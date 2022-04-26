@@ -27,10 +27,10 @@ Youtube propose de faire des clips (extraits vidéos). Cree un lien vers la vid�
 
 - On cree une chaine dédiée
 - On fait des clips pendant la lecture avec l'interface de Youtube (plutot cool)
-- un programme vient télécharger les clips pour pouvoir embarquer la vidéo directement dans les tweets [pas possible, voir dans les limites]
+- un programme vient télécharger les clips pour pouvoir embarquer la vidéo directement dans les tweets ([pas possible !](#les-limites))
 - le twitter bot vient taper dans la base de données de clips téléchargés
 
-Les limites
+### Les limites
 
 - 5s minimum
 - 60s max
@@ -39,7 +39,7 @@ Les limites
 - pas possible d'organiser les clips en playlist (pour les lire tous d'affilée par exemple ou les organiser si besoin)
 - télécharger un clip revient à télécharger la vidéo entière (c'est juste un pointeur vers la vidéo originale)
 
-Les bonus
+### Les bonus
 
 - les vues, analytics et monetisation vont bénéficier au créateur (comme si vidéo originale)
 - les clips sont sauvés sous l'onglet `Vos extraits`. Donc on peut créer une playlist de clips sur notre compte, c'est cool. Par contre le lien devient invalide si on supprime l'extrait
