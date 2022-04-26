@@ -139,8 +139,17 @@ L'extrait `Plantes et luminaires !` a été retiré de la source `le-tribunal-de
 
 ### 5. Gestion du compte du Twitter Bot
 
+A venir...
 
-## Formats
+## Formattage des noms
+
+### Vidéo *source*
+
+Voir [ici](sources/README.md)
+
+### extrait
+
+Voir [ici](extraits/README.md)
 
 ### Timecode
 
