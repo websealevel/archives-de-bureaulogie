@@ -2,8 +2,6 @@
 
 *Un twitter bot qui post des extraits vidéos d'acknoo issus de sa chaîne le tribunal des bureaux*
 
-
-
 ## Comment contribuer au dépôt ?
 
 Envie de contribuer au dépôt en proposant un extrait ? [Lisez d'abord ceci](CONTRIBUTING.md).
@@ -24,40 +22,13 @@ Il faut faire d'abord au plus simple et voir à l'usage si y'a des trucs à amé
 - comment un lien youtube est lu de manière intégrée dans un tweet ? Il a pas l'air d'être lu, c'est du texte
 - quel format vidéo le plus adapté pour Twitter (rapport qualtié/poids) ? du mp4 (on peut baisser la qualité en lecture.)
 
-## Officielle : Youtube API (et clips?) [SOLUTION DEPRECATED]
-
-Youtube propose de faire des clips (extraits vidéos). Cree un lien vers la vidéo originale (cree pas du contenu) et permet de lire l'extrait ou l'intégralité.
-
-- On cree une chaine dédiée
-- On fait des clips pendant la lecture avec l'interface de Youtube (plutot cool)
-- un programme vient télécharger les clips pour pouvoir embarquer la vidéo directement dans les tweets ([pas possible !](#les-limites))
-- le twitter bot vient taper dans la base de données de clips téléchargés
-
-
-
-### Les limites
-
-- 5s minimum
-- 60s max
-- le créateur peut empecher la possibilité de faire des extraits sur ses vidéos
-- pas l'air d'avoir d'API pour manipuler les clips, il va falloir télécharger de manière brut
-- pas possible d'organiser les clips en playlist (pour les lire tous d'affilée par exemple ou les organiser si besoin)
-- télécharger un clip revient à télécharger la vidéo entière (c'est juste un pointeur vers la vidéo originale)
-
-### Les bonus
-
-- les vues, analytics et monetisation vont bénéficier au créateur (comme si vidéo originale)
-- les clips sont sauvés sous l'onglet `Vos extraits`. Donc on peut créer une playlist de clips sur notre compte, c'est cool. Par contre le lien devient invalide si on supprime l'extrait
-
-PAS POSSIBLE !
-
-## Hack 
+## Architecture
 
 La base de données d’extraits doit être simple à éditer (ajouter, supprimer)
 
 On a un fichier texte source **simple à éditer** qui **déclare** les extraits choisis. Pour chaque extrait, on a besoin (a) de l’url de la vidéo (b) d’un couple de timestamps début et fin de l’extrait.
 
-Le projet a l’architecture suivante
+Le projet a l’architecture suivante :
 
 - fichier source au format xml (simple à lire par les humains et les machines, permet de valider un schéma de données). Le fichier déclare l'intégralité des extraits choisis
 - un petit programme client web qui sert d'interface utilisateur pour alimenter le fichier source sans le manipuler directement. Il proposera notamment de preview l'extrait avant de l'ajouter
@@ -87,6 +58,14 @@ Le plus simple serait de télécharger manuellement les vidéos d'ackboo (il en 
 - Une personne en charge de pousser les vidéos sources (vidéos completes) sur le serveur via ftp dans le dossier `sources`
 - formatter le nom de la video comme `{nom-serie}-{numero-video|code}.mp4`, tout en [snake-case](https://fr.wikipedia.org/wiki/Snake_case).
 
+
+## Formattage vidéo
+
+- Vidéo en 720p en .mp4
+- Son à 128 voire 96 kbps
+- cut a la miliseconde
+
+## Téléchargement 
 
 ## Ressources
 
