@@ -7,6 +7,10 @@
 
 require 'utils.php';
 
+
+//Configurer la gestion des erreurs : tout doit aller dans un fichier log une fois en prod
+
+
 echo "Génération des extraits vidéos" . PHP_EOL;
 
 $file_source = 'extraits.xml';
