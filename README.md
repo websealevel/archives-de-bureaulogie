@@ -2,9 +2,9 @@
 
 *Un twitter bot qui post des extraits vidéos d'acknoo issus de sa chaîne le tribunal des bureaux*
 
-## Comment contribuer au dépôt ?
+<!-- ## Comment contribuer au dépôt ?
 
-<!-- Envie de contribuer au dépôt en proposant un extrait ? [Lisez d'abord ceci](CONTRIBUTING.md). -->
+Envie de contribuer au dépôt en proposant un extrait ? [Lisez d'abord ceci](CONTRIBUTING.md). -->
 
 ## Projet
 
