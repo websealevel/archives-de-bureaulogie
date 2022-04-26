@@ -14,7 +14,9 @@ Créer un bot twitter qui *post* des courts extraits vidéos d’ackboo dans une
 
 ## Architecture
 
-Plusieurs solutions
+Plusieurs solutions.
+
+Il faut faire d'abord au plus simple et voir à l'usage si y'a des trucs à améliorer, faut pas *overingeniering*
 
 ### Questions
 
@@ -58,6 +60,12 @@ Le projet a l’architecture suivante
 
 - un deuxième programme *post* à une fréquence donnée des extraits issus de cette base de données (le twitter bot)
 
+## Hack commencer par là
+
+Au plus simple, manipuler directement le fichier. On peut ensuite voir sur le serveur qui heberge les vidéos: 
+
+- la liste complète des vidéos entières téléchargées à la main
+- la liste des extraits (avec leur nom)
 
 ## Téléchargement de vidéos youtube depuis un server mutualisé
 
