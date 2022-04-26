@@ -22,9 +22,9 @@ Il faut faire d'abord au plus simple et voir à l'usage si y'a des trucs à amé
 
 - comment une vidéo démarre auto dans un tweet ? Il faut embarquer le fichier directement, les liens embed ça marche pas
 - comment un lien youtube est lu de manière intégrée dans un tweet ? Il a pas l'air d'être lu, c'est du texte
-- quel format vidéo le plus adapté pour Twitter (rapport qualtié/poids) .
+- quel format vidéo le plus adapté pour Twitter (rapport qualtié/poids) ? du mp4 (on peut baisser la qualité en lecture.)
 
-## Officielle : Youtube API (et clips?)
+## Officielle : Youtube API (et clips?) [SOLUTION DEPRECATED]
 
 Youtube propose de faire des clips (extraits vidéos). Cree un lien vers la vidéo originale (cree pas du contenu) et permet de lire l'extrait ou l'intégralité.
 
@@ -32,6 +32,8 @@ Youtube propose de faire des clips (extraits vidéos). Cree un lien vers la vid�
 - On fait des clips pendant la lecture avec l'interface de Youtube (plutot cool)
 - un programme vient télécharger les clips pour pouvoir embarquer la vidéo directement dans les tweets ([pas possible !](#les-limites))
 - le twitter bot vient taper dans la base de données de clips téléchargés
+
+
 
 ### Les limites
 
@@ -46,6 +48,8 @@ Youtube propose de faire des clips (extraits vidéos). Cree un lien vers la vid�
 
 - les vues, analytics et monetisation vont bénéficier au créateur (comme si vidéo originale)
 - les clips sont sauvés sous l'onglet `Vos extraits`. Donc on peut créer une playlist de clips sur notre compte, c'est cool. Par contre le lien devient invalide si on supprime l'extrait
+
+PAS POSSIBLE !
 
 ## Hack 
 
@@ -77,6 +81,12 @@ Cela pose problème
 - les librairies existantes souffrent toutes du point précédent
 
 Le plus simple serait de télécharger manuellement les vidéos d'ackboo (il en sort pas une par jour non plus j'imagine).
+
+## Solution collaborative
+
+- Une personne en charge de pousser les vidéos sources (vidéos completes) sur le serveur via ftp dans le dossier `sources`
+- formatter le nom de la video comme `{nom-serie}-{numero-video|code}.mp4`, tout en [snake-case](https://fr.wikipedia.org/wiki/Snake_case).
+
 
 ## Ressources
 
