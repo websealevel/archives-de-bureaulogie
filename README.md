@@ -18,7 +18,7 @@ On a un fichier texte source **simple à éditer** qui **déclare** les extraits
 
 Le projet a l’architecture suivante
 
-- fichier source au format xml (simple à lire par les humains et les machines, permet de valider un schéma de données)
+- fichier source au format xml (simple à lire par les humains et les machines, permet de valider un schéma de données). Le fichier déclare l'intégralité des extraits choisis
 - un programme se charge de lire le fichier texte et scanner tous les extraits. S'il détecte un extrait retiré, il supprime l'extrait du dépôt, si nouvel extrait il s'occupe de l'ajouter au dépot. Une petite base de données est ensuite mis à jour et permet de maintenir le dépôt des extraits, d'ajouter de la logique supplémentaire (par exemple indiquer si tel extrait a déjà été posté pour éviter les doublons).
 
 - un deuxième programme *post* à une fréquence donnée des extraits issus de cette base de données (le twitter bot)
