@@ -4,7 +4,7 @@
 
 ## Comment contribuer au dépôt ?
 
-Envie de contribuer au dépôt en proposant un extrait ? [Lisez d'abord ceci](CONTRIBUTING).
+Envie de contribuer au dépôt en proposant un extrait ? [Lisez d'abord ceci](CONTRIBUTING.md).
 
 ## Projet
 
