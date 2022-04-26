@@ -92,8 +92,8 @@ Installer [Filezilla](https://filezilla-project.org/) et se connecter avec les i
 
 ## Ressources
 
-- [Twitter API]()
-- [Rate Limits de la Twitter API]()
+- [Twitter API](https://developer.twitter.com/en/docs/twitter-api)
+- [Rate Limits de la Twitter API](https://developer.twitter.com/en/docs/twitter-api/rate-limits)
 - [Playlist du tribunal des bureaux](https://www.youtube.com/watch?v=YglE-FnSd3g&list=PLDN-m4HWH8MBKJLYIK-80qJBBkVJbPo9p)
 - [Youtube clips features](https://www.youtube.com/watch?v=A63imEmP_-I)
 - [YouTube Video Downloader Script in PHP](https://www.phpzag.com/php-youtube-video-downloader-script/)
