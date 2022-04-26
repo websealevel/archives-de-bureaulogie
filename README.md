@@ -94,9 +94,11 @@ Pousser les vidéos sources (vidéos originales et complètes téléchargées de
 
 ### 4. Ajouter ou supprimer un extrait
 
+#### Ajouter un extrait
+
 Ouvrir `extraits.xml`.
 
-Ajouter un élément `extrait` (copier-coller un extrait existant pour gagner du temps mais n'oubliez pas de l'éditer entièrement) **dans l'élément `source` parent dont est tiré l'extrait**.
+Ajouter un élément `extrait` (copier-coller un extrait existant pour gagner du temps mais n'oubliez pas de l'éditer entièrement) **dans l'élément `source` parent dont sera tiré l'extrait**.
 
 Renseigner dans chaque balise correspondante
 
@@ -122,9 +124,18 @@ Par exemple
 
 Dans cet exemple, la vidéo source `le-tribunal-des-bureaux-1.mp4` n'a pas encore d'extraits. L'extrait `Plantes et luminaires !` sera extrait de la vidéo source `le-tribunal-des-bureaux-2.mp4`.
 
-#### Ajouter un extrait
-
 #### Supprimer un extrait
+
+Il suffit de supprimer l'élément `<extrait>...</extrait>` correspondant. Si on reprend l'exemple précédent après suppression
+
+~~~xml
+<source name="le-tribunal-des-bureaux-1.mp4">
+</source>
+<source name="le-tribunal-des-bureaux-2.mp4">
+</source>
+~~~
+
+L'extrait `Plantes et luminaires !` a été retiré de la source `le-tribunal-des-bureaux-2.mp4`. Au prochain passage du programme l'extrait sera supprimé du dossier `extraits`.
 
 ### 5. Gestion du compte du Twitter Bot
 
