@@ -80,7 +80,7 @@ On peut également voir sur le serveur :
 
 ## Utilisation
 
-### 1. Télécharger les vidéos sources depuis youtube
+### 1. Télécharger une vidéo *source* depuis youtube
 
 Télécharger la vidéo source désirée d'ackboo depuis youtube avec [jdownloader](https://jdownloader.org/).
 
@@ -88,7 +88,7 @@ Télécharger la vidéo source désirée d'ackboo depuis youtube avec [jdownload
 
 Voir [ici les instructions](sources/README.md) sur le format du nom de la vidéo source.
 
-### 3. Uploader une nouvelle vidéo source sur le serveur
+### 3. Uploader une nouvelle vidéo *source* sur le serveur
 
 Pousser les vidéos sources (vidéos originales et complètes téléchargées depuis youtube) sur le serveur via le protocole FTP dans le dossier `sources`, en utilisant [Filezilla](https://filezilla-project.org/).
 
@@ -96,11 +96,51 @@ Pousser les vidéos sources (vidéos originales et complètes téléchargées de
 
 Ouvrir `extraits.xml`.
 
+Ajouter un élément `extrait` (copier-coller un extrait existant pour gagner du temps mais n'oubliez pas de l'éditer entièrement) **dans l'élément `source` parent dont est tiré l'extrait**.
+
+Renseigner dans chaque balise correspondante
+
+- le [`slug`](extraits/README.md#slug)
+- une description courte de l'extrait (ie un titre)
+- debut : le timecode du début. Voir [ici](#timecode) pour le format du timecode
+- fin : le timecode de fin. Voir [ici](#timecode) pour le format du timecode
+
+Par exemple
+
+~~~xml
+<source name="le-tribunal-des-bureaux-1.mp4">
+</source>
+<source name="le-tribunal-des-bureaux-2.mp4">
+        <extrait utilise="0">
+            <slug>plante-et-luminaire</slug>
+            <description>Plantes et luminaires !</description>
+            <debut>00.08.27.300</debut>
+            <fin>00.09.46.600</fin>
+        </extrait>
+</source>
+~~~
+
+Dans cet exemple, la vidéo source `le-tribunal-des-bureaux-1.mp4` n'a pas encore d'extraits. L'extrait `Plantes et luminaires !` sera extrait de la vidéo source `le-tribunal-des-bureaux-2.mp4`.
+
 #### Ajouter un extrait
 
 #### Supprimer un extrait
 
 ### 5. Gestion du compte du Twitter Bot
+
+
+## Formats
+
+### Timecode
+
+Les timecodes (instant de début ou de fin de l'extrait) doivent être formattés au format `hh.mm.ss.lll` avec 
+
+- `h` l'heure
+- `m` la minute
+- `s` la seconde
+- `l` la miliseconde
+
+Ils doivent être compris entre `00.00.00.000` et la durée totale de la vidéo.
 
 ## Ressources
 
