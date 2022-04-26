@@ -111,6 +111,8 @@ Renseigner dans chaque balise correspondante
 - `debut` : le timecode du début. Voir [ici](#timecode) pour le format du timecode
 - `fin` : le timecode de fin. Voir [ici](#timecode) pour le format du timecode
 
+L'attribut `utilise` compte le nombre de fois où l'extrait a été twitté par le bot. L'initialiser à `0` par défaut.
+
 Par exemple
 
 ~~~xml
