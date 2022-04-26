@@ -32,17 +32,24 @@ Le plus simple serait de télécharger manuellement les vidéos d'ackboo (il en 
 - son à 128 voire 96 kbps
 - cut a la miliseconde nécessaire
 
-## Architecture
+## Conception
 
 On a un fichier texte source **simple à éditer** qui **déclare** les extraits choisis. Pour chaque extrait, on a besoin (a) de l’url de la vidéo (b) d’un couple de timestamps début et fin de l’extrait.
 
 Le projet a l’architecture suivante :
 
 - fichier source au format XML (simple à lire par les humains et les machines, permet de valider un schéma de données). Le fichier déclare l'intégralité des extraits choisis
-- [BONUS, à voir si on en a besoin] un petit programme client web qui sert d'interface utilisateur pour alimenter le fichier source sans le manipuler directement. Il proposera notamment de preview l'extrait avant de l'ajouter.
-- un programme se charge de lire le fichier texte et scanner tous les extraits. S'il détecte un extrait retiré, il supprime l'extrait de la base, si nouvel extrait il s'occupe de l'ajouter à la base. [BONUS, à voir si on en a besoin] Une petite base de données est ensuite mise à jour et permet de maintenir le dépôt des extraits, d'ajouter de la logique supplémentaire (par exemple indiquer si tel extrait a déjà été posté pour éviter les doublons). **On peut aussi imaginer faire ça directement dans le XML sous forme d'attribut** (on va pas se faire chier avec une base de données, le XML fera le taff).
+- un petit programme client web qui sert d'interface utilisateur pour alimenter le fichier source sans le manipuler directement. Il proposera notamment de preview l'extrait avant de l'ajouter.
+- un programme se charge de lire le fichier texte et scanner tous les extraits. S'il détecte un extrait retiré, il supprime l'extrait de la base, si nouvel extrait il s'occupe de l'ajouter à la base. [BONUS, à voir si on en a besoin] Une petite base de données est ensuite mise à jour et permet de maintenir le dépôt des extraits, d'ajouter de la logique supplémentaire (par exemple indiquer si tel extrait a déjà été posté pour éviter les doublons). **On peut aussi imaginer faire ça directement dans le XML sous forme d'attribut** (on va pas s'embêter avec une base de données, le XML fera le taff).
 
 - un deuxième programme *post* à une fréquence donnée des extraits issus de cette base de données (le twitter bot)
+
+Le développement d'une petite application web en surcouche de l'édition du fichier source parait rapidement indispensable pour plusieurs raisons:
+
+- éviter de mauvaises manipulations sur le fichier source
+- faciliter l'ajout d'extrait sans erreur
+- prévisualiser l'extrait avant de l'enregistrer (un bon cut se fait à la miliseconde)
+- pouvoir visionner la vidéo sur la page où on ajuste les timecodes pour éditer son cut de manière plus agréable
 
 ## Première itération
 
@@ -51,7 +58,7 @@ Au plus simple
 ### 1. Setup : les données sources et les extraits
 
 - les vidéos complètes (*sources*) sont téléchargées à la main et uploadée sur le serveur
-- pour ajouter/retirer un extrait on manipule directement le fichier source `extraits.xml`. Le fichier source est au format XML et stocke l'intégralité des extraits choisis selon un format défini. Editer directement le fichier `extraits.xml` en respectant le schéma de données.
+- pour ajouter/retirer un extrait on manipule directement le fichier source `extraits.xml`. Le fichier source est au format XML et stocke l'intégralité des extraits choisis selon un format défini. Editer directement le fichier `extraits.xml` en respectant le schéma de données. Renseigner la vidéo source et les timecodes du cut
 - si le fichier comporte des erreurs après édition, il ne sera pas traité par le programme en charge d'éditer les extraits
 
 ### 1.1 Navigation parmi les sources et les extraits
@@ -67,39 +74,33 @@ On peut également voir sur le serveur :
 - ce programme se déclenche à chaque modification du fichier source
 - les extraits sont stockés dans le dossier `extraits`
 
-
 ### 3. Le twitter bot : post automatique d'extraits de manière aléatoire
 
 - un programme twitter bot (derrière un compte) poste à une fréquence donnée (chaque jour, toutes les 12h etc) un extrait pris au hasard dans le dossier `extraits`.
 
-
-## Usage
-
-- Une personne en charge de pousser les vidéos sources (vidéos completes) sur le serveur via le protocole ftp dans le dossier `sources`
-- formatter le nom de la video comme `{nom-serie}-{numero-video|code}-{timestamp-start}-{timestamp-end}.mp4`, tout en [snake-case](https://fr.wikipedia.org/wiki/Snake_case).
-- [éditer le fichier `extraits.xml` pour ajouter/retirer un extrait](#éditer-les-extraits)
-- gestion du compte twitter du bot
-
-
-
-## Éditer les extraits
-
-Ouvrir `extraits.xml`.
-
-### Ajouter un extrait
-
-
-
-
-## Outils nécessaires 
+## Utilisation
 
 ### Télécharger les vidéos sources depuis youtube
 
-Télécharger les vidéos depuis youtube avec [jdownloader](https://jdownloader.org/) 
+Télécharger la vidéo source désirée d'ackboo depuis youtube avec [jdownloader](https://jdownloader.org/).
 
-### Uploader les vidéos sources sur le serveur
+### Renommer la vidéo source
 
-Installer [Filezilla](https://filezilla-project.org/) et se connecter avec les identifiants procurés. Déposer les sources dans le dossier `sources` à la racine du projet.
+Voir [ici les instructions](sources/README.md) sur le format du nom de la vidéo source.
+
+### Uploader une nouvelle vidéo source
+
+Pousser les vidéos sources (vidéos originales et complètes téléchargées depuis youtube) sur le serveur via le protocole FTP dans le dossier `sources`, en utilisant [Filezilla](https://filezilla-project.org/).
+
+### Ajouter ou supprimer un extrait
+
+Ouvrir `extraits.xml`.
+
+#### Ajouter un extrait
+
+#### Supprimer un extrait
+
+### Gestion du compte du Twitter Bot
 
 ## Ressources
 

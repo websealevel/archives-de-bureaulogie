@@ -13,3 +13,5 @@ où `slug` est un élément XML de l'élément extrait. Un [slug](https://fr.wik
 - ne contient pas d'espaces, ils sont remplacés par des hyphens (-)
 - tous les caractères sont en minuscules
 - ne contient que des caractères alphanumériques (lettres standards ASCII et chiffres)
+
+**Toute vidéo ne respectant pas ce formattage sera supprimée** soit par un administrateur soit par un programme de nettoyage.
