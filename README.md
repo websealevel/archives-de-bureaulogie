@@ -100,10 +100,10 @@ Ajouter un élément `extrait` (copier-coller un extrait existant pour gagner du
 
 Renseigner dans chaque balise correspondante
 
-- le [`slug`](extraits/README.md#slug)
-- une description courte de l'extrait (ie un titre)
-- debut : le timecode du début. Voir [ici](#timecode) pour le format du timecode
-- fin : le timecode de fin. Voir [ici](#timecode) pour le format du timecode
+- `slug` : le [slug](extraits/README.md#slug)
+- `description` : une description courte de l'extrait (ie un titre)
+- `debut` : le timecode du début. Voir [ici](#timecode) pour le format du timecode
+- `fin` : le timecode de fin. Voir [ici](#timecode) pour le format du timecode
 
 Par exemple
 
