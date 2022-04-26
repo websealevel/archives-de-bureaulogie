@@ -1,3 +1,3 @@
-# Sources
+# Extraits
 
-Contient les fichiers sources (les vidéos originales et complètes) téléchargées depuis youtube. Permettent de fabriquer les [extraits](../extraits/README.md)
+Contient les extraits générés automatiquement à partir des [sources](../sources/README.md).
