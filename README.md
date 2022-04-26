@@ -77,7 +77,18 @@ On peut également voir sur le serveur :
 
 - Une personne en charge de pousser les vidéos sources (vidéos completes) sur le serveur via le protocole ftp dans le dossier `sources`
 - formatter le nom de la video comme `{nom-serie}-{numero-video|code}-{timestamp-start}-{timestamp-end}.mp4`, tout en [snake-case](https://fr.wikipedia.org/wiki/Snake_case).
+- [éditer le fichier `extraits.xml` pour ajouter/retirer un extrait](#éditer-les-extraits)
 - gestion du compte twitter du bot
+
+
+
+## Éditer les extraits
+
+Ouvrir `extraits.xml`.
+
+### Ajouter un extrait
+
+
 
 
 ## Outils nécessaires 

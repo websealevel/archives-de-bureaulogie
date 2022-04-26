@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='UTF-8'  standalone = "no"?>
+<!DOCTYPE extraits SYSTEM "data.dtd">
+<extraits xmlns="https://websealevel.com/ackboo-out-of-context">
+    <source name="le-tribunal-des-bureaux-2.mp4">
+        <extrait utilise="0">
+            <label></label>
+            <description></description>
+            <debut></debut>
+            <fin></fin>
+        </extrait>
+    </source>
+</extraits>

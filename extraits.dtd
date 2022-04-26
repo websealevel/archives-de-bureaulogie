@@ -1,0 +1,9 @@
+<!ELEMENT extraits (source*) >
+<!ELEMENT source (extrait*) >
+<!ATTLIST source name CDATA #REQUIRED >
+<!ELEMENT extrait (label, description, debut, fin) >
+<!ATTLIST extrait utilise CDATA #REQUIRED >
+<!ELEMENT label (#PCDATA) >
+<!ELEMENT description (#PCDATA) >
+<!ELEMENT debut (#PCDATA) >
+<!ELEMENT fin (#PCDATA) >
