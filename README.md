@@ -20,8 +20,9 @@ Il faut faire d'abord au plus simple et voir à l'usage si y'a des trucs à amé
 
 ### Questions
 
-- comment une vidéo démarre auto dans un tweet ?
-- comment un lien youtube est lu de manière intégrée dans un tweet ?
+- comment une vidéo démarre auto dans un tweet ? Il faut embarquer le fichier directement, les liens embed ça marche pas
+- comment un lien youtube est lu de manière intégrée dans un tweet ? Il a pas l'air d'être lu, c'est du texte
+- quel format vidéo le plus adapté pour Twitter (rapport qualtié/poids) .
 
 ## Officielle : Youtube API (et clips?)
 
