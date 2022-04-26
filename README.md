@@ -147,7 +147,7 @@ A venir...
 
 Voir [ici](sources/README.md)
 
-### extrait
+### Extrait
 
 Voir [ici](extraits/README.md)
 
