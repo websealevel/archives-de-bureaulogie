@@ -61,11 +61,13 @@ Le plus simple serait de télécharger manuellement les vidéos d'ackboo (il en 
 
 ## Formattage vidéo
 
-- Vidéo en 720p en .mp4
+- Vidéo en 720p en .mp4, 60fps
 - Son à 128 voire 96 kbps
 - cut a la miliseconde
 
 ## Téléchargement 
+
+- télécharger 
 
 ## Ressources
 
