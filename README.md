@@ -26,11 +26,15 @@ Cela pose problème
 
 Le plus simple serait de télécharger manuellement les vidéos d'ackboo (il en sort pas une par jour non plus j'imagine).
 
-## Formattage vidéo des extraits
+## Encodage vidéo/audio des extraits
+
+Chaque extrait sera embarqué dans un tweet. Il faut donc veiller à obtenir un bon format et un bon rapport qualité/poids (son et vidéo)
+
+Après une phase de tests on retiendra les valeurs suivantes
 
 - vidéo en 720p en .mp4, 60fps
 - son à 128 voire 96 kbps
-- cut a la miliseconde nécessaire
+- précision : cut a la miliseconde nécessaire
 
 ## Conception
 
