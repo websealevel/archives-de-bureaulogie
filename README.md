@@ -25,12 +25,17 @@ Plusieurs solutions
 
 Youtube propose de faire des clips (extraits vidéos). Cree un lien vers la vidéo originale (cree pas du contenu) et permet de lire l'extrait ou l'intégralité.
 
+- On cree une chaine dédiée
+- On fait des clips pendant la lecture avec l'interface de Youtube (plutot cool)
+- un programme vient télécharger les clips pour pouvoir embarquer la vidéo directement dans les tweets
+- le twitter bot vient taper dans la base de données de clips téléchargés
+
 Les limites
 
 - 5s minimum
 - 60s max
 - le créateur peut empecher la possibilité de faire des extraits sur ses vidéos
-- pas l'air d'avoir d'API pour les clips
+- pas l'air d'avoir d'API pour manipuler les clips, il va falloir télécharger de manière brut
 - pas possible d'organiser les clips en playlist (pour les lire tous d'affilée par exemple ou les organiser si besoin)
 
 Les bonus
