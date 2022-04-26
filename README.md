@@ -27,7 +27,7 @@ Youtube propose de faire des clips (extraits vidéos). Cree un lien vers la vid�
 
 - On cree une chaine dédiée
 - On fait des clips pendant la lecture avec l'interface de Youtube (plutot cool)
-- un programme vient télécharger les clips pour pouvoir embarquer la vidéo directement dans les tweets
+- un programme vient télécharger les clips pour pouvoir embarquer la vidéo directement dans les tweets [pas possible, voir dans les limites]
 - le twitter bot vient taper dans la base de données de clips téléchargés
 
 Les limites
@@ -37,6 +37,7 @@ Les limites
 - le créateur peut empecher la possibilité de faire des extraits sur ses vidéos
 - pas l'air d'avoir d'API pour manipuler les clips, il va falloir télécharger de manière brut
 - pas possible d'organiser les clips en playlist (pour les lire tous d'affilée par exemple ou les organiser si besoin)
+- télécharger un clip revient à télécharger la vidéo entière (c'est juste un pointeur vers la vidéo originale)
 
 Les bonus
 
@@ -58,9 +59,20 @@ Le projet a l’architecture suivante
 - un deuxième programme *post* à une fréquence donnée des extraits issus de cette base de données (le twitter bot)
 
 
+## Téléchargement de vidéos youtube depuis un server mutualisé
+
+Cela pose problème
+
+- je n'ai pas tous les droits sur le serveur pour installer ce que je veux (comme le wrapper youtube-download)
+- youtube change regulièrement d'api donc c'est compliqué de développer un script pour télécharger une vidéo youtube sans qu'il soit difficile à maintenir
+- les librairies existantes souffrent toutes du point précédent
+
+Le plus simple serait de télécharger manuellement les vidéos d'ackboo (il en sort pas une par jour non plus j'imagine).
+
 ## Ressources
 
 - [Twitter API]()
 - [Rate Limits de la Twitter API]()
 - [Playlist du tribunal des bureaux](https://www.youtube.com/watch?v=YglE-FnSd3g&list=PLDN-m4HWH8MBKJLYIK-80qJBBkVJbPo9p)
 - [Youtube clips features](https://www.youtube.com/watch?v=A63imEmP_-I)
+- [YouTube Video Downloader Script in PHP](https://www.phpzag.com/php-youtube-video-downloader-script/)
