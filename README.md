@@ -55,44 +55,44 @@ Le développement d'une petite application web en surcouche de l'édition du fic
 
 Au plus simple
 
-### 1. Setup : les données sources et les extraits
+### Setup : les données sources et les extraits
 
 - les vidéos complètes (*sources*) sont téléchargées à la main et uploadée sur le serveur
 - pour ajouter/retirer un extrait on manipule directement le fichier source `extraits.xml`. Le fichier source est au format XML et stocke l'intégralité des extraits choisis selon un format défini. Editer directement le fichier `extraits.xml` en respectant le schéma de données. Renseigner la vidéo source et les timecodes du cut
 - si le fichier comporte des erreurs après édition, il ne sera pas traité par le programme en charge d'éditer les extraits
 
-### 1.1 Navigation parmi les sources et les extraits
+### Navigation parmi les sources et les extraits
 
 On peut également voir sur le serveur : 
 
 - la liste complète des vidéos sources téléchargées à la main
 - la liste des extraits (avec leur nom)
 
-### 2. Génération automatatique des extraits
+### Génération automatatique des extraits
 
 - un programme utilise le fichier source `extraits.xml` et les vidéos complètes (sources) pour générér/supprimer les extraits déclarés.
 - ce programme se déclenche à chaque modification du fichier source
 - les extraits sont stockés dans le dossier `extraits`
 
-### 3. Le twitter bot : post automatique d'extraits de manière aléatoire
+### Le twitter bot : post automatique d'extraits de manière aléatoire
 
 - un programme twitter bot (derrière un compte) poste à une fréquence donnée (chaque jour, toutes les 12h etc) un extrait pris au hasard dans le dossier `extraits`.
 
 ## Utilisation
 
-### Télécharger les vidéos sources depuis youtube
+### 1. Télécharger les vidéos sources depuis youtube
 
 Télécharger la vidéo source désirée d'ackboo depuis youtube avec [jdownloader](https://jdownloader.org/).
 
-### Renommer la vidéo source
+### 2. Renommer la vidéo source
 
 Voir [ici les instructions](sources/README.md) sur le format du nom de la vidéo source.
 
-### Uploader une nouvelle vidéo source
+### 3. Uploader une nouvelle vidéo source sur le serveur
 
 Pousser les vidéos sources (vidéos originales et complètes téléchargées depuis youtube) sur le serveur via le protocole FTP dans le dossier `sources`, en utilisant [Filezilla](https://filezilla-project.org/).
 
-### Ajouter ou supprimer un extrait
+### 4. Ajouter ou supprimer un extrait
 
 Ouvrir `extraits.xml`.
 
@@ -100,7 +100,7 @@ Ouvrir `extraits.xml`.
 
 #### Supprimer un extrait
 
-### Gestion du compte du Twitter Bot
+### 5. Gestion du compte du Twitter Bot
 
 ## Ressources
 
