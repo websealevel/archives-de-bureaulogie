@@ -15,3 +15,9 @@ Le projet aura l’architecture suivante
 - un deuxième programme post à une fréquence donnée des extraits issus de cette base de données (le twitter bot)
 
 
+
+## Ressources
+
+- [Twitter API]()
+- [Rate Limits de la Twitter API]()
+- [Playlist du tribunal des bureaux](https://www.youtube.com/watch?v=YglE-FnSd3g&list=PLDN-m4HWH8MBKJLYIK-80qJBBkVJbPo9p)
