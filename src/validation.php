@@ -74,16 +74,23 @@ function is_source_valid(string $file_name, $path = PATH_SOURCES)
         throw new Exception($message);
     }
 
+    //Validate media file
+    $ffprobe = FFMpeg\FFProbe::create();
+    if (!$ffprobe->isValid($file_path)) {
+        $message = sprintf("La vidéo source %s n'est pas valide.", $file_name);
+        throw new Exception($message);
+    }
+
     return true;
 }
 
 /**
  * Retourne vrai si le clip est valide, faux sinon
- * @param string $file_source Optional. Le fichier source 
+ * @param string $file_name Le path du fichier extrait
  * @param string $PATH_CLIPS Optional. Le path des extraits
  * @return bool
  */
-function is_clip_valid(string $file_name = SOURCE_FILE, $path = PATH_CLIPS)
+function is_clip_valid(string $file_name, $path = PATH_CLIPS)
 {
     $file_path = $path . '/' . $file_name;
 
@@ -92,6 +99,13 @@ function is_clip_valid(string $file_name = SOURCE_FILE, $path = PATH_CLIPS)
     if ($info["extension"] !== EXTENSION_CLIP) {
 
         $message = sprintf("L'extrait %s n'a pas un format valide", $file_name);
+        throw new Exception($message);
+    }
+
+    //Validate media file
+    $ffprobe = FFMpeg\FFProbe::create();
+    if (!$ffprobe->isValid($file_path)) {
+        $message = sprintf("L'extrait %s n'est pas valide.", $file_name);
         throw new Exception($message);
     }
 
