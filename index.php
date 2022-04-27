@@ -6,8 +6,8 @@
  * @package wsl 
  */
 
-require 'vendor/autoload.php';
-require 'src/utils.php';
+require_once 'vendor/autoload.php';
+require_once 'src/utils.php';
 
 //Global Exception handler
 set_exception_handler(function ($e) {
