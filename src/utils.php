@@ -146,7 +146,13 @@ function is_timecode_format_valid(string $timecode, string $format = FORMAT_TIME
     return preg_match($pattern, $timecode);
 }
 
-
+/**
+ * Retourne un élément enfant d'un élément par nom
+ * @param DOMEelement $el L'élément dont on cherche un enfant
+ * @param string $child_name Le nom de l'élément recherché
+ * @throws Exception Si $child_name est vide, si l'élément n'a pas d'enfants, si un enfant n'est pas défini
+ * @return DOMElement L'élément enfant dont le nom correspond
+ */
 function child_element_by_name(DOMElement $el, string $child_name): DOMElement
 {
 
@@ -155,7 +161,6 @@ function child_element_by_name(DOMElement $el, string $child_name): DOMElement
 
     if (!$el->hasChildNodes())
         throw new Exception("L'élément " . $el->nodeName . "n'as pas d'éléments enfants.");
-
 
     $childs =  $el->childNodes;
 
