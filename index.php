@@ -6,7 +6,7 @@
  * @package wsl 
  */
 
-require 'utils.php';
+require 'src/utils.php';
 
 //Global Exception handler
 set_exception_handler(function (Exception $e) {

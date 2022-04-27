@@ -7,8 +7,8 @@
  */
 
 
-require 'const.php';
-require 'query.php';
+require 'src/const.php';
+require 'src/query.php';
 
 /**
  * Retourne vrai si le fichier source est valide (validation via le DTD), faux sinon
