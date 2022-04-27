@@ -16,15 +16,15 @@ Créer un bot twitter qui *post* des courts extraits vidéos d’ackboo dans une
 - comment un lien youtube est lu de manière intégrée dans un tweet ? Il a pas l'air d'être lu, c'est du texte
 - quel format vidéo le plus adapté pour Twitter (rapport qualtié/poids) ? du mp4 au format 720p et 60fps, son à 128kbps voire 96kbps
 
-## Téléchargement de vidéos youtube depuis un server mutualisé
+## Téléchargement de vidéos youtube depuis un serveur mutualisé
 
 Cela pose problème
 
-- je n'ai pas tous les droits sur le serveur pour installer ce que je veux (comme le wrapper youtube-download)
-- youtube change regulièrement d'api donc c'est compliqué de développer un script pour télécharger une vidéo youtube sans qu'il soit difficile à maintenir
-- les librairies existantes souffrent toutes du point précédent
+- je n'ai pas tous les droits sur le serveur pour installer ce que je veux (comme le wrapper *youtube-download* par exemple)
+- Youtube change regulièrement d'API et sa génération de pages webs, donc c'est compliqué de développer un script pour télécharger une vidéo youtube sans qu'il soit difficile à maintenir
+- les bilbiothèques existantes souffrent toutes du point précédent
 
-Le plus simple serait de télécharger manuellement les vidéos d'ackboo et de les uploader sur le serveur.
+Le plus simple (pour le moment) serait de télécharger manuellement les vidéos d'ackboo et de les uploader sur le serveur manuellement.
 
 ## Encodage vidéo/audio des extraits
 
@@ -36,9 +36,9 @@ Après une phase de tests on retiendra les valeurs suivantes
 - son à 128 voire 96 kbps
 - précision : cut a la miliseconde nécessaire
 
-## Conception
+## Architecture générale
 
-On a un fichier source **simple à éditer** qui **déclare** les extraits choisis. Il fait office de source de vérité et il définit l'état de la base de données d'extraits (quels extraits sont présents ou non). Pour chaque extrait, on a besoin (a) de l’url de la vidéo (b) d’un couple de timecodes début et fin de l’extrait (c) d'un slug (d) d'une description.
+On a un fichier source **simple à éditer** qui **déclare** les extraits choisis. Il fait office de *source de vérité* et il définit l'état de la base de données d'extraits (quels extraits sont présents ou non). Pour chaque extrait, on a besoin (a) de l’url de la vidéo (b) d’un couple de timecodes début et fin de l’extrait (c) d'un slug (d) d'une description.
 
 Le projet a l’architecture suivante :
 
@@ -61,7 +61,7 @@ Voir [ici les instructions](sources/README.md) sur le format du nom de la vidéo
 
 Pousser les vidéos sources (vidéos originales et complètes téléchargées depuis youtube) sur le serveur via le protocole FTP dans le dossier `sources`, en utilisant [Filezilla](https://filezilla-project.org/).
 
-### 4. Ajouter ou supprimer un extrait (version manuelle)
+### 4.1 Ajouter ou supprimer un extrait manuellement (temporaire)
 
 #### Le *fichier source*
 
@@ -113,6 +113,8 @@ Il suffit de supprimer l'élément `<extrait>...</extrait>` correspondant. Si on
 ~~~
 
 L'extrait `Plantes et luminaires !` a été retiré de la source `le-tribunal-des-bureaux-2.mp4`. Au prochain passage du programme l'extrait sera supprimé du dossier `extraits`.
+
+### 4.2 Ajouter, supprimer, modifier un extrait via l'application web
 
 ### 5. Gestion du compte du Twitter Bot
 
