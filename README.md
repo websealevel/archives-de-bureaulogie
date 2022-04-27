@@ -162,7 +162,42 @@ Les fichiers *extraits* **doivent respecter [un format](extraits/README.md#forma
 
 Un extrait doit faire **au moins 1 seconde**, sinon il ne sera pas généré et une exception sera levée.
 
-### Besoins pour une interface de *cut*
+## Lancer le projet (temporaire)
+
+Installer la dernière version de `php`, si ce n'est pas déjà fait.
+
+~~~bash
+sudo apt install php8.1
+~~~
+ou
+~~~bash
+sudo apt install php
+~~~
+si la première ne marche pas.
+
+Testez l'installation et la version de votre php
+
+~~~bash
+php -v
+~~~
+
+Télécharger le code source.
+
+Dans le répertoire du projet lancer un terminal.
+
+Créer un fichier source extraits.xml à partir du fichier extraits.xml.dist
+
+~~~bash
+cp extraits.xml.dist extraits.xml
+~~~
+
+Lancer la création de clips
+
+~~~bash
+php index.php
+~~~
+
+## Besoins pour une interface de *cut*
 
 Le développement d'une petite application web en surcouche de l'édition du fichier source parait rapidement indispensable pour plusieurs raisons:
 
