@@ -98,6 +98,10 @@ Pousser les vidéos sources (vidéos originales et complètes téléchargées de
 
 ### 4. Ajouter ou supprimer un extrait
 
+#### Le *fichier source*
+
+La base de données des extraits est gérée par le `fichier source`. Le fichier source est `extraits.xml`. Il contient tout le travail éditorial de déclaration des extraits. Ce fichier est manipulé par différents programmes (ou à la main mais prudence !) pour gérer les extraits (création, suppression).
+
 #### Ajouter un extrait
 
 Ouvrir `extraits.xml`.
@@ -151,11 +155,11 @@ A venir...
 
 ## Formattage des noms
 
-### Vidéo *source*
+### Fichier vidéo *source*
 
 Voir [ici](sources/README.md)
 
-### Extrait
+### Fichier vidéo *extrait*
 
 Voir [ici](extraits/README.md)
 
@@ -169,6 +173,23 @@ Les timecodes (instant de début ou de fin de l'extrait) doivent être formatté
 - `l` la miliseconde
 
 Ils doivent être compris entre `00.00.00.000` et la durée totale de la vidéo.
+
+
+## Gestion des fichiers sources et des extraits
+
+### Fichiers sources
+
+Les fichiers *sources* sont les vidéos téléchargées depuis youtube entières et servent de source aux extraits. Elles se trouvent dans le dossier `sources`.
+
+Les fichiers *sources* **doivent respecter [un format](sources/README.md#format-du-nom)** sinon elles finiront pas être **supprimées automatiquement**.
+
+### Extraits
+
+Les *extraits* sont les extraits vidéos des [sources](#fichiers-sources). Ils sont générés automatiquement à partir des informations fournies dans le [fichier source](#le-fichier-source). Ils se trouvent dans le dossier `extraits`.
+
+Les fichiers *extraits* **doivent respecter [un format](extraits/README.md#format-du-nom)** sinon elles finiront pas être **supprimées automatiquement**.
+
+Un extrait doit faire **au moins 1 seconde**, sinon il ne sera pas généré et une exception sera levée.
 
 ## Ressources
 

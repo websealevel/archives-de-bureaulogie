@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Toutes les fonctions utiles
+ * Les autres fonctions utils
  *
  * @package wsl 
  */
@@ -32,27 +32,51 @@ function remove_invalid_sources(string $path = PATH_SOURCES, string $format): vo
 
 /**
  * Supprime les extraits invalides dans le path des sources
- * @return void
+ * @return array La liste des noms de fichiers supprimés
  */
-function remove_invalid_clips(string $path = PATH_CLIPS, string $format)
+function remove_invalid_clips(string $path = PATH_CLIPS, string $format): array
 {
     //Appliquer une regex du format attendu des extraits et supprimer les fichiers qui ne respectent pas le format
 
+    return array();
 }
 
-function remove_source(string $file_name)
+/**
+ * Supprime les extraits qui ne sont pas déclarés dans le fichier source
+ * @param string $file_source Optional Default SOURCE_FILE
+ * @return array La liste des noms de fichiers supprimés
+ */
+function remove_undeclared_clips(string $file_source = SOURCE_FILE): array
 {
+    return array();
 }
 
-function remove_clip(string $file_name)
+/**
+ * Supprime une source sur le PATH_SOURCE. Renvoie vrai si la suppression a réussi, faux sinon
+ * @param string $file_name Le nom du fichier source à supprimer
+ * @return bool
+ */
+function remove_source(string $file_name): bool
 {
+    return false;
 }
 
+/**
+ * Supprime un extrait sur le PATH_CLIP. Renvoie vrai si la suppression a réussi, faux sinon
+ * @param string $file_name Le nom du fichier extrait à supprimer
+ * @return bool
+ */
+function remove_clip(string $file_name): bool
+{
+    return false;
+}
+
+/**
+ * Supprime un fichier, renvoie vrai si la suppression a réussi, faux sinon
+ * @param string $file_name Le nom du fichier à supprimer
+ * @return bool
+ */
 function delete_file(string $file_name): bool
 {
-    return true;
-}
-
-function remove_untracked_clips(string $file_source = SOURCE_FILE)
-{
+    return false;
 }
