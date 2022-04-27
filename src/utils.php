@@ -133,7 +133,7 @@ function log_clip_generation(array $report)
  * @param string $file_source Le fichier source à cliper
  * @throws Exception FFMPEG
  */
-function clip_source(DOMElement $clip, string $file_source)
+function clip_source(DOMElement $clip, string $file_source, array $encoding_options = ENCODING_OPTIONS)
 {
     $path_source = PATH_SOURCES . '/' . $file_source;
     $ffmpeg = FFMpeg\FFMpeg::create();
@@ -142,6 +142,7 @@ function clip_source(DOMElement $clip, string $file_source)
     $from_in_seconds = timecode_to_seconds(child_element_by_name($clip, "debut")->nodeValue);
     $to_in_seconds = timecode_to_seconds(child_element_by_name($clip, "fin")->nodeValue);
 
+    //A faire : choisir encodage, format, fps, audio
     $video_clip = $video->clip(FFMpeg\Coordinate\TimeCode::fromSeconds($from_in_seconds), FFMpeg\Coordinate\TimeCode::fromSeconds($to_in_seconds));
 
     $path_to_save_clip = clip_path($clip);

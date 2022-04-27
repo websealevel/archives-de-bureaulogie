@@ -48,3 +48,19 @@ define('EXTENSION_CLIP', 'mp4');
  * Format d'un timecode valide
  */
 define('FORMAT_TIMECODE', "[0-9]{2}.[0-9]{2}.[0-9]{2}.[0-9]{3}");
+
+/**
+ * Options d'encodage video et audio pour la génération d'extraits
+ */
+define(
+    'ENCODING_OPTIONS',
+    array(
+        'video' => array(
+            'fps' => 60,
+            'definition' => '720p'
+        ),
+        'audio' => array(
+            'kbps' => 128
+        )
+    )
+);

@@ -1,3 +1,5 @@
 extraits/*.mp4
 sources/*.mp4
 vendor
+*.mp4
+*.avi
