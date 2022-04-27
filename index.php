@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Parse le fichier source extraits.xml pour éditer les extraits
+ * Main page (temporaire)
  *
  * @package wsl 
  */
@@ -10,13 +10,10 @@ require_once 'vendor/autoload.php';
 require_once 'src/utils.php';
 require_once 'src/ffmpeg.php';
 require_once 'src/validation.php';
+require_once 'src/actions.php';
+require_once 'src/handlers.php';
+
+action_update_clips();
 
 
-
-
-
-
-//Restore default error handler.
-restore_error_handler();
-//Restore default exception handler.
-restore_exception_handler();
+require_once 'src/default-handlers.php';

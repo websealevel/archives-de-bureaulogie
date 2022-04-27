@@ -31,7 +31,7 @@ function is_source_file_valid(string $file_source = SOURCE_FILE): bool
  * @param string $PATH_SOURCES Optional. Le path des sources
  * @return bool
  */
-function is_source_available(string $file_name = SOURCE_FILE, $path = PATH_SOURCES)
+function is_source_available(string $file_name, $path = PATH_SOURCES)
 {
     if (!is_source_valid($file_name, $path))
         return false;

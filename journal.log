@@ -93,3 +93,24 @@ Stack trace:
 [27-Apr-2022 12:03:57 Europe/Berlin] Clips générés avec succès !
 [27-Apr-2022 12:04:13 Europe/Berlin] Clips générés avec succès !
 [27-Apr-2022 12:11:17 Europe/Berlin] Clips générés avec succès !
+[27-Apr-2022 17:02:53 Europe/Berlin] Exception: La vidéo source le-tribunal-des-bureaux-2.mp4 n'est pas valide. in /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/src/validation.php:83
+Stack trace:
+#0 /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/src/validation.php(36): is_source_valid()
+#1 /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/src/ffmpeg.php(31): is_source_available()
+#2 /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/src/actions.php(19): generate_clips()
+#3 /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/index.php(16): action_update_clips()
+#4 {main}
+[27-Apr-2022 17:03:57 Europe/Berlin] Exception: La vidéo source le-tribunal-des-bureaux-2.mp4 n'est pas valide. in /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/src/validation.php:83
+Stack trace:
+#0 /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/src/validation.php(36): is_source_valid()
+#1 /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/src/ffmpeg.php(31): is_source_available()
+#2 /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/src/actions.php(19): generate_clips()
+#3 /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/index.php(16): action_update_clips()
+#4 {main}
+[27-Apr-2022 17:04:36 Europe/Berlin] Exception: La vidéo source le-tribunal-des-bureaux-2.mp4 n'est pas valide. in /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/src/validation.php:83
+Stack trace:
+#0 /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/src/validation.php(36): is_source_valid()
+#1 /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/src/ffmpeg.php(31): is_source_available()
+#2 /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/src/actions.php(19): generate_clips()
+#3 /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/index.php(16): action_update_clips()
+#4 {main}
