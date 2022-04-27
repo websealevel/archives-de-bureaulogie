@@ -67,7 +67,7 @@ Après une phase de tests on retiendra les valeurs suivantes
   -  369 kbps [x]
 - piste audio
   - 96 kbps [x]
-  - échantillonage 48000 Hz (standard dans un fichier vidéo). Avec ffmpeg: `ffmpeg -i input -ar 48000 output`
+  - échantillonage 48000 Hz (standard dans un fichier vidéo). Avec ffmpeg: `ffmpeg -i input -ar 48000 output`. Faire un custom filter dans PHP-FFmpeg
 - cut à la milliseconde [x]
 
 ## Architecture générale
