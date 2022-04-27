@@ -1,4 +1,4 @@
-[27-Apr-2022 09:59:16 Europe/Berlin] Exception: Le format du timecode de fin de l'extrait  n'est pas valide. Veuillez le corriger (voir la documentation). in /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/src/utils.php:137
+[27-Apr-2022 10:14:23 Europe/Berlin] Exception: Les timecodes de début et de fin de l'extrait  ne sont pas valides. Le timecode de début doit être plus petit que le timecode de fin (doit référencer un moment antérieur dans la vidéo). Veuillez le corriger (voir la documentation). in /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/src/utils.php:142
 Stack trace:
 #0 /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/src/utils.php(92): are_timecodes_valid()
 #1 /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/index.php(46): generate_clips()

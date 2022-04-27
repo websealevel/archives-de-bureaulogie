@@ -147,10 +147,14 @@ function are_timecodes_valid(DOMElement $clip, string $file_source): bool
 
 /**
  * Retourne vrai si le timecode du début est plus petit que le timecode de fin, faux sinon
+ * @see https://www.php.net/manual/fr/function.strtotime.php
+ * @param string $start timecode de début de l'extrait
+ * @param string $end timecode de fin de l'extrait
+ * @return bool
  */
 function is_start_timecode_smaller_than_end_timecode(string $start, string $end): bool
 {
-    return true;
+    return strtotime($start) < strtotime($end);
 }
 
 
