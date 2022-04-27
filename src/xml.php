@@ -107,7 +107,7 @@ function clip_path(DOMElement $clip): string
 
     $start = child_element_by_name($clip, "debut")->nodeValue;
 
-    $end = child_element_by_name($clip, "debut")->nodeValue;
+    $end = child_element_by_name($clip, "fin")->nodeValue;
 
     $slug = strtolower(trim(child_element_by_name($clip, "slug")->nodeValue));
 

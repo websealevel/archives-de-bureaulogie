@@ -49,11 +49,10 @@ function generate_clips(string $file_source = SOURCE_FILE): array
 
         //On vérifie que le clip n'existe pas déjà.
         $path_clip_created = clip_path($clip);
-        if (file_exists($path_clip_created)) {
 
+        if (file_exists($path_clip_created)) {
             $file_name = str_replace(PATH_CLIPS . "/", "", $path_clip_created);
             $results["already_exists"][] = $file_name;
-
             continue;
         } else {
 
