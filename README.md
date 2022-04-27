@@ -5,8 +5,8 @@
 - [out-of-context-ackboo-twitter-bot](#out-of-context-ackboo-twitter-bot)
   - [Projet](#projet)
     - [Questions préalables](#questions-préalables)
-  - [Téléchargement de vidéos youtube depuis un serveur mutualisé](#téléchargement-de-vidéos-youtube-depuis-un-serveur-mutualisé)
-  - [Encodage vidéo/audio des extraits](#encodage-vidéoaudio-des-extraits)
+    - [Téléchargement de vidéos youtube depuis un serveur mutualisé](#téléchargement-de-vidéos-youtube-depuis-un-serveur-mutualisé)
+    - [Encodage vidéo/audio des extraits](#encodage-vidéoaudio-des-extraits)
   - [Architecture générale](#architecture-générale)
     - [Le *fichier source*](#le-fichier-source)
     - [Les différents composants](#les-différents-composants)
@@ -44,7 +44,7 @@ Créer un bot twitter qui *post* des courts extraits vidéos d’ackboo dans une
 - comment un lien youtube est lu de manière intégrée dans un tweet ? Il a pas l'air d'être lu, c'est du texte
 - quel format vidéo le plus adapté pour Twitter (rapport qualtié/poids) ? du mp4 au format 720p et 60fps, son à 128kbps voire 96kbps
 
-## Téléchargement de vidéos youtube depuis un serveur mutualisé
+### Téléchargement de vidéos youtube depuis un serveur mutualisé
 
 Cela pose problème
 
@@ -54,7 +54,7 @@ Cela pose problème
 
 Le plus simple (pour le moment) serait de télécharger manuellement les vidéos d'ackboo et de les uploader sur le serveur manuellement.
 
-## Encodage vidéo/audio des extraits
+### Encodage vidéo/audio des extraits
 
 Chaque extrait sera embarqué dans un tweet. Il faut donc veiller à obtenir un bon format et un bon rapport qualité/poids (son et vidéo)
 
