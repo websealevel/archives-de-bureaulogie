@@ -187,12 +187,12 @@ function timecode_to_seconds(string $timecode): int
 function are_timecodes_within_bounds(string $start, string $end, string $file_source): bool
 {
 
-    $file_source = 'sources/le-tribunal-des-bureaux-2.mp4';
+    $path_file_source = PATH_SOURCES . '/' . $file_source;
 
     $ffprobe = FFMpeg\FFProbe::create();
 
     $source_duration_in_seconds = $ffprobe
-        ->streams($file_source)
+        ->streams($path_file_source)
         ->videos()
         ->first()
         ->get('duration');
