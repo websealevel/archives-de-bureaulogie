@@ -45,17 +45,17 @@ define('EXTENSION_CLIP', 'mp4');
 
 
 /**
- * Format d'un timecode valide
+ * Format valide d'un timecode 
  */
 define('FORMAT_TIMECODE', "[0-9]{2}.[0-9]{2}.[0-9]{2}.[0-9]{3}");
 
 /**
- * Format d'un nom de fichier extrait (vidéo)
+ * Format valide d'un nom de fichier extrait (vidéo)
  */
 define('FORMAT_FILE_VIDEO_CLIP', "[a-z0-9\-]+[-]{2}[a-z0-9\-]+[-]{2}[0-9]{2}." . FORMAT_TIMECODE . "[-]{2}" . FORMAT_TIMECODE . "." . EXTENSION_CLIP);
 
 /**
- * Format d'un nom de fichier source (vidéo)
+ * Format valide d'un nom de fichier source (vidéo)
  */
 define('FORMAT_FILE_VIDEO_SOURCE', "[a-z0-9\-]+[-]{2}[a-z0-9\-]+." . EXTENSION_SOURCE);
 
