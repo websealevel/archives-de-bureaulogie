@@ -154,7 +154,7 @@ function are_timecodes_valid(DOMElement $clip, string $file_source): bool
  */
 function is_start_timecode_smaller_than_end_timecode(string $start, string $end): bool
 {
-    //Fonctionne jusqu'à la seconde. Cela veut dire qu'un extrait doit faire au moins une seconde (ça me parait acceptable).
+    //Ne fonctionne pas sur les milisecondes. Cela veut dire qu'un extrait doit faire au moins une seconde (ça me parait acceptable).
     return strtotime($start) < strtotime($end);
 }
 
