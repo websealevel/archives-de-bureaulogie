@@ -25,7 +25,7 @@ function timecode_to_seconds(string $timecode): int
  * Supprime les sources invalides dans le path des sources
  * @return void
  */
-function remove_invalid_sources(string $path = PATH_SOURCES, string $format): void
+function remove_invalid_sources(string $path = PATH_SOURCES, string $format = FORMAT_FILE_VIDEO_SOURCE): void
 {
     //Appliquer une regex du format attendu des sources et supprimer les fichiers qui ne respectent pas le format
 }
@@ -34,7 +34,7 @@ function remove_invalid_sources(string $path = PATH_SOURCES, string $format): vo
  * Supprime les extraits invalides dans le path des sources
  * @return array La liste des noms de fichiers supprimés
  */
-function remove_invalid_clips(string $path = PATH_CLIPS, string $format): array
+function remove_invalid_clips(string $path = PATH_CLIPS, string $format = FORMAT_FILE_VIDEO_CLIP): array
 {
     //Appliquer une regex du format attendu des extraits et supprimer les fichiers qui ne respectent pas le format
 
