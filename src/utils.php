@@ -142,6 +142,10 @@ function are_timecodes_valid(DOMElement $clip, string $file_source): bool
         throw new Exception("Les timecodes de début et de fin de l'extrait " . $clip->getAttribute("slug") . " ne sont pas valides. Le timecode de début doit être plus petit que le timecode de fin (doit référencer un moment antérieur dans la vidéo). Veuillez le corriger (voir la documentation).");
     }
 
+    if (!are_timecodes_within_bounds($start, $end, $file_source)) {
+        throw new Exception("Les timecodes de début et de fin de l'extrait " . $clip->getAttribute("slug") . " ne sont pas valides. Le timecode de début doit être plus grand que l'instant 0 et le timecode de fin doit être plus petit que la durée de la vidéo. Veuillez les corriger.");
+    }
+
     return true;
 }
 
@@ -169,9 +173,22 @@ function is_start_timecode_smaller_than_end_timecode(string $start, string $end)
 function are_timecodes_within_bounds(string $start, string $end, string $file_source): bool
 {
 
+    $file_source = 'sources/le-tribunal-des-bureaux-2.mp4';
 
+    $ffprobe = FFMpeg\FFProbe::create();
 
-    return true;
+    $source_duration = $ffprobe
+        ->streams($file_source)
+        ->videos()
+        ->first()
+        ->get('duration');
+
+    $clip_duration = strtotime($end) - strtotime($start);
+
+    return
+        strtotime($start) > 0 &&
+        strtotime($end) < $source_duration &&
+        $clip_duration < $source_duration;
 }
 
 /**
