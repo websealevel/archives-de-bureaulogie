@@ -1,8 +1,0 @@
-[27-Apr-2022 08:16:01 Europe/Berlin] Error: Call to a member function count() on null in /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/src/utils.php:41
-Stack trace:
-#0 /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/index.php(45): generate_clips()
-#1 {main}
-[27-Apr-2022 08:16:50 Europe/Berlin] Error: Call to a member function count() on null in /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/src/utils.php:41
-Stack trace:
-#0 /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/index.php(45): generate_clips()
-#1 {main}

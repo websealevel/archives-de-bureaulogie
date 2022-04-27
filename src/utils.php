@@ -34,11 +34,17 @@ function is_source_valid(string $file_source = SOURCE_FILE): bool
 function generate_clips(string $file_source = SOURCE_FILE)
 {
 
-    $sources = query_declared_sources();
-    $clips = query_declared_clips();
+    $declared_sources = query_declared_sources();
+    $declared_clips = query_declared_clips();
 
-    echo "Nombre de sources déclarées : " . $sources->count() . PHP_EOL;
-    echo "Nombre d'extraits déclarés : " . $clips->count() . PHP_EOL;
+    $sources = query_sources();
+    $clips = query_clips();
+
+    echo "Nombre de sources déclarées : " . $declared_sources->count() . PHP_EOL;
+    echo "Nombre d'extraits déclarés : " . $declared_clips->count() . PHP_EOL;
+
+    echo "Nombre de sources : " . count($sources) . PHP_EOL;
+    echo "Nombre d'extraits: " . count($clips) . PHP_EOL;
 }
 
 /** 

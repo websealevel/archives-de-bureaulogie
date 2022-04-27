@@ -34,3 +34,27 @@ function query_declared_clips(string $file_source = SOURCE_FILE)
 
     return $result;
 }
+
+/**
+ * Retourne la liste des vidéos sources présentes dans PATH_SOURCES
+ * @param string $file_source Optional. Le fichier source
+ * @param string $path Optional. Le PATH des fichiers sources
+ */
+function query_sources(string $file_source = SOURCE_FILE, string $path = PATH_SOURCES, $extension = EXTENSION_SOURCE)
+{
+    $pattern = $path . '/*.' . $extension;
+    $arrFiles = glob($pattern);
+    return $arrFiles;
+}
+
+/**
+ * Retourne la liste des extraits présents dans PATH_CLIPS
+ * @param string $file_source Optional. Le fichier source
+ * @param string $path Optional. Le PATH des fichiers sources
+ */
+function query_clips(string $file_source = SOURCE_FILE, string $path = PATH_CLIPS, $extension = EXTENSION_CLIP)
+{
+    $pattern = $path . '/*.' . $extension;
+    $arrFiles = glob($pattern);
+    return $arrFiles;
+}
