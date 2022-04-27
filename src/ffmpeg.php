@@ -8,6 +8,7 @@
 
 require_once 'src/const.php';
 require_once 'src/query.php';
+require_once 'src/journaling.php';
 
 
 /**
@@ -21,7 +22,10 @@ function generate_clips(string $file_source = SOURCE_FILE): array
     $declared_clips = query_declared_clips($file_source);
 
 
-    $clips_generated = array();
+    $results = array(
+        "already_exists" => array(),
+        "created" => array()
+    );
 
     foreach ($declared_clips as $clip) {
 
@@ -44,16 +48,29 @@ function generate_clips(string $file_source = SOURCE_FILE): array
         }
 
         //On vérifie que le clip n'existe pas déjà.
+        $path_clip_created = clip_path($clip);
+        if (file_exists($path_clip_created)) {
 
-        //Tout est valide on peut passer à la génération du clip
-        $clips_generated[] = clip_source($clip, $filename_source_video);
+            $file_name = str_replace(PATH_CLIPS . "/", "", $path_clip_created);
+            $results["already_exists"][] = $file_name;
+
+            continue;
+        } else {
+
+            //Tout est valide on peut passer à la génération du clip
+            $results["created"][] = clip_source($clip, $filename_source_video);
+        }
     }
 
-    $report = report_clip_generation();
-    log_clip_generation($report);
+    var_dump($results);
 
-    return $clips_generated();
+    // $report = report_clip_generation();
+    // log_clip_generation($report);
+
+    return $results;
 }
+
+
 
 
 /**
