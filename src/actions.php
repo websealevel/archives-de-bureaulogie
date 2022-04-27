@@ -6,6 +6,12 @@
  * @package wsl 
  */
 
+require_once 'src/utils.php';
+require_once 'src/ffmpeg.php';
+require_once 'src/validation.php';
+require_once 'src/actions.php';
+require_once 'src/handlers.php';
+
 /**
  * Met à jour la base de données des clips (ajoute, supprime en fonction du fichier source), nettoie les clips invalides
  * @return bool
