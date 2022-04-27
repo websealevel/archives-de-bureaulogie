@@ -27,6 +27,43 @@ function is_source_valid(string $file_source = SOURCE_FILE): bool
 }
 
 /**
+ * Retourne un rapport sur l'état des sources/extraits déclarés et présents sur le serveur
+ * @param string $file_source Optional. Défaut 'extraits.xml' Le fichier source contenant la déclaration des extraits
+ * @return array Rapport
+ */
+function report(string $file_source = SOURCE_FILE): array
+{
+    $declared_sources = query_declared_sources($file_source);
+    $declared_clips = query_declared_clips($file_source);
+    $sources = query_sources();
+    $clips = query_clips();
+
+    return array(
+        'declared' => array(
+            'sources' => array(
+                'quantity' => 'Nombre de sources déclarées : ' . $declared_sources->count(),
+                'list' => iterator_to_array($declared_sources)
+            ),
+            'clips' => array(
+                'quantity' => 'Nombre d\'extraits déclarés :' . $declared_clips->count(),
+                'list' => iterator_to_array($declared_clips)
+            )
+        ),
+        'files' => array(
+            'sources' => array(
+                'quantity' => 'Nombre de sources :' . count($sources),
+                'list' => $sources
+            ),
+            'clips' => array(
+                'quantity' => 'Nombre d\'extraits :' . count($clips),
+                'list' => $clips
+            )
+        )
+    );
+}
+
+
+/**
  * Génére les clips déclarés dans le fichier source 
  * @param string file_source Optional. Le fichier source déclarant les extraits (au format XML) 
  * @return void
@@ -34,17 +71,9 @@ function is_source_valid(string $file_source = SOURCE_FILE): bool
 function generate_clips(string $file_source = SOURCE_FILE)
 {
 
-    $declared_sources = query_declared_sources();
-    $declared_clips = query_declared_clips();
+    $report = report();
 
-    $sources = query_sources();
-    $clips = query_clips();
-
-    echo "Nombre de sources déclarées : " . $declared_sources->count() . PHP_EOL;
-    echo "Nombre d'extraits déclarés : " . $declared_clips->count() . PHP_EOL;
-
-    echo "Nombre de sources : " . count($sources) . PHP_EOL;
-    echo "Nombre d'extraits: " . count($clips) . PHP_EOL;
+    var_dump($report);
 }
 
 /** 
