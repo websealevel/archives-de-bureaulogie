@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Parse le fichier source extraits.xml pour éditer les extraits
  *
@@ -18,7 +19,7 @@ ini_set('error_log', 'error_log');
 set_error_handler(function ($errno, $errstr, $errfile, $errline) {
 
     //Convert errors included inuour error-reporing setting into Exceptions
-    if (!(error_reporting()& $errno)) {
+    if (!(error_reporting() & $errno)) {
         return;
     }
 
@@ -38,9 +39,11 @@ if (!is_source_valid($file_source)) {
     die;
 }
 
-echo 'Le fichier source ' . $file_source . ' est valide.';
+echo 'Le fichier source ' . $file_source . ' est valide.' . PHP_EOL;
 
 echo 'Génération des extraits' . PHP_EOL;
+
+generate_clip($file_source);
 
 
 //Restore default exception handler.
