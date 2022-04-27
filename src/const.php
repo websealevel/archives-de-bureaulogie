@@ -42,3 +42,9 @@ define('EXTENSION_SOURCE', 'mp4');
  * L'extension que doit avoir les fichiers extraits
  */
 define('EXTENSION_CLIP', 'mp4');
+
+
+/**
+ * Format d'un timecode valide
+ */
+define('FORMAT_TIMECODE', "[0-9]{2}.[0-9]{2}.[0-9]{2}.[0-9]{3}");

@@ -125,12 +125,49 @@ function source_name(DOMElement $source): string
  */
 function are_timecodes_valid(DOMElement $clip, string $file_source): bool
 {
-    $start = $clip->getAttribute("debut");
-    $end = $clip->getAttribute("fin");
 
-    var_dump($start, $end);
+    $start = child_element_by_name($clip, "debut")->nodeValue;
+    $end = child_element_by_name($clip, "fin")->nodeValue;
+
+    if (!boolval(is_timecode_format_valid($start))) {
+        throw new Exception("Le format du timecode de début de l'extrait " . $clip->getAttribute("slug") . " n'est pas valide. Veuillez le corriger (voir la documentation).");
+    }
+
+    if (!boolval(is_timecode_format_valid($end))) {
+        throw new Exception("Le format du timecode de fin de l'extrait " . $clip->getAttribute("slug") . " n'est pas valide. Veuillez le corriger (voir la documentation).");
+    }
 
     return true;
+}
+
+function is_timecode_format_valid(string $timecode, string $format = FORMAT_TIMECODE): int|bool
+{
+    $pattern = '/' . $format . '/i';
+    return preg_match($pattern, $timecode);
+}
+
+
+function child_element_by_name(DOMElement $el, string $child_name): DOMElement
+{
+
+    if (empty($child_name))
+        throw new Exception("L'élément " . $child_name . "n'existe pas.");
+
+    if (!$el->hasChildNodes())
+        throw new Exception("L'élément " . $el->nodeName . "n'as pas d'éléments enfants.");
+
+
+    $childs =  $el->childNodes;
+
+    $child = $childs->item(0);
+
+    if (!isset($child))
+        throw new Exception("Le premier enfant de " . $el->nodeName . " n'est pas défini");
+    do {
+        if ($child->nodeName === $child_name) {
+            return $child;
+        }
+    } while ($child = $child->nextSibling);
 }
 
 /**
