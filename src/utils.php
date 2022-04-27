@@ -49,6 +49,20 @@ function report(string $file_source = SOURCE_FILE): array
     );
 }
 
+/**
+ * Retourne le timecode valide en secondes. Ignore les milisecondes !
+ * @param string $timecode
+ * @return int secondes
+ */
+function timecode_to_seconds(string $timecode): int
+{
+    if (!is_timecode_format_valid($timecode)) {
+        throw new Exception("Le format du timecode " . $timecode . " n'est pas valide. Veuillez le corriger (voir la documentation).");
+    }
+    return strtotime("1970-01-01 $timecode UTC");
+}
+
+
 
 /**
  * Génére les clips déclarés dans le fichier source 
@@ -80,7 +94,7 @@ function generate_clips(string $file_source = SOURCE_FILE)
             throw new Exception($message);
         }
         //Tout est valide on peut passer à la génération du clip
-        $clip_path = clip_source($clip, $file_source);
+        $clip_path = clip_source($clip, $filename_source_video);
     }
 
     $report = report_clip_generation();
@@ -121,11 +135,41 @@ function log_clip_generation(array $report)
  */
 function clip_source(DOMElement $clip, string $file_source)
 {
+    $path_source = PATH_SOURCES . '/' . $file_source;
     $ffmpeg = FFMpeg\FFMpeg::create();
+    $video = $ffmpeg->open($path_source);
 
+    $from_in_seconds = timecode_to_seconds(child_element_by_name($clip, "debut")->nodeValue);
+    $to_in_seconds = timecode_to_seconds(child_element_by_name($clip, "fin")->nodeValue);
 
-    $clip = $video->clip(FFMpeg\Coordinate\TimeCode::fromSeconds(30), FFMpeg\Coordinate\TimeCode::fromSeconds(15));
-    $clip->save(new FFMpeg\Format\Video\X264(), 'video.avi');
+    $video_clip = $video->clip(FFMpeg\Coordinate\TimeCode::fromSeconds($from_in_seconds), FFMpeg\Coordinate\TimeCode::fromSeconds($to_in_seconds));
+
+    $path_to_save_clip = clip_path($clip);
+
+    $video_clip->save(new FFMpeg\Format\Video\X264(), $path_to_save_clip);
+}
+
+/**
+ * Retourne le path de l'extrait à sauvegarder
+ * @param DOMElement $clip
+ */
+function clip_path(DOMElement $clip): string
+{
+    $source = declared_source_of($clip);
+
+    $source_name = basename(source_name($source), '.' . EXTENSION_SOURCE);
+
+    $start = child_element_by_name($clip, "debut")->nodeValue;
+
+    $end = child_element_by_name($clip, "debut")->nodeValue;
+
+    $slug = strtolower(trim(child_element_by_name($clip, "slug")->nodeValue));
+
+    $clip_file_name = sprintf("%s-%s-%s:%s.%s", $source_name, $slug, $start, $end, EXTENSION_CLIP);
+
+    $clip_path = PATH_CLIPS . '/' . $clip_file_name;
+
+    return $clip_path;
 }
 
 /**

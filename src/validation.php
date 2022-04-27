@@ -163,18 +163,6 @@ function is_start_timecode_smaller_than_end_timecode(string $start, string $end)
     return $start_in_seconds < $end_in_seconds;
 }
 
-/**
- * Retourne le timecode valide en secondes. Ignore les milisecondes !
- * @param string $timecode
- * @return int secondes
- */
-function timecode_to_seconds(string $timecode): int
-{
-    if (!is_timecode_format_valid($timecode)) {
-        throw new Exception("Le format du timecode " . $timecode . " n'est pas valide. Veuillez le corriger (voir la documentation).");
-    }
-    return strtotime("1970-01-01 $timecode UTC");
-}
 
 
 /**

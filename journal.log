@@ -1,5 +1,94 @@
-[27-Apr-2022 11:30:06 Europe/Berlin] Exception: Les timecodes de début et de fin de l'extrait plante-et-luminaire ne sont pas valides. Le timecode de début doit être plus grand que l'instant 0 et le timecode de fin doit être plus petit que la durée de la vidéo. Veuillez les corriger. in /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/src/validation.php:144
+[27-Apr-2022 11:44:27 Europe/Berlin] Alchemy\BinaryDriver\Exception\ExecutionFailureException: ffprobe failed to execute command '/usr/bin/ffprobe' 'sources/extraits.xml' '-show_streams' '-print_format' 'json':
+
+Error Output:
+
+ ffprobe version 4.3.3-0+deb11u1 Copyright (c) 2007-2021 the FFmpeg developers
+  built with gcc 10 (Debian 10.2.1-6)
+  configuration: --prefix=/usr --extra-version=0+deb11u1 --toolchain=hardened --libdir=/usr/lib/x86_64-linux-gnu --incdir=/usr/include/x86_64-linux-gnu --arch=amd64 --enable-gpl --disable-stripping --enable-avresample --disable-filter=resample --enable-gnutls --enable-ladspa --enable-libaom --enable-libass --enable-libbluray --enable-libbs2b --enable-libcaca --enable-libcdio --enable-libcodec2 --enable-libdav1d --enable-libflite --enable-libfontconfig --enable-libfreetype --enable-libfribidi --enable-libgme --enable-libgsm --enable-libjack --enable-libmp3lame --enable-libmysofa --enable-libopenjpeg --enable-libopenmpt --enable-libopus --enable-libpulse --enable-librabbitmq --enable-librsvg --enable-librubberband --enable-libshine --enable-libsnappy --enable-libsoxr --enable-libspeex --enable-libsrt --enable-libssh --enable-libtheora --enable-libtwolame --enable-libvidstab --enable-libvorbis --enable-libvpx --enable-libwavpack --enable-libwebp --enable-libx265 --enable-libxml2 --enable-libxvid --enable-libzmq --enable-libzvbi --enable-lv2 --enable-omx --enable-openal --enable-opencl --enable-opengl --enable-sdl2 --enable-pocketsphinx --enable-libmfx --enable-libdc1394 --enable-libdrm --enable-libiec61883 --enable-chromaprint --enable-frei0r --enable-libx264 --enable-shared
+  libavutil      56. 51.100 / 56. 51.100
+  libavcodec     58. 91.100 / 58. 91.100
+  libavformat    58. 45.100 / 58. 45.100
+  libavdevice    58. 10.100 / 58. 10.100
+  libavfilter     7. 85.100 /  7. 85.100
+  libavresample   4.  0.  0 /  4.  0.  0
+  libswscale      5.  7.100 /  5.  7.100
+  libswresample   3.  7.100 /  3.  7.100
+  libpostproc    55.  7.100 / 55.  7.100
+sources/extraits.xml: No such file or directory
+ in /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/vendor/php-ffmpeg/php-ffmpeg/src/Alchemy/BinaryDriver/ProcessRunner.php:94
 Stack trace:
-#0 /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/src/utils.php(79): are_timecodes_valid()
+#0 /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/vendor/php-ffmpeg/php-ffmpeg/src/Alchemy/BinaryDriver/ProcessRunner.php(72): Alchemy\BinaryDriver\ProcessRunner->doExecutionFailure()
+#1 /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/vendor/php-ffmpeg/php-ffmpeg/src/Alchemy/BinaryDriver/AbstractBinary.php(207): Alchemy\BinaryDriver\ProcessRunner->run()
+#2 /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/vendor/php-ffmpeg/php-ffmpeg/src/Alchemy/BinaryDriver/AbstractBinary.php(136): Alchemy\BinaryDriver\AbstractBinary->run()
+#3 /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/vendor/php-ffmpeg/php-ffmpeg/src/FFMpeg/FFProbe.php(252): Alchemy\BinaryDriver\AbstractBinary->command()
+#4 /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/vendor/php-ffmpeg/php-ffmpeg/src/FFMpeg/FFProbe.php(200): FFMpeg\FFProbe->probe()
+#5 /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/vendor/php-ffmpeg/php-ffmpeg/src/FFMpeg/FFMpeg.php(93): FFMpeg\FFProbe->streams()
+#6 /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/src/utils.php(126): FFMpeg\FFMpeg->open()
+#7 /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/src/utils.php(83): clip_source()
+#8 /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/index.php(47): generate_clips()
+#9 {main}
+
+Next FFMpeg\Exception\RuntimeException: Unable to probe sources/extraits.xml in /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/vendor/php-ffmpeg/php-ffmpeg/src/FFMpeg/FFProbe.php:254
+Stack trace:
+#0 /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/vendor/php-ffmpeg/php-ffmpeg/src/FFMpeg/FFProbe.php(200): FFMpeg\FFProbe->probe()
+#1 /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/vendor/php-ffmpeg/php-ffmpeg/src/FFMpeg/FFMpeg.php(93): FFMpeg\FFProbe->streams()
+#2 /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/src/utils.php(126): FFMpeg\FFMpeg->open()
+#3 /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/src/utils.php(83): clip_source()
+#4 /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/index.php(47): generate_clips()
+#5 {main}
+[27-Apr-2022 11:46:25 Europe/Berlin] Alchemy\BinaryDriver\Exception\ExecutionFailureException: ffprobe failed to execute command '/usr/bin/ffprobe' 'sources/extraits.xml' '-show_streams' '-print_format' 'json':
+
+Error Output:
+
+ ffprobe version 4.3.3-0+deb11u1 Copyright (c) 2007-2021 the FFmpeg developers
+  built with gcc 10 (Debian 10.2.1-6)
+  configuration: --prefix=/usr --extra-version=0+deb11u1 --toolchain=hardened --libdir=/usr/lib/x86_64-linux-gnu --incdir=/usr/include/x86_64-linux-gnu --arch=amd64 --enable-gpl --disable-stripping --enable-avresample --disable-filter=resample --enable-gnutls --enable-ladspa --enable-libaom --enable-libass --enable-libbluray --enable-libbs2b --enable-libcaca --enable-libcdio --enable-libcodec2 --enable-libdav1d --enable-libflite --enable-libfontconfig --enable-libfreetype --enable-libfribidi --enable-libgme --enable-libgsm --enable-libjack --enable-libmp3lame --enable-libmysofa --enable-libopenjpeg --enable-libopenmpt --enable-libopus --enable-libpulse --enable-librabbitmq --enable-librsvg --enable-librubberband --enable-libshine --enable-libsnappy --enable-libsoxr --enable-libspeex --enable-libsrt --enable-libssh --enable-libtheora --enable-libtwolame --enable-libvidstab --enable-libvorbis --enable-libvpx --enable-libwavpack --enable-libwebp --enable-libx265 --enable-libxml2 --enable-libxvid --enable-libzmq --enable-libzvbi --enable-lv2 --enable-omx --enable-openal --enable-opencl --enable-opengl --enable-sdl2 --enable-pocketsphinx --enable-libmfx --enable-libdc1394 --enable-libdrm --enable-libiec61883 --enable-chromaprint --enable-frei0r --enable-libx264 --enable-shared
+  libavutil      56. 51.100 / 56. 51.100
+  libavcodec     58. 91.100 / 58. 91.100
+  libavformat    58. 45.100 / 58. 45.100
+  libavdevice    58. 10.100 / 58. 10.100
+  libavfilter     7. 85.100 /  7. 85.100
+  libavresample   4.  0.  0 /  4.  0.  0
+  libswscale      5.  7.100 /  5.  7.100
+  libswresample   3.  7.100 /  3.  7.100
+  libpostproc    55.  7.100 / 55.  7.100
+sources/extraits.xml: No such file or directory
+ in /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/vendor/php-ffmpeg/php-ffmpeg/src/Alchemy/BinaryDriver/ProcessRunner.php:94
+Stack trace:
+#0 /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/vendor/php-ffmpeg/php-ffmpeg/src/Alchemy/BinaryDriver/ProcessRunner.php(72): Alchemy\BinaryDriver\ProcessRunner->doExecutionFailure()
+#1 /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/vendor/php-ffmpeg/php-ffmpeg/src/Alchemy/BinaryDriver/AbstractBinary.php(207): Alchemy\BinaryDriver\ProcessRunner->run()
+#2 /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/vendor/php-ffmpeg/php-ffmpeg/src/Alchemy/BinaryDriver/AbstractBinary.php(136): Alchemy\BinaryDriver\AbstractBinary->run()
+#3 /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/vendor/php-ffmpeg/php-ffmpeg/src/FFMpeg/FFProbe.php(252): Alchemy\BinaryDriver\AbstractBinary->command()
+#4 /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/vendor/php-ffmpeg/php-ffmpeg/src/FFMpeg/FFProbe.php(200): FFMpeg\FFProbe->probe()
+#5 /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/vendor/php-ffmpeg/php-ffmpeg/src/FFMpeg/FFMpeg.php(93): FFMpeg\FFProbe->streams()
+#6 /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/src/utils.php(127): FFMpeg\FFMpeg->open()
+#7 /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/src/utils.php(83): clip_source()
+#8 /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/index.php(47): generate_clips()
+#9 {main}
+
+Next FFMpeg\Exception\RuntimeException: Unable to probe sources/extraits.xml in /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/vendor/php-ffmpeg/php-ffmpeg/src/FFMpeg/FFProbe.php:254
+Stack trace:
+#0 /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/vendor/php-ffmpeg/php-ffmpeg/src/FFMpeg/FFProbe.php(200): FFMpeg\FFProbe->probe()
+#1 /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/vendor/php-ffmpeg/php-ffmpeg/src/FFMpeg/FFMpeg.php(93): FFMpeg\FFProbe->streams()
+#2 /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/src/utils.php(127): FFMpeg\FFMpeg->open()
+#3 /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/src/utils.php(83): clip_source()
+#4 /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/index.php(47): generate_clips()
+#5 {main}
+[27-Apr-2022 11:47:00 Europe/Berlin] Clips générés avec succès !
+[27-Apr-2022 11:50:59 Europe/Berlin] Error: Call to undefined method FFMpeg\Filters\Video\VideoFilters::save() in /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/src/utils.php:148
+Stack trace:
+#0 /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/src/utils.php(97): clip_source()
 #1 /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/index.php(47): generate_clips()
 #2 {main}
+[27-Apr-2022 11:51:29 Europe/Berlin] Error: Call to undefined method FFMpeg\Filters\Video\VideoFilters::save() in /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/src/utils.php:148
+Stack trace:
+#0 /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/src/utils.php(97): clip_source()
+#1 /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/index.php(47): generate_clips()
+#2 {main}
+[27-Apr-2022 11:52:13 Europe/Berlin] Clips générés avec succès !
+[27-Apr-2022 11:55:30 Europe/Berlin] Clips générés avec succès !
+[27-Apr-2022 12:02:33 Europe/Berlin] Clips générés avec succès !
+[27-Apr-2022 12:02:46 Europe/Berlin] Clips générés avec succès !
+[27-Apr-2022 12:03:40 Europe/Berlin] Clips générés avec succès !
+[27-Apr-2022 12:03:57 Europe/Berlin] Clips générés avec succès !
+[27-Apr-2022 12:04:13 Europe/Berlin] Clips générés avec succès !
