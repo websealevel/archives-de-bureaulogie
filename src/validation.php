@@ -163,7 +163,7 @@ function are_timecodes_within_bounds(string $start, string $end, string $file_so
         ->streams($file_source)
         ->videos()
         ->first()
-        ->get('duration');
+        ->get('duration -sexagesimal');
 
     $clip_duration = strtotime($end) - strtotime($start);
 
