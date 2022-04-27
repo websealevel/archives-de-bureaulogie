@@ -62,8 +62,6 @@ function generate_clips(string $file_source = SOURCE_FILE): array
         }
     }
 
-    var_dump($results);
-
     // $report = report_clip_generation();
     // log_clip_generation($report);
 

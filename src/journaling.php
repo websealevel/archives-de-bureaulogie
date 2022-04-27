@@ -69,3 +69,28 @@ function report(string $file_source = SOURCE_FILE): array
         )
     );
 }
+
+/**
+ * Affiche sur la sortie standard le rapport de la génération des clips
+ * @see generate_clips_report()
+ * @param array $report Le rapport obtenu par la génération des clips
+ * @return void
+ */
+function generate_clips_report_e(array $report)
+{
+
+    $already_exists = $report['already_exists'] ?? array();
+    $created = $report['created'] ?? array();
+
+    printf("La base de données des extraits a été mise à jour\n");
+
+    printf("Extrait(s) crée(s): %d\n", count($created));
+    foreach ($created as $clip) {
+        printf("* %s\n", $clip);
+    }
+
+    printf("Extrait(s) déjà existant(s): %d\n", count($already_exists));
+    foreach ($already_exists as $clip) {
+        printf("* %s\n", $clip);
+    }
+}

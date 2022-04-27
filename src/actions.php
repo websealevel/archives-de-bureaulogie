@@ -18,27 +18,7 @@ function action_update_clips()
 
     $results = generate_clips();
 
-    echo 'Les extraits manquants ont été crées. La liste des extraits est à jour avec la base de données.' . PHP_EOL;
-
-
-    $already_exists = array_filter($results, function ($key) {
-        return 'already_exists' === $key;
-    }, ARRAY_FILTER_USE_KEY);
-
-    $created = array_filter($results, function ($key) {
-        return 'created' === $key;
-    }, ARRAY_FILTER_USE_KEY);
-
-    echo "Liste des extraits crées: " . PHP_EOL;
-    foreach ($created as $clip) {
-        echo $clip . PHP_EOL;
-    }
-    die;
-
-    echo "Liste des extraits déjà crées: " . PHP_EOL;
-    foreach ($already_exists as $clip) {
-        echo $clip . PHP_EOL;
-    }
+    generate_clips_report_e($results);
 }
 
 /**
