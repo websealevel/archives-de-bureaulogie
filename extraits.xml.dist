@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='UTF-8'  standalone = "no"?>
+<!DOCTYPE extraits SYSTEM "extraits.dtd">
+<extraits xmlns="https://websealevel.com/ackboo-out-of-context">
+    <source name="le-tribunal-des-bureaux--2.mp4">
+        <extrait utilise="0">
+            <slug>plante-et-luminaire</slug>
+            <description>Plantes et luminaires !</description>
+            <debut>00.08.27.300</debut>
+            <fin>00.08.29.300</fin>
+        </extrait>
+    </source>
+</extraits>
