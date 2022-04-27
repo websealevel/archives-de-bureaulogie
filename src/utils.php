@@ -15,7 +15,7 @@ require 'src/query.php';
  * @param string $file_source Optional. Défaut 'extraits.xml' Le fichier source contenant la déclaration des extraits
  * @return bool
  */
-function is_source_valid(string $file_source = SOURCE_FILE): bool
+function is_source_file_valid(string $file_source = SOURCE_FILE): bool
 {
     $dom = new DOMDocument();
 
@@ -70,11 +70,105 @@ function report(string $file_source = SOURCE_FILE): array
  */
 function generate_clips(string $file_source = SOURCE_FILE)
 {
+    //On récupere les extraits déclarés
+    $clips = query_declared_clips($file_source);
 
-    $report = report();
+    foreach ($clips as $clip) {
 
-    var_dump($report);
+        //Pour chaque extrait on recupere sa sources déclarée
+        $declared_source = $clip->parentNode;
+
+        //On récupere la source réeelle
+        $file_source = $declared_source->getAttribute('name');
+
+        //On vérifie que la source est disponible
+        if (!is_source_available($file_source)) {
+            $message = "La source déclarée " . $file_source . " n'a pas été uploadée sur le serveur. Veuillez l'uploader d'abord.";
+            throw new Exception($message);
+        }
+
+        //La source est disponible. On peut passer à la génération du clip
+
+        //On vérifie que les timecodes sont valides
+    }
 }
+
+/**
+ * Retourne vrai si la source existe sur la PATH_SOURCES ET qu'elle est valide, faux sinon
+ * @param string $file_source Optional. Le fichier source 
+ * @param string $PATH_SOURCES Optional. Le path des sources
+ * @return bool
+ */
+function is_source_available(string $file_name = SOURCE_FILE, $path = PATH_SOURCES)
+{
+    if (!is_source_valid($file_name, $path))
+        return false;
+
+    $file_path = $path . '/' . $file_name;
+
+    return file_exists($file_path);
+}
+
+/**
+ * Retourne vrai si le clip existe sur la PATH_CLIPS ET qu'il est valide, faux sinon
+ * @param string $file_source Optional. Le fichier source 
+ * @param string $PATH_CLIPS Optional. Le path des extraits
+ * @return bool
+ */
+function is_clip_available(string $file_name = SOURCE_FILE, $path = PATH_CLIPS)
+{
+    if (!is_clip_valid($file_name, $path))
+        return false;
+
+    $file_path = $path . '/' . $file_name;
+
+    return file_exists($file_path);
+}
+
+/**
+ * Retourne vrai si le fichier de la source (vidéo) est valide, faux sinon
+ * @param string $file_source Optional. Le fichier source 
+ * @param string $PATH_SOURCES Optional. Le path des sources
+ * @return bool
+ */
+function is_source_valid(string $file_name, $path = PATH_SOURCES)
+{
+
+    $file_path = $path . '/' . $file_name;
+
+    $info = pathinfo($file_path);
+
+    if ($info["extension"] !== EXTENSION_SOURCE) {
+
+        $message = sprintf("La source %s n'a pas un format valide", $file_name);
+        throw new Exception($message);
+    }
+
+    return true;
+}
+
+/**
+ * Retourne vrai si le clip est valide, faux sinon
+ * @param string $file_source Optional. Le fichier source 
+ * @param string $PATH_CLIPS Optional. Le path des extraits
+ * @return bool
+ */
+function is_clip_valid(string $file_name = SOURCE_FILE, $path = PATH_CLIPS)
+{
+    $file_path = $path . '/' . $file_name;
+
+    $info = pathinfo($file_path);
+
+    if ($info["extension"] !== EXTENSION_CLIP) {
+
+        $message = sprintf("L'extrait %s n'a pas un format valide", $file_name);
+        throw new Exception($message);
+    }
+
+    return true;
+}
+
+
 
 /** 
  * Retourne le fichier XML sous forme de DOM s'il est valide. 

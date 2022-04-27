@@ -1,18 +1,12 @@
 <?xml version='1.0' encoding='UTF-8'  standalone = "no"?>
 <!DOCTYPE extraits SYSTEM "extraits.dtd">
 <extraits xmlns="https://websealevel.com/ackboo-out-of-context">
-    <source name="le-tribunal-des-bureaux-2.mp4">
+    <source name="le-tribunal-des-bureaux-20.mp4">
         <extrait utilise="0">
             <slug>plante-et-luminaire</slug>
             <description>Plantes et luminaires !</description>
             <debut>00.08.27.300</debut>
             <fin>00.09.46.600</fin>
-        </extrait>
-         <extrait utilise="0">
-            <slug>foo-bar</slug>
-            <description>Foo Bar</description>
-            <debut>00.18.27.300</debut>
-            <fin>00.19.45.600</fin>
         </extrait>
     </source>
 </extraits>

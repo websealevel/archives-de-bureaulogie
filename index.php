@@ -11,6 +11,7 @@ require 'src/utils.php';
 //Global Exception handler
 set_exception_handler(function ($e) {
     echo 'Oups, il y a eu un problème :/' . PHP_EOL;
+    echo $e->getMessage() . PHP_EOL;
     error_log($e);
     die;
 });
@@ -33,7 +34,7 @@ echo "Génération des extraits vidéos" . PHP_EOL;
 
 $file_source = 'extraits.xml';
 
-if (!is_source_valid($file_source)) {
+if (!is_source_file_valid($file_source)) {
     echo 'Le fichier source ' . $file_source . ' est invalide. Veuillez le corriger.';
     die;
 }

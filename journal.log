@@ -1,0 +1,24 @@
+[27-Apr-2022 09:07:57 Europe/Berlin] PHP Fatal error:  Uncaught ErrorException: Undefined variable $message in /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/index.php:14
+Stack trace:
+#0 /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/index.php(14): {closure}()
+#1 [internal function]: {closure}()
+#2 {main}
+  thrown in /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/index.php on line 14
+[27-Apr-2022 09:08:26 Europe/Berlin] PHP Fatal error:  Uncaught ErrorException: Undefined variable $getMessage in /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/index.php:14
+Stack trace:
+#0 /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/index.php(14): {closure}()
+#1 [internal function]: {closure}()
+#2 {main}
+  thrown in /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/index.php on line 14
+[27-Apr-2022 09:08:44 Europe/Berlin] Exception: La source déclarée le-tribunal-des-bureaux-20.mp4 n'a pas été uploadée sur le serveur. Veuillez l'uploader in /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/src/utils.php:87
+Stack trace:
+#0 /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/index.php(46): generate_clips()
+#1 {main}
+[27-Apr-2022 09:08:54 Europe/Berlin] Exception: La source déclarée le-tribunal-des-bureaux-20.mp4 n'a pas été uploadée sur le serveur. Veuillez l'uploader in /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/src/utils.php:87
+Stack trace:
+#0 /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/index.php(46): generate_clips()
+#1 {main}
+[27-Apr-2022 09:09:09 Europe/Berlin] Exception: La source déclarée le-tribunal-des-bureaux-20.mp4 n'a pas été uploadée sur le serveur. Veuillez l'uploader in /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/src/utils.php:87
+Stack trace:
+#0 /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/index.php(46): generate_clips()
+#1 {main}
