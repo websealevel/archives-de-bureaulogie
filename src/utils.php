@@ -137,7 +137,20 @@ function are_timecodes_valid(DOMElement $clip, string $file_source): bool
         throw new Exception("Le format du timecode de fin de l'extrait " . $clip->getAttribute("slug") . " n'est pas valide. Veuillez le corriger (voir la documentation).");
     }
 
+    //Checker que end > fin
+
     return true;
+}
+
+/**
+ * Retourne vrai si les timecodes sont dans les limites de la durée de la vidéo (ie debut plus grand que 0 et fin plus petit que durée de la vidéo ), faux sinon
+ * @param string $start timecode du début
+ * @param string $end timecode de fin
+ * @param string $file_source Le path de la vidéo source
+ * @return bool
+ */
+function are_timecodes_within_bounds(string $start, string $end, string $file_source): bool
+{
 }
 
 /**
