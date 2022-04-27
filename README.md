@@ -39,13 +39,13 @@ Après une phase de tests on retiendra les valeurs suivantes
 ## Architecture générale
 
 
-## Le *fichier source*
+### Le *fichier source*
 
 La base de données des extraits est gérée par le `fichier source`. Le fichier source est `extraits.xml`. Il contient tout le travail éditorial de déclaration des extraits. Ce fichier est manipulé par différents programmes (ou à la main mais prudence !) pour gérer les extraits (création, modification, suppression).
 
 Ce fichier est **simple à éditer** et il **déclare** les extraits choisis. Il fait office de *source de vérité* et il définit l'état de la base de données d'extraits (quels extraits sont présents ou non). Pour chaque extrait, on a besoin (a) de l’url de la vidéo (b) d’un couple de timecodes début et fin de l’extrait (c) d'un slug (d) d'une description.
 
-## Les différents composants
+### Les différents composants
 
 Le projet a l’architecture suivante :
 
