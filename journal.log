@@ -114,3 +114,22 @@ Stack trace:
 #2 /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/src/actions.php(19): generate_clips()
 #3 /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/index.php(16): action_update_clips()
 #4 {main}
+[27-Apr-2022 17:25:56 Europe/Berlin] Exception: La vidéo source le-tribunal-des-bureaux-2.mp4 n'est pas valide. in /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/src/validation.php:83
+Stack trace:
+#0 /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/src/validation.php(36): is_source_valid()
+#1 /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/src/ffmpeg.php(31): is_source_available()
+#2 /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/src/actions.php(19): generate_clips()
+#3 /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/index.php(16): action_update_clips()
+#4 {main}
+[27-Apr-2022 17:26:57 Europe/Berlin] Exception: La vidéo source le-tribunal-des-bureaux-2.mp4 n'est pas valide. in /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/src/validation.php:85
+Stack trace:
+#0 /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/src/validation.php(36): is_source_valid()
+#1 /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/src/ffmpeg.php(31): is_source_available()
+#2 /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/src/actions.php(19): generate_clips()
+#3 /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/index.php(16): action_update_clips()
+#4 {main}
+[27-Apr-2022 17:29:49 Europe/Berlin] Error: Call to undefined function report_clip_generation() in /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/src/ffmpeg.php:46
+Stack trace:
+#0 /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/src/actions.php(19): generate_clips()
+#1 /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/index.php(16): action_update_clips()
+#2 {main}

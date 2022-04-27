@@ -13,14 +13,17 @@ require_once 'src/query.php';
 /**
  * Génére les clips déclarés dans le fichier source 
  * @param string file_source Optional. Le fichier source déclarant les extraits (au format XML) 
- * @return void
+ * @return array La liste des extraits générés
  */
-function generate_clips(string $file_source = SOURCE_FILE)
+function generate_clips(string $file_source = SOURCE_FILE): array
 {
     //On récupere les extraits déclarés
-    $clips = query_declared_clips($file_source);
+    $declared_clips = query_declared_clips($file_source);
 
-    foreach ($clips as $clip) {
+
+    $clips_generated = array();
+
+    foreach ($declared_clips as $clip) {
 
         $declared_source = declared_source_of($clip);
 
@@ -39,12 +42,17 @@ function generate_clips(string $file_source = SOURCE_FILE)
             $message = "Les timescodes de l'extrait " . $clip_slug . " ne sont pas valides. Veuillez les corriger.";
             throw new Exception($message);
         }
+
+        //On vérifie que le clip n'existe pas déjà.
+
         //Tout est valide on peut passer à la génération du clip
-        $path_clip_created = clip_source($clip, $filename_source_video);
+        $clips_generated[] = clip_source($clip, $filename_source_video);
     }
 
     $report = report_clip_generation();
     log_clip_generation($report);
+
+    return $clips_generated();
 }
 
 

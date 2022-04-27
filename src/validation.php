@@ -79,7 +79,7 @@ function is_source_valid(string $file_name, $path = PATH_SOURCES)
     //Validate media file
     $ffprobe = FFMpeg\FFProbe::create();
     if (!$ffprobe->isValid($file_path)) {
-        $message = sprintf("La vidéo source %s n'est pas valide.", $file_name);
+        $message = sprintf("La vidéo source %s n'est pas valide ou n'existe pas.", $file_name);
         throw new Exception($message);
     }
 

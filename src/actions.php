@@ -16,7 +16,7 @@ function action_update_clips()
         throw new Exception("Le fichier source est invalide. Veuillez le corriger d'abord.");
     }
 
-    generate_clips();
+    $clips_generated = generate_clips();
 
     // remove_undeclared_clips();
 
