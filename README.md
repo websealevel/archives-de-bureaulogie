@@ -24,7 +24,7 @@ Cela pose problème
 - youtube change regulièrement d'api donc c'est compliqué de développer un script pour télécharger une vidéo youtube sans qu'il soit difficile à maintenir
 - les librairies existantes souffrent toutes du point précédent
 
-Le plus simple serait de télécharger manuellement les vidéos d'ackboo (il en sort pas une par jour non plus j'imagine).
+Le plus simple serait de télécharger manuellement les vidéos d'ackboo et de les uploader sur le serveur.
 
 ## Encodage vidéo/audio des extraits
 
@@ -38,49 +38,14 @@ Après une phase de tests on retiendra les valeurs suivantes
 
 ## Conception
 
-On a un fichier texte source **simple à éditer** qui **déclare** les extraits choisis. Pour chaque extrait, on a besoin (a) de l’url de la vidéo (b) d’un couple de timestamps début et fin de l’extrait.
+On a un fichier source **simple à éditer** qui **déclare** les extraits choisis. Il fait office de source de vérité et il définit l'état de la base de données d'extraits (quels extraits sont présents ou non). Pour chaque extrait, on a besoin (a) de l’url de la vidéo (b) d’un couple de timecodes début et fin de l’extrait (c) d'un slug (d) d'une description.
 
 Le projet a l’architecture suivante :
 
-- fichier source au format XML (simple à lire par les humains et les machines, permet de valider un schéma de données). Le fichier déclare l'intégralité des extraits choisis
-- un petit programme client web qui sert d'interface utilisateur pour alimenter le fichier source sans le manipuler directement. Il proposera notamment de preview l'extrait avant de l'ajouter.
-- un programme se charge de lire le fichier texte et scanner tous les extraits. S'il détecte un extrait retiré, il supprime l'extrait de la base, si nouvel extrait il s'occupe de l'ajouter à la base. [BONUS, à voir si on en a besoin] Une petite base de données est ensuite mise à jour et permet de maintenir le dépôt des extraits, d'ajouter de la logique supplémentaire (par exemple indiquer si tel extrait a déjà été posté pour éviter les doublons). **On peut aussi imaginer faire ça directement dans le XML sous forme d'attribut** (on va pas s'embêter avec une base de données, le XML fera le taff).
-
-- un deuxième programme *post* à une fréquence donnée des extraits issus de cette base de données (le twitter bot)
-
-Le développement d'une petite application web en surcouche de l'édition du fichier source parait rapidement indispensable pour plusieurs raisons:
-
-- éviter de mauvaises manipulations sur le fichier source
-- faciliter l'ajout d'extrait sans erreur
-- prévisualiser l'extrait avant de l'enregistrer (un bon cut se fait à la miliseconde)
-- pouvoir visionner la vidéo sur la page où on ajuste les timecodes pour éditer son cut de manière plus agréable
-
-## Première itération
-
-Au plus simple
-
-### Setup : les données sources et les extraits
-
-- les vidéos complètes (*sources*) sont téléchargées à la main et uploadée sur le serveur
-- pour ajouter/retirer un extrait on manipule directement le fichier source `extraits.xml`. Le fichier source est au format XML et stocke l'intégralité des extraits choisis selon un format défini. Editer directement le fichier `extraits.xml` en respectant le schéma de données. Renseigner la vidéo source et les timecodes du cut
-- si le fichier comporte des erreurs après édition, il ne sera pas traité par le programme en charge d'éditer les extraits
-
-### Navigation parmi les sources et les extraits
-
-On peut également voir sur le serveur : 
-
-- la liste complète des vidéos sources téléchargées à la main
-- la liste des extraits (avec leur nom)
-
-### Génération automatatique des extraits
-
-- un programme utilise le fichier source `extraits.xml` et les vidéos complètes (sources) pour générér/supprimer les extraits déclarés.
-- ce programme se déclenche à chaque modification du fichier source
-- les extraits sont stockés dans le dossier `extraits`
-
-### Le twitter bot : post automatique d'extraits de manière aléatoire
-
-- un programme twitter bot (derrière un compte) poste à une fréquence donnée (chaque jour, toutes les 12h etc) un extrait pris au hasard dans le dossier `extraits`.
+- *fichier source* au format XML (simple à lire par les humains et les machines, permet de valider un schéma de données). Le fichier déclare l'intégralité des extraits choisis. Il est *la base de données des extraits*.
+- un programme client web qui sert d'interface utilisateur pour éditer les extraits (ajouter, modifier, supprimer)
+- un programme qui se charge de lire/manipuler le fichier source pour créer/supprimer/modifier les extraits
+- un deuxième programme qui *post* à une fréquence donnée des extraits issus de cette base de données (aka le Twitter Bot)
 
 ## Utilisation
 
@@ -96,7 +61,7 @@ Voir [ici les instructions](sources/README.md) sur le format du nom de la vidéo
 
 Pousser les vidéos sources (vidéos originales et complètes téléchargées depuis youtube) sur le serveur via le protocole FTP dans le dossier `sources`, en utilisant [Filezilla](https://filezilla-project.org/).
 
-### 4. Ajouter ou supprimer un extrait
+### 4. Ajouter ou supprimer un extrait (version manuelle)
 
 #### Le *fichier source*
 
@@ -174,7 +139,6 @@ Les timecodes (instant de début ou de fin de l'extrait) doivent être formatté
 
 Ils doivent être compris entre `00.00.00.000` et la durée totale de la vidéo.
 
-
 ## Gestion des fichiers sources et des extraits
 
 ### Fichiers sources
@@ -193,11 +157,22 @@ Un extrait doit faire **au moins 1 seconde**, sinon il ne sera pas généré et 
 
 ### Besoins pour une interface de *cut*
 
+Le développement d'une petite application web en surcouche de l'édition du fichier source parait rapidement indispensable pour plusieurs raisons:
+
+- éviter de mauvaises manipulations sur le fichier source
+- faciliter l'ajout d'extrait sans erreur
+- prévisualiser l'extrait avant de l'enregistrer (un bon cut se fait à la miliseconde)
+- pouvoir visionner la vidéo sur la page où on ajuste les timecodes pour éditer son cut de manière plus agréable
+
+
+Besoins identifiés :
+
 - preview de la vidéo source
 - indique le timecode a tout moment
 - timecode entrée et de sortie éditables
 - manipuler les timecodes via une interface graphique sur le player (luxe)
 - plusieurs cut dans un seul fichier via des marqueurs avec label des extraits, en un clic exporter tous les marqueurs (luxe)
+- *normaliser le volume* avec une valeur par défaut (voir ré-encodage) au post-montage. Le volume de la piste audio est défini par défaut par une métadonnée. Il faut que la normalisation se fasse sur le cut et non sur la vidéo entière (normalisation est une fonction de la piste entière, analyse les pics/creux de volume sur tout le volume et essaie de normaliser à partir de ça. Donc attention à ça)
 
 ## Ressources
 
