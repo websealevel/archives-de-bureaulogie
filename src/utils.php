@@ -78,18 +78,22 @@ function generate_clips(string $file_source = SOURCE_FILE)
         $declared_source = declared_source_of($clip);
 
         //On récupere le nom de la source réeelle
-        $file_source = source_name($declared_source);
+        $filename_source_video = source_name($declared_source);
 
         //On vérifie que la source est disponible
-        if (!is_source_available($file_source)) {
-            $message = "La source déclarée " . $file_source . " n'a pas été uploadée sur le serveur. Veuillez l'uploader d'abord.";
+        if (!is_source_available($filename_source_video)) {
+            $message = "La source déclarée " . $filename_source_video . " n'a pas été uploadée sur le serveur. Veuillez l'uploader d'abord.";
             throw new Exception($message);
         }
 
         //La source est disponible. On peut passer à la génération du clip
 
         //On vérifie que les timecodes sont valides
-
+        if (!are_timecodes_valid($clip, $filename_source_video)) {
+            $clip_slug = $clip->getAttribute("slug");
+            $message = "Les timescodes de l'extrait " . $clip_slug . " ne sont pas valides. Veuillez les corriger.";
+            throw new Exception($message);
+        }
     }
 }
 
@@ -111,6 +115,22 @@ function declared_source_of(DOMElement $clip): DOMElement
 function source_name(DOMElement $source): string
 {
     return $source->getAttribute('name');
+}
+
+/**
+ * Retourne vrai si les timecodes sont valides (format, min, max), faux sinon
+ * @param DOMElement $clip L'extrait dont les timescodes sont à valider
+ * @param string $file_source Le path du fichier source de l'extrait
+ * @return bool
+ */
+function are_timecodes_valid(DOMElement $clip, string $file_source): bool
+{
+    $start = $clip->getAttribute("debut");
+    $end = $clip->getAttribute("fin");
+
+    var_dump($start, $end);
+
+    return true;
 }
 
 /**
