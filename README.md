@@ -38,7 +38,14 @@ Après une phase de tests on retiendra les valeurs suivantes
 
 ## Architecture générale
 
-On a un fichier source **simple à éditer** qui **déclare** les extraits choisis. Il fait office de *source de vérité* et il définit l'état de la base de données d'extraits (quels extraits sont présents ou non). Pour chaque extrait, on a besoin (a) de l’url de la vidéo (b) d’un couple de timecodes début et fin de l’extrait (c) d'un slug (d) d'une description.
+
+## Le *fichier source*
+
+La base de données des extraits est gérée par le `fichier source`. Le fichier source est `extraits.xml`. Il contient tout le travail éditorial de déclaration des extraits. Ce fichier est manipulé par différents programmes (ou à la main mais prudence !) pour gérer les extraits (création, modification, suppression).
+
+Ce fichier est **simple à éditer** et il **déclare** les extraits choisis. Il fait office de *source de vérité* et il définit l'état de la base de données d'extraits (quels extraits sont présents ou non). Pour chaque extrait, on a besoin (a) de l’url de la vidéo (b) d’un couple de timecodes début et fin de l’extrait (c) d'un slug (d) d'une description.
+
+## Les différents composants
 
 Le projet a l’architecture suivante :
 
@@ -63,13 +70,9 @@ Pousser les vidéos sources (vidéos originales et complètes téléchargées de
 
 ### 4.1 Ajouter ou supprimer un extrait manuellement (temporaire)
 
-#### Le *fichier source*
-
-La base de données des extraits est gérée par le `fichier source`. Le fichier source est `extraits.xml`. Il contient tout le travail éditorial de déclaration des extraits. Ce fichier est manipulé par différents programmes (ou à la main mais prudence !) pour gérer les extraits (création, suppression).
-
 #### Ajouter un extrait
 
-Ouvrir `extraits.xml`.
+Ouvrir le fichier source `extraits.xml`.
 
 Ajouter un élément `extrait` (copier-coller un extrait existant pour gagner du temps mais n'oubliez pas de l'éditer entièrement) **dans l'élément `source` parent dont sera tiré l'extrait**.
 
@@ -115,6 +118,8 @@ Il suffit de supprimer l'élément `<extrait>...</extrait>` correspondant. Si on
 L'extrait `Plantes et luminaires !` a été retiré de la source `le-tribunal-des-bureaux-2.mp4`. Au prochain passage du programme l'extrait sera supprimé du dossier `extraits`.
 
 ### 4.2 Ajouter, supprimer, modifier un extrait via l'application web
+
+A venir...
 
 ### 5. Gestion du compte du Twitter Bot
 
