@@ -73,15 +73,59 @@ function generate_clips(string $file_source = SOURCE_FILE)
             throw new Exception($message);
         }
 
-        //La source est disponible. On peut passer à la génération du clip
-
         //On vérifie que les timecodes sont valides
         if (!are_timecodes_valid($clip, $filename_source_video)) {
             $clip_slug = $clip->getAttribute("slug");
             $message = "Les timescodes de l'extrait " . $clip_slug . " ne sont pas valides. Veuillez les corriger.";
             throw new Exception($message);
         }
+        //Tout est valide on peut passer à la génération du clip
+        $clip_path = clip_source($clip, $file_source);
     }
+
+    $report = report_clip_generation();
+    log_clip_generation($report);
+}
+
+/**
+ * Retourne un rapport sur la génération d'extraits
+ * @see generate_clips()
+ * @return array Un tableau de rapport
+ */
+function report_clip_generation(): array
+{
+    //Produit un rapport sur génération de clips : liste des extraits générés, erreurs éventuelles. A peaufiner
+    return array(
+        'Clips générés avec succès !'
+    );
+}
+
+/**
+ * Log un rapport sur la génération des extraits
+ * @param array Un tableau contenants des entrées d'un rapport
+ * @see report_clip_generation()
+ */
+function log_clip_generation(array $report)
+{
+    foreach ($report as $entry) {
+        error_log($entry);
+    }
+}
+
+
+/**
+ * Produit un extrait de la vidéo source et retourne le path
+ * @param DOMElement $clip L'élément extrait qui définit l'extrait à préparer
+ * @param string $file_source Le fichier source à cliper
+ * @throws Exception FFMPEG
+ */
+function clip_source(DOMElement $clip, string $file_source)
+{
+    $ffmpeg = FFMpeg\FFMpeg::create();
+
+
+    $clip = $video->clip(FFMpeg\Coordinate\TimeCode::fromSeconds(30), FFMpeg\Coordinate\TimeCode::fromSeconds(15));
+    $clip->save(new FFMpeg\Format\Video\X264(), 'video.avi');
 }
 
 /**

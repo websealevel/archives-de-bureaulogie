@@ -1,0 +1,5 @@
+[27-Apr-2022 11:30:06 Europe/Berlin] Exception: Les timecodes de début et de fin de l'extrait plante-et-luminaire ne sont pas valides. Le timecode de début doit être plus grand que l'instant 0 et le timecode de fin doit être plus petit que la durée de la vidéo. Veuillez les corriger. in /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/src/validation.php:144
+Stack trace:
+#0 /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/src/utils.php(79): are_timecodes_valid()
+#1 /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/index.php(47): generate_clips()
+#2 {main}
