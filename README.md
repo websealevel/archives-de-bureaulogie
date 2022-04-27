@@ -113,6 +113,8 @@ Renseigner dans chaque balise correspondante
 
 L'attribut `utilise` compte le nombre de fois où l'extrait a été twitté par le bot. L'initialiser à `0` par défaut.
 
+L'extrait **doit faire au moins une seconde**.
+
 Par exemple
 
 ~~~xml

@@ -52,6 +52,8 @@ remove_untracked_clips($file_source);
 echo 'Les extraits ont été ajoutés/supprimés. La liste est à jour avec la base de données.' . PHP_EOL;
 
 
+phpinfo();
+
 //Restore default error handler.
 restore_error_handler();
 //Restore default exception handler.

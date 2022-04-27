@@ -3,3 +3,18 @@ Stack trace:
 #0 /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/src/utils.php(92): are_timecodes_valid()
 #1 /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/index.php(46): generate_clips()
 #2 {main}
+[27-Apr-2022 10:21:09 Europe/Berlin] Exception: Les timecodes de début et de fin de l'extrait  ne sont pas valides. Le timecode de début doit être plus petit que le timecode de fin (doit référencer un moment antérieur dans la vidéo). Veuillez le corriger (voir la documentation). in /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/src/utils.php:142
+Stack trace:
+#0 /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/src/utils.php(92): are_timecodes_valid()
+#1 /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/index.php(46): generate_clips()
+#2 {main}
+[27-Apr-2022 10:21:37 Europe/Berlin] Exception: Les timecodes de début et de fin de l'extrait  ne sont pas valides. Le timecode de début doit être plus petit que le timecode de fin (doit référencer un moment antérieur dans la vidéo). Veuillez le corriger (voir la documentation). in /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/src/utils.php:142
+Stack trace:
+#0 /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/src/utils.php(92): are_timecodes_valid()
+#1 /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/index.php(46): generate_clips()
+#2 {main}
+[27-Apr-2022 10:21:50 Europe/Berlin] Exception: Les timecodes de début et de fin de l'extrait  ne sont pas valides. Le timecode de début doit être plus petit que le timecode de fin (doit référencer un moment antérieur dans la vidéo). Veuillez le corriger (voir la documentation). in /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/src/utils.php:142
+Stack trace:
+#0 /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/src/utils.php(92): are_timecodes_valid()
+#1 /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/index.php(46): generate_clips()
+#2 {main}
