@@ -2,6 +2,34 @@
 
 *Un twitter bot qui post des extraits vidéos d'acknoo issus de sa chaîne le tribunal des bureaux*
 
+- [out-of-context-ackboo-twitter-bot](#out-of-context-ackboo-twitter-bot)
+  - [Projet](#projet)
+    - [Questions préalables](#questions-préalables)
+  - [Téléchargement de vidéos youtube depuis un serveur mutualisé](#téléchargement-de-vidéos-youtube-depuis-un-serveur-mutualisé)
+  - [Encodage vidéo/audio des extraits](#encodage-vidéoaudio-des-extraits)
+  - [Architecture générale](#architecture-générale)
+    - [Le *fichier source*](#le-fichier-source)
+    - [Les différents composants](#les-différents-composants)
+  - [Utilisation](#utilisation)
+    - [1. Télécharger une vidéo *source* depuis youtube](#1-télécharger-une-vidéo-source-depuis-youtube)
+    - [2. Renommer la vidéo source](#2-renommer-la-vidéo-source)
+    - [3. Uploader une nouvelle vidéo *source* sur le serveur](#3-uploader-une-nouvelle-vidéo-source-sur-le-serveur)
+    - [4.1 Ajouter ou supprimer un extrait manuellement (temporaire)](#41-ajouter-ou-supprimer-un-extrait-manuellement-temporaire)
+      - [Ajouter un extrait](#ajouter-un-extrait)
+      - [Supprimer un extrait](#supprimer-un-extrait)
+    - [4.2 Ajouter, supprimer, modifier un extrait via l'application web](#42-ajouter-supprimer-modifier-un-extrait-via-lapplication-web)
+    - [5. Gestion du compte du Twitter Bot](#5-gestion-du-compte-du-twitter-bot)
+  - [Formattage des noms](#formattage-des-noms)
+    - [Fichier vidéo *source*](#fichier-vidéo-source)
+    - [Fichier vidéo *extrait*](#fichier-vidéo-extrait)
+    - [Timecode](#timecode)
+  - [Gestion des fichiers sources et des extraits](#gestion-des-fichiers-sources-et-des-extraits)
+    - [Fichiers sources](#fichiers-sources)
+    - [Extraits](#extraits)
+  - [Lancer le projet avec la CLI (temporaire)](#lancer-le-projet-avec-la-cli-temporaire)
+  - [Besoins pour une interface de *cut*](#besoins-pour-une-interface-de-cut)
+  - [Ressources](#ressources)
+
 <!-- ## Comment contribuer au dépôt ?
 
 Envie de contribuer au dépôt en proposant un extrait ? [Lisez d'abord ceci](CONTRIBUTING.md). -->
@@ -175,15 +203,15 @@ sudo apt install php
 ~~~
 si la première ne marche pas.
 
-Testez l'installation et la version de votre php
+Testez l'installation et la version de votre `php`
 
 ~~~bash
 php -v
 ~~~
 
-Télécharger le code source et placez vous dans le dossier du projet.
+Télécharger le code source et placez vous dans le dossier du projet (à la racine).
 
-Installer le gestionnaire de paquets php [`composer`](https://getcomposer.org/)
+Installer le gestionnaire de paquets php [`composer`](https://getcomposer.org/) en copiant collant les instructions ci-dessous
 
 ~~~bash
 php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
@@ -194,13 +222,13 @@ php -r "unlink('composer-setup.php');"
 
 Lancer un terminal.
 
-Installez les dépendances du projets
+Installez les dépendances du projet
 
 ~~~bash
 composer update
 ~~~
 
-Créer un fichier source extraits.xml à partir du fichier extraits.xml.dist
+Créer le fichier source extraits.xml à partir du fichier extraits.xml.dist
 
 ~~~bash
 cp extraits.xml.dist extraits.xml
