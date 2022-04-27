@@ -162,7 +162,7 @@ Les fichiers *extraits* **doivent respecter [un format](extraits/README.md#forma
 
 Un extrait doit faire **au moins 1 seconde**, sinon il ne sera pas généré et une exception sera levée.
 
-## Lancer le projet (temporaire)
+## Lancer le projet avec la CLI (temporaire)
 
 Installer la dernière version de `php`, si ce n'est pas déjà fait.
 
@@ -190,6 +190,8 @@ Créer un fichier source extraits.xml à partir du fichier extraits.xml.dist
 ~~~bash
 cp extraits.xml.dist extraits.xml
 ~~~
+
+Assurez vous de déposer la ou les vidéos sources au bon format dans le dossier `sources`.
 
 Lancer la création de clips
 
