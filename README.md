@@ -27,7 +27,9 @@
     - [Fichiers sources](#fichiers-sources)
     - [Extraits](#extraits)
   - [Lancer le projet avec la CLI (temporaire)](#lancer-le-projet-avec-la-cli-temporaire)
-  - [Besoins pour une interface de *cut*](#besoins-pour-une-interface-de-cut)
+  - [Interface graphique de *cut*](#interface-graphique-de-cut)
+    - [Pourquoi ?](#pourquoi-)
+    - [Besoins identifiés](#besoins-identifiés)
   - [Ressources](#ressources)
 
 <!-- ## Comment contribuer au dépôt ?
@@ -247,7 +249,9 @@ Lancer la création de clips
 php index.php
 ~~~
 
-## Besoins pour une interface de *cut*
+## Interface graphique de *cut*
+
+### Pourquoi ?
 
 Le développement d'une petite application web en surcouche de l'édition du fichier source parait rapidement indispensable pour plusieurs raisons:
 
@@ -256,8 +260,7 @@ Le développement d'une petite application web en surcouche de l'édition du fic
 - prévisualiser l'extrait avant de l'enregistrer (un bon cut se fait à la miliseconde)
 - pouvoir visionner la vidéo sur la page où on ajuste les timecodes pour éditer son cut de manière plus agréable
 
-
-Besoins identifiés :
+### Besoins identifiés
 
 - preview de la vidéo source
 - indique le timecode a tout moment
