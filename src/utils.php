@@ -94,7 +94,7 @@ function generate_clips(string $file_source = SOURCE_FILE)
             throw new Exception($message);
         }
         //Tout est valide on peut passer à la génération du clip
-        $clip_path = clip_source($clip, $filename_source_video);
+        $path_clip_created = clip_source($clip, $filename_source_video);
     }
 
     $report = report_clip_generation();
@@ -132,8 +132,9 @@ function log_clip_generation(array $report)
  * @param DOMElement $clip L'élément extrait qui définit l'extrait à préparer
  * @param string $file_source Le fichier source à cliper
  * @throws Exception FFMPEG
+ * @return string Le path de l'extrait crée
  */
-function clip_source(DOMElement $clip, string $file_source, array $encoding_options = ENCODING_OPTIONS)
+function clip_source(DOMElement $clip, string $file_source, array $encoding_options = ENCODING_OPTIONS): string
 {
     $path_source = PATH_SOURCES . '/' . $file_source;
     $ffmpeg = FFMpeg\FFMpeg::create();
@@ -148,6 +149,8 @@ function clip_source(DOMElement $clip, string $file_source, array $encoding_opti
     $path_to_save_clip = clip_path($clip);
 
     $video_clip->save(new FFMpeg\Format\Video\X264(), $path_to_save_clip);
+
+    return $path_to_save_clip;
 }
 
 /**
