@@ -138,9 +138,21 @@ function are_timecodes_valid(DOMElement $clip, string $file_source): bool
     }
 
     //Checker que end > fin
+    if (!is_start_timecode_smaller_than_end_timecode($start, $end)) {
+        throw new Exception("Les timecodes de début et de fin de l'extrait " . $clip->getAttribute("slug") . " ne sont pas valides. Le timecode de début doit être plus petit que le timecode de fin (doit référencer un moment antérieur dans la vidéo). Veuillez le corriger (voir la documentation).");
+    }
 
     return true;
 }
+
+/**
+ * Retourne vrai si le timecode du début est plus petit que le timecode de fin, faux sinon
+ */
+function is_start_timecode_smaller_than_end_timecode(string $start, string $end): bool
+{
+    return true;
+}
+
 
 /**
  * Retourne vrai si les timecodes sont dans les limites de la durée de la vidéo (ie debut plus grand que 0 et fin plus petit que durée de la vidéo ), faux sinon
@@ -151,6 +163,8 @@ function are_timecodes_valid(DOMElement $clip, string $file_source): bool
  */
 function are_timecodes_within_bounds(string $start, string $end, string $file_source): bool
 {
+
+    return true;
 }
 
 /**
