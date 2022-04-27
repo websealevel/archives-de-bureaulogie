@@ -75,11 +75,10 @@ function generate_clips(string $file_source = SOURCE_FILE)
 
     foreach ($clips as $clip) {
 
-        //Pour chaque extrait on recupere sa sources déclarée
-        $declared_source = $clip->parentNode;
+        $declared_source = declared_source_of($clip);
 
-        //On récupere la source réeelle
-        $file_source = $declared_source->getAttribute('name');
+        //On récupere le nom de la source réeelle
+        $file_source = source_name($declared_source);
 
         //On vérifie que la source est disponible
         if (!is_source_available($file_source)) {
@@ -90,7 +89,28 @@ function generate_clips(string $file_source = SOURCE_FILE)
         //La source est disponible. On peut passer à la génération du clip
 
         //On vérifie que les timecodes sont valides
+
     }
+}
+
+/**
+ * Retourne l'élément source de l'extrait
+ * @param DOMElement $clip  Optional. L'élément clip 
+ * @return DOMElement L'élément source parent
+ */
+function declared_source_of(DOMElement $clip): DOMElement
+{
+    return $clip->parentNode;
+}
+
+/**
+ * Retourne le nom (attribut) de la source déclarée
+ * @param DOMElement $source
+ * @return string
+ */
+function source_name(DOMElement $source): string
+{
+    return $source->getAttribute('name');
 }
 
 /**
