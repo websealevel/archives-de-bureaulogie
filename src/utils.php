@@ -129,21 +129,27 @@ function are_timecodes_valid(DOMElement $clip, string $file_source): bool
     $start = child_element_by_name($clip, "debut")->nodeValue;
     $end = child_element_by_name($clip, "fin")->nodeValue;
 
-    if (!boolval(is_timecode_format_valid($start))) {
+    if (!is_timecode_format_valid($start)) {
         throw new Exception("Le format du timecode de début de l'extrait " . $clip->getAttribute("slug") . " n'est pas valide. Veuillez le corriger (voir la documentation).");
     }
 
-    if (!boolval(is_timecode_format_valid($end))) {
+    if (!is_timecode_format_valid($end)) {
         throw new Exception("Le format du timecode de fin de l'extrait " . $clip->getAttribute("slug") . " n'est pas valide. Veuillez le corriger (voir la documentation).");
     }
 
     return true;
 }
 
-function is_timecode_format_valid(string $timecode, string $format = FORMAT_TIMECODE): int|bool
+/**
+ * Retourne vrai si le format d'un timecode est valide, faux sinon
+ * @param string $timecode Le timecode
+ * @param string $format Le format attendu pour l'expression régulière
+ * @return bool
+ */
+function is_timecode_format_valid(string $timecode, string $format = FORMAT_TIMECODE): bool
 {
     $pattern = '/' . $format . '/i';
-    return preg_match($pattern, $timecode);
+    return boolval(preg_match($pattern, $timecode));
 }
 
 /**
