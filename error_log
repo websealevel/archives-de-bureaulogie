@@ -4,3 +4,15 @@ Stack trace:
 #1 /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/utils.php(22): DOMDocument->validate()
 #2 /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/index.php(36): is_source_valid()
 #3 {main}
+[27-Apr-2022 07:23:46 Europe/Berlin] ErrorException: DOMDocument::validate(): No declaration for attribute xmlns of element extraits in /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/utils.php:22
+Stack trace:
+#0 [internal function]: {closure}()
+#1 /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/utils.php(22): DOMDocument->validate()
+#2 /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/index.php(36): is_source_valid()
+#3 {main}
+[27-Apr-2022 07:24:50 Europe/Berlin] ErrorException: DOMDocument::validate(): Element extrait content does not follow the DTD, expecting (slug , description , debut , fin), got (slug description debut) in /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/utils.php:22
+Stack trace:
+#0 [internal function]: {closure}()
+#1 /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/utils.php(22): DOMDocument->validate()
+#2 /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/index.php(36): is_source_valid()
+#3 {main}
