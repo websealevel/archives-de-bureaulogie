@@ -157,7 +157,23 @@ function are_timecodes_valid(DOMElement $clip, string $file_source): bool
 function is_start_timecode_smaller_than_end_timecode(string $start, string $end): bool
 {
     //Ne fonctionne pas sur les milisecondes. Cela veut dire qu'un extrait doit faire au moins une seconde (ça me parait acceptable).
-    return strtotime($start) < strtotime($end);
+    $start_in_seconds = timecode_to_seconds($start);
+    $end_in_seconds = timecode_to_seconds($end);
+
+    return $start_in_seconds < $end_in_seconds;
+}
+
+/**
+ * Retourne le timecode valide en secondes. Ignore les milisecondes !
+ * @param string $timecode
+ * @return int secondes
+ */
+function timecode_to_seconds(string $timecode): int
+{
+    if (!is_timecode_format_valid($timecode)) {
+        throw new Exception("Le format du timecode " . $timecode . " n'est pas valide. Veuillez le corriger (voir la documentation).");
+    }
+    return strtotime("1970-01-01 $timecode UTC");
 }
 
 
@@ -175,18 +191,21 @@ function are_timecodes_within_bounds(string $start, string $end, string $file_so
 
     $ffprobe = FFMpeg\FFProbe::create();
 
-    $source_duration = $ffprobe
+    $source_duration_in_seconds = $ffprobe
         ->streams($file_source)
         ->videos()
         ->first()
         ->get('duration');
 
-    $clip_duration = strtotime($end) - strtotime($start);
+    $start_in_seconds = timecode_to_seconds($start);
+    $end_in_seconds = timecode_to_seconds($end);
+
+    $clip_duration = timecode_to_seconds($end) - timecode_to_seconds($start);
 
     return
-        strtotime($start) > 0 &&
-        strtotime($end) < $source_duration &&
-        $clip_duration < $source_duration;
+        $start_in_seconds > 0 &&
+        $end_in_seconds < $source_duration_in_seconds &&
+        $clip_duration < $source_duration_in_seconds;
 }
 
 /**
