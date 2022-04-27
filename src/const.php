@@ -62,15 +62,13 @@ define('FORMAT_FILE_VIDEO_SOURCE', "[a-z0-9\-]+[-]{2}[a-z0-9\-]+." . EXTENSION_S
 /**
  * Options d'encodage video et audio pour la génération d'extraits
  */
-define(
-    'ENCODING_OPTIONS',
-    array(
-        'video' => array(
-            'fps' => 60,
-            'definition' => '720p'
-        ),
-        'audio' => array(
-            'kbps' => 128
-        )
-    )
-);
+
+/**
+ * Kbps du flux vidéo
+ */
+define('ENCODING_OPTION_VIDEO_KBPS', 369);
+
+/**
+ * Kbps du flux audio
+ */
+define('ENCODING_OPTION_AUDIO_KBPS', 96);

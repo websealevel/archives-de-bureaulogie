@@ -111,7 +111,7 @@ function clip_path(DOMElement $clip): string
 
     $slug = strtolower(trim(child_element_by_name($clip, "slug")->nodeValue));
 
-    $clip_file_name = sprintf("%s-%s-%s:%s.%s", $source_name, $slug, $start, $end, EXTENSION_CLIP);
+    $clip_file_name = sprintf("%s--%s--%s--%s.%s", $source_name, $slug, $start, $end, EXTENSION_CLIP);
 
     $clip_path = PATH_CLIPS . '/' . $clip_file_name;
 

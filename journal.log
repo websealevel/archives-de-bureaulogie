@@ -1,69 +1,12 @@
-[27-Apr-2022 18:10:23 Europe/Berlin] Clips générés avec succès !
-[27-Apr-2022 18:10:23 Europe/Berlin] ErrorException: Array to string conversion in /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/src/actions.php:34
+[27-Apr-2022 22:57:37 Europe/Berlin] Error: Undefined constant "ENCODING_OPTIONS" in /home/paul/depots/websealevel/out-of-context-ackboo/src/ffmpeg.php:80
 Stack trace:
-#0 /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/src/actions.php(34): {closure}()
-#1 /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/index.php(16): action_update_clips()
-#2 {main}
-[27-Apr-2022 18:10:52 Europe/Berlin] Clips générés avec succès !
-[27-Apr-2022 18:11:11 Europe/Berlin] Clips générés avec succès !
-[27-Apr-2022 18:11:23 Europe/Berlin] Clips générés avec succès !
-[27-Apr-2022 18:11:48 Europe/Berlin] Clips générés avec succès !
-[27-Apr-2022 18:11:48 Europe/Berlin] ErrorException: Array to string conversion in /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/src/actions.php:33
-Stack trace:
-#0 /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/src/actions.php(33): {closure}()
-#1 /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/index.php(16): action_update_clips()
-#2 {main}
-[27-Apr-2022 18:11:56 Europe/Berlin] Clips générés avec succès !
-[27-Apr-2022 18:12:04 Europe/Berlin] Clips générés avec succès !
-[27-Apr-2022 18:12:04 Europe/Berlin] ErrorException: Array to string conversion in /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/src/actions.php:37
-Stack trace:
-#0 /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/src/actions.php(37): {closure}()
-#1 /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/index.php(16): action_update_clips()
-#2 {main}
-[27-Apr-2022 18:12:34 Europe/Berlin] Clips générés avec succès !
-[27-Apr-2022 18:12:34 Europe/Berlin] ErrorException: Array to string conversion in /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/src/actions.php:37
-Stack trace:
-#0 /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/src/actions.php(37): {closure}()
-#1 /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/index.php(16): action_update_clips()
-#2 {main}
-[27-Apr-2022 18:13:00 Europe/Berlin] ErrorException: Array to string conversion in /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/src/actions.php:37
-Stack trace:
-#0 /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/src/actions.php(37): {closure}()
-#1 /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/index.php(16): action_update_clips()
-#2 {main}
-[27-Apr-2022 18:13:32 Europe/Berlin] ErrorException: Array to string conversion in /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/src/actions.php:37
-Stack trace:
-#0 /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/src/actions.php(37): {closure}()
-#1 /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/index.php(16): action_update_clips()
-#2 {main}
-[27-Apr-2022 19:54:26 Europe/Berlin] ErrorException: Array to string conversion in /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/src/actions.php:40
-Stack trace:
-#0 /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/src/actions.php(40): {closure}()
-#1 /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/index.php(16): action_update_clips()
-#2 {main}
-[27-Apr-2022 19:55:09 Europe/Berlin] ErrorException: Array to string conversion in /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/src/actions.php:42
-Stack trace:
-#0 /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/src/actions.php(42): {closure}()
-#1 /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/index.php(16): action_update_clips()
-#2 {main}
-[27-Apr-2022 19:55:55 Europe/Berlin] ErrorException: Array to string conversion in /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/src/actions.php:42
-Stack trace:
-#0 /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/src/actions.php(42): {closure}()
-#1 /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/index.php(16): action_update_clips()
-#2 {main}
-[27-Apr-2022 19:59:11 Europe/Berlin] ValueError: Unknown format specifier "n" in /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/src/actions.php:27
-Stack trace:
-#0 /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/src/actions.php(27): printf()
-#1 /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/index.php(16): action_update_clips()
-#2 {main}
-[27-Apr-2022 20:04:24 Europe/Berlin] ArgumentCountError: 3 arguments are required, 2 given in /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/src/journaling.php:92
-Stack trace:
-#0 /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/src/journaling.php(92): printf()
-#1 /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/src/actions.php(21): generate_clips_report_e()
-#2 /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/index.php(16): action_update_clips()
+#0 /home/paul/depots/websealevel/out-of-context-ackboo/src/ffmpeg.php(60): clip_source()
+#1 /home/paul/depots/websealevel/out-of-context-ackboo/src/actions.php(26): generate_clips()
+#2 /home/paul/depots/websealevel/out-of-context-ackboo/index.php(12): action_update_clips()
 #3 {main}
-[27-Apr-2022 20:50:51 Europe/Berlin] Exception: Le fichier source n'existe pas. Veuillez créer le fichier extraits.xml pour déclarer les extraits que vous souhaitez générer. in /home/paul/depots/websealevel/out-of-context-ackboo/src/validation.php:22
+[27-Apr-2022 23:02:30 Europe/Berlin] Error: Call to undefined method FFMpeg\Media\Video::resize() in /home/paul/depots/websealevel/out-of-context-ackboo/src/ffmpeg.php:98
 Stack trace:
-#0 /home/paul/depots/websealevel/out-of-context-ackboo/src/actions.php(20): is_source_file_valid()
-#1 /home/paul/depots/websealevel/out-of-context-ackboo/index.php(12): action_update_clips()
-#2 {main}
+#0 /home/paul/depots/websealevel/out-of-context-ackboo/src/ffmpeg.php(60): clip_source()
+#1 /home/paul/depots/websealevel/out-of-context-ackboo/src/actions.php(26): generate_clips()
+#2 /home/paul/depots/websealevel/out-of-context-ackboo/index.php(12): action_update_clips()
+#3 {main}

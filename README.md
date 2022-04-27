@@ -60,12 +60,16 @@ Chaque extrait sera embarqué dans un tweet. Il faut donc veiller à obtenir un 
 
 Après une phase de tests on retiendra les valeurs suivantes
 
-- vidéo en 720p en .mp4, 30fps
-- son à 128 voire 96 kbps
-- précision : cut a la miliseconde nécessaire
+- piste vidéo
+  -  en 720p [x]
+  -  en .mp4 [x]
+  -  30fps [x]
+  -  369 kbps [x]
+- piste audio
+  - 96 kbps [x]
+  - échantillonage 48000 Hz (standard dans un fichier vidéo)
 
 ## Architecture générale
-
 
 ### Le *fichier source*
 
@@ -107,7 +111,7 @@ Ajouter un élément `extrait` (copier-coller un extrait existant pour gagner du
 Renseigner dans chaque balise correspondante
 
 - `slug` : le [slug](extraits/README.md#slug)
-- `description` : une description courte de l'extrait (ie un titre)
+- `description` : une description courte de l'extrait (ou un titre). Elle servira de contenu pour le tweet du bot
 - `debut` : le timecode du début. Voir [ici](#timecode) pour le format du timecode
 - `fin` : le timecode de fin. Voir [ici](#timecode) pour le format du timecode
 
@@ -271,3 +275,4 @@ Besoins identifiés :
 - [jdownloader](https://jdownloader.org/), outil open-source de téléchargement en flux continu
 - [filezilla](https://filezilla-project.org/), client ftp open-source
 - [lostlesscut](https://github.com/mifi/lossless-cut), le couteau suisse de l'édition vidéo/audio pour cut la vidéo d'origine
+- [FFMPEG, Invoking command-line tools from PHP scripts](https://trac.ffmpeg.org/wiki/PHP)

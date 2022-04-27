@@ -1,0 +1,63 @@
+# version: "3.4"
+
+# services:
+
+#   #L'application cliente
+#   back:
+#     build:
+#       context: ./
+#       dockerfile: Dockerfile-apache-php
+#     depends_on:
+#       - db
+#     restart: always
+#     networks:
+#       - project_php
+#       - web
+#     volumes:
+#       - ./back/:/var/www/html/:rw
+#       - ./.user.ini:/var/www/html/.user.ini
+#     container_name: ${PROJECT_NAME}-back
+#     labels:
+#       - "traefik.enable=true"
+#       - "traefik.http.routers.back-${PROJECT_NAME}.rule=Host(`back.${PROJECT_NAME}.${TRAEFIK_DOMAIN}`)"
+#       - "traefik.http.routers.back-${PROJECT_NAME}.entrypoints=web"
+#     #Nous donne les droits en ecriture au volume (par défaut donné à root, pas cool)
+#     user: "${UID}:${GID}"
+
+#   #Le serveur de la base de données postgres
+#   db:
+#     image: postgres:14.2
+#     environment:
+#       POSTGRES_USER: 'user'
+#       POSTGRES_PASSWORD: 'password'
+#       POSTGRES_DB: 'mydb'
+#     restart: always
+#     container_name: ${PROJECT_NAME}-db
+#     volumes:
+#       - ./postgres-data:/var/lib/mysql
+#       - ./init:/docker-entrypoint-initdb.d
+#     networks:
+#       - project_php
+#     labels:
+#       - "traefik.enable=false"
+
+#   #Le serveur de adminer
+#   adminer:
+#     image: adminer
+#     restart: always
+#     depends_on:
+#       - db
+#     container_name: ${PROJECT_NAME}-adminer
+#     networks:
+#       - web
+#       - project_php
+#     labels:
+#       - "traefik.enable=true"
+#       - "traefik.http.routers.adminer-${PROJECT_NAME}.rule=Host(`adminer.${PROJECT_NAME}.${TRAEFIK_DOMAIN}`)"
+#       - "traefik.http.routers.adminer-${PROJECT_NAME}.entrypoints=web"
+      
+# networks:
+#   project_default:
+#     internal: true
+#   web:
+#     external: true
