@@ -10,15 +10,19 @@ require 'utils.php';
 //Global Exception handler
 set_exception_handler(function (Exception $e) {
     echo 'Oups, il y a eu un problème :/' . PHP_EOL;
+    error_log($e);
     die;
 });
 //Global Error handler
 ini_set('error_log', 'error_log');
 set_error_handler(function ($errno, $errstr, $errfile, $errline) {
-    echo 'Oups, il y a eu un problème :/' . PHP_EOL;
-    $error = sprintf("%s %s %s %s", $errno, $errstr, $errfile, $errline);
-    error_log($error);
-    die;
+
+    //Convert errors included inuour error-reporing setting into Exceptions
+    if (!(error_reporting()& $errno)) {
+        return;
+    }
+
+    throw new \ErrorException($errstr, $errno, 0, $errfile, $errline);
 });
 
 
@@ -39,5 +43,7 @@ echo 'Le fichier source ' . $file_source . ' est valide.';
 echo 'Génération des extraits' . PHP_EOL;
 
 
-
+//Restore default exception handler.
 restore_exception_handler();
+//Restore default error handler.
+restore_error_handler();

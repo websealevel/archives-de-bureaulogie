@@ -1,1 +1,6 @@
-[27-Apr-2022 07:13:44 Europe/Berlin] 2 DOMDocument::validate(): No declaration for attribute xmlns of element extraits /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/utils.php 22
+[27-Apr-2022 07:21:55 Europe/Berlin] ErrorException: DOMDocument::validate(): No declaration for attribute xmlns of element extraits in /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/utils.php:22
+Stack trace:
+#0 [internal function]: {closure}()
+#1 /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/utils.php(22): DOMDocument->validate()
+#2 /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/index.php(36): is_source_valid()
+#3 {main}
