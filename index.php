@@ -9,15 +9,14 @@
 require 'src/utils.php';
 
 //Global Exception handler
-set_exception_handler(function (Exception $e) {
+set_exception_handler(function ($e) {
     echo 'Oups, il y a eu un problème :/' . PHP_EOL;
     error_log($e);
     die;
 });
 //Global Error handler
-ini_set('error_log', 'error_log');
+ini_set('error_log', 'journal.log');
 set_error_handler(function ($errno, $errstr, $errfile, $errline) {
-
     //Convert errors included inuour error-reporing setting into Exceptions
     if (!(error_reporting() & $errno)) {
         return;
@@ -52,7 +51,7 @@ remove_untracked_clips($file_source);
 echo 'Les extraits ont été ajoutés/supprimés. La liste est à jour avec la base de données.' . PHP_EOL;
 
 
-//Restore default exception handler.
-restore_exception_handler();
 //Restore default error handler.
 restore_error_handler();
+//Restore default exception handler.
+restore_exception_handler();

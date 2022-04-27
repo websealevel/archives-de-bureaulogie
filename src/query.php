@@ -9,9 +9,9 @@
 /**
  * Retourne la liste des sources déclarées
  * @param string $file_source Optional. Le fichier source
- * @param string $PATH Optional. Le PATH des fichiers sources
+ * @return DOMNodeList
  */
-function query_declared_sources(string $file_source = SOURCE_FILE,  string $PATH = PATH_SOURCES): DOMNodeList
+function query_declared_sources(string $file_source = SOURCE_FILE): DOMNodeList
 {
     $xpath = load_xpath($file_source, XMLNS_SOURCE_FILE);
 
@@ -24,21 +24,13 @@ function query_declared_sources(string $file_source = SOURCE_FILE,  string $PATH
 /**
  * Retourne la liste des extraits déclarés dans le dossier
  * @param string $file_source Optional. Le fichier source
- * @param string $PATH Optional. Le PATH des fichiers sources
  * @return DOMNodeList
  */
-function query_declared_clips(string $file_source = SOURCE_FILE,  string $PATH = PATH_SOURCES)
+function query_declared_clips(string $file_source = SOURCE_FILE)
 {
     $xpath = load_xpath($file_source, XMLNS_SOURCE_FILE);
 
-    $sources = query_declared_sources($file_source, $PATH);
+    $result = $xpath->query('//ns:extrait');
 
-    $node = $sources->item(0);
-    if (!isset($node))
-        return;
-    do {
-        echo "name= " . $node->getAttribute('name') . PHP_EOL;
-    } while ($node = $node->nextSibling);
-
-    return;
+    return $result;
 }

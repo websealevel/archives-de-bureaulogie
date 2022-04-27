@@ -41,11 +41,6 @@ function generate_clips(string $file_source = SOURCE_FILE)
     echo "Nombre d'extraits déclarés : " . $clips->count() . PHP_EOL;
 }
 
-
-function remove_untracked_clips(string $file_source = SOURCE_FILE)
-{
-}
-
 /** 
  * Retourne le fichier XML sous forme de DOM s'il est valide. 
  * @param string $file_source Optional. Le fichier source  
@@ -79,4 +74,41 @@ function load_xpath(string $file_source = SOURCE_FILE, string $namespace = XMLNS
     $xpath = new DOMXpath($dom);
     $xpath->registerNamespace('ns', $namespace);
     return $xpath;
+}
+
+/**
+ * Supprime les sources invalides dans le path des sources
+ * @return void
+ */
+function remove_invalid_sources(string $path = PATH_SOURCES, string $format): void
+{
+    //Appliquer une regex du format attendu des sources et supprimer les fichiers qui ne respectent pas le format
+}
+
+/**
+ * Supprime les extraits invalides dans le path des sources
+ * @return void
+ */
+function remove_invalid_clips(string $path = PATH_CLIPS, string $format)
+{
+    //Appliquer une regex du format attendu des extraits et supprimer les fichiers qui ne respectent pas le format
+
+}
+
+function remove_source(string $file_name)
+{
+}
+
+function remove_clip(string $file_name)
+{
+}
+
+function delete_file(string $file_name): bool
+{
+
+    return true;
+}
+
+function remove_untracked_clips(string $file_source = SOURCE_FILE)
+{
 }
