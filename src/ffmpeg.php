@@ -94,6 +94,8 @@ function clip_source(DOMElement $clip, string $file_source): string
 
     $format = new FFMpeg\Format\Video\X264();
 
+    $video->filters()->resample(48000);
+
     $format
         ->setKiloBitrate(ENCODING_OPTION_VIDEO_KBPS)
         ->setAudioKiloBitrate(ENCODING_OPTION_AUDIO_KBPS);
