@@ -7,7 +7,7 @@ Contient les extraits générés automatiquement à partir des [sources](../sour
 Les extraits sont générés automatiquement au format 
 
 ~~~
-{nom-serie}-{numero|identifiant de la video}-{slug}-{code temps début}-{code-temps-fin}.mp4
+{nom-serie}--{numero|identifiant de la video}--{slug}--{code temps début}--{code-temps-fin}.mp4
 ~~~
 
 où `slug` est un élément XML de l'élément extrait. 

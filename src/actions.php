@@ -20,7 +20,7 @@ function action_update_clips()
 
     remove_undeclared_clips();
 
-    clean_invalid_clips();
+    remove_invalid_clips();
 
     echo 'Les extraits ont été ajoutés/supprimés. La liste est à jour avec la base de données.' . PHP_EOL;
 }
