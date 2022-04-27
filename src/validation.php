@@ -16,6 +16,15 @@ require_once 'src/const.php';
  */
 function is_source_file_valid(string $file_source = SOURCE_FILE): bool
 {
+    //Check que le fichier source existe.
+    if (!file_exists($file_source)) {
+
+        throw new Exception("Le fichier source n'existe pas. Veuillez créer le fichier " . SOURCE_FILE . " pour déclarer les extraits que vous souhaitez générer.");
+
+        return false;
+    }
+
+    //Check que le fichier source a un schéma valide spéificié par le dtd.
     $dom = new DOMDocument();
 
     $dom->preserveWhiteSpace = false;
