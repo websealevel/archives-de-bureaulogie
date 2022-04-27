@@ -8,6 +8,7 @@
 
 
 require 'const.php';
+require 'query.php';
 
 /**
  * Retourne vrai si le fichier source est valide (validation via le DTD), faux sinon
@@ -30,12 +31,19 @@ function is_source_valid(string $file_source = SOURCE_FILE): bool
  * @param string file_source Optional. Le fichier source déclarant les extraits (au format XML) 
  * @return void
  */
-function generate_clip(string $file_source = SOURCE_FILE)
+function generate_clips(string $file_source = SOURCE_FILE)
 {
 
-    $sources = query_sources();
+    $sources = query_declared_sources();
+    $clips = query_declared_clips();
 
     echo "Nombre de sources déclarées : " . $sources->count() . PHP_EOL;
+    echo "Nombre d'extraits déclarés : " . $clips->count() . PHP_EOL;
+}
+
+
+function remove_untracked_clips(string $file_source = SOURCE_FILE)
+{
 }
 
 /** 
@@ -71,18 +79,4 @@ function load_xpath(string $file_source = SOURCE_FILE, string $namespace = XMLNS
     $xpath = new DOMXpath($dom);
     $xpath->registerNamespace('ns', $namespace);
     return $xpath;
-}
-
-/**
- * Retourne la liste des vidéos sources présentes dans le dossier
- * @param string $file_source Optional. Le fichier source
- * @param string $PATH Optional. Le PATH des fichiers sources
- */
-function query_sources(string $file_source = SOURCE_FILE,  string $PATH = PATH_SOURCES): DOMNodeList
-{
-    $xpath = load_xpath($file_source, XMLNS_SOURCE_FILE);
-
-    $results = $xpath->query('//ns:extraits/ns:source');
-
-    return $results;
 }

@@ -43,7 +43,13 @@ echo 'Le fichier source ' . $file_source . ' est valide.' . PHP_EOL;
 
 echo 'Génération des extraits' . PHP_EOL;
 
-generate_clip($file_source);
+generate_clips($file_source);
+
+echo 'Suppresion des extraits non déclarés' . PHP_EOL;
+
+remove_untracked_clips($file_source);
+
+echo 'Les extraits ont été ajoutés/supprimés. La liste est à jour avec la base de données.' . PHP_EOL;
 
 
 //Restore default exception handler.
