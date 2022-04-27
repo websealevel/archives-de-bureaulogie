@@ -33,12 +33,9 @@ function is_source_valid(string $file_source = SOURCE_FILE): bool
 function generate_clip(string $file_source = SOURCE_FILE)
 {
 
-    $xpath = load_xpath($file_source, XMLNS_SOURCE_FILE);
+    $sources = query_sources();
 
-    //Selectionne tous les extraits
-    $results = $xpath->query('//ns:extraits/ns:source');
-
-    echo "Nombre de sources déclarées : " . $results->count() . PHP_EOL;
+    echo "Nombre de sources déclarées : " . $sources->count() . PHP_EOL;
 }
 
 /** 
@@ -78,7 +75,14 @@ function load_xpath(string $file_source = SOURCE_FILE, string $namespace = XMLNS
 
 /**
  * Retourne la liste des vidéos sources présentes dans le dossier
+ * @param string $file_source Optional. Le fichier source
+ * @param string $PATH Optional. Le PATH des fichiers sources
  */
-function video_sources(string $file_source = SOURCE_FILE): array
+function query_sources(string $file_source = SOURCE_FILE,  string $PATH = PATH_SOURCES): DOMNodeList
 {
+    $xpath = load_xpath($file_source, XMLNS_SOURCE_FILE);
+
+    $results = $xpath->query('//ns:extraits/ns:source');
+
+    return $results;
 }
