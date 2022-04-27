@@ -9,16 +9,24 @@
 require_once 'src/const.php';
 
 /**
- * Retourne le timecode valide en secondes. Ignore les milisecondes !
+ * Retourne le timecode valide en secondes (milisecondes incluses en décimal)
  * @param string $timecode
- * @return int secondes
+ * @return float Temps en secondes
  */
-function timecode_to_seconds(string $timecode): int
+function timecode_to_seconds(string $timecode): float
 {
     if (!is_timecode_format_valid($timecode)) {
         throw new Exception("Le format du timecode " . $timecode . " n'est pas valide. Veuillez le corriger (voir la documentation).");
     }
-    return strtotime("1970-01-01 $timecode UTC");
+
+    $hour = intval(substr($timecode, 0, 2));
+    $minute = intval(substr($timecode, 3, 2));
+    $second = intval(substr($timecode, 6, 2));
+    $milisecond = intval(substr($timecode, 9, 3));
+
+    $time_in_seconds = $hour * 3600 + $minute * 60 + $second + $milisecond / 1000;
+
+    return $time_in_seconds;
 }
 
 /**

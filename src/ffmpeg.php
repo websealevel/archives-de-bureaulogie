@@ -88,7 +88,6 @@ function clip_source(DOMElement $clip, string $file_source): string
 
     $duration = $to_in_seconds - $from_in_seconds;
 
-    //A faire : choisir encodage, format, fps, audio
     $video_clip = $video->clip(FFMpeg\Coordinate\TimeCode::fromSeconds($from_in_seconds), FFMpeg\Coordinate\TimeCode::fromSeconds($duration));
 
     $path_to_save_clip = clip_path($clip);

@@ -68,6 +68,7 @@ Après une phase de tests on retiendra les valeurs suivantes
 - piste audio
   - 96 kbps [x]
   - échantillonage 48000 Hz (standard dans un fichier vidéo)
+- cut à la milliseconde [x]
 
 ## Architecture générale
 
