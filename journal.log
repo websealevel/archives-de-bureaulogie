@@ -62,3 +62,8 @@ Stack trace:
 #1 /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/src/actions.php(21): generate_clips_report_e()
 #2 /home/paul/depots/websealevel/out-of-context-ackboo-twitter-bot/index.php(16): action_update_clips()
 #3 {main}
+[27-Apr-2022 20:50:51 Europe/Berlin] Exception: Le fichier source n'existe pas. Veuillez créer le fichier extraits.xml pour déclarer les extraits que vous souhaitez générer. in /home/paul/depots/websealevel/out-of-context-ackboo/src/validation.php:22
+Stack trace:
+#0 /home/paul/depots/websealevel/out-of-context-ackboo/src/actions.php(20): is_source_file_valid()
+#1 /home/paul/depots/websealevel/out-of-context-ackboo/index.php(12): action_update_clips()
+#2 {main}

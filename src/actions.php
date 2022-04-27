@@ -9,7 +9,6 @@
 require_once 'src/utils.php';
 require_once 'src/ffmpeg.php';
 require_once 'src/validation.php';
-require_once 'src/actions.php';
 require_once 'src/handlers.php';
 
 /**
@@ -21,6 +20,8 @@ function action_update_clips()
     if (!is_source_file_valid()) {
         throw new Exception("Le fichier source est invalide. Veuillez le corriger d'abord.");
     }
+
+    printf("Génération des clips...\n");
 
     $results = generate_clips();
 
