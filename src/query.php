@@ -6,6 +6,9 @@
  * @package wsl 
  */
 
+require_once 'src/const.php';
+require_once 'src/xml.php';
+
 /**
  * Retourne la liste des sources déclarées
  * @param string $file_source Optional. Le fichier source

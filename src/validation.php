@@ -7,6 +7,7 @@
  */
 
 require_once 'vendor/autoload.php';
+require_once 'src/const.php';
 
 /**
  * Retourne vrai si le fichier source est valide (validation via le DTD), faux sinon
