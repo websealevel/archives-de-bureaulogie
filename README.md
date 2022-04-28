@@ -25,10 +25,14 @@
   - [Gestion des fichiers sources et des extraits](#gestion-des-fichiers-sources-et-des-extraits)
     - [Fichiers sources](#fichiers-sources)
     - [Extraits](#extraits)
-  - [Lancer le projet avec la CLI [DEPRECATED]](#lancer-le-projet-avec-la-cli-deprecated)
   - [Interface graphique de *cut*](#interface-graphique-de-cut)
     - [Pourquoi ?](#pourquoi-)
     - [Besoins identifiés](#besoins-identifiés)
+  - [Getting started](#getting-started)
+    - [Prérequis](#prérequis)
+    - [Lancer le projet](#lancer-le-projet)
+    - [Arrêter le projet](#arrêter-le-projet)
+    - [Réinitialiser la base de données](#réinitialiser-la-base-de-données)
   - [Ressources](#ressources)
 
 <!-- ## Comment contribuer au dépôt ?
@@ -187,57 +191,7 @@ Les fichiers *extraits* **doivent respecter [un format](extraits/README.md#forma
 
 Un extrait doit faire **au moins 1 seconde**, sinon il ne sera pas généré et une exception sera levée.
 
-## Lancer le projet avec la CLI [DEPRECATED]
 
-Installer la dernière version de `php`, si ce n'est pas déjà fait.
-
-~~~bash
-sudo apt install php8.1
-~~~
-ou
-~~~bash
-sudo apt install php
-~~~
-si la première ne marche pas.
-
-Testez l'installation et la version de votre `php`
-
-~~~bash
-php -v
-~~~
-
-Télécharger le code source et placez vous dans le dossier du projet (à la racine).
-
-Installer le gestionnaire de paquets php [`composer`](https://getcomposer.org/) en copiant collant les instructions ci-dessous
-
-~~~bash
-php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
-php -r "if (hash_file('sha384', 'composer-setup.php') === '906a84df04cea2aa72f40b5f787e49f22d4c2f19492ac310e8cba5b96ac8b64115ac402c8cd292b8a03482574915d1a8') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
-php composer-setup.php
-php -r "unlink('composer-setup.php');"
-~~~
-
-Lancer un terminal.
-
-Installez les dépendances du projet
-
-~~~bash
-composer update
-~~~
-
-Créer le fichier source extraits.xml à partir du fichier extraits.xml.dist
-
-~~~bash
-cp extraits.xml.dist extraits.xml
-~~~
-
-Assurez vous de déposer la ou les vidéos sources au bon format dans le dossier `sources`.
-
-Lancer la création de clips
-
-~~~bash
-php index.php
-~~~
 
 ## Interface graphique de *cut*
 
@@ -258,6 +212,50 @@ Le développement d'une petite application web en surcouche de l'édition du fic
 - manipuler les timecodes via une interface graphique sur le player (luxe)
 - plusieurs cut dans un seul fichier via des marqueurs avec label des extraits, en un clic exporter tous les marqueurs (luxe)
 - *normaliser le volume* avec une valeur par défaut (voir ré-encodage) au post-montage. Le volume de la piste audio est défini par défaut par une métadonnée. Il faut que la normalisation se fasse sur le cut et non sur la vidéo entière (normalisation est une fonction de la piste entière, analyse les pics/creux de volume sur tout le volume et essaie de normaliser à partir de ça. Donc attention à ça)
+
+## Getting started
+
+### Prérequis
+
+Installer
+
+- [composer](https://getcomposer.org/)
+- [docker](https://www.docker.com/)
+- [docker-compose](https://docs.docker.com/compose/)
+
+Mettre à jour les dépendances du projet
+
+~~~bash
+composer update
+~~~
+
+### Lancer le projet
+
+Suivez les instructions ici pour mettre en place le reverse-proxy sur votre machine, ou modifiez le docker-compose à votre convenance pour associer vos ports aux différents conteneurs.
+
+Pour lancer le projet
+
+~~~bash
+docker-compose up -d
+~~~
+
+### Arrêter le projet
+
+~~~bash
+docker-compose down
+~~~
+
+### Réinitialiser la base de données 
+
+Le script `docker_postgres_init.sql` est executé par le conteneur de de postgresql au premier lancement. 
+
+Pour réinitialiser la base et ré excuter le script, arrêter le projet, supprimez le dossier `postgres-data`, puis relancer le projet
+
+~~~bash
+docker-compose down
+sudo rm -R postgres-data
+docker-compose up -d
+~~~
 
 ## Ressources
 
