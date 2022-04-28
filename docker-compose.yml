@@ -35,7 +35,6 @@ services:
       POSTGRES_DB: 'mydb'
     restart: always
     container_name: ${PROJECT_NAME}-db
-    user: "${UID}:${GID}"
     volumes:
       - ./postgres-data:/var/lib/mysql
       - ./init:/docker-entrypoint-initdb.d
@@ -61,6 +60,5 @@ services:
       
 networks:
   ackboo:
-    internal: true
   web:
     external: true
