@@ -245,25 +245,23 @@ function is_url_domain_authorized(string $url): bool
 function are_download_request_user_input_valid(DownloadRequest $download_request)
 {
 
-    $series_name = $download_request->series_name;
-
-    $id = $download_request->id;
-
-    if (empty($series_name))
+    if (empty($download_request->series_name))
         return false;
 
-    if (empty($id))
+    if (empty($download_request->id))
         return false;
 
-    $clean_series_name = filter_var($series_name, FILTER_SANITIZE_STRING);
+    $clean_series_name = filter_var($download_request->series_name, FILTER_SANITIZE_STRING);
+
+    $clean_id = filter_var($download_request->id, FILTER_SANITIZE_STRING);
 
     //Ne garde que les caractères alphanumériques (supprime toute ponctuation ou caractère spécial)
     $clean_series_name = preg_replace("/[^a-zA-Z 0-9]+/", "", $clean_series_name);
 
-    $clean_id = filter_var($id, FILTER_SANITIZE_STRING);
-
     //Ne garde que les caractères alphanumériques (supprime toute ponctuation ou caractère spécial)
     $clean_id = preg_replace("/[^a-zA-Z 0-9]+/", "", $clean_id);
 
-    return $series_name === $clean_series_name && $id === $clean_id;
+    return
+        $download_request->series_name === $clean_series_name
+        && $download_request->id === $clean_id;
 }

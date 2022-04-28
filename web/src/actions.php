@@ -7,9 +7,9 @@
  */
 
 require_once 'utils.php';
-require_once 'ffmpeg.php';
+require_once 'clip.php';
 require_once 'validation.php';
-require_once 'youtube-dl.php';
+require_once 'download.php';
 
 /**
  * Met à jour la base de données des clips (ajoute, supprime en fonction du fichier source), nettoie les clips invalides
@@ -50,8 +50,21 @@ function action_clean_sources()
 }
 
 
-function action_download_source_video(DownloadRequest $download_request, string $path_to_download = PATH_SOURCES){
+function action_download_source_video(DownloadRequest $download_request, string $path_to_download = PATH_SOURCES)
+{
     $file = download($download_request);
 
-    var_dump($file);
+    dump($file);
+}
+
+/**
+ * Valide et déplace une vidéo téléchargée vers le dossier sources
+ * @param string $path_to_download Le fichier téléchargé
+ */
+function action_make_source_of_download(string $path_to_download): bool
+{
+
+
+
+    return false;
 }

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Liste des fonctions manipulant les media avec ffmpeg, génération des extraits etc...
+ * Liste des fonctions générant les extraits (clips)
  *
  * @package wsl 
  */

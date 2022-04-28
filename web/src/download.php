@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Les fonctions pour télécharger,manipuler les fichiers sources téléchargés depuis Youtube
+ * Les fonctions pour télécharger, manipuler les fichiers sources téléchargés depuis Youtube
  *
  * @package wsl 
  */
@@ -33,7 +33,7 @@ function download(DownloadRequest $download_request, string $download_path = PAT
 
     //Valider les métadonnées de la vidéo a télcharger pour valider le nom du fichier
     if (!are_download_request_user_input_valid($download_request)) {
-        throw new \Exception("Les métadonnées associées à la vidéo source contiennent des caractères illégaux. Merci de soumettre des chaînes de caractères ne comprenant que des caractères alphanumériques.");
+        throw new \Exception("Les métadonnées associées à la vidéo source sont vides ou contiennent des caractères illégaux. Merci de soumettre des chaînes de caractères ne comprenant que des caractères alphanumériques.");
     }
 
     //Préparer le format du fichier pour qu'il soit source compatible.
@@ -44,13 +44,14 @@ function download(DownloadRequest $download_request, string $download_path = PAT
 
     $format = youtube_dl_download_format();
 
+    dump($format);
+
     $collection = $yt->download(
         Options::create()
             ->downloadPath($download_path)
             ->url($download_request->url)
             ->format($format)
             ->output($file_name)
-            ->audioFormat('mp3')
     );
 
     foreach ($collection->getVideos() as $video) {
@@ -69,15 +70,11 @@ function download(DownloadRequest $download_request, string $download_path = PAT
  * @see https://github.com/ytdl-org/youtube-dl/blob/master/README.md#format-selection
  * @return string
  */
-function youtube_dl_download_format()
+function youtube_dl_download_format(): string
 {
-    //Relire la doc ici
+    //Si on combine video et audio avec le '+', c'est ffmpeg ou avconv qui fusionne les deux fichiers ensuite.
 
-    $video = sprintf("bestvideo[height<=%s]/bestvideo[ext=mp4]/best", ENCODING_OPTION_VIDEO_HEIGHT);
+    // return "bestvideo[height <=? 720][tbr<500][ext=mp4]+bestaudio[height <=? 720][ext=m4a]/best";
 
-    $audio = "best[ext=mp3]/bestaudio";
-
-    $format = "{$video}";
-
-    return $format;
+    return "bestvideo[height <=? 720][tbr<500][ext=mp4]+bestaudio[height <=? 720][ext=m4a]/best";
 }

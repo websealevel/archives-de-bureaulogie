@@ -63,9 +63,9 @@ Chaque extrait sera embarqué dans un tweet. Il faut donc veiller à obtenir un 
 Après une phase de tests on retiendra les paramètres d'encodage avec les valeurs suivantes
 
 - piste vidéo
-  -  résulotion : 720p [x]
+  -  résolution max : 720p [x]
   -  format: mp4 [x]
-  -  frame rate : 30fps [x]
+  -  frame rate max : 30fps [x]
   -  data-transfer rate : 369 kbps [x]
 - piste audio
   - data-transfer rate : 96 kbps [x]
