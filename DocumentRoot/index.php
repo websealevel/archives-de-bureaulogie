@@ -1,15 +1,13 @@
 <?php
 
 /**
- * Main page (temporaire)
+ * Point d'entrée de l'application
  *
  * @package wsl 
  */
 
-require_once 'src/header.php';
+require_once 'templates/header.php';
 
-echo 'ackboo out of context' . PHP_EOL;
+require 'templates/home.php';
 
-dump($_SERVER);
-
-require_once 'src/footer.php';
+require_once 'templates/footer.php';
