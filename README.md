@@ -6,7 +6,7 @@
   - [Projet](#projet)
     - [Questions préalables](#questions-préalables)
     - [Téléchargement de vidéos youtube depuis un serveur mutualisé](#téléchargement-de-vidéos-youtube-depuis-un-serveur-mutualisé)
-    - [Encodage vidéo/audio des extraits](#encodage-vidéoaudio-des-extraits)
+    - [Cahier des charges pour l'encodage vidéo/audio des extraits](#cahier-des-charges-pour-lencodage-vidéoaudio-des-extraits)
   - [Architecture générale](#architecture-générale)
     - [Le *fichier source*](#le-fichier-source)
     - [Les différents composants](#les-différents-composants)
@@ -56,9 +56,9 @@ Cela pose problème
 
 Le plus simple (pour le moment) serait de télécharger manuellement les vidéos d'ackboo et de les uploader sur le serveur manuellement.
 
-### Encodage vidéo/audio des extraits
+### Cahier des charges pour l'encodage vidéo/audio des extraits
 
-Chaque extrait sera embarqué dans un tweet. Il faut donc veiller à obtenir un bon format et un bon rapport qualité/poids (son et vidéo)
+Chaque extrait sera embarqué dans un tweet. Il faut donc veiller à obtenir un bon format et un bon rapport qualité/poids (son et vidéo). Quelques Mo pour un extrait de 2min par exemple.
 
 Après une phase de tests on retiendra les valeurs suivantes
 
