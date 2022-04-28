@@ -72,3 +72,8 @@ define('ENCODING_OPTION_VIDEO_KBPS', 369);
  * Kbps du flux audio
  */
 define('ENCODING_OPTION_AUDIO_KBPS', 96);
+
+/**
+ * Sampling rate audio Hz
+ */
+define('ENCODING_OPTION_AUDIO_SAMPLING_RATE', 48000);
