@@ -6,7 +6,7 @@
  * @package wsl 
  */
 
-require_once __DIR__ .'/../../vendor/autoload.php';
+require_once __DIR__ . '/../../vendor/autoload.php';
 require_once 'const.php';
 
 /**
@@ -216,4 +216,14 @@ function is_timecode_format_valid(string $timecode, string $format = FORMAT_TIME
 {
     $pattern = '/' . $format . '/i';
     return boolval(preg_match($pattern, $timecode));
+}
+
+
+
+/**
+ * Renvoie vrai si l'url est une chaine de caractères url valide, faux sinon
+ */
+function is_valid_url(string $url): bool
+{
+    return !empty($url) && !filter_var($url, FILTER_VALIDATE_URL) === false;
 }

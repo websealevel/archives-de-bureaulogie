@@ -90,3 +90,4 @@ function delete_file(string $file_name): bool
 {
     return false;
 }
+

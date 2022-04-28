@@ -50,6 +50,8 @@ function action_clean_sources()
 }
 
 
-function action_download_source_video(string $url, string $path_to_download = PATH_SOURCES){
-    $file = download($url);
+function action_download_source_video(DownloadRequest $download_request, string $path_to_download = PATH_SOURCES){
+    $file = download($download_request);
+
+    var_dump($file);
 }
