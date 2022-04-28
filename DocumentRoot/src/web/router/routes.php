@@ -7,6 +7,7 @@
  */
 
 require_once __DIR__ . '/../utils.php';
+require_once __DIR__ . '/../actions/authentificate.php';
 
 /**
  * Retourne toutes les routes de l'application sous la clef de leurs méthodes respectives
@@ -19,6 +20,11 @@ function routes(): array
             '/' => function () {
                 present_template('home');
             },
+        ),
+        'post' => array(
+            '/authentificate' => function () {
+                authentificate_user();
+            }
         )
     );
 }
