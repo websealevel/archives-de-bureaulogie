@@ -6,9 +6,9 @@
  * @package wsl 
  */
 
-require_once 'src/const.php';
-require_once 'src/query.php';
-require_once 'src/journaling.php';
+require_once 'const.php';
+require_once 'query.php';
+require_once 'journaling.php';
 
 
 /**

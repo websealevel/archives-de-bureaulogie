@@ -34,6 +34,11 @@ define('PATH_SOURCES', 'sources');
 define('PATH_CLIPS', 'extraits');
 
 /**
+ * Le path des downloads
+ */
+define('PATH_DOWNLOADS', 'downloads');
+
+/**
  * L'extension que doit avoir les fichiers sources
  */
 define('EXTENSION_SOURCE', 'mp4');

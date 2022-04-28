@@ -8,7 +8,7 @@
  */
 
 
-require_once 'src/const.php';
+require_once 'const.php';
 
 /**
  * Retourne un élément enfant d'un élément par nom

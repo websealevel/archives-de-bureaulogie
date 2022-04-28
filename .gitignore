@@ -1,6 +1,10 @@
 extraits.xml
-extraits/*.mp4
-sources/*.mp4
+extraits/
+!/extraits/README.md
+sources/
+!/sources/README.md
+!/downloads/README.md
 vendor
 *.mp4
 *.avi
+*webm

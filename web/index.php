@@ -6,9 +6,12 @@
  * @package wsl 
  */
 
-require_once '../vendor/autoload.php';
-require_once 'src/actions.php';
+require_once 'src/header.php';
 
-echo 'Hello world' . PHP_EOL;
+echo 'ackboo out of context' . PHP_EOL;
 
-require_once 'src/default-handlers.php';
+action_download_source_video('https://www.youtube.com/watch?v=oDAw7vW7H0c');
+
+require_once 'src/footer.php';
+
+

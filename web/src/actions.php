@@ -6,10 +6,10 @@
  * @package wsl 
  */
 
-require_once 'src/utils.php';
-require_once 'src/ffmpeg.php';
-require_once 'src/validation.php';
-require_once 'src/handlers.php';
+require_once 'utils.php';
+require_once 'ffmpeg.php';
+require_once 'validation.php';
+require_once 'youtube-dl.php';
 
 /**
  * Met à jour la base de données des clips (ajoute, supprime en fonction du fichier source), nettoie les clips invalides
@@ -47,4 +47,9 @@ function action_clean_clips()
 function action_clean_sources()
 {
     // remove_invalid_sources();
+}
+
+
+function action_download_source_video(string $url, string $path_to_download = PATH_SOURCES){
+    $file = download($url);
 }

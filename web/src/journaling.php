@@ -7,7 +7,7 @@
  */
 
 
-require_once 'src/const.php';
+require_once 'const.php';
 
 /**
  * Retourne un rapport sur la génération d'extraits
