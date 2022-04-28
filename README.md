@@ -66,10 +66,10 @@ Après une phase de tests on retiendra les paramètres d'encodage avec les valeu
   -  résolution max : 720p [x]
   -  format: mp4 [x]
   -  frame rate max : 30fps [x]
-  -  data-transfer rate : 369 kbps [x]
+  -  video bitrate : 369 kbps [x]
 - piste audio
   - data-transfer rate : 96 kbps [x]
-  - échantillonage : 48000 Hz(standard dans un fichier vidéo)  [x]
+  - audio bitrate/échantillonage : 48000 Hz(standard dans un fichier vidéo)  [x]
 - cut à la milliseconde [x]
 
 ## Architecture générale

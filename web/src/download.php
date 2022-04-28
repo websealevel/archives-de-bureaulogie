@@ -76,5 +76,5 @@ function youtube_dl_download_format(): string
 
     // return "bestvideo[height <=? 720][tbr<500][ext=mp4]+bestaudio[height <=? 720][ext=m4a]/best";
 
-    return "bestvideo[height <=? 720][tbr<500][ext=mp4]+bestaudio[height <=? 720][ext=m4a]/best";
+    return "bestvideo[height <=? 720][tbr<500][ext=mp4]+bestaudio[height <=? 720][ext=m4a][asr <= 48000]/best";
 }
