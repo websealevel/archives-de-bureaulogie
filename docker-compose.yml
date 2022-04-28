@@ -14,9 +14,10 @@ services:
       - ackboo
       - web
     volumes:
-      - ./web/:/var/www/html/:rw
-      - ./vendor/:/var/www/vendor
-      - ./.user.ini:/var/www/html/.user.ini
+      - "./DocumentRoot/:/var/www/html/:rw"
+      - "./vendor/:/var/www/vendor"
+      - "./.user.ini:/var/www/html/.user.ini"
+      - "./DocumentRoot/.htaccess:/var/www/html/.htaccess"
     container_name: ${PROJECT_NAME}-back
     labels:
       - "traefik.enable=true"
