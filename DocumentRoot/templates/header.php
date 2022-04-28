@@ -8,12 +8,12 @@
 
 declare(strict_types=1);
 require_once __DIR__ . '/../../vendor/autoload.php';
-require_once __DIR__ .'/../src/handlers.php';
+require_once __DIR__ . '/../src/handlers.php';
 
 ?>
 
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" dir="rtl">
 
 <head>
     <meta charset="UTF-8">
@@ -24,4 +24,6 @@ require_once __DIR__ .'/../src/handlers.php';
     <meta name="author" content="websealevel">
     <meta name="author" content="kerprimaparte">
     <link rel="icon" type="image/x-icon" href="../assets/img/favicon.ico">
+    <link rel="canonical" href="ackerboooutofcontext.websealevel.com">
+    <code></code>
 </head>
