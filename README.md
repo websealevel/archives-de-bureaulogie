@@ -21,10 +21,10 @@
     - [Fichier vidéo *source*](#fichier-vidéo-source)
     - [Fichier vidéo *extrait*](#fichier-vidéo-extrait)
     - [Timecode](#timecode)
-  - [Gestion des fichiers *downloads*, *sources* et *extraits*](#gestion-des-fichiers-downloads-sources-et-extraits)
-    - [Fichiers downloads](#fichiers-downloads)
-    - [Fichiers sources](#fichiers-sources)
-    - [Extraits](#extraits)
+  - [Gestion des fichiers `downloads`, `sources` et `extraits`](#gestion-des-fichiers-downloads-sources-et-extraits)
+    - [Fichier `download`](#fichier-download)
+    - [Fichier `source`](#fichier-source)
+    - [Fichier `extrait`](#fichier-extrait)
   - [Interface graphique de *cut*](#interface-graphique-de-cut)
     - [Pourquoi ?](#pourquoi-)
     - [Besoins identifiés](#besoins-identifiés)
@@ -169,19 +169,19 @@ Les timecodes (instant de début ou de fin de l'extrait) doivent être formatté
 
 Ils doivent être compris entre `00.00.00.000` et la durée totale de la vidéo.
 
-## Gestion des fichiers *downloads*, *sources* et *extraits*
+## Gestion des fichiers `downloads`, `sources` et `extraits`
 
-### Fichiers downloads
+### Fichier `download`
 
 Quand une nouvelle vidéo est téléchargée via l'application elle n'est pas automatiquement ajoutée aux `sources`. Elle est enregistrée dans le dossier `downloads`. Elle doit être explicitement approuvée par un administrateur pour devenir une *source*.
 
-### Fichiers sources
+### Fichier `source`
 
 Les fichiers *sources* sont les vidéos téléchargées depuis youtube entières et servent de source aux extraits. Elles se trouvent dans le dossier `sources`.
 
 Les fichiers *sources* **doivent respecter [un format](sources/README.md#format-du-nom)** sinon elles finiront pas être **supprimées automatiquement**.
 
-### Extraits
+### Fichier `extrait`
 
 Les *extraits* sont les extraits vidéos des [sources](#fichiers-sources). Ils sont générés automatiquement à partir des informations fournies dans le [fichier source](#le-fichier-source). Ils se trouvent dans le dossier `extraits`.
 
