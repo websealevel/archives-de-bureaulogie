@@ -91,3 +91,26 @@ function delete_file(string $file_name): bool
     return false;
 }
 
+/**
+ * Retourne une chaine de caractères formatté au format Source
+ * @see string FORMAT_FILE_VIDEO_SOURCE
+ */
+function format_to_source_file(DownloadRequest $download_request)
+{
+
+    $series_name = $download_request->series_name;
+    $id = $download_request->id;
+
+    $series_name = preg_replace('#[ -]+#', '-', $series_name);
+    $id = preg_replace('#[ -]+#', '-', $id);
+
+    $series_name_snake_case = strtolower($series_name);
+    $id_snake_case = strtolower($id);
+
+    $file_name = sprintf("%s--%s.%s", $series_name_snake_case, $id_snake_case, EXTENSION_SOURCE);
+
+    if(!preg_match('/'.FORMAT_FILE_VIDEO_SOURCE . '/', $file_name)){
+        throw new Exception("Impossible de valider le nom de la source à télécharger: " . $file_name);
+    }
+    return $file_name;
+}

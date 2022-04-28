@@ -26,9 +26,19 @@ function download(DownloadRequest $download_request, string $download_path = PAT
         throw new \Exception("L'url renseignée n'est pas une url valide.");
     }
 
+    //Valider le nom de domaine
+    if (!is_url_domain_authorized($download_request->url)) {
+        throw new \Exception("Vous essayez de télécharger une vidéo depuis un nom de domaine non autorisé, no f****** way.");
+    }
+
     //Préparer le format du fichier pour qu'il soit source compatible.
 
-    $file_name = 'foobar.mp4';
+
+    if (!are_download_request_user_input_valid($download_request)) {
+        throw new \Exception("Les métadonnées associées à la vidéo source contiennent des caractères illégaux. Merci de soumettre des chaînes de caractères ne comprenant que des caractères alphanumériques.");
+    }
+
+    $file_name = format_to_source_file($download_request);
 
     //Ajouter une progression pour l'utilisateur.
 
@@ -36,14 +46,13 @@ function download(DownloadRequest $download_request, string $download_path = PAT
 
     $format = youtube_dl_download_format();
 
-    var_dump($format);
-
     $collection = $yt->download(
         Options::create()
             ->downloadPath($download_path)
             ->url($download_request->url)
             ->format($format)
             ->output($file_name)
+            ->audioFormat('mp3')
     );
 
     foreach ($collection->getVideos() as $video) {
@@ -64,11 +73,13 @@ function download(DownloadRequest $download_request, string $download_path = PAT
  */
 function youtube_dl_download_format()
 {
+    //Relire la doc ici
+
     $video = sprintf("bestvideo[height<=%s]/bestvideo[ext=mp4]/best", ENCODING_OPTION_VIDEO_HEIGHT);
 
-    $audio = sprintf("bestaudio[height<=%s]/best[ext=mp3]/best", ENCODING_OPTION_VIDEO_HEIGHT);
+    $audio = "best[ext=mp3]/bestaudio";
 
-    $format = "{$video}+{$audio}";
+    $format = "{$video}";
 
     return $format;
 }

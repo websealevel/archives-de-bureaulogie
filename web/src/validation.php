@@ -218,12 +218,52 @@ function is_timecode_format_valid(string $timecode, string $format = FORMAT_TIME
     return boolval(preg_match($pattern, $timecode));
 }
 
-
-
 /**
  * Renvoie vrai si l'url est une chaine de caractères url valide, faux sinon
  */
 function is_valid_url(string $url): bool
 {
     return !empty($url) && !filter_var($url, FILTER_VALIDATE_URL) === false;
+}
+
+/**
+ * Retourne vrai si le nom de domaine de l'url de la vidéo à télécharger est authorisée, faux sinon
+ * @global array ALLOWED_DOMAINS_TO_DOWNLOAD_SOURCES_FROM Toto
+ */
+function is_url_domain_authorized(string $url): bool
+{
+    $url = 'https://www.youtube.com/watch?v=54fea7wuV6s';
+    $parse = parse_url($url);
+    $domain = $parse['host'];
+
+    return in_array($domain, ALLOWED_DOMAINS_TO_DOWNLOAD_SOURCES_FROM);
+}
+
+/**
+ * Retourne vrai si les métadonnées de la vidéo source à télécharger ne contiennent que des caractères valides, faux sinon
+ */
+function are_download_request_user_input_valid(DownloadRequest $download_request)
+{
+
+    $series_name = $download_request->series_name;
+
+    $id = $download_request->id;
+
+    if (empty($series_name))
+        return false;
+
+    if (empty($id))
+        return false;
+
+    $clean_series_name = filter_var($series_name, FILTER_SANITIZE_STRING);
+
+    //Ne garde que les caractères alphanumériques (supprime toute ponctuation ou caractère spécial)
+    $clean_series_name = preg_replace("/[^a-zA-Z 0-9]+/", "", $clean_series_name);
+
+    $clean_id = filter_var($id, FILTER_SANITIZE_STRING);
+
+    //Ne garde que les caractères alphanumériques (supprime toute ponctuation ou caractère spécial)
+    $clean_id = preg_replace("/[^a-zA-Z 0-9]+/", "", $clean_id);
+
+    return $series_name === $clean_series_name && $id === $clean_id;
 }

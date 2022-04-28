@@ -24,7 +24,7 @@ class DownloadRequest
         public readonly string $series_name = "unknown",
 
         /** @var string L'identifiant de l'épisode de la série (mot, nombre)*/
-        public readonly string $identifiant = "unknown",
+        public readonly string $id = "unknown",
     ) {
     }
 }

@@ -87,3 +87,11 @@ define('ENCODING_OPTION_AUDIO_SAMPLING_RATE', 48000);
  * Hauteur max vidéo source et extrait (en p)
  */
 define('ENCODING_OPTION_VIDEO_HEIGHT', '720');
+
+/**
+ * La liste des domaines (hosts) depuis lesquels l'application autorise à télécharger une source.
+ */
+define('ALLOWED_DOMAINS_TO_DOWNLOAD_SOURCES_FROM', array(
+    'www.youtube.com',
+    'youtube.com'
+));
