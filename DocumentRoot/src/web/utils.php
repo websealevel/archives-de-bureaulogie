@@ -17,12 +17,12 @@ function site_title():string
 }
 
 /**
- * Retourne l'url du site
+ * Retourne la home du site
  * @return string le titre du site
  */
 function site_url():string
 {
-    return 'ackboooutofcontext.websealevel.com';
+    return '/';
 }
 
 /**
