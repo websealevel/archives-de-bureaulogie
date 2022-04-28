@@ -1,0 +1,6 @@
+[28-Apr-2022 09:17:52 Europe/Berlin] ErrorException: require_once(src/default-handlers.php): Failed to open stream: No such file or directory in /home/paul/depots/websealevel/out-of-context-ackboo/web/src/footer.php:4
+Stack trace:
+#0 /home/paul/depots/websealevel/out-of-context-ackboo/web/src/footer.php(4): {closure}()
+#1 /home/paul/depots/websealevel/out-of-context-ackboo/web/src/footer.php(4): require_once()
+#2 /home/paul/depots/websealevel/out-of-context-ackboo/web/index.php(15): require_once('...')
+#3 {main}

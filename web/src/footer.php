@@ -1,4 +1,4 @@
 <?php
 
 
-require_once 'src/default-handlers.php';
+require_once 'default-handlers.php';
