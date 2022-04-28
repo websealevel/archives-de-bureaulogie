@@ -3,6 +3,7 @@ extraits/
 !/extraits/README.md
 sources/
 !/sources/README.md
+downloads/
 !/downloads/README.md
 vendor
 *.mp4
