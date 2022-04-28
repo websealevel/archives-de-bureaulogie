@@ -109,8 +109,9 @@ function format_to_source_file(DownloadRequest $download_request)
 
     $file_name = sprintf("%s--%s.%s", $series_name_snake_case, $id_snake_case, EXTENSION_SOURCE);
 
-    if(!preg_match('/'.FORMAT_FILE_VIDEO_SOURCE . '/', $file_name)){
+    if (!preg_match('/' . FORMAT_FILE_VIDEO_SOURCE . '/', $file_name)) {
         throw new Exception("Impossible de valider le nom de la source à télécharger: " . $file_name);
     }
     return $file_name;
 }
+
