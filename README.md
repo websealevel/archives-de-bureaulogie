@@ -5,16 +5,15 @@
 - [out-of-context-ackboo-twitter-bot](#out-of-context-ackboo-twitter-bot)
   - [Projet](#projet)
     - [Questions préalables](#questions-préalables)
-    - [Téléchargement de vidéos youtube depuis un serveur mutualisé](#téléchargement-de-vidéos-youtube-depuis-un-serveur-mutualisé)
     - [Cahier des charges pour l'encodage vidéo/audio des extraits](#cahier-des-charges-pour-lencodage-vidéoaudio-des-extraits)
   - [Architecture générale](#architecture-générale)
     - [Le *fichier source*](#le-fichier-source)
     - [Les différents composants](#les-différents-composants)
   - [Utilisation](#utilisation)
-    - [1. Télécharger une vidéo *source* depuis youtube](#1-télécharger-une-vidéo-source-depuis-youtube)
-    - [2. Renommer la vidéo source](#2-renommer-la-vidéo-source)
-    - [3. Uploader une nouvelle vidéo *source* sur le serveur](#3-uploader-une-nouvelle-vidéo-source-sur-le-serveur)
-    - [4.1 Ajouter ou supprimer un extrait manuellement (temporaire)](#41-ajouter-ou-supprimer-un-extrait-manuellement-temporaire)
+    - [1. Uploader une nouvelle vidéo *source* sur le serveur](#1-uploader-une-nouvelle-vidéo-source-sur-le-serveur)
+      - [Manuelle [DEPRECATED]](#manuelle-deprecated)
+      - [Via l'appli web](#via-lappli-web)
+    - [4.1 Ajouter ou supprimer un extrait manuellement [DEPRECATED]](#41-ajouter-ou-supprimer-un-extrait-manuellement-deprecated)
       - [Ajouter un extrait](#ajouter-un-extrait)
       - [Supprimer un extrait](#supprimer-un-extrait)
     - [4.2 Ajouter, supprimer, modifier un extrait via l'application web](#42-ajouter-supprimer-modifier-un-extrait-via-lapplication-web)
@@ -26,7 +25,7 @@
   - [Gestion des fichiers sources et des extraits](#gestion-des-fichiers-sources-et-des-extraits)
     - [Fichiers sources](#fichiers-sources)
     - [Extraits](#extraits)
-  - [Lancer le projet avec la CLI (temporaire)](#lancer-le-projet-avec-la-cli-temporaire)
+  - [Lancer le projet avec la CLI [DEPRECATED]](#lancer-le-projet-avec-la-cli-deprecated)
   - [Interface graphique de *cut*](#interface-graphique-de-cut)
     - [Pourquoi ?](#pourquoi-)
     - [Besoins identifiés](#besoins-identifiés)
@@ -46,16 +45,6 @@ Créer un bot twitter qui *post* des courts extraits vidéos d’ackboo dans une
 - comment un lien youtube est lu de manière intégrée dans un tweet ? Il a pas l'air d'être lu, c'est du texte
 - quel format vidéo le plus adapté pour Twitter (rapport qualtié/poids) ? du mp4 au format 720p et 60fps, son à 128kbps voire 96kbps
 
-### Téléchargement de vidéos youtube depuis un serveur mutualisé
-
-Cela pose problème
-
-- je n'ai pas tous les droits sur le serveur pour installer ce que je veux (comme le wrapper *youtube-download* par exemple)
-- Youtube change regulièrement d'API et sa génération de pages webs, donc c'est compliqué de développer un script pour télécharger une vidéo youtube sans qu'il soit difficile à maintenir
-- les bilbiothèques existantes souffrent toutes du point précédent
-
-Le plus simple (pour le moment) serait de télécharger manuellement les vidéos d'ackboo et de les uploader sur le serveur manuellement.
-
 ### Cahier des charges pour l'encodage vidéo/audio des extraits
 
 Chaque extrait sera embarqué dans un tweet. Il faut donc veiller à obtenir un bon format et un bon rapport qualité/poids (son et vidéo). Quelques Mo pour un extrait de 2min par exemple.
@@ -71,6 +60,8 @@ Après une phase de tests on retiendra les paramètres d'encodage avec les valeu
   - data-transfer rate : 96 kbps [x]
   - audio bitrate/échantillonage : 48000 Hz(standard dans un fichier vidéo)  [x]
 - cut à la milliseconde [x]
+
+Ces paramètres s'appliquent au téléchargement des vidéos sources et à l'encodage des extraits générés par l'application.
 
 ## Architecture générale
 
@@ -91,19 +82,18 @@ Le projet a l’architecture suivante :
 
 ## Utilisation
 
-### 1. Télécharger une vidéo *source* depuis youtube
+### 1. Uploader une nouvelle vidéo *source* sur le serveur
 
-Télécharger la vidéo source désirée d'ackboo depuis youtube avec [jdownloader](https://jdownloader.org/).
+Si vous souhaitez ajouter une vidéo source à la banque pour en faire de nouveaux extraits.
 
-### 2. Renommer la vidéo source
-
-Voir [ici les instructions](sources/README.md) sur le format du nom de la vidéo source.
-
-### 3. Uploader une nouvelle vidéo *source* sur le serveur
-
+#### Manuelle [DEPRECATED]
 Pousser les vidéos sources (vidéos originales et complètes téléchargées depuis youtube) sur le serveur via le protocole FTP dans le dossier `sources`, en utilisant [Filezilla](https://filezilla-project.org/).
 
-### 4.1 Ajouter ou supprimer un extrait manuellement (temporaire)
+#### Via l'appli web
+
+Faites le via l'appli web (droit nécessaire).
+
+### 4.1 Ajouter ou supprimer un extrait manuellement [DEPRECATED]
 
 #### Ajouter un extrait
 
@@ -197,7 +187,7 @@ Les fichiers *extraits* **doivent respecter [un format](extraits/README.md#forma
 
 Un extrait doit faire **au moins 1 seconde**, sinon il ne sera pas généré et une exception sera levée.
 
-## Lancer le projet avec la CLI (temporaire)
+## Lancer le projet avec la CLI [DEPRECATED]
 
 Installer la dernière version de `php`, si ce n'est pas déjà fait.
 
