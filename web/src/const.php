@@ -82,3 +82,8 @@ define('ENCODING_OPTION_AUDIO_KBPS', 96);
  * Sampling rate audio Hz
  */
 define('ENCODING_OPTION_AUDIO_SAMPLING_RATE', 48000);
+
+/**
+ * Hauteur max vidéo source et extrait (en p)
+ */
+define('ENCODING_OPTION_VIDEO_HEIGHT', '720');
