@@ -49,12 +49,14 @@ function action_clean_sources()
     // remove_invalid_sources();
 }
 
-
-function action_download_source_video(DownloadRequest $download_request, string $path_to_download = PATH_SOURCES)
+/**
+ * Télécharge une nouvelle vidéo source sur le serveur
+ */
+function action_download_video(DownloadRequest $download_request, string $path_to_download = PATH_SOURCES): SplFileInfo
 {
     $file = download($download_request);
 
-    dump($file);
+    return $file;
 }
 
 /**

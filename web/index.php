@@ -16,6 +16,6 @@ $download_request = new DownloadRequest(
     '1'
 );
 
-action_download_source_video($download_request);
+action_download_video($download_request);
 
 require_once 'src/footer.php';
