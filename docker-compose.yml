@@ -36,8 +36,8 @@ services:
     restart: always
     container_name: ${PROJECT_NAME}-db
     volumes:
-      - ./postgres-data:/var/lib/mysql
-      - ./init:/docker-entrypoint-initdb.d
+      - ./postgres-data:/var/lib/postgresql/data
+      - ./docker_postgres_init.sql:/docker-entrypoint-initdb.d/docker_postgres_init.sql
     networks:
       - ackboo
     labels:
