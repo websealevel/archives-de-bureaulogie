@@ -60,16 +60,16 @@ Le plus simple (pour le moment) serait de télécharger manuellement les vidéos
 
 Chaque extrait sera embarqué dans un tweet. Il faut donc veiller à obtenir un bon format et un bon rapport qualité/poids (son et vidéo). Quelques Mo pour un extrait de 2min par exemple.
 
-Après une phase de tests on retiendra les valeurs suivantes
+Après une phase de tests on retiendra les paramètres d'encodage avec les valeurs suivantes
 
 - piste vidéo
-  -  en 720p [x]
-  -  en .mp4 [x]
-  -  30fps [x]
-  -  369 kbps [x]
+  -  résulotion : 720p [x]
+  -  format: mp4 [x]
+  -  frame rate : 30fps [x]
+  -  data-transfer rate : 369 kbps [x]
 - piste audio
-  - 96 kbps [x]
-  - échantillonage 48000 Hz (standard dans un fichier vidéo). Avec ffmpeg: `ffmpeg -i input -ar 48000 output`. Faire un custom filter dans PHP-FFmpeg
+  - data-transfer rate : 96 kbps [x]
+  - échantillonage : 48000 Hz(standard dans un fichier vidéo)  [x]
 - cut à la milliseconde [x]
 
 ## Architecture générale
