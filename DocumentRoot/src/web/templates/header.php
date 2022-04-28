@@ -7,9 +7,9 @@
  */
 
 declare(strict_types=1);
-require_once __DIR__ . '/../../vendor/autoload.php';
-require_once __DIR__ . '/../src/handlers.php';
-require_once __DIR__ . '/../src/web/utils.php';
+require_once __DIR__ . '../../../../../vendor/autoload.php';
+require_once __DIR__ . '../../../handlers.php';
+require_once __DIR__ . '../../utils.php';
 
 ?>
 

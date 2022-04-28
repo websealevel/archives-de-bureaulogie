@@ -6,10 +6,10 @@
  * @package wsl 
  */
 
-require_once 'templates/header.php';
+require_once './src/web/templates/header.php';
 
 require './src/web/router/router.php';
 
 resolve();
 
-require_once './templates/footer.php';
+require_once './src/web/templates/footer.php';

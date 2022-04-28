@@ -11,7 +11,7 @@
  * Retourne le titre du site
  * @return string le titre du site
  */
-function site_title():string
+function site_title(): string
 {
     return 'ackboo out of context';
 }
@@ -20,7 +20,7 @@ function site_title():string
  * Retourne la home du site
  * @return string le titre du site
  */
-function site_url():string
+function site_url(): string
 {
     return '/';
 }
@@ -48,6 +48,20 @@ function esc_html(string $text): string
 /**
  * Inclut les scripts js sur la sortie standards
  */
-function enqueue_js_scripts(){
+function enqueue_js_scripts()
+{
+}
 
+/**
+ * Ecrit sur la sortie standard le template demandé
+ * @param string $template_name Le nom du template dans le dossier templates
+ * @return void
+ */
+function present_template(string $template_name)
+{
+
+    echo $template_name;
+    die;
+    //Check que le template existe, sinon renvoie une 404
+    require __DIR__ . '/../templates/' . $template_name;
 }
