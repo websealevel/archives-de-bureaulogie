@@ -13,9 +13,7 @@
  */
 function authentificate_user()
 {
-
     printf("Voyons voir qui est là\n");
     dump($_POST);
-
     return;
 }
