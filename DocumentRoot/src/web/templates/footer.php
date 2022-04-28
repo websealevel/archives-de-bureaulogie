@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ . '/../src/default-handlers.php';
+require_once __DIR__ . '/../../default-handlers.php';
 ?>
 
 
