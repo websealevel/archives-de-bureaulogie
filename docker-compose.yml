@@ -2,7 +2,7 @@ version: "3.4"
 
 services:
 
-  #L'application cliente
+  #L'application web cliente
   back:
     build:
       context: ./
@@ -58,7 +58,7 @@ services:
       - "traefik.http.routers.adminer-${PROJECT_NAME}.entrypoints=web"
       
 networks:
-  project_default:
+  ackboo:
     internal: true
   web:
     external: true
