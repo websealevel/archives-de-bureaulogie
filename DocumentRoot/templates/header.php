@@ -19,7 +19,7 @@ require_once __DIR__ . '/../src/web/utils.php';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title><?php esc_html_e(site_url()); ?></title>
+    <title><?php esc_html_e(site_title()); ?></title>
     <meta name="description" content="Un Twitter bot qui post des extraits vidéos d'acknoo issus de sa chaîne le tribunal des bureaux">
     <meta name="keywords" content="ackboo, bot Twitter, clips">
     <meta name="author" content="websealevel">
