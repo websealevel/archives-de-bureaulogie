@@ -60,8 +60,33 @@ function enqueue_js_scripts()
 function present_template(string $template_name)
 {
 
-    echo $template_name;
-    die;
+    $template = strtolower(trim($template_name)) . '.php';
+    $path_template = __DIR__ . '/templates/' . $template;
+
+    if (!file_exists($path_template))
+        error_404();
+
     //Check que le template existe, sinon renvoie une 404
-    require __DIR__ . '/../templates/' . $template_name;
+    require $path_template;
+
+    return;
+}
+
+/**
+ * Ecrit sur la sortie standard le template part demandé
+ * @param string $template_name Le nom du template part dans le dossier templates/parts
+ * @return void
+ */
+function present_template_part(string $template_part){
+
+    $template = strtolower(trim($template_part)) . '.php';
+    $path_template = __DIR__ . '/templates/parts/' . $template;
+
+    if (!file_exists($path_template))
+        error_404();
+
+    //Check que le template existe, sinon renvoie une 404
+    require $path_template;
+
+    return;
 }

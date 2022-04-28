@@ -11,4 +11,5 @@
  */
 
 
-require __DIR__ . '/parts/form_login.php';
+
+present_template_part('form-login');
