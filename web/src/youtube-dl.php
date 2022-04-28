@@ -20,7 +20,6 @@ use YoutubeDl\YoutubeDl;
  */
 function download(DownloadRequest $download_request, string $download_path = PATH_DOWNLOADS): SplFileInfo
 {
-
     //Valider l'url
     if (!is_valid_url($download_request->url)) {
         throw new \Exception("L'url renseignée n'est pas une url valide.");

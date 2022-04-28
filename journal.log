@@ -18,3 +18,8 @@ Stack trace:
 #0 /home/paul/depots/websealevel/out-of-context-ackboo/web/src/actions.php(54): download()
 #1 /home/paul/depots/websealevel/out-of-context-ackboo/web/index.php(15): action_download_source_video()
 #2 {main}
+[28-Apr-2022 09:38:06 Europe/Berlin] Error: Cannot modify readonly property DownloadRequest::$url in /home/paul/depots/websealevel/out-of-context-ackboo/web/src/youtube-dl.php:24
+Stack trace:
+#0 /home/paul/depots/websealevel/out-of-context-ackboo/web/src/actions.php(54): download()
+#1 /home/paul/depots/websealevel/out-of-context-ackboo/web/index.php(15): action_download_source_video()
+#2 {main}
