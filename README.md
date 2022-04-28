@@ -4,7 +4,6 @@
 
 - [out-of-context-ackboo-twitter-bot](#out-of-context-ackboo-twitter-bot)
   - [Projet](#projet)
-    - [Questions préalables](#questions-préalables)
     - [Cahier des charges pour l'encodage vidéo/audio des extraits](#cahier-des-charges-pour-lencodage-vidéoaudio-des-extraits)
   - [Architecture générale](#architecture-générale)
     - [Le *fichier source*](#le-fichier-source)
@@ -42,12 +41,6 @@ Envie de contribuer au dépôt en proposant un extrait ? [Lisez d'abord ceci](CO
 ## Projet
 
 Créer un bot twitter qui *post* des courts extraits vidéos d’ackboo dans une grammaire *out of context*.
-
-### Questions préalables
-
-- comment une vidéo démarre auto dans un tweet ? Il faut embarquer le fichier directement, les liens embed ça marche pas. Donc télécharger la vidéo et l'uploader dans un tweet
-- comment un lien youtube est lu de manière intégrée dans un tweet ? Il a pas l'air d'être lu, c'est du texte
-- quel format vidéo le plus adapté pour Twitter (rapport qualtié/poids) ? du mp4 au format 720p et 60fps, son à 128kbps voire 96kbps
 
 ### Cahier des charges pour l'encodage vidéo/audio des extraits
 
