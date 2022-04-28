@@ -31,17 +31,15 @@ function download(DownloadRequest $download_request, string $download_path = PAT
         throw new \Exception("Vous essayez de télécharger une vidéo depuis un nom de domaine non autorisé, no f****** way.");
     }
 
-    //Préparer le format du fichier pour qu'il soit source compatible.
-
-
+    //Valider les métadonnées de la vidéo a télcharger pour valider le nom du fichier
     if (!are_download_request_user_input_valid($download_request)) {
         throw new \Exception("Les métadonnées associées à la vidéo source contiennent des caractères illégaux. Merci de soumettre des chaînes de caractères ne comprenant que des caractères alphanumériques.");
     }
 
+    //Préparer le format du fichier pour qu'il soit source compatible.
     $file_name = format_to_source_file($download_request);
 
-    //Ajouter une progression pour l'utilisateur.
-
+    //Téléchargement.
     $yt = new YoutubeDl();
 
     $format = youtube_dl_download_format();
