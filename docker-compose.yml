@@ -15,6 +15,7 @@ services:
       - web
     volumes:
       - ./web/:/var/www/html/:rw
+      - ./vendor/:/var/www/vendor
       - ./.user.ini:/var/www/html/.user.ini
     container_name: ${PROJECT_NAME}-back
     labels:
