@@ -51,11 +51,13 @@ function action_clean_sources()
 
 /**
  * Télécharge une nouvelle vidéo source sur le serveur
+ * @param DownloadRequest $download_request Un wrapper pour les inputs utilisateur contenant les infos sur la vidéo à télécharger dont l'url
+ * @param string $path_to_download Le path où enregistrer le fichier. Par défaut PATH_DOWNLOADS
+ * @return SplFileInfo Un wrapper du fichier téléchargé
  */
-function action_download_video(DownloadRequest $download_request, string $path_to_download = PATH_SOURCES): SplFileInfo
+function action_download_video(DownloadRequest $download_request, string $path_to_download = PATH_DOWNLOADS): SplFileInfo
 {
-    $file = download($download_request);
-
+    $file = download($download_request, $path_to_download);
     return $file;
 }
 
