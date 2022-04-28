@@ -6,7 +6,7 @@
  * @package wsl 
  */
 
-require_once 'vendor/autoload.php';
+require_once '../vendor/autoload.php';
 require_once 'src/const.php';
 
 /**
