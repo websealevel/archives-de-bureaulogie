@@ -44,8 +44,6 @@ function download(DownloadRequest $download_request, string $download_path = PAT
 
     $format = youtube_dl_download_format();
 
-    dump($format);
-
     $collection = $yt->download(
         Options::create()
             ->downloadPath($download_path)
@@ -72,9 +70,19 @@ function download(DownloadRequest $download_request, string $download_path = PAT
  */
 function youtube_dl_download_format(): string
 {
-    //Si on combine video et audio avec le '+', c'est ffmpeg ou avconv qui fusionne les deux fichiers ensuite.
+    //Si on combine video et audio avec le '+', youtube-dl télécharge deux fichiers puis ffmpeg ou avconv fusionne les deux fichiers ensuite dans un format container (mp4 ou mkv).
 
-    // return "bestvideo[height <=? 720][tbr<500][ext=mp4]+bestaudio[height <=? 720][ext=m4a]/best";
+    //Le format m4e est équivalent au format mp4 pour un fichier audio.
 
-    return "bestvideo[height <=? 720][tbr<500][ext=mp4]+bestaudio[height <=? 720][ext=m4a][asr <= 48000]/best";
+    $format = sprintf(
+        "bestvideo[height <=? %s][tbr<%s][ext=%s]+bestaudio[height <=? %s][ext=%s][asr <= %s]/best",
+        ENCODING_OPTION_VIDEO_HEIGHT,
+        ENCODING_OPTION_VIDEO_KBPS,
+        EXTENSION_SOURCE,
+        ENCODING_OPTION_VIDEO_HEIGHT,
+        EXTENSION_AUDIO,
+        ENCODING_OPTION_AUDIO_SAMPLING_RATE
+    );
+
+    return $format;
 }

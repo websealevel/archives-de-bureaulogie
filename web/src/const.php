@@ -48,6 +48,10 @@ define('EXTENSION_SOURCE', 'mp4');
  */
 define('EXTENSION_CLIP', 'mp4');
 
+/**
+ * Format de la piste audio d'une vidéo source téléchargée
+ */
+define('EXTENSION_AUDIO','m4a');
 
 /**
  * Format valide d'un timecode 
