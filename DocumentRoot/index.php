@@ -8,6 +8,8 @@
 
 require_once 'templates/header.php';
 
-require 'templates/home.php';
+require './src/web/router/router.php';
+
+resolve();
 
 require_once './templates/footer.php';
