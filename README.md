@@ -21,7 +21,8 @@
     - [Fichier vidéo *source*](#fichier-vidéo-source)
     - [Fichier vidéo *extrait*](#fichier-vidéo-extrait)
     - [Timecode](#timecode)
-  - [Gestion des fichiers sources et des extraits](#gestion-des-fichiers-sources-et-des-extraits)
+  - [Gestion des fichiers *downloads*, *sources* et *extraits*](#gestion-des-fichiers-downloads-sources-et-extraits)
+    - [Fichiers downloads](#fichiers-downloads)
     - [Fichiers sources](#fichiers-sources)
     - [Extraits](#extraits)
   - [Interface graphique de *cut*](#interface-graphique-de-cut)
@@ -168,7 +169,11 @@ Les timecodes (instant de début ou de fin de l'extrait) doivent être formatté
 
 Ils doivent être compris entre `00.00.00.000` et la durée totale de la vidéo.
 
-## Gestion des fichiers sources et des extraits
+## Gestion des fichiers *downloads*, *sources* et *extraits*
+
+### Fichiers downloads
+
+Quand une nouvelle vidéo est téléchargée via l'application elle n'est pas automatiquement ajoutée aux `sources`. Elle est enregistrée dans le dossier `downloads`. Elle doit être explicitement approuvée par un administrateur pour devenir une *source*.
 
 ### Fichiers sources
 
@@ -183,8 +188,6 @@ Les *extraits* sont les extraits vidéos des [sources](#fichiers-sources). Ils s
 Les fichiers *extraits* **doivent respecter [un format](extraits/README.md#format-du-nom)** sinon elles finiront pas être **supprimées automatiquement**.
 
 Un extrait doit faire **au moins 1 seconde**, sinon il ne sera pas généré et une exception sera levée.
-
-
 
 ## Interface graphique de *cut*
 
