@@ -22,11 +22,26 @@ function from_session(string $key, string $array_key = '')
 
     if (is_array($value)) {
         if (!empty($array_key)) {
-            return $value["{$array_key}"];
+            $array_value = $value["{$array_key}"];
+            return retrieve_value($array_value);
         } else {
-            return $value;
+            //On utilise le tableau comme valeur
+            return retrieve_value($value);
         }
     }
 
-    return $value;
+    return retrieve_value($value);
+}
+
+
+/**
+ * Ecrit et échappe sur la sortie standard une valeur enregistrée dans la session
+ * @param string $key La clef demandée
+ * @param string $array_key Optional Default = ''. Si la valeur demandée est un tableau, renvoie la valeur sous la clef $array_key
+ * @return void
+ */
+function esc_html_from_session_e(string $key, string $array_key): void
+{
+    $session_value = from_session('form_errors', 'pseudo');
+    esc_html_e($session_value);
 }

@@ -40,12 +40,17 @@ function sign_up_user()
         }
     }
 
+    //Si les inputs sont vides ou introuvables on retourne avec des erreurs
     if (!empty($errors)) {
         //On redirige vers la page de création de compte
         session_start();
         $_SESSION['form_errors'] = $errors;
         header('Location: sign-up');
     }
+
+    //Si les inputs ne sont pas valides (métier), on retourne avec des erreurs
+
+    //Si l'email est déjà utilisé, on retourne avec une erreur email déjà utilisé
 }
 
 function is_valid_pseudo(): bool

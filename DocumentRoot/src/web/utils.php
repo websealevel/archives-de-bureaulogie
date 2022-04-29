@@ -132,3 +132,16 @@ if (!function_exists('write_log')) {
         }
     }
 }
+
+/**
+ * Retrouve la valeur d'un input d'un form
+ * @param Input|string $input La valeur d'un input
+ * @return string La valeur d'un input
+ */
+function retrieve_value(Input|string $input): string
+{
+    if ($input instanceof Input)
+        return $input->value;
+
+    return $input;
+}

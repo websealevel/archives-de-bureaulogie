@@ -19,16 +19,16 @@ class Input
     public function __construct(
 
          /** @var string Le nom du champ */
-        public readonly string $input_name = "",
+        public readonly string $name = "",
 
          /** @var mixed La valeur actuelle du champ */
-        public readonly string $input_value = "",
+        public readonly string $value = "",
 
         /** @var string Le message à afficher pour le champ */
         public readonly string $message = "",
 
-/** @var string Le statut du champ */
-public readonly string $status = ''
+        /** @var string Le statut du champ */
+        public readonly string $status = ''
 
     ) {
     }
