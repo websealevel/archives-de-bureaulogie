@@ -10,7 +10,7 @@
 /**
  * Retourne la valeur sous la clef $key de la session en cours, une chaine vide sinon
  * @param string $key La clef demandée
- * @param string $array_key Optional Default = ''. Si la valeur demandée est un tableau, renvoie la valeur sous la clef $array_key
+ * @param string $array_key Optional. Default = ''. Si la clé demandée référence un tableau en session, retourne la valeur sous la clef $array_key du tableau
  * @return mixed La valeur sous la clef
  */
 function from_session(string $key, string $array_key = '')
@@ -19,6 +19,9 @@ function from_session(string $key, string $array_key = '')
         return '';
 
     $value = $_SESSION["{$key}"] ?? '';
+
+    if (empty($value))
+        return $value;
 
     if (is_array($value)) {
         if (!empty($array_key)) {
