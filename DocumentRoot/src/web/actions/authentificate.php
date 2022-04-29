@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Traite le formulaire de loing 
+ * Traite le formulaire de login
  * @link
  *
  * @package wsl 
