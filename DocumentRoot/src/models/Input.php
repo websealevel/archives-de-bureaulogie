@@ -7,12 +7,6 @@
  */
 
 
-enum InputCode
-{
-    case valid;
-    case invalid;
-    case unknown;
-}
 
 
 /**
@@ -28,13 +22,13 @@ class Input
         public readonly string $input_name = "",
 
          /** @var mixed La valeur actuelle du champ */
-         public readonly string $input_value = "",
+        public readonly string $input_value = "",
 
         /** @var string Le message à afficher pour le champ */
         public readonly string $message = "",
 
-/** @var string Le message à afficher pour le champ */
-public readonly string $code = InputCode::unknows
+/** @var string Le statut du champ */
+public readonly string $status = ''
 
     ) {
     }

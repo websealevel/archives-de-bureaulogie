@@ -24,15 +24,19 @@ function sign_up_user()
 
 
     foreach ($input_names as $input_name) {
+
         if (!isset($_POST["{$input_name}"]) || empty($_POST["{$input_name}"])) {
-            $errors["{$input_name}"] = new InputError(
+            $errors["{$input_name}"] = new Input(
                 $input_name,
                 $_POST["{$input_name}"],
                 "Le champ ne peut pas être vide, veuillez le remplir."
             );
-        }
-        else{
-            $errors["{$input_name}"] = 
+        } else {
+            $errors["{$input_name}"] = new Input(
+                $input_name,
+                $_POST["{$input_name}"],
+                ""
+            );
         }
     }
 
