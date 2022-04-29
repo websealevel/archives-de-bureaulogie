@@ -7,13 +7,21 @@
  * @package wsl 
  */
 ?>
+<?php session_start(); 
+dump($_SESSION);
+?>
+<?php 
+autoload();
+require_once __DIR__ . '/../session.php'; 
+require_once __DIR__ . '/../utils.php'; 
+?>
 
 <?php present_header(); ?>
 
 <h2>Création de votre compte</h2>
 <form action="sign-up" method="post">
     <label for="pseudo">Pseudo</label>
-    <input type="text" name="pseudo">
+    <input type="text" name="pseudo" value="<?php esc_html_e(from_session('form_errors','pseudo')); ?>">
     <label for="email">Email</label>
     <input type="email" name="email">
     <label for="password">Mot de passe</label>

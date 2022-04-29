@@ -8,14 +8,12 @@
  * @package wsl 
  */
 
-require __DIR__ . '/../../models/InputError.php';
+autoload();
+require __DIR__ . '/../../models/Input.php';
 
 function sign_up_user()
 {
     $errors = array();
-
-    dump($_SESSION);
-    dump($_POST);
 
     $input_names = array(
         'pseudo',
@@ -24,18 +22,23 @@ function sign_up_user()
         'password_confirmation'
     );
 
+
     foreach ($input_names as $input_name) {
         if (!isset($_POST["{$input_name}"]) || empty($_POST["{$input_name}"])) {
-            $errors[] = new InputError(
+            $errors["{$input_name}"] = new InputError(
                 $input_name,
                 $_POST["{$input_name}"],
                 "Le champ ne peut pas être vide, veuillez le remplir."
             );
         }
+        else{
+            $errors["{$input_name}"] = 
+        }
     }
 
     if (!empty($errors)) {
         //On redirige vers la page de création de compte
+        session_start();
         $_SESSION['form_errors'] = $errors;
         header('Location: sign-up');
     }

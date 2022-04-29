@@ -22,7 +22,7 @@ function routes(): array
                 present_template('home');
             },
             '/sign-up' => function () {
-                present_template_part('form-sign-up');
+                present_template('sign-up');
             }
         ),
         'post' => array(

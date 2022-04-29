@@ -7,11 +7,19 @@
  */
 
 
+enum InputCode
+{
+    case valid;
+    case invalid;
+    case unknown;
+}
+
+
 /**
  * Classe servant à stocker une erreur sur un champ d'un formulaire
  * @see 
  */
-class InputError
+class Input
 {
 
     public function __construct(
@@ -23,7 +31,11 @@ class InputError
          public readonly string $input_value = "",
 
         /** @var string Le message à afficher pour le champ */
-        public readonly string $message = "Champ invalide",
+        public readonly string $message = "",
+
+/** @var string Le message à afficher pour le champ */
+public readonly string $code = InputCode::unknows
+
     ) {
     }
 }

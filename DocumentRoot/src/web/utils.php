@@ -105,3 +105,30 @@ function present_footer()
 {
     present_template('footer');
 }
+
+/**
+ * Charge l'autoload.php de composer pour inclure les dépendances vendor du script appelant.
+ * @return void
+ */
+function autoload(): void
+{
+    require __DIR__ . '/../../../vendor/autoload.php';
+}
+
+
+if (!function_exists('write_log')) {
+
+    /**Ecrit un log
+     *
+     * @param mixed $log
+     */
+    function write_log($log)
+    {
+
+        if (is_array($log) || is_object($log)) {
+            error_log(print_r($log, true));
+        } else {
+            error_log($log);
+        }
+    }
+}
