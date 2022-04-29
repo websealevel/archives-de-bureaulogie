@@ -6,6 +6,8 @@
  * @package wsl 
  */
 ?>
+
+<?php present_header(); ?>
 <h2>Ackboo out of context</h2>
 <div class="form-login">
     <form action="authentificate" method="post">
@@ -21,3 +23,4 @@
     <p>Pas encore de compte ?</p>
     <a href="sign-up">Créer un compte</a>
 </div>
+<?php present_footer(); ?>

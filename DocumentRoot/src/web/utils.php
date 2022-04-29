@@ -59,7 +59,6 @@ function enqueue_js_scripts()
  */
 function present_template(string $template_name)
 {
-
     $template = strtolower(trim($template_name)) . '.php';
     $path_template = __DIR__ . '/templates/' . $template;
 
@@ -77,7 +76,8 @@ function present_template(string $template_name)
  * @param string $template_name Le nom du template part dans le dossier templates/parts
  * @return void
  */
-function present_template_part(string $template_part){
+function present_template_part(string $template_part)
+{
 
     $template = strtolower(trim($template_part)) . '.php';
     $path_template = __DIR__ . '/templates/parts/' . $template;
@@ -89,4 +89,21 @@ function present_template_part(string $template_part){
     require $path_template;
 
     return;
+}
+
+/**
+ * Ecrit le header sur la sortie standard (output de l'html)
+ * @return void
+ */
+function present_header(): void
+{
+    present_template('header');
+}
+/**
+ * Ecrit le footer sur la sortie standard (output de l'html)
+ * @return void
+ */
+function present_footer()
+{
+    present_template('footer');
 }

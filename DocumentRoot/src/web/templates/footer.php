@@ -14,3 +14,5 @@ require_once __DIR__ . '/../../default-handlers.php';
 </body>
 
 </html>
+
+<?php
