@@ -10,3 +10,5 @@ vendor
 *.avi
 *webm
 journal.log
+youtube-dl
+ffmpeg/

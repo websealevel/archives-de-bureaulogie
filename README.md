@@ -218,6 +218,19 @@ Installer
 - [composer](https://getcomposer.org/)
 - [docker](https://www.docker.com/)
 - [docker-compose](https://docs.docker.com/compose/)
+  
+Installer ffmpeg
+
+~~~bash
+wget https://johnvansickle.com/ffmpeg/builds/ffmpeg-git-amd64-static.tar.xz -O ffmpeg.tar.xz
+tar -xzvf ffmpeg.tar.xz
+~~~
+
+Installer youtube-dl
+
+~~~bash
+wget https://yt-dl.org/downloads/latest/youtube-dl -O youtube-dl
+~~~
 
 Mettre à jour les dépendances du projet
 
