@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Toutes les fonctions utiles pour gérer aider à gérer l'application web
+ * Toutes les fonctions utiles pour gérer la navigation, les templates, l'escaping de l'output et les métadonnées du site.
  * @link
  *
  * @package wsl 
@@ -65,7 +65,6 @@ function present_template(string $template_name)
     if (!file_exists($path_template))
         error_404();
 
-    //Check que le template existe, sinon renvoie une 404
     require $path_template;
 
     return;
@@ -85,7 +84,6 @@ function present_template_part(string $template_part)
     if (!file_exists($path_template))
         error_404();
 
-    //Check que le template existe, sinon renvoie une 404
     require $path_template;
 
     return;
