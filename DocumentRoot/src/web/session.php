@@ -45,6 +45,6 @@ function from_session(string $key, string $array_key = '')
  */
 function esc_html_from_session_e(string $key, string $array_key): void
 {
-    $session_value = from_session('form_errors', 'pseudo');
+    $session_value = from_session($key, $array_key);
     esc_html_e($session_value);
 }
