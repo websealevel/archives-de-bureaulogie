@@ -5,7 +5,7 @@
  * @package wsl 
  */
 
-enum InputStatus: string {
-    case Valid : 'valid';
-    case Invalid: 'invalid';
+enum InputStatus {
+    case Valid ;
+    case Invalid;
 }

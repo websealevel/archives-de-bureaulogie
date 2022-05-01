@@ -146,3 +146,9 @@ function retrieve_value(Input|string|array $input): string
 
     return $input;
 }
+
+
+function is_current_user_logged_in():bool
+{
+    return true;
+}

@@ -232,7 +232,6 @@ function is_valid_url(string $url): bool
  */
 function is_url_domain_authorized(string $url): bool
 {
-    $url = 'https://www.youtube.com/watch?v=54fea7wuV6s';
     $parse = parse_url($url);
     $domain = $parse['host'];
 

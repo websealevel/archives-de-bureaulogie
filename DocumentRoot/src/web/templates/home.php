@@ -13,7 +13,12 @@
 
 present_header();
 
-present_template_part('form-login');
+
+if(!is_current_user_logged_in()){
+    present_template_part('form-login');
+}else{
+    present_template_part('links');
+}
 
 present_footer();
 

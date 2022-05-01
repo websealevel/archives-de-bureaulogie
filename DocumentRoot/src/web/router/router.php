@@ -54,7 +54,7 @@ function find_callback(string $path, string $method): callable
 
 
 /**
- * Retourne le path (la ressource) demandée
+ * Retourne le path (la ressource) demandée avec les paramètres d'URL
  * @return string
  */
 function get_path(): string

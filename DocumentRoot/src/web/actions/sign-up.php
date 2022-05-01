@@ -30,59 +30,68 @@ function sign_up_user()
             'errors' => array()
         ),
         'email' => array(
-            'errors' => array(),
             'validation_callback' => function (string $email): Input {
                 return new Input('email', $email, '', InputStatus::Valid);
-            }
+            },
+            'errors' => array(),
         ),
         'password' => array(
-            'errors' => array(),
             'validation_callback' => function (string $password): Input {
                 return new Input('password', $password, '', InputStatus::Valid);
-            }
+            },
+            'errors' => array(),
         ),
         'password_confirmation' => array(
-            'errors' => array(),
             'validation_callback' => function (string $password_confirmation): Input {
                 return new Input('password_confirmation', $password_confirmation, '', InputStatus::Valid);
-            }
+            },
+            'errors' => array(),
         ),
     );
 
-    $input_validation = array();
-
-
-    foreach ($input_names as $input_name) {
+    foreach ($input_names as $name => $input) {
 
         //Check que les champs sont présents
-        if (!isset($_POST["{$input_name}"])) {
+        if (!isset($_POST["{$name}"])) {
 
-            $input_names["{$input_name}"]['errors'][] = new Input(
-                $input_name,
-                $_POST["{$input_name}"],
+            $input_names["{$name}"]['errors'][] = new Input(
+                $name,
+                $_POST["{$name}"],
                 "Le champ ne peut pas être vide, veuillez le remplir.",
                 InputStatus::Invalid
             );
         }
 
         //Appelle la callback de validation sur chaque champ
-        $validation_callback = $input_names["{$input_name}"]['validation_callback'];
+        $validation_callback = $input['validation_callback'];
 
         if (!is_callable($validation_callback)) {
             throw new Exception("La callback de validation n'est pas callable.");
         }
-        $input_names["{$input_name}"]['errors'][] = $validation_callback();
+        $input['errors'][] = $validation_callback($_POST["{$name}"]);
     }
 
-    $invalid_inputs = array_filter($input_validation, function ($validation) {
-        return InputStatus::Invalid === $Input->status;
+
+    //Filtrer que les champs avec un champs 'errors' non vide et status invalid.
+
+    $invalid_inputs = array_filter($input_names, function ($input) {
+        return !empty($input['errors']);
     });
-    
+
+    $errors = array_map(function ($input) {
+        return $input['errors'];
+    }, $input_names);
+
     //Si des validations ont échoué, on retourne à la page avec les erreurs
-    if (!empty($invalid_inputs)) {
+    if (!empty($errors)) {
         $_SESSION['form_errors'] = $errors;
         header('Location: sign-up');
     }
 
     //C'est ok, on crée le compte
+
+
+    //On renvoie l'utilisateur vers la home avec un message disant connectez vous (pre fill login et password)
+
+    header('Location: /');
 }
