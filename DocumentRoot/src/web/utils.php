@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Toutes les fonctions utiles pour gérer la navigation, les templates, l'escaping de l'output et les métadonnées du site.
+ * Toutes les fonctions utiles pour gérer la navigation, les templates, l'escaping et les métadonnées du site.
  * @link
  *
  * @package wsl 
@@ -116,7 +116,22 @@ function autoload(): void
     require __DIR__ . '/../../../vendor/autoload.php';
 }
 
+/**
+ * Retrouve la valeur d'un input d'un form
+ * @param Input|string|array $input La valeur d'un input
+ * @return string La valeur d'un input
+ */
+function retrieve_value(Input|string|array $input): string
+{
+    if ($input instanceof Input)
+        return $input->value;
 
+    return $input;
+}
+
+/**
+ * error_log en amélioré.
+ */
 if (!function_exists('write_log')) {
 
     /**Ecrit un log
@@ -132,23 +147,4 @@ if (!function_exists('write_log')) {
             error_log($log);
         }
     }
-}
-
-/**
- * Retrouve la valeur d'un input d'un form
- * @param Input|string|array $input La valeur d'un input
- * @return string La valeur d'un input
- */
-function retrieve_value(Input|string|array $input): string
-{
-    if ($input instanceof Input)
-        return $input->value;
-
-    return $input;
-}
-
-
-function is_current_user_logged_in():bool
-{
-    return true;
 }
