@@ -6,16 +6,32 @@
  * @package wsl 
  */
 
+/**
+ * Démarre une session php avec des options
+ * @return bool Vrai si la session a démaré, faux sinon
+ */
+function start_session(): bool
+{
+    $options = array(
+        'cookie_lifetime' => 3600,
+    );
+
+    return session_start($options);
+}
+
 
 /**
  * Retourne la valeur sous la clef $key de la session en cours, une chaine vide sinon
  * @param string $key La clef demandée
  * @param string $array_key Optional. Default = ''. Si la clé demandée référence un tableau en session, retourne la valeur sous la clef $array_key du tableau
  * @return mixed La valeur sous la clef
+ * @global array $_SESSION
  */
 function from_session(string $key, string $array_key = '')
 {
-    if (!isset($_SESSION)){
+    global $_SESSION;
+
+    if (!isset($_SESSION)) {
         throw new Exception("from_session, la session n'est pas ouverte.");
     }
 

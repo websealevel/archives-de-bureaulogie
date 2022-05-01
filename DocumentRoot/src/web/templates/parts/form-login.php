@@ -7,7 +7,7 @@
  */
 ?>
 
-<h2>Ackboo out of context</h2>
+<h2>Connexion</h2>
 <div class="form-login">
     <form action="authentificate" method="post">
         <label for="login">Pseudo </label>
@@ -19,6 +19,5 @@
 </div>
 
 <div class="sign-up">
-    <p>Pas encore de compte ?</p>
-    <a href="sign-up">Créer un compte</a>
+    <p>Pas encore de compte, <a href="sign-up">créez en un</a>.</p>
 </div>
