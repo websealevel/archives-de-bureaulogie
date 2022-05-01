@@ -8,15 +8,13 @@
  */
 ?>
 
-<?php session_start(); ?>
-
 <?php
 autoload();
 require_once __DIR__ . '/../session.php';
 require_once __DIR__ . '/../utils.php';
 ?>
 
-<?php $session_is_opened = start_session() ?>
+
 
 <?php present_header(); ?>
 

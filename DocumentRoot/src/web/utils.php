@@ -63,7 +63,7 @@ function present_template(string $template_name)
     $path_template = __DIR__ . '/templates/' . $template;
 
     if (!file_exists($path_template))
-        error_404();
+        present_template('404');
 
     require $path_template;
 
@@ -82,7 +82,8 @@ function present_template_part(string $template_part)
     $path_template = __DIR__ . '/templates/parts/' . $template;
 
     if (!file_exists($path_template))
-        error_404();
+        present_template('404');
+
 
     require $path_template;
 

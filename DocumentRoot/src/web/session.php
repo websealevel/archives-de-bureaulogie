@@ -29,11 +29,11 @@ function start_session(): bool
  */
 function from_session(string $key, string $array_key = '')
 {
-    global $_SESSION;
+    // global $_SESSION;
 
-    if (!isset($_SESSION)) {
-        throw new Exception("from_session, la session n'est pas ouverte.");
-    }
+    // if (!isset($_SESSION)) {
+    //     throw new Exception("from_session, la session n'est pas ouverte.");
+    // }
 
     $value = $_SESSION["{$key}"] ?? '';
 
