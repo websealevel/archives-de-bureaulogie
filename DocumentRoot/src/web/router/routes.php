@@ -25,6 +25,10 @@ function routes(): array
             '/sign-up' => function () {
                 start_session();
                 present_template('sign-up');
+            },
+            '/log-out' => function () {
+                session_destroy();
+                present_template('log-out');
             }
         ),
         'post' => array(
