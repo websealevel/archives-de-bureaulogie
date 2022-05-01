@@ -7,8 +7,16 @@
  */
 
 //Global Exception handler
-set_exception_handler(function (Exception $e) {
-    error_log($e);
+set_exception_handler(function ($e) {
+
+    if ($e instanceof ErrorException) {
+        $errorType = "Error";
+    } else {
+        $errorType = "Exception";
+    }
+
+    error_log("=> type: " . $errorType . " code : " . $e->getCode() . " message: " . $e->getMessage() . " trace: " . $e->getTraceAsString());
+    
 });
 //Global Error handler
 ini_set('error_log', 'journal.log');

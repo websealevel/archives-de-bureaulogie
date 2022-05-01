@@ -16,7 +16,7 @@ php_value display_startup_errors Off
 php_value display_errors Off
 
 #Report all errors
-php_value error_reporting "E_ALL & ~E_NOTICE && ~E_WARNING"
+php_value error_reporting "E_ALL & ~E_NOTICE"
 #Turns on error logging
 php_value log_errors On
 
