@@ -7,14 +7,16 @@
  * @package wsl 
  */
 ?>
-<?php session_start();
-dump($_SESSION);
-?>
+
+<?php session_start(); ?>
+
 <?php
 autoload();
 require_once __DIR__ . '/../session.php';
 require_once __DIR__ . '/../utils.php';
 ?>
+
+
 
 <?php present_header(); ?>
 
@@ -25,7 +27,7 @@ require_once __DIR__ . '/../utils.php';
     <input type="text" name="pseudo" value="<?php esc_html_from_session_e('form_errors', 'pseudo') ?>">
 
     <label for="email">Email</label>
-    <input type="email" name="email" value="<?php esc_html_from_session_e('form_errors', 'email') ?>">
+    <input type="email" name="email" value="<?php esc_html_from_session_e('form_errors', 'email21') ?>">
 
     <label for="password">Mot de passe</label>
     <input type="password" name="password">

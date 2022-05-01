@@ -95,7 +95,7 @@ function present_template_part(string $template_part)
  */
 function present_header(): void
 {
-    present_template('header');
+    present_template_part('header');
 }
 /**
  * Ecrit le footer sur la sortie standard (output de l'html)
@@ -103,7 +103,7 @@ function present_header(): void
  */
 function present_footer()
 {
-    present_template('footer');
+    present_template_part('footer');
 }
 
 /**

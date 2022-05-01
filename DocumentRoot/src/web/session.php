@@ -15,8 +15,9 @@
  */
 function from_session(string $key, string $array_key = '')
 {
-    if (!isset($_SESSION))
-        return '';
+    if (!isset($_SESSION)){
+        throw new Exception("from_session, la session n'est pas ouverte.");
+    }
 
     $value = $_SESSION["{$key}"] ?? '';
 
@@ -25,6 +26,10 @@ function from_session(string $key, string $array_key = '')
 
     if (is_array($value)) {
         if (!empty($array_key)) {
+
+            if (!isset($value["{$array_key}"])) {
+                throw new Exception("from_session, la clé demandée dans le tableau n'existe pas");
+            }
             $array_value = $value["{$array_key}"];
             return retrieve_value($array_value);
         } else {
