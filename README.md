@@ -1,6 +1,6 @@
 # out-of-context-ackboo-twitter-bot
 
-*Un twitter bot qui post des extraits vidéos d'acknoo issus de sa chaîne le tribunal des bureaux*
+*Un twitter bot qui post des extraits vidéos d'ackboo issus de sa chaîne le tribunal des bureaux*
 
 - [out-of-context-ackboo-twitter-bot](#out-of-context-ackboo-twitter-bot)
   - [Projet](#projet)
@@ -240,7 +240,7 @@ composer update
 
 ### Lancer le projet
 
-Suivez les instructions ici pour mettre en place le reverse-proxy sur votre machine, ou modifiez le docker-compose à votre convenance pour associer vos ports aux différents conteneurs.
+Suivez [les instructions ici](https://github.com/websealevel/local-env-docker) pour mettre en place le reverse-proxy sur votre machine, ou modifiez le docker-compose à votre convenance pour associer vos ports aux différents conteneurs.
 
 Pour lancer le projet
 
