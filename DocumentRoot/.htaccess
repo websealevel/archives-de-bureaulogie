@@ -6,27 +6,13 @@ RewriteRule ^(.*)$ index.php?q=$1 [L,QSA]
 </IfModule>
 
 #PHP configuration
-#Production
 
 #Upload
 php_value upload_max_filesize 1M
 
 #Display errors
-php_value display_startup_errors Off
-php_value display_errors Off
-
-#Report all errors
-php_value error_reporting "E_ALL & ~E_NOTICE"
-#Turns on error logging
+php_value display_startup_errors On
+php_value display_errors On
 php_value log_errors On
+php_value error_reporting 1
 
-#Development
-
-##Display errors
-#display_startup_errors=On
-#display_errors=On
-
-##Report all errors
-# error_reporting=1
-# #Turns on error logging
-# log_errors=On
