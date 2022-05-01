@@ -1,6 +1,6 @@
 # out-of-context-ackboo-twitter-bot
 
-*Un twitter bot qui post des extraits vidéos d'ackboo issus de sa chaîne le tribunal des bureaux*
+*Un twitter bot qui post des extraits vidéos d'ackboo issus de sa série "Le tribunal des bureaux"*
 
 - [out-of-context-ackboo-twitter-bot](#out-of-context-ackboo-twitter-bot)
   - [Projet](#projet)
