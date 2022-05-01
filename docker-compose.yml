@@ -19,7 +19,6 @@ services:
       - "./downloads/:/var/www/downloads"
       - "./extraits/:/var/www/extraits"
       - "./sources/:/var/www/sources"
-      - "./.user.ini:/var/www/html/.user.ini"
       - "./youtube-dl:/var/www/html/youtube-dl"
       - "./ffmpeg:/var/www/html/ffmpeg"
       - "./DocumentRoot/.htaccess:/var/www/html/.htaccess"

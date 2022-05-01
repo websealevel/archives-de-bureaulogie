@@ -22,7 +22,7 @@ function resolve()
     $callback = find_callback($path, $method);
 
     if (!is_callable($callback)) {
-        error_500();
+        present_template('500');
     }
 
     $callback();
@@ -41,34 +41,17 @@ function find_callback(string $path, string $method): callable
 
     if (!array_key_exists($method,  $routes))
         return function () {
-            error_500();
+            present_template('500');
         };
 
     if (!array_key_exists($path,  $routes[$method]))
         return function () {
-            error_404();
+            present_template('404');
         };
 
     return  $routes[$method][$path];
 }
 
-/**
- * Ecrit une erreur 500 sur la sortie standard
- * @return void
- */
-function error_500()
-{
-    echo 'Error 500' . PHP_EOL;
-}
-
-/**
- * Ecrit une erreur 404 sur la sortie standard
- * @return void
- */
-function error_404()
-{
-    echo 'Error 404, la ressource est introuvable, sorry :/ ' . PHP_EOL;
-}
 
 /**
  * Retourne le path (la ressource) demandée

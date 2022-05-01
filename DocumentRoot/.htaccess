@@ -4,3 +4,29 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^(.*)$ index.php?q=$1 [L,QSA]
 </IfModule>
+
+#PHP configuration
+#Production
+
+#Upload
+php_value upload_max_filesize 1M
+
+#Display errors
+php_value display_startup_errors Off
+php_value display_errors Off
+
+#Report all errors
+php_value error_reporting "E_ALL & ~E_NOTICE && ~E_WARNING"
+#Turns on error logging
+php_value log_errors On
+
+#Development
+
+##Display errors
+#display_startup_errors=On
+#display_errors=On
+
+##Report all errors
+# error_reporting=1
+# #Turns on error logging
+# log_errors=On

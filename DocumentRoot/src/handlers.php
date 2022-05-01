@@ -7,7 +7,7 @@
  */
 
 //Global Exception handler
-set_exception_handler(function ($e) {
+set_exception_handler(function (Exception $e) {
     error_log($e);
 });
 //Global Error handler
