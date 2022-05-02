@@ -28,6 +28,7 @@ function start_session(): bool
  * @param string $array_key Optional. Default = ''. Si la clé demandée référence un tableau en session, retourne la valeur sous la clef $array_key du tableau
  * @return mixed La valeur sous la clef
  * @global array $_SESSION
+ * @throws Exception Si aucune session n'est ouverte
  */
 function from_session(string $key, string $array_key = '')
 {
@@ -76,6 +77,7 @@ function esc_html_from_session_e(string $key, string $array_key): void
  * Ecrit sur la sortie standard le message d'erreur associé à l'input du form s'il existe, rien sinon
  * @param string $input_name Le nom du champ du formuliare
  * @param InputValidation[] $form_errors
+ * @throws Exception - Si aucune session n'est ouverte
  * @return void
  */
 function esc_html_form_error_msg_e(string $input_name, string $key_form_errors)
