@@ -119,13 +119,13 @@ function autoload(): void
 }
 
 /**
- * Retrouve la valeur d'un input d'un form
- * @param Input|string|array $input La valeur d'un input
- * @return string La valeur d'un input
+ * Retrouve la valeur POSTée d'un input de formulaire
+ * @param InputValidation|string|array $input La valeur d'un input
+ * @return string La valeur POSTé de l'input
  */
-function retrieve_value(Input|string|array $input): string
+function retrieve_value(InputValidation|string|array $input): string
 {
-    if ($input instanceof Input)
+    if ($input instanceof InputValidation)
         return $input->value;
 
     return $input;
@@ -151,10 +151,9 @@ function validate_posted_form(array $inputs): array
         if (!isset($_POST["{$name}"])) {
             $input_validations["{$name}"] = new InputValidation(
                 $name,
-                "Le champ ne peut pas être vide, veuillez le remplir.",
-                InputStatus::Invalid
+                "",
+                "Le champ ne peut pas être vide, veuillez le remplir."
             );
-
             continue;
         }
 

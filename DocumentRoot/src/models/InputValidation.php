@@ -6,7 +6,7 @@
  * @package wsl 
  */
 
-require __DIR__ .'/enumInputStatus.php';
+require __DIR__ . '/enumInputStatus.php';
 
 /**
  * Classe servant à stocker la validation d'un champ de formulaire
@@ -19,6 +19,9 @@ class InputValidation
 
         /** @var string Le nom du champ de formulaire référencé */
         public  string $name = "",
+
+        /** @var string Le nom du champ de formulaire référencé */
+        public  string $value = "",
 
         /** @var string Le message à afficher pour le champ */
         public  string $message = "",

@@ -21,28 +21,30 @@ require_once __DIR__ . '/../utils.php';
  */
 function sign_up_user()
 {
+    //Pourquoi je dois redémarrer la session ici ? Début de chaque script ?
+    start_session();
 
     $form_inputs = array(
         new FormInput('pseudo', $_POST['pseudo'], function (string $pseudo): InputValidation {
             if (empty($pseudo))
-                return new InputValidation('pseudo', 'Le pseudo ne peut pas être vide');
+                return new InputValidation('pseudo', $pseudo, 'Le pseudo ne peut pas être vide');
 
-            if (!preg_match('/[^a-z0-9]/i', $pseudo)) {
-                return new InputValidation('pseudo', 'Le pseudo ne peut contenir que des caractères alphanumériques.');
+            if (preg_match('/[^a-z_\-0-9]/i', $pseudo)) {
+                return new InputValidation('pseudo', $pseudo, 'Le pseudo ne peut contenir que des caractères alphanumériques.');
             }
 
-            return new InputValidation('pseudo', '', InputStatus::Valid);
+            return new InputValidation('pseudo', $pseudo, 'OK', InputStatus::Valid);
         }),
         new FormInput('email', $_POST['email'], function (string $email): InputValidation {
-            return new InputValidation('email', '');
+            return new InputValidation('email', $email, '');
         }),
 
         new FormInput('password', $_POST['password'], function (string $password): InputValidation {
-            return new InputValidation('password', '');
+            return new InputValidation('password', $password, '');
         }),
 
         new FormInput('password_confirmation', $_POST['password_confirmation'], function (string $password_confirmation): InputValidation {
-            return new InputValidation('password_confirmation', '');
+            return new InputValidation('password_confirmation', $password_confirmation, '');
         }),
     );
 
@@ -56,9 +58,7 @@ function sign_up_user()
 
     //Si des validations ont échoué, on retourne à la page avec les erreurs
     if (!empty($invalid_inputs)) {
-        error_log('NOPE');
-        write_log($invalid_inputs);
-        $_SESSION['form_errors'] = $invalid_inputs;
+        $_SESSION['form_errors'] = $input_validations;
         redirect('/sign-up');
     }
 
