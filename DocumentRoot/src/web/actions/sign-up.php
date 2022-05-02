@@ -22,12 +22,10 @@ require_once __DIR__ . '/../utils.php';
 function sign_up_user()
 {
 
-    error_log('yo');
-
     $form_inputs = array(
         new FormInput('pseudo', $_POST['pseudo'], function (string $pseudo): InputValidation {
             if (empty($pseudo))
-                return new Input('pseudo', $pseudo, 'Le pseudo ne peut pas être vide');
+                return new InputValidation('pseudo', 'Le pseudo ne peut pas être vide');
 
             if (!preg_match('/[^a-z0-9]/i', $pseudo)) {
                 return new InputValidation('pseudo', 'Le pseudo ne peut contenir que des caractères alphanumériques.');
@@ -48,13 +46,11 @@ function sign_up_user()
         }),
     );
 
-    die;
-
     $input_validations = validate_posted_form($form_inputs);
 
     //Filtrer que les champs avec un champs 'errors' non vide et status invalid.
 
-    $invalid_inputs = array_filter($input_validations, function (Input $input) {
+    $invalid_inputs = array_filter($input_validations, function (InputValidation $input) {
         return InputStatus::Invalid === $input->status;
     });
 

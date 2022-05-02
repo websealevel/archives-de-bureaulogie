@@ -166,5 +166,5 @@ function validate_posted_form(array $inputs): array
         $input_validations["{$name}"] = $validation_callback($input->value);
     }
 
-    return $input_validations();
+    return $input_validations;
 }
