@@ -10,15 +10,14 @@
  * @package wsl 
  */
 
+require_once __DIR__ . '../../current-user.php';
 
 present_header();
 
-
-if(!is_current_user_logged_in()){
+if (!is_current_user_logged_in()) {
     present_template_part('form-login');
-}else{
+} else {
     present_template_part('links');
 }
 
 present_footer();
-

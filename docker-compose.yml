@@ -22,6 +22,7 @@ services:
       - "./youtube-dl:/var/www/html/youtube-dl"
       - "./ffmpeg:/var/www/html/ffmpeg"
       - "./DocumentRoot/.htaccess:/var/www/html/.htaccess"
+      - "./DocumentRoot/journal.log:/var/www/html/journal.log:rw"
     container_name: ${PROJECT_NAME}-back
     labels:
       - "traefik.enable=true"

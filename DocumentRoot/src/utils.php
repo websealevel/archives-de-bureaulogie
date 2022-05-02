@@ -91,6 +91,7 @@ function delete_file(string $file_name): bool
     return false;
 }
 
+
 /**
  * Retourne une chaine de caractères formatté au format Source
  * @see string FORMAT_FILE_VIDEO_SOURCE

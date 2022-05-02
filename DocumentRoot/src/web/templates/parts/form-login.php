@@ -19,5 +19,5 @@
 </div>
 
 <div class="sign-up">
-    <p>Pas encore de compte, <a href="sign-up">créez en un</a>.</p>
+    <p>Pas encore de compte ? <a href="sign-up">Créez en un</a>.</p>
 </div>

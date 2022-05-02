@@ -18,7 +18,7 @@ function resolve()
 {
     $path = get_path();
     $method = get_method();
-    
+
     $callback = find_callback($path, $method);
 
     if (!is_callable($callback)) {
@@ -26,6 +26,13 @@ function resolve()
     }
 
     $callback();
+}
+
+function redirect(string $path)
+{
+
+    header('Location: ' . $path);
+    exit;
 }
 
 /**
