@@ -78,10 +78,15 @@ function esc_html_from_session_e(string $key, string $array_key): void
  * @param InputValidation[] $form_errors
  * @return void
  */
-function esc_html_form_error_msg_e(string $input_name, array $form_errors)
-{   
-    if (!isset($form_errors))
+function esc_html_form_error_msg_e(string $input_name, string $key_form_errors)
+{
+    if (!isset($_SESSION))
+        throw new Exception("Aucune session n'est ouverte");
+
+    if (!isset($_SESSION["{$key_form_errors}"]))
         return;
+
+    $form_errors = $_SESSION["{$key_form_errors}"];
 
     if (!array_key_exists($input_name, $form_errors))
         return;

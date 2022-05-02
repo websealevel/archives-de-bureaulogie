@@ -75,5 +75,6 @@ function sign_up_user()
     //C'est ok, on crée le compte
 
     //On renvoie l'utilisateur vers la home avec un message disant connectez vous (pre fill login et password)
+    session_unset();
     redirect('/');
 }

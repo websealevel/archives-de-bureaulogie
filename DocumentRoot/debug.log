@@ -1,104 +1,18 @@
-[02-May-2022 20:49:34 UTC] Array
-(
-    [pseudo] => InputValidation Object
-        (
-            [name] => pseudo
-            [value] => 
-            [message] => Le pseudo ne peut pas être vide
-            [status] => InputStatus Enum
-                (
-                    [name] => Invalid
-                )
-
-        )
-
-    [email] => InputValidation Object
-        (
-            [name] => email
-            [value] => 
-            [message] => Le format de l'email est invalide
-            [status] => InputStatus Enum
-                (
-                    [name] => Invalid
-                )
-
-        )
-
-    [password] => InputValidation Object
-        (
-            [name] => password
-            [value] => 
-            [message] => Le mot de passe doit faire au moins 6 caractères
-            [status] => InputStatus Enum
-                (
-                    [name] => Invalid
-                )
-
-        )
-
-    [password_confirmation] => InputValidation Object
-        (
-            [name] => password_confirmation
-            [value] => 
-            [message] => OK
-            [status] => InputStatus Enum
-                (
-                    [name] => Valid
-                )
-
-        )
-
-)
-
-[02-May-2022 20:49:34 UTC] Array
-(
-    [pseudo] => InputValidation Object
-        (
-            [name] => pseudo
-            [value] => 
-            [message] => Le pseudo ne peut pas être vide
-            [status] => InputStatus Enum
-                (
-                    [name] => Invalid
-                )
-
-        )
-
-    [email] => InputValidation Object
-        (
-            [name] => email
-            [value] => 
-            [message] => Le format de l'email est invalide
-            [status] => InputStatus Enum
-                (
-                    [name] => Invalid
-                )
-
-        )
-
-    [password] => InputValidation Object
-        (
-            [name] => password
-            [value] => 
-            [message] => Le mot de passe doit faire au moins 6 caractères
-            [status] => InputStatus Enum
-                (
-                    [name] => Invalid
-                )
-
-        )
-
-    [password_confirmation] => InputValidation Object
-        (
-            [name] => password_confirmation
-            [value] => 
-            [message] => OK
-            [status] => InputStatus Enum
-                (
-                    [name] => Valid
-                )
-
-        )
-
-)
-
+[02-May-2022 20:54:54 UTC] => type: Error code : 2 message: Undefined array key "form_errors" trace: #0 /var/www/html/src/web/templates/sign-up.php(26): {closure}(2, 'Undefined array...', '/var/www/html/s...', 26)
+#1 /var/www/html/src/web/utils.php(70): require('/var/www/html/s...')
+#2 /var/www/html/src/web/router/routes.php(27): present_template('sign-up')
+#3 /var/www/html/src/web/router/router.php(28): {closure}()
+#4 /var/www/html/index.php(11): resolve()
+#5 {main}
+[02-May-2022 20:55:39 UTC] => type: Error code : 2 message: Undefined array key "form_errors" trace: #0 /var/www/html/src/web/templates/sign-up.php(26): {closure}(2, 'Undefined array...', '/var/www/html/s...', 26)
+#1 /var/www/html/src/web/utils.php(70): require('/var/www/html/s...')
+#2 /var/www/html/src/web/router/routes.php(27): present_template('sign-up')
+#3 /var/www/html/src/web/router/router.php(28): {closure}()
+#4 /var/www/html/index.php(11): resolve()
+#5 {main}
+[02-May-2022 20:58:00 UTC] => type: Error code : 2 message: Undefined array key "form_errors" trace: #0 /var/www/html/src/web/templates/sign-up.php(45): {closure}(2, 'Undefined array...', '/var/www/html/s...', 45)
+#1 /var/www/html/src/web/utils.php(70): require('/var/www/html/s...')
+#2 /var/www/html/src/web/router/routes.php(27): present_template('sign-up')
+#3 /var/www/html/src/web/router/router.php(28): {closure}()
+#4 /var/www/html/index.php(11): resolve()
+#5 {main}
