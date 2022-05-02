@@ -9,8 +9,8 @@
  */
 
 autoload();
-require __DIR__ . '/../../models/FormInput.php';
-require __DIR__ . '/../../models/InputValidation.php';
+require_once __DIR__ . '/../../models/FormInput.php';
+require_once __DIR__ . '/../../models/InputValidation.php';
 require_once __DIR__ . '/../utils.php';
 
 /**
@@ -33,19 +33,29 @@ function sign_up_user()
                 return new InputValidation('pseudo', $pseudo, 'Le pseudo ne peut contenir que des caractères alphanumériques.');
             }
 
-            return new InputValidation('pseudo', $pseudo, 'OK', InputStatus::Valid);
+            return new InputValidation('pseudo', $pseudo, '', InputStatus::Valid);
         }),
         new FormInput('email', $_POST['email'], function (string $email): InputValidation {
-            return new InputValidation('email', $email, '');
+            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                return new InputValidation('email', $email, 'Le format de l\'email est invalide');
+            }
+            return new InputValidation('email', $email, '', InputStatus::Valid);
         }),
 
         new FormInput('password', $_POST['password'], function (string $password): InputValidation {
-            return new InputValidation('password', $password, '');
+            if (strlen($password) < 6)
+                return new InputValidation('password', $password, 'Le mot de passe doit faire au moins 6 caractères');
+
+            return new InputValidation('password', $password, '', InputStatus::Valid);
         }),
 
         new FormInput('password_confirmation', $_POST['password_confirmation'], function (string $password_confirmation): InputValidation {
-            return new InputValidation('password_confirmation', $password_confirmation, '');
-        }),
+
+            if (!isset($_POST['password']) || $password_confirmation !== $_POST['password']) return new InputValidation('password_confirmation', $password_confirmation, 'Les mots de passe ne correspondent pas.');
+
+            return new InputValidation('password_confirmation', $password_confirmation, '', InputStatus::Valid);
+        })
+
     );
 
     $input_validations = validate_posted_form($form_inputs);

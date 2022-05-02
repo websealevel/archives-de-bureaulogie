@@ -1,1 +1,104 @@
+[02-May-2022 20:49:34 UTC] Array
+(
+    [pseudo] => InputValidation Object
+        (
+            [name] => pseudo
+            [value] => 
+            [message] => Le pseudo ne peut pas être vide
+            [status] => InputStatus Enum
+                (
+                    [name] => Invalid
+                )
+
+        )
+
+    [email] => InputValidation Object
+        (
+            [name] => email
+            [value] => 
+            [message] => Le format de l'email est invalide
+            [status] => InputStatus Enum
+                (
+                    [name] => Invalid
+                )
+
+        )
+
+    [password] => InputValidation Object
+        (
+            [name] => password
+            [value] => 
+            [message] => Le mot de passe doit faire au moins 6 caractères
+            [status] => InputStatus Enum
+                (
+                    [name] => Invalid
+                )
+
+        )
+
+    [password_confirmation] => InputValidation Object
+        (
+            [name] => password_confirmation
+            [value] => 
+            [message] => OK
+            [status] => InputStatus Enum
+                (
+                    [name] => Valid
+                )
+
+        )
+
+)
+
+[02-May-2022 20:49:34 UTC] Array
+(
+    [pseudo] => InputValidation Object
+        (
+            [name] => pseudo
+            [value] => 
+            [message] => Le pseudo ne peut pas être vide
+            [status] => InputStatus Enum
+                (
+                    [name] => Invalid
+                )
+
+        )
+
+    [email] => InputValidation Object
+        (
+            [name] => email
+            [value] => 
+            [message] => Le format de l'email est invalide
+            [status] => InputStatus Enum
+                (
+                    [name] => Invalid
+                )
+
+        )
+
+    [password] => InputValidation Object
+        (
+            [name] => password
+            [value] => 
+            [message] => Le mot de passe doit faire au moins 6 caractères
+            [status] => InputStatus Enum
+                (
+                    [name] => Invalid
+                )
+
+        )
+
+    [password_confirmation] => InputValidation Object
+        (
+            [name] => password_confirmation
+            [value] => 
+            [message] => OK
+            [status] => InputStatus Enum
+                (
+                    [name] => Valid
+                )
+
+        )
+
+)
 

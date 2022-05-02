@@ -6,7 +6,7 @@
  * @package wsl 
  */
 
-require __DIR__ . '/enumInputStatus.php';
+require_once __DIR__ . '/enumInputStatus.php';
 
 /**
  * Classe servant à stocker la validation d'un champ de formulaire

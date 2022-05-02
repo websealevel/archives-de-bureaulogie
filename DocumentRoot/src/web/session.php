@@ -6,6 +6,8 @@
  * @package wsl 
  */
 
+require_once __DIR__ . '/../models/InputValidation.php';
+
 /**
  * Démarre une session php avec des options
  * @return bool Vrai si la session a démaré, faux sinon
@@ -34,7 +36,7 @@ function from_session(string $key, string $array_key = '')
     if (!isset($_SESSION)) {
         throw new Exception("from_session, la session n'est pas ouverte.");
     }
-    
+
     $value = $_SESSION["{$key}"] ?? '';
 
     if (empty($value))
@@ -68,4 +70,21 @@ function esc_html_from_session_e(string $key, string $array_key): void
 {
     $session_value = from_session($key, $array_key);
     esc_html_e($session_value);
+}
+
+/**
+ * Ecrit sur la sortie standard le message d'erreur associé à l'input du form s'il existe, rien sinon
+ * @param string $input_name Le nom du champ du formuliare
+ * @param InputValidation[] $form_errors
+ * @return void
+ */
+function esc_html_form_error_msg_e(string $input_name, array $form_errors)
+{   
+    if (!isset($form_errors))
+        return;
+
+    if (!array_key_exists($input_name, $form_errors))
+        return;
+
+    esc_html_e($form_errors["{$input_name}"]->message);
 }
