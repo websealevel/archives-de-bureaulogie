@@ -13,6 +13,8 @@ require_once __DIR__ . '/../../models/FormInput.php';
 require_once __DIR__ . '/../../models/InputValidation.php';
 require_once __DIR__ . '/../utils.php';
 
+require_once __DIR__ . '/../database/crud-users.php';
+
 /**
  * Crée un compte utilisateur si l'utilisateur n'existe pas déjà
  * @global array $_SESSION
@@ -73,8 +75,19 @@ function sign_up_user()
     }
 
     //C'est ok, on crée le compte
+    $user = new User(
+        $input_validations['pseudo']->value,
+        $input_validations['email']->value,
+        $input_validations['password']->value,
+        '',
+    );
 
-    //On renvoie l'utilisateur vers la home avec un message disant connectez vous (pre fill login et password)
+    $result = insert_user($user);
+
+    //On renvoie l'utilisateur vers la home avec un message
     session_unset();
+    $_SESSION['notice'] = array(
+        new Notice("Votre compte a été crée avec succès, connectez-vous !", NoticeStatus::Success)
+    );
     redirect('/');
 }
