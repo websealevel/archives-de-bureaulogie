@@ -1,1 +1,58 @@
+[02-May-2022 15:40:56 UTC] NOPE
+[02-May-2022 15:40:56 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "WP_DEBUG" in /var/www/html/src/web/log.php:18
+Stack trace:
+#0 /var/www/html/src/web/actions/sign-up.php(60): write_log(Array)
+#1 /var/www/html/src/web/router/routes.php(41): sign_up_user()
+#2 /var/www/html/src/web/router/router.php(28): {closure}()
+#3 /var/www/html/index.php(11): resolve()
+#4 {main}
+  thrown in /var/www/html/src/web/log.php on line 18
+[02-May-2022 15:41:10 UTC] NOPE
+[02-May-2022 15:41:10 UTC] Array
+(
+    [pseudo] => InputValidation Object
+        (
+            [name] => pseudo
+            [message] => Le pseudo ne peut pas être vide
+            [status] => InputStatus Enum
+                (
+                    [name] => Invalid
+                )
+
+        )
+
+    [email] => InputValidation Object
+        (
+            [name] => email
+            [message] => 
+            [status] => InputStatus Enum
+                (
+                    [name] => Invalid
+                )
+
+        )
+
+    [password] => InputValidation Object
+        (
+            [name] => password
+            [message] => 
+            [status] => InputStatus Enum
+                (
+                    [name] => Invalid
+                )
+
+        )
+
+    [password_confirmation] => InputValidation Object
+        (
+            [name] => password_confirmation
+            [message] => 
+            [status] => InputStatus Enum
+                (
+                    [name] => Invalid
+                )
+
+        )
+
+)
 

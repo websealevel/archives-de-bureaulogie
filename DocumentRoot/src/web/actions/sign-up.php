@@ -56,6 +56,8 @@ function sign_up_user()
 
     //Si des validations ont échoué, on retourne à la page avec les erreurs
     if (!empty($invalid_inputs)) {
+        error_log('NOPE');
+        write_log($invalid_inputs);
         $_SESSION['form_errors'] = $invalid_inputs;
         redirect('/sign-up');
     }

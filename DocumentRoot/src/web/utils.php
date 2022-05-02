@@ -7,6 +7,8 @@
  * @package wsl 
  */
 
+require __DIR__ . '/log.php';
+
 /**
  * Retourne le titre du site
  * @return string le titre du site
@@ -162,7 +164,7 @@ function validate_posted_form(array $inputs): array
         if (!is_callable($validation_callback)) {
             throw new Exception("La callback de validation n'est pas callable.");
         }
-        
+
         $input_validations["{$name}"] = $validation_callback($input->value);
     }
 
