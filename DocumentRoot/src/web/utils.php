@@ -128,3 +128,43 @@ function retrieve_value(Input|string|array $input): string
 
     return $input;
 }
+
+
+/**
+ * Valide les champs de formulaires passés en argument et retourne la validation sous forme d'un tableau mappant les inputs.
+ * @param FormInput[] $inputs Les inputs demandés
+ * @return InputValidation[] Un tableau de validation d'inputs
+ * @global array $_POST
+ */
+function validate_posted_form(array $inputs): array
+{
+
+    $input_validations = array();
+
+    foreach ($inputs as $input) {
+
+        $name = $input->name;
+
+        //Check que le champ est POSTé.
+        if (!isset($_POST["{$name}"])) {
+            $input_validations["{$name}"] = new InputValidation(
+                $name,
+                "Le champ ne peut pas être vide, veuillez le remplir.",
+                InputStatus::Invalid
+            );
+
+            continue;
+        }
+
+        //Si champ POSTé, appelle la callback de validation.
+        $validation_callback = $input->validation_callback;
+
+        if (!is_callable($validation_callback)) {
+            throw new Exception("La callback de validation n'est pas callable.");
+        }
+        
+        $input_validations["{$name}"] = $validation_callback($input->value);
+    }
+
+    return $input_validations();
+}

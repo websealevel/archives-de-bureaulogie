@@ -9,8 +9,9 @@
  */
 
 autoload();
-require __DIR__ . '/../../models/Input.php';
-
+require __DIR__ . '/../../models/FormInput.php';
+require __DIR__ . '/../../models/InputValidation.php';
+require_once __DIR__ . '/../utils.php';
 
 /**
  * Crée un compte utilisateur si l'utilisateur n'existe pas déjà
@@ -21,60 +22,35 @@ require __DIR__ . '/../../models/Input.php';
 function sign_up_user()
 {
 
-    $input_names = array(
-        'pseudo' => array(
-            //Alphanumérique et non vide
-            'validation_callback' => function (string $pseudo): Input {
-                if (empty($pseudo))
-                    return new Input('pseudo', $pseudo, 'Le pseudo ne peut pas être vide');
+    error_log('yo');
 
-                if (!preg_match('/[^a-z0-9]/i', $pseudo)) {
-                    return new Input('pseudo', $pseudo, 'Le pseudo ne peut contenir que des caractères alphanumériques.');
-                }
+    $form_inputs = array(
+        new FormInput('pseudo', $_POST['pseudo'], function (string $pseudo): InputValidation {
+            if (empty($pseudo))
+                return new Input('pseudo', $pseudo, 'Le pseudo ne peut pas être vide');
 
-                return new Input('pseudo', $pseudo, '', InputStatus::Valid);
-            },
-        ),
-        'email' => array(
-            'validation_callback' => function (string $email): Input {
-                return new Input('email', $email, '', InputStatus::Invalid);
-            },
-        ),
-        'password' => array(
-            'validation_callback' => function (string $password): Input {
-                return new Input('password', $password, '', InputStatus::Valid);
-            },
-        ),
-        'password_confirmation' => array(
-            'validation_callback' => function (string $password_confirmation): Input {
-                return new Input('password_confirmation', $password_confirmation, '', InputStatus::Valid);
-            },
-        ),
+            if (!preg_match('/[^a-z0-9]/i', $pseudo)) {
+                return new InputValidation('pseudo', 'Le pseudo ne peut contenir que des caractères alphanumériques.');
+            }
+
+            return new InputValidation('pseudo', '', InputStatus::Valid);
+        }),
+        new FormInput('email', $_POST['email'], function (string $email): InputValidation {
+            return new InputValidation('email', '');
+        }),
+
+        new FormInput('password', $_POST['password'], function (string $password): InputValidation {
+            return new InputValidation('password', '');
+        }),
+
+        new FormInput('password_confirmation', $_POST['password_confirmation'], function (string $password_confirmation): InputValidation {
+            return new InputValidation('password_confirmation', '');
+        }),
     );
 
-    $input_validations = array();
+    die;
 
-    foreach ($input_names as $name => $input) {
-
-        //Check que les champs sont présents
-        if (!isset($_POST["{$name}"])) {
-
-            $input_validations["{$name}"]['validation'] = new Input(
-                $name,
-                $_POST["{$name}"],
-                "Le champ ne peut pas être vide, veuillez le remplir.",
-                InputStatus::Invalid
-            );
-        }
-
-        //Appelle la callback de validation sur chaque champ
-        $validation_callback = $input['validation_callback'];
-
-        if (!is_callable($validation_callback)) {
-            throw new Exception("La callback de validation n'est pas callable.");
-        }
-        $input_validations["{$name}"] = $validation_callback($_POST["{$name}"]);
-    }
+    $input_validations = validate_posted_form($form_inputs);
 
     //Filtrer que les champs avec un champs 'errors' non vide et status invalid.
 
@@ -84,7 +60,7 @@ function sign_up_user()
 
     //Si des validations ont échoué, on retourne à la page avec les erreurs
     if (!empty($invalid_inputs)) {
-        $_SESSION['form_errors'] = $input_validations;
+        $_SESSION['form_errors'] = $invalid_inputs;
         redirect('/sign-up');
     }
 
