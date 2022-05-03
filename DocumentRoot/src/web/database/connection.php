@@ -17,20 +17,20 @@ autoload();
 function connection_to_db()
 {
 
-    $env_path = SRC_PATH . '.env_db';
+    $env_path = SRC_PATH;
 
     $dotenv = Dotenv\Dotenv::createImmutable($env_path, '.env_db');
     $dotenv->load();
 
     // $db = pg_connect("$credentials");
     dump(DB_DSN);
-    die;
-    try {
-        $db = new PDO($dsn, $user, $password);
-    } catch (PDOException $e) {
-        error_log($e);
-        exit;
-    }
+    // die;
+    // try {
+    //     $db = new PDO($dsn, $user, $password);
+    // } catch (PDOException $e) {
+    //     error_log($e);
+    //     exit;
+    // }
 
-    return $db;
+    // return $db;
 }

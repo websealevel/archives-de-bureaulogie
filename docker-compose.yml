@@ -23,6 +23,7 @@ services:
       - "./ffmpeg:/var/www/html/ffmpeg"
       - "./DocumentRoot/.htaccess:/var/www/html/.htaccess"
       - "./DocumentRoot/php.ini:/usr/local/etc/php/conf.d/aooc_php.ini"
+      - "./DocumentRoot/.env_db:/var/www/html/src/.env_db"
     container_name: ${PROJECT_NAME}-back
     labels:
       - "traefik.enable=true"

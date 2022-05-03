@@ -12,5 +12,4 @@ vendor
 journal.log
 youtube-dl
 ffmpeg/
-DocumentRoot/src/web/database/access.php
-DocumentRoot/.env
+DocumentRoot/src/.env_db
