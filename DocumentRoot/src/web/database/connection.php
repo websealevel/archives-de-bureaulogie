@@ -17,20 +17,53 @@ autoload();
 function connection_to_db()
 {
 
-    $env_path = SRC_PATH;
+    load_db_env();
 
-    $dotenv = Dotenv\Dotenv::createImmutable($env_path, '.env_db');
+    dd($_ENV);
+
+    try {
+        $db = new PDO($dsn, $user, $password);
+    } catch (PDOException $e) {
+        error_log($e);
+        exit;
+    }
+
+    return $db;
+}
+
+
+/**
+ * Retourne la valeur sous la clef $key dans la variable d'environnement $_ENV
+ * @param string $key La clé sous la quelle est enregistrée la valeur recherchée dans $_ENV
+ * @global array $_ENV
+ * @return string La valeur demandée, une chaine vide sinon
+ */
+function from_env(string $key): string
+{
+    return $_ENV["$key"] ?? '';
+}
+
+/**
+ * Charge les données définies dans le fichier d'environnement et les stocke dans $_ENV
+ * @param string $env_path Le path du fichier d'environnement.
+ * @param string $env_file Le nom du fichier.
+ * @global array $_ENV
+ * @return Dotenv\Dotenv
+ */
+function load_db_env(string $env_path = SRC_PATH, string $env_file = '.env_db'): Dotenv\Dotenv
+{
+
+    if (isset($_ENV['db_env']))
+        return $_ENV['db_env'];
+
+    $dotenv = Dotenv\Dotenv::createImmutable($env_path, $env_file);
     $dotenv->load();
 
-    // $db = pg_connect("$credentials");
-    dump(DB_DSN);
-    // die;
-    // try {
-    //     $db = new PDO($dsn, $user, $password);
-    // } catch (PDOException $e) {
-    //     error_log($e);
-    //     exit;
-    // }
+    $credentials = array(
+        'host' => ''
+    );
 
-    // return $db;
+    $_ENV['db_env'] = $credentials;
+
+    return $dotenv;
 }
