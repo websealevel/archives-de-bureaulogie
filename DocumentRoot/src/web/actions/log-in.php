@@ -41,9 +41,7 @@ function log_in()
 
     $input_validations = validate_posted_form($form_inputs);
 
-
     //Filtrer que les champs avec un champs 'errors' non vide et status invalid.
-
     $invalid_inputs = array_filter($input_validations, function (InputValidation $input) {
         return InputStatus::Invalid === $input->status;
     });
@@ -56,9 +54,9 @@ function log_in()
 
     //On tente de log
     $credentials = array(
-        'pseudo' => $input_validations['pseudo']->value,
+        'login' => $input_validations['login']->value,
         'password ' => my_hash_password($input_validations['password']->value)
     );
 
-    dd($credentials);
+    $result = log_user($credentials);
 }

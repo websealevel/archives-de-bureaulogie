@@ -89,7 +89,7 @@ function sign_up_user()
     //On renvoie l'utilisateur vers la home avec un message
     session_unset();
     $_SESSION['notices'] = array(
-        new Notice("Féliciations, vous êtes désormais inscrit⸱e à l'Université Libre de Bureaulogie ! Vous pouvez désormains accéder à votre espace numérique de travail.", NoticeStatus::Success)
+        new Notice("Féliciations, vous êtes désormais inscrit⸱e à l'Université Libre de Bureaulogie ! Vous pouvez désormais nous aider à faire connaître la bureaulogie.", NoticeStatus::Success)
     );
     redirect('/');
 }

@@ -27,8 +27,8 @@ function create_account(User $user): string|bool
     $stmt = $db->prepare($sql);
 
     $stmt->bindValue(':pseudo', $user->pseudo);
-    $stmt->bindValue(':password', $user->pseudo);
-    $stmt->bindValue(':email', $user->pseudo);
+    $stmt->bindValue(':password', $user->password);
+    $stmt->bindValue(':email', $user->email);
     $stmt->bindValue(':created_on', date('Y-m-d H:i:s'));
     $stmt->bindValue(':has_reached_majority', true);
     $stmt->bindValue(':has_accepted_the_chart', true);
@@ -48,4 +48,36 @@ function create_account(User $user): string|bool
     }
 
     return $db->lastInsertId();
+}
+
+/**
+ * Authentifie un compte utilisateur à partir de son pseudo/email et mot de passe
+ * Retourne l'id de l'utilisateur s'il existe, 
+ * @param array $credentials Les credentials POSTé par l'user (pseudo/email, mot de passe)
+ */
+function log_user(array $credentials)
+{
+
+    $pseudo = $credentials['login'];
+
+    //Select par pseudo
+    $db = connect_to_db();
+    $sql = 'SELECT pseudo, password FROM accounts where pseudo = :pseudo ';
+    $stmt = $db->prepare($sql);
+
+    try {
+        $stmt->execute();
+        $result = $stmt->fetchObject();
+        dd($result);
+    } catch (PDOException $e) {
+        error_log($e);
+        redirect('/sign-up');
+    }
+
+
+    //Si pas trouvé, on rejette
+    //Si trouvé, on check mdp, si pas ok, on rejette
+    //Sinon on log
+
+
 }

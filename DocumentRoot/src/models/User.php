@@ -12,7 +12,7 @@ class User
 
         public  string $pseudo,
 
-        public string $hash_password,
+        public string $password,
 
         public string $email,
 
