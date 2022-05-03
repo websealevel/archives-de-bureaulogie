@@ -21,8 +21,8 @@ function connect_to_db()
 
     $dsn = dsn_from_credentials($credentials);
 
-    phpinfo();
-    die;
+    // phpinfo();
+    // die;
 
     try {
         $db = new PDO($dsn, $credentials['user'], $credentials['password']);
