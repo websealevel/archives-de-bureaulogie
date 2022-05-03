@@ -20,7 +20,6 @@ require_once __DIR__ . '/../database/crud-users.php';
  */
 function log_in()
 {
-
     $form_inputs = array(
 
         new FormInput('login', $_POST['login'], function (string $login): InputValidation {

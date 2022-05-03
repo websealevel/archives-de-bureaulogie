@@ -24,6 +24,7 @@ function start_session(): bool
 
 /**
  * Retourne la valeur sous la clef $key de la session en cours, une chaine vide sinon
+ * A refactor (dégueulasse).
  * @param string $key La clef demandée
  * @param string $array_key Optional. Default = ''. Si la clé demandée référence un tableau en session, retourne la valeur sous la clef $array_key du tableau
  * @return mixed La valeur sous la clef
@@ -35,7 +36,7 @@ function from_session(string $key, string $array_key = '')
     global $_SESSION;
 
     if (!isset($_SESSION)) {
-        throw new Exception("from_session, la session n'est pas ouverte.");
+        throw new Exception("@from_session: la session n'est pas ouverte");
     }
 
     $value = $_SESSION["{$key}"] ?? '';
@@ -45,9 +46,8 @@ function from_session(string $key, string $array_key = '')
 
     if (is_array($value)) {
         if (!empty($array_key)) {
-
             if (!isset($value["{$array_key}"])) {
-                throw new Exception("from_session, la clé demandée dans le tableau n'existe pas");
+                throw new Exception("@from_session: la clé demandée n'existe pas");
             }
             $array_value = $value["{$array_key}"];
             return retrieve_value($array_value);
@@ -108,7 +108,7 @@ function esc_html_notices_e()
     $notices = $_SESSION['notices'];
 
     if (!is_array($notices))
-        throw new Exception("Les notices doivent être empilées dans un tableau");
+        throw new Exception("@esc_html_notices_e: les notices ne sont pas empilées dans un tableau");
 
     $html_notices = array_map(function (Notice $notice) {
         return '<li class="notice ' . $notice->status->value . '">' . $notice->message . '</li>';

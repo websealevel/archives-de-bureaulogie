@@ -18,7 +18,6 @@ require_once __DIR__ . '/../router/router.php';
  */
 function create_account(User $user): string|bool
 {
-
     $db = connect_to_db();
 
     $sql = 'INSERT INTO accounts(pseudo, password, email, created_on, has_reached_majority, has_accepted_the_chart, major, option, grade  )'
@@ -71,9 +70,11 @@ function log_user(array $credentials)
         dd($result);
     } catch (PDOException $e) {
         error_log($e);
-        redirect('/sign-up');
+        $_SESSION['notices'] = array(
+            new Notice("Une erreur technique est survenue.", NoticeStatus::Error)
+        );
+        redirect('/');
     }
-
 
     //Si pas trouvé, on rejette
     //Si trouvé, on check mdp, si pas ok, on rejette
