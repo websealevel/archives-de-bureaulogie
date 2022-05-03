@@ -17,12 +17,16 @@ autoload();
 function connection_to_db()
 {
 
-    load_db_env();
+    $credentials = load_db_env();
 
-    dd($_ENV);
+    $dsn = dsn_from_credentials($credentials);
+
+    dd($dsn);
 
     try {
-        $db = new PDO($dsn, $user, $password);
+        $db = new PDO($dsn, $credentials['user'], $credentials['password']);
+
+        dd($db);
     } catch (PDOException $e) {
         error_log($e);
         exit;
@@ -48,9 +52,9 @@ function from_env(string $key): string
  * @param string $env_path Le path du fichier d'environnement.
  * @param string $env_file Le nom du fichier.
  * @global array $_ENV
- * @return Dotenv\Dotenv
+ * @return array
  */
-function load_db_env(string $env_path = SRC_PATH, string $env_file = '.env_db'): Dotenv\Dotenv
+function load_db_env(string $env_path = SRC_PATH, string $env_file = '.env_db'): array
 {
 
     if (isset($_ENV['db_env']))
@@ -60,10 +64,26 @@ function load_db_env(string $env_path = SRC_PATH, string $env_file = '.env_db'):
     $dotenv->load();
 
     $credentials = array(
-        'host' => ''
+        'host' => $_ENV['DB_HOST'],
+        'port' => $_ENV['DB_PORT'],
+        'dbname' => $_ENV['DB_NAME'],
+        'user' => $_ENV['DB_USER'],
+        'password' => $_ENV['DB_PASSWORD']
     );
 
+    //On concatène tout ça.
     $_ENV['db_env'] = $credentials;
 
-    return $dotenv;
+    return $credentials;
+}
+
+
+function dsn_from_credentials(array $credentials): string
+{
+    return sprintf(
+        "host:%s;dbname:%s;port:%s;charset=utf8",
+        $credentials['host'],
+        $credentials['dbname'],
+        $credentials['port']
+    );
 }
