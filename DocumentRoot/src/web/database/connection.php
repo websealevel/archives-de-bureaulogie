@@ -14,7 +14,7 @@ autoload();
  * @param $string $credentials La chaine de caractères contenant les credentials postgresql
  * @return 
  */
-function connection_to_db()
+function connect_to_db()
 {
 
     $credentials = load_db_env();
@@ -25,8 +25,6 @@ function connection_to_db()
 
     try {
         $db = new PDO($dsn, $credentials['user'], $credentials['password']);
-
-        dd($db);
     } catch (PDOException $e) {
         error_log($e);
         exit;
@@ -77,7 +75,11 @@ function load_db_env(string $env_path = SRC_PATH, string $env_file = '.env_db'):
     return $credentials;
 }
 
-
+/**
+ * Retourne le DSN pour l'interface PDO
+ * @param array $credentials Les credentials de la bdd
+ * @return string Le dsn
+ */
 function dsn_from_credentials(array $credentials): string
 {
     return sprintf(

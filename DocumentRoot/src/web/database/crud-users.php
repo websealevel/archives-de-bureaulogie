@@ -15,5 +15,5 @@ require_once __DIR__ . '/../database/connection.php';
 function insert_user(User $user)
 {
 
-    $db = connection_to_db();
+    $db = connect_to_db();
 }
