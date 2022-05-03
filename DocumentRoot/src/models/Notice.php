@@ -10,6 +10,7 @@
 
 
 require_once __DIR__ . '/enumNoticeStatus.php';
+
 class Notice
 {
     public function __construct(

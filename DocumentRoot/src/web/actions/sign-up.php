@@ -83,12 +83,12 @@ function sign_up_user()
         '',
     );
 
-    $result = insert_user($user);
+    $result = create_account($user);
 
     //On renvoie l'utilisateur vers la home avec un message
     session_unset();
-    $_SESSION['notice'] = array(
-        new Notice("Féliciations, vous faites désormais partie de la Fondation Libre de Bureaulogie, vous pouvez désormais contribuer dès aujourd'hui à diffusion de la bureaulogie.", NoticeStatus::Success)
+    $_SESSION['notices'] = array(
+        new Notice("Féliciations, vous êtes désormais inscrit⸱e à l'Université Libre de Bureaulogie ! Vous pouvez désormains accéder à votre espace numérique de travail.", NoticeStatus::Success)
     );
     redirect('/');
 }

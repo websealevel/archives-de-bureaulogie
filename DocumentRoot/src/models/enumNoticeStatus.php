@@ -7,8 +7,8 @@
  * @package wsl 
  */
 
-enum NoticeStatus {
-    case Success ;
-    case Error;
-    case Warning;
+enum NoticeStatus: string {
+    case Success = 'success' ;
+    case Error = 'error';
+    case Warning = 'warning';
 }

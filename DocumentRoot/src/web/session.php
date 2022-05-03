@@ -95,3 +95,32 @@ function esc_html_form_error_msg_e(string $input_name, string $key_form_errors)
 
     esc_html_e($form_errors["{$input_name}"]->message);
 }
+
+/**
+ * Ecrit sur la sortie standard les notices présentes en session
+ * @global $_SESSION
+ * @throws Exception - Si aucune session n'est ouverte
+ */
+function esc_html_notices_e()
+{
+    if (!isset($_SESSION))
+        throw new Exception("Aucune session n'est ouverte");
+
+    if (!isset($_SESSION['notices']))
+        return;
+
+    $notices = $_SESSION['notices'];
+
+    if (!is_array($notices))
+        throw new Exception("Les notices doivent être empilées dans un tableau");
+
+    $html_notices = array_map(function (Notice $notice) {
+        return '<li class="notice ' . $notice->status->value . '">' . $notice->message . '</li>';
+    }, $notices);
+
+    echo '<ul class="notices">';
+    foreach ($html_notices as $html_notice) {
+        echo $html_notice;
+    }
+    echo '</ul>';
+}
