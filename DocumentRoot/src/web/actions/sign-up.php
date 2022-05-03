@@ -88,7 +88,7 @@ function sign_up_user()
     //On renvoie l'utilisateur vers la home avec un message
     session_unset();
     $_SESSION['notice'] = array(
-        new Notice("Votre compte a été crée avec succès, connectez-vous !", NoticeStatus::Success)
+        new Notice("Féliciations, vous faites désormais partie de la Fondation Libre de Bureaulogie, vous pouvez désormais contribuer dès aujourd'hui à diffusion de la bureaulogie.", NoticeStatus::Success)
     );
     redirect('/');
 }
