@@ -19,5 +19,5 @@
 </div>
 
 <div class="sign-up">
-    <p>Pas encore de compte ? <a href="sign-up">Devenir membre de la FLB</a></p>
+    <p>Pas encore de compte ? <a href="sign-up">S'inscrire à l'ULB</a></p>
 </div>

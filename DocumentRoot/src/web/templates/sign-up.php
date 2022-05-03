@@ -16,7 +16,11 @@ require_once __DIR__ . '/../utils.php';
 
 <?php present_header(); ?>
 
-<h2>Devenir membre de la FDB</h2>
+<h2>Formulaire d'inscription à l'<span>ULB</span></h2>
+
+<h3>Conditions d'inscription</h3>
+
+<p>Les frais d'inscription sont entièrement pris en charge par la Sécurité Sociale. </p>
 
 <?php esc_html_notices_e(); ?>
 
