@@ -17,7 +17,7 @@ require_once __DIR__ . '../../../utils.php';
 <html lang="fr" dir="ltr">
 
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><?php esc_html_e(site_title()); ?></title>
     <meta name="description" content="Un Twitter bot qui post des extraits vidéos d'acknoo issus de sa chaîne le tribunal des bureaux">

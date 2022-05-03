@@ -19,7 +19,7 @@ class UniversityDpt
 
         public  string $key,
         public  string $label,
-        public UniversityResearcher $chairman,
+        public UniversityResearcher $chairman = null,
     ) {
     }
 }

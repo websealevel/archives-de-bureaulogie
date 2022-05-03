@@ -12,7 +12,7 @@
 
 require_once __DIR__ . 'UniversityDpt.php';
 
-class Notice
+class UniversityMajor
 {
     public function __construct(
 

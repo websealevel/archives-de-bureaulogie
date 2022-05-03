@@ -20,7 +20,14 @@ function university_majors(): array
 {
 
     $majors = array(
-        new UniversityMajor()
+        new UniversityMajor(
+            'cable_managment',
+            'Cable managment',
+            new UniversityDpt(
+                'ingenierie',
+                'Ingénierie'
+            )
+        )
     );
 
 

@@ -18,9 +18,20 @@ require_once __DIR__ . '/../utils.php';
 
 <h2>Formulaire d'inscription à l'<span>ULB</span></h2>
 
-<h3>Conditions d'inscription</h3>
+<h3>Conditions d'admission</h3>
 
-<p>Les frais d'inscription sont entièrement pris en charge par la Sécurité Sociale. </p>
+<ul>
+    <li>Etre majeur·e</li>
+    <li>1an d'expérience sur bureau recommandée</li>
+    <li>L'ULB donne sa chance à toutes les personnes cherchant à étudier la bureaulogie. Toute personne ayant été condamné à la prison en première instance ou ayant subi un rappel à la loi peut intégrer l'université sans discrimination ni jugement. Aucune information sur le caser judiciaire des étudiant·es n'est demandée par l'ULB.</li>
+</ul>
+
+<h3>Informations sur le processus d'admission</h3>
+<ul>
+    <li>Les frais d'inscription sont <em>totalement gratuits</em>. Vous n'avez aucun frais à avancer. La Mutuelle Bureaulogiste (MB) couvre tous les frais de santé de nos étudiant·es ainsi que de leurs bureaux sous réserve d'être muni·e d'une carte d'étudiant·e en bureaulogie.</li>
+    <li>Un bureau sera mis à disposition de chacun de nos étudiant·e</li>
+    <li>Des passerelles sont disponibles pour passer directement en 2ème année si votre bureau a été relaxé au tribunal des bureaux de Paris. Pour ce faire, prenez contact avec votre responsable pédagogique.</li>
+</ul>
 
 <?php esc_html_notices_e(); ?>
 
@@ -76,16 +87,18 @@ require_once __DIR__ . '/../utils.php';
     </div>
 
     <div>
-        <input type="checkbox" name="condition_1" checked >
+        <input type="checkbox" name="condition_1" checked>
         <label for="condition_1" required>J'accepte les conditions etc... </label>
         <input type="checkbox" name="condition_2" checked>
         <label for="condition_2" required>J'ai pris connaissance de la charte de l'Université Libre de Bureaulogie </label>
+        <input type="checkbox" name="major" checked>
+        <label for="major" required>Je certifie être majeur</label>
     </div>
 
     <input type="submit" value="Créer mon compte">
 </form>
 <p>
-<a href="/politique-de-confidentialite">Comment l'Université Libre de Bureaulogie utilisent mes données personnelles ? </a>
+    <a href="/politique-de-confidentialite">Comment l'Université Libre de Bureaulogie utilisent mes données personnelles ? </a>
 </p>
 
 <p>
