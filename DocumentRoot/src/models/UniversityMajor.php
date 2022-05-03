@@ -10,7 +10,7 @@
  */
 
 
-require_once __DIR__ . 'UniversityDpt.php';
+require_once __DIR__ . '/UniversityDpt.php';
 
 class UniversityMajor
 {

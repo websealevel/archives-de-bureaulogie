@@ -9,7 +9,7 @@
  * @package wsl 
  */
 
-require_once __DIR__ . 'UniversityResearcher.php';
+require_once __DIR__ . '/UniversityResearcher.php';
 
 
 class UniversityDpt
@@ -19,7 +19,7 @@ class UniversityDpt
 
         public  string $key,
         public  string $label,
-        public UniversityResearcher $chairman = null,
+        public UniversityResearcher $chairman = new UniversityResearcher(),
     ) {
     }
 }

@@ -12,6 +12,7 @@
 autoload();
 require_once __DIR__ . '/../session.php';
 require_once __DIR__ . '/../utils.php';
+require_once __DIR__ . '/../university.php';
 ?>
 
 <?php present_header(); ?>
@@ -82,14 +83,8 @@ require_once __DIR__ . '/../utils.php';
     </div>
 
     <div>
-        <label for="speciality">Spécialité</label>
-
-        <select name="speciality" id="">
-            <option selected value="cable_managment"></option>
-            <option value="peripheriques_obseletes">Périphériques obsolètes [Dpt Épistémologie]</option>
-            <option value="perroquet">Perroquet</option>
-        </select>
-        <div class="error-message"><?php esc_html_form_error_msg_e('level', 'form_errors') ?></div>
+        <?php esc_html_select_majors_e(university_majors()); ?>
+        <div class="error-message"><?php esc_html_form_error_msg_e('major', 'form_errors') ?></div>
     </div>
 
     <ul class="sign-up--conditions">

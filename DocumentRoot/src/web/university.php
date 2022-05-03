@@ -19,6 +19,7 @@ require_once __DIR__ . '/../models/UniversityMajor.php';
 function university_majors(): array
 {
 
+    //A deplacer dans un fichier d'env.
     $majors = array(
         new UniversityMajor(
             'cable_managment',
@@ -26,6 +27,14 @@ function university_majors(): array
             new UniversityDpt(
                 'ingenierie',
                 'Ingénierie'
+            )
+        ),
+        new UniversityMajor(
+            'peripheriques_obsoletes',
+            'Périphériques obsolètes',
+            new UniversityDpt(
+                'epistemology',
+                'Épistémologie'
             )
         )
     );
@@ -40,4 +49,19 @@ function university_majors(): array
  */
 function esc_html_select_majors_e(array $majors)
 {
+    $major_options = array_map(function ($major) {
+
+        $label = sprintf("%s (Dpt %s)", $major->label, $major->dpt->label);
+
+        return '<option value="' . $major->key . '">' . $label . '</option>';
+    }, $majors);
+
+    echo '<label for="major">Spécialité</label>';
+    echo '<select name="major" id="">';
+    foreach ($major_options as $major_option) {
+        echo $major_option;
+    }
+
+    echo '</select>';
+    return;
 }
