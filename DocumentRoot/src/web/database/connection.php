@@ -86,7 +86,7 @@ function load_db_env(string $env_path = SRC_PATH, string $env_file = '.env_db'):
 function dsn_from_credentials(array $credentials): string
 {
     return sprintf(
-        "host:%s;dbname:%s;port:%s;charset=utf8",
+        "pgsql:host=%s;dbname=%s;port=%s",
         $credentials['host'],
         $credentials['dbname'],
         $credentials['port']
