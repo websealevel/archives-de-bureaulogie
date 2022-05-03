@@ -13,4 +13,5 @@ journal.log
 youtube-dl
 ffmpeg/
 DocumentRoot/.env_db
+DocumentRoot/debug.log
 Specs.md
