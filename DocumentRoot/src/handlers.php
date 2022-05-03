@@ -1,12 +1,12 @@
 <?php
 
 /**
- * Gestion des Exceptions et des erreurs de manière globale
+ * Gestion des Exceptions et des Erreurs de manière globale
  *
  * @package wsl 
  */
 
-//Global Exception handler
+//Global Exception handler.
 set_exception_handler(function ($e) {
 
     if ($e instanceof ErrorException) {
@@ -18,7 +18,7 @@ set_exception_handler(function ($e) {
     error_log("=> type: " . $errorType . " code : " . $e->getCode() . " message: " . $e->getMessage() . " trace: " . $e->getTraceAsString());
 });
 
-
+//Global Error handler.
 set_error_handler(function ($errno, $errstr, $errfile, $errline) {
 
     //Convert errors included in our error-reporing setting into Exceptions
