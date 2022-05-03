@@ -123,4 +123,6 @@ function esc_html_notices_e()
         echo $html_notice;
     }
     echo '</ul>';
+
+    unset($_SESSION['notices']);
 }

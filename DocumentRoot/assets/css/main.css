@@ -322,10 +322,20 @@ summary {
 }
 
 
+ul.notices {
+	list-style-type: none;
+}
+
+.notice {
+	padding-left: 10px;
+	padding-right: 10px;
+	font-weight: bold;
+}
 
 .notice.error {
 	color: red;
 }
-.notice.succes {
-	color: greenyellow;
+
+.notice.success {
+	color: green;
 }
