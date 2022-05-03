@@ -31,7 +31,7 @@ function log_in()
         }),
 
         new FormInput('password', $_POST['password'], function (string $password): InputValidation {
-            if (strlen($password) < 6)
+            if (!$password || mb_strlen($password) < 6)
                 return new InputValidation('password', $password, 'Le mot de passe doit faire au moins 6 caractères');
 
             return new InputValidation('password', $password, '', InputStatus::Valid);
@@ -54,9 +54,11 @@ function log_in()
         redirect('/');
     }
 
-    //C'est ok, on crée le compte
+    //On tente de log
     $credentials = array(
         'pseudo' => $input_validations['pseudo']->value,
-        'password ' => $input_validations['password']->value
+        'password ' => my_hash_password($input_validations['password']->value)
     );
+
+    dd($credentials);
 }

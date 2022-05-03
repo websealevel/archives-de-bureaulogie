@@ -19,6 +19,8 @@ require_once __DIR__ . '/../university.php';
 
 <p>Fil d'ariane</p>
 
+<p>Aidez nous à faire vivre la bureaulogie</p>
+
 <h2>S'inscrire à l'<span>ULB</span></h2>
 
 <?php esc_html_notices_e(); ?>
@@ -54,9 +56,9 @@ require_once __DIR__ . '/../university.php';
 
 
     <div>
-        <label for="level">Niveau</label>
+        <label for="grade">Niveau</label>
 
-        <select name="level" id="">
+        <select name="grade" id="">
             <option selected value="studentL1">Étudiant·e en 1ère année de bureaulogie </option>
             <option selected value="studentL2">Étudiant·e en 2ème année de bureaulogie </option>
             <option selected value="studentL3">Étudiant·e en 3ème année de bureaulogie </option>

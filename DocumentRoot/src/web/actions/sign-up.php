@@ -13,6 +13,7 @@ require_once __DIR__ . '/../../models/FormInput.php';
 require_once __DIR__ . '/../../models/InputValidation.php';
 require_once __DIR__ . '/../../models/Notice.php';
 require_once __DIR__ . '/../utils.php';
+require_once __DIR__ . '/../password.php';
 
 require_once __DIR__ . '/../database/crud-users.php';
 
@@ -79,7 +80,7 @@ function sign_up_user()
     $user = new User(
         $input_validations['pseudo']->value,
         $input_validations['email']->value,
-        $input_validations['password']->value,
+        my_hash_password($input_validations['password']->value),
         '',
     );
 
