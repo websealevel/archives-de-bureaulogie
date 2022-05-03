@@ -16,6 +16,4 @@ function insert_user(User $user)
 {
 
     $db = connection_to_db();
-
-    write_log($user);
 }
