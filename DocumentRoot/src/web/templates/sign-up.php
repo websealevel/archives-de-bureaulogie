@@ -16,14 +16,18 @@ require_once __DIR__ . '/../utils.php';
 
 <?php present_header(); ?>
 
-<h2>Formulaire d'inscription à l'<span>ULB</span></h2>
+<h2>Étudier à l'<span>ULB</span></h2>
+
+<h3>Présentation</h3>
+
+<a href="">Lire les témoignages de nos ancien·es étudiant·es</a>
 
 <h3>Conditions d'admission</h3>
 
 <ul>
     <li>Etre majeur·e</li>
     <li>1an d'expérience sur bureau recommandée</li>
-    <li>L'ULB donne sa chance à toutes les personnes cherchant à étudier la bureaulogie. Toute personne ayant été condamné à la prison en première instance ou ayant subi un rappel à la loi peut intégrer l'université sans discrimination ni jugement. Aucune information sur le caser judiciaire des étudiant·es n'est demandée par l'ULB.</li>
+    <li>L'<span>ULB</span> donne sa chance à toutes les personnes cherchant à étudier la bureaulogie. Toute personne ayant été condamné à la prison en première instance ou ayant subi un rappel à la loi peut intégrer l'université sans discrimination ni jugement. Aucune information sur le caser judiciaire des étudiant·es n'est demandée par l'<span>ULB</span>.</li>
 </ul>
 
 <h3>Informations sur le processus d'admission</h3>
@@ -34,6 +38,8 @@ require_once __DIR__ . '/../utils.php';
 </ul>
 
 <?php esc_html_notices_e(); ?>
+
+<h2>Formulaire d'inscription</h2>
 
 <form action="sign-up" method="post">
 
@@ -70,7 +76,7 @@ require_once __DIR__ . '/../utils.php';
             <option selected value="studentL1">Étudiant·e en 1ère année de bureaulogie </option>
             <option selected value="studentL2">Étudiant·e en 2ème année de bureaulogie </option>
             <option selected value="studentL3">Étudiant·e en 3ème année de bureaulogie </option>
-            <option value="other">Inscription Libre</option>
+            <option value="other">Candidat Libre</option>
         </select>
         <div class="error-message"><?php esc_html_form_error_msg_e('level', 'form_errors') ?></div>
     </div>
@@ -86,19 +92,20 @@ require_once __DIR__ . '/../utils.php';
         <div class="error-message"><?php esc_html_form_error_msg_e('level', 'form_errors') ?></div>
     </div>
 
-    <div>
-        <input type="checkbox" name="condition_1" checked>
-        <label for="condition_1" required>J'accepte les conditions etc... </label>
-        <input type="checkbox" name="condition_2" checked>
-        <label for="condition_2" required>J'ai pris connaissance de la charte de l'Université Libre de Bureaulogie </label>
-        <input type="checkbox" name="major" checked>
-        <label for="major" required>Je certifie être majeur</label>
-    </div>
+    <ul class="sign-up--conditions">
+        <li><input type="checkbox" name="charte" checked>
+            <label for="condition_2" required>J'ai reconnais avoir lu et compris le sens et les implications de <a href="/charte">la charte éthique et informatique de l'Université Libre de Bureaulogie</a></label>
+        </li>
+        <li> <input type="checkbox" name="majority" checked>
+            <label for="majority" required>Je certifie être majeur</label>
+        </li>
+
+    </ul>
 
     <input type="submit" value="Créer mon compte">
 </form>
 <p>
-    <a href="/politique-de-confidentialite">Comment l'Université Libre de Bureaulogie utilisent mes données personnelles ? </a>
+    <a href="/politique-de-confidentialite">Que fait l'Université Libre de Bureaulogie de mes données personnelles ? </a>
 </p>
 
 <p>

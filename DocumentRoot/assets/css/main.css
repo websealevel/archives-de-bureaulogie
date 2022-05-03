@@ -322,9 +322,10 @@ summary {
 }
 
 
-ul.notices {
+ul.notices,ul.sign-up--conditions {
 	list-style-type: none;
 }
+
 
 .notice {
 	padding-left: 10px;
