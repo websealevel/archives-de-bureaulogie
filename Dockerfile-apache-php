@@ -7,3 +7,9 @@ RUN apt-get install -y libpq-dev \
 RUN a2enmod rewrite
 
 # Installer ffmpeg, youtube-dl en téléchargement avec curl/wget
+
+
+# Timezone
+ENV TZ=Europe/Paris
+ENV DEBIAN_FRONTEND=noninteractive
+RUN apt-get update && apt-get install -y tzdata

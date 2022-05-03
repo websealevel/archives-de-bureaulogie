@@ -1,2 +1,4 @@
 FROM postgres:14.2
+ENV TZ="Europe/Paris"
+RUN date
 

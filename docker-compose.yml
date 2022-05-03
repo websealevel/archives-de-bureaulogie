@@ -34,7 +34,9 @@ services:
 
   #Le serveur de la base de données postgres
   db:
-    image: postgres:14.2
+    build:
+      context: ./
+      dockerfile: Dockerfile-postgres
     environment:
       POSTGRES_USER: 'user'
       POSTGRES_PASSWORD: 'password'
