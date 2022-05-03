@@ -16,7 +16,7 @@ require_once __DIR__ . '/../utils.php';
 
 <?php present_header(); ?>
 
-<h2>Inscription au département de bureaulogie</h2>
+<h2>Devenir membre de la FDB</h2>
 
 <form action="sign-up" method="post">
 
@@ -55,6 +55,13 @@ require_once __DIR__ . '/../utils.php';
             <option disabled value="master">Maître bureaulogue</option>
         </select>
         <div class="error-message"><?php esc_html_form_error_msg_e('level', 'form_errors') ?></div>
+    </div>
+
+    <div>
+        <input type="checkbox" name="condition_1">
+        <label for="condition_1" required>J'accepte les conditions etc... </label>
+        <input type="checkbox" name="condition_2">
+        <label for="condition_2" required>J'ai pris connaissance de la charte de la fondation libre de bureaulogie </label>
     </div>
 
     <input type="submit" value="Créer mon compte">

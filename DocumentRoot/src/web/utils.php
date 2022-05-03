@@ -15,7 +15,7 @@ require __DIR__ . '/log.php';
  */
 function site_title(): string
 {
-    return 'ackboo out of context';
+    return 'Fondation Libre de Bureaulogie';
 }
 
 /**

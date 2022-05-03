@@ -7,7 +7,7 @@
  */
 ?>
 
-<h2>Connexion</h2>
+<h2>Se connecter</h2>
 <div class="form-login">
     <form action="authentificate" method="post">
         <label for="login">Pseudo </label>
@@ -19,5 +19,5 @@
 </div>
 
 <div class="sign-up">
-    <p>Pas encore de compte ? <a href="sign-up">Créez en un</a>.</p>
+    <p>Pas encore de compte ?<a href="sign-up">Devenir membre</a></p>
 </div>
