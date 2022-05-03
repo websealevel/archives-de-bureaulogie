@@ -21,7 +21,7 @@ require_once __DIR__ . '/../utils.php';
 <form action="sign-up" method="post">
 
     <div>
-        <label for="pseudo">Pseudo</label>
+        <label for="pseudo">Pseudonyme</label>
         <input type="text" name="pseudo" value="<?php esc_html_from_session_e('form_errors', 'pseudo') ?>" required>
         <div class="error-message"><?php esc_html_form_error_msg_e('pseudo', 'form_errors') ?></div>
     </div>
@@ -67,5 +67,7 @@ require_once __DIR__ . '/../utils.php';
     <input type="submit" value="Créer mon compte">
 </form>
 
+
+<a href="/">Retour à la page d'accueil</a>
 
 <?php present_footer(); ?>
