@@ -340,3 +340,7 @@ ul.notices,ul.sign-up--conditions {
 .notice.success {
 	color: green;
 }
+
+.error-message{
+	color:red;
+}

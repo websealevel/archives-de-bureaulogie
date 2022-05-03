@@ -18,7 +18,6 @@ function resolve()
 {
     $path = get_path();
     $method = get_method();
-
     $callback = find_callback($path, $method);
 
     if (!is_callable($callback)) {
@@ -52,8 +51,10 @@ function find_callback(string $path, string $method): callable
 
     if (!array_key_exists($path,  $routes[$method]))
         return function () {
+
             present_template('404');
         };
+
 
     return  $routes[$method][$path];
 }

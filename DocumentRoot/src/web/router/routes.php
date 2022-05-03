@@ -8,7 +8,7 @@
 
 require_once __DIR__ . '/../utils.php';
 require_once __DIR__ . '/../session.php';
-require_once __DIR__ . '/../actions/authentificate.php';
+require_once __DIR__ . '/../actions/log-in.php';
 require_once __DIR__ . '/../actions/sign-up.php';
 
 /**
@@ -32,11 +32,9 @@ function routes(): array
             }
         ),
         'post' => array(
-            '/authentificate' => function () {
-                authentificate_user();
-            }
-        ),
-        'post' => array(
+            '/log-in' => function () {
+                log_in();
+            },
             '/sign-up' => function () {
                 sign_up_user();
             }

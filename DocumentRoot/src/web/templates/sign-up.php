@@ -17,26 +17,9 @@ require_once __DIR__ . '/../university.php';
 
 <?php present_header(); ?>
 
-<h2>Étudier à l'<span>ULB</span></h2>
+<p>Fil d'ariane</p>
 
-<h3>Présentation</h3>
-
-<a href="">Lire les témoignages de nos ancien·es étudiant·es</a>
-
-<h3>Conditions d'admission</h3>
-
-<ul>
-    <li>Etre majeur·e</li>
-    <li>1an d'expérience sur bureau recommandée</li>
-    <li>L'<span>ULB</span> donne sa chance à toutes les personnes cherchant à étudier la bureaulogie. Toute personne ayant été condamné à la prison en première instance ou ayant subi un rappel à la loi peut intégrer l'université sans discrimination ni jugement. Aucune information sur le caser judiciaire des étudiant·es n'est demandée par l'<span>ULB</span>.</li>
-</ul>
-
-<h3>Informations sur le processus d'admission</h3>
-<ul>
-    <li>Les frais d'inscription sont <em>totalement gratuits</em>. Vous n'avez aucun frais à avancer. La Mutuelle Bureaulogiste (MB) couvre tous les frais de santé de nos étudiant·es ainsi que de leurs bureaux sous réserve d'être muni·e d'une carte d'étudiant·e en bureaulogie.</li>
-    <li>Un bureau sera mis à disposition de chacun de nos étudiant·e</li>
-    <li>Des passerelles sont disponibles pour passer directement en 2ème année si votre bureau a été relaxé au tribunal des bureaux de Paris. Pour ce faire, prenez contact avec votre responsable pédagogique.</li>
-</ul>
+<h2>S'inscrire à l'<span>ULB</span></h2>
 
 <?php esc_html_notices_e(); ?>
 

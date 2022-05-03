@@ -9,11 +9,17 @@
 
 <h2>Se connecter</h2>
 <div class="form-login">
-    <form action="authentificate" method="post">
-        <label for="login">Pseudo </label>
-        <input type="text" id="login" name="login">
-        <label for="password">Mot de passe </label>
-        <input type="password" id="password" name="password">
+    <form action="log-in" method="POST">
+        <div>
+            <label for="login">Login </label>
+            <input type="text" id="login" name="login">
+            <div class="error-message"><?php esc_html_form_error_msg_e('login', 'form_errors') ?></div>
+        </div>
+        <div>
+            <label for="password">Mot de passe </label>
+            <input type="password" id="password" name="password">
+            <div class="error-message"><?php esc_html_form_error_msg_e('password', 'form_errors') ?></div>
+        </div>
         <input type="submit" value="Connexion">
     </form>
 </div>
