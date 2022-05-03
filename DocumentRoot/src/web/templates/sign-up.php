@@ -56,9 +56,21 @@ require_once __DIR__ . '/../utils.php';
         <label for="level">Niveau</label>
 
         <select name="level" id="">
-            <option selected value="student">Étudiant·e en bureaulogie</option>
-            <option value="other">Autre</option>
-            <option disabled value="master">Maître bureaulogue</option>
+            <option selected value="studentL1">Étudiant·e en 1ère année de bureaulogie </option>
+            <option selected value="studentL2">Étudiant·e en 2ème année de bureaulogie </option>
+            <option selected value="studentL3">Étudiant·e en 3ème année de bureaulogie </option>
+            <option value="other">Inscription Libre</option>
+        </select>
+        <div class="error-message"><?php esc_html_form_error_msg_e('level', 'form_errors') ?></div>
+    </div>
+
+    <div>
+        <label for="speciality">Spécialité</label>
+
+        <select name="speciality" id="">
+            <option selected value="cable_managment"></option>
+            <option value="peripheriques_obseletes">Périphériques obsolètes [Dpt Épistémologie]</option>
+            <option value="perroquet">Perroquet</option>
         </select>
         <div class="error-message"><?php esc_html_form_error_msg_e('level', 'form_errors') ?></div>
     </div>
@@ -67,13 +79,17 @@ require_once __DIR__ . '/../utils.php';
         <input type="checkbox" name="condition_1" checked >
         <label for="condition_1" required>J'accepte les conditions etc... </label>
         <input type="checkbox" name="condition_2" checked>
-        <label for="condition_2" required>J'ai pris connaissance de la charte de la fondation libre de bureaulogie </label>
+        <label for="condition_2" required>J'ai pris connaissance de la charte de l'Université Libre de Bureaulogie </label>
     </div>
 
     <input type="submit" value="Créer mon compte">
 </form>
+<p>
+<a href="/politique-de-confidentialite">Comment l'Université Libre de Bureaulogie utilisent mes données personnelles ? </a>
+</p>
 
-
-<a href="/">Retour à la page d'accueil</a>
+<p>
+    <a href="/">Retour à la page d'accueil</a>
+</p>
 
 <?php present_footer(); ?>
