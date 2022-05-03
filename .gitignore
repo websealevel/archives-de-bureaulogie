@@ -13,3 +13,4 @@ journal.log
 youtube-dl
 ffmpeg/
 DocumentRoot/src/.env_db
+Specs.md
