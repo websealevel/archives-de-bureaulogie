@@ -21,8 +21,8 @@ function create_account(User $user): string|bool
 
     $db = connect_to_db();
 
-    $sql = 'INSERT INTO accounts(pseudo, password, email, created_on)'
-        . 'VALUES(:pseudo,:password,:email,:created_on)';
+    $sql = 'INSERT INTO accounts(pseudo, password, email, created_on, has_reached_majority, has_accepted_the_chart, major, option, grade  )'
+        . 'VALUES(:pseudo,:password,:email,:created_on, :has_reached_majority, :has_accepted_the_chart, :major, :option, :grade )';
 
     $stmt = $db->prepare($sql);
 
@@ -30,10 +30,16 @@ function create_account(User $user): string|bool
     $stmt->bindValue(':password', $user->pseudo);
     $stmt->bindValue(':email', $user->pseudo);
     $stmt->bindValue(':created_on', date('Y-m-d H:i:s'));
+    $stmt->bindValue(':has_reached_majority', true);
+    $stmt->bindValue(':has_accepted_the_chart', true);
+    $stmt->bindValue(':major', 'cable_managment');
+    $stmt->bindValue(':option', '');
+    $stmt->bindValue(':grade', 'studentL1');
 
     try {
         $stmt->execute();
     } catch (PDOException $e) {
+        error_log($e);
         $_SESSION['notices'] = array(
             new Notice("Un membre de l'Université Libre de Bureaulogie porte déjà ce pseudonyme ou dispose déjà de cet email. Veuillez en essayer un autre s'il vous plaît", NoticeStatus::Error)
         );

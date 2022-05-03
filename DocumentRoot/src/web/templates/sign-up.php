@@ -21,8 +21,6 @@ require_once __DIR__ . '/../university.php';
 
 <p>Aidez nous à faire vivre la bureaulogie</p>
 
-<h2>S'inscrire à l'<span>ULB</span></h2>
-
 <?php esc_html_notices_e(); ?>
 
 <h2>Formulaire d'inscription</h2>

@@ -83,7 +83,7 @@ function esc_html_from_session_e(string $key, string $array_key): void
 function esc_html_form_error_msg_e(string $input_name, string $key_form_errors)
 {
 
-    if (!isset($_SESSION) && !isset($_SESSION["{$key_form_errors}"]))
+    if (!isset($_SESSION) || !isset($_SESSION["{$key_form_errors}"]))
         return;
 
     $form_errors = $_SESSION["{$key_form_errors}"];
@@ -102,7 +102,7 @@ function esc_html_form_error_msg_e(string $input_name, string $key_form_errors)
 function esc_html_notices_e()
 {
 
-    if (!isset($_SESSION) && !isset($_SESSION['notices']))
+    if (!isset($_SESSION) || !isset($_SESSION['notices']))
         return;
 
     $notices = $_SESSION['notices'];
