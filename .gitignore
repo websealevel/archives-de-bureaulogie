@@ -13,3 +13,4 @@ journal.log
 youtube-dl
 ffmpeg/
 DocumentRoot/src/web/database/access.php
+DocumentRoot/.env

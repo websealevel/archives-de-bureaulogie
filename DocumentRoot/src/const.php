@@ -51,7 +51,7 @@ define('EXTENSION_CLIP', 'mp4');
 /**
  * Format de la piste audio d'une vidéo source téléchargée
  */
-define('EXTENSION_AUDIO','m4a');
+define('EXTENSION_AUDIO', 'm4a');
 
 /**
  * Format valide d'un timecode 
@@ -99,3 +99,4 @@ define('ALLOWED_DOMAINS_TO_DOWNLOAD_SOURCES_FROM', array(
     'www.youtube.com',
     'youtube.com'
 ));
+

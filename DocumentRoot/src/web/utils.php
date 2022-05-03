@@ -115,7 +115,7 @@ function present_footer()
  */
 function autoload(): void
 {
-    require __DIR__ . '/../../../vendor/autoload.php';
+    require_once __DIR__ . '/../../../vendor/autoload.php';
 }
 
 /**
@@ -169,5 +169,4 @@ function validate_posted_form(array $inputs): array
 
     return $input_validations;
 }
-
 
