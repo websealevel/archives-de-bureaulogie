@@ -7,9 +7,6 @@
  * @package wsl 
  */
 session_start();
-?>
-
-<?php
 autoload();
 require_once __DIR__ . '/../utils.php';
 require_once __DIR__ . '/../session.php';
@@ -17,7 +14,6 @@ require_once __DIR__ . '/../session.php';
 <?php present_header(); ?>
 
 <p>Fil d'ariane</p>
-<?php dump($_SESSION); ?>
 
 <?php esc_html_notices_e(); ?>
 

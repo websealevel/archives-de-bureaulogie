@@ -52,7 +52,7 @@ function sql_insert_account(string $pseudo, string $password, string $email)
 
     $stmt->execute();
 
-    return $stmt->lastInsertId('accounts_id_seq');
+    return $db->lastInsertId('accounts_id_seq');
 }
 
 

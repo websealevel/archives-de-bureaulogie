@@ -15,7 +15,7 @@ require __DIR__ . '/log.php';
  */
 function site_title(): string
 {
-    return 'Archives municipales de bureaulogie';
+    return 'Archives bureaulogiques';
 }
 
 /**

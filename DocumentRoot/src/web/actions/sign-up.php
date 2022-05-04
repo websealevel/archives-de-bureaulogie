@@ -25,6 +25,7 @@ require_once __DIR__ . '/../database/repository-accounts.php';
  */
 function sign_up_user()
 {
+    session_start();
     $form_inputs = array(
         new FormInput('pseudo', $_POST['pseudo'], function (string $pseudo): InputValidation {
             if (empty($pseudo))
@@ -76,8 +77,8 @@ function sign_up_user()
     //C'est ok, on crée le compte
     $user = new User(
         $input_validations['pseudo']->value,
-        $input_validations['email']->value,
         my_hash_password($input_validations['password']->value),
+        $input_validations['email']->value,
     );
 
 
@@ -85,8 +86,7 @@ function sign_up_user()
 
     //On renvoie l'utilisateur vers la home avec un message
     session_unset();
-    $_SESSION['notices'] = array(
+    redirect('/', 'notices', array(
         new Notice("Féliciations, vous êtes désormais inscrit⸱e à l'Université Libre de Bureaulogie ! Vous pouvez désormais nous aider à faire connaître la bureaulogie.", NoticeStatus::Success)
-    );
-    redirect('/');
+    ));
 }
