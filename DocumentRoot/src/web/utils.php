@@ -170,3 +170,25 @@ function validate_posted_form(array $inputs): array
     return $input_validations;
 }
 
+/**
+ * Retourne le path des clips sur le serveur
+ * @return string Le path des clips
+ */
+function web_clips_path(): string
+{
+    $path_clips = __DIR__ . '/../../../extraits';
+    return $path_clips;
+}
+
+/**
+ * Retourne le path d'un clip sur le serveur
+ * @return string Le path des clips
+ */
+function web_clip_path(string $clip_name): string
+{
+    $path = web_clips_path();
+    $clip_path = sprintf("%s/%s", $path, $clip_name);
+    if (!file_exists($clip_path))
+        throw new Exception("L'extrait n'existe pas sur le serveur.");
+    return $clip_path;
+}

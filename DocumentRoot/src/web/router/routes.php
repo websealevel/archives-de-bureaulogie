@@ -26,11 +26,14 @@ function routes(): array
             '/sign-up' => function () {
                 present_template('sign-up');
             },
+            '/log-in' => function () {
+                present_template('home');
+            },
             '/log-out' => function () {
                 log_out();
             },
-            '/log-in' => function () {
-                present_template('home');
+            '/clip' => function () {
+                present_template('clip');
             }
         ),
         'post' => array(
