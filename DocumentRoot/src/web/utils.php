@@ -48,7 +48,7 @@ function esc_html(string $text): string
 }
 
 /**
- * Inclut les scripts js sur la sortie standards
+ * Inclut les scripts js sur la sortie standards dans le footer.
  */
 function enqueue_js_scripts()
 {
@@ -64,6 +64,7 @@ function present_template(string $template_name)
     $template = strtolower(trim($template_name)) . '.php';
     $path_template = __DIR__ . '/templates/' . $template;
 
+    //Possible infinite loop si le template 404 n'existe pas.
     if (!file_exists($path_template))
         present_template('404');
 
@@ -85,7 +86,6 @@ function present_template_part(string $template_part)
 
     if (!file_exists($path_template))
         present_template('404');
-
 
     require $path_template;
 

@@ -14,8 +14,9 @@ require_once __DIR__ . '../../current-user.php';
 require_once __DIR__ . '/../utils.php';
 require_once __DIR__ . '/../session.php';
 
+session_start();
 if (!is_current_user_logged_in()) {
-    present_template_part('form-login');
+    present_template('login');
 } else {
     present_template('home-actions');
 }

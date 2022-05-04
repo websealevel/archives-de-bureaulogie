@@ -9,6 +9,7 @@
 require_once __DIR__ . '/../utils.php';
 require_once __DIR__ . '/../session.php';
 require_once __DIR__ . '/../actions/log-in.php';
+require_once __DIR__ . '/../actions/log-out.php';
 require_once __DIR__ . '/../actions/sign-up.php';
 
 /**
@@ -26,7 +27,7 @@ function routes(): array
                 present_template('sign-up');
             },
             '/log-out' => function () {
-                present_template('log-out');
+                log_out();
             },
             '/log-in' => function () {
                 present_template('home');

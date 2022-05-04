@@ -13,7 +13,7 @@
 function is_current_user_logged_in(): bool
 {
     if (!isset($_SESSION))
-        return false;
+        throw new Exception("Aucune session active");
 
-    return boolval($_SESSION['user_authentificated']);
+    return boolval($_SESSION['user_authentificated'] ?? false);
 }

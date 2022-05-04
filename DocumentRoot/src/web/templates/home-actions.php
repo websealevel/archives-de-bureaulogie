@@ -7,9 +7,8 @@
  * @package wsl 
  */
 
-require __DIR__ . '/../../current-user.php';
+require_once __DIR__ . '/../current-user.php';
 
-session_start();
 if (!is_current_user_logged_in())
     redirect('/');
 ?>
@@ -18,3 +17,4 @@ if (!is_current_user_logged_in())
 
 <a href="">Éditer un extrait</a>
 <a href="">Télécharger une nouvelle source</a>
+<a href="/log-out">Se déconnecter</a>
