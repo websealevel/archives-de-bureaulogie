@@ -20,7 +20,7 @@ require_once __DIR__ . '/../utils.php';
 
 <?php esc_html_notices_e(); ?>
 
-<h2>Formulaire d'inscription</h2>
+<h2>Formulaire d'adhésion</h2>
 
 <form action="sign-up" method="post">
 
@@ -74,6 +74,8 @@ require_once __DIR__ . '/../utils.php';
     <input type="submit" value="Créer mon compte">
 </form>
 <p>
+    <p>Par soucis écologique nous ne vous enverrons aucun mail sauf éventuellement pour vous tenir informé de vos contributions</p>
+    <p>Par souci de sécurité, et en accord avec les principes de la bureaulogie, vous n'aurez pas la possibilité de recouvrir votre mot de passe en cas de perte. Conservez le soigneusement.</p>
     <a href="/politique-de-confidentialite">Que fait {XXX} de mes données personnelles ? </a>
 </p>
 
