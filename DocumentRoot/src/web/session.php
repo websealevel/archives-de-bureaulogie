@@ -108,22 +108,3 @@ function esc_html_notices_e()
     unset($_SESSION['notices']);
 }
 
-/**
- * Enregistre le compte utilisateur en session
- * @param mixed $account Les données du compte utilisateur
- * @global array $_SESSION
- * @return void
- */
-function login_user_session($account)
-{
-
-    if (!isset($_SESSION))
-        throw new Exception("Aucune session n'est ouverte");
-
-    $_SESSION['user_authentificated'] = true;
-    $_SESSION['pseudo'] = $account->pseudo;
-
-
-    error_log_login_success($account);
-}
-

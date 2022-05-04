@@ -51,12 +51,12 @@ function error_log_login_success($account): void
 
 /**
  * Log un logout réussi
- * @param stdClass $account Les infos du compte authentifié
+ * @param string $login
  * @global array $_SERVER
  * @return void
  */
-function error_log_out_success($account): void
+function error_log_out_success(string $login): void
 {
-    $message = sprintf("Logout: login: %s - IP: %s - date: %s", $account->pseudo, $_SERVER['REMOTE_ADDR'], date('Y-m-d H:i:s'));
+    $message = sprintf("Logout: login: %s - IP: %s - date: %s", $login, $_SERVER['REMOTE_ADDR'], date('Y-m-d H:i:s'));
     error_log($message);
 }

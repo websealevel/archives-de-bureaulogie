@@ -10,6 +10,7 @@
 require_once __DIR__ . '/../../models/Notice.php';
 require_once __DIR__ . '/../session.php';
 require_once __DIR__ . '/../actions/log-out.php';
+require_once __DIR__ . '/../log.php';
 
 
 /**
@@ -20,7 +21,8 @@ require_once __DIR__ . '/../actions/log-out.php';
 function log_out()
 {
     session_start();
-    logout_user_session();
+    $login = logout_user_session();
+    error_log_out_success($login);
     redirect('/', 'notices', array(
         new Notice("Vous avez été déconnecté avec succès", NoticeStatus::Success)
     ));
@@ -29,13 +31,15 @@ function log_out()
 /**
  * Supprime le compte utilisateur en session
  * @global array $_SESSION
- * @return void
+ * @return string Le login de l'utilisateur
  */
-function logout_user_session()
+function logout_user_session(): string
 {
     if (!isset($_SESSION))
         throw new Exception("Aucune session n'est ouverte");
 
+    $login = $_SESSION['pseudo'] ?? '';
     session_regenerate_id();
     session_destroy();
+    return $login;
 }
