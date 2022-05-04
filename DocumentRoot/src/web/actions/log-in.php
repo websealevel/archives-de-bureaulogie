@@ -44,9 +44,9 @@ function log_in()
     $invalid_inputs = array_filter($input_validations, function (InputValidation $input) {
         return InputStatus::Invalid === $input->status;
     });
-
     //Si des validations ont échoué, on retourne à la page avec les erreurs
     if (!empty($invalid_inputs)) {
+        write_log('FORM_ERRORS');
         $_SESSION['form_errors'] = $input_validations;
         redirect('/');
     }

@@ -10,15 +10,26 @@ require_once __DIR__ . '/../models/InputValidation.php';
 
 /**
  * Démarre une session php avec des options
- * @return bool Vrai si la session a démaré, faux sinon
  */
-function start_session(): bool
+function start_session()
 {
     $options = array(
         'cookie_lifetime' => 3600,
     );
 
-    return session_start($options);
+    session_start($options);
+
+    //Extra security sur la session. On vérifie qu'entre 2 requêtes c'est le même browser
+    //Source: https://privacyaustralia.net/phpsec/projects/guide/php-security-guide-sessions/
+
+    if (isset($_SESSION['HTTP_USER_AGENT'])) {
+        if ($_SESSION['HTTP_USER_AGENT'] != md5($_SERVER['HTTP_USER_AGENT'])) {
+            //Demande une réauthentification
+            exit;
+        }
+    } else {
+        $_SESSION['HTTP_USER_AGENT'] = md5($_SERVER['HTTP_USER_AGENT'] . md5('ulb'));
+    }
 }
 
 
