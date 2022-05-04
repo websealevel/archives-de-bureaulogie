@@ -11,7 +11,7 @@ require_once __DIR__ . '/../../models/User.php';
 require_once __DIR__ . '/../../models/Notice.php';
 require_once __DIR__ . '/../database/connection.php';
 require_once __DIR__ . '/../router/router.php';
-require_once __DIR__ . '/queries_account.php';
+require_once __DIR__ . '/queries-accounts.php';
 
 /**
  * Insère un utilisateur en base de données
@@ -53,9 +53,14 @@ function log_user(array $credentials)
         redirect('/');
     }
 
-    //Si trouvé, on check mdp, si pas ok, on rejette
-    dd($account);
 
+    //Si trouvé, on check mdp, si pas ok, on rejette
+    if ($credentials['password'] !== $account->password) {
+        $_SESSION['notices'] = array(
+            new Notice("Vos identifiants ne sont pas corrects, veuillez réessayer s'il vous plait", NoticeStatus::Error)
+        );
+    }
+    dd("Bonjour " . $account->pseudo);
     //Sinon on log
 
 
