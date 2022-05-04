@@ -12,7 +12,9 @@ vendor
 journal.log
 youtube-dl
 ffmpeg/
-DocumentRoot/.env_db
+DocumentRoot/.env
+DocumentRoot/web/.env
+DocumentRoot/web/.env_db
 DocumentRoot/debug.log
 postgres-data/
 Specs.md
