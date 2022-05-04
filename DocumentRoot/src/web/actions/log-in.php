@@ -58,4 +58,7 @@ function log_in()
     );
 
     $result = log_user($credentials);
+
+    //On regenere le sessions id.
+    session_regenerate_id(true);
 }
