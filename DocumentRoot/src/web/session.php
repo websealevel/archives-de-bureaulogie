@@ -123,6 +123,7 @@ function login_user_session($account)
     $_SESSION['user_authentificated'] = true;
     $_SESSION['pseudo'] = $account->pseudo;
 
+
     error_log_login_success($account);
 }
 
