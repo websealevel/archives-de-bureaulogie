@@ -7,7 +7,8 @@
  * @package wsl 
  */
 
-autoload();
+
+require_once __DIR__ . '/../environment.php';
 
 /**
  * Retourne une connexion à la base de données en cas de succès, faux sinon
@@ -50,14 +51,13 @@ function from_env(string $key): string
  * @global array $_ENV
  * @return array
  */
-function load_db_env(string $env_path = SRC_PATH, string $env_file = '.env_db'): array
+function load_db_env(string $env_path = SRC_PATH, string $env_file = '.env'): array
 {
 
     if (isset($_ENV['db_env']))
         return $_ENV['db_env'];
 
-    $dotenv = Dotenv\Dotenv::createImmutable($env_path, $env_file);
-    $dotenv->load();
+    load_env();
 
     $credentials = array(
         'host' => $_ENV['DB_HOST'],
