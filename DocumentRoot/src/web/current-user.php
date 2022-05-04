@@ -12,5 +12,8 @@
  */
 function is_current_user_logged_in(): bool
 {
-    return false;
+    if (!isset($_SESSION))
+        return false;
+
+    return boolval($_SESSION['user_authentificated']);
 }

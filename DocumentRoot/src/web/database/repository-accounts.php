@@ -76,5 +76,5 @@ function log_user(Credentials $credentials)
     login_user_session($account);
 
     //Redirige vers la page d'accueil authentifié.
-    redirect('/', refresh: 5);
+    redirect('/');
 }
