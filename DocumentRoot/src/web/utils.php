@@ -15,7 +15,7 @@ require __DIR__ . '/log.php';
  */
 function site_title(): string
 {
-    return 'Université Libre de Bureaulogie';
+    return 'Archives municipales de bureaulogie';
 }
 
 /**

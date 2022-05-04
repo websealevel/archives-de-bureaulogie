@@ -7,9 +7,7 @@ CREATE TABLE accounts (
     last_login TIMESTAMP,
     has_reached_majority BOOLEAN NOT NULL,
     has_accepted_the_chart BOOLEAN NOT NULL,
-    major VARCHAR (255),
-    option VARCHAR (255),
-    grade VARCHAR (255)
+    heard_about_bureaulogy VARCHAR(255)
 );
 
 CREATE TABLE roles(

@@ -12,14 +12,11 @@
 autoload();
 require_once __DIR__ . '/../session.php';
 require_once __DIR__ . '/../utils.php';
-require_once __DIR__ . '/../university.php';
 ?>
 
 <?php present_header(); ?>
 
 <p>Fil d'ariane</p>
-
-<p>Aidez nous à faire vivre la bureaulogie</p>
 
 <?php esc_html_notices_e(); ?>
 
@@ -52,27 +49,21 @@ require_once __DIR__ . '/../university.php';
         <div class="error-message"><?php esc_html_form_error_msg_e('password_confirmation', 'form_errors') ?></div>
     </div>
 
-
     <div>
-        <label for="grade">Niveau</label>
-
-        <select name="grade" id="">
-            <option selected value="studentL1">Étudiant·e en 1ère année de bureaulogie </option>
-            <option selected value="studentL2">Étudiant·e en 2ème année de bureaulogie </option>
-            <option selected value="studentL3">Étudiant·e en 3ème année de bureaulogie </option>
-            <option value="other">Candidat Libre</option>
+        <label for="heard_about_bureaulogy">Comment avez-vous connu la bureaulogie ?</label>
+        <select name="heard_about_bureaulogy" id="">
+            <option hidden disabled selected value> -- choisir une réponse -- </option>
+            <option value="tribunal_des_bureaux">Au tribunal des bureaux</option>
+            <option value="seminaire">En assistant à un séminaire</option>
+            <option value="par_un_proche">Par un proche</option>
+            <option value="unknow">Je ne souhaite pas répondre</option>
         </select>
-        <div class="error-message"><?php esc_html_form_error_msg_e('level', 'form_errors') ?></div>
     </div>
 
-    <div>
-        <?php esc_html_select_majors_e(university_majors()); ?>
-        <div class="error-message"><?php esc_html_form_error_msg_e('major', 'form_errors') ?></div>
-    </div>
 
     <ul class="sign-up--conditions">
         <li><input type="checkbox" name="charte" checked>
-            <label for="condition_2" required>J'ai reconnais avoir lu et compris le sens et les implications de <a href="/charte">la charte éthique et informatique de l'Université Libre de Bureaulogie</a></label>
+            <label for="condition_2" required>J'ai reconnais avoir lu et compris <a href="/charte">la charte de {XXX}</a></label>
         </li>
         <li> <input type="checkbox" name="majority" checked>
             <label for="majority" required>Je certifie être majeur</label>
@@ -83,7 +74,7 @@ require_once __DIR__ . '/../university.php';
     <input type="submit" value="Créer mon compte">
 </form>
 <p>
-    <a href="/politique-de-confidentialite">Que fait l'Université Libre de Bureaulogie de mes données personnelles ? </a>
+    <a href="/politique-de-confidentialite">Que fait {XXX} de mes données personnelles ? </a>
 </p>
 
 <p>

@@ -29,9 +29,7 @@ function sql_insert_account(string $pseudo, string $password, string $email)
             created_on, 
             has_reached_majority, 
             has_accepted_the_chart, 
-            major, 
-            option, 
-            grade  )'
+            heard_about_bureaulogy)'
         .
         'VALUES(
             :pseudo,
@@ -40,9 +38,7 @@ function sql_insert_account(string $pseudo, string $password, string $email)
             :created_on, 
             :has_reached_majority, 
             :has_accepted_the_chart, 
-            :major, 
-            :option, 
-            :grade )';
+            :heard_about_bureaulogy, )';
 
     $stmt = $db->prepare($sql);
 
@@ -52,9 +48,7 @@ function sql_insert_account(string $pseudo, string $password, string $email)
     $stmt->bindValue(':created_on', date('Y-m-d H:i:s'));
     $stmt->bindValue(':has_reached_majority', true);
     $stmt->bindValue(':has_accepted_the_chart', true);
-    $stmt->bindValue(':major', 'cable_managment');
-    $stmt->bindValue(':option', '');
-    $stmt->bindValue(':grade', 'studentL1');
+    $stmt->bindValue(':heard_about_bureaulogy', 'tribunal_des_bureaux');
 
     $stmt->execute();
 

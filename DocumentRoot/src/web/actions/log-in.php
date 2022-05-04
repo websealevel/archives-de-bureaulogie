@@ -56,6 +56,7 @@ function log_in()
     //On tente de log
     $credentials = new Credentials(
         $input_validations['login']->value,
+        $input_validations['password']->value,
         my_hash_password($input_validations['password']->value)
     );
 
