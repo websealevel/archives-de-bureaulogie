@@ -5,7 +5,12 @@
  *
  * @package wsl 
  */
+
+require_once __DIR__ . '/../../utils.php';
+require_once __DIR__ . '/../../session.php';
 ?>
+
+<?php present_header(); ?>
 
 <h2>Se connecter</h2>
 <?php esc_html_notices_e(); ?>
@@ -28,3 +33,4 @@
 <div class="sign-up">
     <p>Pas encore de compte ? <a href="sign-up">S'inscrire</a></p>
 </div>
+<?php present_footer(); ?>

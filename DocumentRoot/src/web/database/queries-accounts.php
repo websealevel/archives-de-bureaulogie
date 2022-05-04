@@ -50,7 +50,6 @@ function sql_insert_account(string $pseudo, string $password, string $email)
     $stmt->bindValue(':has_accepted_the_chart', true);
     $stmt->bindValue(':heard_about_bureaulogy', 'tribunal_des_bureaux');
 
-
     $stmt->execute();
 
     return $stmt->lastInsertId('accounts_id_seq');

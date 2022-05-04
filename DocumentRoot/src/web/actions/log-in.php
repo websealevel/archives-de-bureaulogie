@@ -21,7 +21,7 @@ require_once __DIR__ . '/../database/repository-accounts.php';
  */
 function log_in()
 {
-    start_session();
+    // start_session();
 
     $form_inputs = array(
 

@@ -9,16 +9,6 @@
 require_once __DIR__ . '/../models/InputValidation.php';
 
 /**
- * Démarre une session php avec des options
- */
-function start_session(): bool
-{
-    $options = array();
-    return session_start($options);
-}
-
-
-/**
  * Retourne la valeur sous la clef $key de la session en cours, une chaine vide sinon
  * A refactor (dégueulasse).
  * @param string $key La clef demandée
@@ -97,7 +87,6 @@ function esc_html_form_error_msg_e(string $input_name, string $key_form_errors)
  */
 function esc_html_notices_e()
 {
-
     if (!isset($_SESSION) || !isset($_SESSION['notices']))
         return;
 

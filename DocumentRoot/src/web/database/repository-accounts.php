@@ -26,8 +26,9 @@ function create_account(User $user): string|bool
         $id = sql_insert_account($user->pseudo, $user->password, $user->email);
     } catch (PDOException $e) {
         error_log($e);
+       
         $_SESSION['notices'] = array(
-            new Notice("Un membre de l'Université Libre de Bureaulogie porte déjà ce pseudonyme ou dispose déjà de cet email. Veuillez en essayer un autre s'il vous plaît", NoticeStatus::Error)
+            new Notice("Un membre porte déjà ce pseudonyme ou dispose déjà de cet email. Veuillez en essayer un autre s'il vous plaît", NoticeStatus::Error)
         );
         redirect('/sign-up');
     }
