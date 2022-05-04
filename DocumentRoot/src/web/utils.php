@@ -183,6 +183,7 @@ function web_clips_path(): string
 /**
  * Retourne le path d'un clip sur le serveur
  * @return string Le path des clips
+ * @throws Exception - Si le clip n'existe pas
  */
 function web_clip_path(string $clip_name): string
 {

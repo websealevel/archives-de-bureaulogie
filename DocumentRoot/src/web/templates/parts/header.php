@@ -21,11 +21,11 @@ require_once __DIR__ . '../../../utils.php';
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><?php esc_html_e(site_title()); ?></title>
     <meta name="description" content="Un Twitter bot qui post des extraits vidéos d'acknoo issus de sa chaîne le tribunal des bureaux">
-    <meta name="keywords" content="ackboo, bot Twitter, clips">
+    <meta name="keywords" content="ackboo, archives, bureaulogie, le tribunal des bureaux">
     <meta name="author" content="websealevel">
     <meta name="author" content="kerprimaparte">
     <link rel="icon" type="image/x-icon" href="../assets/img/favicon.ico">
-    <link rel="canonical" href="ackerboooutofcontext.websealevel.com">
+    <link rel="canonical" href="">
     <link rel="stylesheet" href="../assets/css/main.css">
     <code></code>
 </head>

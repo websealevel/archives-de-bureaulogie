@@ -12,14 +12,12 @@ require_once __DIR__ . '/../utils.php';
 ?>
 <?php present_header(); ?>
 
-<h2>Éditer un extrait</h2>
+<h2>Création d'un extrait</h2>
+<a href="/">Retour</a>
 
-
-<?php dump(web_clip_path("le-tribunal-des-bureaux--2--plante-et-luminaire--00.08.27.300--00.09.29.325.mp4"));  ?>
-
-
+<p>Une explication</p>
 <video width="320" height="240" controls>
-    <source src="./le-tribunal-des-bureaux--2--plante-et-luminaire--00.08.27.300--00.09.29.325.mp4" type="video/mp4">
+    <source src="test.mp4" type="audio/mp4">
     Your browser does not support the video tag.
 </video>
 
