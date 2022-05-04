@@ -58,7 +58,7 @@ function sql_insert_account(string $pseudo, string $password, string $email)
 
     $stmt->execute();
 
-    return $stmt->lastInsertId('stocks_id_seq');
+    return $stmt->lastInsertId('user_id');
 }
 
 

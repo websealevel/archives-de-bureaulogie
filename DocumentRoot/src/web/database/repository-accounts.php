@@ -12,6 +12,8 @@ require_once __DIR__ . '/../../models/Notice.php';
 require_once __DIR__ . '/../database/connection.php';
 require_once __DIR__ . '/../router/router.php';
 require_once __DIR__ . '/queries-accounts.php';
+require_once __DIR__ . '/../utils.php';
+require_once __DIR__ . '/../log.php';
 
 /**
  * Insère un utilisateur en base de données
@@ -45,19 +47,29 @@ function log_user(Credentials $credentials)
         $account = sql_find_account_by_pseudo($credentials->login);
     } catch (PDOException $e) {
         error_log($e);
-        $_SESSION['notices'] = array(
+        redirect('/', 'notices', array(
             new Notice("Impossible de trouver votre compte, veuillez réessayer s'il vous plaît.", NoticeStatus::Error)
-        );
-        redirect('/');
+        ));
     }
 
+    if (!$account) {
+        redirect('/', 'notices', array(
+            new Notice("Impossible de vous identifier, veuillez réessayer s'il vous plaît.", NoticeStatus::Error)
+        ));
+    }
+
+    if (!is_string($credentials->password) || !is_string($account->password)) {
+        throw new Exception("Passwords ne sont pas au format attendu de chaine de caractères.");
+    }
 
     //Si trouvé, on check mdp, si pas ok, on rejette
-    if ($credentials['password'] !== $account->password) {
-        $_SESSION['notices'] = array(
+    if (0 !== strcmp($credentials->password, $account->password)) {
+        error_log_login_failed($credentials);
+        redirect('/', 'notices', array(
             new Notice("Vos identifiants ne sont pas corrects, veuillez réessayer s'il vous plait", NoticeStatus::Error)
-        );
+        ));
     }
+    
     dd("Bonjour " . $account->pseudo);
     //Sinon on log
 

@@ -24,3 +24,15 @@ if (!function_exists('write_log')) {
         }
     }
 }
+
+/**
+ * Log une tentative échouée de login
+ * @param Credentials $credentials Les credentials POSTé par l'utilisateur
+ * @global array $_SERVER
+ */
+function error_log_login_failed(Credentials $credentials)
+{
+
+    dump('Tentative de connexion échouée');
+    dump($credentials);
+}
