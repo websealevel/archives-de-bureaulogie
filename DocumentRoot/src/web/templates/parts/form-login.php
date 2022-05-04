@@ -7,8 +7,8 @@
  */
 ?>
 
-<?php dump($_SESSION); ?>
 <h2>Se connecter</h2>
+
 <div class="form-login">
     <form action="log-in" method="POST">
         <div>

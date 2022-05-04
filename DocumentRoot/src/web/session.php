@@ -11,9 +11,10 @@ require_once __DIR__ . '/../models/InputValidation.php';
 /**
  * Démarre une session php avec des options
  */
-function start_session()
+function start_session(): bool
 {
-    session_start();
+    $options = array();
+    return session_start($options);
 }
 
 

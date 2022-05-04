@@ -20,14 +20,13 @@ function routes(): array
     return  array(
         'get' => array(
             '/' => function () {
+                start_session();
                 present_template('home');
             },
             '/sign-up' => function () {
-                start_session();
                 present_template('sign-up');
             },
             '/log-out' => function () {
-                session_destroy();
                 present_template('log-out');
             }
         ),

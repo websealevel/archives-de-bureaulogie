@@ -20,6 +20,8 @@ require_once __DIR__ . '/../database/crud-users.php';
  */
 function log_in()
 {
+    start_session();
+    
     $form_inputs = array(
 
         new FormInput('login', $_POST['login'], function (string $login): InputValidation {
@@ -46,7 +48,6 @@ function log_in()
     });
     //Si des validations ont échoué, on retourne à la page avec les erreurs
     if (!empty($invalid_inputs)) {
-        write_log('FORM_ERRORS');
         $_SESSION['form_errors'] = $input_validations;
         redirect('/');
     }
