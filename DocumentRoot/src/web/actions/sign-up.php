@@ -15,7 +15,7 @@ require_once __DIR__ . '/../../models/Notice.php';
 require_once __DIR__ . '/../utils.php';
 require_once __DIR__ . '/../password.php';
 
-require_once __DIR__ . '/../database/crud-users.php';
+require_once __DIR__ . '/../database/crud-accounts.php';
 
 /**
  * Crée un compte utilisateur si l'utilisateur n'existe pas déjà

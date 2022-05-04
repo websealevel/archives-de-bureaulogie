@@ -11,7 +11,7 @@ require_once __DIR__ . '/../../models/User.php';
 require_once __DIR__ . '/../../models/Notice.php';
 require_once __DIR__ . '/../database/connection.php';
 require_once __DIR__ . '/../router/router.php';
-require_once __DIR__ . '/queries_user.php';
+require_once __DIR__ . '/queries-accounts.php';
 
 /**
  * Insère un utilisateur en base de données
