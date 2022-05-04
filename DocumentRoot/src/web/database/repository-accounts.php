@@ -11,7 +11,7 @@ require_once __DIR__ . '/../../models/User.php';
 require_once __DIR__ . '/../../models/Notice.php';
 require_once __DIR__ . '/../database/connection.php';
 require_once __DIR__ . '/../router/router.php';
-require_once __DIR__ . '/queries-accounts.php';
+require_once __DIR__ . '/queries_account.php';
 
 /**
  * Insère un utilisateur en base de données
@@ -54,6 +54,7 @@ function log_user(array $credentials)
     }
 
     //Si trouvé, on check mdp, si pas ok, on rejette
+    dd($account);
 
     //Sinon on log
 

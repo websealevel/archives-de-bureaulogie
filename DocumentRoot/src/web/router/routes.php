@@ -20,7 +20,6 @@ function routes(): array
     return  array(
         'get' => array(
             '/' => function () {
-                start_session();
                 present_template('home');
             },
             '/sign-up' => function () {
@@ -28,6 +27,9 @@ function routes(): array
             },
             '/log-out' => function () {
                 present_template('log-out');
+            },
+            '/log-in' => function () {
+                present_template('home');
             }
         ),
         'post' => array(

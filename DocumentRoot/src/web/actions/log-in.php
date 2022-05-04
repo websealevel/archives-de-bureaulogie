@@ -11,7 +11,7 @@ require_once __DIR__ . '/../../models/FormInput.php';
 require_once __DIR__ . '/../../models/InputValidation.php';
 require_once __DIR__ . '/../../models/Notice.php';
 require_once __DIR__ . '/../utils.php';
-require_once __DIR__ . '/../database/crud-accounts.php';
+require_once __DIR__ . '/../database/repository-accounts.php';
 
 /**
  * Authentifie l'utilisateur
@@ -59,6 +59,8 @@ function log_in()
     );
 
     $result = log_user($credentials);
+
+    dd($result);
 
     //On regenere le sessions id.
     session_regenerate_id(true);
