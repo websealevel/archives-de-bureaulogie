@@ -127,16 +127,3 @@ function login_user_session($account)
     error_log_login_success($account);
 }
 
-/**
- * Supprime le compte utilisateur en session
- * @global array $_SESSION
- * @return void
- */
-function logout_user_session()
-{
-    if (!isset($_SESSION))
-        throw new Exception("Aucune session n'est ouverte");
-
-    unset($_SESSION['user_authentificated']);
-    unset($_SESSION['pseudo']);
-}

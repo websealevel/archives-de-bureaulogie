@@ -14,7 +14,10 @@ if (!is_current_user_logged_in())
 ?>
 
 <h2>Bienvenue !</h2>
+<ul>
+    <li><a href="">Éditer un extrait</a></li>
+    <li><a href="">Télécharger une nouvelle source</a></li>
+</ul>
 
-<a href="">Éditer un extrait</a>
-<a href="">Télécharger une nouvelle source</a>
+
 <a href="/log-out">Se déconnecter</a>
