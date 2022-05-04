@@ -36,15 +36,13 @@ function create_account(User $user): string|bool
 /**
  * Authentifie un compte utilisateur à partir de son pseudo/email et mot de passe
  * Retourne l'id de l'utilisateur s'il existe, 
- * @param array $credentials Les credentials POSTé par l'user (pseudo/email, mot de passe)
+ * @param Credentials $credentials Les credentials POSTé par l'user (pseudo/email, mot de passe)
  */
-function log_user(array $credentials)
+function log_user(Credentials $credentials)
 {
 
-    $pseudo = $credentials['login'];;
-
     try {
-        $account = sql_find_account_by_pseudo($pseudo);
+        $account = sql_find_account_by_pseudo($credentials->login);
     } catch (PDOException $e) {
         error_log($e);
         $_SESSION['notices'] = array(

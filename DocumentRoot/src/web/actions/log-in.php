@@ -10,6 +10,7 @@
 require_once __DIR__ . '/../../models/FormInput.php';
 require_once __DIR__ . '/../../models/InputValidation.php';
 require_once __DIR__ . '/../../models/Notice.php';
+require_once __DIR__ . '/../../models/Credentials.php';
 require_once __DIR__ . '/../utils.php';
 require_once __DIR__ . '/../database/repository-accounts.php';
 
@@ -53,9 +54,9 @@ function log_in()
     }
 
     //On tente de log
-    $credentials = array(
-        'login' => $input_validations['login']->value,
-        'password ' => my_hash_password($input_validations['password']->value)
+    $credentials = new Credentials(
+        $input_validations['login']->value,
+        my_hash_password($input_validations['password']->value)
     );
 
     $result = log_user($credentials);
