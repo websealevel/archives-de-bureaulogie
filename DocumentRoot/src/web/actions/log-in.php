@@ -60,6 +60,8 @@ function log_in()
 
     $result = log_user($credentials);
 
+    var_dump($result);
+    die;
     dd($result);
 
     //On regenere le sessions id.
