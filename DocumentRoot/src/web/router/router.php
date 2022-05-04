@@ -32,16 +32,22 @@ function resolve()
  * @param string $path La route vers laquelle rediriger
  * @param string $session_key La clé sous laquelle enregistrer les données à mettre en session
  * @param array $data Les données à enregistrer en session
+ * @param string $refresh Indiquer un temps avant de rediriger. Default 0
  * @global array $_SESSION
  * @see Routes, Router
  * @return void
  */
-function redirect(string $path, string $session_key ='', array $data = array())
+function redirect(string $path, string $session_key = '', array $data = array(), int $refresh = 0)
 {
     if (!empty($session_key) && !empty($data) && isset($_SESSION)) {
         $_SESSION[$session_key] = $data;
     }
-    header('Location: ' . $path);
+
+    if (0 === $refresh)
+        header('Location: ' . $path);
+    else
+        header("refresh:{$refresh};url={$path}");
+
     exit;
 }
 

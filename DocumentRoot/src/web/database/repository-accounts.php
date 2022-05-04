@@ -13,6 +13,7 @@ require_once __DIR__ . '/../database/connection.php';
 require_once __DIR__ . '/../router/router.php';
 require_once __DIR__ . '/queries-accounts.php';
 require_once __DIR__ . '/../utils.php';
+require_once __DIR__ . '/../session.php';
 require_once __DIR__ . '/../log.php';
 
 /**
@@ -62,7 +63,7 @@ function log_user(Credentials $credentials)
         throw new Exception("Passwords ne sont pas au format attendu de chaine de caractères.");
     }
 
-    
+
     //Si trouvé, on check mdp, si pas ok, on rejette
     if (!password_verify($credentials->password, $account->password)) {
         error_log_login_failed($credentials);
@@ -71,5 +72,9 @@ function log_user(Credentials $credentials)
         ));
     }
 
-    dd("Bonjour " . $account->pseudo);
+    //Compte authentifié
+    login_user_session($account);
+
+    //Redirige vers la page d'accueil authentifié.
+    redirect('/', refresh: 5);
 }

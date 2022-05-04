@@ -33,6 +33,30 @@ if (!function_exists('write_log')) {
  */
 function error_log_login_failed(Credentials $credentials): void
 {
-    $message = sprintf("Tentative de connexion échouée: login: %s - IP: %s - date: %s", $credentials->login, $_SERVER['REMOTE_ADDR'], date('Y-m-d H:i:s'));
+    $message = sprintf("Tentative d'authentification échouée: login: %s - IP: %s - date: %s", $credentials->login, $_SERVER['REMOTE_ADDR'], date('Y-m-d H:i:s'));
+    error_log($message);
+}
+
+/**
+ * Log une authentification réussie
+ * @param stdClass $account Les infos du compte authentifié
+ * @global array $_SERVER
+ * @return void
+ */
+function error_log_login_success($account): void
+{
+    $message = sprintf("Authentification réussie: login: %s - IP: %s - date: %s", $account->pseudo, $_SERVER['REMOTE_ADDR'], date('Y-m-d H:i:s'));
+    error_log($message);
+}
+
+/**
+ * Log un logout réussi
+ * @param stdClass $account Les infos du compte authentifié
+ * @global array $_SERVER
+ * @return void
+ */
+function error_log_out_success($account): void
+{
+    $message = sprintf("Logout: login: %s - IP: %s - date: %s", $account->pseudo, $_SERVER['REMOTE_ADDR'], date('Y-m-d H:i:s'));
     error_log($message);
 }
