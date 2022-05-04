@@ -87,6 +87,6 @@ function sign_up_user()
     //On renvoie l'utilisateur vers la home avec un message
     session_unset();
     redirect('/', 'notices', array(
-        new Notice("Féliciations, vous êtes désormais inscrit⸱e à l'Université Libre de Bureaulogie ! Vous pouvez désormais nous aider à faire connaître la bureaulogie.", NoticeStatus::Success)
+        new Notice("Féliciations, vous êtes désormais inscrit⸱e. Vous pouvez vous connecter et contribuer aux archives de la bureaulogie.", NoticeStatus::Success)
     ));
 }

@@ -29,10 +29,10 @@ if (!function_exists('write_log')) {
  * Log une tentative échouée de login
  * @param Credentials $credentials Les credentials POSTé par l'utilisateur
  * @global array $_SERVER
+ * @return void
  */
-function error_log_login_failed(Credentials $credentials)
+function error_log_login_failed(Credentials $credentials): void
 {
-
-    dump('Tentative de connexion échouée');
-    dump($credentials);
+    $message = sprintf("Tentative de connexion échouée: login: %s - IP: %s - date: %s", $credentials->login, $_SERVER['REMOTE_ADDR'], date('Y-m-d H:i:s'));
+    error_log($message);
 }

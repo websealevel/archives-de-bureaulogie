@@ -62,9 +62,9 @@ function log_user(Credentials $credentials)
         throw new Exception("Passwords ne sont pas au format attendu de chaine de caractères.");
     }
 
-
+    
     //Si trouvé, on check mdp, si pas ok, on rejette
-    if (0 !== strcmp($credentials->password, $account->password)) {
+    if (!password_verify($credentials->password, $account->password)) {
         error_log_login_failed($credentials);
         redirect('/', 'notices', array(
             new Notice("Vos identifiants ne sont pas corrects, veuillez réessayer s'il vous plait", NoticeStatus::Error)
@@ -72,7 +72,4 @@ function log_user(Credentials $credentials)
     }
 
     dd("Bonjour " . $account->pseudo);
-    //Sinon on log
-
-
 }

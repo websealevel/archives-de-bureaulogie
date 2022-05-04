@@ -21,10 +21,9 @@ require_once __DIR__ . '/../database/repository-accounts.php';
  */
 function log_in()
 {
-    // start_session();
+    session_start();
 
     $form_inputs = array(
-
         new FormInput('login', $_POST['login'], function (string $login): InputValidation {
             if (empty($login))
                 return new InputValidation('login', $login, 'Veuillez fournir votre pseudo pour vous identifiez.');
@@ -38,7 +37,6 @@ function log_in()
 
             return new InputValidation('password', $password, '', InputStatus::Valid);
         }),
-
     );
 
     $input_validations = validate_posted_form($form_inputs);
@@ -48,21 +46,17 @@ function log_in()
         return InputStatus::Invalid === $input->status;
     });
     //Si des validations ont échoué, on retourne à la page avec les erreurs
-    if (!empty($invalid_inputs)) {
-        $_SESSION['form_errors'] = $input_validations;
-        redirect('/');
-    }
+    if (!empty($invalid_inputs))
+        redirect('/', 'form_errors', $input_validations);
 
     //On tente de log
     $credentials = new Credentials(
         $input_validations['login']->value,
         $input_validations['password']->value,
-        my_hash_password($input_validations['password']->value)
     );
 
     $result = log_user($credentials);
 
-
-    //On regenere le sessions id.
+    //On regenere le sessions id (security).
     session_regenerate_id(true);
 }

@@ -14,7 +14,6 @@ class Credentials
 
         public string $login,
         public string $password,
-        public string $password_hashed,
     ) {
     }
 }
