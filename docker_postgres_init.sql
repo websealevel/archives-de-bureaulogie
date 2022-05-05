@@ -1,6 +1,7 @@
 CREATE TABLE roles(
     role_id serial PRIMARY KEY,
-    role_name VARCHAR (255) UNIQUE NOT NULL
+    role VARCHAR (255) UNIQUE NOT NULL,
+    role_label VARCHAR (255) NOT NULL
 );
 
 CREATE TABLE capabilities (
@@ -11,7 +12,7 @@ CREATE TABLE capabilities (
 
 CREATE TABLE accounts (
     id serial PRIMARY KEY,
-    role_id INT NOT NULL,
+    role VARCHAR(255) NOT NULL,
     pseudo VARCHAR (50) UNIQUE NOT NULL,
     password VARCHAR (255) NOT NULL,
     email VARCHAR (255) UNIQUE NOT NULL,
@@ -20,25 +21,26 @@ CREATE TABLE accounts (
     has_reached_majority BOOLEAN NOT NULL,
     has_accepted_the_chart BOOLEAN NOT NULL,
     heard_about_bureaulogy VARCHAR(255),
-    FOREIGN KEY (role_id) REFERENCES roles (role_id)
+    CONSTRAINT fk_role FOREIGN KEY (role) REFERENCES roles (role)
 );
 
 -- Table de jointure roles-capabilities.
 CREATE TABLE roles_capabilities (
-    role_id INT NOT NULL,
-    cap_id INT NOT NULL,
-    PRIMARY KEY (role_id, cap_id),
-    FOREIGN KEY (role_id) REFERENCES roles (role_id)
+    role INT NOT NULL,
+    cap INT NOT NULL,
+    PRIMARY KEY (role, cap),
+    CONSTRAINT fk_cap FOREIGN KEY (cap) REFERENCES capabilites(cap),
+    CONSTRAINT fk_role FOREIGN KEY (role) REFERENCES roles(role)
 );
 
 -- Inserer les roles.
 INSERT INTO
-    roles(role_name)
+    roles(role, role_label)
 VALUES
-    ('superadmin'),
-    ('admin'),
-    ('moderateur'),
-    ('contributeur');
+    ('superadmin', 'super administrateur'),
+    ('admin', 'administrateur'),
+    ('moderateur', 'modérateur'),
+    ('contributeur', 'contributeur');
 
 -- Inserer les capabilites.
 INSERT INTO
@@ -77,6 +79,11 @@ VALUES
         'list_all_sources',
         'Lister toutes les sources vidéos'
     );
+
+INSERT INTO
+    roles_capabilities(role, cap)
+VALUES
+    ('contributeur', 'list_all_sources');
 
 -- - superadmin
 --   - tous les droits admin
