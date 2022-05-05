@@ -1,18 +1,18 @@
 CREATE TABLE roles(
-    role_id serial PRIMARY KEY,
+    role_id INT PRIMARY KEY,
     role VARCHAR (255) UNIQUE NOT NULL,
     role_label VARCHAR (255) NOT NULL
 );
 
 CREATE TABLE capabilities (
-    cap_id serial PRIMARY KEY,
+    cap_id INT PRIMARY KEY,
     cap VARCHAR (255) UNIQUE NOT NULL,
     cap_label VARCHAR (255) NOT NULL
 );
 
 CREATE TABLE accounts (
     id serial PRIMARY KEY,
-    role VARCHAR(255) NOT NULL,
+    role_id INT NOT NULL,
     pseudo VARCHAR (50) UNIQUE NOT NULL,
     password VARCHAR (255) NOT NULL,
     email VARCHAR (255) UNIQUE NOT NULL,
@@ -21,70 +21,111 @@ CREATE TABLE accounts (
     has_reached_majority BOOLEAN NOT NULL,
     has_accepted_the_chart BOOLEAN NOT NULL,
     heard_about_bureaulogy VARCHAR(255),
-    CONSTRAINT fk_role FOREIGN KEY (role) REFERENCES roles (role)
+    CONSTRAINT fk_role FOREIGN KEY (role_id) REFERENCES roles (role_id)
 );
 
 -- Table de jointure roles-capabilities.
 CREATE TABLE roles_capabilities (
-    role INT NOT NULL,
-    cap INT NOT NULL,
-    PRIMARY KEY (role, cap),
-    CONSTRAINT fk_cap FOREIGN KEY (cap) REFERENCES capabilites(cap),
-    CONSTRAINT fk_role FOREIGN KEY (role) REFERENCES roles(role)
+    role_id INT NOT NULL,
+    cap_id INT NOT NULL,
+    PRIMARY KEY (role_id, cap_id),
+    CONSTRAINT fk_cap FOREIGN KEY (cap_id) REFERENCES capabilities(cap_id),
+    CONSTRAINT fk_role FOREIGN KEY (role_id) REFERENCES roles(role_id)
 );
 
 -- Inserer les roles.
 INSERT INTO
-    roles(role, role_label)
+    roles(role_id, role, role_label)
 VALUES
-    ('superadmin', 'super administrateur'),
-    ('admin', 'administrateur'),
-    ('moderateur', 'modérateur'),
-    ('contributeur', 'contributeur');
+    (1, 'superadmin', 'super administrateur'),
+    (2, 'admin', 'administrateur'),
+    (3, 'moderateur', 'modérateur'),
+    (4, 'contributeur', 'contributeur');
 
 -- Inserer les capabilites.
 INSERT INTO
-    capabilities(cap, cap_label)
+    capabilities(cap_id, cap, cap_label)
 VALUES
-    ('add_admin', 'Ajouter un compte administrateur'),
-    ('add_moderator', 'Ajouter un compte modérateur'),
     (
+        1,
+        'add_admin',
+        'Ajouter un compte administrateur'
+    ),
+    (
+        2,
+        'add_moderator',
+        'Ajouter un compte modérateur'
+    ),
+    (
+        3,
         'edit_all_references',
         'Éditer les références bibliographiques de tout le monde'
     ),
     (
+        4,
         'list_all_references',
         'Lister les références bibliographiques de tout le monde'
     ),
     (
+        5,
         'list_all_clips',
         'Lister les extraits vidéos de tout le monde'
     ),
-    ('add_source', 'Ajouter une vidéo source'),
-    ('remove_source', 'Supprimer une vidéo source'),
-    ('remove_clip', 'Supprimer un clip'),
-    ('mod_references', 'Modérer les références'),
-    ('mod_clips', 'Modérer les extraits vidéos'),
-    ('submit_clip', 'Proposer un extrait vidéo'),
-    ('submit_reference', 'Proposer une référence'),
     (
+        6,
+        'add_source',
+        'Ajouter une vidéo source'
+    ),
+    (
+        7,
+        'remove_source',
+        'Supprimer une vidéo source'
+    ),
+    (
+        8,
+        'remove_clip',
+        'Supprimer un clip'
+    ),
+    (
+        9,
+        'mod_references',
+        'Modérer les références'
+    ),
+    (
+        10,
+        'mod_clips',
+        'Modérer les extraits vidéos'
+    ),
+    (
+        11,
+        'submit_clip',
+        'Proposer un extrait vidéo'
+    ),
+    (
+        12,
+        'submit_reference',
+        'Proposer une référence'
+    ),
+    (
+        13,
         'list_my_references',
         'Lister toutes ses références soumises (approuvées ou non'
     ),
     (
+        14,
         'list_my_clips',
         'Lister tous ses extraits vidéos approuvés'
     ),
     (
+        15,
         'list_all_sources',
         'Lister toutes les sources vidéos'
     );
 
-INSERT INTO
-    roles_capabilities(role, cap)
-VALUES
-    ('contributeur', 'list_all_sources');
-
+-- INSERT INTO
+--     roles_capabilities(role, cap)
+-- VALUES
+--     ('contributeur', 'list_all_sources');
 -- - superadmin
 --   - tous les droits admin
 --   - ajouter un admin
