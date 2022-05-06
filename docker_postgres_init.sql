@@ -120,6 +120,21 @@ VALUES
         15,
         'list_all_sources',
         'Lister toutes les sources vidéos'
+    ),
+    (
+        16,
+        'ban_contributor',
+        'Bannir un compte contributeur'
+    ),
+    (
+        17,
+        'ban_moderator',
+        'Bannir un compte modérateur'
+    ),
+    (
+        18,
+        'ban_admin',
+        'Bannir un compte administrateur'
     );
 
 INSERT INTO
@@ -142,8 +157,11 @@ VALUES
     (2, 6),
     (2, 7),
     (2, 8),
+    (2, 16),
+    (2, 17),
     -- superadmin
-    (1, 1);
+    (1, 1),
+    (1, 17);
 
 -- Roles et capabilities
 -- - superadmin
