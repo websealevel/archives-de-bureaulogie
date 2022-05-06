@@ -72,8 +72,8 @@ require_once __DIR__ . '/../session.php';
     <input type="submit" value="Créer mon compte">
 </form>
 <p>
-<p>Par soucis écologique nous ne vous enverrons aucun mail sauf éventuellement pour vous tenir informé de vos contributions</p>
-<p>Par souci de sécurité, et en accord avec les principes de la bureaulogie, vous n'aurez pas la possibilité de recouvrir votre mot de passe en cas de perte. Conservez le soigneusement sur votre bureau.</p>
+<p>Par soucis écologique nous ne vous enverrons aucun mail, sauf pour vous tenir informé·e de vos éventuelles contributions.</p>
+<p>Par mesure de sécurité, et en accord avec les principes de la bureaulogie, vous n'aurez pas la possibilité de recouvrir votre mot de passe en cas de perte. Conservez le soigneusement sur votre bureau.</p>
 <a href="/politique-de-confidentialite">Que fait {XXX} de mes données personnelles ? </a>
 </p>
 
