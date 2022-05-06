@@ -37,7 +37,7 @@ if (!function_exists('write_log')) {
  */
 function error_log_login_failed(Credentials $credentials): void
 {
-    $message = sprintf("Tentative d'authentification échouée: login: %s - IP: %s - date: %s", $credentials->login, $_SERVER['REMOTE_ADDR'], date('Y-m-d H:i:s'));
+    $message = sprintf("Tentative d'authentification échouée: LOGIN: %s - IP: %s - DATE: %s", $credentials->login, $_SERVER['REMOTE_ADDR'], date('Y-m-d H:i:s'));
     error_log($message);
     return;
 }
@@ -50,7 +50,7 @@ function error_log_login_failed(Credentials $credentials): void
  */
 function error_log_login_success($account): void
 {
-    $message = sprintf("Authentification réussie: login: %s - IP: %s - date: %s", $account->pseudo, $_SERVER['REMOTE_ADDR'], date('Y-m-d H:i:s'));
+    $message = sprintf("Authentification réussie: LOGIN: %s - IP: %s - DATE: %s", $account->pseudo, $_SERVER['REMOTE_ADDR'], date('Y-m-d H:i:s'));
     error_log($message);
     return;
 }
@@ -58,12 +58,13 @@ function error_log_login_success($account): void
 /**
  * Log un logout réussi
  * @param string $login
+ * @param Notice $notice
  * @global array $_SERVER
  * @return void
  */
 function error_log_out_success(string $login, Notice $notice): void
 {
-    $message = sprintf("Logout: status: %s login: %s - IP: %s - date: %s", $notice->status, $login, $_SERVER['REMOTE_ADDR'], date('Y-m-d H:i:s'));
+    $message = sprintf("Logout: STATUS: %s - LOGIN: %s - IP: %s - DATE: %s", $notice->status->value, $login, $_SERVER['REMOTE_ADDR'], date('Y-m-d H:i:s'));
     error_log($message);
     return;
 }

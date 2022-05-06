@@ -23,6 +23,7 @@ function is_current_user_logged_in(): bool
 
 /**
  * Retourne vrai si l'utilisateur en session peut effectuer cette action, faux sinon. Certaines actions demandent à nouveau de s'authentifier.
+ * @return bool
  */
 function current_user_can(): bool
 {

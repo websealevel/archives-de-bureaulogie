@@ -22,15 +22,7 @@ set_exception_handler(function ($e) {
 
     error_log("=> type: " . $errorType . " code : " . $e->getCode() . " message: " . $e->getMessage() . " trace: " . $e->getTraceAsString());
 
-    return;
-    //Deconnecte l'utilisateur en session, redirige vers la page d'accueil
-    $notice = new Notice("Une erreur est survenue, vous avez été déconnecté. Veuillez nous en excusez.", NoticeStatus::ExceptionThrown);
-    if (!isset($_SESSION))
-        log_out($notice);
-    else
-        redirect('/', 'notices', array(
-            $notice
-        ));
+    fails_gracefully();
 });
 
 //Global Error handler.
@@ -42,3 +34,23 @@ set_error_handler(function ($errno, $errstr, $errfile, $errline) {
     }
     throw new \ErrorException($errstr, $errno, 0, $errfile, $errline);
 });
+
+/**
+ * Deconnecte l'utilisateur en session, redirige vers la page d'accueil.
+ * @return void
+ * @global $_SESSION
+ */
+function fails_gracefully()
+{
+    //Fails gracefully : 
+    $notice = new Notice("Oups, une erreur est survenue et vous avez été déconnecté. Veuillez nous en excusez.", NoticeStatus::ExceptionThrown);
+
+    if (!isset($_SESSION)) {
+        log_out($notice);
+    } else {
+        dump('un-authentificated fails_gracefully');
+        redirect('/', 'notices', array(
+            $notice
+        ));
+    }
+}

@@ -8,7 +8,7 @@
  * @package wsl 
  */
 
-require __DIR__ . '/routes.php';
+require_once __DIR__ . '/routes.php';
 
 
 /**
@@ -43,10 +43,11 @@ function redirect(string $path, string $session_key = '', array $data = array(),
         $_SESSION[$session_key] = $data;
     }
 
-    if (0 === $refresh)
+    if (0 === $refresh) {
         header('Location: ' . $path);
-    else
+    } else{
         header("refresh:{$refresh};url={$path}");
+    }
 
     exit;
 }
