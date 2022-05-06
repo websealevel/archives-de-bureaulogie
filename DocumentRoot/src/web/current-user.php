@@ -7,6 +7,8 @@
  */
 
 
+require_once __DIR__ . '/roles-caps.php';
+
 /**
  * Retourne vrai si l'utilisateur courant est connecté, faux sinon
  * @return bool

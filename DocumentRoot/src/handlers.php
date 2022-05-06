@@ -48,7 +48,6 @@ function fails_gracefully()
     if (!isset($_SESSION)) {
         log_out($notice);
     } else {
-        dump('un-authentificated fails_gracefully');
         redirect('/', 'notices', array(
             $notice
         ));

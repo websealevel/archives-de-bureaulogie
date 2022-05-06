@@ -7,7 +7,7 @@
  * @package wsl 
  */
 
-require_once __DIR__ . '/../models/enumRoles.php';
+require_once __DIR__ . '/../models/enumRolesId.php';
 
 /**
  * Retourne vrai si une capacité existe, lève une exception sinon (erreur 500)
@@ -15,8 +15,7 @@ require_once __DIR__ . '/../models/enumRoles.php';
  * @return bool 
  * @throws Exception - Si la capacité n'existe pas en base.
  */
-function is_cap_defined(string $cap):bool
+function is_cap_defined(string $cap): bool
 {
-
-    $result = 
+    return false;
 }
