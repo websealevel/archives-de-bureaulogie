@@ -47,13 +47,14 @@ require_once __DIR__ . '/../session.php';
     </div>
 
     <div>
-        <label for="heard_about_bureaulogy">Comment avez-vous connu la bureaulogie ?</label>
+        <label for="heard_about_bureaulogy">Comment avez-vous découvert la bureaulogie ?</label>
         <select name="heard_about_bureaulogy" id="">
             <option hidden disabled selected value> -- choisir une réponse -- </option>
-            <option value="tribunal_des_bureaux">Au tribunal des bureaux</option>
-            <option value="seminaire">En assistant à un séminaire</option>
-            <option value="par_un_proche">Par un proche</option>
-            <option value="unknow">Je ne souhaite pas répondre</option>
+            <option value="tribunal_des_bureaux">au tribunal</option>
+            <option value="par_un_proche">oui, exactement</option>
+            <option value="par_un_proche">pas tout à fait</option>
+            <option value="unknow">je ne souhaite pas répondre</option>
+            <option value="unknow"><i>je ne connais pas la bureaulogie</i></option>
         </select>
     </div>
 

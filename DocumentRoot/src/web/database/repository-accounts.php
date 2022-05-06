@@ -21,10 +21,10 @@ require_once __DIR__ . '/../log.php';
  * @param User $user
  * @return string|bool L'id de l'utilisateur inséré
  */
-function create_account(User $user): string|bool
+function create_account(User $user, string $role = 'contributeur'): string|bool
 {
     try {
-        $id = sql_insert_account($user->pseudo, $user->password, $user->email);
+        $id = sql_insert_account($user->pseudo, $user->password, $user->email, $role);
     } catch (PDOException $e) {
         error_log($e);
         redirect('/sign-up', 'notices', array(

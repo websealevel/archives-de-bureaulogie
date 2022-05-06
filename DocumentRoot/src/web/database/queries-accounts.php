@@ -19,16 +19,15 @@ require_once __DIR__ . '/queries-roles-capabilities.php';
  * @return int L'id du compte crée
  * @throws PDOException $e
  */
-function sql_insert_account(string $pseudo, string $password, string $email, string $role = 'contributeur2')
+function sql_insert_account(string $pseudo, string $password, string $email, string $role = 'contributeur')
 {
     $db = connect_to_db();
 
-    $role_id = sql_find_role_id_by_name($role);
-    if (!$role_id) {
+    $result = sql_find_role_id_by_name($role);
+
+    if (!$result) {
         throw new Exception(sprintf("Le role %s n'existe pas", $role));
     }
-
-    dd($role, $role_id);
 
     $sql = 'INSERT INTO accounts(
             pseudo, 
@@ -61,7 +60,7 @@ function sql_insert_account(string $pseudo, string $password, string $email, str
     $stmt->bindValue(':has_reached_majority', true);
     $stmt->bindValue(':has_accepted_the_chart', true);
     $stmt->bindValue(':heard_about_bureaulogy', 'tribunal_des_bureaux');
-    $stmt->bindValue(':role_id', $role_id);
+    $stmt->bindValue(':role_id', $result->role_id);
 
     $stmt->execute();
 
