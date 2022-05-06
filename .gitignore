@@ -17,4 +17,3 @@ DocumentRoot/web/.env
 DocumentRoot/web/.env_db
 DocumentRoot/debug.log
 postgres-data/
-Specs.md
