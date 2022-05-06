@@ -135,6 +135,16 @@ VALUES
         18,
         'ban_admin',
         'Bannir un compte administrateur'
+    ),
+    (
+        19,
+        'downgrade_admin',
+        'Changer le role d un admin à un role plus bas'
+    ),
+    (
+        20,
+        'downgrade_moderator',
+        'Changer le role d un modérateur à un role plus bas'
     );
 
 INSERT INTO
@@ -149,6 +159,7 @@ VALUES
     -- Modérateur
     (3, 9),
     (3, 10),
+    (3, 16),
     -- Admin
     (2, 2),
     (2, 3),
@@ -159,13 +170,17 @@ VALUES
     (2, 8),
     (2, 16),
     (2, 17),
+    (2, 20),
     -- superadmin
     (1, 1),
-    (1, 17);
+    (1, 17),
+    (1, 18),
+    (1, 19);
 
 -- Roles et capabilities
 -- - superadmin
 --   - ajouter un admin
+--   - changer le role de admin à modérateur
 -- - admin 
 --   - ajouter un modérateur
 --   - éditer ressources bilbio de tout le monde
@@ -173,7 +188,8 @@ VALUES
 --   - lister tous les extraits
 --   - ajouter une source
 --   - supprimer une source
---   - supprimer un extrait
+--   - bannir le compte modérateur/contributeur
+--   - changer le role de modérateur vers contributeur
 -- - modérateur
 --   - modérer une ressource biblio
 --   - modérer un extrait vidéo
@@ -182,4 +198,3 @@ VALUES
 --   - proposer une ressource biblio
 --   - voir ses extraits vidéos par source
 --   - voir ses ressources biblios
---   - voir toutes les vidéos sources
