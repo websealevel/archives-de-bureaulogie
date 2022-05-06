@@ -8,6 +8,7 @@
  */
 
 require_once __DIR__ . '/../current-user.php';
+require_once __DIR__ . '/../roles-caps.php';
 
 if (!is_current_user_logged_in())
     redirect('/');
@@ -18,7 +19,10 @@ if (!is_current_user_logged_in())
 <h3>Archives vidéos</h3>
 
 <ul>
+    <?php if current_user_can('submit_clip') :  ?>
     <li><a href="clip">Créer un nouvel extrait</a></li>
+    <?php endif;  ?>
+
 </ul>
 
 <h3>Archives bibliographiques</h3>

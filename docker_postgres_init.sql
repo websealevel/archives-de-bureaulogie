@@ -7,7 +7,8 @@ CREATE TABLE roles(
 CREATE TABLE capabilities (
     cap_id INT PRIMARY KEY,
     cap VARCHAR (255) UNIQUE NOT NULL,
-    cap_label VARCHAR (255) NOT NULL
+    cap_label VARCHAR (255) NOT NULL,
+    require_authentification_check BOOLEAN NOT NULL
 );
 
 CREATE TABLE accounts (
@@ -44,107 +45,132 @@ VALUES
 
 -- Inserer les capabilites.
 INSERT INTO
-    capabilities(cap_id, cap, cap_label)
+    capabilities(
+        cap_id,
+        cap,
+        cap_label,
+        require_authentification_check
+    )
 VALUES
     (
         1,
         'add_admin',
-        'Ajouter un compte administrateur'
+        'Ajouter un compte administrateur',
+        true
     ),
     (
         2,
         'add_moderator',
-        'Ajouter un compte modérateur'
+        'Ajouter un compte modérateur',
+        true
     ),
     (
         3,
         'edit_all_references',
-        'Éditer les références bibliographiques de tout le monde'
+        'Éditer les références bibliographiques de tout le monde',
+        false
     ),
     (
         4,
         'list_all_references',
-        'Lister les références bibliographiques de tout le monde'
+        'Lister les références bibliographiques de tout le monde',
+        false
     ),
     (
         5,
         'list_all_clips',
-        'Lister les extraits vidéos de tout le monde'
+        'Lister les extraits vidéos de tout le monde',
+        false
     ),
     (
         6,
         'add_source',
-        'Ajouter une vidéo source'
+        'Ajouter une vidéo source',
+        true
     ),
     (
         7,
         'remove_source',
-        'Supprimer une vidéo source'
+        'Supprimer une vidéo source',
+        true
     ),
     (
         8,
         'remove_clip',
-        'Supprimer un clip'
+        'Supprimer un clip',
+        false
     ),
     (
         9,
         'mod_references',
-        'Modérer les références'
+        'Modérer les références',
+        false
     ),
     (
         10,
         'mod_clips',
-        'Modérer les extraits vidéos'
+        'Modérer les extraits vidéos',
+        false
     ),
     (
         11,
         'submit_clip',
-        'Proposer un extrait vidéo'
+        'Proposer un extrait vidéo',
+        false
     ),
     (
         12,
         'submit_reference',
-        'Proposer une référence'
+        'Proposer une référence',
+        false
     ),
     (
         13,
         'list_my_references',
-        'Lister toutes ses références soumises (approuvées ou non)'
+        'Lister toutes ses références soumises (approuvées ou non)',
+        false
     ),
     (
         14,
         'list_my_clips',
-        'Lister tous ses extraits vidéos approuvés'
+        'Lister tous ses extraits vidéos approuvés',
+        false
     ),
     (
         15,
         'list_all_sources',
-        'Lister toutes les sources vidéos'
+        'Lister toutes les sources vidéos',
+        false
     ),
     (
         16,
         'ban_contributor',
-        'Bannir un compte contributeur'
+        'Bannir un compte contributeur',
+        true
     ),
     (
         17,
         'ban_moderator',
-        'Bannir un compte modérateur'
+        'Bannir un compte modérateur',
+        true
     ),
     (
         18,
         'ban_admin',
-        'Bannir un compte administrateur'
+        'Bannir un compte administrateur',
+        true
     ),
     (
         19,
         'downgrade_admin',
-        'Changer le role d un admin à un role plus bas'
+        'Changer le role d un admin à un role plus bas',
+        true
     ),
     (
         20,
         'downgrade_moderator',
-        'Changer le role d un modérateur à un role plus bas'
+        'Changer le role d un modérateur à un role plus bas',
+        true
     );
 
 INSERT INTO
