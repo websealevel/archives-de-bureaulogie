@@ -109,7 +109,7 @@ VALUES
     (
         13,
         'list_my_references',
-        'Lister toutes ses références soumises (approuvées ou non'
+        'Lister toutes ses références soumises (approuvées ou non)'
     ),
     (
         14,
@@ -122,15 +122,33 @@ VALUES
         'Lister toutes les sources vidéos'
     );
 
--- INSERT INTO
---     roles_capabilities(role, cap)
--- VALUES
---     ('contributeur', 'list_all_sources');
+INSERT INTO
+    roles_capabilities(role_id, cap_id)
+VALUES
+    -- Contributeur
+    (4, 11),
+    (4, 12),
+    (4, 13),
+    (4, 14),
+    (4, 15),
+    -- Modérateur
+    (3, 9),
+    (3, 10),
+    -- Admin
+    (2, 2),
+    (2, 3),
+    (2, 4),
+    (2, 5),
+    (2, 6),
+    (2, 7),
+    (2, 8),
+    -- superadmin
+    (1, 1);
+
+-- Roles et capabilities
 -- - superadmin
---   - tous les droits admin
 --   - ajouter un admin
 -- - admin 
---   - tous les droits modérateur
 --   - ajouter un modérateur
 --   - éditer ressources bilbio de tout le monde
 --   - lister toutes les ressources biblio
