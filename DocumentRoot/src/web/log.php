@@ -8,6 +8,10 @@
  * @package wsl 
  */
 
+
+require_once __DIR__ . '/../models/Credentials.php';
+require_once __DIR__ . '/../models/Notice.php';
+
 if (!function_exists('write_log')) {
 
     /**Ecrit un log
@@ -35,6 +39,7 @@ function error_log_login_failed(Credentials $credentials): void
 {
     $message = sprintf("Tentative d'authentification échouée: login: %s - IP: %s - date: %s", $credentials->login, $_SERVER['REMOTE_ADDR'], date('Y-m-d H:i:s'));
     error_log($message);
+    return;
 }
 
 /**
@@ -47,6 +52,7 @@ function error_log_login_success($account): void
 {
     $message = sprintf("Authentification réussie: login: %s - IP: %s - date: %s", $account->pseudo, $_SERVER['REMOTE_ADDR'], date('Y-m-d H:i:s'));
     error_log($message);
+    return;
 }
 
 /**
@@ -55,8 +61,9 @@ function error_log_login_success($account): void
  * @global array $_SERVER
  * @return void
  */
-function error_log_out_success(string $login): void
+function error_log_out_success(string $login, Notice $notice): void
 {
-    $message = sprintf("Logout: login: %s - IP: %s - date: %s", $login, $_SERVER['REMOTE_ADDR'], date('Y-m-d H:i:s'));
+    $message = sprintf("Logout: status: %s login: %s - IP: %s - date: %s", $notice->status, $login, $_SERVER['REMOTE_ADDR'], date('Y-m-d H:i:s'));
     error_log($message);
+    return;
 }

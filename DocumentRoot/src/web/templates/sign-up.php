@@ -23,26 +23,26 @@ require_once __DIR__ . '/../session.php';
 
     <div>
         <label for="pseudo">Pseudonyme</label>
-        <input type="text" name="pseudo" value="<?php echo "foo";/*esc_html_from_session_e('form_errors', 'pseudo')*/ ?>" required>
+        <input type="text" name="pseudo" value="<?php echo "paul";/*esc_html_from_session_e('form_errors', 'pseudo')*/ ?>" required>
         <div class="error-message"><?php esc_html_form_error_msg_e('pseudo', 'form_errors') ?></div>
     </div>
 
     <div>
         <label for="email">Email</label>
-        <input type="email" name="email" value="<?php echo "foo@bar.com" /*esc_html_from_session_e('form_errors', 'email')*/ ?>" required>
+        <input type="email" name="email" value="<?php echo "contact@websealevel.com" /*esc_html_from_session_e('form_errors', 'email')*/ ?>" required>
         <div class="error-message"><?php esc_html_form_error_msg_e('email', 'form_errors') ?></div>
     </div>
 
     <div>
         <label for="password">Mot de passe</label>
-        <input type="password" name="password" required minlength="6" maxlength="12" value="123456">
+        <input type="password" name="password" required minlength="6" maxlength="12" value="password">
         <div class="error-message"><?php echo  esc_html_form_error_msg_e('password', 'form_errors') ?></div>
     </div>
 
 
     <div>
         <label for="password_confirmation">Confirmer votre mot de passe</label>
-        <input type="password" name="password_confirmation" required value="123456">
+        <input type="password" name="password_confirmation" required value="password">
         <div class="error-message"><?php esc_html_form_error_msg_e('password_confirmation', 'form_errors') ?></div>
     </div>
 

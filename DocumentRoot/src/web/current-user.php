@@ -6,6 +6,9 @@
  * @package wsl 
  */
 
+
+require_once __DIR__ . '/roles-caps.php';
+
 /**
  * Retourne vrai si l'utilisateur courant est connecté, faux sinon
  * @return bool
@@ -16,4 +19,12 @@ function is_current_user_logged_in(): bool
         throw new Exception("Aucune session active");
 
     return boolval($_SESSION['user_authentificated'] ?? false);
+}
+
+/**
+ * Retourne vrai si l'utilisateur en session peut effectuer cette action, faux sinon. Certaines actions demandent à nouveau de s'authentifier.
+ */
+function current_user_can(): bool
+{
+    return false;
 }

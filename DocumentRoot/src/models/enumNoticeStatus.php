@@ -11,4 +11,5 @@ enum NoticeStatus: string {
     case Success = 'success' ;
     case Error = 'error';
     case Warning = 'warning';
+    case ExceptionThrown = 'exception occured';
 }

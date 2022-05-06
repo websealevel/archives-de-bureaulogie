@@ -18,13 +18,13 @@ require_once __DIR__ . '/../log.php';
  * @return void
  * @global $_SESSION
  */
-function log_out()
+function log_out(Notice $notice = new Notice("Vous avez été déconnecté avec succès", NoticeStatus::Success))
 {
     session_start();
     $login = logout_user_session();
-    error_log_out_success($login);
+    error_log_out_success($login, $notice);
     redirect('/', 'notices', array(
-        new Notice("Vous avez été déconnecté avec succès", NoticeStatus::Success)
+        $notice
     ));
 }
 
