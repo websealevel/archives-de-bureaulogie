@@ -45,13 +45,11 @@ function current_user_can(string $cap): bool
     $authentificated_user_role = sql_find_role_of_account($authentificated_user_id);
 
     //Check si le role a la cap
-    dd($authentificated_user_role);
-
     if (!role_has_cap($authentificated_user_role, $cap)) {
         return false;
     }
 
-    return false;
+    return true;
 }
 
 /**
@@ -83,7 +81,7 @@ function confirm_current_user_identity(int $authentificated_user_id, string $pas
 
     //Redirige vers l'action
 
-    dd("Ok c'est bien toi, tu as le droit de fair ça.");
+    dd("Ok c'est bien toi, tu as le droit de faire ça.");
 
     return false;
 }
