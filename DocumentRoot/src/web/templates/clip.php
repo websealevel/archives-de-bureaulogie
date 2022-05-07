@@ -13,7 +13,6 @@ session_start();
 
 if (!current_user_can('submit_clip'))
     redirect('/');
-
 //Creer un extrait, post en AJAX via l'API de l'appli, réponse
 ?>
 
@@ -24,8 +23,8 @@ if (!current_user_can('submit_clip'))
 
 <p>Lore ipsum</p>
 
-<video width="320" height="240">
-    <source src="<?php echo sprintf("%s/%s.mp4", __DIR__, 'videos/test') ?>" type="video/mp4">
+<video width="320" height="240" controls>
+    <source src="<?php echo sprintf("%s/%s.mp4", __DIR__, 'the_hustle') ?>" type="video/mp4">
     Your browser does not support the video tag.
 </video>
 
