@@ -25,7 +25,7 @@ function log_out(Notice $notice = new Notice("Vous avez été déconnecté avec 
     error_log_out_success($login, $notice);
     redirect('/', 'notices', array(
         $notice
-    ), 3);
+    ));
 }
 
 /**

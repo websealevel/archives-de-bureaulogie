@@ -34,7 +34,6 @@ function cap_exists(string $cap): bool
  */
 function role_has_cap(string $role, string $cap): bool
 {
-    dd($role, $cap);
 
     return false;
 }

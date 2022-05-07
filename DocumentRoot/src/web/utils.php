@@ -15,7 +15,7 @@ require_once __DIR__ . '/log.php';
  */
 function site_title(): string
 {
-    return 'Archives bureaulogiques';
+    return 'Archives de Bureaulogie';
 }
 
 /**
