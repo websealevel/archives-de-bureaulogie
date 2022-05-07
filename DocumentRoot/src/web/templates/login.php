@@ -8,6 +8,7 @@
 
 require_once __DIR__ . '/../utils.php';
 require_once __DIR__ . '/../session.php';
+require_once __DIR__ . '/../environment.php';
 
 ?>
 
@@ -31,7 +32,9 @@ require_once __DIR__ . '/../session.php';
     </form>
 </div>
 
-<div class="sign-up">
-    <p>Pas encore de compte ? <a href="sign-up">S'inscrire</a></p>
-</div>
+<?php if (is_signup_activated()) : ?>
+    <div class="sign-up">
+        <p>Pas encore de compte ? <a href="sign-up">S'inscrire</a></p>
+    </div>
+<?php endif; ?>
 <?php present_footer(); ?>

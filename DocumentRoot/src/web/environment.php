@@ -37,3 +37,15 @@ function in_maintenance_mode(): bool
 
     return true;
 }
+
+/**
+ * Retourne vrai si le site est en maintenance, faux sinon
+ * @global array $_ENV
+ */
+function is_signup_activated(): bool
+{
+    if (isset($_ENV['SITE_DISABLE_SIGN_UP']))
+        return boolval($_ENV['SITE_DISABLE_SIGN_UP']);
+
+    return true;
+}

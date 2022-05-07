@@ -14,8 +14,8 @@ require_once __DIR__ . '/../../models/InputValidation.php';
 require_once __DIR__ . '/../../models/Notice.php';
 require_once __DIR__ . '/../utils.php';
 require_once __DIR__ . '/../password.php';
-
 require_once __DIR__ . '/../database/repository-accounts.php';
+require_once __DIR__ . '/../environment.php';
 
 /**
  * Crée un compte utilisateur si l'utilisateur n'existe pas déjà
@@ -25,6 +25,10 @@ require_once __DIR__ . '/../database/repository-accounts.php';
  */
 function sign_up_user()
 {
+
+    if (!is_signup_activated())
+        redirect('/');
+
     session_start();
     $form_inputs = array(
         new FormInput('pseudo', $_POST['pseudo'], function (string $pseudo): InputValidation {

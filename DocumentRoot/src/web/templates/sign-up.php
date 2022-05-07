@@ -10,6 +10,10 @@ session_start();
 autoload();
 require_once __DIR__ . '/../utils.php';
 require_once __DIR__ . '/../session.php';
+
+if (!is_signup_activated())
+    redirect('/');
+
 ?>
 <?php present_header(); ?>
 
