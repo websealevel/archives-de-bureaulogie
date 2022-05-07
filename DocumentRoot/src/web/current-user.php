@@ -45,11 +45,7 @@ function current_user_can(string $cap): bool
     $authentificated_user_role = sql_find_role_of_account($authentificated_user_id);
 
     //Check si le role a la cap
-    if (!role_has_cap($authentificated_user_role, $cap)) {
-        return false;
-    }
-
-    return true;
+    return role_has_cap($authentificated_user_role, $cap);
 }
 
 /**
