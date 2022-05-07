@@ -34,8 +34,6 @@ function cap_exists(string $cap): bool
  */
 function role_has_cap(string $role, string $cap): bool
 {
-
-
     dd($role, $cap);
 
     return false;
@@ -49,15 +47,4 @@ function role_has_cap(string $role, string $cap): bool
 function is_authentification_confirmation_required(string $cap): bool
 {
     return true;
-}
-
-
-/**
- * Renvoie le rôle du compte
- * @param string $id L'id du compte
- * @return bool
- */
-function account_role(string $account_id): bool
-{
-    $role = sql_find_role_of_account($account_id);
 }
