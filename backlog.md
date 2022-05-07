@@ -1,10 +1,11 @@
 # Backlog
 
 - normaliser l'audio SUR l'extrait []
+- activer/desactiver inscriptions au site [x]
 - utliser youtube-dl en local
 - utiliser ffmpeg en local
 - pas de password recover [x]
-- ecran Creer un extrait [x]
+- ecran Creer un extrait []
 - ecran Télécharger une source 
 - ecran Ajouter une entrée Biblio
 - ecran Editer une entrée Biblio  
@@ -13,7 +14,6 @@
 - ecran liste des bureaulogues  
 - ecran nos contributeurs
 - modération
-
 
 ## Pour le twitter Bot
 
@@ -42,9 +42,12 @@ Envoyer un mail
 - revoir les méta de header pour les mettre a jour SEO [ ]
 - faire un test de pénétration
 - couvrir de tests les droits et capabilites []
+- mettre en place des roles et capacités associes [x]
 
 
 ### Rôles et droits associés
+
+Chaque rôle de l'étage supérieur hérite des capacités des rôles de l'étage inférieur.
 
 - superadmin
   - tous les droits admin
