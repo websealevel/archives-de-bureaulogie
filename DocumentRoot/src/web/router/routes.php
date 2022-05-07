@@ -11,6 +11,7 @@ require_once __DIR__ . '/../session.php';
 require_once __DIR__ . '/../actions/log-in.php';
 require_once __DIR__ . '/../actions/log-out.php';
 require_once __DIR__ . '/../actions/sign-up.php';
+require_once __DIR__ . '/../actions/authentification-confirmation.php';
 
 /**
  * Retourne toutes les routes de l'application sous la clef de leurs méthodes respectives
@@ -39,6 +40,9 @@ function routes(): array
         'post' => array(
             '/log-in' => function () {
                 log_in();
+            },
+            '/authentification-confirmation' => function () {
+                confirm_authentification();
             },
             '/sign-up' => function () {
                 sign_up_user();

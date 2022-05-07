@@ -92,3 +92,49 @@ function sql_find_account_by_pseudo(string $pseudo)
 
     return $result = $stmt->fetchObject();
 }
+
+/**
+ * Cherche un compte par id
+ * @param string $id
+ * @return stdClass
+ */
+function sql_find_account_by_id(string $id): stdClass
+{
+
+    $db = connect_to_db();
+    $sql = 'SELECT id, pseudo, password FROM accounts where id = :id';
+    $stmt = $db->prepare($sql);
+    $stmt->bindValue(':id', $id);
+    $stmt->execute();
+
+    return $result = $stmt->fetchObject();
+}
+
+/**
+ * Cherche le role d'un compte par id du compte
+ * @param string $id L'id du compte
+ * @return string
+ */
+function sql_find_role_of_account(string $id): string
+{
+
+    $db = connect_to_db();
+
+    $sql_role_id = 'SELECT role_id FROM accounts where id = :id';
+    $stmt = $db->prepare($sql_role_id);
+    $stmt->bindValue(':id', $id);
+    $stmt->execute();
+
+    $result_role_id = $stmt->fetchObject();
+
+    $role_id = $result_role_id->role_id;
+
+    $sql_role_name = 'SELECT role FROM roles where role_id = :role_id';
+    $stmt = $db->prepare($sql_role_name);
+    $stmt->bindValue(':role_id', $role_id);
+    $stmt->execute();
+
+    $result_role_name = $stmt->fetchObject();
+
+    return $result_role_name->role;
+}

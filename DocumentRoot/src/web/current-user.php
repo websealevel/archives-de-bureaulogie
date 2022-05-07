@@ -19,7 +19,7 @@ function is_current_user_logged_in(): bool
     if (!isset($_SESSION))
         throw new Exception("Aucune session active");
 
-    return boolval($_SESSION['user_authentificated'] ?? false);
+    return boolval(from_session('user_authentificated') ?? false);
 }
 
 /**
@@ -31,18 +31,59 @@ function is_current_user_logged_in(): bool
 function current_user_can(string $cap): bool
 {
 
+    //Check que l'utilisateur est authentifié
+    if (!is_current_user_logged_in()) {
+        return false;
+    }
+
     //Check que la cap existe
     if (!cap_exists($cap)) {
         throw new Exception("La capacité " . $cap . "n'existe pas.");
     }
+    $authentificated_user_id = from_session('account_id');
 
-    //Récupere le compte et son role
-
-    dd('Le role existe, le compte maintenant');
-
-    //Check si une 2eme authentification est demandée (sécuritée renforcée sur certaine actions). Si c'est le cas redirect vers un petit écran confirmation du mot de passe.
+    $authentificated_user_role = sql_find_role_of_account($authentificated_user_id);
 
     //Check si le role a la cap
+    dd($authentificated_user_role);
+
+    if (!role_has_cap($authentificated_user_role, $cap)) {
+        return false;
+    }
+
+    return false;
+}
+
+/**
+ * Retourne vrai si le mot de passe renseigné correspond à celui du compte authentifié en session, faux sinon
+ * @param int $id - L'id de l'utilisateur authentifié en session
+ * @param string $password_confirmation - La nouvelle demande de mot de passe
+ * @return bool
+ * @throws Exception - Si l'id du compte ne correspond à rien en base
+ */
+function confirm_current_user_identity(int $authentificated_user_id, string $password_confirmation): bool
+{
+
+    $account = sql_find_account_by_id($authentificated_user_id);
+
+    if (!$account) {
+        throw new Exception("L'id de l'utilisateur authentifié ne correspond à aucun compte enregistré en base.");
+    }
+
+    if (!is_string($password_confirmation) || !is_string($password_confirmation)) {
+        throw new Exception("Passwords ne sont pas au format attendu de chaine de caractères.");
+    }
+
+    //Si trouvé, on check mdp, si pas ok, on rejette
+    if (!password_verify($password_confirmation, $account->password)) {
+        redirect('/authentification-confirmation', 'notices', array(
+            new Notice("Le mot de passe est incorrect. Veuillez ré-essayer s'il vous plaît.", NoticeStatus::Error)
+        ));
+    }
+
+    //Redirige vers l'action
+
+    dd("Ok c'est bien toi, tu as le droit de fair ça.");
 
     return false;
 }
