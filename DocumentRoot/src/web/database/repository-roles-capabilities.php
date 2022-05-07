@@ -30,10 +30,14 @@ function cap_exists(string $cap): bool
  * Retourne vrai si le rôle donne droit à la capacité
  * @param string $role Le rôle
  * @param string $cap La capacité
+ * @throws Exception - Si le role n'existe pas ou si la capacité n'existe pas
  * @return bool
  */
 function role_has_cap(string $role, string $cap): bool
 {
+
+    //Intersting stuff here!
+
 
     return false;
 }
