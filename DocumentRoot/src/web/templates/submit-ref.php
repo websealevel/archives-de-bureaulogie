@@ -11,19 +11,13 @@ require_once __DIR__ . '/../utils.php';
 require_once __DIR__ . '/../current-user.php';
 session_start();
 
-if (!current_user_can('submit_clip'))
+if (!current_user_can('submit_reference'))
     redirect('/');
 ?>
 
 <?php present_header(); ?>
 
-<h2>Créer un extrait</h2>
+<h2>Soumettre une référence bibliographique</h2>
 <a href="/">Retour</a>
-
-<p>Une explication</p>
-<video width="320" height="240" controls>
-    <source src="test.mp4" type="audio/mp4">
-    Your browser does not support the video tag.
-</video>
 
 <?php present_footer(); ?>

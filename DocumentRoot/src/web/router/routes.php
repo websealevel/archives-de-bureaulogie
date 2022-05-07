@@ -35,6 +35,9 @@ function routes(): array
             },
             '/clip' => function () {
                 present_template('clip');
+            },
+            '/submit_ref' => function () {
+                present_template('submit-ref');
             }
         ),
         'post' => array(

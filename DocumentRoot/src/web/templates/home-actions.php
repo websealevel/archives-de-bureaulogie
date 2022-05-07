@@ -27,7 +27,7 @@ require_once __DIR__ . '/../current-user.php';
 <h3>Archives bibliographiques</h3>
 <ul>
     <?php if (current_user_can('submit_reference')) :  ?>
-        <li><a href="clip">Ajouter une référence bibliographique</a></li>
+        <li><a href="submit_ref">Ajouter une référence bibliographique</a></li>
     <?php endif;  ?>
 </ul>
 
