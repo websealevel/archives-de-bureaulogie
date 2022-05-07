@@ -14,6 +14,16 @@
 - ecran nos contributeurs
 - modération
 
+
+## Pour le twitter Bot
+
+Page de config:
+
+- frequence de tweets, heure etc...
+- créer une playlist éditable pour mettre l'ordre des extraits
+- dans la playlist on voit des métas (nb de fois extrait tweetés)
+- voir les tweets plus méta (likes, retweeks)
+
 ## Modération
 
 Modération des sources biblios proposées: accepter ou refuser. 

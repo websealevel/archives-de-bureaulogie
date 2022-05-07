@@ -10,7 +10,7 @@ require_once __DIR__ . '/../models/InputValidation.php';
 
 /**
  * Retourne la valeur sous la clef $key de la session en cours, une chaine vide sinon
- * A refactor (dégueulasse).
+ * @see == A refactor (dégueulasse) ==
  * @param string $key La clef demandée
  * @param string $array_key Optional. Default = ''. Si la clé demandée référence un tableau en session, retourne la valeur sous la clef $array_key du tableau
  * @return mixed La valeur sous la clef
