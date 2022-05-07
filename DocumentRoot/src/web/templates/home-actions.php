@@ -9,8 +9,7 @@
 
 require_once __DIR__ . '/../current-user.php';
 
-if (!current_user_can('submit_clip'))
-    redirect('/');
+
 ?>
 
 <h2>Bienvenue !</h2>
