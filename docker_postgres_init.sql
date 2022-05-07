@@ -1,7 +1,8 @@
 CREATE TABLE roles(
     role_id INT PRIMARY KEY,
     role VARCHAR (255) UNIQUE NOT NULL,
-    role_label VARCHAR (255) NOT NULL
+    role_label VARCHAR (255) NOT NULL,
+    ancestor INT -- l'id du role dont le role hérite
 );
 
 CREATE TABLE capabilities (
@@ -36,12 +37,12 @@ CREATE TABLE roles_capabilities (
 
 -- Inserer les roles.
 INSERT INTO
-    roles(role_id, role, role_label)
+    roles(role_id, role, role_label, ancestor)
 VALUES
-    (1, 'superadmin', 'super administrateur'),
-    (2, 'admin', 'administrateur'),
-    (3, 'moderateur', 'modérateur'),
-    (4, 'contributeur', 'contributeur');
+    (1, 'superadmin', 'super administrateur', 2),
+    (2, 'admin', 'administrateur', 3),
+    (3, 'moderateur', 'modérateur', 4),
+    (4, 'contributeur', 'contributeur', NULL);
 
 -- Inserer les capabilites.
 INSERT INTO
