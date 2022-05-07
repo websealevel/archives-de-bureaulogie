@@ -71,7 +71,7 @@ function log_user(Credentials $credentials)
         ));
     }
 
-    //Compte authentifié
+    //Authentifie l'utilisateur
     login_user_session($account);
 
     //Redirige vers la page d'accueil authentifié.

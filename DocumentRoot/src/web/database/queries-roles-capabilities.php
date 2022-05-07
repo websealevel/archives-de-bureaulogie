@@ -24,3 +24,20 @@ function sql_find_role_id_by_name(string $role): stdClass
     $stmt->execute();
     return $result = $stmt->fetchObject();
 }
+
+/**
+ * Cherche une capacité par son nom
+ * @param string $role Le nom de la capacité
+ * @return stdClass L'id de la capacité ou false si la capacité n'existe pas.
+ */
+function sql_find_capacity_by_name(string $cap): stdClass
+{
+
+    $db = connect_to_db();
+    $sql = 'SELECT cap_id FROM capabilities where cap = :cap';
+    $stmt = $db->prepare($sql);
+    $stmt->bindValue(':cap', $cap);
+    $stmt->execute();
+    
+    return $result = $stmt->fetchObject();
+}

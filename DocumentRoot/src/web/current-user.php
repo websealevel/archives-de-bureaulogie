@@ -7,7 +7,8 @@
  */
 
 
-require_once __DIR__ . '/roles-caps.php';
+require_once __DIR__ . '/database/repository-accounts.php';
+require_once __DIR__ . '/database/repository-roles-capabilities.php';
 
 /**
  * Retourne vrai si l'utilisateur courant est connecté, faux sinon
@@ -22,10 +23,26 @@ function is_current_user_logged_in(): bool
 }
 
 /**
- * Retourne vrai si l'utilisateur en session peut effectuer cette action, faux sinon. Certaines actions demandent à nouveau de s'authentifier.
+ * Retourne vrai si l'utilisateur authentifié a la capacité de faire cette action, faux sinon
+ * @param string $cap La capacité à tester
  * @return bool
+ * @throws Exception - Si la capacité n'existe pas
  */
-function current_user_can(): bool
+function current_user_can(string $cap): bool
 {
+
+    //Check que la cap existe
+    if (!cap_exists($cap)) {
+        throw new Exception("La capacité " . $cap . "n'existe pas.");
+    }
+
+    //Récupere le compte et son role
+
+    dd('Le role existe, le compte maintenant');
+
+    //Check si une 2eme authentification est demandée (sécuritée renforcée sur certaine actions). Si c'est le cas redirect vers un petit écran confirmation du mot de passe.
+
+    //Check si le role a la cap
+
     return false;
 }
