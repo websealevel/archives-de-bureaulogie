@@ -1,13 +1,10 @@
-# out-of-context-ackboo-twitter-bot
+# Archives de bureaulogie
 
 *Un twitter bot qui post des extraits vidéos d'ackboo issus de sa série "Le tribunal des bureaux"*
 
-- [out-of-context-ackboo-twitter-bot](#out-of-context-ackboo-twitter-bot)
+- [Archives de bureaulogie](#archives-de-bureaulogie)
   - [Projet](#projet)
-  - [Architecture générale](#architecture-générale)
-    - [Le *fichier source*](#le-fichier-source)
-    - [Les différents composants](#les-différents-composants)
-  - [Getting started](#getting-started)
+  - [*Getting started*](#getting-started)
     - [Prérequis](#prérequis)
     - [Lancer le projet](#lancer-le-projet)
     - [Arrêter le projet](#arrêter-le-projet)
@@ -20,27 +17,9 @@ Envie de contribuer au dépôt en proposant un extrait ? [Lisez d'abord ceci](CO
 
 ## Projet
 
-Créer un bot twitter qui *post* des courts extraits vidéos d’ackboo dans une grammaire *out of context*.
+Voir les specifications techniques du projet [ici](backlog.md).
 
-
-## Architecture générale
-
-### Le *fichier source*
-
-La base de données des extraits est gérée par le `fichier source`. Le fichier source est `extraits.xml`. Il contient tout le travail éditorial de déclaration des extraits. Ce fichier est manipulé par différents programmes (ou à la main mais prudence !) pour gérer les extraits (création, modification, suppression).
-
-Ce fichier est **simple à éditer** et il **déclare** les extraits choisis. Il fait office de *source de vérité* et il définit l'état de la base de données d'extraits (quels extraits sont présents ou non). Pour chaque extrait, on a besoin (a) de l’url de la vidéo (b) d’un couple de timecodes début et fin de l’extrait (c) d'un slug (d) d'une description.
-
-### Les différents composants
-
-Le projet a l’architecture suivante :
-
-- *fichier source* au format XML (simple à lire par les humains et les machines, permet de valider un schéma de données). Le fichier déclare l'intégralité des extraits choisis. Il est *la base de données des extraits*.
-- un programme client web qui sert d'interface utilisateur pour éditer les extraits (ajouter, modifier, supprimer)
-- un programme qui se charge de lire/manipuler le fichier source pour créer/supprimer/modifier les extraits
-- un deuxième programme qui *post* à une fréquence donnée des extraits issus de cette base de données (aka le Twitter Bot)
-
-## Getting started
+## *Getting started*
 
 ### Prérequis
 
