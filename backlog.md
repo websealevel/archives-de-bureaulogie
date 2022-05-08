@@ -1,4 +1,4 @@
-# Sepcs et backlog
+# Specifications et *backlog*
 
 Les spécifications techniques du projet et le backlog.
 
