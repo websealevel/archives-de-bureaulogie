@@ -102,11 +102,9 @@ Envoyer un mail
 Chaque rôle de l'étage supérieur hérite des capacités des rôles de l'étage inférieur.
 
 - superadmin
-  - tous les droits admin
   - ajouter un admin
   - changer le role de admin à modérateur
 - admin 
-  - tous les droits modérateur
   - ajouter un modérateur
   - éditer ressources bilbio de tout le monde
   - lister toutes les ressources biblio
