@@ -1,6 +1,6 @@
 # Archives de bureaulogie
 
-*Un twitter bot qui post des extraits vidéos d'ackboo issus de sa série "Le tribunal des bureaux"*
+*Les archives de bureaulogie*.
 
 - [Archives de bureaulogie](#archives-de-bureaulogie)
   - [Projet](#projet)
