@@ -11,6 +11,7 @@ require_once __DIR__ . '/../session.php';
 require_once __DIR__ . '/../actions/log-in.php';
 require_once __DIR__ . '/../actions/log-out.php';
 require_once __DIR__ . '/../actions/sign-up.php';
+require_once __DIR__ . '/../actions/download-source.php';
 require_once __DIR__ . '/../actions/authentification-confirmation.php';
 
 /**
@@ -52,7 +53,10 @@ function routes(): array
             },
             '/sign-up' => function () {
                 sign_up_user();
-            }
+            },
+            '/download-source' => function () {
+                download_source();
+            },
         )
     );
 }

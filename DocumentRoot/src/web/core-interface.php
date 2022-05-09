@@ -17,7 +17,7 @@ require_once __DIR__ . '/../core/query.php';
  */
 function esc_sources_to_html_select_e(string $name_attr = 'sources'): void
 {
-    $options = map_declared_sources_to_select_options();
+    $options = map_declared_sources_to_html_item('option');
 
     $label = 'Veuillez choisir la vidéo dont vous souhaitez faire un extrait';
 
@@ -31,17 +31,38 @@ function esc_sources_to_html_select_e(string $name_attr = 'sources'): void
     return;
 }
 
+
+function esc_html_list_sources_e(string $name_attr = 'sources'): void
+{
+    $options = map_declared_sources_to_html_item('li');
+
+    $label = 'Liste des vidéos sources déjà présentes';
+
+    echo sprintf('<label for="%s">%s</label>', $name_attr, $label);
+
+    echo sprintf('<li name="%s">', $name_attr);
+    foreach ($options as $option) {
+        echo $option;
+    }
+    echo sprintf('</li>');
+    return;
+}
+
 /**
  * Retourne une liste de sources sous forme d'options HTML
  * @param string $filter Un filtre sur les sources à appliquer. Optional. Default = 'all'
  * @return array 
  */
-function map_declared_sources_to_select_options(string $filter = "all"): array
+function map_declared_sources_to_html_item(string $html_item, string $filter = "all"): array
 {
+    if (!in_array($html_item, array('li', 'option'))) {
+        throw new Exception("html_item invalide.");
+    }
+
     $sources = query_declared_sources();
 
-    $options = array_map(function ($source) {
-        return map_source_to_option($source);
+    $options = array_map(function ($source) use ($html_item) {
+        return map_source_to_html_item($source, $html_item);
     }, iterator_to_array($sources));
 
     return $options;
@@ -50,13 +71,14 @@ function map_declared_sources_to_select_options(string $filter = "all"): array
 /**
  * Retourne une source au format option HTML
  * @param DOMElement $source Un élément source
+ * @param string $html_item Un élément html de liste (option ou li)
  * @return string L'élément source au format d'option HTML
  */
-function map_source_to_option(DOMElement $source): string
+function map_source_to_html_item(DOMElement $source, string $html_item): string
 {
     $name = $source->getAttribute('name');
     $label = $source->getAttribute('label');
-    return sprintf('<option name="%s">%s</option>', $name, $label);
+    return sprintf('<%s name="%s">%s</%s>', $html_item, $name, $label, $html_item);
 }
 
 /**
