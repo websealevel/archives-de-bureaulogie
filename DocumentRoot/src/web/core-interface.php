@@ -15,7 +15,7 @@ require_once __DIR__ . '/../core/query.php';
  * @param string $name_attr L'attribut name du select
  * @return void
  */
-function esc_sources_to_html_select_e(string $name_attr = 'sources')
+function esc_sources_to_html_select_e(string $name_attr = 'sources'): void
 {
     $options = map_declared_sources_to_select_options();
 
@@ -28,6 +28,7 @@ function esc_sources_to_html_select_e(string $name_attr = 'sources')
         echo $option;
     }
     echo sprintf('</select>');
+    return;
 }
 
 /**

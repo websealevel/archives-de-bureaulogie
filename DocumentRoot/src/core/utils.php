@@ -6,7 +6,7 @@
  * @package wsl 
  */
 
-require_once 'const.php';
+require_once __DIR__ . '/const.php';
 
 /**
  * Retourne le timecode valide en secondes (milisecondes incluses en décimal)

@@ -1,11 +1,20 @@
 <?php
 
 /**
- * Les constantes du projet (config)
+ * Configurations de l'application core
  *
  * @package wsl 
  */
 
+
+/**
+ * Charge l'autoload.php de composer pour inclure les dépendances vendor du script appelant.
+ * @return void
+ */
+function autload_core(): void
+{
+    require_once __DIR__ . '/../../vendor/autoload.php';
+}
 
 /**
  * Le fichier source (contient les déclarations des extraits)
@@ -98,3 +107,31 @@ define('ALLOWED_DOMAINS_TO_DOWNLOAD_SOURCES_FROM', array(
     'www.youtube.com',
     'youtube.com'
 ));
+
+/**
+ * FFMPEG
+ * @see https://github.com/PHP-FFMpeg/PHP-FFMpeg
+ */
+
+/**
+ * le path des binaires FFMPEG
+ */
+define('FFMPEG_BINARIES', __DIR__ . '/../../ffmpeg/ffmpeg');
+/**
+ * le path des binaries FFPROBE
+ */
+define('FFPROBE_BINARIES', __DIR__ . '/../../ffmpeg/ffprobe');
+/**
+ * Le timeout des process FFMPEG
+ */
+define('FFMPEG_TIMEOUT', 3600);
+/**
+ * Le nombre de threads utilisé par FFPMEG
+ */
+define('FFMPEG_THREADS', 6);
+
+/**
+ * YOUTUBE-DL
+ */
+
+define('YOUTUBE-DL_PATH', '');

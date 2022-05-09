@@ -6,10 +6,10 @@
  * @package wsl 
  */
 
-require_once 'utils.php';
-require_once 'clip.php';
-require_once 'validation.php';
-require_once 'download.php';
+require_once __DIR__ . '/utils.php';
+require_once __DIR__ . '/clip.php';
+require_once __DIR__ . '/validation.php';
+require_once __DIR__ . '/download.php';
 
 /**
  * Met à jour la base de données des clips (ajoute, supprime en fonction du fichier source), nettoie les clips invalides

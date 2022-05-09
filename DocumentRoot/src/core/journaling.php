@@ -7,7 +7,7 @@
  */
 
 
-require_once 'const.php';
+require_once __DIR__ . '/const.php';
 
 /**
  * Retourne un rapport sur la génération d'extraits

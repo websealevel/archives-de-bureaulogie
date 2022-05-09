@@ -8,7 +8,7 @@
  */
 
 
-require_once 'const.php';
+require_once __DIR__ . '/const.php';
 
 /**
  * Retourne un élément enfant d'un élément par nom

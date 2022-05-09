@@ -11,9 +11,9 @@ Les spécifications techniques du projet et le backlog.
 Le projet a l’architecture suivante :
 
 - *fichier source* au format XML (simple à lire par les humains et les machines, permet de valider un schéma de données). Le fichier déclare l'intégralité des extraits choisis. Il est *la base de données des extraits*.
-- un programme client web qui sert d'interface utilisateur pour éditer les extraits (ajouter, modifier, supprimer)
-- un programme qui se charge de lire/manipuler le fichier source pour créer/supprimer/modifier les extraits
-- un deuxième programme qui *post* à une fréquence donnée des extraits issus de cette base de données (aka le Twitter Bot)
+- une application web qui sert d'interface utilisateur pour éditer les extraits (ajouter, modifier, supprimer) et soumettre des références bibliographiques
+- une application *core* qui se charge de lire/manipuler le fichier source pour créer/supprimer/modifier les extraits
+- des applis qui *post* à une fréquence donnée des extraits issus de cette base de données (aka les Twitter Bot)
 - une base de données pour gérer les comptes utilisateurs et les rôles associés
 
 #### Le *fichier source*

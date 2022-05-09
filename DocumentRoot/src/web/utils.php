@@ -145,7 +145,7 @@ function present_footer(array $js_scripts = array())
  */
 function autoload(): void
 {
-    require_once __DIR__ . '/../../../vendor/autoload.php';
+    require_once __DIR__ . '/../../vendor/autoload.php';
 }
 
 /**

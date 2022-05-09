@@ -6,9 +6,9 @@
  * @package wsl 
  */
 
-require_once 'const.php';
-require_once 'query.php';
-require_once 'journaling.php';
+require_once __DIR__ . '/const.php';
+require_once __DIR__ . '/query.php';
+require_once __DIR__ . '/journaling.php';
 
 
 /**
@@ -67,9 +67,6 @@ function generate_clips(string $file_source = SOURCE_FILE): array
     return $results;
 }
 
-
-
-
 /**
  * Produit un extrait de la vidéo source et retourne le path
  * @param DOMElement $clip L'élément extrait qui définit l'extrait à préparer
@@ -80,7 +77,16 @@ function generate_clips(string $file_source = SOURCE_FILE): array
 function clip_source(DOMElement $clip, string $file_source): string
 {
     $path_source = PATH_SOURCES . '/' . $file_source;
-    $ffmpeg = FFMpeg\FFMpeg::create();
+
+    // $ffmpeg = FFMpeg\FFMpeg::create();
+
+    $ffmpeg = FFMpeg\FFMpeg::create(array(
+        'ffmpeg.binaries'  => FFMPEG_BINARIES,
+        'ffprobe.binaries' => FFPROBE_BINARIES,
+        'timeout'          => intval(FFMPEG_TIMEOUT),
+        'ffmpeg.threads'   => intval(FFMPEG_THREADS),
+    ));
+
     $video = $ffmpeg->open($path_source);
 
     $from_in_seconds = timecode_to_seconds(child_element_by_name($clip, "debut")->nodeValue);
@@ -99,7 +105,6 @@ function clip_source(DOMElement $clip, string $file_source): string
     $format
         ->setKiloBitrate(ENCODING_OPTION_VIDEO_KBPS)
         ->setAudioKiloBitrate(ENCODING_OPTION_AUDIO_KBPS);
-
 
     $video_clip->save($format, $path_to_save_clip);
 

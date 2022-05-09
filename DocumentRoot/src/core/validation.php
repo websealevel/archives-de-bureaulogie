@@ -6,8 +6,8 @@
  * @package wsl 
  */
 
-autoload();
-require_once 'const.php';
+autload_core();
+require_once __DIR__ . '/const.php';
 
 /**
  * Retourne vrai si le fichier source est valide (validation via le DTD), faux sinon
