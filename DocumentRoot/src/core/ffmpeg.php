@@ -39,9 +39,7 @@ function ffbprobe_instance(): FFProbe
 {
     $ffprobe = FFMpeg\FFProbe::create(array(
         'ffmpeg.binaries'  => FFMPEG_BINARIES,
-        'ffprobe.binaries' => FFPROBE_BINARIES,
-        'timeout'          => intval(FFMPEG_TIMEOUT),
-        'ffmpeg.threads'   => intval(FFMPEG_THREADS),
+        'temporary_directory' => __DIR__ .'/ffmpeg-tmp'
     ));
     return $ffprobe;
 }

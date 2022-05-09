@@ -16,8 +16,6 @@ services:
     volumes:
       - "./DocumentRoot/:/var/www/html/:rw"
       - "./vendor/:/var/www/vendor"
-      - "./youtube-dl:/var/www/html/youtube-dl"
-      - "./ffmpeg:/var/www/html/ffmpeg"
       - "./DocumentRoot/.htaccess:/var/www/html/.htaccess"
       - "./DocumentRoot/php.ini:/usr/local/etc/php/conf.d/aooc_php.ini"
       - "./DocumentRoot/.env:/var/www/html/src/.env"

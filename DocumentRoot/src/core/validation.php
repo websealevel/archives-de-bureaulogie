@@ -81,7 +81,6 @@ function is_source_valid(string $file_name, $path = PATH_SOURCES)
 
     $info = pathinfo($file_path);
 
-
     if ($info["extension"] !== EXTENSION_SOURCE) {
         $message = sprintf("La source %s n'a pas un format valide", $file_name);
         throw new Exception($message);
@@ -92,8 +91,8 @@ function is_source_valid(string $file_name, $path = PATH_SOURCES)
         'ffprobe.binaries' => FFPROBE_BINARIES,
     ));
 
-    if (!$ffprobe->isValid('/var/www/html/sources/le-tribunal-des-bureaux--2.mp4')) {
-        $message = sprintf("La vidéo source %s n'est pas valide ou n'existe pas.", $file_name);
+    if (!$ffprobe->isValid($file_name)) {
+        $message = sprintf("ffprobe: la vidéo source %s n'a pas un format valide.", $file_name);
         throw new Exception($message);
     }
 
@@ -113,10 +112,10 @@ function is_clip_valid(string $file_name, $path = PATH_CLIPS)
     $info = pathinfo($file_path);
 
     if ($info["extension"] !== EXTENSION_CLIP) {
-
         $message = sprintf("L'extrait %s n'a pas un format valide", $file_name);
         throw new Exception($message);
     }
+
 
     //Validate media file
     $ffprobe = ffbprobe_instance();

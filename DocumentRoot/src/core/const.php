@@ -128,10 +128,14 @@ define('FFMPEG_TIMEOUT', 3600);
 /**
  * Le nombre de threads utilisé par FFPMEG
  */
-define('FFMPEG_THREADS', 6);
+define('FFMPEG_THREADS', 12);
 
 /**
  * YOUTUBE-DL
+ * @see 
  */
 
+/**
+ * Le path du binaire de youtube-dl
+ */
 define('YOUTUBE-DL_PATH', '');
