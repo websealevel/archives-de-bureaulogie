@@ -16,7 +16,6 @@ session_start();
 
 if (!current_user_can('add_source'))
     redirect('/');
-//Creer un extrait, post en AJAX via l'API de l'appli, réponse
 ?>
 
 <?php present_header(); ?>
@@ -27,14 +26,14 @@ if (!current_user_can('add_source'))
     <a href="/">Retour</a>
 </div>
 
-
 <?php esc_html_list_sources_e(); ?>
 
 <h3>Ajouter</h3>
-<form action="download-source" method="post">
+<?php esc_html_form_error_msg_e('source_url', 'form_errors'); ?>
+<form action="download-source" method="POST">
     <label for="source_url">Renseigner l'url youtube de la vidéo</label>
     <input type="url" name="source_url">
-    <input type="submit" value="Télécharger sur le serveur">
+    <input type="submit" value="Ajouter">
 </form>
 
 <div name="preview_source">

@@ -15,7 +15,7 @@ present_header();
 
 <p>Vous souhaitez effectuer une action sensible. Veuillez saisir votre mot de passe à nouveau s'il vous plait.</p>
 
-<form action="confirm-authentification" method="post">
+<form action="confirm-authentification" method="POST">
     <label for="password">Mot de passe:</label>
     <input type="password" name="password">
     <input type="submit" value="Valider">

@@ -190,5 +190,6 @@ A part
 - installer un paquet qui gere les bans d'IP (type wordfence), tentatives de login repetees, brut force
 - ajouter honey pot dans le form d'inscription (voir ce que je peux faire d'autre)
 - pour les comptes admin on va leur associer des adresses IP autorisées en plus de l'authentification
+- telechargament de sources autorisé que depuis la chaine de canardPC []
 
 

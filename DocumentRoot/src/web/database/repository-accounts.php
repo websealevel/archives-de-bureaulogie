@@ -35,6 +35,7 @@ function create_account(User $user, string $role = 'contributeur'): string|bool
     return $id;
 }
 
+
 /**
  * Authentifie un compte utilisateur à partir de son pseudo/email et mot de passe
  * Retourne l'id de l'utilisateur s'il existe, 
