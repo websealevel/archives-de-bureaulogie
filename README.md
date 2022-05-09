@@ -1,6 +1,6 @@
 # Archives de bureaulogie
 
-*Les archives de bureaulogie* est un projet qui a pour ambition de promouvoir la bureaulogie en proposant une plateforme collaborative de publication d'extraits vidéos du Tribunal des bureaux d'ackboo (père fondateur de la bureaulogie) ainsi que de diffusion de références bibliographiques pour approfondir le sujet.
+*Les archives de bureaulogie* est un projet qui a pour ambition de promouvoir la bureaulogie en proposant une plateforme collaborative de publication d'extraits vidéos du [tribunal des bureaux](https://www.youtube.com/watch?v=YglE-FnSd3g&list=PLDN-m4HWH8MBKJLYIK-80qJBBkVJbPo9p) d'ackboo (père fondateur de la bureaulogie) ainsi que de diffusion de références bibliographiques pour approfondir le sujet.
 
 Il sert également de prétexte pour construire un outil en *vanilla php* pour poursuivre la formation.
 
@@ -52,7 +52,7 @@ composer update
 
 ### Lancer le projet
 
-Suivez [les instructions ici](https://github.com/websealevel/local-env-docker) pour mettre en place le reverse-proxy sur votre machine, ou modifiez le docker-compose à votre convenance pour associer vos ports aux différents conteneurs.
+Suivez [les instructions ici](https://github.com/websealevel/local-env-docker) pour mettre en place le reverse-proxy sur votre machine, ou modifiez le `docker-compose` à votre convenance pour associer vos ports aux différents conteneurs.
 
 Pour lancer le projet
 
@@ -83,11 +83,8 @@ docker-compose up -d
 - [Twitter API](https://developer.twitter.com/en/docs/twitter-api)
 - [Rate Limits de la Twitter API](https://developer.twitter.com/en/docs/twitter-api/rate-limits)
 - [Playlist du tribunal des bureaux](https://www.youtube.com/watch?v=YglE-FnSd3g&list=PLDN-m4HWH8MBKJLYIK-80qJBBkVJbPo9p)
-- [Youtube clips features](https://www.youtube.com/watch?v=A63imEmP_-I)
-- [YouTube Video Downloader Script in PHP](https://www.phpzag.com/php-youtube-video-downloader-script/)
 - [jdownloader](https://jdownloader.org/), outil open-source de téléchargement en flux continu
-- [filezilla](https://filezilla-project.org/), client ftp open-source
-- [lostlesscut](https://github.com/mifi/lossless-cut), le couteau suisse de l'édition vidéo/audio pour cut la vidéo d'origine
 - [FFMPEG, Invoking command-line tools from PHP scripts](https://trac.ffmpeg.org/wiki/PHP)
 - [norkunas/youtube-dl-php ](https://packagist.org/packages/norkunas/youtube-dl-php), wrapper php pour youtube-dl
 - [youtube-dl](https://github.com/ytdl-org/youtube-dl), download videos from youtube.com or other video platforms 
+- [lostlesscut](https://github.com/mifi/lossless-cut), le couteau suisse de l'édition vidéo/audio pour cut la vidéo d'origine
