@@ -139,7 +139,7 @@ Chaque rôle de l'étage supérieur hérite des capacités des rôles de l'étag
 A part
 
 - twitterbot
-  - get l'API twitter
+  - get l'API pour twitter (interroger la playlist, nextItem extrait et nextItem reference)
 
 ### Métrique des ressources (extraits et references biblios)
 
@@ -152,7 +152,7 @@ A part
 - normaliser l'audio SUR l'extrait []
 - activer/desactiver inscriptions au site [x]
 - utliser youtube-dl en local
-- utiliser ffmpeg en local
+- utiliser ffmpeg/ffprobe en local [x]
 - pas de password recover [x]
 - ecran Creer un extrait []
 - ecran Télécharger une source 
