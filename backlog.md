@@ -104,10 +104,12 @@ Dire qu'on ne modifie pas quelque chose de soumis, on le valide ou non. On peut 
 ### Pages
 
 - Charte : strict sur le contenu, toute infraction a la charte, banissement (IP banni et compte suspendu)
-- Qui sommes nous ?
+- Qui sommes nous ? Humour, parodie, ref à ackoo et le tribunal des bureaux
+- Open source : lien vers le projet, forker, contribuer etc...
 - Nous soutenir : lien vers patreon, expliquer pourquoi (hebergement, travail, nom de domaine, vidéos) avec des chiffres. Engagement à corriger les bugs et la sécurité mais soutien sans attendre une garantie en retour. Si le projet n'est plus maintenu les soutiens seront automatiquement cloturés.
 - Mettre un message pour découverte de faille de sécu, envoyer par mail avant d'ouvrir une issue
 - Mettre un message pour les hacker "bravo, peux tu m'expliquer comment tu as fait ? ça m'interesse."
+- Contact : le mail contact@archives-de-bureaulogie.fr
 
 ### Rôles et droits associés
 
