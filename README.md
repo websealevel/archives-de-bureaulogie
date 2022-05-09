@@ -2,6 +2,8 @@
 
 *Les archives de bureaulogie* est un projet qui a pour ambition de promouvoir la bureaulogie en proposant une plateforme collaborative de publication d'extraits vidéos du Tribunal des bureaux d'ackboo (père fondateur de la bureaulogie) ainsi que de diffusion de références bibliographiques pour approfondir le sujet.
 
+Il sert également de prétexte pour construire un outil en *vanilla php* pour poursuivre la formation.
+
 - [Archives de bureaulogie](#archives-de-bureaulogie)
   - [Projet](#projet)
   - [*Getting started*](#getting-started)
