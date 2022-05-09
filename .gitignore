@@ -8,6 +8,8 @@ DocumentRoot/sources/*
 DocumentRoot/downloads/*
 !/DocumentRoot/downloads/README.md
 !/DocumentRoot/downloads/index.php
+DocumentRoot/ffpmeg/*
+!/DocumentRoot/ffpmeg/index.php
 vendor
 *.mp4
 *.avi
