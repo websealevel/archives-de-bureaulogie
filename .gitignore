@@ -1,8 +1,10 @@
 extraits.xml
-extraits/
-!/extraits/README.md
-sources/
-!/sources/README.md
+DocumentRoot/extraits/
+!/DocumentRoot/extraits/README.md
+!/DocumentRoot/extraits/index.php
+DocumentRoot/sources/
+!/DocumentRoot/sources/README.md
+!/DocumentRoot/sources/index.php
 downloads/
 !/downloads/README.md
 vendor
