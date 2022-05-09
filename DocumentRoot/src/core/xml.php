@@ -42,7 +42,7 @@ function child_element_by_name(DOMElement $el, string $child_name): DOMElement
 /** 
  * Retourne le fichier XML sous forme de DOM s'il est valide. 
  * @param string $file_source Optional. Le fichier source  
- * @throws Exception Si le schéma n'est pas valide 
+ * @throws Exception - Si le schéma n'est pas valide 
  * @return DOMDocument Abstraction du fichier sous forme de DOM */
 function load_xml(string $file_source = SOURCE_FILE): DOMDocument
 {
@@ -54,7 +54,7 @@ function load_xml(string $file_source = SOURCE_FILE): DOMDocument
     $dom->load($file_source);
 
     if (!$dom->validate()) {
-        throw new \Exception('Fichier source ' . $file_source . 'invalide. Impossible de le charger. Vérifiez l\'intégrité du fichier avant de continuer.');
+        throw new Exception('Fichier source ' . $file_source . 'invalide. Impossible de le charger. Vérifiez l\'intégrité du fichier avant de continuer.');
     }
 
     return $dom;

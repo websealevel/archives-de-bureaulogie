@@ -16,9 +16,6 @@ services:
     volumes:
       - "./DocumentRoot/:/var/www/html/:rw"
       - "./vendor/:/var/www/vendor"
-      - "./downloads/:/var/www/downloads"
-      - "./extraits/:/var/www/extraits"
-      - "./sources/:/var/www/sources"
       - "./youtube-dl:/var/www/html/youtube-dl"
       - "./ffmpeg:/var/www/html/ffmpeg"
       - "./DocumentRoot/.htaccess:/var/www/html/.htaccess"

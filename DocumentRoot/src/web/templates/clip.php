@@ -9,6 +9,7 @@
  */
 require_once __DIR__ . '/../utils.php';
 require_once __DIR__ . '/../current-user.php';
+require_once __DIR__ . '/../core-interface.php';
 
 session_start();
 
@@ -23,11 +24,24 @@ if (!current_user_can('submit_clip'))
 
 <a href="/">Retour</a>
 
-<p>Lore ipsum</p>
+<form action="">
+    <?php esc_sources_to_html_select_e(); ?>
+</form>
 
-<video width="320" height="240" controls>
-    <source src="<?php echo esc_web_clip_path_url_e('le-tribunal-des-bureaux--2--plante-et-luminaire--00.08.27.300--00.09.29.325.mp4'); ?>" type="video/mp4">
-    Your browser does not support the video tag.
-</video>
+<div name="preview_source">
+    <video width="320" height="240" controls>
+        <source src="<?php echo esc_web_clip_path_url_e('le-tribunal-des-bureaux--2--plante-et-luminaire--00.08.27.300--00.09.29.325.mp4'); ?>" type="video/mp4">
+        Votre navigateur ne supporte pas le tag video HTML5 :(
+    </video>
+
+</div>
+
+<div name="preview_clip">
+    <video width="320" height="240" controls>
+        <source src="<?php echo esc_web_clip_path_url_e('le-tribunal-des-bureaux--2--plante-et-luminaire--00.08.27.300--00.09.29.325.mp4'); ?>" type="video/mp4">
+        Votre navigateur ne supporte pas le tag video HTML5 :(
+    </video>
+</div>
+
 
 <?php present_footer(array('template-clip')); ?>

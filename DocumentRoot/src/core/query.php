@@ -6,8 +6,9 @@
  * @package wsl 
  */
 
-require_once 'const.php';
-require_once 'xml.php';
+require_once __DIR__ . '/const.php';
+require_once __DIR__ . '/xml.php';
+require_once __DIR__ . '/validation.php';
 
 /**
  * Retourne la liste des sources déclarées
@@ -18,9 +19,19 @@ function query_declared_sources(string $file_source = SOURCE_FILE): DOMNodeList
 {
     $xpath = load_xpath($file_source, XMLNS_SOURCE_FILE);
 
-    $result = $xpath->query('//ns:extraits/ns:source');
+    $sources = $xpath->query('//ns:extraits/ns:source');
 
-    return $result;
+    if (!$sources)
+        return new DOMNodeList();
+
+    //Check que les sources déclarées correspondent aux sources présentes
+    $not_found = array_filter(iterator_to_array($sources), function ($source) {
+        return !is_source_available($source->getAttribute('name'));
+    });
+
+    dd($not_found);
+
+    return $sources;
 }
 
 

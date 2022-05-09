@@ -6,7 +6,7 @@
  * @package wsl 
  */
 
-require_once __DIR__ . '/../../vendor/autoload.php';
+autoload();
 require_once 'const.php';
 
 /**
