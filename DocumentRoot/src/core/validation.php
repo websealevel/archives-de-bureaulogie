@@ -87,7 +87,7 @@ function is_source_valid(string $file_name, $path = PATH_SOURCES)
 
     //Validate media file
     $ffprobe = FFMpeg\FFProbe::create(array(
-        'ffprobe.binaries' => '/var/www/html/ffmpeg/ffprobe',
+        'ffprobe.binaries' => FFPROBE_BINARIES,
     ));;
 
 
