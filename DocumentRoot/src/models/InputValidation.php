@@ -17,10 +17,10 @@ class InputValidation
 
     public function __construct(
 
-        /** @var string Le nom du champ de formulaire référencé */
+        /** @var string Le nom du champ de formulaire */
         public  string $name = "",
 
-        /** @var string Le nom du champ de formulaire référencé */
+        /** @var string Le valeur du champ de formulaire */
         public  string $value = "",
 
         /** @var string Le message à afficher pour le champ */

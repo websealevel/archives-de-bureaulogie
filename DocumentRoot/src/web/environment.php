@@ -39,7 +39,7 @@ function in_maintenance_mode(): bool
 }
 
 /**
- * Retourne vrai si le site est en maintenance, faux sinon
+ * Retourne vrai si la création de compte est activée, faux sinon
  * @global array $_ENV
  */
 function is_signup_activated(): bool
