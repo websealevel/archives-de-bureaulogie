@@ -8,6 +8,8 @@
 
 autload_core();
 require_once __DIR__ . '/const.php';
+require_once __DIR__ . '/ffmpeg.php';
+
 
 /**
  * Retourne vrai si le fichier source est valide (validation via le DTD), faux sinon
@@ -79,15 +81,18 @@ function is_source_valid(string $file_name, $path = PATH_SOURCES)
 
     $info = pathinfo($file_path);
 
-    if ($info["extension"] !== EXTENSION_SOURCE) {
 
+    if ($info["extension"] !== EXTENSION_SOURCE) {
         $message = sprintf("La source %s n'a pas un format valide", $file_name);
         throw new Exception($message);
     }
 
     //Validate media file
-    $ffprobe = FFMpeg\FFProbe::create();
-    if (!$ffprobe->isValid($file_path)) {
+    $ffprobe = FFMpeg\FFProbe::create(array(
+        'ffprobe.binaries' => FFPROBE_BINARIES,
+    ));
+
+    if (!$ffprobe->isValid('/var/www/html/sources/le-tribunal-des-bureaux--2.mp4')) {
         $message = sprintf("La vidéo source %s n'est pas valide ou n'existe pas.", $file_name);
         throw new Exception($message);
     }
@@ -114,7 +119,7 @@ function is_clip_valid(string $file_name, $path = PATH_CLIPS)
     }
 
     //Validate media file
-    $ffprobe = FFMpeg\FFProbe::create();
+    $ffprobe = ffbprobe_instance();
     if (!$ffprobe->isValid($file_path)) {
         $message = sprintf("L'extrait %s n'est pas valide.", $file_name);
         throw new Exception($message);
@@ -187,7 +192,7 @@ function are_timecodes_within_bounds(string $start, string $end, string $file_so
 
     $path_file_source = PATH_SOURCES . '/' . $file_source;
 
-    $ffprobe = FFMpeg\FFProbe::create();
+    $ffprobe = ffbprobe_instance();
 
     $source_duration_in_seconds = $ffprobe
         ->streams($path_file_source)

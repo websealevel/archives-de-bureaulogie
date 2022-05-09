@@ -9,7 +9,7 @@
 require_once __DIR__ . '/const.php';
 require_once __DIR__ . '/query.php';
 require_once __DIR__ . '/journaling.php';
-
+require_once __DIR__ .'/ffmpeg.php';
 
 /**
  * Génére les clips déclarés dans le fichier source 
@@ -80,12 +80,7 @@ function clip_source(DOMElement $clip, string $file_source): string
 
     // $ffmpeg = FFMpeg\FFMpeg::create();
 
-    $ffmpeg = FFMpeg\FFMpeg::create(array(
-        'ffmpeg.binaries'  => FFMPEG_BINARIES,
-        'ffprobe.binaries' => FFPROBE_BINARIES,
-        'timeout'          => intval(FFMPEG_TIMEOUT),
-        'ffmpeg.threads'   => intval(FFMPEG_THREADS),
-    ));
+    $ffmpeg = ffpmeg_instance();
 
     $video = $ffmpeg->open($path_source);
 

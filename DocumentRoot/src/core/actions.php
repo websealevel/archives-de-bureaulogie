@@ -65,10 +65,8 @@ function action_download_video(DownloadRequest $download_request, string $path_t
  * Valide et déplace une vidéo téléchargée vers le dossier sources
  * @param string $path_to_download Le fichier téléchargé
  */
-function action_make_source_of_download(string $path_to_download): bool
+function action_move_download_to_source(string $path_to_download): bool
 {
-
-
 
     return false;
 }
