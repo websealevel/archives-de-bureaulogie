@@ -8,15 +8,14 @@ DocumentRoot/sources/*
 DocumentRoot/downloads/*
 !/DocumentRoot/downloads/README.md
 !/DocumentRoot/downloads/index.php
-DocumentRoot/ffpmeg/*
-!/DocumentRoot/ffpmeg/index.php
+DocumentRoot/ffmpeg/*
+!/DocumentRoot/ffmpeg/index.php
 vendor
 *.mp4
 *.avi
 *webm
 journal.log
 youtube-dl
-ffmpeg/
 DocumentRoot/.env
 DocumentRoot/web/.env
 DocumentRoot/web/.env_db
