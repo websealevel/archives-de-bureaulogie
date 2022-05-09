@@ -1,3 +1,3 @@
 # ffmpeg/ffprob dependencies
 
-Installer les binaires ffpmeg et ffprobe ici.
+Installer les binaires `ffpmeg` et `ffprobe` ici.
