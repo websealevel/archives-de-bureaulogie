@@ -8,6 +8,7 @@
  */
 
 require_once __DIR__ . '/log.php';
+require_once __DIR__ . '/../core/const.php';
 
 /**
  * Retourne le titre du site
@@ -27,15 +28,20 @@ function home_rel_url(): string
     return '/';
 }
 
+/**
+ * Retourne le nom de domaine du site
+ * @return string
+ */
 function host(): string
 {
     return filter_input(INPUT_SERVER, 'HTTP_HOST');
 }
 
 /**
- * Retourne l'url du site
+ * Retourne l'url du site (protocole et nom de domaine)
+ * @return string
  */
-function site_url()
+function site_url(): string
 {
     $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
     $domain = host();
@@ -191,8 +197,28 @@ function validate_posted_form(array $inputs): array
  */
 function web_clips_path(): string
 {
-    $path_clips = __DIR__ . '/../../../extraits';
-    return $path_clips;
+    $path = sprintf("%s", PATH_CLIPS);
+    return $path;
+}
+
+/**
+ * Retourne le path des downloads sur le serveur
+ * @return string Le path des downloads
+ */
+function web_downloads_path(): string
+{
+    $path = sprintf("%s", PATH_DOWNLOADS);
+    return $path;
+}
+
+/**
+ * Retourne le path des sources sur le serveur
+ * @return string Le path des downloads
+ */
+function web_sources_path(): string
+{
+    $path = sprintf("%s", PATH_SOURCES);
+    return $path;
 }
 
 /**

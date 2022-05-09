@@ -29,14 +29,16 @@ if (!current_user_can('submit_clip'))
 $url = "http://back.ackboo.test/src/web/templates/the_hustle.mp4";
 // OK !!
 $url_extraits = 'src/web/templates/the_hustle.mp4';
-//Au dessus du document root
-$url_extraits = '../extraits/le-tribunal-des-bureaux--2--plante-et-luminaire--00.08.27.300--00.09.29.325.mp4';
-dump($url_extraits);
+// OK !!
+$url_extraits = 'extraits/le-tribunal-des-bureaux--2--plante-et-luminaire--00.08.27.300--00.09.29.325.mp4';
+// !! OK
+$url_official = web_clip_path('le-tribunal-des-bureaux--2--plante-et-luminaire--00.08.27.300--00.09.29.325.mp4');
+dump($url_official);
 ?>
 
 
 <video width="320" height="240" controls>
-    <source src="<?php echo $url_extraits; ?>" type="video/mp4">
+    <source src="<?php echo web_clip_path('le-tribunal-des-bureaux--2--plante-et-luminaire--00.08.27.300--00.09.29.325.mp4'); ?>" type="video/mp4">
     Your browser does not support the video tag.
 </video>
 
