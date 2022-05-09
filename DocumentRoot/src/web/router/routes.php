@@ -36,6 +36,9 @@ function routes(): array
             '/clip' => function () {
                 present_template('clip');
             },
+            '/download-source' => function () {
+                present_template('download-source');
+            },
             '/submit_ref' => function () {
                 present_template('submit-ref');
             }

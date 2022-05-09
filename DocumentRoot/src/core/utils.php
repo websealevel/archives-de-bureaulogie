@@ -115,4 +115,3 @@ function format_to_source_file(DownloadRequest $download_request)
     }
     return $file_name;
 }
-

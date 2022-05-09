@@ -8,7 +8,6 @@
 
 autload_core();
 require_once __DIR__ . '/const.php';
-require_once __DIR__ . '/ffmpeg.php';
 
 
 /**

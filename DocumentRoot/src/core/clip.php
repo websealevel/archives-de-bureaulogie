@@ -9,7 +9,6 @@
 require_once __DIR__ . '/const.php';
 require_once __DIR__ . '/query.php';
 require_once __DIR__ . '/journaling.php';
-require_once __DIR__ .'/ffmpeg.php';
 
 /**
  * Génére les clips déclarés dans le fichier source 

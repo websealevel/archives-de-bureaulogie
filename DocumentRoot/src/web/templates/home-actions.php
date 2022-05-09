@@ -22,6 +22,10 @@ require_once __DIR__ . '/../current-user.php';
         <li><a href="clip">Créer un nouvel extrait</a></li>
     <?php endif;  ?>
 
+    <?php if (current_user_can('add_source')) :  ?>
+        <li><a href="clip">Créer un nouvel extrait</a></li>
+    <?php endif;  ?>
+
 </ul>
 
 <h3>Archives bibliographiques</h3>

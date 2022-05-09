@@ -58,3 +58,67 @@ function map_source_to_option(DOMElement $source): string
     $label = $source->getAttribute('label');
     return sprintf('<option name="%s">%s</option>', $name, $label);
 }
+
+/**
+ * Retourne le path des downloads sur le serveur
+ * @return string Le path des downloads
+ */
+function web_downloads_path(): string
+{
+    $path = sprintf("%s", PATH_DOWNLOADS);
+    return $path;
+}
+
+/**
+ * Retourne le path des sources sur le serveur
+ * @return string Le path des downloads
+ */
+function web_sources_path(): string
+{
+    $path = sprintf("%s", PATH_SOURCES);
+    return $path;
+}
+
+/**
+ * Retourne le path d'un clip sur le serveur
+ * @return string Le path des clips
+ * @throws Exception - Si le clip n'existe pas
+ */
+function web_clip_path(string $clip_name): string
+{
+    $path = web_clips_path();
+    $clip_path = sprintf("%s/%s", $path, $clip_name);
+    if (!file_exists($clip_path))
+        throw new Exception("L'extrait n'existe pas sur le serveur.");
+    return $clip_path;
+}
+
+/**
+ * Ecrit sur la sortie standard l'url d'un clip (attribut source tag video)
+ * @param string $clip_name
+ * @return void
+ */
+function esc_video_clip_url_e(string $clip_name)
+{
+    $url = web_clip_path($clip_name);
+    if ($url !== filter_var($url, FILTER_SANITIZE_URL)) {
+        throw new Exception("L'url de l'extrait n'est pas valide.");
+    }
+    dd($url);
+    echo $url;
+    return;
+}
+/**
+ * Ecrit sur la sortie standard l'url d'une vidéo source (attribut source tag video)
+ * @param string $source_name
+ * @return void
+ */
+function esc_video_source_url_e(string $source_name)
+{
+    $url = web_clip_path($source_name);
+    if ($url !== filter_var($url, FILTER_SANITIZE_URL)) {
+        throw new Exception("L'url de l'extrait n'est pas valide.");
+    }
+    echo $url;
+    return;
+}
