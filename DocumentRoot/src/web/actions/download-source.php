@@ -12,6 +12,7 @@ require_once __DIR__ . '/../../models/InputValidation.php';
 require_once __DIR__ . '/../../models/Notice.php';
 require_once __DIR__ . '/../utils.php';
 require_once __DIR__ . '/../database/repository-roles-capabilities.php';
+require_once __DIR__ . '/../core-interface.php';
 
 /**
  * Télécharge une vidéo source depuis une url valide vers le dossier source
@@ -63,7 +64,6 @@ function download_source()
         return InputStatus::Invalid === $input->status;
     });
 
-
     //Si des validations ont échoué, on retourne à la page avec les erreurs
     if (!empty($invalid_inputs))
         redirect('/download-source', 'form_errors', $input_validations);
@@ -72,4 +72,6 @@ function download_source()
     if (is_authentification_confirmation_required('add_source')) {
         redirect('/confirm-authentification');
     }
+
+    dd('Let s download');
 }

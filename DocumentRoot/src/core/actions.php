@@ -29,7 +29,7 @@ function action_update_clips()
 }
 
 /**
- * Supprime les clips invalides/non déclarés dans le fichier source et les sources invalides
+ * Supprime les clips invalides(non déclarés dans le fichier source, format invalide) et les sources invalides(format invalide)
  * @return void
  */
 function action_clean()
@@ -59,14 +59,4 @@ function action_download_video(DownloadRequest $download_request, string $path_t
 {
     $file = download($download_request, $path_to_download);
     return $file;
-}
-
-/**
- * Valide et déplace une vidéo téléchargée vers le dossier sources
- * @param string $path_to_download Le fichier téléchargé
- */
-function action_move_download_to_source(string $path_to_download): bool
-{
-
-    return false;
 }

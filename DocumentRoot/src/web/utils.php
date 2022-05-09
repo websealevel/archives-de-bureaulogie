@@ -200,13 +200,4 @@ function validate_posted_form(array $inputs): array
     return $input_validations;
 }
 
-/**
- * Retourne le path des clips sur le serveur
- * @return string Le path des clips
- */
-function web_clips_path(): string
-{
-    $path = sprintf("%s", PATH_CLIPS);
-    return $path;
-}
 

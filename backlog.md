@@ -149,19 +149,18 @@ A part
 
 ### taches
 
-- normaliser l'audio SUR l'extrait []
+- *normaliser le volume* avec une valeur par défaut (voir ré-encodage) au post-montage. Le volume de la piste audio est défini par défaut par une métadonnée. Il faut que la normalisation se fasse sur le cut et non sur la vidéo entière (normalisation est une fonction de la piste entière, analyse les pics/creux de volume sur tout le volume et essaie de normaliser à partir de ça. Donc attention à ça) []
 - activer/desactiver inscriptions au site [x]
-- utliser youtube-dl en local
+- utliser youtube-dl en local []
 - utiliser ffmpeg/ffprobe en local [x]
 - pas de password recover [x]
 - ecran Creer un extrait []
-- ecran Télécharger une source 
+- ecran Télécharger une source/Lister sources déja présentes [][x]
+- ecran Liste des extraits par Source [] 
 - ecran Ajouter une entrée Biblio
 - ecran Editer une entrée Biblio  
 - ecran Liste biblios en attente de modération  
-- ecran Liste des extraits par Source 
 - ecran liste des bureaulogues  
-- ecran nos contributeurs
 - modération
 
 ### Interface graphique de *cut*
@@ -172,7 +171,7 @@ A part
 - timecode entrée et de sortie éditables
 - manipuler les timecodes via une interface graphique sur le player (luxe)
 - plusieurs cut dans un seul fichier via des marqueurs avec label des extraits, en un clic exporter tous les marqueurs (luxe)
-- *normaliser le volume* avec une valeur par défaut (voir ré-encodage) au post-montage. Le volume de la piste audio est défini par défaut par une métadonnée. Il faut que la normalisation se fasse sur le cut et non sur la vidéo entière (normalisation est une fonction de la piste entière, analyse les pics/creux de volume sur tout le volume et essaie de normaliser à partir de ça. Donc attention à ça)
+
 
 ## Sécurité
 
@@ -191,5 +190,6 @@ A part
 - ajouter honey pot dans le form d'inscription (voir ce que je peux faire d'autre)
 - pour les comptes admin on va leur associer des adresses IP autorisées en plus de l'authentification
 - telechargament de sources autorisé que depuis la chaine de canardPC []
+- finir la confirmation d'authentification sur les actions sensibles []
 
 

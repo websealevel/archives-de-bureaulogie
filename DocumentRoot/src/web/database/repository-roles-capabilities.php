@@ -46,5 +46,5 @@ function role_has_cap(string $role, string $cap): bool
  */
 function is_authentification_confirmation_required(string $cap): bool
 {
-    return true;
+    return false;
 }
