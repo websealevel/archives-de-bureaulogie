@@ -1,13 +1,17 @@
 <?php
 
 /**
- * Instance de ffpmeg/ffprobe configuré sur le path local
+ * Lancer des instances de ffpmeg/ffprobe configuré avec les bin sur le path local
  * Description:
  *
  * @link
  *
  * @package wsl 
  */
+
+autload_core();
+
+require_once __DIR__ . '/const.php';
 
 use FFMpeg\FFMpeg;
 use FFMpeg\FFProbe;
