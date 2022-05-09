@@ -10,6 +10,7 @@ DocumentRoot/downloads/*
 !/DocumentRoot/downloads/index.php
 DocumentRoot/ffmpeg/*
 !/DocumentRoot/ffmpeg/index.php
+!/DocumentRoot/ffmpeg/README.md
 vendor
 *.mp4
 *.avi
