@@ -22,9 +22,24 @@ function site_title(): string
  * Retourne la home du site
  * @return string le titre du site
  */
-function site_url(): string
+function home_rel_url(): string
 {
     return '/';
+}
+
+function host(): string
+{
+    return filter_input(INPUT_SERVER, 'HTTP_HOST');
+}
+
+/**
+ * Retourne l'url du site
+ */
+function site_url()
+{
+    $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
+    $domain = host();
+    return sprintf("%s%s", $protocol, $domain);
 }
 
 /**

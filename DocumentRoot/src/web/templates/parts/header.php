@@ -42,7 +42,7 @@ require_once __DIR__ . '../../../utils.php';
 
             <div class="site-branding">
                 <p class="site-title">
-                    <a href="<?php esc_html_e(site_url()); ?>">
+                    <a href="<?php esc_html_e(home_rel_url()); ?>">
                         <h1>
                             <?php esc_html_e(site_title()); ?>
                         </h1>
