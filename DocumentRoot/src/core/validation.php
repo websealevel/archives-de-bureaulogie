@@ -117,10 +117,9 @@ function is_clip_valid(string $file_name, $path = PATH_CLIPS)
         throw new Exception($message);
     }
 
-
     //Validate media file
     $ffprobe = FFMpeg\FFProbe::create(array(
-        'ffprobe.binaries' => '/var/www/html/ffmpeg/ffprobe',
+        'ffprobe.binaries' => FFPROBE_BINARIES,
     ));;
     if (!$ffprobe->isValid($file_path)) {
         $message = sprintf("L'extrait %s n'est pas valide.", $file_name);

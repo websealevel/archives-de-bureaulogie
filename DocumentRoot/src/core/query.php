@@ -29,6 +29,11 @@ function query_declared_sources(string $file_source = SOURCE_FILE): DOMNodeList
         return !is_source_available($source->getAttribute('name'));
     });
 
+    if (!empty($not_found)) {
+        $message = sprintf("%s sources sont déclarées dans le fichier source mais ne sont pas présentes sur le verveur !", count($not_found));
+        throw new Exception($message);
+    }
+
     return $sources;
 }
 

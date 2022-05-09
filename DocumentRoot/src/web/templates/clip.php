@@ -30,7 +30,7 @@ if (!current_user_can('submit_clip'))
 
 <div name="preview_source">
     <video width="320" height="240" controls>
-        <source src="<?php echo esc_web_clip_path_url_e('le-tribunal-des-bureaux--2--plante-et-luminaire--00.08.27.300--00.09.29.325.mp4'); ?>" type="video/mp4">
+        <source src="<?php ?>" type="video/mp4">
         Votre navigateur ne supporte pas le tag video HTML5 :(
     </video>
 
