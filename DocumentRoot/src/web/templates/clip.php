@@ -20,6 +20,7 @@ if (!current_user_can('submit_clip'))
 <?php present_header(); ?>
 
 <h2>Créer un extrait</h2>
+
 <a href="/">Retour</a>
 
 <p>Lore ipsum</p>
@@ -29,4 +30,4 @@ if (!current_user_can('submit_clip'))
     Your browser does not support the video tag.
 </video>
 
-<?php present_footer(); ?>
+<?php present_footer(array('template-clip')); ?>

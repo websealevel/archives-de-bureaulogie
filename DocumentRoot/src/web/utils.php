@@ -69,10 +69,17 @@ function esc_html(string $text): string
 }
 
 /**
- * Inclut les scripts js sur la sortie standards dans le footer.
+ * Ecrit les scripts js sur la sortie standard dans une balise script.
+ * @param array $scripts Les scripts js à sortir sur la sortie standard
  */
-function enqueue_js_scripts()
+function enqueue_js_scripts(array $scripts = array())
 {
+    echo '<script>';
+    foreach ($scripts as $script) {
+        $js_script_path = sprintf("%s/js/%s.js", ASSETS_PATH, $script);
+        require $js_script_path;
+    }
+    echo '</script>';
 }
 
 /**
@@ -123,11 +130,13 @@ function present_header(): void
 }
 /**
  * Ecrit le footer sur la sortie standard (output de l'html)
+ * @param array $js_dependencies Scripts JS à enqueue
  * @return void
  */
-function present_footer()
+function present_footer(array $js_scripts = array())
 {
-    present_template_part('footer');
+    present_template_part('footer', $js_scripts);
+    enqueue_js_scripts($js_scripts);
 }
 
 /**

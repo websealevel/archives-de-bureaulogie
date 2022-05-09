@@ -14,6 +14,7 @@ Le projet a l’architecture suivante :
 - un programme client web qui sert d'interface utilisateur pour éditer les extraits (ajouter, modifier, supprimer)
 - un programme qui se charge de lire/manipuler le fichier source pour créer/supprimer/modifier les extraits
 - un deuxième programme qui *post* à une fréquence donnée des extraits issus de cette base de données (aka le Twitter Bot)
+- une base de données pour gérer les comptes utilisateurs et les rôles associés
 
 #### Le *fichier source*
 
@@ -36,6 +37,7 @@ Après une phase de tests on retiendra les paramètres d'encodage avec les valeu
   - data-transfer rate : 96 kbps [x]
   - audio bitrate/échantillonage : 48000 Hz(standard dans un fichier vidéo)  [x]
 - cut à la milliseconde [x]
+- piste audio normalisée sur l'intégralité de l'extrait (et non de la source) []
 
 Ces paramètres s'appliquent au téléchargement des vidéos sources et à l'encodage des extraits générés par l'application.
 
@@ -122,6 +124,11 @@ Chaque rôle de l'étage supérieur hérite des capacités des rôles de l'étag
   - voir ses extraits vidéos par source
   - voir ses ressources biblios
 
+A part
+
+- twitterbot
+  - get l'API twitter
+
 ### Métrique des ressources (extraits et references biblios)
 
 - Metriques de popularité en recueillant les retweet et likes de chaque ressource.
@@ -147,18 +154,8 @@ Chaque rôle de l'étage supérieur hérite des capacités des rôles de l'étag
 
 ### Interface graphique de *cut*
 
-#### Pourquoi ?
-
-Le développement d'une petite application web en surcouche de l'édition du fichier source parait rapidement indispensable pour plusieurs raisons:
-
-- éviter de mauvaises manipulations sur le fichier source
-- faciliter l'ajout d'extrait sans erreur
-- prévisualiser l'extrait avant de l'enregistrer (un bon cut se fait à la miliseconde)
-- pouvoir visionner la vidéo sur la page où on ajuste les timecodes pour éditer son cut de manière plus agréable
-
-#### Besoins identifiés
-
-- preview de la vidéo source
+- preview de la vidéo source + preview de l'extrait
+- mettre en pause la vidéo source si play video extrait et vice versa
 - indique le timecode a tout moment
 - timecode entrée et de sortie éditables
 - manipuler les timecodes via une interface graphique sur le player (luxe)
@@ -176,5 +173,7 @@ Le développement d'une petite application web en surcouche de l'édition du fic
 - faire un test de pénétration
 - couvrir de tests les droits et capabilites []
 - mettre en place des roles et capacités associes [x]
+- creer un utilisateur twitter pour chaque twitter bot avec un role twitter_user
+- utiliser pcbs et l'autre pour formatter le code au standard PSR
 
 
