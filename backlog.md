@@ -177,6 +177,6 @@ A part
 - utiliser pcbs et l'autre pour formatter le code au standard PSR
 - installer un paquet qui gere les bans d'IP (type wordfence), tentatives de login repetees, brut force
 - ajouter honey pot dans le form d'inscription (voir ce que je peux faire d'autre)
-- pour les comptes admin on va ajouter des adresses IP en plus de l'authentification
+- pour les comptes admin on va leur associer des adresses IP autorisées en plus de l'authentification
 
 
