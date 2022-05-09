@@ -88,10 +88,11 @@ function is_source_valid(string $file_name, $path = PATH_SOURCES)
 
     //Validate media file
     $ffprobe = FFMpeg\FFProbe::create(array(
-        'ffprobe.binaries' => FFPROBE_BINARIES,
-    ));
+        'ffprobe.binaries' => '/var/www/html/ffmpeg/ffprobe',
+    ));;
 
-    if (!$ffprobe->isValid($file_name)) {
+
+    if (!$ffprobe->isValid($file_path)) {
         $message = sprintf("ffprobe: la vidéo source %s n'a pas un format valide.", $file_name);
         throw new Exception($message);
     }
@@ -118,7 +119,9 @@ function is_clip_valid(string $file_name, $path = PATH_CLIPS)
 
 
     //Validate media file
-    $ffprobe = ffbprobe_instance();
+    $ffprobe = FFMpeg\FFProbe::create(array(
+        'ffprobe.binaries' => '/var/www/html/ffmpeg/ffprobe',
+    ));;
     if (!$ffprobe->isValid($file_path)) {
         $message = sprintf("L'extrait %s n'est pas valide.", $file_name);
         throw new Exception($message);

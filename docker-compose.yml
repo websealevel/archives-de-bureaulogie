@@ -15,7 +15,6 @@ services:
       - web
     volumes:
       - "./DocumentRoot/:/var/www/html/:rw"
-      - "./vendor/:/var/www/vendor"
       - "./DocumentRoot/.htaccess:/var/www/html/.htaccess"
       - "./DocumentRoot/php.ini:/usr/local/etc/php/conf.d/aooc_php.ini"
       - "./DocumentRoot/.env:/var/www/html/src/.env"

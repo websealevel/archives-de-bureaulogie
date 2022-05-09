@@ -31,15 +31,3 @@ function ffpmeg_instance(): FFMpeg
 
     return $ffmpeg;
 }
-/**
- * Retourne une instance de ffrpobe avec une config locale
- * @return FFProbe
- */
-function ffbprobe_instance(): FFProbe
-{
-    $ffprobe = FFMpeg\FFProbe::create(array(
-        'ffmpeg.binaries'  => FFMPEG_BINARIES,
-        'temporary_directory' => __DIR__ .'/ffmpeg-tmp'
-    ));
-    return $ffprobe;
-}

@@ -29,8 +29,6 @@ function query_declared_sources(string $file_source = SOURCE_FILE): DOMNodeList
         return !is_source_available($source->getAttribute('name'));
     });
 
-    dd($not_found);
-
     return $sources;
 }
 
