@@ -175,5 +175,8 @@ A part
 - mettre en place des roles et capacités associes [x]
 - creer un utilisateur twitter pour chaque twitter bot avec un role twitter_user
 - utiliser pcbs et l'autre pour formatter le code au standard PSR
+- installer un paquet qui gere les bans d'IP (type wordfence), tentatives de login repetees, brut force
+- ajouter honey pot dans le form d'inscription (voir ce que je peux faire d'autre)
+- pour les comptes admin on va ajouter des adresses IP en plus de l'authentification
 
 
