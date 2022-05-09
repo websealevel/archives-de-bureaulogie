@@ -234,3 +234,17 @@ function web_clip_path(string $clip_name): string
         throw new Exception("L'extrait n'existe pas sur le serveur.");
     return $clip_path;
 }
+
+/**
+ * Ecrit sur la sortie standard l'url du clip
+ * @param string $clip_name Le nom du clip demandé
+ * @return void
+ */
+function esc_web_clip_path_url_e(string $clip_name)
+{
+    $url = web_clip_path($clip_name);
+    if ($url !== filter_var($url, FILTER_SANITIZE_URL)) {
+        throw new Exception("L'url de l'extrait n'est pas valide.");
+    }
+    echo $url;
+}
