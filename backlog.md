@@ -99,6 +99,16 @@ Envoyer un mail
 - "Féliciations, notre archiviste a validé votre ressource bibliographique. Elle a été intégrée au corpus existant."
 - "Nous avons le regret de vous annoncer que votre ressource bibliohraphique a été rejeté pour la raison suivante {X}. Cette décision est malheureusement irrévocable."
 
+Dire qu'on ne modifie pas quelque chose de soumis, on le valide ou non. On peut se permettre de corriger des fautes pour les ref biblio (en accord avec la méta) et si ça pose un pb de sens, dire que nous aussi (bienveillant) "on fait des fotes(barré) fautes". Pour les extraits on corrige que si ça cree un pb de compréhension.
+
+### Pages
+
+- Charte : strict sur le contenu, toute infraction a la charte, banissement (IP banni et compte suspendu)
+- Qui sommes nous ?
+- Nous soutenir : lien vers patreon, expliquer pourquoi (hebergement, travail, nom de domaine, vidéos) avec des chiffres. Engagement à corriger les bugs et la sécurité mais soutien sans attendre une garantie en retour. Si le projet n'est plus maintenu les soutiens seront automatiquement cloturés.
+- Mettre un message pour découverte de faille de sécu, envoyer par mail avant d'ouvrir une issue
+- Mettre un message pour les hacker "bravo, peux tu m'expliquer comment tu as fait ? ça m'interesse."
+
 ### Rôles et droits associés
 
 Chaque rôle de l'étage supérieur hérite des capacités des rôles de l'étage inférieur.
