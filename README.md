@@ -1,6 +1,6 @@
 # Archives de bureaulogie
 
-*Les archives de bureaulogie* est un projet qui a pour ambition de promouvoir la bureaulogie en proposant une plateforme collaborative de publication d'extraits vidéos du Tribunal des bureaux d'ackoo (père fondateur de la bureaulogie) ainsi que de diffusion de références bibliographiques pour approfondir le sujet.
+*Les archives de bureaulogie* est un projet qui a pour ambition de promouvoir la bureaulogie en proposant une plateforme collaborative de publication d'extraits vidéos du Tribunal des bureaux d'ackboo (père fondateur de la bureaulogie) ainsi que de diffusion de références bibliographiques pour approfondir le sujet.
 
 - [Archives de bureaulogie](#archives-de-bureaulogie)
   - [Projet](#projet)
