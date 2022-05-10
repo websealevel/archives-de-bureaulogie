@@ -17,7 +17,7 @@ present_header();
 <p>En crééant un compte sur
     <a href="<?php echo $_SERVER['HTTP_HOST']; ?>">
         <?php echo $_SERVER['HTTP_HOST']; ?>
-    </a> <em> vous êtes engagée à respecter cette charte</em>.
+    </a> <em> vous êtes engagé·e à respecter cette charte</em>.
 </p>
 
 <p>Toute contribution ou attitude provenant d'un compte qui ne respecte pas la charte sera suspendu, voire supprimé.</p>
