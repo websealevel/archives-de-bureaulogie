@@ -79,22 +79,20 @@ function download_source()
             return new InputValidation('series', $series, '', InputStatus::Valid);
         }),
 
-        new FormInput('slug', $_POST['slug'], function (string $slug): InputValidation {
+        new FormInput('name', $_POST['name'], function (string $name): InputValidation {
             //Non vide.
-            if (empty($slug))
-                return new InputValidation('slug', $slug, "Renseignez un identifiant.");
+            if (empty($name))
+                return new InputValidation('name', $name, "Renseignez un identifiant.");
 
             //Seulement alphanumerique, sans espace, entre 1 et 12 caractères
-            if (!(preg_match('/[a-z0-9]/', $slug) && mb_strlen($slug) >= 1 && mb_strlen($slug) < 12)) {
-                return new InputValidation('slug', $slug, "Renseignez un identifiant valide. Seuls les caratères de a à z et de 0 à 9 sont autorisés.");
+            if (!(preg_match('/[a-z0-9]{1,25}/', $name))) {
+                return new InputValidation('name', $name, "Renseignez un identifiant valide. Seuls les caratères de a à z et de 0 à 9 sont autorisés.");
             }
             //N'existe pas déjà en base.
-            if (!is_available_source_name($_POST['series'], $slug)) {
-                return new InputValidation('slug', $slug, "Cet identifiant est déjà utilisé, veuillez en choisir un autre.");
+            if (!is_available_source_name($_POST['series'], $name)) {
+                return new InputValidation('name', $name, "Cet identifiant est déjà utilisé, veuillez en choisir un autre.");
             }
-
-
-            return new InputValidation('slug', $slug, '', InputStatus::Valid);
+            return new InputValidation('name', $name, '', InputStatus::Valid);
         })
     );
 

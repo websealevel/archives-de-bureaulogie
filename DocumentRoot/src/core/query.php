@@ -53,6 +53,8 @@ function query_source_by_name_attr(string $value, string $file_source = SOURCE_F
 
     $match = $xpath->query($query);
 
+    dd($match);
+
     //Aucun match, Node vide
 
     //Un match, La seule node

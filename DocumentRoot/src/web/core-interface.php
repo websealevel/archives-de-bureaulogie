@@ -182,7 +182,7 @@ function is_available_source_name(string $base_name, string $slug): bool
 
     $match = query_source_by_name_attr($full_name);
 
-    dd('ON EST LA');
+    dd($match);
 
     return false;
 }
