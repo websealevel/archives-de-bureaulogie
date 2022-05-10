@@ -107,6 +107,12 @@ define('ALLOWED_DOMAINS_TO_DOWNLOAD_SOURCES_FROM', array(
     'www.youtube.com',
     'youtube.com'
 ));
+/**
+ * La liste des series possibles pour (formatage du nom des vidéos sources)
+ */
+define('SOURCE_SERIES', array(
+    'le-tribunal-des-bureaux'
+));
 
 /**
  * FFMPEG

@@ -14,6 +14,9 @@ require_once __DIR__ . '/../utils.php';
 require_once __DIR__ . '/../database/repository-roles-capabilities.php';
 require_once __DIR__ . '/../core-interface.php';
 
+use YoutubeDl\Options;
+use YoutubeDl\YoutubeDl;
+
 /**
  * Télécharge une vidéo source depuis une url valide vers le dossier source
  * @global array $_POST
@@ -24,15 +27,19 @@ function download_source()
     session_start();
 
     $form_inputs = array(
+
         new FormInput('source_url', $_POST['source_url'], function (string $source_url): InputValidation {
+
+            //Non vide.
             if (empty($source_url))
                 return new InputValidation('source_url', $source_url, "Renseignez une url valide de source à télécharger.");
 
+            //Format valide.
             if ($source_url !== filter_input(INPUT_POST, 'source_url', FILTER_SANITIZE_URL)) {
                 return new InputValidation('source_url', $source_url, "Renseignez une url valide de source à télécharger.");
             }
 
-            //Check que l'url a un domaine autorisé.
+            //Domaine autorisé.
             if (!defined('ALLOWED_DOMAINS_TO_DOWNLOAD_SOURCES_FROM'))
                 throw new Exception('Allowed domains n\'est pas défini. Potentielle faille.');
 
@@ -41,7 +48,6 @@ function download_source()
             $domain = $url_parts['host'];
 
             if (!in_array($domain, ALLOWED_DOMAINS_TO_DOWNLOAD_SOURCES_FROM)) {
-
                 return new InputValidation(
                     'source_url',
                     $source_url,
@@ -54,9 +60,39 @@ function download_source()
 
             //Contrainte sur la chaine youtube (juste celle de canardPC)
             return new InputValidation('source_url', $source_url, '', InputStatus::Valid);
+        }),
+
+        new FormInput('series', $_POST['series'], function (string $series): InputValidation {
+
+            if (!defined('SOURCE_SERIES'))
+                throw new Exception('SOURCE_SERIES n\'est pas défini.');
+
+            //Nom de série autorisé.
+            if (!in_array($series, SOURCE_SERIES)) {
+                return new InputValidation(
+                    'series',
+                    $series,
+                    sprintf(
+                        "Renseignez un nom de série valide. Voici les noms autorisés: %s",
+                        implode(", ", SOURCE_SERIES)
+                    )
+                );
+            }
+
+            return new InputValidation('series', $series, '', InputStatus::Valid);
+        }),
+
+        new FormInput('slug', $_POST['slug'], function (string $slug): InputValidation {
+            //Non vide.
+            if (empty($slug))
+                return new InputValidation('slug', $slug, "Renseignez une identifiant valide.");
+
+            //Seulement alphanumerique(hyphen), sans espace, entre 1 et 12 caractères
+            return new InputValidation('slug', $slug, '', InputStatus::Valid);
         })
     );
 
+    //Validation des champs
     $input_validations = validate_posted_form($form_inputs);
 
     //Filtrer que les champs avec un champs 'errors' non vide et status invalid.
@@ -74,5 +110,8 @@ function download_source()
     }
 
     dd('Let s download');
+    // $download_request = new DownloadRequest(
+    //     $input_validations['source_url']->value,
+    // );
     // download();
 }

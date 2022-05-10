@@ -19,29 +19,48 @@ if (!current_user_can('add_source'))
 ?>
 
 <?php present_header(); ?>
-
-<h2>Ajouter une nouvelle vidéo source à la bibliothèque</h2>
-
 <div>
     <a href="/">Retour</a>
 </div>
 
+<h2>Ajouter une nouvelle vidéo source à la bibliothèque</h2>
+
+<p>Les vidéos <em>sources</em> sont les vidéos originales et complètes à partir desquelles les extraits pourront être réalisés.</p>
+
+<h3>Liste des sources déjà présentes</h3>
 <?php esc_html_list_sources_e(); ?>
 
 <h3>Ajouter</h3>
 <?php esc_html_form_error_msg_e('source_url', 'form_errors'); ?>
-<form action="download-source" method="POST">
-    <label for="source_url">Renseigner l'url youtube de la vidéo</label>
-    <input type="url" name="source_url">
-    <input type="submit" value="Ajouter">
-</form>
+<main class="form-add-source">
+    <form action="download-source" method="POST">
+        <div>
+            <label for="source_url">Copier/coller l'url de la vidéo youtube</label>
+            <input type="url" name="source_url">
+        </div>
 
-<div name="preview_source">
-    <video width="320" height="240" controls>
-        <source src="" type="video/mp4">
-        Votre navigateur ne supporte pas le tag video HTML5 :(
-    </video>
-</div>
+        <label for="series">Choisir la série</label>
+        <select name="series" id="">
+            <option value="le-tribunal-des-bureaux" selected>Le tribunal des bureaux</option>
+        </select>
+        <div>
+            <label for="slug">Identifiant</label>
+            <input type="text" name="slug" pattern="[a-z0-9]" minlength="1" maxlength="12">
+        </div>
+        <div>
+            <input type="submit" value="Ajouter la vidéo aux sources">
+        </div>
+    </form>
+    <div name="preview_source">
+        <video width="320" height="240" controls>
+            <source src="" type="video/mp4">
+            Votre navigateur ne supporte pas le tag video HTML5 :(
+        </video>
+    </div>
+
+</main>
+
+
 
 
 <?php present_footer(); ?>

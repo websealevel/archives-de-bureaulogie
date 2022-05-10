@@ -103,21 +103,23 @@ function esc_sources_to_html_select_e(string $name_attr = 'sources'): void
 /**
  * Ecrit sur la sortie standard les sources sous la forme d'une liste
  * @param string $name_attr L'attribut name de la liste
+ * @param string $label Optional. Default no. Ajouter un label à la liste
  * @return void
  */
-function esc_html_list_sources_e(string $name_attr = 'sources'): void
+function esc_html_list_sources_e(string $name_attr = 'sources', string $label =''): void
 {
     $options = map_declared_sources_to_html_item('li');
 
-    $label = 'Liste des vidéos sources déjà présentes';
+    if (!empty($label)) {
+        $label = 'Liste des vidéos sources déjà présentes';
+        echo sprintf('<label for="%s">%s</label>', $name_attr, $label);
+    }
 
-    echo sprintf('<label for="%s">%s</label>', $name_attr, $label);
-
-    echo sprintf('<li name="%s">', $name_attr);
+    echo sprintf('<ul name="%s">', $name_attr);
     foreach ($options as $option) {
         echo $option;
     }
-    echo sprintf('</li>');
+    echo sprintf('</ul>');
     return;
 }
 
