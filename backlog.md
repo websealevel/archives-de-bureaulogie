@@ -163,6 +163,9 @@ A part
 - ecran liste des bureaulogues  
 - modération
 - dans le footer mettre performance (taille page, temps de reponse du serveur) si possible []
+- tout basculer dans des namespaces []
+- remplacer tous les require par une fonction []
+- deplacer le fichier source+dtd dans un dossier a part[]
 
 ### Interface graphique de *cut*
 
