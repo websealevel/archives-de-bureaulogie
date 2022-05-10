@@ -34,15 +34,11 @@ if (!current_user_can('add_source'))
 <h3>Ajouter</h3>
 <main class="form-add-source">
     <form action="download-source" method="POST">
-        <div>
-            <?php esc_html_form_error_msg_e('source_url', 'form_errors'); ?>
-            <label for="source_url">Copier/coller l'url de la vidéo youtube</label>
-            <input type="url" name="source_url" value="<?php esc_html_from_session_e('form_errors', 'source_url'); ?>" required>
-        </div>
+
 
         <div>
             <?php esc_html_form_error_msg_e('series', 'form_errors'); ?>
-            <label for="series">Choisir la série</label>
+            <label for="series">Choisissez la série à laquelle appartient la source</label>
             <select name="series" id="">
                 <option value="le-tribunal-des-bureaux" selected>Le tribunal des bureaux</option>
             </select>
@@ -50,8 +46,13 @@ if (!current_user_can('add_source'))
 
         <div>
             <?php esc_html_form_error_msg_e('slug', 'form_errors'); ?>
-            <label for="slug">Identifiant</label>
-            <input type="text" name="slug" pattern="[a-z0-9]{1,12}"  required  value="<?php esc_html_from_session_e('form_errors', 'slug'); ?>">
+            <label for="slug">Choisissez un identifiant court pour cette vidéo (un mot/nombre en minuscule)</label>
+            <input type="text" name="slug" pattern="[a-z0-9]{1,12}" required value="<?php esc_html_from_session_e('form_errors', 'slug'); ?>">
+        </div>
+        <div>
+            <?php esc_html_form_error_msg_e('source_url', 'form_errors'); ?>
+            <label for="source_url">Copiez/collez l'url de la vidéo youtube</label>
+            <input type="url" name="source_url" value="<?php esc_html_from_session_e('form_errors', 'source_url'); ?>" required>
         </div>
         <div name="preview_source">
             <p>Preview</p>
@@ -61,7 +62,7 @@ if (!current_user_can('add_source'))
             </video>
         </div>
         <div>
-            <input type="submit" value="Ajouter">
+            <input type="submit" value="Ajouter la source">
         </div>
     </form>
 </main>
