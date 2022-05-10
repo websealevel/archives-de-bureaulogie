@@ -171,7 +171,7 @@ function esc_video_source_url_e(string $source_name)
 }
 
 /**
- * Retourne vrai si la source est déjà déclarée en base, faux sinon
+ * Retourne vrai si la source est déjà déclarée, faux sinon
  * @param string $base_name La base du nom de la source
  * @param string $slug Le slug du nom de la source
  * @return bool
@@ -181,6 +181,9 @@ function is_available_source_name(string $base_name, string $slug): bool
     $full_name = build_source_name($base_name, $slug);
 
     $match = query_source_by_name_attr($full_name);
+
+
+    return false;
 }
 
 /**
