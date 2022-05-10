@@ -167,10 +167,17 @@ A part
 - deplacer le fichier source+dtd dans un dossier a part[]
 
 
+### Ecran Creer un extrait
+
 ### Ecran Ajouter une source
 
-- progression téléchargement
-- charger prévisualisation quand l'url est collée (js)
+- télécharger une vidéo apres soumission du formulaire [x]
+- progression téléchargement []
+- téléchargement en arrière plan []
+- charger prévisualisation quand l'url est collée (js) []
+- lancer le téléchargement via une requete AJAX sur l'API de l'appli (non bloquant) []
+- nettoyer si le téléchargement échoue et fails gracefully sans deconnecter []
+- si le téléchargement va à son terme appeler callback pour déclarer la nouvelle source dans le fichier source []
 
 ### Interface graphique de *cut*
 
@@ -203,6 +210,6 @@ A part
 - finir la confirmation d'authentification sur les actions sensibles []
 - installer un moniteur éthique pour analyser la fréquentation du site[]
 - vérifier que les error/exception handlers sont bien intégrés à chaque script []
-- certaines exceptions ne devraient pas logout l'utilisateur (ex téléchargement échoué), mauvais pour l'ux []
+- certaines exceptions ne devraient pas logout l'utilisateur (ex téléchargement échoué), mauvais pour l'ux [x] => solution: Les try/catch localement, sinon par défaut ça deconnecte
 
 
