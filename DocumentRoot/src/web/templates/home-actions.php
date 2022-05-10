@@ -11,7 +11,7 @@ require_once __DIR__ . '/../current-user.php';
 
 
 ?>
-
+<?php present_header(); ?>
 <h2>Bienvenue !</h2>
 
 <h3>Archives vidéos</h3>
@@ -36,3 +36,4 @@ require_once __DIR__ . '/../current-user.php';
 </ul>
 
 <a href="/log-out">Se déconnecter</a>
+<?php present_footer(); ?>

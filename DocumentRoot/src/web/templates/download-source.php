@@ -27,7 +27,7 @@ if (!current_user_can('add_source'))
 
 <p>Les vidéos <em>sources</em> sont les vidéos originales et complètes à partir desquelles les extraits pourront être réalisés.</p>
 
-<h3>Liste des sources déjà présentes</h3>
+<h3>Sources présentes dans la base</h3>
 <?php esc_html_list_sources_e(); ?>
 
 <h3>Ajouter</h3>
@@ -47,17 +47,17 @@ if (!current_user_can('add_source'))
             <label for="slug">Identifiant</label>
             <input type="text" name="slug" pattern="[a-z0-9]" minlength="1" maxlength="12">
         </div>
+        <div name="preview_source">
+            <p>Preview</p>
+            <video width="320" height="240" controls>
+                <source src="" type="video/mp4">
+                Votre navigateur ne supporte pas le tag video HTML5 :(
+            </video>
+        </div>
         <div>
             <input type="submit" value="Ajouter la vidéo aux sources">
         </div>
     </form>
-    <div name="preview_source">
-        <video width="320" height="240" controls>
-            <source src="" type="video/mp4">
-            Votre navigateur ne supporte pas le tag video HTML5 :(
-        </video>
-    </div>
-
 </main>
 
 
