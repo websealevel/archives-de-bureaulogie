@@ -36,6 +36,7 @@ function sign_up_user()
             new Notice("Vous êtes déjà connecté.", NoticeStatus::Success)
         ));
 
+
     $form_inputs = array(
         new FormInput('pseudo', $_POST['pseudo'], function (string $pseudo): InputValidation {
             if (empty($pseudo))
@@ -55,8 +56,8 @@ function sign_up_user()
         }),
 
         new FormInput('password', $_POST['password'], function (string $password): InputValidation {
-            if (strlen($password) < 6)
-                return new InputValidation('password', $password, 'Le mot de passe doit faire au moins 6 caractères');
+            if (strlen($password) < 6 || strlen($password) > 64)
+                return new InputValidation('password', $password, 'Le mot de passe doit faire au moins 6 caractères.');
 
             return new InputValidation('password', $password, '', InputStatus::Valid);
         }),
@@ -67,13 +68,18 @@ function sign_up_user()
 
             return new InputValidation('password_confirmation', $password_confirmation, '', InputStatus::Valid);
         }),
-        new FormInput('majority', $_POST['majority'], function (string $majority): InputValidation {
+        new FormInput('charte', isset($_POST['charte']), function (string $charte): InputValidation {
+            if (empty($charte))
+                return new InputValidation('charte', $charte, 'Vous devez accepter la charte pour pouvoir créer un compte.');
 
-            if (!isset($_POST['majority']))
+            return new InputValidation('majority', $charte, '', InputStatus::Valid);
+        }, true),
+        new FormInput('majority', isset($_POST['majority']), function (string $majority): InputValidation {
+            if (empty($majority))
                 return new InputValidation('majority', $majority, 'Vous devez être majeur pour pouvoir créer un compte.');
 
             return new InputValidation('majority', $majority, '', InputStatus::Valid);
-        })
+        }, true)
 
     );
 

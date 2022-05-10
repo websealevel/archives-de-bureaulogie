@@ -177,8 +177,8 @@ function validate_posted_form(array $inputs): array
 
         $name = $input->name;
 
-        //Check que le champ est POSTé.
-        if (!isset($_POST["{$name}"])) {
+        //Check que le champ est POSTé si c'est pas une checkbox
+        if (!isset($_POST["{$name}"]) && !$input->is_checkbox) {
             $input_validations["{$name}"] = new InputValidation(
                 $name,
                 "",

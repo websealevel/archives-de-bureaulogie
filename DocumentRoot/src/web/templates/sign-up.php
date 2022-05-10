@@ -62,12 +62,14 @@ if (!is_signup_activated())
 
     <ul class="sign-up--conditions">
         <li>
-            <input type="checkbox" name="charte" id="id_charte">
+            <?php esc_html_form_error_msg_e('charte', 'form_errors') ?>
+            <input type="checkbox" id="id_charte" name="charte">
             <label for="id_charte" required>J'ai reconnais avoir lu et compris <a href="/charte">la charte des Archives de Bureaulogie</a>, et je m'engage à la respecter <span class="required">*</span></label>
         </li>
         <li>
-            <input type="checkbox" id="id_majority" name="majority"><span class="required">*</span>
-            <label for="id_majority" required>Je certifie être majeur</label>
+            <?php esc_html_form_error_msg_e('majority', 'form_errors') ?>
+            <input type="checkbox" id="id_majority" name="majority">
+            <label for="id_majority" required>Je certifie être majeur<span class="required">*</span></label>
         </li>
 
     </ul>
