@@ -57,6 +57,8 @@ function core_download(DownloadRequest $download_request, string $download_path 
             ->output($file_name)
     );
 
+    dd($collection->getVideos());
+
     foreach ($collection->getVideos() as $video) {
         if ($video->getError() !== null) {
             throw new \Exception("Error downloading video: {$video->getError()}.");

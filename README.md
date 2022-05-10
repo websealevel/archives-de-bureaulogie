@@ -87,4 +87,5 @@ docker-compose up -d
 - [FFMPEG, Invoking command-line tools from PHP scripts](https://trac.ffmpeg.org/wiki/PHP)
 - [norkunas/youtube-dl-php ](https://packagist.org/packages/norkunas/youtube-dl-php), wrapper php pour youtube-dl
 - [youtube-dl](https://github.com/ytdl-org/youtube-dl), download videos from youtube.com or other video platforms 
+- [yt-dlp](https://github.com/yt-dlp/yt-dlp#installation), un fork de youtube-dlc, lui même un fork de youtube-dl. Nouvelles features avancées, bien maintenu. Alternative envisageable.
 - [lostlesscut](https://github.com/mifi/lossless-cut), le couteau suisse de l'édition vidéo/audio pour cut la vidéo d'origine

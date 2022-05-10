@@ -166,6 +166,12 @@ A part
 - remplacer tous les require par une fonction []
 - deplacer le fichier source+dtd dans un dossier a part[]
 
+
+### Ecran Ajouter une source
+
+- progression téléchargement
+- charger prévisualisation quand l'url est collée (js)
+
 ### Interface graphique de *cut*
 
 - preview de la vidéo source + preview de l'extrait
