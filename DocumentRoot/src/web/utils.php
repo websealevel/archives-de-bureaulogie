@@ -69,6 +69,29 @@ function esc_html(string $text): string
 }
 
 /**
+ * Ecrit sur la sortie standard le fil d'ariane
+ * @param string $relative_path Le chemin vers lequel le fil pointe
+ * @return void
+ */
+function esc_html_breadcrumbs(string $relative_path = '/'): void
+{
+    $uri_without_breadcrumbs = array(
+        '/',
+        '/confirm-authentification'
+    );
+
+    if (in_array($_SERVER['REQUEST_URI'], $uri_without_breadcrumbs))
+        return;
+?>
+    <div class="fil-arianne">
+        <a href="/">Retour</a>
+    </div>
+<?php
+    return;
+}
+
+
+/**
  * Ecrit les scripts js sur la sortie standard dans une balise script.
  * @param array $scripts Les scripts js à sortir sur la sortie standard
  */
@@ -140,7 +163,7 @@ function present_footer(array $js_scripts = array())
 }
 
 /**
- * Charge l'autoload.php de composer pour inclure les dépendances vendor du script appelant.
+ * Charge l'autoload.php de composer pour inclure les dépendances vendor du script appelant. Attention : ne pas appeler si le script appelant est dans une arborescence de 2 niveaux par rapport à vendor. Voir si on peut faire mieux.
  * @return void
  */
 function autoload(): void
@@ -195,30 +218,7 @@ function validate_posted_form(array $inputs): array
         }
 
         $input_validations["{$name}"] = $validation_callback($input->value);
-
     }
 
     return $input_validations;
-}
-
-/**
- * Ecrit sur la sortie standard le fil d'ariane
- * @param string $relative_path Le chemin vers lequel le fil pointe
- * @return void
- */
-function esc_html_breadcrumbs(string $relative_path = '/'): void
-{
-    $uri_without_breadcrumbs = array(
-        '/',
-        '/confirm-authentification'
-    );
-
-    if (in_array($_SERVER['REQUEST_URI'], $uri_without_breadcrumbs))
-        return;
-?>
-    <div class="fil-arianne">
-        <a href="/">Retour</a>
-    </div>
-<?php
-    return;
 }
