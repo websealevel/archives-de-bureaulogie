@@ -11,8 +11,8 @@ require_once __DIR__ . '/log.php';
 require_once __DIR__ . '/../core/const.php';
 
 /**
- * Retourne le titre du site
- * @return string le titre du site
+ * Retourne le titre du site.
+ * @return string le titre du site.
  */
 function site_title(): string
 {
@@ -20,8 +20,8 @@ function site_title(): string
 }
 
 /**
- * Retourne la home du site
- * @return string le titre du site
+ * Retourne la home du site.
+ * @return string le titre du site.
  */
 function home_rel_url(): string
 {
@@ -29,7 +29,7 @@ function home_rel_url(): string
 }
 
 /**
- * Retourne le nom de domaine du site
+ * Retourne le nom de domaine du site.
  * @return string
  */
 function host(): string
@@ -38,7 +38,7 @@ function host(): string
 }
 
 /**
- * Retourne l'url du site (protocole et nom de domaine)
+ * Retourne l'url du site (protocole et nom de domaine).
  * @return string
  */
 function site_url(): string
@@ -49,8 +49,8 @@ function site_url(): string
 }
 
 /**
- * Echappe et écrit du texte sur la sortie standard
- * @param string $text Le texte à échapper et à écrire
+ * Echappe et écrit du texte sur la sortie standard.
+ * @param string $text Le texte à échapper et à écrire.
  * @return void
  */
 function esc_html_e(string $text)
@@ -59,9 +59,9 @@ function esc_html_e(string $text)
 }
 
 /**
- * Retourne du texte échappé
- * @param string $text Le texte à échapper
- * @return string Le texte échappé
+ * Retourne du texte échappé.
+ * @param string $text Le texte à échapper.
+ * @return string Le texte échappé.
  */
 function esc_html(string $text): string
 {
@@ -69,8 +69,8 @@ function esc_html(string $text): string
 }
 
 /**
- * Ecrit sur la sortie standard le fil d'ariane
- * @param string $relative_path Le chemin vers lequel le fil pointe
+ * Ecrit sur la sortie standard le fil d'ariane.
+ * @param string $relative_path Le chemin vers lequel le fil pointe.
  * @return void
  */
 function esc_html_breadcrumbs(string $relative_path = '/'): void
@@ -90,10 +90,10 @@ function esc_html_breadcrumbs(string $relative_path = '/'): void
     return;
 }
 
-
 /**
  * Ecrit les scripts js sur la sortie standard dans une balise script.
- * @param array $scripts Les scripts js à sortir sur la sortie standard
+ * @param array $scripts Les scripts js à sortir sur la sortie standard.
+ * @return void
  */
 function enqueue_js_scripts(array $scripts = array())
 {
@@ -103,11 +103,12 @@ function enqueue_js_scripts(array $scripts = array())
         require $js_script_path;
     }
     echo '</script>';
+    return;
 }
 
 /**
- * Ecrit sur la sortie standard le template demandé
- * @param string $template_name Le nom du template dans le dossier templates
+ * Ecrit sur la sortie standard le template demandé.
+ * @param string $template_name Le nom du template dans le dossier templates.
  * @return void
  */
 function present_template(string $template_name)
@@ -125,13 +126,12 @@ function present_template(string $template_name)
 }
 
 /**
- * Ecrit sur la sortie standard le template part demandé
- * @param string $template_name Le nom du template part dans le dossier templates/parts
+ * Ecrit sur la sortie standard le template part demandé.
+ * @param string $template_name Le nom du template part dans le dossier templates/parts.
  * @return void
  */
 function present_template_part(string $template_part)
 {
-
     $template = strtolower(trim($template_part)) . '.php';
     $path_template = __DIR__ . '/templates/parts/' . $template;
 
@@ -144,7 +144,7 @@ function present_template_part(string $template_part)
 }
 
 /**
- * Ecrit le header sur la sortie standard (output de l'html)
+ * Ecrit le header sur la sortie standard (output de l'html).
  * @return void
  */
 function present_header(): void
@@ -172,9 +172,9 @@ function autoload(): void
 }
 
 /**
- * Retrouve la valeur POSTée d'un input de formulaire
- * @param InputValidation|string|array $input La valeur d'un input
- * @return InputValidation|string|array La valeur POSTé de l'input
+ * Retrouve la valeur POSTée d'un input de formulaire.
+ * @param InputValidation|string|array $input La valeur d'un input.
+ * @return InputValidation|string|array La valeur POSTé de l'input.
  */
 function retrieve_value(InputValidation|string|array $input): string
 {
@@ -184,16 +184,14 @@ function retrieve_value(InputValidation|string|array $input): string
     return $input;
 }
 
-
 /**
  * Valide les champs de formulaires passés en argument et retourne la validation sous forme d'un tableau mappant les inputs.
- * @param FormInput[] $inputs Les inputs demandés
- * @return InputValidation[] Un tableau de validation d'inputs
+ * @param FormInput[] $inputs Les inputs demandés.
+ * @return InputValidation[] Un tableau de validation d'inputs.
  * @global array $_POST
  */
 function validate_posted_form(array $inputs): array
 {
-
     $input_validations = array();
 
     foreach ($inputs as $input) {
