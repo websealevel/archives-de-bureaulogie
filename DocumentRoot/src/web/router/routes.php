@@ -46,6 +46,15 @@ function routes(): array
             '/confirm-authentification' => function () {
                 present_template('confirm-authentification');
             },
+            '/charte' => function () {
+                present_template('charte');
+            },
+            '/contact' => function () {
+                present_template('contact');
+            },
+            '/confidentiality-policy' => function () {
+                present_template('confidentiality-policy');
+            }
         ),
         'post' => array(
             '/log-in' => function () {

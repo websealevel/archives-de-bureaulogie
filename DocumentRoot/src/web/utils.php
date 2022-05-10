@@ -200,4 +200,24 @@ function validate_posted_form(array $inputs): array
     return $input_validations;
 }
 
+/**
+ * Ecrit sur la sortie standard le fil d'ariane
+ * @param string $relative_path Le chemin vers lequel le fil pointe
+ * @return void
+ */
+function esc_html_breadcrumbs(string $relative_path = '/'): void
+{
+    $uri_without_breadcrumbs = array(
+        '/',
+        '/confirm-authentification'
+    );
 
+    if (in_array($_SERVER['REQUEST_URI'], $uri_without_breadcrumbs))
+        return;
+?>
+    <div class="fil-arianne">
+        <a href="/">Retour</a>
+    </div>
+<?php
+    return;
+}

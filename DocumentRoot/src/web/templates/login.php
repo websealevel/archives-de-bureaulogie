@@ -15,7 +15,6 @@ require_once __DIR__ . '/../environment.php';
 <?php present_header(); ?>
 
 <h2>Se connecter</h2>
-<?php esc_html_notices_e(); ?>
 <div class="form-login">
     <form action="log-in" method="POST">
         <div>

@@ -13,16 +13,11 @@ require_once __DIR__ . '/../current-user.php';
 require_once __DIR__ . '/../core-interface.php';
 
 session_start();
-
 if (!current_user_can('add_source'))
     redirect('/');
-
 ?>
 
 <?php present_header(); ?>
-<div>
-    <a href="/">Retour</a>
-</div>
 
 <h2>Ajouter une nouvelle vidéo source à la bibliothèque</h2>
 
@@ -35,10 +30,11 @@ if (!current_user_can('add_source'))
 <main class="form-add-source">
     <form action="download-source" method="POST">
 
+    <div class="form-note">Les champs marqués d'un asterisque sont obligatoires</div>
 
         <div>
             <?php esc_html_form_error_msg_e('series', 'form_errors'); ?>
-            <label for="series">Choisissez la série à laquelle appartient la source</label>
+            <label for="series">Choisissez la série à laquelle appartient la source <span class="required">*</span></label>
             <select name="series" id="">
                 <option value="le-tribunal-des-bureaux" selected>Le tribunal des bureaux</option>
             </select>
@@ -46,12 +42,12 @@ if (!current_user_can('add_source'))
 
         <div>
             <?php esc_html_form_error_msg_e('slug', 'form_errors'); ?>
-            <label for="slug">Choisissez un identifiant court pour cette vidéo (un mot/nombre en minuscule)</label>
+            <label for="slug">Choisissez un identifiant court pour cette vidéo (un mot ou un nombre en minuscule) <span class="required">*</span></label>
             <input type="text" name="slug" pattern="[a-z0-9]{1,12}" required value="<?php esc_html_from_session_e('form_errors', 'slug'); ?>">
         </div>
         <div>
             <?php esc_html_form_error_msg_e('source_url', 'form_errors'); ?>
-            <label for="source_url">Copiez/collez l'url de la vidéo youtube</label>
+            <label for="source_url">Copiez/collez l'url de la vidéo youtube <span class="required">*</span></label>
             <input type="url" name="source_url" value="<?php esc_html_from_session_e('form_errors', 'source_url'); ?>" required>
         </div>
         <div name="preview_source">

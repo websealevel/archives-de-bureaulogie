@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Header
+ * Header (début de toute réponse de template)
  *
  * @package wsl
  */
@@ -20,8 +20,8 @@ autoload();
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><?php esc_html_e(site_title()); ?></title>
-    <meta name="description" content="Un Twitter bot qui post des extraits vidéos d'acknoo issus de sa chaîne le tribunal des bureaux">
-    <meta name="keywords" content="ackboo, archives, bureaulogie, le tribunal des bureaux">
+    <meta name="description" content="Un site collaboratif pour créer et diffuser des ressources vidéos et bibliographiques sur la bureaulogie.">
+    <meta name="keywords" content="ackboo, archives, bureaulogie, le tribunal des bureaux, archives, archives de bureaulogie, extraits, ressources bibliographiques">
     <meta name="author" content="websealevel">
     <meta name="author" content="kerprimaparte">
     <link rel="icon" type="image/x-icon" href="../assets/img/favicon.ico">
@@ -56,3 +56,5 @@ autoload();
         </header>
 
         <div id="content" class="site-content">
+            <?php esc_html_breadcrumbs('/'); ?>
+            <?php esc_html_notices_e(); ?>

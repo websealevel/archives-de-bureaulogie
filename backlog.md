@@ -162,6 +162,7 @@ A part
 - ecran Liste biblios en attente de modération  
 - ecran liste des bureaulogues  
 - modération
+- dans le footer mettre performance (taille page, temps de reponse du serveur) si possible []
 
 ### Interface graphique de *cut*
 
@@ -191,5 +192,6 @@ A part
 - pour les comptes admin on va leur associer des adresses IP autorisées en plus de l'authentification
 - telechargament de sources autorisé que depuis la chaine de canardPC []
 - finir la confirmation d'authentification sur les actions sensibles []
+- installer un moniteur éthique pour analyser la fréquentation du site[]
 
 

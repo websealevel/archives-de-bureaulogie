@@ -13,6 +13,7 @@ require_once __DIR__ . '/../../models/FormInput.php';
 require_once __DIR__ . '/../../models/InputValidation.php';
 require_once __DIR__ . '/../../models/Notice.php';
 require_once __DIR__ . '/../utils.php';
+require_once __DIR__ . '/../current-user.php';
 require_once __DIR__ . '/../password.php';
 require_once __DIR__ . '/../database/repository-accounts.php';
 require_once __DIR__ . '/../environment.php';
@@ -28,8 +29,13 @@ function sign_up_user()
 
     if (!is_signup_activated())
         redirect('/');
-
     session_start();
+
+    if (is_current_user_logged_in())
+        redirect('/', 'notices', array(
+            new Notice("Vous êtes déjà connecté.", NoticeStatus::Success)
+        ));
+
     $form_inputs = array(
         new FormInput('pseudo', $_POST['pseudo'], function (string $pseudo): InputValidation {
             if (empty($pseudo))
@@ -60,6 +66,13 @@ function sign_up_user()
             if (!isset($_POST['password']) || $password_confirmation !== $_POST['password']) return new InputValidation('password_confirmation', $password_confirmation, 'Les mots de passe ne correspondent pas.');
 
             return new InputValidation('password_confirmation', $password_confirmation, '', InputStatus::Valid);
+        }),
+        new FormInput('majority', $_POST['majority'], function (string $majority): InputValidation {
+
+            if (!isset($_POST['majority']))
+                return new InputValidation('majority', $majority, 'Vous devez être majeur pour pouvoir créer un compte.');
+
+            return new InputValidation('majority', $majority, '', InputStatus::Valid);
         })
 
     );
@@ -84,7 +97,6 @@ function sign_up_user()
         my_hash_password($input_validations['password']->value),
         $input_validations['email']->value,
     );
-
 
     $result = create_account($user);
 
