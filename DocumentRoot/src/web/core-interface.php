@@ -183,11 +183,17 @@ function is_available_source_name(string $series, string $slug, string $url): bo
 
     $match = query_source_by_name_attr($full_name);
 
+    if (false === $match)
+        return true;
+
     $match_url = $match->attributes->getNamedItem('url')->nodeValue;
     $match_name = $match->attributes->getNamedItem('name')->nodeValue;
 
-    return $full_name === $match_name && $url === $match_url
-        || $url === $match_url;
+    $declared_source_with_same_url = $url === $match_url;
+    $declared_source_with_same_name = $full_name === $match_name;
+    $identical_declared_source = $declared_source_with_same_url && $declared_source_with_name;
+
+    return !$identical_declared_source || !$declared_source_with_same_url || !$declared_source_with_same_name;
 }
 
 /**

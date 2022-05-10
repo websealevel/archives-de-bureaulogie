@@ -38,12 +38,12 @@ function query_declared_sources(string $file_source = SOURCE_FILE): DOMNodeList
 }
 
 /**
- * Retourne l'élément source dont l'attribut name a la valeur $value
+ * Retourne l'élément source dont l'attribut name a la valeur $value, faux si aucun match
  * @param string $value La valeur de l'attribut name de la source rechercé
- * @return DOMNode
+ * @return DOMNode|bool 
  * @throws Exception - Si la liste contient plus d'un résultat (chaque source avoir un attribut à la valeur unique)
  */
-function query_source_by_name_attr(string $value, string $file_source = SOURCE_FILE): DOMNode
+function query_source_by_name_attr(string $value, string $file_source = SOURCE_FILE): DOMNode|bool
 {
     $xpath = load_xpath($file_source, XMLNS_SOURCE_FILE);
 

@@ -81,18 +81,24 @@ function download_source()
         }),
 
         new FormInput('name', $_POST['name'], function (string $name): InputValidation {
+
             //Non vide.
-            if (empty($name))
+            if (empty($name)) {
                 return new InputValidation('name', $name, "Renseignez un identifiant.");
+            }
 
             //Seulement alphanumerique, sans espace, entre 1 et 25 caractères
             if (!(preg_match('/[a-z0-9]{1,25}/', $name))) {
                 return new InputValidation('name', $name, "Renseignez un identifiant valide. Seuls les caratères de a à z et de 0 à 9 sont autorisés.");
             }
+
             //N'existe pas déjà en base.
             if (!is_available_source_name($_POST['series'], $name, $_POST['source_url'])) {
                 return new InputValidation('name', $name, "Cette source a déjà été déclarée. Une autre source avec la même url a été trouvée.");
             }
+
+            dd($name . ' all clean');
+
             return new InputValidation('name', strval($name), '', InputStatus::Valid);
         })
     );
