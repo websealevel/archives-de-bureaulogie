@@ -38,26 +38,36 @@ function query_declared_sources(string $file_source = SOURCE_FILE): DOMNodeList
 }
 
 /**
- * Retourne l'élément source dont l'attribut name a la valeur $value, faux si aucun match
+ * Retourne l'élément source dont l'attribut attr_name a la valeur $value, faux si aucun match
+ * @param string $attr_name Le nom de l'attribut
  * @param string $value La valeur de l'attribut name de la source rechercé
  * @return DOMNode|bool 
- * @throws Exception - Si la liste contient plus d'un résultat (chaque source avoir un attribut à la valeur unique)
+ * @throws Exception - Si la liste contient plus d'un résultat (chaque source avoir un attribut attr_name à la valeur unique)
+ * @throws Exception - Si l'attribut demandé n'a  pas une contrainte (soit DTD via ID soit métier) d'unicité sur sa valeur.
  */
-function query_source_by_name_attr(string $value, string $file_source = SOURCE_FILE): DOMNode|bool
+function query_source_by_unique_attr(string $attr_name, string $value, string $file_source = SOURCE_FILE): DOMNode|bool
 {
+    $unique_attributes = array(
+        'name',
+        'url'
+    );
+
+    if (!in_array($attr_name, $unique_attributes))
+        throw new Exception("Cette fonction ne doit être utilisée que pour requêter des éléments avec des attributs dont la valeur doit être unique dans le document. Les attributs autorisés sont: " . implode($unique_attributes));
+
     $xpath = load_xpath($file_source, XMLNS_SOURCE_FILE);
 
-    $query = sprintf("//ns:extraits/ns:source[@name='%s']", $value);
+    $query = sprintf("//ns:extraits/ns:source[@%s='%s']", $attr_name, $value);
 
     $match = $xpath->query($query);
 
     if ($match->count() > 1)
-        throw new Exception("Il existe deux sources avec le même attribut name, chaque attribut name doit avoir une valeur unique");
+        throw new Exception(sprintf("Il existe deux sources avec le même attribut %s, chaque attribut %s doit avoir une valeur unique", $attr_name, $attr_name));
 
     if (1 == $match->count())
         return $match->item(0);
 
-    return new DOMNode();
+    return false;
 }
 
 

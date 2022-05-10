@@ -93,11 +93,9 @@ function download_source()
             }
 
             //N'existe pas déjà en base.
-            if (!is_available_source_name($_POST['series'], $name, $_POST['source_url'])) {
+            if (is_source_already_declared($_POST['series'], $name, $_POST['source_url'])) {
                 return new InputValidation('name', $name, "Cette source a déjà été déclarée. Une autre source avec la même url a été trouvée.");
             }
-
-            dd($name . ' all clean');
 
             return new InputValidation('name', strval($name), '', InputStatus::Valid);
         })
@@ -106,8 +104,6 @@ function download_source()
 
     //Validation des champs
     $input_validations = validate_posted_form($form_inputs);
-
-    dd('next');
 
     //Filtrer que les champs avec un champs 'errors' non vide et status invalid.
     $invalid_inputs = array_filter($input_validations, function (InputValidation $input) {

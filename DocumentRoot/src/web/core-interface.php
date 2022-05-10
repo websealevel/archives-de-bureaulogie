@@ -177,23 +177,19 @@ function esc_video_source_url_e(string $source_name)
  * @param string $url L'url de la source
  * @return bool
  */
-function is_available_source_name(string $series, string $slug, string $url): bool
+function is_source_already_declared(string $series, string $slug, string $url): bool
 {
     $full_name = build_source_name($series, $slug);
 
-    $match = query_source_by_name_attr($full_name);
+    $match = query_source_by_unique_attr('name', $full_name);
 
-    if (false === $match)
-        return true;
+    //Si aucun match par name, on check le match par url
+    if (false === $match) {
+        $url_match = query_source_by_unique_attr('url', $url);
+        return false !== $url_match;
+    }
 
-    $match_url = $match->attributes->getNamedItem('url')->nodeValue;
-    $match_name = $match->attributes->getNamedItem('name')->nodeValue;
-
-    $declared_source_with_same_url = $url === $match_url;
-    $declared_source_with_same_name = $full_name === $match_name;
-    $identical_declared_source = $declared_source_with_same_url && $declared_source_with_name;
-
-    return !$identical_declared_source || !$declared_source_with_same_url || !$declared_source_with_same_name;
+    return true;
 }
 
 /**
