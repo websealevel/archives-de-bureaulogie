@@ -21,20 +21,8 @@ use YoutubeDl\YoutubeDl;
  */
 function core_download(DownloadRequest $download_request, string $download_path = PATH_SOURCES): SplFileInfo|bool
 {
-    //Valider l'url
-    if (!is_valid_url($download_request->url)) {
-        throw new \Exception("L'url renseignée n'est pas une url valide.");
-    }
 
-    //Valider le nom de domaine
-    if (!is_url_domain_authorized($download_request->url)) {
-        throw new \Exception("Vous essayez de télécharger une vidéo depuis un nom de domaine non autorisé, no f****** way.");
-    }
-
-    //Valider les métadonnées de la vidéo a télcharger pour valider le nom du fichier
-    if (!is_download_request_valid($download_request)) {
-        throw new \Exception("Les métadonnées associées à la vidéo source sont vides ou contiennent des caractères illégaux. Merci de soumettre des chaînes de caractères ne comprenant que des caractères alphanumériques.");
-    }
+    check_download_request($download_request);
 
     //Préparer le format du fichier pour qu'il soit source compatible.
     $file_name = format_to_source_file($download_request);
@@ -87,6 +75,34 @@ function core_download(DownloadRequest $download_request, string $download_path 
 
         return false;
     }
+}
+
+/**
+ * Valide la demande de téléchargement.
+ * @param DownloadRequest $download_request La demande de téléchargement.
+ * @throws Exception - si l'url de la vidéo à télécharger n'est pas valide.
+ * @throws Exception - si l'utilisateur essaie de télécharger une video depuis un host pas autorisé
+ * @throws Exception - si le nom du fichier sous lequel est enregistré la vidéo contient des caractères invalides
+ * @return void
+ */
+function check_download_request(DownloadRequest $download_request): void
+{
+    //Valider l'url
+    if (!is_valid_url($download_request->url)) {
+        throw new \Exception("L'url renseignée n'est pas une url valide.");
+    }
+
+    //Valider le nom de domaine
+    if (!is_url_domain_authorized($download_request->url)) {
+        throw new \Exception("Vous essayez de télécharger une vidéo depuis un nom de domaine non autorisé, no f****** way.");
+    }
+
+    //Valider les métadonnées de la vidéo a télcharger pour valider le nom du fichier
+    if (!is_download_request_valid($download_request)) {
+        throw new \Exception("Les métadonnées associées à la vidéo source sont vides ou contiennent des caractères illégaux. Merci de soumettre des chaînes de caractères ne comprenant que des caractères alphanumériques.");
+    }
+
+    return;
 }
 
 /**
