@@ -179,8 +179,5 @@ function is_available_source_name(string $source_name): bool
 {
     $full_name = sprintf("%s.%s", $source_name, EXTENSION_SOURCE);
 
-    //Déplacer cette logique directement dans la query
-    $sources = query_declared_sources();
-
-    dd($full_name, $sources);
+    dd($full_name);
 }

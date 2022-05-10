@@ -9,3 +9,5 @@
 <!ELEMENT description (#PCDATA) >
 <!ELEMENT debut (#PCDATA) >
 <!ELEMENT fin (#PCDATA) >
+<!ATTLIST extrait name ID #REQUIRED>
+<!ATTLIST source name ID #REQUIRED>

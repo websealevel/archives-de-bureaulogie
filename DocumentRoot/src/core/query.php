@@ -37,6 +37,23 @@ function query_declared_sources(string $file_source = SOURCE_FILE): DOMNodeList
     return $sources;
 }
 
+/**
+ * Retourne la liste des sources dont l'attribut name correspond à $name
+ * @param string $name Le nom de l'attribut de la source rechercé
+ * @return DOMNode
+ */
+function query_source_by_name_attr(string $name, string $file_source = SOURCE_FILE): DOMNode
+{
+
+    $xpath = load_xpath($file_source, XMLNS_SOURCE_FILE);
+
+    $match = $xpath->query('');
+
+    //Si plusieurs matchs il y a un pb, doit être unique
+
+    return new DOMNode();
+}
+
 
 /**
  * Retourne la liste des extraits déclarés dans le dossier
