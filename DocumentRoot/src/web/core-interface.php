@@ -106,7 +106,7 @@ function esc_sources_to_html_select_e(string $name_attr = 'sources'): void
  * @param string $label Optional. Default no. Ajouter un label à la liste
  * @return void
  */
-function esc_html_list_sources_e(string $name_attr = 'sources', string $label =''): void
+function esc_html_list_sources_e(string $name_attr = 'sources', string $label = ''): void
 {
     $options = map_declared_sources_to_html_item('li');
 
@@ -168,4 +168,19 @@ function esc_video_source_url_e(string $source_name)
     }
     echo $url;
     return;
+}
+
+/**
+ * Retourne vrai si le nom de la source est déjà utilisé en base, faux sinon
+ * @param string $source_name Le nom de la source (slug)
+ * @return bool
+ */
+function is_available_source_name(string $source_name): bool
+{
+    $full_name = sprintf("%s.%s", $source_name, EXTENSION_SOURCE);
+
+    //Déplacer cette logique directement dans la query
+    $sources = query_declared_sources();
+
+    dd($full_name, $sources);
 }

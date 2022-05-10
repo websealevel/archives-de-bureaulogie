@@ -37,7 +37,7 @@ if (!current_user_can('add_source'))
         <div>
             <?php esc_html_form_error_msg_e('source_url', 'form_errors'); ?>
             <label for="source_url">Copier/coller l'url de la vidéo youtube</label>
-            <input type="url" name="source_url">
+            <input type="url" name="source_url" value="<?php esc_html_from_session_e('form_errors', 'source_url'); ?>" required>
         </div>
 
         <div>
@@ -51,7 +51,7 @@ if (!current_user_can('add_source'))
         <div>
             <?php esc_html_form_error_msg_e('slug', 'form_errors'); ?>
             <label for="slug">Identifiant</label>
-            <input type="text" name="slug" pattern="[a-z0-9]" minlength="1" maxlength="12">
+            <input type="text" name="slug" pattern="[a-z0-9]{1,12}"  required  value="<?php esc_html_from_session_e('form_errors', 'slug'); ?>">
         </div>
         <div name="preview_source">
             <p>Preview</p>

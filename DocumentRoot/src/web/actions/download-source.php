@@ -82,9 +82,18 @@ function download_source()
         new FormInput('slug', $_POST['slug'], function (string $slug): InputValidation {
             //Non vide.
             if (empty($slug))
-                return new InputValidation('slug', $slug, "Renseignez une identifiant valide.");
+                return new InputValidation('slug', $slug, "Renseignez un identifiant.");
 
-            //Seulement alphanumerique(hyphen), sans espace, entre 1 et 12 caractères
+            //Seulement alphanumerique, sans espace, entre 1 et 12 caractères
+            if (!(preg_match('/[a-z0-9]/', $slug) && mb_strlen($slug) > 1 && mb_strlen($slug) < 12)) {
+                return new InputValidation('slug', $slug, "Renseignez un identifiant valide. Seuls les caratères de a à z et de 0 à 9 sont autorisés.");
+            }
+            //N'existe pas déjà en base.
+            if (!is_available_source_name($slug)) {
+                return new InputValidation('slug', $slug, "Cet identifiant est déjà utilisé, veuillez en choisir un autre.");
+            }
+
+
             return new InputValidation('slug', $slug, '', InputStatus::Valid);
         })
     );
