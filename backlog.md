@@ -151,7 +151,7 @@ A part
 
 - *normaliser le volume* avec une valeur par défaut (voir ré-encodage) au post-montage. Le volume de la piste audio est défini par défaut par une métadonnée. Il faut que la normalisation se fasse sur le cut et non sur la vidéo entière (normalisation est une fonction de la piste entière, analyse les pics/creux de volume sur tout le volume et essaie de normaliser à partir de ça. Donc attention à ça) []
 - activer/desactiver inscriptions au site [x]
-- utliser youtube-dl en local []
+- utliser youtube-dl en local [x]
 - utiliser ffmpeg/ffprobe en local [x]
 - pas de password recover [x]
 - ecran Creer un extrait []
@@ -161,8 +161,7 @@ A part
 - ecran Editer une entrée Biblio  
 - ecran Liste biblios en attente de modération  
 - ecran liste des bureaulogues  
-- modération
-- dans le footer mettre performance (taille page, temps de reponse du serveur) si possible []
+- Modération
 - tout basculer dans des namespaces []
 - remplacer tous les require par une fonction []
 - deplacer le fichier source+dtd dans un dossier a part[]
@@ -180,7 +179,8 @@ A part
 ## Sécurité
 
 - regarder comment mieux sécuriser les sessions [x]
-- limiter le nb de sources téléchargéés/extraits / user
+- ajouter honey pot dans le form d'inscription (voir ce que je peux faire d'autre pour éviter les spams) []
+- limiter le nb de sources extraits / user []
 - interdire de dl si espace disque donné atteint
 - enlever la version d'apache dans la requete de reponse
 - dev un mode maintenance simple (fichier .env si c'est On on charge le template maintenance.php dès l'index avant le router. Et voilà) [x]
@@ -188,13 +188,12 @@ A part
 - faire un test de pénétration
 - couvrir de tests les droits et capabilites []
 - mettre en place des roles et capacités associes [x]
-- creer un utilisateur twitter pour chaque twitter bot avec un role twitter_user
-- utiliser pcbs et l'autre pour formatter le code au standard PSR
-- installer un paquet qui gere les bans d'IP (type wordfence), tentatives de login repetees, brut force
-- ajouter honey pot dans le form d'inscription (voir ce que je peux faire d'autre)
-- pour les comptes admin on va leur associer des adresses IP autorisées en plus de l'authentification
+- creer un utilisateur twitter pour chaque twitter bot avec un role twitter_user []
+- utiliser pcbs et l'autre pour formatter le code au standard PSR []
+- installer un paquet qui gere les bans d'IP (type wordfence), tentatives de login repetees, brut force []
+- pour les comptes admin associer une liste blanche d'adresses IP en plus de l'authentification []
 - refactor formulaires avec champs requis, label cliquables et obligation d'etre majeure et d'accepter la charte [x]
-- telechargament de sources autorisé que depuis la chaine de canardPC []
+- telechargement de sources autorisé que depuis la chaine de canardPC []
 - finir la confirmation d'authentification sur les actions sensibles []
 - installer un moniteur éthique pour analyser la fréquentation du site[]
 - vérifier que les error/exception handlers sont bien intégrés à chaque script []
