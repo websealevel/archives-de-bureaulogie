@@ -57,6 +57,6 @@ function action_clean_sources()
  */
 function action_download_video(DownloadRequest $download_request, string $path_to_download = PATH_DOWNLOADS): SplFileInfo
 {
-    $file = download($download_request, $path_to_download);
+    $file = core_download($download_request, $path_to_download);
     return $file;
 }

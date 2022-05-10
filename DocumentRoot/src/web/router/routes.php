@@ -67,7 +67,7 @@ function routes(): array
                 sign_up_user();
             },
             '/download-source' => function () {
-                download_source();
+                web_download_source();
             },
         )
     );

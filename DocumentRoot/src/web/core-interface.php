@@ -213,3 +213,14 @@ function build_source_name(string $series, string $slug): string
 
     return $file_name;
 }
+
+/**
+ * Appel au core pour télécharger la vidéo source dans le dossier des sources
+ * @param DownloadRequest $download_request La ressource à télécharger
+ */
+function download_video(DownloadRequest $download_request)
+{
+
+
+    dd('YO');
+}

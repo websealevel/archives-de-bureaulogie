@@ -7,15 +7,28 @@
  * @package wsl 
  */
 
+/**
+ * Models
+ */
 require_once __DIR__ . '/../../models/FormInput.php';
 require_once __DIR__ . '/../../models/InputValidation.php';
 require_once __DIR__ . '/../../models/Notice.php';
-require_once __DIR__ . '/../utils.php';
-require_once __DIR__ . '/../database/repository-roles-capabilities.php';
-require_once __DIR__ . '/../core-interface.php';
+require_once __DIR__ . '/../../models/DonwloadRequest.php';
 
-use YoutubeDl\Options;
-use YoutubeDl\YoutubeDl;
+/**
+ * Utils
+ */
+require_once __DIR__ . '/../utils.php';
+
+/**
+ * Database
+ */
+require_once __DIR__ . '/../database/repository-roles-capabilities.php';
+
+/**
+ * Interface avec la partie core
+ */
+require_once __DIR__ . '/../core-interface.php';
 
 /**
  * Télécharge une vidéo source depuis une url valide vers le dossier source si elle n'est pas déjà déclarée dans le fichier source
@@ -23,7 +36,7 @@ use YoutubeDl\YoutubeDl;
  * @global array $_SESSION
  * @throws Exception - Si la série des sources valides n'est pas définie
  */
-function download_source()
+function web_download_source()
 {
     session_start();
 
@@ -119,9 +132,12 @@ function download_source()
         redirect('/confirm-authentification');
     }
 
-    dd('Let s download');
-    // $download_request = new DownloadRequest(
-    //     $input_validations['source_url']->value,
-    // );
-    // download();
+
+    $download_request = new DownloadRequest(
+        $input_validations['source_url']->value,
+        $input_validations['series']->value,
+        $input_validations['name']->value,
+    );
+
+    download_video($download_request);
 }

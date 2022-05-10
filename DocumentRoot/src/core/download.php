@@ -19,7 +19,7 @@ use YoutubeDl\YoutubeDl;
  * @param string $download_path Optional Default PATH_SOURCES Le path où enregistrer la vidéo sur le disque.
  * @return SplFileInfo Un wrapper du fichier téléchargé
  */
-function download(DownloadRequest $download_request, string $download_path = PATH_DOWNLOADS): SplFileInfo
+function core_download(DownloadRequest $download_request, string $download_path = PATH_DOWNLOADS): SplFileInfo
 {
     //Valider l'url
     if (!is_valid_url($download_request->url)) {
