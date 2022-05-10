@@ -1,12 +1,14 @@
 <?xml version='1.0' encoding='UTF-8'  standalone = "no"?>
 <!DOCTYPE extraits SYSTEM "extraits.dtd">
-<extraits xmlns="https://websealevel.com/archives-de-burealogie">
-    <source name="">
-        <extrait utilise="0">
+<extraits xmlns="https://archives-de-bureaulogie.fr/clips">
+    <source url="" name="" label="">
+        <extrait name="" poste="">
             <slug></slug>
             <description></description>
             <debut></debut>
             <fin></fin>
+            <auteur></auteur>
+            <cree_le></cree_le>
         </extrait>
     </source>
 </extraits>
