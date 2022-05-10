@@ -8,6 +8,8 @@
 
 autoload();
 
+require_once __DIR__ . '/../models/YoutubeDLProcessBuilder.php';
+
 use YoutubeDl\Options;
 use YoutubeDl\YoutubeDl;
 
@@ -39,8 +41,11 @@ function core_download(DownloadRequest $download_request, string $download_path 
     //Préparer le format du fichier pour qu'il soit source compatible.
     $file_name = format_to_source_file($download_request);
 
+    //Installation custom de youtube-dl sur le path du projet.
+    $youtube_process_builder = new Youtube_DL_ProcessBuilder(YOUTUBE_DL_PATH);
+
     //Téléchargement.
-    $yt = new YoutubeDl();
+    $yt = new YoutubeDl($youtube_process_builder);
 
     $format = youtube_dl_download_format();
 
@@ -54,6 +59,7 @@ function core_download(DownloadRequest $download_request, string $download_path 
 
     foreach ($collection->getVideos() as $video) {
         if ($video->getError() !== null) {
+            dd('NOPE');
             throw new \Exception("Error downloading video: {$video->getError()}.");
         } else {
             $result = $video->getFile();

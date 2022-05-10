@@ -139,4 +139,4 @@ define('FFMPEG_THREADS', 12);
 /**
  * Le path du binaire de youtube-dl
  */
-define('YOUTUBE-DL_PATH', '');
+define('YOUTUBE_DL_PATH', __DIR__ . '../../youtube-dl');
