@@ -322,7 +322,8 @@ summary {
 }
 
 
-ul.notices,ul.sign-up--conditions {
+ul.notices,
+ul.sign-up--conditions {
 	list-style-type: none;
 }
 
@@ -341,6 +342,10 @@ ul.notices,ul.sign-up--conditions {
 	color: green;
 }
 
-.error-message{
-	color:red;
+.error-message {
+	color: red;
+}
+
+body {
+	margin: 0 25%;
 }

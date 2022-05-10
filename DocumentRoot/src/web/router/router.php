@@ -70,7 +70,6 @@ function find_callback(string $path, string $method): callable
 
     if (!array_key_exists($path,  $routes[$method]))
         return function () {
-
             present_template('404');
         };
 

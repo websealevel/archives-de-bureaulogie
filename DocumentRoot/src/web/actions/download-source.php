@@ -72,10 +72,7 @@ function download_source()
                 return new InputValidation(
                     'series',
                     $series,
-                    sprintf(
-                        "Renseignez un nom de série valide. Voici les noms autorisés: %s",
-                        implode(", ", SOURCE_SERIES)
-                    )
+                    "Renseignez un nom de série valide"
                 );
             }
 

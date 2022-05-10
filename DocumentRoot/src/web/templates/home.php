@@ -15,6 +15,7 @@ require_once __DIR__ . '/../session.php';
 require_once __DIR__ . '/../current-user.php';
 
 session_start();
+
 if (!is_current_user_logged_in()) {
     present_template('login');
 } else {

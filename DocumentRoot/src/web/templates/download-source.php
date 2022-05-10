@@ -16,6 +16,7 @@ session_start();
 
 if (!current_user_can('add_source'))
     redirect('/');
+
 ?>
 
 <?php present_header(); ?>
@@ -31,19 +32,24 @@ if (!current_user_can('add_source'))
 <?php esc_html_list_sources_e(); ?>
 
 <h3>Ajouter</h3>
-<?php esc_html_form_error_msg_e('source_url', 'form_errors'); ?>
 <main class="form-add-source">
     <form action="download-source" method="POST">
         <div>
+            <?php esc_html_form_error_msg_e('source_url', 'form_errors'); ?>
             <label for="source_url">Copier/coller l'url de la vidéo youtube</label>
             <input type="url" name="source_url">
         </div>
 
-        <label for="series">Choisir la série</label>
-        <select name="series" id="">
-            <option value="le-tribunal-des-bureaux" selected>Le tribunal des bureaux</option>
-        </select>
         <div>
+            <?php esc_html_form_error_msg_e('series', 'form_errors'); ?>
+            <label for="series">Choisir la série</label>
+            <select name="series" id="">
+                <option value="le-tribunal-des-bureaux" selected>Le tribunal des bureaux</option>
+            </select>
+        </div>
+
+        <div>
+            <?php esc_html_form_error_msg_e('slug', 'form_errors'); ?>
             <label for="slug">Identifiant</label>
             <input type="text" name="slug" pattern="[a-z0-9]" minlength="1" maxlength="12">
         </div>
@@ -55,12 +61,9 @@ if (!current_user_can('add_source'))
             </video>
         </div>
         <div>
-            <input type="submit" value="Ajouter la vidéo aux sources">
+            <input type="submit" value="Ajouter">
         </div>
     </form>
 </main>
-
-
-
 
 <?php present_footer(); ?>
