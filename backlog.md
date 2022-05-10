@@ -181,7 +181,7 @@ A part
 - interdire de dl si espace disque donné atteint
 - enlever la version d'apache dans la requete de reponse
 - dev un mode maintenance simple (fichier .env si c'est On on charge le template maintenance.php dès l'index avant le router. Et voilà) [x]
-- revoir les méta de header pour les mettre a jour SEO [ ]
+- revoir les méta de header pour les mettre a jour SEO [x]
 - faire un test de pénétration
 - couvrir de tests les droits et capabilites []
 - mettre en place des roles et capacités associes [x]
@@ -190,8 +190,10 @@ A part
 - installer un paquet qui gere les bans d'IP (type wordfence), tentatives de login repetees, brut force
 - ajouter honey pot dans le form d'inscription (voir ce que je peux faire d'autre)
 - pour les comptes admin on va leur associer des adresses IP autorisées en plus de l'authentification
+- refactor formulaires avec champs requis, label cliquables et obligation d'etre majeure et d'accepter la charte [x]
 - telechargament de sources autorisé que depuis la chaine de canardPC []
 - finir la confirmation d'authentification sur les actions sensibles []
 - installer un moniteur éthique pour analyser la fréquentation du site[]
+- vérifier que les error/exception handlers sont bien intégrés à chaque script []
 
 
