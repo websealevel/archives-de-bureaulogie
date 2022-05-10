@@ -20,6 +20,7 @@ require_once __DIR__ . '/../log.php';
  */
 function log_out(Notice $notice = new Notice("Vous avez été déconnecté avec succès", NoticeStatus::Success))
 {
+    session_start();
     if (isset($_SESSION)) {
         $login = logout_user_session();
         error_log_out_success($login, $notice);

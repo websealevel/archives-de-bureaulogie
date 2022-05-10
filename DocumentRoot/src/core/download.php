@@ -32,6 +32,7 @@ function core_download(DownloadRequest $download_request, string $download_path 
 
     //Show progress
     $yt->onProgress(static function (?string $progressTarget, string $percentage, string $size, string $speed, string $eta, ?string $totalTime): void {
+        dump('HERE');
         echo "Download file: $progressTarget; Percentage: $percentage; Size: $size";
         if ($speed) {
             echo "; Speed: $speed";
