@@ -11,12 +11,14 @@ DocumentRoot/downloads/*
 DocumentRoot/ffmpeg/*
 !/DocumentRoot/ffmpeg/index.php
 !/DocumentRoot/ffmpeg/README.md
+/DocumentRoot/youtube-dl/youtube-dl
+!/DocumentRoot/ffmpeg/README.md
+!/DocumentRoot/ffmpeg/index.php
 vendor
 *.mp4
 *.avi
 *webm
 journal.log
-youtube-dl
 DocumentRoot/.env
 DocumentRoot/web/.env
 DocumentRoot/web/.env_db
