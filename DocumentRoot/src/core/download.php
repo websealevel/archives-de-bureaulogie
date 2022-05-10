@@ -13,13 +13,13 @@ use YoutubeDl\YoutubeDl;
 
 /**
  * Télécharges une vidéo depuis l'url Youtube $url et l'enregistre sur $download_path
- * @see https://github.com/ytdl-org/youtube-dl/blob/master/README.md#format-selection=
- * @throws Exception Si le téléchargement a échoué.
+ * @see https://github.com/ytdl-org/youtube-dl/blob/master/README.md#format-selection
  * @param DownloadRequest $url La demande de téléchargement
  * @param string $download_path Optional Default PATH_SOURCES Le path où enregistrer la vidéo sur le disque.
- * @return SplFileInfo Un wrapper du fichier téléchargé
+ * @return SplFileInfo|bool Un wrapper du fichier téléchargé, faux si le téléchargement échoue
+ * @throws Exception Si le téléchargement a échoué.
  */
-function core_download(DownloadRequest $download_request, string $download_path = PATH_SOURCES): SplFileInfo
+function core_download(DownloadRequest $download_request, string $download_path = PATH_SOURCES): SplFileInfo|bool
 {
     //Valider l'url
     if (!is_valid_url($download_request->url)) {
@@ -42,6 +42,20 @@ function core_download(DownloadRequest $download_request, string $download_path 
     //Téléchargement.
     $yt = new YoutubeDl();
 
+    //Show progress
+    $yt->onProgress(static function (?string $progressTarget, string $percentage, string $size, string $speed, string $eta, ?string $totalTime): void {
+        echo "Download file: $progressTarget; Percentage: $percentage; Size: $size";
+        if ($speed) {
+            echo "; Speed: $speed";
+        }
+        if ($eta) {
+            echo "; ETA: $eta";
+        }
+        if ($totalTime !== null) {
+            echo "; Downloaded in: $totalTime";
+        }
+    });
+
     $yt->setBinPath(YOUTUBE_DL_PATH);
     $yt->setPythonPath(PYTHON_PATH);
 
@@ -55,17 +69,24 @@ function core_download(DownloadRequest $download_request, string $download_path 
             ->output($file_name)
     );
 
-    foreach ($collection->getVideos() as $video) {
-
-        dd($video);
-
-        if ($video->getError() !== null) {
-            throw new \Exception("Error downloading video: {$video->getError()}.");
-        } else {
-            $result = $video->getFile();
+    try {
+        foreach ($collection->getVideos() as $video) {
+            if ($video->getError() !== null) {
+                throw new \Exception("Error downloading video: {$video->getError()}.");
+            } else {
+                $result = $video->getFile();
+            }
         }
+        return $result;
+    } catch (Exception $e) {
+        error_log($e);
+        //Dire a l'utilisateur que le téléchargement a échoué et qu'il doit réessayer.
+        echo 'Le téléchargement a échoué. Veuillez réessayer.';
+
+        //Nettoyer les données temporaires de téléchargement.
+
+        return false;
     }
-    return $result;
 }
 
 /**

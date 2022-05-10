@@ -221,5 +221,13 @@ function build_source_name(string $series, string $slug): string
  */
 function download_video(DownloadRequest $download_request)
 {
-    $file = action_download_video($download_request);
+    $result = action_download_video($download_request);
+
+    if(false === $result){
+        //Le téléchargement a échoué
+    }
+
+    //Declarer la nouvelle source dans le fichier source.
+
+    //Le téléchargement a marché et la source a été déclarée
 }
