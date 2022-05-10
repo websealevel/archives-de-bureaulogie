@@ -186,7 +186,8 @@ function is_source_already_declared(string $series, string $slug, string $url): 
     //Si aucun match par name, on check le match par url
     if (false === $match) {
         $url_match = query_source_by_unique_attr('url', $url);
-        return false !== $url_match;
+        $match_by_url = false !== $url_match;
+        return $match_by_url;
     }
 
     return true;

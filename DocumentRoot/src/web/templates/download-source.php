@@ -30,7 +30,7 @@ if (!current_user_can('add_source'))
 <main class="form-add-source">
     <form action="download-source" method="POST">
 
-    <div class="form-note">Les champs marqués d'un asterisque sont obligatoires</div>
+        <div class="form-note">Les champs marqués d'un asterisque sont obligatoires</div>
 
         <div>
             <?php esc_html_form_error_msg_e('series', 'form_errors'); ?>
@@ -43,12 +43,13 @@ if (!current_user_can('add_source'))
         <div>
             <?php esc_html_form_error_msg_e('name', 'form_errors'); ?>
             <label for="name">Choisissez un identifiant court pour cette vidéo (un mot ou un nombre en minuscule) <span class="required">*</span></label>
-            <input type="text" name="name" pattern="[a-z0-9]{1,25}" title="un nom en caractères alphanumériques, sans espaces (utiliser des hyphens à la place), d'1 caractère min" required value="<?php esc_html_from_session_e('form_errors', 'name'); ?>">
+            <input type="text" name="name" pattern="[a-z0-9]{1,25}" title="un nom en caractères alphanumériques, sans espaces (utiliser des hyphens à la place), d'1 caractère min" value="3" required>
+            
         </div>
         <div>
             <?php esc_html_form_error_msg_e('source_url', 'form_errors'); ?>
             <label for="source_url">Copiez/collez l'url de la vidéo youtube <span class="required">*</span></label>
-            <input type="url" name="source_url" title="l'url complète de la vidéo youtube"value="<?php esc_html_from_session_e('form_errors', 'source_url'); ?>" required>
+            <input type="url" name="source_url" title="l'url complète de la vidéo youtube" value="https://www.youtube.com/watch?v=cKo50XAX4Og" required>
         </div>
         <div name="preview_source">
             <p>Preview</p>
