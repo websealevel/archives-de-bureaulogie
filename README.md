@@ -8,6 +8,9 @@ Il sert également de prétexte pour construire un outil en *vanilla php* pour p
   - [Projet](#projet)
   - [*Getting started*](#getting-started)
     - [Prérequis](#prérequis)
+      - [Dépendences dev](#dépendences-dev)
+      - [ffmpeg et ffprobe](#ffmpeg-et-ffprobe)
+      - [youtube-dl](#youtube-dl)
     - [Lancer le projet](#lancer-le-projet)
     - [Arrêter le projet](#arrêter-le-projet)
     - [Réinitialiser la base de données](#réinitialiser-la-base-de-données)
@@ -25,26 +28,33 @@ Voir les specifications techniques du projet [ici](backlog.md).
 
 ### Prérequis
 
+#### Dépendences dev
 Installer
 
 - [composer](https://getcomposer.org/)
 - [docker](https://www.docker.com/)
 - [docker-compose](https://docs.docker.com/compose/)
   
-Installer ffmpeg
+
+#### ffmpeg et ffprobe
+
+Installer `ffmpeg` et `ffprobe` dans le dossier `DocumentRoot/ffmpeg`
 
 ~~~bash
 wget https://johnvansickle.com/ffmpeg/builds/ffmpeg-git-amd64-static.tar.xz -O ffmpeg.tar.xz
 tar -xzvf ffmpeg.tar.xz
 ~~~
+Supprimer l'archive.
 
-Installer youtube-dl
+#### youtube-dl
+
+Installer `youtube-dl` dans le dossier `DocumentRoot/youtube-dl` (youtube-dl a besoin de python3.2+ pour fonctionner).
 
 ~~~bash
-wget https://yt-dl.org/downloads/latest/youtube-dl -O youtube-dl
+curl -L https://yt-dl.org/downloads/latest/youtube-dl -o youtube-dl
 ~~~
 
-Mettre à jour les dépendances du projet
+Mettre à jour les dépendances du projet. Se placer à la racine du projet puis
 
 ~~~bash
 composer update
