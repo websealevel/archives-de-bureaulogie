@@ -6,7 +6,7 @@ RUN apt-get install -y libpq-dev \
     && docker-php-ext-install pdo pdo_pgsql pgsql
 RUN a2enmod rewrite
 
-# Installer ffmpeg, youtube-dl en téléchargement avec curl/wget
+RUN apt-get -y install python3
 
 # Timezone
 ENV TZ=Europe/Paris

@@ -133,10 +133,11 @@ define('FFMPEG_THREADS', 12);
 
 /**
  * YOUTUBE-DL
- * @see 
+ * @see https://github.com/norkunas/youtube-dl-php
  */
 
 /**
  * Le path du binaire de youtube-dl
  */
 define('YOUTUBE_DL_PATH', __DIR__ . '../../youtube-dl');
+define('PYTHON_PATH', '/usr/bin/python3');
