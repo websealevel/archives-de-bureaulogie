@@ -9,6 +9,7 @@
  */
 
 require_once __DIR__ . '/../core/query.php';
+require_once __DIR__ . '/../core/actions.php';
 
 /**
  * PATHS
@@ -220,7 +221,5 @@ function build_source_name(string $series, string $slug): string
  */
 function download_video(DownloadRequest $download_request)
 {
-
-
-    dd('YO');
+    $file = action_download_video($download_request);
 }

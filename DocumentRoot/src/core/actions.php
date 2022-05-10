@@ -55,7 +55,7 @@ function action_clean_sources()
  * @param string $path_to_download Le path où enregistrer le fichier. Par défaut PATH_DOWNLOADS
  * @return SplFileInfo Un wrapper du fichier téléchargé
  */
-function action_download_video(DownloadRequest $download_request, string $path_to_download = PATH_DOWNLOADS): SplFileInfo
+function action_download_video(DownloadRequest $download_request, string $path_to_download = PATH_SOURCES): SplFileInfo
 {
     $file = core_download($download_request, $path_to_download);
     return $file;

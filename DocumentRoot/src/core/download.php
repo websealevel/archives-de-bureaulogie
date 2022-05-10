@@ -19,7 +19,7 @@ use YoutubeDl\YoutubeDl;
  * @param string $download_path Optional Default PATH_SOURCES Le path où enregistrer la vidéo sur le disque.
  * @return SplFileInfo Un wrapper du fichier téléchargé
  */
-function core_download(DownloadRequest $download_request, string $download_path = PATH_DOWNLOADS): SplFileInfo
+function core_download(DownloadRequest $download_request, string $download_path = PATH_SOURCES): SplFileInfo
 {
     //Valider l'url
     if (!is_valid_url($download_request->url)) {
@@ -32,7 +32,7 @@ function core_download(DownloadRequest $download_request, string $download_path 
     }
 
     //Valider les métadonnées de la vidéo a télcharger pour valider le nom du fichier
-    if (!are_download_request_user_input_valid($download_request)) {
+    if (!is_download_request_valid($download_request)) {
         throw new \Exception("Les métadonnées associées à la vidéo source sont vides ou contiennent des caractères illégaux. Merci de soumettre des chaînes de caractères ne comprenant que des caractères alphanumériques.");
     }
 

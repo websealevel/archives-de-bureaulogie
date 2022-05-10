@@ -139,5 +139,5 @@ function web_download_source()
         $input_validations['name']->value,
     );
 
-    download_video($download_request);
+    $file = download_video($download_request);
 }

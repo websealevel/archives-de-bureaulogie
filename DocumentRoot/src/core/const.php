@@ -37,11 +37,6 @@ define('PATH_SOURCES', __DIR__ . '/../../sources');
 define('PATH_CLIPS', __DIR__ . '/../../extraits');
 
 /**
- * Le path des downloads
- */
-define('PATH_DOWNLOADS', __DIR__ . '/../../downloads');
-
-/**
  * Le namespace du fichier source.
  */
 define('XMLNS_SOURCE_FILE', 'https://archives-de-bureaulogie.fr/clips');

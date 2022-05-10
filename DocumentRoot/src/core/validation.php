@@ -246,7 +246,7 @@ function is_url_domain_authorized(string $url): bool
 /**
  * Retourne vrai si les métadonnées de la vidéo source à télécharger ne contiennent que des caractères valides, faux sinon
  */
-function are_download_request_user_input_valid(DownloadRequest $download_request)
+function is_download_request_valid(DownloadRequest $download_request)
 {
 
     if (empty($download_request->series_name))
@@ -255,12 +255,12 @@ function are_download_request_user_input_valid(DownloadRequest $download_request
     if (empty($download_request->id))
         return false;
 
-    $clean_series_name = filter_var($download_request->series_name, FILTER_SANITIZE_STRING);
+    $clean_series_name = trim(strtolower($download_request->series_name));
 
-    $clean_id = filter_var($download_request->id, FILTER_SANITIZE_STRING);
+    $clean_id = trim(strtolower($download_request->id));
 
     //Ne garde que les caractères alphanumériques (supprime toute ponctuation ou caractère spécial)
-    $clean_series_name = preg_replace("/[^a-zA-Z 0-9]+/", "", $clean_series_name);
+    $clean_series_name = preg_replace("/[^a-zA-Z 0-9 -]+/", "", $clean_series_name);
 
     //Ne garde que les caractères alphanumériques (supprime toute ponctuation ou caractère spécial)
     $clean_id = preg_replace("/[^a-zA-Z 0-9]+/", "", $clean_id);
