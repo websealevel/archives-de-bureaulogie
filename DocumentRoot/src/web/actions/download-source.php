@@ -85,11 +85,11 @@ function download_source()
                 return new InputValidation('slug', $slug, "Renseignez un identifiant.");
 
             //Seulement alphanumerique, sans espace, entre 1 et 12 caractères
-            if (!(preg_match('/[a-z0-9]/', $slug) && mb_strlen($slug) > 1 && mb_strlen($slug) < 12)) {
+            if (!(preg_match('/[a-z0-9]/', $slug) && mb_strlen($slug) >= 1 && mb_strlen($slug) < 12)) {
                 return new InputValidation('slug', $slug, "Renseignez un identifiant valide. Seuls les caratères de a à z et de 0 à 9 sont autorisés.");
             }
             //N'existe pas déjà en base.
-            if (!is_available_source_name($slug)) {
+            if (!is_available_source_name($_POST['series'], $slug)) {
                 return new InputValidation('slug', $slug, "Cet identifiant est déjà utilisé, veuillez en choisir un autre.");
             }
 

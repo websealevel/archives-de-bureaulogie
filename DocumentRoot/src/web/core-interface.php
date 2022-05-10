@@ -171,13 +171,31 @@ function esc_video_source_url_e(string $source_name)
 }
 
 /**
- * Retourne vrai si le nom de la source est déjà utilisé en base, faux sinon
- * @param string $source_name Le nom de la source (slug)
+ * Retourne vrai si la source est déjà déclarée en base, faux sinon
+ * @param string $base_name La base du nom de la source
+ * @param string $slug Le slug du nom de la source
  * @return bool
  */
-function is_available_source_name(string $source_name): bool
+function is_available_source_name(string $base_name, string $slug): bool
 {
-    $full_name = sprintf("%s.%s", $source_name, EXTENSION_SOURCE);
+    $full_name = build_source_name($base_name, $slug);
 
-    dd($full_name);
+    $match = query_source_by_name_attr($full_name);
+}
+
+/**
+ * Retourne le nom complet d'une source (son attribut name) à partir de sa base et de son slug/identifiant
+ */
+function build_source_name(string $base_name, string $slug): string
+{
+    if (empty($base_name) || empty($slug))
+        throw new Exception("Impossible de reconstruire le nom de la source, la base du nom ou le slug est vide");
+
+    $file_name = sprintf("%s--%s.%s", $base_name, $slug, EXTENSION_SOURCE);
+
+    //Check format
+    if (!preg_match('/' . FORMAT_FILE_VIDEO_SOURCE . '/', $file_name))
+        throw new Exception("Une contrainte sur le nom de la source est mauvaise car le nom reconstruit de la source n'est pas dans un format valide.");
+
+    return $file_name;
 }
