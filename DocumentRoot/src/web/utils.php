@@ -174,7 +174,7 @@ function autoload(): void
 /**
  * Retrouve la valeur POSTée d'un input de formulaire
  * @param InputValidation|string|array $input La valeur d'un input
- * @return string La valeur POSTé de l'input
+ * @return InputValidation|string|array La valeur POSTé de l'input
  */
 function retrieve_value(InputValidation|string|array $input): string
 {
