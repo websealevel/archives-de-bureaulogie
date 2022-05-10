@@ -39,9 +39,6 @@ function core_download(DownloadRequest $download_request, string $download_path 
     //Préparer le format du fichier pour qu'il soit source compatible.
     $file_name = format_to_source_file($download_request);
 
-    //Installation custom de youtube-dl sur le path du projet.
-    // $youtube_process_builder = new Youtube_DL_ProcessBuilder();
-
     //Téléchargement.
     $yt = new YoutubeDl();
 
@@ -58,19 +55,18 @@ function core_download(DownloadRequest $download_request, string $download_path 
             ->output($file_name)
     );
 
-    dd($collection->getVideos());
+    foreach ($collection->getVideos() as $video) {
 
+        dd($video);
 
-    // foreach ($collection->getVideos() as $video) {
+        if ($video->getError() !== null) {
+            throw new \Exception("Error downloading video: {$video->getError()}.");
+        } else {
+            $result = $video->getFile();
+        }
+    }
 
-    //     dd($video);
-
-    //     if ($video->getError() !== null) {
-    //         throw new \Exception("Error downloading video: {$video->getError()}.");
-    //     } else {
-    //         $result = $video->getFile();
-    //     }
-    // }
+    dd('end');
 
     // return $result;
 }
