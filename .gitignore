@@ -25,3 +25,4 @@ DocumentRoot/web/.env_db
 DocumentRoot/debug.log
 postgres-data/
 .vscode
+~

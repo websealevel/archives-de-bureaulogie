@@ -65,10 +65,7 @@ function core_download(DownloadRequest $download_request, string $download_path 
             $result = $video->getFile();
         }
     }
-
-    dd('end');
-
-    // return $result;
+    return $result;
 }
 
 /**
