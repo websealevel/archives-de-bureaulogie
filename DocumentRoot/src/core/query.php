@@ -38,28 +38,24 @@ function query_declared_sources(string $file_source = SOURCE_FILE): DOMNodeList
 }
 
 /**
- * Retourne la liste des sources dont l'attribut name a la valeur $value
+ * Retourne l'élément source dont l'attribut name a la valeur $value
  * @param string $value La valeur de l'attribut name de la source rechercé
  * @return DOMNode
+ * @throws Exception - Si la liste contient plus d'un résultat (chaque source avoir un attribut à la valeur unique)
  */
 function query_source_by_name_attr(string $value, string $file_source = SOURCE_FILE): DOMNode
 {
-
     $xpath = load_xpath($file_source, XMLNS_SOURCE_FILE);
-
-    //Reconstruire le name complet
 
     $query = sprintf("//ns:extraits/ns:source[@name='%s']", $value);
 
     $match = $xpath->query($query);
 
-    dd($match);
+    if ($match->count() > 1)
+        throw new Exception("Il existe deux sources avec le même attribut name, chaque attribut name doit avoir une valeur unique");
 
-    //Aucun match, Node vide
-
-    //Un match, La seule node
-
-    //Si plusieurs matchs il y a un pb, doit être unique.Exception
+    if (1 == $match->count())
+        return $match->item(0);
 
     return new DOMNode();
 }

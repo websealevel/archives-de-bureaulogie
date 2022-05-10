@@ -6,6 +6,7 @@
 
 <!-- element source -->
 <!ATTLIST source name ID #REQUIRED>
+<!ATTLIST source url CDATA #REQUIRED>
 <!ATTLIST source label CDATA #REQUIRED >
 
 <!-- element extrait -->

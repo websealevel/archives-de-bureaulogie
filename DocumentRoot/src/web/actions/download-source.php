@@ -18,9 +18,10 @@ use YoutubeDl\Options;
 use YoutubeDl\YoutubeDl;
 
 /**
- * Télécharge une vidéo source depuis une url valide vers le dossier source
+ * Télécharge une vidéo source depuis une url valide vers le dossier source si elle n'est pas déjà déclarée dans le fichier source
  * @global array $_POST
  * @global array $_SESSION
+ * @throws Exception - Si la série des sources valides n'est pas définie
  */
 function download_source()
 {
@@ -89,12 +90,14 @@ function download_source()
                 return new InputValidation('name', $name, "Renseignez un identifiant valide. Seuls les caratères de a à z et de 0 à 9 sont autorisés.");
             }
             //N'existe pas déjà en base.
-            if (!is_available_source_name($_POST['series'], $name)) {
-                return new InputValidation('name', $name, "Cet identifiant est déjà utilisé, veuillez en choisir un autre.");
+            if (!is_available_source_name($_POST['series'], $name, $_POST['source_url'])) {
+                return new InputValidation('name', $name, "Cette source a déjà été déclarée. Une autre source avec la même url a été trouvée.");
             }
             return new InputValidation('name', $name, '', InputStatus::Valid);
         })
     );
+
+    dd('Next');
 
     //Validation des champs
     $input_validations = validate_posted_form($form_inputs);
