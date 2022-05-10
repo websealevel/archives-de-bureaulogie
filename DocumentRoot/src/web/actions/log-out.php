@@ -20,12 +20,17 @@ require_once __DIR__ . '/../log.php';
  */
 function log_out(Notice $notice = new Notice("Vous avez été déconnecté avec succès", NoticeStatus::Success))
 {
-    session_start();
-    $login = logout_user_session();
-    error_log_out_success($login, $notice);
-    redirect('/', 'notices', array(
-        $notice
-    ));
+    if (isset($_SESSION)) {
+        $login = logout_user_session();
+        error_log_out_success($login, $notice);
+        redirect('/', 'notices', array(
+            $notice
+        ));
+    } else {
+        redirect('/', 'notices', array(
+            $notice
+        ));
+    }
 }
 
 /**
@@ -36,7 +41,7 @@ function log_out(Notice $notice = new Notice("Vous avez été déconnecté avec 
 function logout_user_session(): string
 {
     if (!isset($_SESSION))
-        throw new Exception("Aucune session n'est ouverte");
+        throw new Exception("On ne devrait pas chercher à logout un user qui n'est pas connecté.");
 
     $login = $_SESSION['pseudo'] ?? '';
     session_regenerate_id();

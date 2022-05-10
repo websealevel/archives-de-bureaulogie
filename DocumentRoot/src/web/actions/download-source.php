@@ -85,7 +85,7 @@ function download_source()
             if (empty($name))
                 return new InputValidation('name', $name, "Renseignez un identifiant.");
 
-            //Seulement alphanumerique, sans espace, entre 1 et 12 caractères
+            //Seulement alphanumerique, sans espace, entre 1 et 25 caractères
             if (!(preg_match('/[a-z0-9]{1,25}/', $name))) {
                 return new InputValidation('name', $name, "Renseignez un identifiant valide. Seuls les caratères de a à z et de 0 à 9 sont autorisés.");
             }
@@ -93,14 +93,15 @@ function download_source()
             if (!is_available_source_name($_POST['series'], $name, $_POST['source_url'])) {
                 return new InputValidation('name', $name, "Cette source a déjà été déclarée. Une autre source avec la même url a été trouvée.");
             }
-            return new InputValidation('name', $name, '', InputStatus::Valid);
+            return new InputValidation('name', strval($name), '', InputStatus::Valid);
         })
     );
 
-    dd('Next');
 
     //Validation des champs
     $input_validations = validate_posted_form($form_inputs);
+
+    dd('next');
 
     //Filtrer que les champs avec un champs 'errors' non vide et status invalid.
     $invalid_inputs = array_filter($input_validations, function (InputValidation $input) {

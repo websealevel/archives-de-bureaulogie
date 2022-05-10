@@ -172,14 +172,14 @@ function esc_video_source_url_e(string $source_name)
 
 /**
  * Retourne vrai si la source est déjà déclarée (nom et url identiques ou url identiques), faux sinon
- * @param string $base_name La base du nom de la source
+ * @param string $series La base du nom de la source
  * @param string $slug Le slug du nom de la source
  * @param string $url L'url de la source
  * @return bool
  */
-function is_available_source_name(string $base_name, string $slug, string $url): bool
+function is_available_source_name(string $series, string $slug, string $url): bool
 {
-    $full_name = build_source_name($base_name, $slug);
+    $full_name = build_source_name($series, $slug);
 
     $match = query_source_by_name_attr($full_name);
 
@@ -192,13 +192,17 @@ function is_available_source_name(string $base_name, string $slug, string $url):
 
 /**
  * Retourne le nom complet d'une source (son attribut name) à partir de sa base et de son slug/identifiant
+ * @param string $series Le nom de la série à laquelle appartient la vidéo source
+ * @param stirng $slug L'identifiant ajouté au nom de la vidéo
+ * @return string Le nom complet au format FORMAT_FILE_VIDEO_SOURCE
+ * @see FORMAT_FILE_VIDEO_SOURCE
  */
-function build_source_name(string $base_name, string $slug): string
+function build_source_name(string $series, string $slug): string
 {
-    if (empty($base_name) || empty($slug))
+    if (empty($series) || empty($slug))
         throw new Exception("Impossible de reconstruire le nom de la source, la base du nom ou le slug est vide");
 
-    $file_name = sprintf("%s--%s.%s", $base_name, $slug, EXTENSION_SOURCE);
+    $file_name = sprintf("%s--%s.%s", $series, $slug, EXTENSION_SOURCE);
 
     //Check format
     if (!preg_match('/' . FORMAT_FILE_VIDEO_SOURCE . '/', $file_name))

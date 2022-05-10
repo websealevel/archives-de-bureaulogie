@@ -175,6 +175,8 @@ function validate_posted_form(array $inputs): array
 
     foreach ($inputs as $input) {
 
+        error_log($input->name);
+
         $name = $input->name;
 
         //Check que le champ est POSTé si c'est pas une checkbox
@@ -187,6 +189,9 @@ function validate_posted_form(array $inputs): array
             continue;
         }
 
+        error_log('checked');
+
+
         //Si champ POSTé, appelle la callback de validation.
         $validation_callback = $input->validation_callback;
 
@@ -195,6 +200,7 @@ function validate_posted_form(array $inputs): array
         }
 
         $input_validations["{$name}"] = $validation_callback($input->value);
+
     }
 
     return $input_validations;
