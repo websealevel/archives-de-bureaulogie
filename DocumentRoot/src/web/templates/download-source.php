@@ -64,4 +64,4 @@ if (!current_user_can('add_source'))
     </form>
 </main>
 
-<?php present_footer(); ?>
+<?php present_footer(array('jquery-min','template-download-source')); ?>
