@@ -24,20 +24,24 @@ function log_out(Notice $notice = new Notice("Vous avez été déconnecté avec 
     //                  soit déconnecté suite à une exception (et headers peuvent être déjà envoyés)
 
     if (!isset($_SESSION)) {
-        throw new Exception("On ne devrait pas chercher à logout un user qui n'est pas connecté.");
+
+        session_start();
+
+        if (!isset($_SESSION['user_authentificated']) || !$_SESSION['user_authentificated'])
+            throw new Exception("On ne devrait pas chercher à logout un user qui n'est pas connecté.");
     }
 
     if (headers_sent()) {
         //Headers déjà envoyé, exception envoyée durant l'excution d'un template. Je redirige pas, j'indique en session que l'utilisateur n'est plus connecté.
         session_unset();
-        $_SESSION['notices'] = array($notice); 
+        $_SESSION['notices'] = array($notice);
         present_template_part('form-login');
         present_footer();
     } else {
         //Sinon, c'est une action de log-out classique ou en début de script, je peux rediriger directement
         session_regenerate_id();
-        session_unset();
         error_log_out_success($_SESSION['pseudo'], $notice);
+        session_unset();
         redirect('/', 'notices', array(
             $notice
         ));
