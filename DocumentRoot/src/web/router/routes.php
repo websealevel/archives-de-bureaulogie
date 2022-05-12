@@ -13,6 +13,7 @@ require_once __DIR__ . '/../actions/log-out.php';
 require_once __DIR__ . '/../actions/sign-up.php';
 require_once __DIR__ . '/../actions/download-source.php';
 require_once __DIR__ . '/../actions/confirm-authentification.php';
+require_once __DIR__ . '/../api/download-source.php';
 
 /**
  * Retourne toutes les routes de l'application sous la clef de leurs méthodes respectives
@@ -69,6 +70,9 @@ function routes(): array
             '/download-source' => function () {
                 web_download_source();
             },
+            '/api/v1/download' => function () {
+                api_download_source();
+            }
         )
     );
 }

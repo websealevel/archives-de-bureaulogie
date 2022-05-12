@@ -19,11 +19,11 @@ if (!current_user_can('add_source'))
 
 <?php present_header(); ?>
 
-<h2>Ajouter une nouvelle vidéo source à la bibliothèque</h2>
+<h2>Ajouter une nouvelle vidéo source aux archives</h2>
 
 <p>Les vidéos <em>sources</em> sont les vidéos originales et complètes à partir desquelles les extraits pourront être réalisés.</p>
 
-<h3>Sources présentes dans la base</h3>
+<h3>Lise des sources présentes dans les archives</h3>
 <?php esc_html_list_sources_e(); ?>
 
 <h3>Ajouter</h3>
@@ -43,7 +43,7 @@ if (!current_user_can('add_source'))
         <div>
             <?php esc_html_form_error_msg_e('name', 'form_errors'); ?>
             <label for="name">Choisissez un identifiant court pour cette vidéo (un mot ou un nombre en minuscule) <span class="required">*</span></label>
-            <input type="text" name="name" pattern="[a-z0-9]{1,25}" title="un nom en caractères alphanumériques, sans espaces (utiliser des hyphens à la place), d'1 caractère min" value="3" required>
+            <input type="text" name="name" placeholder="ex: 3" pattern="[a-z0-9#]{1,25}" title="un nom en caractères alphanumériques, sans espaces (utiliser des hyphens à la place), d'1 caractère min" value="3" required>
 
         </div>
         <div>

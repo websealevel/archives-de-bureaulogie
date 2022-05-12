@@ -32,7 +32,6 @@ function core_download(DownloadRequest $download_request, string $download_path 
 
     //Show progress
     $yt->onProgress(static function (?string $progressTarget, string $percentage, string $size, string $speed, string $eta, ?string $totalTime): void {
-        dump('HERE');
         echo "Download file: $progressTarget; Percentage: $percentage; Size: $size";
         if ($speed) {
             echo "; Speed: $speed";
@@ -71,9 +70,7 @@ function core_download(DownloadRequest $download_request, string $download_path 
         error_log($e);
         //Dire a l'utilisateur que le téléchargement a échoué et qu'il doit réessayer.
         echo 'Le téléchargement a échoué. Veuillez réessayer.';
-
         //Nettoyer les données temporaires de téléchargement.
-
         return false;
     }
 }

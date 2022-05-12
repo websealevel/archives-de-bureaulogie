@@ -94,13 +94,13 @@ function web_download_source()
         }),
 
         new FormInput('name', $_POST['name'], function (string $name): InputValidation {
-
             //Non vide.
             if (empty($name)) {
                 return new InputValidation('name', $name, "Renseignez un identifiant.");
             }
 
-            //Seulement alphanumerique, sans espace, entre 1 et 25 caractères
+            //Seulement alphanumerique ou '#', sans espace, entre 1 et 25 caractères
+            //Ne marche pas.
             if (!(preg_match('/[a-z0-9]{1,25}/', $name))) {
                 return new InputValidation('name', $name, "Renseignez un identifiant valide. Seuls les caratères de a à z et de 0 à 9 sont autorisés.");
             }
@@ -139,7 +139,9 @@ function web_download_source()
         $input_validations['name']->value,
     );
 
-    $file = download_video($download_request);
-
-    
+    try {
+        $file = download_video($download_request);
+    } catch (Exception $e) {
+        error_log($e);
+    }
 }
