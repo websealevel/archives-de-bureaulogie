@@ -133,6 +133,7 @@ function present_template(string $template_name)
 function present_template_part(string $template_part)
 {
     $template = strtolower(trim($template_part)) . '.php';
+
     $path_template = __DIR__ . '/templates/parts/' . $template;
 
     if (!file_exists($path_template))
@@ -158,7 +159,7 @@ function present_header(): void
  */
 function present_footer(array $js_scripts = array())
 {
-    present_template_part('footer', $js_scripts);
+    present_template_part('footer');
     enqueue_js_scripts($js_scripts);
 }
 

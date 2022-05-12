@@ -44,12 +44,6 @@ function fails_gracefully()
 {
     //Fails gracefully : 
     $notice = new Notice("Oups, une erreur est survenue et vous avez été déconnecté. Veuillez nous en excusez.", NoticeStatus::ExceptionThrown);
-
-    if (isset($_SESSION)) {
-        log_out($notice);
-    } else {
-        redirect('/', 'notices', array(
-            $notice
-        ));
-    }
+    log_out($notice);
+    return;
 }

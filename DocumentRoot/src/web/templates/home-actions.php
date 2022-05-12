@@ -9,7 +9,7 @@
 
 require_once __DIR__ . '/../current-user.php';
 ?>
-<?php present_header(); ?>
+<?php present_header()?>
 
 <h2>Bienvenue !</h2>
 

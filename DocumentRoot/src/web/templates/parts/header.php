@@ -10,9 +10,7 @@ declare(strict_types=1);
 require_once __DIR__ . '../../../../handlers.php';
 require_once __DIR__ . '../../../utils.php';
 autoload();
-
 ?>
-
 <!DOCTYPE html>
 <html lang="fr" dir="ltr">
 

@@ -45,7 +45,7 @@ function redirect(string $path, string $session_key = '', array $data = array(),
 
     if (0 === $refresh) {
         header('Location: ' . $path);
-    } else{
+    } else {
         header("refresh:{$refresh};url={$path}");
     }
 

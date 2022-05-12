@@ -20,32 +20,28 @@ require_once __DIR__ . '/../log.php';
  */
 function log_out(Notice $notice = new Notice("Vous avez été déconnecté avec succès", NoticeStatus::Success))
 {
-    session_start();
-    if (isset($_SESSION)) {
-        $login = logout_user_session();
-        error_log_out_success($login, $notice);
-        redirect('/', 'notices', array(
-            $notice
-        ));
+    //2 cas de figure : soit deconnecté en appelant directement log-out
+    //                  soit déconnecté suite à une exception (et headers peuvent être déjà envoyés)
+
+    if (!isset($_SESSION)) {
+        throw new Exception("On ne devrait pas chercher à logout un user qui n'est pas connecté.");
+    }
+
+    if (headers_sent()) {
+        //Headers déjà envoyé, exception envoyée durant l'excution d'un template. Je redirige pas, j'indique en session que l'utilisateur n'est plus connecté.
+        session_unset();
+        $_SESSION['notices'] = array($notice); 
+        present_template_part('form-login');
+        present_footer();
     } else {
+        //Sinon, c'est une action de log-out classique ou en début de script, je peux rediriger directement
+        session_regenerate_id();
+        session_unset();
+        error_log_out_success($_SESSION['pseudo'], $notice);
         redirect('/', 'notices', array(
             $notice
         ));
     }
-}
 
-/**
- * Supprime le compte utilisateur en session
- * @global array $_SESSION
- * @return string Le login de l'utilisateur
- */
-function logout_user_session(): string
-{
-    if (!isset($_SESSION))
-        throw new Exception("On ne devrait pas chercher à logout un user qui n'est pas connecté.");
-
-    $login = $_SESSION['pseudo'] ?? '';
-    session_regenerate_id();
-    session_destroy();
-    return $login;
+    return;
 }
