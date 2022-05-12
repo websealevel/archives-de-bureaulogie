@@ -44,7 +44,7 @@ if (!current_user_can('add_source'))
             <?php esc_html_form_error_msg_e('name', 'form_errors'); ?>
             <label for="name">Choisissez un identifiant court pour cette vidéo (un mot ou un nombre en minuscule) <span class="required">*</span></label>
             <input type="text" name="name" pattern="[a-z0-9]{1,25}" title="un nom en caractères alphanumériques, sans espaces (utiliser des hyphens à la place), d'1 caractère min" value="3" required>
-            
+
         </div>
         <div>
             <?php esc_html_form_error_msg_e('source_url', 'form_errors'); ?>
@@ -53,10 +53,8 @@ if (!current_user_can('add_source'))
         </div>
         <div name="preview_source">
             <p>Preview</p>
-            <video width="320" height="240" controls>
-                <source src="" type="video/mp4">
-                Votre navigateur ne supporte pas le tag video HTML5 :(
-            </video>
+            <iframe width="420" height="315" src="">
+            </iframe>
         </div>
         <div>
             <input type="submit" value="Ajouter la source">
@@ -64,4 +62,4 @@ if (!current_user_can('add_source'))
     </form>
 </main>
 
-<?php present_footer(array('jquery-min','template-download-source')); ?>
+<?php present_footer(array('jquery-min', 'template-download-source')); ?>

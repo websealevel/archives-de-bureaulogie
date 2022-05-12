@@ -97,7 +97,7 @@ function esc_html_breadcrumbs(string $relative_path = '/'): void
  */
 function enqueue_js_scripts(array $scripts = array())
 {
-    if (empty($js_scripts))
+    if (empty($scripts))
         return;
 
     echo '<script>';
