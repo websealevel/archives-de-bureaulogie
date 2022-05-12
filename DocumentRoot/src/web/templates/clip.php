@@ -14,8 +14,8 @@ require_once __DIR__ . '/../core-interface.php';
 session_start();
 
 if (!current_user_can('submit_clip'))
-    redirect('/', 'notices', array(new Notice('Vous devez être authentifié pour soumettre un clip')));
-    
+    redirect('/', 'notices', array(new Notice('Vous devez être authentifié pour soumettre un clip', NoticeStatus::Error)));
+
 ?>
 
 <?php present_header(); ?>

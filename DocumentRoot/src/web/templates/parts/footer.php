@@ -11,7 +11,7 @@ require_once __DIR__ . '../../../../default-handlers.php';
 </div> <!-- #content !-->
 </div> <!-- #page !-->
 
-<?php enqueue_js_scripts(); ?>
+<?php enqueue_js_scripts($js_scripts); ?>
 
 </body>
 

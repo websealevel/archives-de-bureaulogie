@@ -40,7 +40,8 @@ function log_out(Notice $notice = new Notice("Vous avez été déconnecté avec 
     } else {
         //Sinon, c'est une action de log-out classique ou en début de script, je peux rediriger directement
         session_regenerate_id();
-        error_log_out_success($_SESSION['pseudo'], $notice);
+        $pseudo = $_SESSION['pseudo'] ?? 'Inconnu';
+        error_log_out_success($pseudo, $notice);
         session_unset();
         redirect('/', 'notices', array(
             $notice

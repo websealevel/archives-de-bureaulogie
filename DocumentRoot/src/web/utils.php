@@ -97,6 +97,9 @@ function esc_html_breadcrumbs(string $relative_path = '/'): void
  */
 function enqueue_js_scripts(array $scripts = array())
 {
+    if (empty($js_scripts))
+        return;
+
     echo '<script>';
     foreach ($scripts as $script) {
         $js_script_path = sprintf("%s/js/%s.js", ASSETS_PATH, $script);
@@ -130,7 +133,7 @@ function present_template(string $template_name)
  * @param string $template_name Le nom du template part dans le dossier templates/parts.
  * @return void
  */
-function present_template_part(string $template_part)
+function present_template_part(string $template_part, array $js_scripts = array())
 {
     $template = strtolower(trim($template_part)) . '.php';
 
@@ -159,8 +162,7 @@ function present_header(): void
  */
 function present_footer(array $js_scripts = array())
 {
-    present_template_part('footer');
-    enqueue_js_scripts($js_scripts);
+    present_template_part('footer', $js_scripts);
 }
 
 /**
