@@ -7,13 +7,25 @@
  * @package wsl 
  */
 
+require_once __DIR__ . '/../current-user.php';
+
 header("Cache-Control: no-store");
 header("Content-Type: text/event-stream");
 
 
 //Check les droits
 
+// session_id($_REQUEST['PHPSESSID']);
+session_id('toto');
+session_start();
+write_log($_SESSION);
 
+if (true) {
+    // if (!current_user_can('add_source')) {
+    echo 'data: {"Autorisation" : "refusée"}';
+    echo "\n\n";
+    exit;
+}
 
 while (true) {
     // Every 3 second, send a "ping" event.
@@ -24,9 +36,9 @@ while (true) {
     while (ob_get_level() > 0) {
         ob_end_flush();
     }
-    flush();
-    //Log on the server
-    error_log('message sent');
+    flush(); //Send to the browser
+
+    //On the server
 
     // Break the loop if the client aborted the connection (closed the page)
     if (connection_aborted()) break;
