@@ -43,6 +43,7 @@ jQuery(function ($) {
         $.post('/api/v1/download-source', data).done(function (data) {
 
 
+            console.log(data)
             console.log(data['statut'])
 
             //Si le formulaire est rejeté on récupere les erreurs
