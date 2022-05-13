@@ -63,8 +63,6 @@ function sql_find_pending_download_request_with_same_url(string $url): stdClass|
 
     $db = connect_to_db();
 
-    $db = connect_to_db();
-
     $sql =
         'SELECT 
         id
@@ -75,6 +73,32 @@ function sql_find_pending_download_request_with_same_url(string $url): stdClass|
 
     $stmt = $db->prepare($sql);
     $stmt->bindValue(':url', $url);
+    $stmt->bindValue(':state', 'pending');
+    $stmt->execute();
+
+    return $result = $stmt->fetchObject();
+}
+
+/**
+ * Retourne la liste des téléchargements en attente d'un compte, faux sinon
+ * @param string $account_id L'id du compte
+ * @return mixed
+ */
+function sql_find_pending_downloads(string $account_id)
+{
+
+    $db = connect_to_db();
+
+    $sql =
+        'SELECT 
+        id,url,format,filename
+        FROM downloads 
+        where account_id = :account_id
+        AND
+        state = :state ';
+
+    $stmt = $db->prepare($sql);
+    $stmt->bindValue(':account_id', $account_id);
     $stmt->bindValue(':state', 'pending');
     $stmt->execute();
 

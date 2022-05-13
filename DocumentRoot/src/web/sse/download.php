@@ -7,7 +7,9 @@
  * @package wsl 
  */
 
+require_once __DIR__ . '/../session.php';
 require_once __DIR__ . '/../current-user.php';
+require_once __DIR__ . '/../database/repository-downloads.php';
 
 header("Cache-Control: no-store");
 header("Content-Type: text/event-stream");
@@ -22,6 +24,11 @@ if (!current_user_can('add_source')) {
     echo "\n\n";
     exit;
 }
+
+//Trouver les téléchargements pending associés au compte
+$pending_downloads = pending_downloads(from_session('account_id'));
+
+//Lancer les téléchargement et écrire la progression sur la sortie standard
 
 ob_start();
 $foo = 'ping';
@@ -80,21 +87,21 @@ exit;
 //     //Nettoyer les données temporaires de téléchargement.
 // }
 
-while (true) {
-    // Every 3 second, send a "ping" event.
-    $foo = 'ping';
-    echo 'data: {"ping": "' . $foo . '"}';
-    echo "\n\n";
+// while (true) {
+//     // Every 3 second, send a "ping" event.
+//     $foo = 'ping';
+//     echo 'data: {"ping": "' . $foo . '"}';
+//     echo "\n\n";
 
-    while (ob_get_level() > 0) {
-        ob_end_flush();
-    }
-    flush(); //Send to the browser
+//     while (ob_get_level() > 0) {
+//         ob_end_flush();
+//     }
+//     flush(); //Send to the browser
 
-    //On the server
+//     //On the server
 
-    // Break the loop if the client aborted the connection (closed the page)
-    if (connection_aborted()) break;
+//     // Break the loop if the client aborted the connection (closed the page)
+//     if (connection_aborted()) break;
 
-    sleep(3);
-}
+//     sleep(3);
+// }

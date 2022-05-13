@@ -13,6 +13,7 @@ require_once __DIR__ . '/../utils.php';
 require_once __DIR__ . '/../../core/download.php';
 require_once __DIR__ . '/../../models/Notice.php';
 require_once __DIR__ . '/queries-downloads.php';
+require_once __DIR__ . '/../current-user.php';
 
 
 /**
@@ -23,6 +24,9 @@ require_once __DIR__ . '/queries-downloads.php';
  */
 function create_download(DownloadRequest $download_request, string $account_id): int|Notice
 {
+
+    if (!current_user_can('add_source'))
+        return new Notice("Autorisation refusée", NoticeStatus::Error);
 
     $filename = format_to_source_file($download_request);
     $format = youtube_dl_download_format();
@@ -45,4 +49,29 @@ function create_download(DownloadRequest $download_request, string $account_id):
     }
 
     return $id;
+}
+
+
+/**
+ * Retourne la liste des téléchargements en attente d'un compte
+ * @param string $account_id L'id du compte utilisateur
+ * @return mixed La liste des téléchargements ou une Notice en cas d'erreur
+ */
+function pending_downloads(string $account_id)
+{
+
+    if (!current_user_can('add_source'))
+        return new Notice("Autorisation refusée", NoticeStatus::Error);
+
+    try {
+        $pending_downloads = sql_find_pending_downloads($account_id);
+    } catch (PDOException $e) {
+        error_log($e);
+        return new Notice(
+            sprintf("La récupération des téléchargement en attente a échoué"),
+            NoticeStatus::Error
+        );
+    }
+
+    return $pending_downloads;
 }
