@@ -26,13 +26,13 @@ function api_download_source()
     //Check le form
     $input_validations = check_download_request_form();
 
-    //Filtrer que les champs avec un champs 'errors' non vide et status invalid.
-    $invalid_inputs = array_filter($input_validations, function (InputValidation $input) {
-        return InputStatus::Invalid === $input->status;
-    });
+    $invalid_inputs = filter_invalid_inputs($input_validations);
 
-    if (!empty($invalid_inputs))
+    //Retourner les erreurs sur les champs
+    if (!empty($invalid_inputs)) {
         print_r($invalid_inputs);
+        exit;
+    }
 
     //Lancement du téléchargement de la source
     //Mettre le téléchargement dans un process
