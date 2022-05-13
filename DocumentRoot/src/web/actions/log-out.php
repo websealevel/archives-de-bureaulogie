@@ -28,7 +28,7 @@ function log_out(Notice $notice = new Notice("Vous avez été déconnecté avec 
         session_start();
 
         if (!isset($_SESSION['user_authentificated']) || !$_SESSION['user_authentificated']){
-            echo 'Nope';
+            echo 'Silence';
             exit;
         }
     }

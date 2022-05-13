@@ -44,7 +44,6 @@ function web_download_source()
             new Notice('Vous n\'avez pas l\'autorisation d\'ajouter une source', NoticeStatus::Error)
         ));
 
-
     $form_inputs = array(
 
         new FormInput('source_url', $_POST['source_url'], function (string $source_url): InputValidation {
@@ -144,9 +143,9 @@ function web_download_source()
         $input_validations['name']->value,
     );
 
-    try {
-        $file = download_video($download_request);
-    } catch (Exception $e) {
-        error_log($e);
-    }
+    //Mettre le téléchargement dans un process
+    //Sauver le PID en base pour le tracker
+    //Retourner le PID
+    // $file = download_video($download_request);
+    echo 'OK';
 }
