@@ -34,7 +34,6 @@ require_once __DIR__ . '/../core-interface.php';
  * Télécharge une vidéo source depuis une url valide vers le dossier source si elle n'est pas déjà déclarée dans le fichier source
  * @global array $_POST
  * @global array $_SESSION
- * @throws Exception - Si la série des sources valides n'est pas définie
  */
 function web_download_source()
 {
@@ -43,6 +42,39 @@ function web_download_source()
         redirect('/', 'notices', array(
             new Notice('Vous n\'avez pas l\'autorisation d\'ajouter une source', NoticeStatus::Error)
         ));
+
+    $input_validations = check_download_request_form();
+
+    //Filtrer que les champs avec un champs 'errors' non vide et status invalid.
+    $invalid_inputs = array_filter($input_validations, function (InputValidation $input) {
+        return InputStatus::Invalid === $input->status;
+    });
+
+    if (!empty($invalid_inputs))
+        redirect('/download-source', 'errors', $input_validations);
+
+    //Validation du mot de passe si action sensible. A faire.
+    if (is_authentification_confirmation_required('add_source')) {
+        redirect('/confirm-authentification');
+    }
+
+    $download_request = new DownloadRequest(
+        $input_validations['source_url']->value,
+        $input_validations['series']->value,
+        $input_validations['name']->value,
+    );
+
+    $file = download_video($download_request);
+    return $file;
+}
+
+/**
+ * Vérifie la validité des champs du formulaire de demande de téléchargement de source. Retourne un tableau d'InputValidation correspondant à chaque champ avec son status valide ou non
+ * @return InputValidation[] 
+ * @throws Exception - Si la série des sources valides n'est pas définie
+ */
+function check_download_request_form(): array
+{
 
     $form_inputs = array(
 
@@ -122,30 +154,5 @@ function web_download_source()
     //Validation des champs
     $input_validations = validate_posted_form($form_inputs);
 
-    //Filtrer que les champs avec un champs 'errors' non vide et status invalid.
-    $invalid_inputs = array_filter($input_validations, function (InputValidation $input) {
-        return InputStatus::Invalid === $input->status;
-    });
-
-    //Si des validations ont échoué, on retourne à la page avec les erreurs
-    if (!empty($invalid_inputs))
-        redirect('/download-source', 'form_errors', $input_validations);
-
-    //Validation du mot de passe si action sensible.
-    if (is_authentification_confirmation_required('add_source')) {
-        redirect('/confirm-authentification');
-    }
-
-
-    $download_request = new DownloadRequest(
-        $input_validations['source_url']->value,
-        $input_validations['series']->value,
-        $input_validations['name']->value,
-    );
-
-    //Mettre le téléchargement dans un process
-    //Sauver le PID en base pour le tracker
-    //Retourner le PID
-    // $file = download_video($download_request);
-    echo 'OK';
+    return $input_validations;
 }

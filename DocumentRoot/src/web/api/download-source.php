@@ -14,7 +14,7 @@ require_once __DIR__ . '/../current-user.php';
 require_once __DIR__ . '/../actions/download-source.php';
 
 function api_download_source()
-{    
+{
     session_id($_POST['PHPSESSID']);
     session_start();
 
@@ -23,10 +23,21 @@ function api_download_source()
         exit;
     }
 
+    //Check le form
+    $input_validations = check_download_request_form();
+
+    //Filtrer que les champs avec un champs 'errors' non vide et status invalid.
+    $invalid_inputs = array_filter($input_validations, function (InputValidation $input) {
+        return InputStatus::Invalid === $input->status;
+    });
+
+    if (!empty($invalid_inputs))
+        print_r($invalid_inputs);
+
     //Lancement du téléchargement de la source
-
-    web_download_source();
-
+    //Mettre le téléchargement dans un process
+    //Sauver le PID en base pour le tracker
+    //Retourner le PID
 
     echo json_encode(array(
         'message' => 'Bonjour ' . $_SESSION['pseudo']
