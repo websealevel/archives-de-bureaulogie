@@ -31,17 +31,30 @@ jQuery(function ($) {
     //     })
     // });
 
-    const evtSource = new EventSource("sse-download-source");
-    evtSource.onmessage = function (event) {
-        const newElement = document.createElement("li");
-        const eventList = document.getElementById("list");
+    $("#form-download").submit(function (event) {
 
-        newElement.textContent = "message: " + event.data;
-        eventList.appendChild(newElement);
-    }
+        event.preventDefault();
 
-    evtSource.onerror = function (err) {
-        console.error("EventSource failed:", err);
-    };
+        const data = $('form#form-download').serialize() + '&PHPSESSID=' + PHPSESSID
+
+        $.post('/api/v1/download-source', data).done(function (data) {
+            console.log(data)
+        }).fail(function () {
+            console.log('fail')
+        })
+    });
+
+    // const evtSource = new EventSource("sse-download-source");
+    // evtSource.onmessage = function (event) {
+    //     const newElement = document.createElement("li");
+    //     const eventList = document.getElementById("list");
+
+    //     newElement.textContent = "message: " + event.data;
+    //     eventList.appendChild(newElement);
+    // }
+
+    // evtSource.onerror = function (err) {
+    //     console.error("EventSource failed:", err);
+    // };
 
 });

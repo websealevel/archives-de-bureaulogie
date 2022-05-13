@@ -35,6 +35,19 @@ CREATE TABLE roles_capabilities (
     CONSTRAINT fk_role FOREIGN KEY (role_id) REFERENCES roles(role_id)
 );
 
+CREATE TABLE downloads (
+    id serial PRIMARY KEY,
+    url VARCHAR(300) NOT NULL,
+    filename VARCHAR(255) NOT NULL,
+    format VARCHAR(300) NOT NULL,
+    account_id INT NOT NULL,
+    process_pid INT,
+    token VARCHAR(255) NOT NULL,
+    state VARCHAR(30) NOT NULL,
+    created_on TIMESTAMP NOT NULL,
+    CONSTRAINT fk_account FOREIGN KEY (account_id) REFERENCES accounts(id)
+);
+
 -- Inserer les roles.
 INSERT INTO
     roles(role_id, role, role_label, ancestor)

@@ -14,7 +14,8 @@ require_once __DIR__ . '/../current-user.php';
 require_once __DIR__ . '/../actions/download-source.php';
 require_once __DIR__ . '/../../models/DonwloadRequest.php';
 require_once __DIR__ . '/../../core/download.php';
-require_once __DIR__ .'/../utils.php';
+require_once __DIR__ . '/../utils.php';
+require_once __DIR__ . '/../database/repository-downloads.php';
 
 autoload();
 
@@ -38,7 +39,10 @@ function api_download_source()
 
     //Retourner les erreurs sur les champs
     if (!empty($invalid_inputs)) {
-        print_r($invalid_inputs);
+        print_r(array(
+            'statut' => 400,
+            'errors' => $invalid_inputs,
+        ));
         exit;
     }
 
@@ -51,63 +55,14 @@ function api_download_source()
     //Lancement du téléchargement de la source
     check_download_request($download_request);
 
-    //Préparer le format du fichier pour qu'il soit source compatible.
-    $file_name = format_to_source_file($download_request);
+    //On enregistre en base une demande associée à la session
+    $token = generate_download_token();
+    create_download($download_request);
 
-    echo 'ok';
+    //Retourne une réponse interprétable par le front
+    print_r(array(
+        'statut' => 200,
+        'errors' => array(),
+    ));
     exit;
-
-    // //Téléchargement.
-    // $yt = new YoutubeDl();
-
-    // //Show progress
-    // $yt->onProgress(static function (?string $progressTarget, string $percentage, string $size, string $speed, string $eta, ?string $totalTime): void {
-    //     echo "Download file: $progressTarget; Percentage: $percentage; Size: $size";
-    //     if ($speed) {
-    //         echo "; Speed: $speed";
-    //     }
-    //     if ($eta) {
-    //         echo "; ETA: $eta";
-    //     }
-    //     if ($totalTime !== null) {
-    //         echo "; Downloaded in: $totalTime";
-    //     }
-    // });
-
-
-    // $yt->setBinPath('/var/www/html/youtube-dl/youtube-dl');
-    // $yt->setPythonPath('/usr/bin/python3');
-
-    // $format = youtube_dl_download_format();
-
-    // //Téléchargement
-    // $collection = $yt->download(
-    //     Options::create()
-    //         ->downloadPath('/var/www/html/sources')
-    //         ->url($download_request->url)
-    //         ->format($format)
-    //         ->output($file_name)
-    // );
-
-
-    // try {
-    //     foreach ($collection->getVideos() as $video) {
-    //         if ($video->getError() !== null) {
-    //             throw new \Exception("Error downloading video: {$video->getError()}.");
-    //         } else {
-    //             $result = $video->getFile();
-    //         }
-    //     }
-    //     return $result;
-    // } catch (Exception $e) {
-    //     error_log($e);
-    //     //Dire a l'utilisateur que le téléchargement a échoué et qu'il doit réessayer.
-    //     echo 'Le téléchargement a échoué. Veuillez réessayer.';
-    //     //Nettoyer les données temporaires de téléchargement.
-    // }
-
-    // echo 'Téléchargement terminé';
-    // exit;
 }
-
-

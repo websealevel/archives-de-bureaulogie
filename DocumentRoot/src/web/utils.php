@@ -102,7 +102,7 @@ function enqueue_js_scripts(array $scripts = array())
 
 
     echo '<script type="text/javascript">' . PHP_EOL;
-    echo 'const PHPSESSID="' . session_id() .'";'. PHP_EOL;
+    echo 'const PHPSESSID="' . session_id() . '";' . PHP_EOL;
     foreach ($scripts as $script) {
         $js_script_path = sprintf("%s/js/%s.js", ASSETS_PATH, $script);
         require $js_script_path;
@@ -224,4 +224,13 @@ function validate_posted_form(array $inputs): array
     }
 
     return $input_validations;
+}
+
+/**
+ * Retourne une chaine de caractère aléatoire
+ */
+function generate_download_token()
+{
+    $bytes = random_bytes(50);
+    return bin2hex($bytes);
 }

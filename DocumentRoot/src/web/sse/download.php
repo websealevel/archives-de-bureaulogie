@@ -15,17 +15,72 @@ header("Content-Type: text/event-stream");
 
 //Check les droits
 
-// session_id($_REQUEST['PHPSESSID']);
-session_id('toto');
+session_id($_REQUEST['PHPSESSID']);
 session_start();
 write_log($_SESSION);
 
-if (true) {
-    // if (!current_user_can('add_source')) {
+if (!current_user_can('add_source')) {
     echo 'data: {"Autorisation" : "refusée"}';
     echo "\n\n";
     exit;
 }
+
+ob_start();
+$foo = 'ping';
+echo 'data: {"ping": "' . $foo . '"}';
+echo "\n\n";
+ob_end_flush();
+exit;
+
+
+// //Téléchargement.
+// $yt = new YoutubeDl();
+
+// //Show progress
+// $yt->onProgress(static function (?string $progressTarget, string $percentage, string $size, string $speed, string $eta, ?string $totalTime): void {
+//     echo "Download file: $progressTarget; Percentage: $percentage; Size: $size";
+//     if ($speed) {
+//         echo "; Speed: $speed";
+//     }
+//     if ($eta) {
+//         echo "; ETA: $eta";
+//     }
+//     if ($totalTime !== null) {
+//         echo "; Downloaded in: $totalTime";
+//     }
+// });
+
+
+// $yt->setBinPath('/var/www/html/youtube-dl/youtube-dl');
+// $yt->setPythonPath('/usr/bin/python3');
+
+// $format = youtube_dl_download_format();
+
+// //Téléchargement
+// $collection = $yt->download(
+//     Options::create()
+//         ->downloadPath('/var/www/html/sources')
+//         ->url($download_request->url)
+//         ->format($format)
+//         ->output($file_name)
+// );
+
+
+// try {
+//     foreach ($collection->getVideos() as $video) {
+//         if ($video->getError() !== null) {
+//             throw new \Exception("Error downloading video: {$video->getError()}.");
+//         } else {
+//             $result = $video->getFile();
+//         }
+//     }
+//     return $result;
+// } catch (Exception $e) {
+//     error_log($e);
+//     //Dire a l'utilisateur que le téléchargement a échoué et qu'il doit réessayer.
+//     echo 'Le téléchargement a échoué. Veuillez réessayer.';
+//     //Nettoyer les données temporaires de téléchargement.
+// }
 
 while (true) {
     // Every 3 second, send a "ping" event.
