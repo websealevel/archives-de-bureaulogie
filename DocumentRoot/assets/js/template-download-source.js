@@ -20,14 +20,16 @@ jQuery(function ($) {
 
     //Checker s'il y a des téléchargements associés à mon compte
     const evtSource = new EventSource("sse-download-source");
+
+    //A la reception de message venant du serveur
     evtSource.onmessage = function (event) {
         const newElement = document.createElement("li");
         const eventList = document.getElementById("list");
-
         newElement.textContent = "message: " + event.data;
         eventList.appendChild(newElement);
     }
 
+    //En cas d'erreur
     evtSource.onerror = function (err) {
         console.error("EventSource failed:", err);
     };
