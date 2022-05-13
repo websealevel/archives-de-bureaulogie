@@ -18,22 +18,35 @@ jQuery(function ($) {
         }
     })
 
-    //Checker s'il y a des téléchargements associés à mon compte
+    //Checker s'il y a des téléchargements en attente associés à mon compte, les lance
     const evtSource = new EventSource("sse-download-source");
 
     //A la reception de message venant du serveur
     evtSource.onmessage = function (event) {
-        console.log(event.data)
+
         const json_data = JSON.parse(event.data)
-        console.log(json_data['pending_downloads'])
+        const downloads = json_data['pending_downloads']
+
+        downloads.forEach(download => {
+
+            //Si l'élément existe déjà
+            if ($("ul#pending-downloads li#" + download.id).length) {
+                //Mettre à jour la progression
+            } else {
+                $("ul#pending-downloads").append(
+                    '<li id="' + download.id + '">' +
+                    'Téléchargement <div class="dl-filename">' + download.filename + '</div>' +
+                    '<div class="dl-progress">'+
+                    '<progress value="'+ download.progression +'" max="100"></progress>'+
+                    '</div>'+
+                    '<div>Vitesse de téléchargement : ' + download.speed +'</div>'+
+                    '</li>'
+                )
+            }
+            console.log(download.url, download.id)
+        });
+
     }
-
-    //En cas d'erreur
-    evtSource.onerror = function (err) {
-        console.error("EventSource failed:", err);
-    };
-
-
     //Soumettre une nouvelle demande de téléchargement
     $("#form-download").submit(function (event) {
 
@@ -48,25 +61,6 @@ jQuery(function ($) {
             console.log(data['statut'])
 
             //Si le formulaire est rejeté on récupere les erreurs et on les affiche. A faire.
-
-            //Si le formulaire est validé, on récupere un status code nous disant qu'on peut y aller
-
-            //On ouvre une connexion SSE avec le serveur. Celui ci va scanner tous les téléchargement pending associés à notre compte (grace à notre PHPSESSID) et les lancer
-
-            //Ouverture de la connexion SSE pour lancer les téléchargements et récupérer la progression des downloads.
-
-            // const evtSource = new EventSource("sse-download-source");
-            // evtSource.onmessage = function (event) {
-            //     const newElement = document.createElement("li");
-            //     const eventList = document.getElementById("list");
-
-            //     newElement.textContent = "message: " + event.data;
-            //     eventList.appendChild(newElement);
-            // }
-
-            // evtSource.onerror = function (err) {
-            //     console.error("EventSource failed:", err);
-            // };
 
         }).fail(function () {
             console.log('fail')

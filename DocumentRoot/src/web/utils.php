@@ -225,3 +225,4 @@ function validate_posted_form(array $inputs): array
 
     return $input_validations;
 }
+

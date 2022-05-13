@@ -8,6 +8,8 @@
  * @package wsl 
  */
 
+require_once __DIR__ . '/utils.php';
+require_once __DIR__ . '/database/repository-downloads.php';
 require_once __DIR__ . '/../core/query.php';
 require_once __DIR__ . '/../core/actions.php';
 
@@ -216,18 +218,13 @@ function build_source_name(string $series, string $slug): string
 }
 
 /**
- * Appel au core pour télécharger la vidéo source dans le dossier des sources
- * @param DownloadRequest $download_request La ressource à télécharger
+ * Ecrit sur la sortie standard l'historique des téléchargements de vidéos sources
+ * @return void
  */
-function download_video(DownloadRequest $download_request)
+function esc_download_history_e(): void
 {
-    $result = action_download_video($download_request);
-
-    if(false === $result){
-        //Le téléchargement a échoué
+    $history = download_history();
+    foreach ($history as $download) {
+        esc_html_e($download['url']);
     }
-
-    //Declarer la nouvelle source dans le fichier source.
-
-    //Le téléchargement a marché et la source a été déclarée
 }

@@ -31,41 +31,6 @@ require_once __DIR__ . '/../database/repository-roles-capabilities.php';
 require_once __DIR__ . '/../core-interface.php';
 
 /**
- * Télécharge une vidéo source depuis une url valide vers le dossier source si elle n'est pas déjà déclarée dans le fichier source
- * @global array $_POST
- * @global array $_SESSION
- */
-function web_download_source()
-{
-    session_start();
-    if (!current_user_can('add_source'))
-        redirect('/', 'notices', array(
-            new Notice('Vous n\'avez pas l\'autorisation d\'ajouter une source', NoticeStatus::Error)
-        ));
-
-    $input_validations = check_download_request_form();
-
-    $invalid_inputs = filter_invalid_inputs($input_validations);
-
-    if (!empty($invalid_inputs))
-        redirect('/download-source', 'errors', $input_validations);
-
-    //Validation du mot de passe si action sensible. A faire.
-    if (is_authentification_confirmation_required('add_source')) {
-        redirect('/confirm-authentification');
-    }
-
-    $download_request = new DownloadRequest(
-        $input_validations['source_url']->value,
-        $input_validations['series']->value,
-        $input_validations['name']->value,
-    );
-
-    $file = download_video($download_request);
-    return $file;
-}
-
-/**
  * Vérifie la validité des champs du formulaire de demande de téléchargement de source. Retourne un tableau d'InputValidation correspondant à chaque champ avec son status valide ou non
  * @return InputValidation[] 
  * @throws Exception - Si la série des sources valides n'est pas définie

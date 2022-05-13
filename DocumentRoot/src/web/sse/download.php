@@ -37,11 +37,11 @@ $progression = 0;
 //Lancer les téléchargement et écrire la progression sur la sortie standard
 ob_start();
 echo 'data: {';
-echo '"pending_downloads" : {';
+echo '"pending_downloads" : [';
 foreach ($pending_downloads as $download) {
-    echo sprintf('"%s" : { "url": "%s", "filename" : "%s", "progression": "%s" }', $download['id'], $download['url'], $download['filename'], $progression);
+    echo sprintf('{"id" : "%s", "url": "%s", "filename" : "%s", "progression": "%s" }', $download['id'], $download['url'], $download['filename'], $progression);
 }
-echo '}';
+echo ']';
 echo '}';
 
 echo "\n\n";
@@ -70,7 +70,6 @@ exit;
 // $yt->setBinPath('/var/www/html/youtube-dl/youtube-dl');
 // $yt->setPythonPath('/usr/bin/python3');
 
-// $format = youtube_dl_download_format();
 
 // //Téléchargement
 // $collection = $yt->download(
@@ -96,23 +95,4 @@ exit;
 //     //Dire a l'utilisateur que le téléchargement a échoué et qu'il doit réessayer.
 //     echo 'Le téléchargement a échoué. Veuillez réessayer.';
 //     //Nettoyer les données temporaires de téléchargement.
-// }
-
-// while (true) {
-//     // Every 3 second, send a "ping" event.
-//     $foo = 'ping';
-//     echo 'data: {"ping": "' . $foo . '"}';
-//     echo "\n\n";
-
-//     while (ob_get_level() > 0) {
-//         ob_end_flush();
-//     }
-//     flush(); //Send to the browser
-
-//     //On the server
-
-//     // Break the loop if the client aborted the connection (closed the page)
-//     if (connection_aborted()) break;
-
-//     sleep(3);
 // }

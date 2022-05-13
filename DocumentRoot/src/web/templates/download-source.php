@@ -67,7 +67,8 @@ if (!current_user_can('add_source'))
     <ul id="pending-downloads">
     </ul>
     <h3>Historique des téléchargements</h3>
-    <ul id="history-downloads">
+    <ul id="downloads-history">
+        <?php esc_download_history_e();  ?>
     </ul>
 </main>
 

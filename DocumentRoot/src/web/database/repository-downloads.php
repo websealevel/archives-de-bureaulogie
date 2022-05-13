@@ -75,3 +75,25 @@ function pending_downloads(string $account_id)
 
     return $pending_downloads;
 }
+
+/**
+ * Retourne la liste des téléchargements terminés (pas ceux en cours de téléchargement ou en attente)
+ * @return array
+ */
+function download_history()
+{
+
+    try {
+        $terminated_downloads = sql_find_all_terminated_downloads();
+    } catch (PDOException $e) {
+        error_log($e);
+        redirect('/sign-up', 'notices', array(
+            new Notice(
+                sprintf("La récupération de l'historique des téléchargements a échoué"),
+                NoticeStatus::Error
+            )
+        ));
+    }
+
+    return $terminated_downloads;
+}
