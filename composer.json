@@ -1,9 +1,0 @@
-{
-    "require": {
-        "php-ffmpeg/php-ffmpeg": "^1.0",
-        "norkunas/youtube-dl-php": "^2.1.1",
-        "monolog/monolog": "^2.5",
-        "symfony/var-dumper": "^6.0",
-        "vlucas/phpdotenv": "^5.4"
-    }
-}

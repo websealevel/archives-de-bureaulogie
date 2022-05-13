@@ -168,7 +168,7 @@ function present_footer(array $js_scripts = array())
 }
 
 /**
- * Charge l'autoload.php de composer pour inclure les dépendances vendor du script appelant. Attention : ne pas appeler si le script appelant est dans une arborescence de 2 niveaux par rapport à vendor. Voir si on peut faire mieux.
+ * Charge l'autoload.php de composer pour inclure les dépendances vendor du script appelant.
  * @return void
  */
 function autoload(): void

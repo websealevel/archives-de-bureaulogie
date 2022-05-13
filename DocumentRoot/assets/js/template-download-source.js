@@ -21,14 +21,27 @@ jQuery(function ($) {
     //Checker s'il y a des process en cours de téléchargement
 
     //Poster le formulaire de téléchargement en ajax, recuperer les id et interroger pour obtenir la progression
-    $("#form-download").submit(function (event) {
-        event.preventDefault();
-        const data = $('form#form-download').serialize() + '&PHPSESSID='+PHPSESSID
-        $.post('/api/v1/download-source', data).done(function (data) {
-            console.log(data)
-        }).fail(function () {
-            console.log('fail')
-        })
-    });
+    // $("#form-download").submit(function (event) {
+    //     event.preventDefault();
+    //     const data = $('form#form-download').serialize() + '&PHPSESSID=' + PHPSESSID
+    //     $.post('/api/v1/download-source', data).done(function (data) {
+    //         console.log(data)
+    //     }).fail(function () {
+    //         console.log('fail')
+    //     })
+    // });
+
+    const evtSource = new EventSource("sse-download-source");
+    evtSource.onmessage = function (event) {
+        const newElement = document.createElement("li");
+        const eventList = document.getElementById("list");
+
+        newElement.textContent = "message: " + event.data;
+        eventList.appendChild(newElement);
+    }
+
+    evtSource.onerror = function (err) {
+        console.error("EventSource failed:", err);
+    };
 
 });

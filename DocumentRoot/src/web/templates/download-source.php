@@ -62,6 +62,10 @@ if (!current_user_can('add_source'))
             <input type="submit" value="Importer">
         </div>
     </form>
+
+    <ul id="list">
+        
+    </ul>
 </main>
 
 <?php present_footer(array('jquery-min', 'template-download-source')); ?>
