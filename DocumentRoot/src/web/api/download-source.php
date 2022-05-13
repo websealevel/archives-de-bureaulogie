@@ -88,7 +88,7 @@ function api_download_source()
     //Show progress
     $yt->onProgress(static function (?string $progressTarget, string $percentage, string $size, string $speed, string $eta, ?string $totalTime): void {
 
-        // sql_update_download($progressTarget);
+        sql_update_download($progressTarget);
 
         //Enregistrer l'état du téléchargement (requete à la base)
 
@@ -110,13 +110,12 @@ function api_download_source()
     $collection = $yt->download(
         Options::create()
             ->downloadPath('/var/www/html/sources')
-            ->url($download_request->url)
+            ->url('https://www.youtube.com/watch?v=duJwGSUhRQA')
             ->format($format)
             ->output($filename)
     );
 
-
-    // sql_change_download_state($download_id, 'downloading');
+    sql_change_download_state($download_id, 'downloading');
 
     foreach ($collection->getVideos() as $video) {
         if ($video->getError() !== null) {
