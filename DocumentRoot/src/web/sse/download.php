@@ -14,14 +14,17 @@ require_once __DIR__ . '/../database/repository-downloads.php';
 header("Cache-Control: no-store");
 header("Content-Type: text/event-stream");
 
-//Check les droits
+//Authentification
 session_id($_REQUEST['PHPSESSID']);
 session_start();
-write_log($_SESSION);
 
+//Check les droits
 if (!current_user_can('add_source')) {
-    echo 'data: {"Autorisation" : "refusée"}';
+    ob_start();
+    $foo = 'Refusé';
+    echo 'data: {"access": "Refusé"}';
     echo "\n\n";
+    ob_end_flush();
     exit;
 }
 
@@ -29,7 +32,6 @@ if (!current_user_can('add_source')) {
 $pending_downloads = pending_downloads(from_session('account_id'));
 
 //Lancer les téléchargement et écrire la progression sur la sortie standard
-
 ob_start();
 $foo = 'ping';
 echo 'data: {"ping": "' . $foo . '"}';
