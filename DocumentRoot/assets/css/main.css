@@ -321,6 +321,11 @@ summary {
 	word-wrap: normal !important;
 }
 
+/* Me */
+
+html{
+	scroll-behavior: smooth;
+}
 
 ul.notices,
 ul.sign-up--conditions {

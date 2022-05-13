@@ -42,7 +42,15 @@ CREATE TABLE downloads (
     format VARCHAR(300) NOT NULL,
     account_id INT NOT NULL,
     process_pid INT,
-    state VARCHAR(30) NOT NULL, -- pending, downloading, downloaded, failed
+    -- l'id du processus (si on veut l'arreter)
+    progression INT,
+    -- progression instantanée de téléchargement
+    speed VARCHAR(50),
+    -- vitesse instantannée de téléchargement
+    totaltime VARCHAR(50),
+    -- temps de téléchargement
+    state VARCHAR(30) NOT NULL,
+    -- pending, downloading, downloaded, failed
     created_on TIMESTAMP NOT NULL,
     CONSTRAINT fk_account FOREIGN KEY (account_id) REFERENCES accounts(id)
 );

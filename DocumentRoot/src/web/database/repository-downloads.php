@@ -57,14 +57,14 @@ function create_download(DownloadRequest $download_request, string $account_id):
  * @param string $account_id L'id du compte utilisateur
  * @return mixed La liste des téléchargements ou une Notice en cas d'erreur
  */
-function pending_downloads(string $account_id)
+function active_downloads(string $account_id)
 {
 
     if (!current_user_can('add_source'))
         return new Notice("Autorisation refusée", NoticeStatus::Error);
 
     try {
-        $pending_downloads = sql_find_pending_downloads($account_id);
+        $pending_downloads = sql_find_active_downloads($account_id);
     } catch (PDOException $e) {
         error_log($e);
         return new Notice(
@@ -96,4 +96,26 @@ function download_history()
     }
 
     return $terminated_downloads;
+}
+
+/**
+ * Change le status du téléchargement
+ * @param string $download_id L'id du téléchargement
+ * @param string $new_state Le nouvel état du téléchargement
+ * @return int
+ */
+function download_change_state(string $download_id, string $new_state): int
+{
+
+    try {
+        $download_changed = sql_change_download_state($download_id, $new_state);
+    } catch (PDOException $e) {
+        error_log($e);
+        return new Notice(
+            sprintf("Le changement de statut du téléchargement a échoué."),
+            NoticeStatus::Error
+        );
+    }
+
+    return $download_changed;
 }

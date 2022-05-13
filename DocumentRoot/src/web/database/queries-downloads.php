@@ -84,7 +84,7 @@ function sql_find_pending_download_request_with_same_url(string $url): stdClass|
  * @param string $account_id L'id du compte
  * @return array|bool
  */
-function sql_find_pending_downloads(string $account_id): array|bool
+function sql_find_active_downloads(string $account_id): array|bool
 {
 
     $db = connect_to_db();
@@ -99,7 +99,7 @@ function sql_find_pending_downloads(string $account_id): array|bool
 
     $stmt = $db->prepare($sql);
     $stmt->bindValue(':account_id', $account_id);
-    $stmt->bindValue(':state', 'pending');
+    $stmt->bindValue(':state', 'downloading');
     $stmt->execute();
 
     return $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -128,4 +128,36 @@ function sql_find_all_terminated_downloads(): array|bool
     $stmt->execute();
 
     return $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+/**
+ * Change l'état d'un téléchargement.
+ * @param string $download_id L'id du téléchargement.
+ * @param string $state Le nouvel état du téléchargement.
+ * @return int Le nombre de lignes modifiées.
+ */
+function sql_change_download_state(string $download_id, string $state): int
+{
+
+
+    $db = connect_to_db();
+
+    $sql =
+        'UPDATE downloads 
+        SET state = :state
+        WHERE id = :id
+        ';
+    $stmt = $db->prepare($sql);
+    $stmt->bindValue(':state', $state);
+    $stmt->bindValue(':id', $download_id);
+    $stmt->execute();
+
+    // return the number of row affected
+    return $stmt->rowCount();
+}
+
+
+function sql_update_download(string $progressTarget)
+{
+    error_log($progressTarget);
 }
