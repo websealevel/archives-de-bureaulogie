@@ -27,8 +27,10 @@ function log_out(Notice $notice = new Notice("Vous avez été déconnecté avec 
 
         session_start();
 
-        if (!isset($_SESSION['user_authentificated']) || !$_SESSION['user_authentificated'])
-            throw new Exception("On ne devrait pas chercher à logout un user qui n'est pas connecté.");
+        if (!isset($_SESSION['user_authentificated']) || !$_SESSION['user_authentificated']){
+            echo 'Nope';
+            exit;
+        }
     }
 
     if (headers_sent()) {

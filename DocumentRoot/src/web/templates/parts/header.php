@@ -9,6 +9,7 @@
 declare(strict_types=1);
 require_once __DIR__ . '../../../../handlers.php';
 require_once __DIR__ . '../../../utils.php';
+require_once __DIR__ . '../../../session.php';
 autoload();
 ?>
 <!DOCTYPE html>

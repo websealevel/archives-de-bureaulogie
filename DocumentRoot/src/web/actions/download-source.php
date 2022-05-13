@@ -39,6 +39,11 @@ require_once __DIR__ . '/../core-interface.php';
 function web_download_source()
 {
     session_start();
+    if (!current_user_can('add_source'))
+        redirect('/', 'notices', array(
+            new Notice('Vous n\'avez pas l\'autorisation d\'ajouter une source', NoticeStatus::Error)
+        ));
+
 
     $form_inputs = array(
 

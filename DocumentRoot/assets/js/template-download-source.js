@@ -25,7 +25,7 @@ jQuery(function ($) {
         event.preventDefault();
         const data = $('form#form-download').serialize() + '&PHPSESSID='+PHPSESSID
         $.post('/api/v1/download-source', data).done(function (data) {
-            console.log(data.)
+            console.log(data)
         }).fail(function () {
             console.log('fail')
         })
