@@ -21,7 +21,7 @@ require_once __DIR__ . '/../current-user.php';
     <?php endif;  ?>
 
     <?php if (current_user_can('add_source')) :  ?>
-        <li><a href="download-source">Ajouter une nouvelle vidéo source</a></li>
+        <li><a href="download-source">Importer une nouvelle vidéo source</a></li>
     <?php endif;  ?>
 
 </ul>

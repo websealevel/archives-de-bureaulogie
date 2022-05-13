@@ -20,7 +20,7 @@ jQuery(function ($) {
 
     //Checker s'il y a des process en cours de téléchargement
 
-    //Poster le formulaire de téléchargement en ajax
+    //Poster le formulaire de téléchargement en ajax, recuperer les id et interroger pour obtenir la progression
     $("#form-download").submit(function (event) {
         event.preventDefault();
         const data = $('form#form-download').serialize() + '&PHPSESSID='+PHPSESSID
@@ -30,13 +30,5 @@ jQuery(function ($) {
             console.log('fail')
         })
     });
-
-    //Valider le formulaire
-
-    //Si formulaire invalide retourne les erreurs
-
-    //Si formulaire valide lance un process de téléchargement et retourne le pid
-
-    //On peut annuler un process
 
 });

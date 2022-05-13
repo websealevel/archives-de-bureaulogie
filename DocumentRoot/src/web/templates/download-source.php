@@ -21,14 +21,14 @@ if (!current_user_can('add_source'))
 
 <?php present_header(); ?>
 
-<h2>Ajouter une nouvelle vidéo source aux archives</h2>
+<h2>Importer une nouvelle vidéo source aux archives</h2>
 
 <p>Les vidéos <em>sources</em> sont les vidéos originales et complètes à partir desquelles les extraits pourront être réalisés.</p>
 
-<h3>Lise des sources présentes dans les archives</h3>
+<h3>Liste des sources présentes dans les archives</h3>
 <?php esc_html_list_sources_e(); ?>
 
-<h3>Ajouter</h3>
+<h3>Importer</h3>
 <main class="form-add-source">
     <form action="download-source" method="POST" id="form-download">
 
@@ -59,7 +59,7 @@ if (!current_user_can('add_source'))
             </iframe>
         </div>
         <div>
-            <input type="submit" value="Ajouter la source">
+            <input type="submit" value="Importer">
         </div>
     </form>
 </main>
