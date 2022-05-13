@@ -62,12 +62,14 @@ function api_download_source()
     $response = create_download($download_request, $authentificated_user_id);
 
     if ($response instanceof Notice) {
-        print_r(array(
+        header('Content-Type: application/json; charset=utf-8');
+        echo json_encode(array(
             'statut' => 400,
             'errors' => array($response),
         ));
     } else {
-        print_r(array(
+        header('Content-Type: application/json; charset=utf-8');
+        echo json_encode(array(
             'statut' => 200,
             'errors' => array(),
         ));

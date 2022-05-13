@@ -27,6 +27,8 @@ jQuery(function ($) {
         const data = $('form#form-download').serialize() + '&PHPSESSID=' + PHPSESSID
 
         $.post('/api/v1/download-source', data).done(function (data) {
+
+
             console.log(data)
 
             //Si le formulaire est rejeté on récupere les erreurs
@@ -36,7 +38,7 @@ jQuery(function ($) {
             //On ouvre une connexion SSE avec le serveur. Celui ci va scanner tous les téléchargement pending associés à notre compte (grace à notre PHPSESSID) et les lancer
 
             //Ouverture de la connexion SSE pour lancer les téléchargements et récupérer la progression des downloads.
-            
+
             // const evtSource = new EventSource("sse-download-source");
             // evtSource.onmessage = function (event) {
             //     const newElement = document.createElement("li");
