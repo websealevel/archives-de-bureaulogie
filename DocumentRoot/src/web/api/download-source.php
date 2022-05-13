@@ -56,8 +56,7 @@ function api_download_source()
     check_download_request($download_request);
 
     //On enregistre en base une demande associée à la session
-    $token = generate_download_token();
-    create_download($download_request);
+    $id = create_download($download_request);
 
     //Retourne une réponse interprétable par le front
     print_r(array(

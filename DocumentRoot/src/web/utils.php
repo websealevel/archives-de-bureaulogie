@@ -225,12 +225,3 @@ function validate_posted_form(array $inputs): array
 
     return $input_validations;
 }
-
-/**
- * Retourne une chaine de caractère aléatoire
- */
-function generate_download_token()
-{
-    $bytes = random_bytes(50);
-    return bin2hex($bytes);
-}
