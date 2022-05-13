@@ -42,7 +42,6 @@ CREATE TABLE downloads (
     format VARCHAR(300) NOT NULL,
     account_id INT NOT NULL,
     process_pid INT,
-    token VARCHAR(255) NOT NULL,
     state VARCHAR(30) NOT NULL,
     created_on TIMESTAMP NOT NULL,
     CONSTRAINT fk_account FOREIGN KEY (account_id) REFERENCES accounts(id)

@@ -12,9 +12,7 @@ require_once __DIR__ . '/../current-user.php';
 header("Cache-Control: no-store");
 header("Content-Type: text/event-stream");
 
-
 //Check les droits
-
 session_id($_REQUEST['PHPSESSID']);
 session_start();
 write_log($_SESSION);

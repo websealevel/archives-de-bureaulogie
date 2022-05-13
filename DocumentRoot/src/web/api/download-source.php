@@ -56,7 +56,10 @@ function api_download_source()
     check_download_request($download_request);
 
     //On enregistre en base une demande associée à la session
-    $id = create_download($download_request);
+
+    $authentificated_user_id = from_session('account_id');
+
+    $id = create_download($download_request, $authentificated_user_id);
 
     //Retourne une réponse interprétable par le front
     print_r(array(

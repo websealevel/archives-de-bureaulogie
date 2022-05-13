@@ -15,14 +15,14 @@ require_once __DIR__ . '/../../models/Notice.php';
 require_once __DIR__ . '/queries-downloads.php';
 
 
-function create_download(DownloadRequest $download_request)
+function create_download(DownloadRequest $download_request, string $account_id)
 {
 
     $filename = format_to_source_file($download_request);
     $format = youtube_dl_download_format();
 
     try {
-        $id = sql_insert_download($download_request, $filename, $format);
+        $id = sql_insert_download($download_request, $filename, $format, $account_id);
     } catch (PDOException $e) {
         error_log($e);
         redirect('/download-source', 'notices', array(
