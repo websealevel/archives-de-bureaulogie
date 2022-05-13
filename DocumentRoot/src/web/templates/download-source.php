@@ -63,8 +63,11 @@ if (!current_user_can('add_source'))
         </div>
     </form>
 
-    <ul id="list">
-        
+    <h3>Téléchargements en cours</h3>
+    <ul id="pending-downloads">
+    </ul>
+    <h3>Historique des téléchargements</h3>
+    <ul id="history-downloads">
     </ul>
 </main>
 

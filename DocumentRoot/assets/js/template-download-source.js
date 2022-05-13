@@ -23,10 +23,9 @@ jQuery(function ($) {
 
     //A la reception de message venant du serveur
     evtSource.onmessage = function (event) {
-        const newElement = document.createElement("li");
-        const eventList = document.getElementById("list");
-        newElement.textContent = "message: " + event.data;
-        eventList.appendChild(newElement);
+        console.log(event.data)
+        const json_data = JSON.parse(event.data)
+        console.log(json_data['pending_downloads'])
     }
 
     //En cas d'erreur
@@ -48,7 +47,7 @@ jQuery(function ($) {
             console.log(data)
             console.log(data['statut'])
 
-            //Si le formulaire est rejeté on récupere les erreurs
+            //Si le formulaire est rejeté on récupere les erreurs et on les affiche. A faire.
 
             //Si le formulaire est validé, on récupere un status code nous disant qu'on peut y aller
 

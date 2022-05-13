@@ -30,11 +30,20 @@ if (!current_user_can('add_source')) {
 
 //Trouver les téléchargements pending associés au compte
 $pending_downloads = pending_downloads(from_session('account_id'));
+write_log($pending_downloads);
+
+$progression = 0;
 
 //Lancer les téléchargement et écrire la progression sur la sortie standard
 ob_start();
-$foo = 'ping';
-echo 'data: {"ping": "' . $foo . '"}';
+echo 'data: {';
+echo '"pending_downloads" : {';
+foreach ($pending_downloads as $download) {
+    echo sprintf('"%s" : { "url": "%s", "filename" : "%s", "progression": "%s" }', $download['id'], $download['url'], $download['filename'], $progression);
+}
+echo '}';
+echo '}';
+
 echo "\n\n";
 ob_end_flush();
 exit;

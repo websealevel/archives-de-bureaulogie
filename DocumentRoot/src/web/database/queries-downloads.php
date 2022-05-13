@@ -102,5 +102,5 @@ function sql_find_pending_downloads(string $account_id)
     $stmt->bindValue(':state', 'pending');
     $stmt->execute();
 
-    return $result = $stmt->fetchObject();
+    return $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
