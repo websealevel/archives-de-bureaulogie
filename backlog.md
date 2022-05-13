@@ -173,9 +173,9 @@ A part
 
 - télécharger une vidéo apres soumission du formulaire [x]
 - progression téléchargement []
-- téléchargement en arrière plan []
-- charger prévisualisation quand l'url est collée (js) []
-- lancer le téléchargement via une requete AJAX sur l'API de l'appli (non bloquant) []
+- téléchargement en arrière plan [x]
+- charger prévisualisation quand l'url est collée (js) [x]
+- lancer le téléchargement via une requete AJAX sur l'API de l'appli (non bloquant) [x]
 - nettoyer si le téléchargement échoue et fails gracefully sans deconnecter []
 - si le téléchargement va à son terme appeler callback pour déclarer la nouvelle source dans le fichier source []
 
@@ -191,6 +191,7 @@ A part
 
 ## Sécurité
 
+- role_has_cap a implementer !!! []
 - regarder comment mieux sécuriser les sessions [x]
 - ajouter honey pot dans le form d'inscription (voir ce que je peux faire d'autre pour éviter les spams) []
 - limiter le nb de sources extraits / user []
@@ -209,7 +210,7 @@ A part
 - telechargement de sources autorisé que depuis la chaine de canardPC []
 - finir la confirmation d'authentification sur les actions sensibles []
 - installer un moniteur éthique pour analyser la fréquentation du site[]
-- vérifier que les error/exception handlers sont bien intégrés à chaque script []
+- vérifier que les error/exception handlers sont bien intégrés à chaque script [x]
 - certaines exceptions ne devraient pas logout l'utilisateur (ex téléchargement échoué), mauvais pour l'ux [x] => solution: Les try/catch localement, sinon par défaut ça deconnecte
 
 
