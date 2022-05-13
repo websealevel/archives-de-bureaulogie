@@ -28,7 +28,7 @@ if (!current_user_can('add_source'))
 
 <h3>Ajouter</h3>
 <main class="form-add-source">
-    <form action="download-source" method="POST">
+    <form action="download-source" method="POST" id="form-download">
 
         <div class="form-note">Les champs marqués d'un asterisque sont obligatoires</div>
 

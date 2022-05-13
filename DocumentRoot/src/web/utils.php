@@ -100,7 +100,9 @@ function enqueue_js_scripts(array $scripts = array())
     if (empty($scripts))
         return;
 
-    echo '<script>';
+
+    echo '<script type="text/javascript">' . PHP_EOL;
+    echo 'const PHPSESSID="' . session_id() .'";'. PHP_EOL;
     foreach ($scripts as $script) {
         $js_script_path = sprintf("%s/js/%s.js", ASSETS_PATH, $script);
         require $js_script_path;

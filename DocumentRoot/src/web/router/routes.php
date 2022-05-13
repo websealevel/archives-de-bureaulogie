@@ -70,7 +70,7 @@ function routes(): array
             '/download-source' => function () {
                 web_download_source();
             },
-            '/api/v1/download' => function () {
+            '/api/v1/download-source' => function () {
                 api_download_source();
             }
         )
