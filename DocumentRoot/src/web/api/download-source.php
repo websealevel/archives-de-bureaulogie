@@ -59,12 +59,18 @@ function api_download_source()
 
     $authentificated_user_id = from_session('account_id');
 
-    $id = create_download($download_request, $authentificated_user_id);
+    $response = create_download($download_request, $authentificated_user_id);
 
-    //Retourne une réponse interprétable par le front
-    print_r(array(
-        'statut' => 200,
-        'errors' => array(),
-    ));
+    if ($response instanceof Notice) {
+        print_r(array(
+            'statut' => 400,
+            'errors' => array($response),
+        ));
+    } else {
+        print_r(array(
+            'statut' => 200,
+            'errors' => array(),
+        ));
+    }
     exit;
 }

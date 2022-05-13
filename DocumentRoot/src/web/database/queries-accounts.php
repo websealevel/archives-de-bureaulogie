@@ -70,9 +70,9 @@ function sql_insert_account(string $pseudo, string $password, string $email, str
 
 
 /**
- * Cherche un compte utilisateur par pseudo
+ * Cherche un compte utilisateur par pseudo. Retourne le compte, faux sinon
  * @param string $pseudo
- * @return un objet account
+ * @return mixed
  * @throws PDOException $e
  */
 function sql_find_account_by_pseudo(string $pseudo)
@@ -96,9 +96,9 @@ function sql_find_account_by_pseudo(string $pseudo)
 /**
  * Cherche un compte par id
  * @param string $id
- * @return stdClass
+ * @return stdClass|false
  */
-function sql_find_account_by_id(string $id): stdClass
+function sql_find_account_by_id(string $id): stdClass|false
 {
 
     $db = connect_to_db();

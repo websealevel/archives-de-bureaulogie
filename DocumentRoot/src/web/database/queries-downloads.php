@@ -52,3 +52,31 @@ function sql_insert_download(DownloadRequest $download_request, string $filename
 
     return $db->lastInsertId('downloads_id_seq');
 }
+
+/**
+ * Retourne vrai si une demande de téléchargement en attente sur la même url est déjà enregistrée, faux sinon
+ * @param string $url L'url de la vidéo à télécharger
+ * @return stdClass|false
+ */
+function sql_find_pending_download_request_with_same_url(string $url): stdClass|false
+{
+
+    $db = connect_to_db();
+
+    $db = connect_to_db();
+
+    $sql =
+        'SELECT 
+        id
+        FROM downloads 
+        where url = :url
+        AND
+        state = :state ';
+
+    $stmt = $db->prepare($sql);
+    $stmt->bindValue(':url', $url);
+    $stmt->bindValue(':state', 'pending');
+    $stmt->execute();
+
+    return $result = $stmt->fetchObject();
+}
