@@ -28,7 +28,14 @@ function api_download_source()
     session_start();
 
     if (!current_user_can('add_source')) {
-        echo 'Autorisation refusée';
+        header('Content-Type: application/json; charset=utf-8');
+        echo json_encode(array(
+            'statut' => 500,
+            'errors' => array(new Notice(
+                "Vous n'avez pas l'autorisation.",
+                NoticeStatus::Error
+            ))
+        ));
         exit;
     }
 
@@ -55,18 +62,19 @@ function api_download_source()
     //Lancement du téléchargement de la source
     check_download_request($download_request);
 
-    //On enregistre en base une demande associée à la session
-
     $authentificated_user_id = from_session('account_id');
 
+    //On enregistre en base une demande associée à la session
     $response = create_download($download_request, $authentificated_user_id);
 
+    //En cas d'erreur sur le formulaire ou d'accès à la base.
     if ($response instanceof Notice) {
         header('Content-Type: application/json; charset=utf-8');
         echo json_encode(array(
-            'statut' => 400,
+            'statut' => 403,
             'errors' => array($response),
         ));
+        //En cas de formulaire valide.
     } else {
         header('Content-Type: application/json; charset=utf-8');
         echo json_encode(array(

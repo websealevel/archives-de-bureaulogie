@@ -20,6 +20,10 @@ jQuery(function ($) {
 
     //Checker s'il y a des process en cours de téléchargement
 
+
+
+
+    //Soumettre une nouvelle demande de téléchargement
     $("#form-download").submit(function (event) {
 
         event.preventDefault();
@@ -29,7 +33,7 @@ jQuery(function ($) {
         $.post('/api/v1/download-source', data).done(function (data) {
 
 
-            console.log(data)
+            console.log(data['statut'])
 
             //Si le formulaire est rejeté on récupere les erreurs
 
