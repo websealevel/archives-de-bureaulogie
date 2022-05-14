@@ -48,20 +48,22 @@ jQuery(function ($) {
 
                 //Mettre à jour la progression et la vitesse
 
-                $progress = $("ul#active_downloads li#" + download.id + " div.dl-progress progress")
+                $progress = $("ul#active_downloads li#" + download.id + " div.dl-progress #bar")
 
                 $div_speed = $("ul#active_downloads li#" + download.id + " div.dl-speed span")
 
+                $progress.attr('width', download.progression)
                 $progress.html(download.progression)
                 $div_speed.html(download.speed)
 
             } else {
                 //Sinon, creer un nouvel item
                 $("ul#active_downloads").append(
-                    '<li id="' + download.id + '">' +
+                    '<li class="w3-container" id="' + download.id + '">' +
                     '<div class="dl-filename">' + download.filename + '</div>' +
                     '<div class="dl-progress">' +
-                    '<progress value="' + download.progression + '" max="100"></progress>' +
+                    '<div class="w3-light-grey">' +
+                    '<div div id="bar" class= "w3-container w3-green w3-center" style="width:' + download.progression + '%">' + download.progression + '%</div></div > ' +
                     '</div>' +
                     '<div class="dl-speed">Vitesse de téléchargement : <span>' + download.speed + '</span></div>' +
                     '</li>'
