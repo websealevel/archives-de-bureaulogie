@@ -110,6 +110,11 @@ Dire qu'on ne modifie pas quelque chose de soumis, on le valide ou non. On peut 
 - Mettre un message pour découverte de faille de sécu, envoyer par mail avant d'ouvrir une issue
 - Mettre un message pour les hacker "bravo, peux tu m'expliquer comment tu as fait ? ça m'interesse."
 - Contact : le mail contact@archives-de-bureaulogie.fr
+- Extraits
+- Sources
+- Références biblios
+- Playlist Extraits (Twitter bot), admin only
+- Playlist Références biblios (Twitter bot), admin only
 
 ### Rôles et droits associés
 
@@ -147,29 +152,32 @@ A part
 
 ## Backlog
 
-### taches
+### Général
 
 - *normaliser le volume* avec une valeur par défaut (voir ré-encodage) au post-montage. Le volume de la piste audio est défini par défaut par une métadonnée. Il faut que la normalisation se fasse sur le cut et non sur la vidéo entière (normalisation est une fonction de la piste entière, analyse les pics/creux de volume sur tout le volume et essaie de normaliser à partir de ça. Donc attention à ça) []
 - activer/desactiver inscriptions au site [x]
+- activer/desactiver mode maintenance du site [x]
 - utliser youtube-dl en local [x]
 - utiliser ffmpeg/ffprobe en local [x]
 - pas de password recover [x]
-- ecran Creer un extrait []
-- ecran Télécharger une source/Lister sources déja présentes [][x]
-- ecran Liste des extraits par Source [] 
+- ecran [Ajouter une source/Lister sources](#ecran---importer-une-sourcelister-les-sources) [][x]
+- ecran [Creer un extrait/Lister les extraits](#ecran---creer-un-extraitlister-les-extraits) []
 - ecran Ajouter une entrée Biblio
 - ecran Editer une entrée Biblio  
 - ecran Liste biblios en attente de modération  
-- ecran liste des bureaulogues  
-- Modération
-- tout basculer dans des namespaces []
-- remplacer tous les require par une fonction []
+- ecran Liste des bureaulogues (tous les contributeurs avec leurs contributions) 
+- ecran Modération des extraits
+- ecran Modération des ressources biblios
+- gestion des emails (activation du compte, suite à une modération, banissement du compte)
+
+### Code source
+
+- tout basculer dans des namespaces (PSR-4) []
 - deplacer le fichier source+dtd dans un dossier a part[]
-
-
-### Ecran Creer un extrait
-
-### Ecran Ajouter une source
+- utiliser phpcbs et phpcs pour formatter le code au standard PHP Pro PSR []
+- generer la documentation (PSR-5 en cours) avec phpdocumentor []
+  
+### Ecran - Importer une source/Lister les sources
 
 - télécharger une vidéo apres soumission du formulaire [x]
 - progression téléchargement [x]
@@ -186,8 +194,10 @@ A part
 - recuperer le PID du processus youtube-dl du download []
 - proposer dans téléchargement en cours la possibilité d'annuler le dl (grace au pid) []
 
-### Interface graphique de *cut*
+### Ecran - Creer un extrait/Lister les extraits
 
+- lister tous les extraits asociés à la source sélectionnée []. 
+- afficher deux elements vidéos : source et extrait []
 - preview de la vidéo source + preview de l'extrait
 - mettre en pause la vidéo source si play video extrait et vice versa
 - indique le timecode a tout moment
@@ -196,9 +206,25 @@ A part
 - plusieurs cut dans un seul fichier via des marqueurs avec label des extraits, en un clic exporter tous les marqueurs (luxe)
 
 
+### Ecran Ajouter une ressource biblio
+
+- si role > modérateur, afficher la liste des ressources présentes (html)
+- formulaire avec select type de ressource (livre, article, podcast...)
+
+
+### Ecran Modération des extraits vidéos
+
+A venir...
+
+### Ecran Modération des ressources bibliographiques
+
+A venir...
+
 ## Sécurité
 
 - role_has_cap a implementer !!! []
+- envoyer un email pour valider le compte []
+- ajouter une colonne status du compte (actif, banni)
 - regarder comment mieux sécuriser les sessions [x]
 - ajouter honey pot dans le form d'inscription (voir ce que je peux faire d'autre pour éviter les spams) []
 - limiter le nb de sources extraits / user []
@@ -210,7 +236,6 @@ A part
 - couvrir de tests les droits et capabilites []
 - mettre en place des roles et capacités associes [x]
 - creer un utilisateur twitter pour chaque twitter bot avec un role twitter_user []
-- utiliser pcbs et l'autre pour formatter le code au standard PSR []
 - installer un paquet qui gere les bans d'IP (type wordfence), tentatives de login repetees, brut force []
 - pour les comptes admin associer une liste blanche d'adresses IP en plus de l'authentification []
 - refactor formulaires avec champs requis, label cliquables et obligation d'etre majeure et d'accepter la charte [x]
