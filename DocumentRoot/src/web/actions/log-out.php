@@ -18,7 +18,7 @@ require_once __DIR__ . '/../log.php';
  * @return void
  * @global $_SESSION
  */
-function log_out(Notice $notice = new Notice("Vous avez été déconnecté avec succès", NoticeStatus::Success))
+function log_out(Notice $notice = new Notice("Vous avez été déconnecté·e avec succès", NoticeStatus::Success))
 {
     //2 cas de figure : soit deconnecté en appelant directement log-out
     //                  soit déconnecté suite à une exception (et headers peuvent être déjà envoyés)

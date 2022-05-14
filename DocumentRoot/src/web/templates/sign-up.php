@@ -64,12 +64,12 @@ if (!is_signup_activated())
         <li>
             <?php esc_html_form_error_msg_e('charte', 'form_errors') ?>
             <input type="checkbox" id="id_charte" name="charte">
-            <label for="id_charte" required>J'ai reconnais avoir lu et compris <a href="/charte">la charte des Archives de Bureaulogie</a>, et je m'engage à la respecter <span class="required">*</span></label>
+            <label for="id_charte" required>Je reconnais avoir lu et compris <a href="/charte">la charte des Archives de Bureaulogie</a>, et je m'engage à la respecter <span class="required">*</span></label>
         </li>
         <li>
             <?php esc_html_form_error_msg_e('majority', 'form_errors') ?>
             <input type="checkbox" id="id_majority" name="majority">
-            <label for="id_majority" required>Je certifie être majeur<span class="required">*</span></label>
+            <label for="id_majority" required>Je certifie être majeur·e<span class="required">*</span></label>
         </li>
 
     </ul>
@@ -77,7 +77,9 @@ if (!is_signup_activated())
     <input type="submit" value="Créer mon compte">
 </form>
 <p>
-<p>Par soucis écologique nous ne vous enverrons aucun mail, sauf pour vous tenir informé·e de vos éventuelles contributions.</p>
+    
+<p>Par soucis écologique nous ne vous enverrons aucun email inutile, sauf pour valider votre compte et vous tenir informé·e de vos futures contributions.</p>
+
 <p>Par mesure de sécurité, et en accord avec les principes de la bureaulogie, vous n'aurez pas la possibilité de recouvrir votre mot de passe en cas de perte. Conservez le soigneusement sur votre bureau.</p>
 <a href="/confidentiality-policy">Que font les Archives de Bureaulogie de mes données personnelles ? </a>
 </p>
