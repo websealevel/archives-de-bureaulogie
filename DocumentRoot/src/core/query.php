@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Liste toutes les requêtes XPATH sur le fichier source
+ * Liste toutes les requêtes XPATH sur le fichier source ainsi que les fonctions d'inspection des fichiers sources et extraits.
  *
  * @package wsl 
  */
@@ -38,6 +38,20 @@ function query_declared_sources(string $file_source = SOURCE_FILE): DOMNodeList
 }
 
 /**
+ * Retourne la liste des extraits déclarés dans le dossier
+ * @param string $file_source Optional. Le fichier source
+ * @return DOMNodeList
+ */
+function query_declared_clips(string $file_source = SOURCE_FILE)
+{
+    $xpath = load_xpath($file_source, XMLNS_SOURCE_FILE);
+
+    $result = $xpath->query('//ns:extrait');
+
+    return $result;
+}
+
+/**
  * Retourne l'élément source dont l'attribut attr_name a la valeur $value, faux si aucun match
  * @param string $attr_name Le nom de l'attribut
  * @param string $value La valeur de l'attribut name de la source rechercé
@@ -70,23 +84,8 @@ function query_source_by_unique_attr(string $attr_name, string $value, string $f
     return false;
 }
 
-
 /**
- * Retourne la liste des extraits déclarés dans le dossier
- * @param string $file_source Optional. Le fichier source
- * @return DOMNodeList
- */
-function query_declared_clips(string $file_source = SOURCE_FILE)
-{
-    $xpath = load_xpath($file_source, XMLNS_SOURCE_FILE);
-
-    $result = $xpath->query('//ns:extrait');
-
-    return $result;
-}
-
-/**
- * Retourne la liste des vidéos sources présentes dans PATH_SOURCES
+ * Retourne la liste des fichiers vidéos sources présents dans PATH_SOURCES
  * @param string $file_source Optional. Le fichier source
  * @param string $path Optional. Le PATH des fichiers sources
  */
@@ -98,7 +97,7 @@ function query_sources(string $file_source = SOURCE_FILE, string $path = PATH_SO
 }
 
 /**
- * Retourne la liste des extraits présents dans PATH_CLIPS
+ * Retourne la liste des fichiers extraits présents dans PATH_CLIPS
  * @param string $file_source Optional. Le fichier source
  * @param string $path Optional. Le PATH des fichiers sources
  */
