@@ -21,7 +21,7 @@
     - [Métrique des ressources (extraits et references biblios)](#métrique-des-ressources-extraits-et-references-biblios)
   - [Backlog](#backlog)
     - [Général](#général)
-    - [Code source](#code-source)
+    - [Code source / Dépôt](#code-source--dépôt)
     - [Ecran - Importer une source/Lister les sources](#ecran---importer-une-sourcelister-les-sources)
     - [Ecran - Creer un extrait/Lister les extraits](#ecran---creer-un-extraitlister-les-extraits)
     - [Ecran Ajouter une ressource biblio](#ecran-ajouter-une-ressource-biblio)
@@ -132,9 +132,10 @@ Dire qu'on ne modifie pas quelque chose de soumis, on le valide ou non. On peut 
 ### Pages
 
 - Charte : strict sur le contenu, toute infraction a la charte, banissement (IP banni et compte suspendu)
-- Qui sommes nous ? Humour, parodie, ref à ackoo et le tribunal des bureaux
-- Open source : lien vers le projet, forker, contribuer etc...
+- Qui sommes nous ? Humour, parodie, ref à acknoo et le tribunal des bureaux
+- Open source : lien vers le projet,contribuer, forker, contribuer etc...
 - Nous soutenir : lien vers patreon, expliquer pourquoi (hebergement, travail, nom de domaine, vidéos) avec des chiffres. Engagement à corriger les bugs et la sécurité mais soutien sans attendre une garantie en retour. Si le projet n'est plus maintenu les soutiens seront automatiquement cloturés.
+- Rencontré un bug ? Mettre un lien vers les issues du dépot pour en déposer une
 - Mettre un message pour découverte de faille de sécu, envoyer par mail avant d'ouvrir une issue
 - Mettre un message pour les hacker "bravo, peux tu m'expliquer comment tu as fait ? ça m'interesse."
 - Contact : le mail contact@archives-de-bureaulogie.fr
@@ -200,12 +201,13 @@ Suivi des tâches à réaliser.
 - ecran Modération des ressources biblios
 - gestion des emails (activation du compte, suite à une modération, banissement du compte)
 
-### Code source
+### Code source / Dépôt
 
 - tout basculer dans des namespaces (PSR-4) []
 - deplacer le fichier source+dtd dans un dossier a part[]
 - utiliser phpcbs et phpcs pour formatter le code au standard PHP Pro PSR []
 - generer la documentation (PSR-5 en cours) avec phpdocumentor []
+- mettre en place un template pour déposer une issue (s'inspirer de celui de symfony)[]
   
 ### Ecran - Importer une source/Lister les sources
 
