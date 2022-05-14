@@ -35,7 +35,6 @@ jQuery(function ($) {
     });
 
     //Server Send Event protocol : écouter les téléchargements en cours
-    console.log('listen')
     const evtSource = new EventSource("sse-download-source");
     evtSource.onmessage = function (event) {
 
