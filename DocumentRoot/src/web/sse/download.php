@@ -35,10 +35,8 @@ ob_start();
 echo 'data: {';
 echo '"active_downloads" : [';
 foreach ($active_downloads as $download) {
-
-    $progression_escaped = str_replace('%', '%%', $download['progression']);
-
-    echo sprintf('{"id": "%s", "url": "%s", "filename": "%s", "progression": "%s", "speed": "%s" }', $download['id'], $download['url'], $download['filename'], $progression_escaped, $download['speed']);
+    $progression_formated = str_replace('%', '', $download['progression']);
+    echo sprintf('{"id": "%s", "url": "%s", "filename": "%s", "progression": "%s", "speed": "%s" }', $download['id'], $download['url'], $download['filename'], $progression_formated, $download['speed']);
 }
 echo ']';
 echo '}';

@@ -43,9 +43,22 @@ jQuery(function ($) {
         const downloads = json_data['active_downloads']
 
         downloads.forEach(download => {
+
+            console.log(download)
+
             //Si l'élément existe déjà
             if ($("ul#active_downloads li#" + download.id).length) {
                 //Mettre à jour la progression
+
+                $div_progress = $("ul#active_downloads li#" + download.id + " div.dl-progress")
+
+                $div_speed = $("ul#active_downloads li#" + download.id + " div.dl-speed")
+
+                $div_progress.html(download.progression)
+                $div_speed.html(download.speed)
+
+
+
             } else {
                 //Sinon, creer un nouvel item
                 $("ul#active_downloads").append(
@@ -54,7 +67,7 @@ jQuery(function ($) {
                     '<div class="dl-progress">' +
                     '<progress value="' + download.progression + '" max="100"></progress>' +
                     '</div>' +
-                    '<div>Vitesse de téléchargement : ' + download.speed + '</div>' +
+                    '<div class="dl-speed">Vitesse de téléchargement : ' + download.speed + '</div>' +
                     '</li>'
                 )
             }
