@@ -82,10 +82,14 @@ function api_download_source()
 
     $authentificated_user_id = from_session('account_id');
 
-    //On enregistre en base une demande associée à la session
-    if (!current_user_can('add_source'))
-        return new Notice("Autorisation refusée", NoticeStatus::Error);
-
+    if (!current_user_can('add_source')) {
+        header('Content-Type: application/json; charset=utf-8');
+        echo json_encode(array(
+            'statut' => 403,
+            'errors' => array(new Notice("Autorisation refusée", NoticeStatus::Error)),
+        ));
+        exit;
+    }
 
     //Check dans le fichier source si déjà une source avec cette url
     //Si c'est le cas on renvoie une erreur au front.
@@ -147,7 +151,6 @@ function api_download_source()
                 error_log_download($authentificated_user_id, $download_request->url, $filename, DownloadState::Failed);
 
                 throw new Exception("Error downloading video: {$video->getError()}");
-
             } else {
                 //Mettre le state du dl a downloaded
                 download_change_state($download_id, DownloadState::Downloaded->value);
