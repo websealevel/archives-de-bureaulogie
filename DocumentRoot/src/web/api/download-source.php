@@ -153,7 +153,7 @@ function api_download_source()
                 throw new Exception("Error downloading video: {$video->getError()}");
             } else {
                 //Mettre le state du dl a downloaded
-                download_change_state($download_id, DownloadState::Downloaded->value);
+                download_change_state($download_id, DownloadState::Downloaded);
 
                 //Log un message propre sur le download terminé.
                 error_log_download($authentificated_user_id, $download_request->url, $filename, DownloadState::Downloaded);
