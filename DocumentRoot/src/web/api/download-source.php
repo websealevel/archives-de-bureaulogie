@@ -9,15 +9,35 @@
  * @package wsl 
  */
 
+/**
+ * Vendor
+ */
 require_once __DIR__ . '/../../../vendor/autoload.php';
-require_once __DIR__ . '/../current-user.php';
+
+/**
+ * Models
+ */
 require_once __DIR__ . '/../../models/DonwloadRequest.php';
+require_once __DIR__ . '/../../models/enumDownloadState.php';
+
+/**
+ * Functions
+ */
 require_once __DIR__ . '/../utils.php';
+require_once __DIR__ . '/../current-user.php';
+require_once __DIR__ . '/../log.php';
 require_once __DIR__ . '/../database/repository-downloads.php';
 
 use YoutubeDl\Options;
 use YoutubeDl\YoutubeDl;
 
+
+/**
+ * Traite la requête AJAX/formulaire de téléchargement de vidéo source. Lance le téléchargement si tout est ok, retourne une erreur sinon
+ * @global array $_POST
+ * @global array $_ENV
+ * @return void
+ */
 function api_download_source()
 {
     session_id($_POST['PHPSESSID']);
@@ -68,6 +88,7 @@ function api_download_source()
 
 
     //Check dans le fichier source si déjà une source avec cette url
+    //Si c'est le cas on renvoie une erreur au front.
 
     $filename = format_to_source_file($download_request);
 
@@ -103,7 +124,8 @@ function api_download_source()
             sql_update_download($db, $download_id, $process_target, $percentage, $size, $speed, $total_time);
         });
 
-        sql_change_download_state($download_id, 'downloading');
+        //Mettre l'état du download à actif
+        sql_change_download_state($download_id, DownloadState::Downloading->value);
 
         $collection = $yt->download(
             Options::create()
@@ -120,6 +142,7 @@ function api_download_source()
             if ($video->getError() !== null) {
 
                 //Mettre le state du dl à failed
+                sql_change_download_state($download_id, DownloadState::Failed->value);
 
                 error_log("Error downloading video: {$video->getError()}.");
                 throw new Exception("Error downloading video: {$video->getError()}");
@@ -132,6 +155,7 @@ function api_download_source()
         write_log('Fichier enregistré : ' . $file->getFilename());
 
         //Mettre le state du dl a downloaded
+        sql_change_download_state($download_id, DownloadState::Downloaded->value);
 
         //Mettre à jour le fichier source.
 

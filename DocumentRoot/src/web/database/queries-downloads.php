@@ -11,6 +11,7 @@
 
 require_once __DIR__ . '/connection.php';
 require_once __DIR__ . '/../../models/DonwloadRequest.php';
+require_once __DIR__ . '/../../models/enumDownloadState.php';
 
 /**
  * Enregistre une demande de téléchargement
@@ -46,7 +47,7 @@ function sql_insert_download(DownloadRequest $download_request, string $filename
     $stmt->bindValue(':filename', $filename);
     $stmt->bindValue(':format', $format);
     $stmt->bindValue(':account_id', $account_id);
-    $stmt->bindValue(':state', 'pending');
+    $stmt->bindValue(':state', DownloadState::Pending->value);
     $stmt->bindValue(':created_on', date('Y-m-d H:i:s'));
     $stmt->execute();
 

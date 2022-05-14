@@ -68,3 +68,15 @@ function error_log_out_success(string $login, Notice $notice): void
     error_log($message);
     return;
 }
+
+
+/**
+ * Log un lancement de téléchargement
+ * @return void
+ */
+function error_log_download_started(string $login, Notice $notice): void
+{
+    $message = sprintf("Logout: STATUS: %s - LOGIN: %s - IP: %s - DATE: %s", $notice->status->value, $login, $_SERVER['REMOTE_ADDR'], date('Y-m-d H:i:s'));
+    error_log($message);
+    return;
+}
