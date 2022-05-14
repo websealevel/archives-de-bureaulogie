@@ -164,12 +164,16 @@ function sql_update_download(PDO $db, string $download_id, ?string $progressTarg
     $sql =
         'UPDATE downloads
     SET 
-    progression = :progression
+    progression = :progression,
+    speed = :speed,
+    totaltime = :totaltime
     WHERE
     id = :id';
 
     $stmt = $db->prepare($sql);
     $stmt->bindValue(':progression', $percentage);
+    $stmt->bindValue(':speed', $speed);
+    $stmt->bindValue(':totaltime', $total_time ?? '');
     $stmt->bindValue(':id', $download_id);
     $stmt->execute();
 

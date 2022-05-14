@@ -6,12 +6,9 @@
  * @package wsl 
  */
 
-require_once __DIR__ . '/../../../vendor/autoload.php';
 require_once __DIR__ . '/../session.php';
 require_once __DIR__ . '/../current-user.php';
 require_once __DIR__ . '/../database/repository-downloads.php';
-
-
 
 header("Cache-Control: no-store");
 header("Content-Type: text/event-stream");
@@ -33,14 +30,11 @@ if (!current_user_can('add_source')) {
 //Trouver les téléchargements en cours
 $active_downloads = active_downloads(from_session('account_id'));
 
-//Envoyer les infos de progression
-$progression = 0;
-
 ob_start();
 echo 'data: {';
 echo '"pending_downloads" : [';
 foreach ($active_downloads as $download) {
-    echo sprintf('{"id" : "%s", "url": "%s", "filename" : "%s", "progression": "%s" }', $download['id'], $download['url'], $download['filename'], $progression);
+    echo sprintf('{"id" : "%s", "url": "%s", "filename" : "%s", "progression": "%s", "speed" : %s }', $download['id'], $download['url'], $download['filename'], $download['progression'], $download['speed']);
 }
 echo ']';
 echo '}';
