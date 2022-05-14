@@ -53,7 +53,7 @@ jQuery(function ($) {
                 $div_speed = $("ul#active_downloads li#" + download.id + " div.dl-speed span")
 
                 $progress.width(download.progression + '%')
-                $progress.html(download.progression)
+                $progress.html(download.progression + '%')
                 $div_speed.html(download.speed)
 
             } else {
