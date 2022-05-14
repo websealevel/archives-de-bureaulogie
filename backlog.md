@@ -248,5 +248,10 @@ A venir...
 - installer un moniteur éthique pour analyser la fréquentation du site[]
 - vérifier que les error/exception handlers sont bien intégrés à chaque script [x]
 - certaines exceptions ne devraient pas logout l'utilisateur (ex téléchargement échoué), mauvais pour l'ux [x] => solution: Les try/catch localement, sinon par défaut ça deconnecte
+- backup : dump de la base, extraits.xml et extraits.dtd suffisent
+- recover: regenerer tous les fichiers à partir du fichier source grâce a une fonction core []
+- desactiver/activer acces aux comptes Twitter []
+- desactiver facilement les comptes Twitter []
+- desactiver facilement le site []
 
 
