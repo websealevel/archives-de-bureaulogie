@@ -78,3 +78,23 @@ function log_user(Credentials $credentials)
     //Redirige vers la page d'accueil authentifié.
     redirect('/');
 }
+
+/**
+ * Retourne le compte s'il existe, faux sinon
+ * @return stdClass|bool
+ */
+function find_account_by_id(string $id): stdClass|bool
+{
+
+    try {
+
+        $account = sql_find_account_by_id($id);
+    } catch (Exception $e) {
+        error_log($e);
+        redirect('/', 'notices', array(
+            new Notice("Une erreur s'est produite.", NoticeStatus::Error)
+        ));
+    }
+
+    return $account;
+}

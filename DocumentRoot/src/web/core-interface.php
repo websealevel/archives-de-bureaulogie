@@ -10,6 +10,7 @@
 
 require_once __DIR__ . '/utils.php';
 require_once __DIR__ . '/database/repository-downloads.php';
+require_once __DIR__ . '/database/repository-accounts.php';
 require_once __DIR__ . '/../core/query.php';
 require_once __DIR__ . '/../core/actions.php';
 
@@ -218,15 +219,33 @@ function build_source_name(string $series, string $slug): string
 }
 
 /**
- * Ecrit sur la sortie standard l'historique des téléchargements de vidéos sources
+ * Ecrit sur la sortie standard l'historique des téléchargements de vidéos sources sous la forme d'items li
  * @return void
  */
-function esc_download_history_e(): void
+function esc_download_history_items_e(): void
 {
     $history = download_history();
     foreach ($history as $download) {
-        esc_html_e($download['url']);
+
+        $account = find_account_by_id($download['account_id']);
+
+        $created_on = date('d-m-Y à H:i:s', strtotime($download['created_on']));
+
+        $item = sprintf(
+            "
+        <li>utilisateur: %s - url: %s - démarré le: %s - temps total de téléchargement (min): %s - nom du fichier: %s - statut: %s
+        </li>",
+            $account->pseudo,
+            $download['url'],
+            $created_on,
+            $download['totaltime'],
+            $download['filename'],
+            $download['state']
+        );
+
+        echo ($item);
     }
+    return;
 }
 /**
  * Ecrit sur la sortie standard le nombre de téléchargements en cours
@@ -235,7 +254,7 @@ function esc_download_history_e(): void
 function esc_active_downloads_info_e()
 {
     $active_downloads = active_downloads();
-    if (false === $active_downloads)
+    if (0 === count($active_downloads))
         return;
     esc_html_e(sprintf("(%d téléchargement(s) en cours)", count($active_downloads)));
     return;

@@ -113,7 +113,7 @@ function sql_find_all_terminated_downloads(): array|bool
 
     $sql =
         'SELECT 
-        id,url,format,filename,created_on
+        id,url,format,filename,created_on,account_id,state,totaltime
         FROM downloads 
         where state = :state_1
         OR

@@ -68,7 +68,7 @@ if (!current_user_can('add_source'))
     </ul>
     <h3>Historique des téléchargements</h3>
     <ul id="downloads-history">
-        <?php esc_download_history_e();  ?>
+        <?php esc_download_history_items_e();  ?>
     </ul>
 </main>
 
