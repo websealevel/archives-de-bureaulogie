@@ -97,9 +97,9 @@ docker-compose up -d
 
 #### FFMPEG / Symfony
 
-Issue ouverte ici.
+Issue ouverte [ici](https://github.com/symfony/symfony/issues/46348).
 
-PHP-FFMpeg (en fait c'est dans symfony/process) encounters an unexpected error when a custom array value is registered in super globals `$_ENV`. This custom array value is parsed and generates an error.
+PHP-FFMpeg (en fait c'est dans `symfony/process`) encounters an unexpected error when a custom array value is registered in super globals `$_ENV`. This custom array value is parsed and generates an error.
 
 ##### Expected Behavior
 
@@ -113,7 +113,7 @@ Register an array in `$_ENV` , for example
 $_ENV['foo'] = array('bar');
 ~~~
 
-Then when the function `start()` in `Process.php` (ligne 293) iterates over the local variable $env in the for loop an error occurs.
+Then when the method `start()` in `Process.php` (ligne 293) iterates over the local variable `$env` in the for loop an error occurs.
 
 #### Youtube-dl renvoie l'erreur 'ERROR: unable to download video data: HTTP Error 403: Forbidden while using youtube_dl'
 
