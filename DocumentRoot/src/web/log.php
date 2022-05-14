@@ -10,6 +10,7 @@
 
 
 require_once __DIR__ . '/../models/Credentials.php';
+require_once __DIR__ . '/../models/enumDownloadState.php';
 require_once __DIR__ . '/../models/Notice.php';
 
 if (!function_exists('write_log')) {
@@ -71,12 +72,16 @@ function error_log_out_success(string $login, Notice $notice): void
 
 
 /**
- * Log un lancement de téléchargement
+ * Log un téléchargement
+ * @param string $account_id L'id du compte utilisateur ayant initié le téléchargement
+ * @param string $url L'url de la vidéo à télcharger
+ * @param string $filename Le nom du fichier sous lequel est enregistré le téléchargement
+ * @param DownloadState $download_state L'état du téléchargement
  * @return void
  */
-function error_log_download_started(string $login, Notice $notice): void
+function error_log_download(string $account_id, string $url, string $filename, DownloadState $download_state): void
 {
-    $message = sprintf("Logout: STATUS: %s - LOGIN: %s - IP: %s - DATE: %s", $notice->status->value, $login, $_SERVER['REMOTE_ADDR'], date('Y-m-d H:i:s'));
+    $message = sprintf("Download STATE: %s - URL: %s - FILENAME: %s - ACCOUNT_ID: %s - IP: %s - DATE: %s", $download_state->value, $url, $filename, $account_id, $_SERVER['REMOTE_ADDR'], date('Y-m-d H:i:s'));
     error_log($message);
     return;
 }

@@ -125,7 +125,9 @@ function api_download_source()
         });
 
         //Mettre l'état du download à actif
-        sql_change_download_state($download_id, DownloadState::Downloading->value);
+        sql_change_download_state($download_id, DownloadState::Downloading);
+
+        error_log_download($authentificated_user_id, $download_request->url, $filename, DownloadState::Downloading);
 
         $collection = $yt->download(
             Options::create()
@@ -135,16 +137,14 @@ function api_download_source()
                 ->output($filename)
         );
 
-        //Log un message propre sur le download en cours
-        error_log('Start download ' . $download_request->url);
-
         foreach ($collection->getVideos() as $video) {
             if ($video->getError() !== null) {
 
                 //Mettre le state du dl à failed
-                sql_change_download_state($download_id, DownloadState::Failed->value);
+                sql_change_download_state($download_id, DownloadState::Failed);
 
-                error_log("Error downloading video: {$video->getError()}.");
+                error_log_download($authentificated_user_id, $download_request->url, $filename, DownloadState::Failed);
+
                 throw new Exception("Error downloading video: {$video->getError()}");
             } else {
                 $file = $video->getFile();
@@ -152,7 +152,7 @@ function api_download_source()
         }
 
         //Log un message propre sur le download terminé.
-        write_log('Fichier enregistré : ' . $file->getFilename());
+        error_log_download($authentificated_user_id, $download_request->url, $filename, DownloadState::Downloaded);
 
         //Mettre le state du dl a downloaded
         sql_change_download_state($download_id, DownloadState::Downloaded->value);
