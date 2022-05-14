@@ -103,6 +103,8 @@ function api_download_source()
             sql_update_download($db, $download_id, $process_target, $percentage, $size, $speed, $total_time);
         });
 
+        sql_change_download_state($download_id, 'downloading');
+
         $collection = $yt->download(
             Options::create()
                 ->downloadPath('/var/www/html/sources')
@@ -111,19 +113,28 @@ function api_download_source()
                 ->output($filename)
         );
 
-        sql_change_download_state($download_id, 'downloading');
-
+        //Log un message propre sur le download en cours
         error_log('Start download ' . $download_request->url);
 
         foreach ($collection->getVideos() as $video) {
             if ($video->getError() !== null) {
+
+                //Mettre le state du dl à failed
+
                 error_log("Error downloading video: {$video->getError()}.");
+                throw new Exception("Error downloading video: {$video->getError()}");
             } else {
                 $file = $video->getFile();
             }
         }
 
+        //Log un message propre sur le download terminé.
         write_log('Fichier enregistré : ' . $file->getFilename());
+
+        //Mettre le state du dl a downloaded
+
+        //Mettre à jour le fichier source.
+
     } catch (Exception $e) {
         error_log($e);
         header('Content-Type: application/json; charset=utf-8');
