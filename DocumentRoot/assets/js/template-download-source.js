@@ -52,7 +52,7 @@ jQuery(function ($) {
 
                 $div_speed = $("ul#active_downloads li#" + download.id + " div.dl-speed span")
 
-                $progress.attr('width', download.progression)
+                $progress.width(download.progression + '%')
                 $progress.html(download.progression)
                 $div_speed.html(download.speed)
 
@@ -63,7 +63,10 @@ jQuery(function ($) {
                     '<div class="dl-filename">' + download.filename + '</div>' +
                     '<div class="dl-progress">' +
                     '<div class="w3-light-grey">' +
-                    '<div div id="bar" class= "w3-container w3-green w3-center" style="width:' + download.progression + '%">' + download.progression + '%</div></div > ' +
+                    '<div id="bar" class= "w3-container w3-green w3-center" style="width:' + download.progression + '%">' + 
+                    download.progression + '%' +
+                    '</div>' +
+                    '</div>' +
                     '</div>' +
                     '<div class="dl-speed">Vitesse de téléchargement : <span>' + download.speed + '</span></div>' +
                     '</li>'
