@@ -172,12 +172,19 @@ A part
 ### Ecran Ajouter une source
 
 - télécharger une vidéo apres soumission du formulaire [x]
-- progression téléchargement []
+- progression téléchargement [x]
 - téléchargement en arrière plan [x]
 - charger prévisualisation quand l'url est collée (js) [x]
 - lancer le téléchargement via une requete AJAX sur l'API de l'appli (non bloquant) [x]
-- nettoyer si le téléchargement échoue et fails gracefully sans deconnecter []
-- si le téléchargement va à son terme appeler callback pour déclarer la nouvelle source dans le fichier source []
+- si le téléchargement échoue fails gracefully sans deconnecter [x]
+- si le téléchargement va à son terme déclarer la nouvelle source dans le fichier source []
+- empecher le téléchargement si une ressource avec la meme url est déjà déclarée dans le fichier source[]
+- empecher un téléchargement d'une ressource à une url identique si téléchargement avec la meme url "en cours"(downloading)[]
+- afficher les erreurs dans le formulaire (js) []
+- fixer bug format (plus de son)[]
+- nettoyer le cache de youtube dl après chaque dl []
+- recuperer le PID du processus youtube-dl du download []
+- proposer dans téléchargement en cours la possibilité d'annuler le dl (grace au pid) []
 
 ### Interface graphique de *cut*
 
