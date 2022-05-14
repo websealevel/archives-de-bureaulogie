@@ -1,6 +1,34 @@
-# Specifications et *backlog*
+# Specifications et *backlog* des archives de bureaulogie
 
-Les spécifications techniques du projet et le backlog.
+- [Specifications et *backlog* des archives de bureaulogie](#specifications-et-backlog-des-archives-de-bureaulogie)
+  - [Specs](#specs)
+    - [Architecture générale](#architecture-générale)
+      - [Les différents composants](#les-différents-composants)
+      - [Le *fichier source*](#le-fichier-source)
+    - [Cahier des charges pour l'encodage vidéo/audio des extraits](#cahier-des-charges-pour-lencodage-vidéoaudio-des-extraits)
+    - [Formattage des noms](#formattage-des-noms)
+      - [Fichier vidéo *source*](#fichier-vidéo-source)
+      - [Fichier vidéo *extrait*](#fichier-vidéo-extrait)
+      - [Timecode](#timecode)
+    - [Gestion des fichiers `downloads`, `sources` et `extraits`](#gestion-des-fichiers-downloads-sources-et-extraits)
+      - [Fichier `download`](#fichier-download)
+      - [Fichier `source`](#fichier-source)
+      - [Fichier `extrait`](#fichier-extrait)
+    - [Twitter Bots](#twitter-bots)
+    - [Modération](#modération)
+    - [Pages](#pages)
+    - [Rôles et droits associés](#rôles-et-droits-associés)
+    - [Métrique des ressources (extraits et references biblios)](#métrique-des-ressources-extraits-et-references-biblios)
+  - [Backlog](#backlog)
+    - [Général](#général)
+    - [Code source](#code-source)
+    - [Ecran - Importer une source/Lister les sources](#ecran---importer-une-sourcelister-les-sources)
+    - [Ecran - Creer un extrait/Lister les extraits](#ecran---creer-un-extraitlister-les-extraits)
+    - [Ecran Ajouter une ressource biblio](#ecran-ajouter-une-ressource-biblio)
+    - [Ecran Modération des extraits vidéos](#ecran-modération-des-extraits-vidéos)
+    - [Ecran Modération des ressources bibliographiques](#ecran-modération-des-ressources-bibliographiques)
+  - [SEO](#seo)
+  - [Sécurité](#sécurité)
 
 ## Specs
 
