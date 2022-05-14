@@ -11,7 +11,7 @@ services:
       - db
     restart: always
     networks:
-      - ackboo
+      - archives-de-bureaulogie
       - web
     volumes:
       - "./DocumentRoot/:/var/www/html/:rw"
@@ -41,7 +41,7 @@ services:
       - ./postgres-data:/var/lib/postgresql/data
       - ./docker_postgres_init.sql:/docker-entrypoint-initdb.d/docker_postgres_init.sql
     networks:
-      - ackboo
+      - archives-de-bureaulogie
     labels:
       - "traefik.enable=false"
 
@@ -54,13 +54,13 @@ services:
     container_name: ${PROJECT_NAME}-adminer
     networks:
       - web
-      - ackboo
+      - archives-de-bureaulogie
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.adminer-${PROJECT_NAME}.rule=Host(`adminer.${PROJECT_NAME}.${TRAEFIK_DOMAIN}`)"
       - "traefik.http.routers.adminer-${PROJECT_NAME}.entrypoints=web"
       
 networks:
-  ackboo:
+  archives-de-bureaulogie:
   web:
     external: true
