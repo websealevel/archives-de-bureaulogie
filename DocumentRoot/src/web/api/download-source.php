@@ -109,7 +109,7 @@ function api_download_source()
     //En cas de formulaire valide, on lance le téléchargement
 
     $yt = new YoutubeDl();
-
+    //A remettre dans des variables d'environnement.
     $yt->setBinPath('/var/www/html/youtube-dl/youtube-dl');
     $yt->setPythonPath('/usr/bin/python3');
 
@@ -125,7 +125,7 @@ function api_download_source()
         });
 
         //Mettre l'état du download à actif
-        sql_change_download_state($download_id, DownloadState::Downloading);
+        download_change_state($download_id, DownloadState::Downloading);
 
         error_log_download($authentificated_user_id, $download_request->url, $filename, DownloadState::Downloading);
 
@@ -138,27 +138,33 @@ function api_download_source()
         );
 
         foreach ($collection->getVideos() as $video) {
+
             if ($video->getError() !== null) {
 
                 //Mettre le state du dl à failed
-                sql_change_download_state($download_id, DownloadState::Failed);
+                download_change_state($download_id, DownloadState::Failed);
 
                 error_log_download($authentificated_user_id, $download_request->url, $filename, DownloadState::Failed);
 
                 throw new Exception("Error downloading video: {$video->getError()}");
+
             } else {
+                //Mettre le state du dl a downloaded
+                download_change_state($download_id, DownloadState::Downloaded->value);
+
+                //Log un message propre sur le download terminé.
+                error_log_download($authentificated_user_id, $download_request->url, $filename, DownloadState::Downloaded);
+
+                //Mettre à jour le fichier source.
                 $file = $video->getFile();
+
+                //Retourner une réponse au front ?
+
+
+
+                exit;
             }
         }
-
-        //Log un message propre sur le download terminé.
-        error_log_download($authentificated_user_id, $download_request->url, $filename, DownloadState::Downloaded);
-
-        //Mettre le state du dl a downloaded
-        sql_change_download_state($download_id, DownloadState::Downloaded->value);
-
-        //Mettre à jour le fichier source.
-
     } catch (Exception $e) {
         error_log($e);
         header('Content-Type: application/json; charset=utf-8');

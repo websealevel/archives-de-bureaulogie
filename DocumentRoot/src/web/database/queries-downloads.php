@@ -134,10 +134,10 @@ function sql_find_all_terminated_downloads(): array|bool
 /**
  * Change l'état d'un téléchargement.
  * @param string $download_id L'id du téléchargement.
- * @param string $state Le nouvel état du téléchargement.
+ * @param DownloadState $state Le nouvel état du téléchargement.
  * @return int Le nombre de lignes modifiées.
  */
-function sql_change_download_state(string $download_id, string $state): int
+function sql_change_download_state(string $download_id, DownloadState $state): int
 {
     $db = connect_to_db();
 
@@ -147,7 +147,7 @@ function sql_change_download_state(string $download_id, string $state): int
         WHERE id = :id
         ';
     $stmt = $db->prepare($sql);
-    $stmt->bindValue(':state', $state);
+    $stmt->bindValue(':state', $state->value);
     $stmt->bindValue(':id', $download_id);
     $stmt->execute();
 

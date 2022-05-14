@@ -9,11 +9,14 @@
  * @package wsl 
  */
 
+require_once __DIR__ . '/queries-downloads.php';
+
 require_once __DIR__ . '/../utils.php';
+
 require_once __DIR__ . '/../../core/download.php';
 require_once __DIR__ . '/../../models/Notice.php';
-require_once __DIR__ . '/queries-downloads.php';
-require_once __DIR__ . '/../current-user.php';
+require_once __DIR__ . '/../../models/enumDownloadState.php';
+
 
 
 /**
@@ -91,12 +94,11 @@ function download_history()
 /**
  * Change le status du téléchargement
  * @param string $download_id L'id du téléchargement
- * @param string $new_state Le nouvel état du téléchargement
+ * @param DownloadState $new_state Le nouvel état du téléchargement
  * @return int
  */
-function download_change_state(string $download_id, string $new_state): int
+function download_change_state(string $download_id, DownloadState $new_state): int
 {
-
     try {
         $download_changed = sql_change_download_state($download_id, $new_state);
     } catch (PDOException $e) {
