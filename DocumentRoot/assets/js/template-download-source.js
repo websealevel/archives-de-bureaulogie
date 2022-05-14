@@ -44,20 +44,17 @@ jQuery(function ($) {
 
         downloads.forEach(download => {
 
-            console.log(download)
-
             //Si l'élément existe déjà
             if ($("ul#active_downloads li#" + download.id).length) {
-                //Mettre à jour la progression
 
-                $div_progress = $("ul#active_downloads li#" + download.id + " div.dl-progress")
+                //Mettre à jour la progression et la vitesse
 
-                $div_speed = $("ul#active_downloads li#" + download.id + " div.dl-speed")
+                $progress = $("ul#active_downloads li#" + download.id + " div.dl-progress progress")
 
-                $div_progress.html(download.progression)
+                $div_speed = $("ul#active_downloads li#" + download.id + " div.dl-speed span")
+
+                $progress.html(download.progression)
                 $div_speed.html(download.speed)
-
-
 
             } else {
                 //Sinon, creer un nouvel item
@@ -67,7 +64,7 @@ jQuery(function ($) {
                     '<div class="dl-progress">' +
                     '<progress value="' + download.progression + '" max="100"></progress>' +
                     '</div>' +
-                    '<div class="dl-speed">Vitesse de téléchargement : ' + download.speed + '</div>' +
+                    '<div class="dl-speed">Vitesse de téléchargement : <span>' + download.speed + '</span></div>' +
                     '</li>'
                 )
             }
