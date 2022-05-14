@@ -181,6 +181,7 @@ Suivi des tâches à réaliser.
   
 ### Ecran - Importer une source/Lister les sources
 
+- `preg_match` sur le name du formulaire ne fonctionne pas, à fixer (check_download_request_form, ligne 102) [ ]
 - télécharger une vidéo apres soumission du formulaire [x]
 - progression téléchargement [x]
 - téléchargement en arrière plan [x]
