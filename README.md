@@ -2,7 +2,7 @@
 
 *Les archives de bureaulogie* est un projet qui a pour ambition de promouvoir la bureaulogie en proposant une plateforme collaborative de publication d'extraits vidéos du [tribunal des bureaux](https://www.youtube.com/watch?v=YglE-FnSd3g&list=PLDN-m4HWH8MBKJLYIK-80qJBBkVJbPo9p) d'ackboo (père fondateur de la bureaulogie) ainsi que de diffusion de références bibliographiques pour approfondir le sujet.
 
-Il sert également de prétexte pour construire un outil en *vanilla php* pour poursuivre la formation.
+Il sert également de prétexte pour construire un outil en *vanilla php* pour se former et s'amuser.
 
 - [Archives de bureaulogie](#archives-de-bureaulogie)
   - [Projet : vue d'ensemble et suivi](#projet--vue-densemble-et-suivi)
