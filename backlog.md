@@ -223,6 +223,13 @@ A venir...
 
 A venir...
 
+## SEO
+
+- ajouter un sitemap
+- robots
+- revoir les méta de header pour les mettre a jour SEO [x]
+- adapter les métas pour chaque page []
+  
 ## Sécurité
 
 - role_has_cap a implementer !!! []
@@ -234,9 +241,8 @@ A venir...
 - limiter le nb de sources extraits / user []
 - interdire de dl si espace disque donné atteint
 - enlever la version d'apache dans la requete de reponse
-- dev un mode maintenance simple (fichier .env si c'est On on charge le template maintenance.php dès l'index avant le router. Et voilà) [x]
-- revoir les méta de header pour les mettre a jour SEO [x]
-- faire un test de pénétration
+- dev un mode maintenance simple (fichier .env si c'est `On` on charge le template `maintenance.php` dès l'`index.php` avant le router) [x]
+- faire un test de pénétration []
 - couvrir de tests les droits et capabilites []
 - mettre en place des roles et capacités associes [x]
 - creer un utilisateur twitter pour chaque twitter bot avec un role twitter_user []
