@@ -5,7 +5,7 @@
 Il sert également de prétexte pour construire un outil en *vanilla php* pour poursuivre la formation.
 
 - [Archives de bureaulogie](#archives-de-bureaulogie)
-  - [Projet](#projet)
+  - [Projet : vue d'ensemble et suivi](#projet--vue-densemble-et-suivi)
   - [*Getting started*](#getting-started)
     - [Prérequis](#prérequis)
       - [Dépendences dev](#dépendences-dev)
@@ -25,9 +25,9 @@ Il sert également de prétexte pour construire un outil en *vanilla php* pour p
 
 Envie de contribuer au dépôt en proposant un extrait ? [Lisez d'abord ceci](CONTRIBUTING.md). -->
 
-## Projet
+## Projet : vue d'ensemble et suivi
 
-Voir les specifications techniques du projet [ici](backlog.md).
+Voir les specifications techniques et le backlog du projet [ici](backlog.md).
 
 ## *Getting started*
 
