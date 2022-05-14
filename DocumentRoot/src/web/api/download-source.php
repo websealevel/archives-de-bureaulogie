@@ -63,9 +63,17 @@ function api_download_source()
     $authentificated_user_id = from_session('account_id');
 
     //On enregistre en base une demande associée à la session
+    if (!current_user_can('add_source'))
+        return new Notice("Autorisation refusée", NoticeStatus::Error);
+
+
+    //Check dans le fichier source si déjà une source avec cette url
+
+    $filename = format_to_source_file($download_request);
+
     $response = create_download($download_request, $authentificated_user_id);
 
-    //En cas d'erreur sur le formulaire ou d'accès à la base.
+    //En cas d'erreur d'accès à la base.
     if ($response instanceof Notice) {
         header('Content-Type: application/json; charset=utf-8');
         echo json_encode(array(
@@ -76,7 +84,6 @@ function api_download_source()
     }
 
     $download_id = $response;
-
 
     //En cas de formulaire valide, on lance le téléchargement
     //Téléchargement.
@@ -89,6 +96,7 @@ function api_download_source()
     $yt->onProgress(static function (?string $progressTarget, string $percentage, string $size, string $speed, string $eta, ?string $totalTime): void {
 
         sql_update_download($progressTarget);
+        write_log($progressTarget);
 
         //Enregistrer l'état du téléchargement (requete à la base)
 
@@ -101,17 +109,11 @@ function api_download_source()
         }
     });
 
-    $filename = format_to_source_file($download_request);
-    $format = youtube_dl_download_format();
-
-    write_log($download_request->url);
-    write_log($filename);
-
     $collection = $yt->download(
         Options::create()
             ->downloadPath('/var/www/html/sources')
-            ->url('https://www.youtube.com/watch?v=duJwGSUhRQA')
-            ->format($format)
+            ->url($download_request->url)
+            ->format(youtube_dl_download_format())
             ->output($filename)
     );
 

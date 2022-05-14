@@ -25,18 +25,8 @@ require_once __DIR__ . '/../current-user.php';
 function create_download(DownloadRequest $download_request, string $account_id): int|Notice
 {
 
-    if (!current_user_can('add_source'))
-        return new Notice("Autorisation refusée", NoticeStatus::Error);
-
     $filename = format_to_source_file($download_request);
     $format = youtube_dl_download_format();
-
-    if (false !== sql_find_pending_download_request_with_same_url($download_request->url)) {
-        return new Notice(
-            sprintf("La demande téléchargement a déjà été enregistrée.", $filename),
-            NoticeStatus::Error
-        );
-    }
 
     try {
         $id = sql_insert_download($download_request, $filename, $format, $account_id);

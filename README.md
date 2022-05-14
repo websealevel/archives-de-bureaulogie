@@ -14,6 +14,11 @@ Il sert également de prétexte pour construire un outil en *vanilla php* pour p
     - [Lancer le projet](#lancer-le-projet)
     - [Arrêter le projet](#arrêter-le-projet)
     - [Réinitialiser la base de données](#réinitialiser-la-base-de-données)
+    - [Problèmes connus](#problèmes-connus)
+      - [FFMPEG / Symfony](#ffmpeg--symfony)
+        - [Expected Behavior](#expected-behavior)
+        - [Steps to Reproduce](#steps-to-reproduce)
+      - [Youtube-dl renvoie l'erreur 'ERROR: unable to download video data: HTTP Error 403: Forbidden while using youtube_dl'](#youtube-dl-renvoie-lerreur-error-unable-to-download-video-data-http-error-403-forbidden-while-using-youtube_dl)
   - [Ressources](#ressources)
 
 <!-- ## Comment contribuer au dépôt ?
@@ -86,6 +91,36 @@ Pour réinitialiser la base et ré excuter le script, arrêter le projet, suppri
 docker-compose down
 sudo rm -R postgres-data
 docker-compose up -d
+~~~
+
+### Problèmes connus
+
+#### FFMPEG / Symfony
+
+Issue ouverte ici.
+
+PHP-FFMpeg (en fait c'est dans symfony/process) encounters an unexpected error when a custom array value is registered in super globals `$_ENV`. This custom array value is parsed and generates an error.
+
+##### Expected Behavior
+
+It should not produce an error.
+
+##### Steps to Reproduce
+
+Register an array in `$_ENV` , for example
+
+~~~
+$_ENV['foo'] = array('bar');
+~~~
+
+Then when the function `start()` in `Process.php` (ligne 293) iterates over the local variable $env in the for loop an error occurs.
+
+#### Youtube-dl renvoie l'erreur 'ERROR: unable to download video data: HTTP Error 403: Forbidden while using youtube_dl'
+
+Il faut supprimer le cache
+
+~~~
+/usr/bin/python3 youtube-dl --rm-cache-dir
 ~~~
 
 ## Ressources
