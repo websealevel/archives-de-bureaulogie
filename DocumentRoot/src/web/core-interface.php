@@ -228,3 +228,15 @@ function esc_download_history_e(): void
         esc_html_e($download['url']);
     }
 }
+/**
+ * Ecrit sur la sortie standard le nombre de téléchargements en cours
+ * @return void
+ */
+function esc_active_downloads_info_e()
+{
+    $active_downloads = active_downloads();
+    if (false === $active_downloads)
+        return;
+    esc_html_e(sprintf("(%d téléchargement(s) en cours)", count($active_downloads)));
+    return;
+}

@@ -47,17 +47,16 @@ function create_download(DownloadRequest $download_request, string $account_id):
 
 /**
  * Retourne la liste des téléchargements en attente d'un compte
- * @param string $account_id L'id du compte utilisateur
  * @return mixed La liste des téléchargements ou une Notice en cas d'erreur
  */
-function active_downloads(string $account_id)
+function active_downloads()
 {
 
     if (!current_user_can('add_source'))
         return new Notice("Autorisation refusée", NoticeStatus::Error);
 
     try {
-        $pending_downloads = sql_find_active_downloads($account_id);
+        $pending_downloads = sql_find_active_downloads();
     } catch (PDOException $e) {
         error_log($e);
         return new Notice(

@@ -7,6 +7,7 @@
  * @package wsl 
  */
 
+require_once __DIR__ . '/../core-interface.php';
 require_once __DIR__ . '/../current-user.php';
 ?>
 <?php present_header()?>
@@ -21,7 +22,8 @@ require_once __DIR__ . '/../current-user.php';
     <?php endif;  ?>
 
     <?php if (current_user_can('add_source')) :  ?>
-        <li><a href="download-source">Importer une nouvelle vidéo source</a></li>
+        <li><a href="download-source">Importer une nouvelle vidéo source </a>
+        <?php esc_active_downloads_info_e(); ?></li>
     <?php endif;  ?>
 
 </ul>

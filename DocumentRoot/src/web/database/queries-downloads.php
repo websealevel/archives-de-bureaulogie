@@ -81,11 +81,10 @@ function sql_find_pending_download_request_with_same_url(string $url): stdClass|
 }
 
 /**
- * Retourne la liste des téléchargements en attente d'un compte, faux sinon
- * @param string $account_id L'id du compte
+ * Retourne la liste des téléchargements en cours, faux sinon
  * @return array|bool
  */
-function sql_find_active_downloads(string $account_id): array|bool
+function sql_find_active_downloads(): array|bool
 {
 
     $db = connect_to_db();
@@ -94,13 +93,10 @@ function sql_find_active_downloads(string $account_id): array|bool
         'SELECT 
         id,url,format,filename,progression,speed
         FROM downloads 
-        where account_id = :account_id
-        AND
-        state = :state ';
+        WHERE state = :state';
 
     $stmt = $db->prepare($sql);
-    $stmt->bindValue(':account_id', $account_id);
-    $stmt->bindValue(':state', 'downloading');
+    $stmt->bindValue(':state', DownloadState::Downloading->value);
     $stmt->execute();
 
     return $result = $stmt->fetchAll(PDO::FETCH_ASSOC);

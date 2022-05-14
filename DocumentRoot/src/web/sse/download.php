@@ -29,7 +29,7 @@ if (!current_user_can('add_source')) {
 }
 
 //Trouver les téléchargements en cours
-$active_downloads = active_downloads(from_session('account_id'));
+$active_downloads = active_downloads();
 
 ob_start();
 echo 'data: {';
