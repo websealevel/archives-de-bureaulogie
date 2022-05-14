@@ -18,8 +18,18 @@ function is_current_user_logged_in(): bool
 {
     if (!isset($_SESSION))
         throw new Exception("Aucune session active");
-
     return boolval(from_session('user_authentificated') ?? false);
+}
+
+/**
+ * Retourne le pseudo de l'utilisateur authentifié
+ * @return string
+ */
+function current_user_pseudo(): string
+{
+    if (!is_current_user_logged_in())
+        throw new Exception("L'utilisateur devrait être authentifié quand on chercher son pseudo");
+    return from_session('pseudo') ?? 'cher inconnu';
 }
 
 /**

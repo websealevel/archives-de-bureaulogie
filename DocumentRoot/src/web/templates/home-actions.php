@@ -10,9 +10,9 @@
 require_once __DIR__ . '/../core-interface.php';
 require_once __DIR__ . '/../current-user.php';
 ?>
-<?php present_header()?>
+<?php present_header() ?>
 
-<h2>Bienvenue !</h2>
+<h2>Bonjour <?php esc_html_e(current_user_pseudo()); ?> !</h2>
 
 <h3>Archives vidéos</h3>
 
@@ -23,7 +23,7 @@ require_once __DIR__ . '/../current-user.php';
 
     <?php if (current_user_can('add_source')) :  ?>
         <li><a href="download-source">Importer une nouvelle vidéo source </a>
-        <?php esc_active_downloads_info_e(); ?></li>
+            <?php esc_active_downloads_info_e(); ?></li>
     <?php endif;  ?>
 
 </ul>
