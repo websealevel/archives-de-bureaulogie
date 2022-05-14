@@ -86,14 +86,15 @@ function api_download_source()
     $download_id = $response;
 
     //En cas de formulaire valide, on lance le téléchargement
-    //Téléchargement.
+
     $yt = new YoutubeDl();
-    //Lancer les téléchargement et écrire la progression sur la sortie standard
+
     $yt->setBinPath('/var/www/html/youtube-dl/youtube-dl');
     $yt->setPythonPath('/usr/bin/python3');
 
-
     try {
+
+        //Lancer le téléchargement et écrire la progression en base.
 
         $db = connect_to_db();
 
@@ -124,6 +125,7 @@ function api_download_source()
 
         write_log('Fichier enregistré : ' . $file->getFilename());
     } catch (Exception $e) {
+        error_log($e);
         header('Content-Type: application/json; charset=utf-8');
         echo json_encode(array(
             'statut' => 500,

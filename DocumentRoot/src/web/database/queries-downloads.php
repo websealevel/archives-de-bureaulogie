@@ -162,6 +162,8 @@ function sql_change_download_state(string $download_id, string $state): int
 function sql_update_download(PDO $db, string $download_id, ?string $progressTarget, string $percentage, string $size, string $speed, ?string $total_time)
 {
 
+    write_log(array($download_id, $progressTarget));
+
     $sql =
         'UPDATE downloads
     SET 

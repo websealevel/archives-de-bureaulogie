@@ -43,7 +43,7 @@ CREATE TABLE downloads (
     account_id INT NOT NULL,
     process_pid INT,
     -- l'id du processus (si on veut l'arreter)
-    progression INT,
+    progression VARCHAR(20),
     -- progression instantanée de téléchargement
     speed VARCHAR(50),
     -- vitesse instantannée de téléchargement
