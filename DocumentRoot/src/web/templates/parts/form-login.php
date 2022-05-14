@@ -15,7 +15,7 @@ require_once __DIR__ . '/../../utils.php';
 <div class="form-login">
     <form action="log-in" method="POST">
         <div>
-            <label for="login">Login </label>
+            <label for="login">Pseudo </label>
             <input type="text" id="login" name="login" value="paul">
             <div class="error-message"><?php esc_html_form_error_msg_e('login', 'form_errors') ?></div>
         </div>

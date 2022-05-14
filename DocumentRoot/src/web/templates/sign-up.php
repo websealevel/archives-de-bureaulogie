@@ -22,7 +22,7 @@ if (!is_signup_activated())
     <div class="form-note">Les champs marqués d'un asterisque sont obligatoires</div>
 
     <div>
-        <label for="pseudo">Pseudonyme <span class="required">*</span></label>
+        <label for="pseudo">Pseudo <span class="required">*</span></label>
         <input type="text" name="pseudo" value="<?php echo "paul";/*esc_html_from_session_e('form_errors', 'pseudo')*/ ?>" required>
         <div class="error-message"><?php esc_html_form_error_msg_e('pseudo', 'form_errors') ?></div>
     </div>
@@ -77,7 +77,7 @@ if (!is_signup_activated())
     <input type="submit" value="Créer mon compte">
 </form>
 <p>
-    
+
 <p>Par soucis écologique nous ne vous enverrons aucun email inutile, sauf pour valider votre compte et vous tenir informé·e de vos futures contributions.</p>
 
 <p>Par mesure de sécurité, et en accord avec les principes de la bureaulogie, vous n'aurez pas la possibilité de recouvrir votre mot de passe en cas de perte. Conservez le soigneusement sur votre bureau.</p>
