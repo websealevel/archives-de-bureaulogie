@@ -92,7 +92,7 @@ function sql_find_active_downloads(string $account_id): array|bool
 
     $sql =
         'SELECT 
-        id,url,format,filename
+        id,url,format,filename,progression,speed
         FROM downloads 
         where account_id = :account_id
         AND

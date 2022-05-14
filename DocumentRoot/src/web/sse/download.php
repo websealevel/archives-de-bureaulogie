@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Server Send Event (SSE) utilisé pour observer les téléchargements en cours
  * @link https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events
@@ -32,9 +33,12 @@ $active_downloads = active_downloads(from_session('account_id'));
 
 ob_start();
 echo 'data: {';
-echo '"pending_downloads" : [';
+echo '"active_downloads" : [';
 foreach ($active_downloads as $download) {
-    echo sprintf('{"id" : "%s", "url": "%s", "filename" : "%s", "progression": "%s", "speed" : %s }', $download['id'], $download['url'], $download['filename'], $download['progression'], $download['speed']);
+
+    $progression_escaped = str_replace('%', '%%', $download['progression']);
+
+    echo sprintf('{"id": "%s", "url": "%s", "filename": "%s", "progression": "%s", "speed": "%s" }', $download['id'], $download['url'], $download['filename'], $progression_escaped, $download['speed']);
 }
 echo ']';
 echo '}';

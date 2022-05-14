@@ -59,12 +59,12 @@ if (!current_user_can('add_source'))
             </iframe>
         </div>
         <div>
-            <input type="submit" value="Importer">
+            <input type="submit" value="Télécharger dans les archives">
         </div>
     </form>
 
     <h3>Téléchargements en cours</h3>
-    <ul id="pending-downloads">
+    <ul id="active_downloads">
     </ul>
     <h3>Historique des téléchargements</h3>
     <ul id="downloads-history">

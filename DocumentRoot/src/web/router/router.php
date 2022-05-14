@@ -11,18 +11,14 @@
 require_once __DIR__ . '/routes.php';
 require_once __DIR__ . '/../log.php';
 
-
-
 /**
  * Résoud la requête entrante
  */
 function resolve()
 {
-
     $path = get_path();
 
-
-    //Server send events route
+    //Special case : Server Send Events (SSE) route (écouter téléchargements en cours)
     if ('/sse-download-source' === $path) {
         require_once __DIR__ . '/../sse/download.php';
         exit;
@@ -71,9 +67,6 @@ function redirect(string $path, string $session_key = '', array $data = array(),
  */
 function find_callback(string $path, string $method): callable
 {
-
-
-
     $routes = routes();
 
     if (!array_key_exists($method,  $routes))

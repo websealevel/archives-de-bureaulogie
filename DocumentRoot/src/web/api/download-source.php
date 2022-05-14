@@ -159,11 +159,12 @@ function api_download_source()
                 error_log_download($authentificated_user_id, $download_request->url, $filename, DownloadState::Downloaded);
 
                 //Mettre à jour le fichier source.
+
+                //Générer le label à partir de series+slug
+
                 $file = $video->getFile();
 
                 //Retourner une réponse au front ?
-
-
 
                 exit;
             }

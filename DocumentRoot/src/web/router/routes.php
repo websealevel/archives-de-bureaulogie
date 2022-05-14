@@ -78,9 +78,6 @@ function routes(): array
             '/sign-up' => function () {
                 sign_up_user();
             },
-            // '/download-source' => function () {
-            //     web_download_source();
-            // },
             '/api/v1/download-source' => function () {
                 api_download_source();
             },

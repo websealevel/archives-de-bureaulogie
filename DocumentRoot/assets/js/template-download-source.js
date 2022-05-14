@@ -34,34 +34,31 @@ jQuery(function ($) {
         })
     });
 
+    //Server Send Event protocol : écouter les téléchargements en cours
+    console.log('listen')
+    const evtSource = new EventSource("sse-download-source");
+    evtSource.onmessage = function (event) {
 
-    //Ecouter les téléchargements en cours
-    // const evtSource = new EventSource("sse-download-source");
-    // evtSource.onmessage = function (event) {
-    //     const json_data = JSON.parse(event.data)
-    //     const downloads = json_data['pending_downloads']
-    //     downloads.forEach(download => {
-    //         //Si l'élément existe déjà
-    //         if ($("ul#pending-downloads li#" + download.id).length) {
-    //             //Mettre à jour la progression
+        const json_data = JSON.parse(event.data)
+        const downloads = json_data['active_downloads']
 
-    //         } else {
-    //             $("ul#pending-downloads").append(
-    //                 '<li id="' + download.id + '">' +
-    //                 'Téléchargement <div class="dl-filename">' + download.filename + '</div>' +
-    //                 '<div class="dl-progress">'+
-    //                 '<progress value="'+ download.progression +'" max="100"></progress>'+
-    //                 '</div>'+
-    //                 '<div>Vitesse de téléchargement : ' + download.speed +'</div>'+
-    //                 '</li>'
-    //             )
-    //         }
-    //         console.log(download.url, download.id)
-    //     });
-    // }
-
-
-
-
+        downloads.forEach(download => {
+            //Si l'élément existe déjà
+            if ($("ul#active_downloads li#" + download.id).length) {
+                //Mettre à jour la progression
+            } else {
+                //Sinon, creer un nouvel item
+                $("ul#active_downloads").append(
+                    '<li id="' + download.id + '">' +
+                    '<div class="dl-filename">' + download.filename + '</div>' +
+                    '<div class="dl-progress">' +
+                    '<progress value="' + download.progression + '" max="100"></progress>' +
+                    '</div>' +
+                    '<div>Vitesse de téléchargement : ' + download.speed + '</div>' +
+                    '</li>'
+                )
+            }
+        });
+    }
 
 });
