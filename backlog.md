@@ -226,6 +226,7 @@ A venir...
 ## Sécurité
 
 - role_has_cap a implementer !!! []
+- déclarer une limite d'extraits / utilisateur / source (20 par exemple) []
 - envoyer un email pour valider le compte []
 - ajouter une colonne status du compte (actif, banni)
 - regarder comment mieux sécuriser les sessions [x]
