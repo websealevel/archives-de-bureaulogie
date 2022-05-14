@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Traite le formulaire d'ajout de source
+ * Validation du formulaire de téléchargement d'une vidéo source (la requête de téléchargement est effectuée en AJAX et traitée par api/download-source.php)
  * @link
  *
  * @package wsl 
