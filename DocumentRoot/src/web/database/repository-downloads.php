@@ -46,7 +46,7 @@ function create_download(DownloadRequest $download_request, string $account_id):
 
 
 /**
- * Retourne la liste des téléchargements en attente d'un compte
+ * Retourne la liste des téléchargements en attente.
  * @return mixed La liste des téléchargements ou une Notice en cas d'erreur
  */
 function active_downloads()
