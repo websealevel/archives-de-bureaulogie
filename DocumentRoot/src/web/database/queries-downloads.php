@@ -138,8 +138,6 @@ function sql_find_all_terminated_downloads(): array|bool
  */
 function sql_change_download_state(string $download_id, string $state): int
 {
-
-
     $db = connect_to_db();
 
     $sql =
@@ -156,8 +154,26 @@ function sql_change_download_state(string $download_id, string $state): int
     return $stmt->rowCount();
 }
 
-
-function sql_update_download(string $progressTarget)
+/**
+ * Met à jour les métadonnées d'un téléchargement. On passe la connexion à la DB pour éviter d'en ouvrir une à chaque fois
+ * @param PDO $db L'accès à la base
+ * @param string $download_id L'identifiant du téléchargement à mettre à jour
+ */
+function sql_update_download(PDO $db, string $download_id, ?string $progressTarget, string $percentage, string $size, string $speed, ?string $total_time)
 {
-    error_log($progressTarget);
+
+    $sql =
+        'UPDATE downloads
+    SET 
+    progression = :progression
+    WHERE
+    id = :id';
+
+    $stmt = $db->prepare($sql);
+    $stmt->bindValue(':progression', $percentage);
+    $stmt->bindValue(':id', $download_id);
+    $stmt->execute();
+
+    // return the number of row affected
+    return $stmt->rowCount();
 }

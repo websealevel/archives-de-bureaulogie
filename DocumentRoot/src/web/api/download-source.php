@@ -92,39 +92,47 @@ function api_download_source()
     $yt->setBinPath('/var/www/html/youtube-dl/youtube-dl');
     $yt->setPythonPath('/usr/bin/python3');
 
-    //Show progress
-    $yt->onProgress(static function (?string $progressTarget, string $percentage, string $size, string $speed, string $eta, ?string $totalTime): void {
 
-        sql_update_download($progressTarget);
-        write_log($progressTarget);
+    try {
 
-        //Enregistrer l'état du téléchargement (requete à la base)
+        $db = connect_to_db();
 
-        echo "Download file: $progressTarget; Percentage: $percentage; Size: $size";
-        if ($speed) {
-            echo "; Speed: $speed";
+        //Show progress
+        $yt->onProgress(static function (?string $process_target, string $percentage, string $size, string $speed, string $eta, ?string $total_time) use ($download_id, $db): void {
+            sql_update_download($db, $download_id, $process_target, $percentage, $size, $speed, $total_time);
+        });
+
+        error_log('start');
+
+        $collection = $yt->download(
+            Options::create()
+                ->downloadPath('/var/www/html/sources')
+                ->url($download_request->url)
+                ->format(youtube_dl_download_format())
+                ->output($filename)
+        );
+
+        sql_change_download_state($download_id, 'downloading');
+
+        error_log('start');
+
+
+        foreach ($collection->getVideos() as $video) {
+            if ($video->getError() !== null) {
+                error_log("Error downloading video: {$video->getError()}.");
+            } else {
+                $file = $video->getFile(); 
+            }
         }
-        if ($totalTime !== null) {
-            echo "; Downloaded in: $totalTime";
-        }
-    });
 
-    $collection = $yt->download(
-        Options::create()
-            ->downloadPath('/var/www/html/sources')
-            ->url($download_request->url)
-            ->format(youtube_dl_download_format())
-            ->output($filename)
-    );
+        write_log('Fichier enregistré : ' . $file->);
 
-    sql_change_download_state($download_id, 'downloading');
-
-    foreach ($collection->getVideos() as $video) {
-        if ($video->getError() !== null) {
-            error_log("Error downloading video: {$video->getError()}.");
-        } else {
-            echo $video->getTitle(); // Will return Phonebloks
-            // $video->getFile(); // \SplFileInfo instance of downloaded file
-        }
+    } catch (Exception $e) {
+        header('Content-Type: application/json; charset=utf-8');
+        echo json_encode(array(
+            'statut' => 500,
+            'errors' => array(new Notice('Une erreur est survenue, veuillez réessayer', NoticeStatus::Error)),
+        ));
+        exit;
     }
 }
