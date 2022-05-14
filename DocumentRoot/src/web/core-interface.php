@@ -232,9 +232,10 @@ function esc_download_history_items_e(): void
         $created_on = date('d-m-Y à H:i:s', strtotime($download['created_on']));
 
         $item = sprintf(
-            "
-        <li>utilisateur: %s - url: %s - démarré le: %s - temps total de téléchargement (min): %s - nom du fichier: %s - statut: %s
-        </li>",
+            '
+        <li class="download-state %s">utilisateur: %s - url: %s - démarré le: %s - temps total de téléchargement (min): %s - nom du fichier: %s - statut: %s
+        </li>',
+            $download['state'],
             $account->pseudo,
             $download['url'],
             $created_on,
