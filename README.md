@@ -115,6 +115,8 @@ $_ENV['foo'] = array('bar');
 
 Then when the method `start()` in `Process.php` (ligne 293) iterates over the local variable `$env` in the for loop an error occurs.
 
+Ne pas enregistrer de valeur `array` dans `$_ENV` pour corriger le pb en attendant.
+
 #### Youtube-dl renvoie l'erreur 'ERROR: unable to download video data: HTTP Error 403: Forbidden while using youtube_dl'
 
 Il faut supprimer le cache

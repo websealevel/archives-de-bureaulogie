@@ -203,6 +203,7 @@ Suivi des tâches à réaliser.
 
 ### Code source / Dépôt
 
+- ne pas enregistrer d'array dans `$_ENV` pour les variables d'environnement, issue déposée [ici](https://github.com/symfony/symfony/issues/46348) []
 - tout basculer dans des namespaces (PSR-4) []
 - deplacer le fichier source+dtd dans un dossier a part[]
 - utiliser phpcbs et phpcs pour formatter le code au standard PHP Pro PSR []
