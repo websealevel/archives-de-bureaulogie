@@ -54,10 +54,10 @@ function from_env(string $key): string
 function load_db_env(string $env_path = SRC_PATH, string $env_file = '.env'): array
 {
 
-    if (isset($_ENV['db_env']))
-        return $_ENV['db_env'];
-
-    load_env();
+    if (!isset($_ENV['DB_ENV_LOADED'])) {
+        load_env();
+        $_ENV['DB_ENV_LOADED'] = true;
+    }
 
     $credentials = array(
         'host' => $_ENV['DB_HOST'],
@@ -66,9 +66,6 @@ function load_db_env(string $env_path = SRC_PATH, string $env_file = '.env'): ar
         'user' => $_ENV['DB_USER'],
         'password' => $_ENV['DB_PASSWORD']
     );
-
-    //On concatène tout ça.
-    $_ENV['db_env'] = $credentials;
 
     return $credentials;
 }
