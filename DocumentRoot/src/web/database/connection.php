@@ -9,6 +9,7 @@
 
 
 require_once __DIR__ . '/../environment.php';
+require_once __DIR__ . '/../../models/CredentialsDB.php';
 
 /**
  * Retourne une connexion à la base de données en cas de succès, faux sinon
@@ -23,7 +24,7 @@ function connect_to_db()
     $dsn = dsn_from_credentials($credentials);
 
     try {
-        $db = new PDO($dsn, $credentials['user'], $credentials['password']);
+        $db = new PDO($dsn, $credentials->user, $credentials->password);
     } catch (PDOException $e) {
         error_log($e);
         exit;
@@ -49,9 +50,9 @@ function from_env(string $key): string
  * @param string $env_path Le path du fichier d'environnement.
  * @param string $env_file Le nom du fichier.
  * @global array $_ENV
- * @return array
+ * @return CredentialsDB
  */
-function load_db_env(string $env_path = SRC_PATH, string $env_file = '.env'): array
+function load_db_env(string $env_path = SRC_PATH, string $env_file = '.env'): CredentialsDB
 {
 
     if (!isset($_ENV['DB_ENV_LOADED'])) {
@@ -59,12 +60,12 @@ function load_db_env(string $env_path = SRC_PATH, string $env_file = '.env'): ar
         $_ENV['DB_ENV_LOADED'] = true;
     }
 
-    $credentials = array(
-        'host' => $_ENV['DB_HOST'],
-        'port' => $_ENV['DB_PORT'],
-        'dbname' => $_ENV['DB_NAME'],
-        'user' => $_ENV['DB_USER'],
-        'password' => $_ENV['DB_PASSWORD']
+    $credentials = new CredentialsDB(
+        $_ENV['DB_HOST'],
+        $_ENV['DB_NAME'],
+        $_ENV['DB_PORT'],
+        $_ENV['DB_USER'],
+        $_ENV['DB_PASSWORD'],
     );
 
     return $credentials;
@@ -72,15 +73,15 @@ function load_db_env(string $env_path = SRC_PATH, string $env_file = '.env'): ar
 
 /**
  * Retourne le DSN pour l'interface PDO
- * @param array $credentials Les credentials de la bdd
+ * @param CredentialsDB $credentials Les credentials de la bdd
  * @return string Le dsn
  */
-function dsn_from_credentials(array $credentials): string
+function dsn_from_credentials(CredentialsDB $credentials): string
 {
     return sprintf(
         "pgsql:host=%s;dbname=%s;port=%s",
-        $credentials['host'],
-        $credentials['dbname'],
-        $credentials['port']
+        $credentials->host,
+        $credentials->dbname,
+        $credentials->port
     );
 }
