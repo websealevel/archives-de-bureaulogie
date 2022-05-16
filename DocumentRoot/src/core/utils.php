@@ -62,6 +62,16 @@ function remove_undeclared_clips(string $file_source = SOURCE_FILE): array
 }
 
 /**
+ * Supprime les sources qui ne sont pas déclarées dans le fichier source
+ * @param string $file_source Optional Default SOURCE_FILE
+ * @return array La liste des noms de fichiers supprimés
+ */
+function remove_undeclared_sources(string $file_source = SOURCE_FILE): array
+{
+    return array();
+}
+
+/**
  * Supprime une source sur le PATH_SOURCE. Renvoie vrai si la suppression a réussi, faux sinon
  * @param string $file_name Le nom du fichier source à supprimer
  * @return bool

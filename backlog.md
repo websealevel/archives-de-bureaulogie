@@ -28,6 +28,7 @@
     - [Ecran Modération des extraits vidéos](#ecran-modération-des-extraits-vidéos)
     - [Ecran Modération des ressources bibliographiques](#ecran-modération-des-ressources-bibliographiques)
   - [SEO](#seo)
+  - [Core](#core)
   - [Sécurité](#sécurité)
 
 ## Specs
@@ -261,6 +262,21 @@ A venir...
 - revoir les méta de header pour les mettre a jour SEO [x]
 - adapter les métas pour chaque page []
   
+
+## Core
+- action_update_clips[ ]
+  - generate_clips[ ]
+  - clean_clips[ ]
+    - clean invalid clips[ ]
+    - clean undeclared clips[ ]
+- action_clean_sources[ ]
+  - clean invalid sources [ ]
+  - clean undeclared sources []
+- generate rapports []
+  - dans un fichier de log si en mode cgi []
+  - sur la sortie standard en mode cli []
+- backup : dump de la base, extraits.xml et extraits.dtd suffisent [ ]
+- recover: regenerer tous les fichiers à partir du fichier source grâce a une fonction core []
 ## Sécurité
 
 - role_has_cap a implementer !!! []
@@ -285,8 +301,6 @@ A venir...
 - installer un moniteur éthique pour analyser la fréquentation du site[]
 - vérifier que les error/exception handlers sont bien intégrés à chaque script [x]
 - certaines exceptions ne devraient pas logout l'utilisateur (ex téléchargement échoué), mauvais pour l'ux [x] => solution: Les try/catch localement, sinon par défaut ça deconnecte
-- backup : dump de la base, extraits.xml et extraits.dtd suffisent
-- recover: regenerer tous les fichiers à partir du fichier source grâce a une fonction core []
 - desactiver/activer acces aux comptes Twitter []
 - desactiver facilement les comptes Twitter []
 - desactiver facilement le site []

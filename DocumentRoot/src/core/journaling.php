@@ -71,26 +71,58 @@ function report(string $file_source = SOURCE_FILE): array
 }
 
 /**
- * Affiche sur la sortie standard le rapport de la génération des clips
+ * Affiche sur la sortie standard ou dans un fichier de log (en fonction du mode de php utilisé) le rapport de la génération des clips
  * @see generate_clips_report()
  * @param array $report Le rapport obtenu par la génération des clips
  * @return void
  */
-function generate_clips_report_e(array $report)
+function report_generated_clips_e(array $report)
 {
+
+    $output = array();
 
     $already_exists = $report['already_exists'] ?? array();
     $created = $report['created'] ?? array();
 
-    printf("La base de données des extraits a été mise à jour\n");
+    $output[] = "== Rapport de génération de clips : DEBUT " . date('d-m-Y H:m:s') . " == \n";
 
-    printf("Extrait(s) crée(s): %d\n", count($created));
+    $output[] = sprintf("Extrait(s) crée(s): %d\n", count($created));
+
     foreach ($created as $clip) {
-        printf("* %s\n", $clip);
+        $output[] = sprintf("* %s\n", $clip);
+    }
+    $output[] = sprintf("Extrait(s) déjà existant(s): %d\n", count($already_exists));
+
+    foreach ($already_exists as $clip) {
+        $output[] = sprintf("* %s\n", $clip);
     }
 
-    printf("Extrait(s) déjà existant(s): %d\n", count($already_exists));
-    foreach ($already_exists as $clip) {
-        printf("* %s\n", $clip);
-    }
+    $output[] = "<== Rapport de génération de clips : FIN == \n\n";
+
+    //utiliser ob, ecrire dans un buffer temporaire. Et à la fin flush output dans le bon container (fichier ou sortie standard)
+}
+
+/**
+ * Affiche sur la sortie standard ou dans un fichier de log (en fonction du mode de php utilisé) le rapport de nettoyage des clips
+ * @see generate_clips_report()
+ * @param array $report Le rapport obtenu par le nettoyage des clips
+ * @return void
+ */
+function report_cleaned_clips_e(array $report)
+{
+
+    $output = array();
+    $output[] = "==> Rapport de nettoyage de clips : DEBUT . Date : " . date('d-m-Y H:m:s') . " == \n";
+
+    $output[] = "<== Rapport de nettoyage de clips : FIN == \n\n";
+
+    //utiliser ob, ecrire dans un buffer temporaire. Et à la fin flush output dans le bon container (fichier ou sortie standard)
+}
+
+/**
+ * Retourne le fichier où sont enregistrés les rapports du composant core de l'application (où sont écrits les rapports)
+ */
+function core_reporting_file(): string
+{
+    return 'core_journal.log';
 }

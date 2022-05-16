@@ -18,7 +18,6 @@ autload_core();
  */
 function is_source_file_valid(string $file_source = SOURCE_FILE): bool
 {
-    echo $file_source;
     //Check que le fichier source existe.
     if (!file_exists($file_source)) {
 

@@ -145,3 +145,14 @@ define('YOUTUBE_DL_PATH', __DIR__ . '/../../youtube-dl/youtube-dl');
  * Le path du binaire de python
  */
 define('PYTHON_PATH', '/usr/bin/python3');
+
+
+/**
+ * Retourne vrai si php est utilisé en mode cli, faux sinon
+ * @return bool
+ * @see https://www.php.net/manual/en/function.php-sapi-name.php 
+ */
+function is_cli(): bool
+{
+    return php_sapi_name() === 'cli';
+}

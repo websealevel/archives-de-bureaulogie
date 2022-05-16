@@ -12,20 +12,22 @@ require_once __DIR__ . '/validation.php';
 require_once __DIR__ . '/download.php';
 
 /**
- * Met à jour la base de données des clips (ajoute, supprime en fonction du fichier source), nettoie les clips invalides
+ * Met à jour la base de données des clips (ajoute et nettoie des clips en fonction du fichier source)
  * @return bool
  */
-function action_update_clips()
+function action_update_clips(): bool
 {
     if (!is_source_file_valid()) {
         throw new Exception("Le fichier source est invalide. Veuillez le corriger d'abord.");
     }
 
-    printf("Génération des clips...\n");
+    $results_generated_clips = generate_clips();
+    $results_clened_clips = action_clean_clips();
 
-    $results = generate_clips();
+    report_generated_clips_e($results_generated_clips);
+    report_cleaned_clips_e($results_clened_clips);
 
-    generate_clips_report_e($results);
+    return true;
 }
 
 /**
@@ -38,13 +40,26 @@ function action_clean()
     action_clean_clips();
 }
 
-function action_clean_clips()
+/**
+ * Retourne la liste des extraits vidéos supprimés car ils n'étaient pas déclarés dans le fichier source, ou leur format n'était pas valide
+ * @return array
+ */
+function action_clean_clips(): array
 {
-    // remove_undeclared_clips();
-    // remove_invalid_clips();
+    $cleaned = array();
+    $cleaned['undeclared'] = remove_undeclared_clips();
+    $cleaned['invalid'] = remove_invalid_clips();
+    return $cleaned;
 }
 
-function action_clean_sources()
+/**
+ * Retourne la liste des vidéos sources supprimées car elles n'étaient pas déclarées dans le fichier source, ou leur format n'était pas valide
+ * @return array
+ */
+function action_clean_sources(): array
 {
-    // remove_invalid_sources();
+    $cleaned = array();
+    $cleaned['undeclared'] = remove_undeclared_sources();
+    $cleaned['invalid'] = remove_invalid_sources();
+    return $cleaned;
 }
