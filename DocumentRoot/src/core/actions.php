@@ -121,10 +121,8 @@ function remove_invalid_clips(string $path = PATH_CLIPS): array
         //S'il respecte le format on peut analyser le nom pour récupérer : source, slug et les timecodes
 
         //Retrouver le clip s'il est déclaré
-        $source = extract_source($file);
-        $slug = extract_slug($file);
-        $timecode_start = extract_timecode($file, 'start');
-        $timecode_end = extract_timecode($file, 'end');
+        $metadata = extract_metadata($file);
+
 
         //S'il est pas déclaré => invalide il dégage
 
@@ -138,8 +136,8 @@ function remove_invalid_clips(string $path = PATH_CLIPS): array
 
         return !$is_valid;
     });
-    die;
 
+    var_dump($invalid);
 
     return $invalid;
 }

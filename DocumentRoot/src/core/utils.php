@@ -115,14 +115,20 @@ function extract_metadata($filename): array|false
     if (!is_clip_filename_valid_format($filename))
         return false;
 
-    $matches = array();
+    $basename = basename($filename, '.' . EXTENSION_CLIP);
 
-    preg_match('/^\[' . FORMAT_SOURCE_NAME_VIDEO_CLIP . '\]/', $filename, $matches);
+    $metadata = array();
 
-    if (!isset($matches[0]))
-        throw new Exception("L'extraction du nom de la source n'a pas fonctionné alors que le nom du fichier a le format attendu");
+    do {
+        $iter_first = strpos($basename, '[');
+        $iter_end = strpos($basename, ']');
+        $metadata[] = mb_substr($basename, $iter_first, $iter_end - $iter_first + 1);
+        $basename = str_replace($metadata[count($metadata) - 1], '', $basename);
+    } while (!empty($basename));
 
-    $source = $matches[0];
+    $values =  array_map(function ($data) {
+        return str_replace(array('[', ']'), '', $data);
+    }, $metadata);
 
-    return str_replace(array('[', ']'), '', $source);
+    return $values;
 }
