@@ -29,6 +29,9 @@
     - [Ecran Modération des ressources bibliographiques](#ecran-modération-des-ressources-bibliographiques)
   - [SEO](#seo)
   - [Core](#core)
+    - [Unicité d'une source](#unicité-dune-source)
+    - [Unicité d'un clip](#unicité-dun-clip)
+    - [A implementer (CLI/CGI)](#a-implementer-clicgi)
   - [Sécurité](#sécurité)
 
 ## Specs
@@ -262,8 +265,19 @@ A venir...
 - revoir les méta de header pour les mettre a jour SEO [x]
 - adapter les métas pour chaque page []
   
-
 ## Core
+
+
+### Unicité d'une source
+
+- url
+
+### Unicité d'un clip
+
+- timecodes
+
+### A implementer (CLI/CGI)
+
 - action_update_clips[ ]
   - generate_clips[ ]
   - clean_clips[ ]

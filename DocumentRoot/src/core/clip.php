@@ -60,9 +60,6 @@ function generate_clips(string $file_source = SOURCE_FILE): array
         }
     }
 
-    // $report = report_clip_generation();
-    // log_clip_generation($report);
-
     return $results;
 }
 
@@ -77,9 +74,7 @@ function clip_source(DOMElement $clip, string $file_source): string
 {
     $path_source = PATH_SOURCES . '/' . $file_source;
 
-    $ffmpeg = FFMpeg\FFMpeg::create(array(
-        
-    ));
+    $ffmpeg = FFMpeg\FFMpeg::create(array());
 
     $video = $ffmpeg->open($path_source);
 

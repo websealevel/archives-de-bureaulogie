@@ -5,7 +5,6 @@
 <!ELEMENT source (extrait*) >
 
 <!-- element source -->
-<!ATTLIST source name ID #REQUIRED>
 <!ATTLIST source url CDATA #REQUIRED>
 <!ATTLIST source label CDATA #REQUIRED >
 <!ATTLIST source series (le-tribunal-des-bureaux) "le-tribunal-des-bureaux" >

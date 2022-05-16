@@ -6,6 +6,8 @@
  * @package wsl 
  */
 
+require_once __DIR__ . '/../web/utils.php';
+
 autoload();
 
 use YoutubeDl\Options;

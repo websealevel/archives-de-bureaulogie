@@ -10,31 +10,6 @@
 require_once __DIR__ . '/const.php';
 
 /**
- * Retourne un rapport sur la génération d'extraits
- * @see generate_clips()
- * @return array Un tableau de rapport
- */
-function report_clip_generation(): array
-{
-    //Produit un rapport sur génération de clips : liste des extraits générés, erreurs éventuelles. A peaufiner
-    return array(
-        'Clips générés avec succès !'
-    );
-}
-
-/**
- * Log un rapport sur la génération des extraits
- * @param array Un tableau contenants des entrées d'un rapport
- * @see report_clip_generation()
- */
-function log_clip_generation(array $report)
-{
-    foreach ($report as $entry) {
-        error_log($entry);
-    }
-}
-
-/**
  * Retourne un rapport sur l'état des sources/extraits déclarés et présents sur le serveur
  * @param string $file_source Optional. Défaut 'extraits.xml' Le fichier source contenant la déclaration des extraits
  * @return array Rapport

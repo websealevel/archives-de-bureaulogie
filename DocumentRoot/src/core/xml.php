@@ -96,7 +96,8 @@ function source_name(DOMElement $source): string
 }
 
 /**
- * Retourne le path de l'extrait à sauvegarder
+ * Retourne le path (dont le nom du fichier) de l'extrait à sauvegarder.
+ * Le nom du fichier de l'extrait est construit à partir du slug et des timescodes.
  * @param DOMElement $clip
  */
 function clip_path(DOMElement $clip): string
