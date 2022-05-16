@@ -66,7 +66,6 @@ define('FORMAT_TIMECODE', "[0-9]{2}.[0-9]{2}.[0-9]{2}.[0-9]{3}");
  */
 define('FORMAT_SOURCE_NAME_VIDEO_CLIP', '[a-z0-9\-]+');
 
-
 /**
  * Format valide du nom du slug dans le nom du fichier extrait
  */
@@ -156,5 +155,5 @@ define('SOURCE_SERIES', array(
  */
 function is_cli(): bool
 {
-    return php_sapi_name() === 'cli';
+    return 'cli' === php_sapi_name();
 }
