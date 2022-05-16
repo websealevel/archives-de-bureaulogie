@@ -275,7 +275,7 @@ A venir...
 
 ### Unicité d'un clip
 
-- timecodes
+- source + timecodes identiques. Si sur une meme source, deux clips ont les memes timecodes, ce sont les mêmes extraits.                
 
 ### A implementer (CLI/CGI)
 

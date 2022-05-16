@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Liste toutes les requêtes XPATH sur le fichier source ainsi que les fonctions d'inspection des fichiers sources et extraits.
+ * Liste toutes les requêtes XPATH sur le fichier source (sources et extraits déclarés)
  *
  * @package wsl 
  */
@@ -11,7 +11,7 @@ require_once __DIR__ . '/xml.php';
 require_once __DIR__ . '/validation.php';
 
 /**
- * Retourne la liste des sources déclarées
+ * Retourne la liste des sources déclarées dans le fichier source
  * @param string $file_source Optional. Le fichier source
  * @return DOMNodeList
  */
@@ -38,7 +38,7 @@ function query_declared_sources(string $file_source = SOURCE_FILE): DOMNodeList
 }
 
 /**
- * Retourne la liste des extraits déclarés dans le dossier
+ * Retourne la liste des extraits déclarés dans le fichier source
  * @param string $file_source Optional. Le fichier source
  * @return DOMNodeList
  */
@@ -85,25 +85,32 @@ function query_source_by_unique_attr(string $attr_name, string $value, string $f
 }
 
 /**
- * Retourne la liste des fichiers vidéos sources présents dans PATH_SOURCES
- * @param string $file_source Optional. Le fichier source
- * @param string $path Optional. Le PATH des fichiers sources
+ * Retourne l'élément clip demandé
+ * @param string $source La source du clip (son parent)
+ * @param string $slug Le slug du clip
+ * @param string $timecode_start
+ * @param string $timecode_end
+ * @return DOMNode|false
  */
-function query_sources(string $file_source = SOURCE_FILE, string $path = PATH_SOURCES, $extension = EXTENSION_SOURCE)
+function query_clip(string $source, string $slug, string $timecode_start, string $timecode_end, string $file_source = SOURCE_FILE): DOMNode|false
 {
-    $pattern = $path . '/*.' . $extension;
-    $arrFiles = glob($pattern);
-    return $arrFiles;
+    $xpath = load_xpath($file_source, XMLNS_SOURCE_FILE);
+
+    // $query = sprintf("//ns:extraits/ns:source[@%s='%s']", $attr_name, $value);
+
+    // $match = $xpath->query($query);
+
+    return false;
 }
 
 /**
- * Retourne la liste des fichiers extraits présents dans PATH_CLIPS
- * @param string $file_source Optional. Le fichier source
- * @param string $path Optional. Le PATH des fichiers sources
+ * Ajoute un extrait à la source s'il n'existe pas déjà (source+timecodes identiques)
+ * @param string $source La source du clip (son parent)
+ * @param string $slug Le slug du clip
+ * @param string $timecode_start
+ * @param string $timecode_end
+ * @return DOMNode Le noeud ajouté
  */
-function query_clips(string $file_source = SOURCE_FILE, string $path = PATH_CLIPS, $extension = EXTENSION_CLIP)
+function declare_clip(string $source, string $slug, string $timecode_start, string $timecode_end, string $file_source = SOURCE_FILE): DOMNode
 {
-    $pattern = $path . '/*.' . $extension;
-    $arrFiles = glob($pattern);
-    return $arrFiles;
 }
