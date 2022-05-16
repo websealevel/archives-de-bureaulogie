@@ -280,16 +280,16 @@ A venir...
 ### A implementer (CLI/CGI)
 
 - action_update_clips[ ]
-  - generate_clips[ ]
-  - clean_clips[ ]
-    - clean invalid clips[ ] (nom invalide, timecodes invalides)
+  - generate_clips[x]
+  - clean_clips[]
+    - clean invalid clips[] (nom invalide, timecodes invalides)
     - clean undeclared clips[ ]
 - action_clean_sources[ ]
   - clean invalid sources [ ]
   - clean undeclared sources []
 - generate rapports []
-  - dans un fichier de log si en mode cgi []
-  - sur la sortie standard en mode cli []
+  - dans un fichier de log si en mode cgi [x]
+  - sur la sortie standard en mode cli [x]
 - backup : dump de la base, extraits.xml et extraits.dtd suffisent [ ]
 - recover: regenerer tous les fichiers à partir du fichier source grâce a une fonction core []
 ## Sécurité
