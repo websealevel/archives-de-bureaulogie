@@ -42,7 +42,7 @@ function query_declared_sources(string $file_source = SOURCE_FILE): DOMNodeList
  * @param string $file_source Optional. Le fichier source
  * @return DOMNodeList
  */
-function query_declared_clips(string $file_source = SOURCE_FILE)
+function query_declared_clips(string $file_source = SOURCE_FILE): DOMNodeList
 {
     $xpath = load_xpath($file_source, XMLNS_SOURCE_FILE);
 

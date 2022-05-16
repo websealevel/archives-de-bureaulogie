@@ -27,7 +27,7 @@ function action_update_clips(): bool
     $results_generated_clips = generate_clips();
     // $results_clened_clips = action_clean_clips();
 
-    // report_generated_clips_e($results_generated_clips);
+    report_generated_clips_e($results_generated_clips);
     // report_cleaned_clips_e($results_clened_clips);
 
     return true;

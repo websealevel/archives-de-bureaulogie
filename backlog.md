@@ -282,7 +282,7 @@ A venir...
 - action_update_clips[ ]
   - generate_clips[ ]
   - clean_clips[ ]
-    - clean invalid clips[ ]
+    - clean invalid clips[ ] (nom invalide, timecodes invalides)
     - clean undeclared clips[ ]
 - action_clean_sources[ ]
   - clean invalid sources [ ]
