@@ -275,7 +275,7 @@ function is_download_request_valid(DownloadRequest $download_request)
 }
 
 /**
- * Retourne vrai si le nom du fichier (et non du path complet) respecte le format imposé pour pouvoir être analysé par ses diférentes parties (source, slug, timecodes), faux sinon
+ * Retourne vrai si le nom du fichier extrait (et non son path complet) respecte le format imposé pour pouvoir être analysé et découpé (pour retrouver la source, slug et les timecodes), faux sinon
  * @param string $filename Le nom de fichier du clip
  * @return bool
  */
