@@ -87,14 +87,14 @@ DB_PASSWORD="password"
 DB_CHARSET="utf8"
 
 # FFMPEG
-PATH_BIN_FFMPEG=ffmpeg/ffmpeg
-PATH_BIN_FFMPROBE=ffmpeg/ffmprobe
+PATH_BIN_FFMPEG=/var/www/html/ffmpeg/ffmpeg
+PATH_BIN_FFPROBE=/var/www/html/ffmpeg/ffprobe
 FFMPEG_TIMEOUT=3600
 FFMPEG_THREADS=12
 
 # youtube-dl
 PATH_PYTHON=/usr/bin/python3
-PATH_BIN_YOUTUBEDL=youtube-dl/youtube-dl
+PATH_BIN_YOUTUBEDL=/var/www/html/youtube-dl/youtube-dl
 ~~~
 
 La liste des options
@@ -109,7 +109,7 @@ La liste des options
 - `FFMPEG_TIMEOUT`: le timeout de FFMPEG
 - `FFMPEG_THREADS`: le nombre de threads utilisé par FFMPEG
 - `PATH_PYTHON`: le path de python (python3+)
-- `PATH_BIN_YOUTUBEDL`: le path de youtube-dl
+- `PATH_BIN_YOUTUBEDL`: le path de
 - `SITE_MAINTENANCE_MODE`: 0 pas en maintenance, 1 en maintenance
 - `SITE_DISABLE_SIGN_UP`: 0 les inscriptions sont ouvertes, 1 fermées
 
