@@ -6,8 +6,9 @@
  * @package wsl 
  */
 
-autload_core();
 require_once __DIR__ . '/const.php';
+
+autload_core();
 
 
 /**
@@ -17,6 +18,7 @@ require_once __DIR__ . '/const.php';
  */
 function is_source_file_valid(string $file_source = SOURCE_FILE): bool
 {
+    echo $file_source;
     //Check que le fichier source existe.
     if (!file_exists($file_source)) {
 

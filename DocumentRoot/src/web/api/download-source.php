@@ -124,7 +124,7 @@ function api_download_source()
         $db = connect_to_db();
 
         //Show progress
-        $yt->onProgress(static function (?string $process_target, string $percentage, string $size, string $speed, string $eta, ?string $total_time) use ($download_id, $db): void {
+        $yt->onProgress(static function (?string $process_target, ?string $percentage, ?string $size, ?string $speed, string $eta, ?string $total_time) use ($download_id, $db): void {
             sql_update_download($db, $download_id, $process_target, $percentage, $size, $speed, $total_time);
         });
 

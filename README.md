@@ -13,6 +13,8 @@ Il sert également de prétexte pour construire un outil en *vanilla php* pour s
       - [youtube-dl](#youtube-dl)
     - [Lancer le projet](#lancer-le-projet)
     - [Arrêter le projet](#arrêter-le-projet)
+    - [Core functions (CLI)](#core-functions-cli)
+      - [checker la validation du fichier source](#checker-la-validation-du-fichier-source)
     - [Réinitialiser la base de données](#réinitialiser-la-base-de-données)
     - [Problèmes connus](#problèmes-connus)
       - [FFMPEG / Symfony](#ffmpeg--symfony)
@@ -79,6 +81,13 @@ docker-compose up -d
 
 ~~~bash
 docker-compose down
+~~~
+
+### Core functions (CLI)
+
+#### checker la validation du fichier source
+~~~php
+php -r "require 'src/core/validation.php'; is_source_file_valid();"
 ~~~
 
 ### Réinitialiser la base de données 

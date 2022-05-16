@@ -8,7 +8,7 @@
 <!ATTLIST source name ID #REQUIRED>
 <!ATTLIST source url CDATA #REQUIRED>
 <!ATTLIST source label CDATA #REQUIRED >
-
+<!ATTLIST source series (le-tribunal-des-bureaux) "le-tribunal-des-bureaux" >
 <!-- element extrait -->
 <!ATTLIST extraits xmlns CDATA #REQUIRED >
 <!ATTLIST extrait name ID #REQUIRED>
