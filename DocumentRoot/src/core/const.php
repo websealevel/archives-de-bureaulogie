@@ -64,7 +64,7 @@ define('FORMAT_TIMECODE', "[0-9]{2}.[0-9]{2}.[0-9]{2}.[0-9]{3}");
 /**
  * Format valide d'un nom de fichier extrait (vidéo)
  */
-define('FORMAT_FILE_VIDEO_CLIP', "[a-z0-9\-]+[-]{2}[a-z0-9\-]+[-]{2}[0-9]{2}." . FORMAT_TIMECODE . "[-]{2}" . FORMAT_TIMECODE . "." . EXTENSION_CLIP);
+define('FORMAT_FILE_VIDEO_CLIP', "[a-z0-9\-]+[-]{2}[a-z0-9\-]+[-]{2}" . FORMAT_TIMECODE . "[-]{2}" . FORMAT_TIMECODE . "." . EXTENSION_CLIP);
 
 /**
  * Format valide d'un nom de fichier source (vidéo)
