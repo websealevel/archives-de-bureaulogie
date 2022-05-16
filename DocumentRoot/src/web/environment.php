@@ -72,6 +72,10 @@ function load_default_values(): void
     else
         $_ENV['PATH_BIN_YOUTUBEDL'] = dirname(__DIR__, 2) . '/' . $_ENV['PATH_BIN_YOUTUBEDL'];
 
+
+    var_dump($_ENV);
+    die;
+
     return;
 }
 
