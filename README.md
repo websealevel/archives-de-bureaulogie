@@ -11,7 +11,10 @@ Il sert également de prétexte pour construire un outil en *vanilla php* pour s
       - [Dépendences dev](#dépendences-dev)
       - [ffmpeg et ffprobe](#ffmpeg-et-ffprobe)
       - [youtube-dl](#youtube-dl)
-      - [Configurer les path](#configurer-les-path)
+      - [Configuration](#configuration)
+- [Database credentials](#database-credentials)
+- [FFMPEG](#ffmpeg)
+- [youtube-dl](#youtube-dl-1)
     - [Lancer le projet](#lancer-le-projet)
     - [Arrêter le projet](#arrêter-le-projet)
     - [Core functions (CLI)](#core-functions-cli)
@@ -68,9 +71,47 @@ Mettre à jour les dépendances du projet. Se placer à la racine du projet puis
 composer update
 ~~~
 
-#### Configurer les path
+#### Configuration
 
+La configuration du projet se fait dans un fichier `.env` à la racine de `DocumentRoot`
 
+Voici les options par défaut. Surchargez les à votre convenance.
+
+~~~
+# Database credentials
+DB_HOST="db"
+DB_NAME="mydb"
+DB_PORT="5432"
+DB_USER="user"
+DB_PASSWORD="password"
+DB_CHARSET="utf8"
+
+# FFMPEG
+PATH_BIN_FFMPEG=ffmpeg/ffmpeg
+PATH_BIN_FFMPROBE=ffmpeg/ffmprobe
+FFMPEG_TIMEOUT=3600
+FFMPEG_THREADS=12
+
+# youtube-dl
+PATH_PYTHON=/usr/bin/python3
+PATH_BIN_YOUTUBEDL=youtube-dl/youtube-dl
+~~~
+
+La liste des options
+
+- `DB_HOST` : le nom d'hôte de la base de données
+- `DB_NAME` : le nom de la base de données
+- `DB_USER` : le nom de l'utilisateur de la base de données
+- `DB_PASSWORD` : le mot de passe de l'utilisateur de la base de données
+- `DB_CHARSET` : l'encodage des caractères de la base de données
+- `PATH_BIN_FFMPEG`: le chemin du bin FFMPEG
+- `PATH_BIN_FFMPROBE`: le chemin du bin FFMPROBE
+- `FFMPEG_TIMEOUT`: le timeout de FFMPEG
+- `FFMPEG_THREADS`: le nombre de threads utilisé par FFMPEG
+- `PATH_PYTHON`: le path de python (python3+)
+- `PATH_BIN_YOUTUBEDL`: le path de youtube-dl
+- `SITE_MAINTENANCE_MODE`: 0 pas en maintenance, 1 en maintenance
+- `SITE_DISABLE_SIGN_UP`: 0 les inscriptions sont ouvertes, 1 fermées
 
 ### Lancer le projet
 
