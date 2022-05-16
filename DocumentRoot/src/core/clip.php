@@ -81,8 +81,6 @@ function clip_source(DOMElement $clip, string $file_source): string
         'ffmpeg.threads'   => $_ENV['FFMPEG_THREADS'],
     ));
 
-    var_dump($ffmpeg);
-
     $video = $ffmpeg->open($path_source);
 
     $from_in_seconds = timecode_to_seconds(child_element_by_name($clip, "debut")->nodeValue);

@@ -7,6 +7,7 @@
  * @package wsl 
  */
 
+require_once __DIR__ . '/../path.php';
 require_once __DIR__ . '/utils.php';
 
 autoload();
@@ -46,23 +47,30 @@ function from_env(string $key): string
  */
 function load_default_values(): void
 {
-    if (!isset($_ENV['SITE_MAINTENANCE_MODE']))
+    if (!isset($_ENV['SITE_MAINTENANCE_MODE'])) {
         $_ENV['SITE_MAINTENANCE_MODE'] = 1;
+    }
 
     if (!isset($_ENV['SITE_DISABLE_SIGN_UP']))
         $_ENV['SITE_DISABLE_SIGN_UP'] = 1;
 
     if (!isset($_ENV['PATH_BIN_FFMPEG']))
-        $_ENV['PATH_BIN_FFMPEG'] = dirname(__DIR__) . '/' . 'ffmpeg/ffmpeg';
+        $_ENV['PATH_BIN_FFMPEG'] = dirname(__DIR__, 2) . '/' . 'ffmpeg/ffmpeg';
+    else
+        $_ENV['PATH_BIN_FFMPEG'] = dirname(__DIR__, 2) . '/' . $_ENV['PATH_BIN_FFMPEG'];
 
     if (!isset($_ENV['PATH_BIN_FFPROBE']))
-        $_ENV['PATH_BIN_FFPROBE'] = dirname(__DIR__) . '/' . 'ffmpeg/ffprobe';
+        $_ENV['PATH_BIN_FFPROBE'] = dirname(__DIR__, 2) . '/' . 'ffmpeg/ffprobe';
+    else
+        $_ENV['PATH_BIN_FFPROBE'] = dirname(__DIR__, 2) . '/' . $_ENV['PATH_BIN_FFPROBE'];
 
     if (!isset($_ENV['PATH_PYTHON']))
         $_ENV['PATH_PYTHON'] = '/usr/bin/python3';
 
     if (!isset($_ENV['PATH_BIN_YOUTUBEDL']))
-        $_ENV['PATH_BIN_YOUTUBEDL'] = dirname(__DIR__) . '/' . 'youtube-dl/youtube-dl';
+        $_ENV['PATH_BIN_YOUTUBEDL'] = dirname(__DIR__, 2) . '/' . 'youtube-dl/youtube-dl';
+    else
+        $_ENV['PATH_BIN_YOUTUBEDL'] = dirname(__DIR__, 2) . '/' . $_ENV['PATH_BIN_YOUTUBEDL'];
 
     return;
 }

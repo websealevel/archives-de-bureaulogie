@@ -51,7 +51,7 @@ Installer
 
 Installer `ffmpeg` et `ffprobe` dans le dossier `DocumentRoot/ffmpeg`
 
-Télécharger les builds static `ici` (vous pouvez aussi recompiler le code source mais il faudra bien configurer le build pour inclure les codecs comme x264, voir `./configure --help` pour plus d'info).
+Télécharger les builds static `ici` (vous pouvez aussi [recompiler le code source](https://ffmpeg.org/download.html#repositories) mais il faudra bien configurer le build pour inclure les codecs comme x264, voir `./configure --help` pour plus d'info).
 
 Copier les executables `ffmpeg` et `ffprobe` dans le dossier `DocumentRoot/ffmpeg`.
 
@@ -85,14 +85,14 @@ DB_PASSWORD="password"
 DB_CHARSET="utf8"
 
 # FFMPEG
-PATH_BIN_FFMPEG=/var/www/html/ffmpeg/ffmpeg
-PATH_BIN_FFPROBE=/var/www/html/ffmpeg/ffprobe
+PATH_BIN_FFMPEG=ffmpeg/ffmpeg
+PATH_BIN_FFPROBE=ffmpeg/ffprob
 FFMPEG_TIMEOUT=3600
 FFMPEG_THREADS=12
 
 # youtube-dl
 PATH_PYTHON=/usr/bin/python3
-PATH_BIN_YOUTUBEDL=/var/www/html/youtube-dl/youtube-dl
+PATH_BIN_YOUTUBEDL=youtube-dl/youtube-dl
 ~~~
 
 La liste des options
@@ -102,12 +102,12 @@ La liste des options
 - `DB_USER` : le nom de l'utilisateur de la base de données
 - `DB_PASSWORD` : le mot de passe de l'utilisateur de la base de données
 - `DB_CHARSET` : l'encodage des caractères de la base de données
-- `PATH_BIN_FFMPEG`: le chemin du bin FFMPEG
-- `PATH_BIN_FFMPROBE`: le chemin du bin FFMPROBE
+- `PATH_BIN_FFMPEG`: le chemin **relatif à DocumentRoot** du bin FFMPEG
+- `PATH_BIN_FFMPROBE`: le chemin **relatif à DocumentRoot** du bin FFMPROBE
 - `FFMPEG_TIMEOUT`: le timeout de FFMPEG
 - `FFMPEG_THREADS`: le nombre de threads utilisé par FFMPEG
 - `PATH_PYTHON`: le path de python (python3+)
-- `PATH_BIN_YOUTUBEDL`: le path de
+- `PATH_BIN_YOUTUBEDL`: le chemin **relatif à DocumentRoot** de youtube-dl
 - `SITE_MAINTENANCE_MODE`: 0 pas en maintenance, 1 en maintenance
 - `SITE_DISABLE_SIGN_UP`: 0 les inscriptions sont ouvertes, 1 fermées
 

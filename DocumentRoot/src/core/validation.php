@@ -92,7 +92,6 @@ function is_source_valid(string $file_name, $path = PATH_SOURCES)
         'ffprobe.binaries' => from_env('PATH_BIN_FFPROBE'),
     ));;
 
-
     if (!$ffprobe->isValid($file_path)) {
         $message = sprintf("ffprobe: la vidéo source %s n'a pas un format valide.", $file_name);
         throw new Exception($message);
@@ -120,7 +119,7 @@ function is_clip_valid(string $file_name, $path = PATH_CLIPS)
 
     //Validate media file
     $ffprobe = FFMpeg\FFProbe::create(array(
-        'ffprobe.binaries' => FFPROBE_BINARIES,
+        'ffprobe.binaries' =>  from_env('PATH_BIN_FFPROBE'),
     ));;
     if (!$ffprobe->isValid($file_path)) {
         $message = sprintf("L'extrait %s n'est pas valide.", $file_name);
@@ -196,7 +195,7 @@ function are_timecodes_within_bounds(string $start, string $end, string $file_so
 
     //Validate media file
     $ffprobe = FFMpeg\FFProbe::create(array(
-        'ffprobe.binaries' => FFPROBE_BINARIES,
+        'ffprobe.binaries' => from_env('PATH_BIN_FFPROBE'),
     ));;
 
     $source_duration_in_seconds = $ffprobe
