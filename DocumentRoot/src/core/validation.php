@@ -281,5 +281,7 @@ function is_download_request_valid(DownloadRequest $download_request)
  */
 function is_clip_filename_valid_format(string $filename): bool
 {
+    var_dump($filename);
+    var_dump(preg_match('/' . FORMAT_FILE_VIDEO_CLIP . '/', $filename));
     return preg_match('/' . FORMAT_FILE_VIDEO_CLIP . '/', $filename);
 }

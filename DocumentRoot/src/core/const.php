@@ -64,7 +64,7 @@ define('FORMAT_TIMECODE', "[0-9]{2}.[0-9]{2}.[0-9]{2}.[0-9]{3}");
 /**
  * Format valide du nom de la source dans le nom du fichier extrait
  */
-define('FORMAT_SOURCE_NAME_VIDEO_CLIP', '[a-z0-9\-]');
+define('FORMAT_SOURCE_NAME_VIDEO_CLIP', '[a-z0-9\-]+');
 
 
 /**
@@ -98,7 +98,18 @@ define(
 /**
  * Format valide d'un nom de fichier source (vidéo)
  */
-define('FORMAT_FILE_VIDEO_SOURCE', "[a-z0-9\-]+[-]{1}[a-z0-9\-]+." . EXTENSION_SOURCE);
+define(
+    'FORMAT_FILE_VIDEO_SOURCE',
+    sprintf(
+        "
+    [a-z0-9\-]+
+    [-]{1}
+    [a-z0-9\-]+
+    .
+    %s",
+        EXTENSION_SOURCE
+    )
+);
 
 /**
  * Options d'encodage video et audio pour la génération d'extraits

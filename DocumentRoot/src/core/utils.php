@@ -75,7 +75,7 @@ function format_to_clip_file(DOMElement $clip): string
 
     $slug = strtolower(trim(child_element_by_name($clip, "slug")->nodeValue));
 
-    return sprintf("%s-%s--%s--%s.%s", $source_name, $slug, $start, $end, EXTENSION_CLIP);
+    return sprintf("%s--%s--%s--%s.%s", $source_name, $slug, $start, $end, EXTENSION_CLIP);
 }
 
 
