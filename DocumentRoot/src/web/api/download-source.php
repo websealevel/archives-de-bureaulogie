@@ -113,9 +113,9 @@ function api_download_source()
     //En cas de formulaire valide, on lance le téléchargement
 
     $yt = new YoutubeDl();
-    //A remettre dans des variables d'environnement.
-    $yt->setBinPath('/var/www/html/youtube-dl/youtube-dl');
-    $yt->setPythonPath('/usr/bin/python3');
+
+    $yt->setBinPath(from_env('PATH_BIN_YOUTUBEDL'));
+    $yt->setPythonPath(from_env('PATH_PYTHON'));
 
     try {
 
@@ -135,7 +135,7 @@ function api_download_source()
 
         $collection = $yt->download(
             Options::create()
-                ->downloadPath('/var/www/html/sources')
+                ->downloadPath(PATH_SOURCES)
                 ->url($download_request->url)
                 ->format(youtube_dl_download_format())
                 ->output($filename)
