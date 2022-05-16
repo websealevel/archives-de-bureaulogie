@@ -58,8 +58,9 @@ function report_generate_clips_e(array $report)
 
     $already_exists = $report['already_exists'] ?? array();
     $created = $report['created'] ?? array();
+    $invalid = $report['invalid'] ?? array();
 
-    $output[] = "== Rapport de génération de clips : DEBUT " . date('d-m-Y H:m:s') . " == \n";
+    $output[] = "==> Rapport de génération de clips : DEBUT " . date('d-m-Y H:m:s') . " == \n";
 
     $output[] = sprintf("Extrait(s) crée(s): %d\n", count($created));
 
@@ -72,9 +73,37 @@ function report_generate_clips_e(array $report)
         $output[] = sprintf("* %s\n", $clip);
     }
 
-    $output[] = "<== Rapport de génération de clips : FIN == \n\n";
+    $output[] = sprintf("Extrait(s) invalide(s): %d\n", count($invalid));
 
-    //utiliser ob, ecrire dans un buffer temporaire. Et à la fin flush output dans le bon container (fichier ou sortie standard)
+    foreach ($invalid as $clip) {
+        $output[] = sprintf("* %s\n", $clip);
+    }
+
+    $output[] = "<==\n\n";
+
+    print_report($output);
+}
+
+
+/**
+ * Ecrit le tableau $output ligne par ligne sur la sortie standard si php est en mode CLI, dans le fichier de log du core si php est en mode CGI
+ * @param array $output Les données à imprimer
+ * @return void
+ */
+function print_report(array $output): void
+{
+    if (is_cli()) {
+        foreach ($output as $line) {
+            echo $line . PHP_EOL;
+        }
+    } else {
+        $file = core_reporting_file();
+        if (!is_file($file)) {
+            file_put_contents($file, $output);
+        }
+        file_put_contents($file, $output, FILE_APPEND);
+    }
+    return;
 }
 
 /**
@@ -91,7 +120,7 @@ function report_clean_clips_e(array $report)
 
     $output[] = "<== Rapport de nettoyage de clips : FIN == \n\n";
 
-    //utiliser ob, ecrire dans un buffer temporaire. Et à la fin flush output dans le bon container (fichier ou sortie standard)
+    print_report($output);
 }
 
 /**

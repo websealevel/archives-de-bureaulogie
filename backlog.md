@@ -319,6 +319,7 @@ A venir...
 - desactiver/activer acces aux comptes Twitter []
 - desactiver facilement les comptes Twitter []
 - desactiver facilement le site []
+- donner les droits sur les dossier sources, extraits et sur les fichiers extraits.xml et extraits.xtd à l'user d'apache www-data (seul lui et le root peuvent les ouvrir et les lire) []
 
 
 ## Features additionnelles

@@ -62,7 +62,7 @@ function generate_clips(string $file_source = SOURCE_FILE): array
             }
         } catch (Exception $e) {
 
-            $results['invalid'][] = clip_path($clip);
+            $results['invalid'][] = str_replace(PATH_CLIPS . "/", "", clip_path($clip));
         }
     }
 
