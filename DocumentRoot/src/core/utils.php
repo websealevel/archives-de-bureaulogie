@@ -41,6 +41,43 @@ function delete_file(string $file_name): bool
     return false;
 }
 
+/**
+ * Retourne le path (dont le nom du fichier) de l'extrait à sauvegarder.
+ * Le nom du fichier de l'extrait est construit à partir du slug et des timescodes.
+ * @param DOMElement $clip
+ */
+function clip_path(DOMElement $clip): string
+{
+
+    $clip_file_name = format_to_clip_file($clip);
+
+    $clip_path = PATH_CLIPS . '/' . $clip_file_name;
+
+    return $clip_path;
+}
+
+/**
+ * Retourne un nom de fichier pour le clip au format FORMAT_FILE_VIDEO_CLIP
+ * @see FORMAT_FILE_VIDEO_CLIP
+ * @param DOMElement $clip
+ * @return string
+ */
+function format_to_clip_file(DOMElement $clip): string
+{
+
+    $source = declared_source_of($clip);
+
+    $source_name = basename(source_name($source), '.' . EXTENSION_SOURCE);
+
+    $start = child_element_by_name($clip, "debut")->nodeValue;
+
+    $end = child_element_by_name($clip, "fin")->nodeValue;
+
+    $slug = strtolower(trim(child_element_by_name($clip, "slug")->nodeValue));
+
+    return sprintf("%s-%s--%s--%s.%s", $source_name, $slug, $start, $end, EXTENSION_CLIP);
+}
+
 
 /**
  * Retourne une chaine de caractères formatté au format Source
@@ -64,4 +101,24 @@ function format_to_source_file(DownloadRequest $download_request)
         throw new Exception("Impossible de valider le nom de la source à télécharger: " . $file_name);
     }
     return $file_name;
+}
+
+/**
+ * Retourne le nom de la source à partir du nom du fichier extrait, faux si une erreur se produit (format non valide)
+ * @param string $filename Le nom du fichier extrait
+ * @return string|false
+ */
+function extract_source($filename): string|false
+{
+    if (!is_clip_filename_valid_format($filename))
+        return false;
+
+    $matches = array();
+
+    preg_match('/' . FORMAT_FILE_VIDEO_CLIP . '/', $filename, $matches);
+
+    var_dump($matches);
+    die;
+
+    return $matches[1];
 }

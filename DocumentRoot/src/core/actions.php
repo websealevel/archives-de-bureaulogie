@@ -25,10 +25,10 @@ function action_update_clips(): bool
         throw new Exception("Le fichier source est invalide. Veuillez le corriger d'abord.");
     }
 
-    // $results_generated_clips = generate_clips();
-    $results_cleaned_clips = action_clean_clips();
+    $results_generated_clips = generate_clips();
+    // $results_cleaned_clips = action_clean_clips();
 
-    // report_generate_clips_e($results_generated_clips);
+    report_generate_clips_e($results_generated_clips);
     // report_clean_clips_e($results_cleaned_clips);
 
     return true;
@@ -123,6 +123,7 @@ function remove_invalid_clips(string $path = PATH_CLIPS): array
 
         //Retrouver le clip s'il est déclaré
         $source = extract_source($file);
+        die;
         $slug = extract_slug($file);
         $timecode_start = extract_timecode($file, 'start');
         $timecode_end = extract_timecode($file, 'end');
@@ -139,9 +140,6 @@ function remove_invalid_clips(string $path = PATH_CLIPS): array
 
         return !$is_valid;
     });
-
-
-    var_dump($invalid);
     die;
 
 

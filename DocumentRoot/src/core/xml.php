@@ -96,27 +96,3 @@ function source_name(DOMElement $source): string
 {
     return $source->getAttribute('name');
 }
-
-/**
- * Retourne le path (dont le nom du fichier) de l'extrait à sauvegarder.
- * Le nom du fichier de l'extrait est construit à partir du slug et des timescodes.
- * @param DOMElement $clip
- */
-function clip_path(DOMElement $clip): string
-{
-    $source = declared_source_of($clip);
-
-    $source_name = basename(source_name($source), '.' . EXTENSION_SOURCE);
-
-    $start = child_element_by_name($clip, "debut")->nodeValue;
-
-    $end = child_element_by_name($clip, "fin")->nodeValue;
-
-    $slug = strtolower(trim(child_element_by_name($clip, "slug")->nodeValue));
-
-    $clip_file_name = sprintf("%s--%s--%s--%s.%s", $source_name, $slug, $start, $end, EXTENSION_CLIP);
-
-    $clip_path = PATH_CLIPS . '/' . $clip_file_name;
-
-    return $clip_path;
-}
