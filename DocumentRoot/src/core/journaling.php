@@ -99,9 +99,10 @@ function print_report(array $output): void
     } else {
         $file = core_reporting_file();
         if (!is_file($file)) {
-            file_put_contents($file, $output);
+            $path = __DIR__ . '/' . $file;
+            file_put_contents($path, $output);
         }
-        file_put_contents($file, $output, FILE_APPEND);
+        file_put_contents($path, $output, FILE_APPEND);
     }
     return;
 }
