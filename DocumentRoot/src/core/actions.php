@@ -45,15 +45,13 @@ function action_clean()
 }
 
 /**
- * Retourne la liste des extraits vidéos supprimés car ils n'étaient pas déclarés dans le fichier source, ou leur format n'était pas valide
+ * Retourne la liste des extraits vidéos supprimés car ils n'étaient pas déclarés dans le fichier source, ou ils n'étaient pas valides.
+ * @see function remove_invalid_clips()
  * @return array
  */
 function action_clean_clips(): array
 {
-    $cleaned = array();
-    $cleaned['undeclared'] = remove_undeclared_clips();
-    $cleaned['invalid'] = remove_invalid_clips();
-    return $cleaned;
+    return remove_invalid_clips();
 }
 
 /**
@@ -103,8 +101,6 @@ function list_files_in_dir(string $path, array $files_to_exclude = array()): arr
  */
 function remove_invalid_clips(string $path = PATH_CLIPS): array
 {
-    //Appliquer une regex du format attendu des extraits et supprimer les fichiers qui ne respectent pas le format
-
 
     $invalid = array();
 
@@ -117,9 +113,17 @@ function remove_invalid_clips(string $path = PATH_CLIPS): array
 
     $invalid = array_filter($files, function ($file) {
 
-        //Retrouver le nom de la source à partir du nom du fichier
+        $is_valid = false;
 
-        //surcharger are_timecodes_valid pour passer juste un nom de fichier
+        //Retrouver le clip s'il est déclaré
+
+        //S'il est pas déclaré => invalide il dégage
+
+        //On retrouve sa source, si elle est pas déclarée => orphelin il degage
+
+        //si are_timecodes_valid non => ca dégage
+
+        //le nom du fichier doit respecter le format sinon ça dégage 
 
         // $is_valid = is_clip_valid($file) && are_timecodes_valid()
 
@@ -142,17 +146,6 @@ function remove_invalid_clips(string $path = PATH_CLIPS): array
 function remove_clip(string $file_name): bool
 {
     return false;
-}
-
-
-/**
- * Supprime les extraits qui ne sont pas déclarés dans le fichier source
- * @param string $file_source Optional Default SOURCE_FILE
- * @return array La liste des noms de fichiers supprimés
- */
-function remove_undeclared_clips(string $file_source = SOURCE_FILE): array
-{
-    return array();
 }
 
 /**

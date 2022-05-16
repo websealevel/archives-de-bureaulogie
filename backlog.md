@@ -282,7 +282,7 @@ A venir...
 - action_update_clips[ ]
   - generate_clips[x]
   - clean_clips[]
-    - clean invalid clips[] (nom invalide, timecodes invalides)
+    - clean invalid clips[] (format nom invalide, timecodes invalides, extrait orphelin cad que la source n'est pas déclarée dans le fichier source)
     - clean undeclared clips[ ]
 - action_clean_sources[ ]
   - clean invalid sources [ ]
