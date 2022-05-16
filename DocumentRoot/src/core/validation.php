@@ -273,3 +273,14 @@ function is_download_request_valid(DownloadRequest $download_request)
         $download_request->series_name === $clean_series_name
         && $download_request->id === $clean_id;
 }
+
+/**
+ * Retourne vrai si le nom du fichier (et non du path complet) respecte le format imposé pour pouvoir être analysé par ses diférentes parties (source, slug, timecodes), faux sinon
+ * @param string $filename Le nom de fichier du clip
+ * @return bool
+ */
+function is_clip_filename_valid_format(string $filename): bool
+{
+    // return preg_match(FORMAT_FILE_VIDEO_CLIP, $filename);
+    return false;
+}

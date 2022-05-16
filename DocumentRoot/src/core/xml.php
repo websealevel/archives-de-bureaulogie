@@ -11,7 +11,7 @@
 require_once __DIR__ . '/const.php';
 
 /**
- * Retourne un élément enfant d'un élément par nom
+ * Retourne un élément enfant d'un élément par nom. Nous sommes garantis d'avoir l'élément enfant recherché grâce au schéma de validation dtd. Si ce n'est pas le cas c'est une erreur du développeur.
  * @param DOMEelement $el L'élément dont on cherche un enfant
  * @param string $child_name Le nom de l'élément recherché
  * @throws Exception Si $child_name est vide, si l'élément n'a pas d'enfants, si un enfant n'est pas défini
@@ -37,6 +37,8 @@ function child_element_by_name(DOMElement $el, string $child_name): DOMElement
             return $child;
         }
     } while ($child = $child->nextSibling);
+
+    throw new Exception("L'élément enfant " . $child_name . "n'existe pas !");
 }
 
 /** 

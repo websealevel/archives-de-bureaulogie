@@ -115,7 +115,17 @@ function remove_invalid_clips(string $path = PATH_CLIPS): array
 
         $is_valid = false;
 
+        //le nom du fichier doit respecter le format sinon ça dégage 
+        if (!is_clip_filename_valid_format($file))
+            return true;
+
+        //S'il respecte le format on peut analyser le nom pour récupérer : source, slug et les timecodes
+
         //Retrouver le clip s'il est déclaré
+        $source = extract_source($file);
+        $slug = extract_slug($file);
+        $timecode_start = extract_timecode($file, 'start');
+        $timecode_end = extract_timecode($file, 'end');
 
         //S'il est pas déclaré => invalide il dégage
 
@@ -123,7 +133,7 @@ function remove_invalid_clips(string $path = PATH_CLIPS): array
 
         //si are_timecodes_valid non => ca dégage
 
-        //le nom du fichier doit respecter le format sinon ça dégage 
+
 
         // $is_valid = is_clip_valid($file) && are_timecodes_valid()
 

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Liste toutes les requêtes XPATH sur le fichier source (sources et extraits déclarés)
+ * Liste toutes les requêtes (lecture et écriture) XPATH sur le fichier source (sources et extraits déclarés)
  *
  * @package wsl 
  */
