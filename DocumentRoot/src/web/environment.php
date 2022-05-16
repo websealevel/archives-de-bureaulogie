@@ -28,6 +28,18 @@ function load_env(string $env_path = SRC_PATH, string $env_file = '.env')
     load_default_values();
 }
 
+
+/**
+ * Retourne la valeur sous la clef $key dans la variable d'environnement $_ENV
+ * @param string $key La clé sous la quelle est enregistrée la valeur recherchée dans $_ENV
+ * @global array $_ENV
+ * @return string La valeur demandée, une chaine vide sinon
+ */
+function from_env(string $key): string
+{
+    return $_ENV["$key"] ?? '';
+}
+
 /**
  * Charge des variables d'environnement par défaut si elles ne sont pas trouvées dans le .env
  * @return void
@@ -52,7 +64,6 @@ function load_default_values(): void
     if (!isset($_ENV['PATH_BIN_YOUTUBEDL']))
         $_ENV['PATH_BIN_YOUTUBEDL'] = dirname(__DIR__) . '/' . 'youtube-dl/youtube-dl';
 
-    dd($_ENV);
     return;
 }
 

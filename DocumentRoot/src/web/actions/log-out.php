@@ -27,13 +27,14 @@ function log_out(Notice $notice = new Notice("Vous avez été déconnecté·e av
 
         session_start();
 
-        if (!isset($_SESSION['user_authentificated']) || !$_SESSION['user_authentificated']){
+        if (!isset($_SESSION['user_authentificated']) || !$_SESSION['user_authentificated']) {
             echo 'Silence';
             exit;
         }
     }
 
     if (headers_sent()) {
+        //Ca pose des problèmes c'est pas ouf.
         //Headers déjà envoyé, exception envoyée durant l'excution d'un template. Je redirige pas, j'indique en session que l'utilisateur n'est plus connecté.
         session_unset();
         $_SESSION['notices'] = array($notice);

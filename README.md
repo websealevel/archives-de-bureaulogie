@@ -51,11 +51,9 @@ Installer
 
 Installer `ffmpeg` et `ffprobe` dans le dossier `DocumentRoot/ffmpeg`
 
-- Télécharger le code source [ici](https://packages.debian.org/stretch/ffmpeg)
-- `./configure`
-- `make` 
+Télécharger les builds static `ici` (vous pouvez aussi recompiler le code source mais il faudra bien configurer le build pour inclure les codecs comme x264, voir `./configure --help` pour plus d'info).
 
-Copier les executables dans le dossier `DocumentRoot/ffmpeg`.
+Copier les executables `ffmpeg` et `ffprobe` dans le dossier `DocumentRoot/ffmpeg`.
 
 #### youtube-dl
 

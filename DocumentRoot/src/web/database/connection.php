@@ -34,16 +34,7 @@ function connect_to_db()
 }
 
 
-/**
- * Retourne la valeur sous la clef $key dans la variable d'environnement $_ENV
- * @param string $key La clé sous la quelle est enregistrée la valeur recherchée dans $_ENV
- * @global array $_ENV
- * @return string La valeur demandée, une chaine vide sinon
- */
-function from_env(string $key): string
-{
-    return $_ENV["$key"] ?? '';
-}
+
 
 /**
  * Charge les données définies dans le fichier d'environnement et les stocke dans $_ENV

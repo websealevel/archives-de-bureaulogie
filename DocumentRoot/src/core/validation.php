@@ -7,6 +7,7 @@
  */
 
 require_once __DIR__ . '/const.php';
+require_once __DIR__ . '/../web/environment.php';
 
 autload_core();
 
@@ -88,7 +89,7 @@ function is_source_valid(string $file_name, $path = PATH_SOURCES)
 
     //Validate media file
     $ffprobe = FFMpeg\FFProbe::create(array(
-        'ffprobe.binaries' => FFPROBE_BINARIES,
+        'ffprobe.binaries' => from_env('PATH_BIN_FFPROBE'),
     ));;
 
 
