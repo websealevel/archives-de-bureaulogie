@@ -29,7 +29,7 @@ function core_download(DownloadRequest $download_request, string $download_path 
     //Préparer le format du fichier pour qu'il soit source compatible.
     $file_name = format_to_source_file($download_request);
 
-    //Téléchargement.
+    //Téléchargement. Indiquer les binaires locaux.
     $yt = new YoutubeDl();
 
     //Show progress

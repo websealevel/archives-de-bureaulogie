@@ -74,7 +74,12 @@ function clip_source(DOMElement $clip, string $file_source): string
 {
     $path_source = PATH_SOURCES . '/' . $file_source;
 
-    $ffmpeg = FFMpeg\FFMpeg::create(array());
+    $ffmpeg = FFMpeg\FFMpeg::create(array(
+        'ffmpeg.binaries'  => ,
+        'ffprobe.binaries' => ,
+        'timeout'          => FFMPEG_TIMEOUT, // The timeout for the underlying process
+        'ffmpeg.threads'   => FFMPEG_THREADS,   // The number of threads that FFMpeg should use
+    ));
 
     $video = $ffmpeg->open($path_source);
 

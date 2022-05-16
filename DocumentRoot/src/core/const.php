@@ -110,44 +110,6 @@ define('SOURCE_SERIES', array(
 ));
 
 /**
- * FFMPEG
- * @see https://github.com/PHP-FFMpeg/PHP-FFMpeg
- */
-
-/**
- * le path des binaires FFMPEG
- */
-define('FFMPEG_BINARIES', __DIR__ . '/../../ffmpeg/ffmpeg');
-/**
- * le path des binaries FFPROBE
- */
-define('FFPROBE_BINARIES', __DIR__ . '/../../ffmpeg/ffprobe');
-/**
- * Le timeout des process FFMPEG
- */
-define('FFMPEG_TIMEOUT', 3600);
-/**
- * Le nombre de threads utilisé par FFPMEG
- */
-define('FFMPEG_THREADS', 12);
-
-/**
- * YOUTUBE-DL
- * @see https://github.com/norkunas/youtube-dl-php
- */
-
-/**
- * Le path du binaire de youtube-dl
- */
-define('YOUTUBE_DL_PATH', __DIR__ . '/../../youtube-dl/youtube-dl');
-
-/**
- * Le path du binaire de python
- */
-define('PYTHON_PATH', '/usr/bin/python3');
-
-
-/**
  * Retourne vrai si php est utilisé en mode cli, faux sinon
  * @return bool
  * @see https://www.php.net/manual/en/function.php-sapi-name.php 

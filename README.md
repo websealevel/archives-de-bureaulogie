@@ -11,6 +11,7 @@ Il sert également de prétexte pour construire un outil en *vanilla php* pour s
       - [Dépendences dev](#dépendences-dev)
       - [ffmpeg et ffprobe](#ffmpeg-et-ffprobe)
       - [youtube-dl](#youtube-dl)
+      - [Configurer les path](#configurer-les-path)
     - [Lancer le projet](#lancer-le-projet)
     - [Arrêter le projet](#arrêter-le-projet)
     - [Core functions (CLI)](#core-functions-cli)
@@ -47,11 +48,11 @@ Installer
 
 Installer `ffmpeg` et `ffprobe` dans le dossier `DocumentRoot/ffmpeg`
 
-~~~bash
-wget https://johnvansickle.com/ffmpeg/builds/ffmpeg-git-amd64-static.tar.xz -O ffmpeg.tar.xz
-tar -xzvf ffmpeg.tar.xz
-~~~
-Supprimer l'archive.
+- Télécharger le code source [ici](https://packages.debian.org/stretch/ffmpeg)
+- `./configure`
+- `make` 
+
+Copier les executables dans le dossier `DocumentRoot/ffmpeg`.
 
 #### youtube-dl
 
@@ -66,6 +67,10 @@ Mettre à jour les dépendances du projet. Se placer à la racine du projet puis
 ~~~bash
 composer update
 ~~~
+
+#### Configurer les path
+
+
 
 ### Lancer le projet
 
