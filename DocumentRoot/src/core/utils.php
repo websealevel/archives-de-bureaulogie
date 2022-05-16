@@ -80,12 +80,14 @@ function format_to_clip_file(DOMElement $clip): string
 
 
 /**
- * Retourne une chaine de caractères formatté au format Source
+ * Retourne une chaine de caractères formatté au format FORMAT_FILE_VIDEO_SOURCE (utilisé notamment pour générér les noms des fichiers vidéos sources)
  * @see string FORMAT_FILE_VIDEO_SOURCE
+ * @param DownloadRequest $download_request
+ * @return string Le nom du fichier vidéo source au format correct
+ * @throws Exception - Si le nom du fichier source n'est pas validé par le format attendu
  */
-function format_to_source_file(DownloadRequest $download_request)
+function format_to_source_file(DownloadRequest $download_request): string
 {
-
     $series_name = $download_request->series_name;
     $id = $download_request->id;
 
@@ -95,9 +97,9 @@ function format_to_source_file(DownloadRequest $download_request)
     $series_name_snake_case = strtolower($series_name);
     $id_snake_case = strtolower($id);
 
-    $file_name = sprintf("%s--%s.%s", $series_name_snake_case, $id_snake_case, EXTENSION_SOURCE);
+    $file_name = sprintf("%s-%s.%s", $series_name_snake_case, $id_snake_case, EXTENSION_SOURCE);
 
-    if (!preg_match('/' . FORMAT_FILE_VIDEO_SOURCE . '/', $file_name)) {
+    if (!preg_match('/^' . FORMAT_FILE_VIDEO_SOURCE . '$/', $file_name)) {
         throw new Exception("Impossible de valider le nom de la source à télécharger: " . $file_name);
     }
     return $file_name;
