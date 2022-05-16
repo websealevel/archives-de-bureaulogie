@@ -51,7 +51,7 @@ function report(string $file_source = SOURCE_FILE): array
  * @param array $report Le rapport obtenu par la génération des clips
  * @return void
  */
-function report_generated_clips_e(array $report)
+function report_generate_clips_e(array $report)
 {
 
     $output = array();
@@ -83,7 +83,7 @@ function report_generated_clips_e(array $report)
  * @param array $report Le rapport obtenu par le nettoyage des clips
  * @return void
  */
-function report_cleaned_clips_e(array $report)
+function report_clean_clips_e(array $report)
 {
 
     $output = array();

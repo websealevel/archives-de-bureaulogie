@@ -13,7 +13,7 @@ require_once __DIR__ . '/journaling.php';
 /**
  * Génére les clips déclarés dans le fichier source 
  * @param string file_source Optional. Le fichier source déclarant les extraits (au format XML) 
- * @return array La liste des extraits générés
+ * @return array La liste des extraits générés, déjà existants et invalides
  */
 function generate_clips(string $file_source = SOURCE_FILE): array
 {
@@ -64,9 +64,9 @@ function generate_clips(string $file_source = SOURCE_FILE): array
 
             $results['invalid'][] = clip_path($clip);
         }
-
-        return $results;
     }
+
+    return $results;
 }
 
 /**
