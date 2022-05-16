@@ -75,7 +75,7 @@ function format_to_clip_file(DOMElement $clip): string
 
     $slug = strtolower(trim(child_element_by_name($clip, "slug")->nodeValue));
 
-    return sprintf("%s--%s--%s--%s.%s", $source_name, $slug, $start, $end, EXTENSION_CLIP);
+    return sprintf("[%s][%s][%s][%s].%s", $source_name, $slug, $start, $end, EXTENSION_CLIP);
 }
 
 
@@ -110,17 +110,19 @@ function format_to_source_file(DownloadRequest $download_request): string
  * @param string $filename Le nom du fichier extrait
  * @return string|false
  */
-function extract_source($filename): string|false
+function extract_metadata($filename): array|false
 {
     if (!is_clip_filename_valid_format($filename))
         return false;
 
     $matches = array();
 
-    preg_match('/' . FORMAT_FILE_VIDEO_CLIP . '/', $filename, $matches);
+    preg_match('/^\[' . FORMAT_SOURCE_NAME_VIDEO_CLIP . '\]/', $filename, $matches);
 
-    var_dump($matches);
-    die;
+    if (!isset($matches[0]))
+        throw new Exception("L'extraction du nom de la source n'a pas fonctionné alors que le nom du fichier a le format attendu");
 
-    return $matches[1];
+    $source = $matches[0];
+
+    return str_replace(array('[', ']'), '', $source);
 }

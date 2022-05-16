@@ -95,13 +95,12 @@ function list_files_in_dir(string $path, array $files_to_exclude = array()): arr
 }
 
 /**
- * Supprime les extraits invalides dans le path des sources
+ * Supprime les extraits non déclarés ou invalides dans le dossier des extraits
  * @param string $path Le path des extraits (dossier)
- * @return array La liste des noms de fichiers invalid supprimés
+ * @return array La liste des extraits qui ont été supprimés
  */
 function remove_invalid_clips(string $path = PATH_CLIPS): array
 {
-
     $invalid = array();
 
     $files = list_files_in_dir($path, array(
@@ -123,7 +122,6 @@ function remove_invalid_clips(string $path = PATH_CLIPS): array
 
         //Retrouver le clip s'il est déclaré
         $source = extract_source($file);
-        die;
         $slug = extract_slug($file);
         $timecode_start = extract_timecode($file, 'start');
         $timecode_end = extract_timecode($file, 'end');

@@ -77,15 +77,7 @@ define('FORMAT_SLUG_VIDEO_CLIP', '[a-z0-9\-]+');
 define(
     'FORMAT_FILE_VIDEO_CLIP',
     sprintf(
-        "%s
-        [-]{2}
-        %s
-        [-]{2}
-        %s
-        [-]{2}
-        %s
-        .
-        %s",
+        "\[%s\]\[%s\]\[%s\]\[%s\].%s",
         FORMAT_SOURCE_NAME_VIDEO_CLIP,
         FORMAT_SLUG_VIDEO_CLIP,
         FORMAT_TIMECODE,
@@ -100,12 +92,7 @@ define(
 define(
     'FORMAT_FILE_VIDEO_SOURCE',
     sprintf(
-        "
-    [a-z0-9\-]+
-    [-]{1}
-    [a-z0-9\-]+
-    .
-    %s",
+        "[a-z0-9\-]+[-]{1}[a-z0-9\-]+.%s",
         EXTENSION_SOURCE
     )
 );

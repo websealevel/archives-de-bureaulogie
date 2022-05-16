@@ -153,11 +153,11 @@ function are_timecodes_valid(DOMElement $clip, string $file_source): bool
 
     //Checker que end > fin
     if (!is_start_timecode_smaller_than_end_timecode($start, $end)) {
-        throw new Exception("Les timecodes de début et de fin de l'extrait " . $slug . " ne sont pas valides. Le timecode de début doit être plus petit que le timecode de fin (doit référencer un moment antérieur dans la vidéo). Veuillez le corriger (voir la documentation).");
+        throw new Exception("Les timecodes de début et de fin de l'extrait " . $slug . " ne sont pas valides. Le timecode de début doit être plus petit que le timecode de fin (doit référencer un moment antérieur dans la vidéo). Veuillez modifier les timecodes.");
     }
 
     if (!are_timecodes_within_bounds($start, $end, $file_source)) {
-        throw new Exception("Les timecodes de début et de fin de l'extrait " . $slug . " ne sont pas valides. Le timecode de début doit être plus grand que l'instant 0 et le timecode de fin doit être plus petit que la durée de la vidéo. Veuillez les corriger.");
+        throw new Exception("Les timecodes de début et de fin de l'extrait " . $slug . " ne sont pas valides. Le timecode de début doit être plus grand que l'instant 0 et le timecode de fin doit être plus petit que la durée de la vidéo. Veuillez modifier les timecodes.");
     }
 
     return true;
@@ -281,7 +281,5 @@ function is_download_request_valid(DownloadRequest $download_request)
  */
 function is_clip_filename_valid_format(string $filename): bool
 {
-    var_dump($filename);
-    var_dump(preg_match('/' . FORMAT_FILE_VIDEO_CLIP . '/', $filename));
     return preg_match('/' . FORMAT_FILE_VIDEO_CLIP . '/', $filename);
 }
