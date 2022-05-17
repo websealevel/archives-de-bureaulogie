@@ -1,13 +1,45 @@
 <?xml version='1.0' encoding='UTF-8'  standalone = "no"?>
 <!DOCTYPE extraits SYSTEM "extraits.dtd">
 <extraits xmlns="https://archives-de-bureaulogie.fr/clips">
-    <source url="" name="" label="">
-        <extrait name="" poste="">
-            <slug></slug>
-            <description></description>
-            <debut></debut>
-            <fin></fin>
-            <auteur></auteur>
+    <source series="le-tribunal-des-bureaux" url="https://www.youtube.com/watch?v=msjthe2mWO4" name="le-tribunal-des-bureaux-2.mp4" label="Le tribunal des bureaux 2">
+        <extrait poste="0" title="Plantes et luminaires">
+            <slug>plante-et-luminaire</slug>
+            <description>Plantes et luminaires !</description>
+            <debut>00.08.27.300</debut>
+            <fin>00.08.29.325</fin>
+            <auteur>websealevel</auteur>
+            <cree_le></cree_le>
+        </extrait>
+        <extrait poste="0" title="Différents timecodes">
+            <slug>differents-timecodes</slug>
+            <description>Plantes et luminaires !</description>
+            <debut>00.07.27.300</debut>
+            <fin>00.08.27.325</fin>
+            <auteur>websealevel</auteur>
+            <cree_le></cree_le>
+        </extrait>
+        <extrait poste="0" title="Meme timecodes avec slug different">
+            <slug>meme-timecodes-slug-different</slug>
+            <description>Plantes et luminaires !</description>
+            <debut>00.08.27.300</debut>
+            <fin>00.09.29.325</fin>
+            <auteur>websealevel</auteur>
+            <cree_le></cree_le>
+        </extrait>
+        <extrait poste="0" title="Foo bar">
+            <slug>foobar</slug>
+            <description>Valide !</description>
+            <debut>00.11.27.200</debut>
+            <fin>00.12.29.325</fin>
+            <auteur>websealevel</auteur>
+            <cree_le></cree_le>
+        </extrait>
+        <extrait poste="0" title="Invalid timecodes">
+            <slug>invalid-time-codes</slug>
+            <description>Invalid timecodes!</description>
+            <debut>00.10.27.200</debut>
+            <fin>00.05.29.325</fin>
+            <auteur>websealevel</auteur>
             <cree_le></cree_le>
         </extrait>
     </source>

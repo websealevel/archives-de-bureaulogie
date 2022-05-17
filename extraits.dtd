@@ -1,10 +1,22 @@
+<!-- Root: extraits -->
+
+<!-- relations -->
 <!ELEMENT extraits (source*) >
 <!ELEMENT source (extrait*) >
+
+<!-- element source -->
+<!ATTLIST source name ID #REQUIRED>
+<!ATTLIST source url CDATA #REQUIRED>
+<!ATTLIST source label CDATA #REQUIRED >
+<!ATTLIST source series (le-tribunal-des-bureaux) "le-tribunal-des-bureaux" >
+<!-- element extrait -->
 <!ATTLIST extraits xmlns CDATA #REQUIRED >
-<!ATTLIST source name CDATA #REQUIRED >
-<!ELEMENT extrait (slug, description, debut, fin) >
-<!ATTLIST extrait utilise CDATA #REQUIRED >
+<!ATTLIST extrait poste CDATA #REQUIRED >
+<!ATTLIST extrait title CDATA #REQUIRED >
+<!ELEMENT extrait (slug, description, debut, fin, auteur, cree_le) >
 <!ELEMENT slug (#PCDATA) >
 <!ELEMENT description (#PCDATA) >
 <!ELEMENT debut (#PCDATA) >
 <!ELEMENT fin (#PCDATA) >
+<!ELEMENT auteur (#PCDATA) >
+<!ELEMENT cree_le (#PCDATA) >
