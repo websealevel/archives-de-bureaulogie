@@ -82,7 +82,11 @@ composer update
 
 #### Configuration
 
-La configuration du projet se fait dans un fichier `.env` à la racine de `DocumentRoot`
+La configuration du projet se fait dans un fichier `.env` à la racine de `DocumentRoot`. 
+
+~~~bash
+mv DocumentRoot/.env.dist DocumentRoot/.env
+~~~
 
 Voici les options par défaut. Surchargez les à votre convenance.
 
