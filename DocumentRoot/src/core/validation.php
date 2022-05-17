@@ -279,7 +279,7 @@ function is_download_request_valid(DownloadRequest $download_request)
  * @param string $filename Le nom de fichier du clip
  * @return bool
  */
-function is_clip_filename_valid_format(string $filename): bool
+function clip_has_valid_filename_format(string $filename): bool
 {
     return preg_match('/' . FORMAT_FILE_VIDEO_CLIP . '/', $filename);
 }

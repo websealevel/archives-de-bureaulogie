@@ -108,7 +108,7 @@ function format_to_source_file(DownloadRequest $download_request): string
 }
 
 /**
- * Retourne le nom de la source à partir du nom du fichier extrait, faux si une erreur se produit (format non valide)
+ * Retourne le nom de la source à partir du nom du fichier extrait, faux si une erreur se produit (format non valide). Forme à améliorer avec de la regex plutôt et des match par groupe.
  * @param string $filename Le nom du fichier extrait
  * @return ClipMetaData|false
  * @throws Exception - S'il n'y a pas autant de métadonnées que dans le model ClipMetadata
@@ -116,10 +116,10 @@ function format_to_source_file(DownloadRequest $download_request): string
  */
 function extract_metadata($filename): ClipMetaData|false
 {
-    if (!is_clip_filename_valid_format($filename))
+    if (!clip_has_valid_filename_format($filename))
         return false;
 
-    $basename = basename($filename, '.' . EXTENSION_CLIP);
+    $basename = basename($filename, sprintf('.%s', EXTENSION_CLIP));
 
     $metadata = array();
 
