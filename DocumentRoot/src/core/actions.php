@@ -27,10 +27,10 @@ function action_update_clips(): bool
         throw new Exception("Le fichier source est invalide. Veuillez le corriger d'abord.");
     }
 
-    // $results_generated_clips = generate_clips();
-    $results_cleaned_clips = action_clean_clips();
+    $results_generated_clips = generate_clips();
+    // $results_cleaned_clips = action_clean_clips();
 
-    // report_generate_clips_e($results_generated_clips);
+    report_generate_clips_e($results_generated_clips);
     // report_clean_clips_e($results_cleaned_clips);
 
     return true;
