@@ -22,11 +22,12 @@ Il sert également de prétexte pour construire un outil en *vanilla php* pour s
     - [Core functions (CLI)](#core-functions-cli)
       - [checker la validation du fichier source (`extraits.xml`)](#checker-la-validation-du-fichier-source-extraitsxml)
     - [mettre à jour les fichiers clips à partir du fichier source (cree clips déclarés manquants, supprime les fichiers clips invalides et non déclarés)](#mettre-à-jour-les-fichiers-clips-à-partir-du-fichier-source-cree-clips-déclarés-manquants-supprime-les-fichiers-clips-invalides-et-non-déclarés)
-    - [Réinitialiser la base de données](#réinitialiser-la-base-de-données)
-    - [Problèmes connus](#problèmes-connus)
-      - [FFMPEG / Symfony](#ffmpeg--symfony)
+    - [FAQ - Problèmes connus, rencontrés](#faq---problèmes-connus-rencontrés)
+      - [Comment réinitialiser la base de données ?](#comment-réinitialiser-la-base-de-données-)
+      - [Erreur avec la dépendence symfony/process de FFMPEG](#erreur-avec-la-dépendence-symfonyprocess-de-ffmpeg)
         - [Expected Behavior](#expected-behavior)
         - [Steps to Reproduce](#steps-to-reproduce)
+        - [Solution](#solution)
       - [Youtube-dl renvoie l'erreur 'ERROR: unable to download video data: HTTP Error 403: Forbidden while using youtube_dl'](#youtube-dl-renvoie-lerreur-error-unable-to-download-video-data-http-error-403-forbidden-while-using-youtube_dl)
   - [Ressources](#ressources)
 
@@ -155,7 +156,11 @@ php -r "require 'src/core/validation.php'; is_source_file_valid();"
 php -r "require 'src/core/actions.php' ; action_update_clips();"
 ~~~
 
-### Réinitialiser la base de données 
+
+
+### FAQ - Problèmes connus, rencontrés
+
+#### Comment réinitialiser la base de données ?
 
 Le script `docker_postgres_init.sql` est executé par le conteneur de de postgresql au premier lancement. 
 
@@ -167,9 +172,7 @@ sudo rm -R postgres-data
 docker-compose up -d
 ~~~
 
-### Problèmes connus
-
-#### FFMPEG / Symfony
+#### Erreur avec la dépendence symfony/process de FFMPEG
 
 Issue ouverte [ici](https://github.com/symfony/symfony/issues/46348).
 
@@ -189,7 +192,9 @@ $_ENV['foo'] = array('bar');
 
 Then when the method `start()` in `Process.php` (ligne 293) iterates over the local variable `$env` in the for loop an error occurs.
 
-Ne pas enregistrer de valeur `array` dans `$_ENV` pour corriger le pb en attendant.
+##### Solution
+
+Ne pas enregistrer de valeur `array` dans `$_ENV` pour corriger le pb (pratique non recommandée).
 
 #### Youtube-dl renvoie l'erreur 'ERROR: unable to download video data: HTTP Error 403: Forbidden while using youtube_dl'
 
