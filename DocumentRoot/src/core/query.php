@@ -97,9 +97,7 @@ function query_clip(string $source, string $slug, string $timecode_start, string
 {
     $xpath = load_xpath($file_source, XMLNS_SOURCE_FILE);
 
-    var_dump($xpath);
     die;
-
     // $query = sprintf("//ns:extraits/ns:source[@%s='%s']", $attr_name, $value);
 
     $match = $xpath->query($query);

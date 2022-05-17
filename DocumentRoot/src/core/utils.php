@@ -139,9 +139,9 @@ function extract_metadata($filename): ClipMetaData|false
     }
 
     return new ClipMetaData(
-        source: $metadata[0],
-        slug: $metadata[1],
-        timecode_start: $metadata[2],
-        timecode_end: $metadata[3],
+        source: $values[0],
+        slug: $values[1],
+        timecode_start: $values[2],
+        timecode_end: $values[3],
     );
 }

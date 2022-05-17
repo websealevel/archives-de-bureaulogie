@@ -125,6 +125,9 @@ function remove_invalid_clips(string $path = PATH_CLIPS): array
         //Retrouver le clip s'il est déclaré
         $metadata = extract_metadata($file);
 
+        var_dump($metadata);
+        die;
+
         $clip = query_clip($metadata->source, $metadata->slug, $metadata->timecode_start, $metadata->timecode_end, 'model');
 
         //S'il est pas déclaré => invalide il dégage
