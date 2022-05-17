@@ -10,6 +10,8 @@ require_once __DIR__ . '/utils.php';
 require_once __DIR__ . '/clip.php';
 require_once __DIR__ . '/validation.php';
 require_once __DIR__ . '/download.php';
+require_once __DIR__ . '/../models/ClipMetaData.php';
+
 // Corriger cette dependence (core ne doit pas dépendre de web)
 require_once __DIR__ . '/../web/environment.php';
 
@@ -123,6 +125,7 @@ function remove_invalid_clips(string $path = PATH_CLIPS): array
         //Retrouver le clip s'il est déclaré
         $metadata = extract_metadata($file);
 
+        $clip = query_clip($metadata->source, $metadata->slug, $metadata->timecode_start, $metadata->timecode_end, 'model');
 
         //S'il est pas déclaré => invalide il dégage
 

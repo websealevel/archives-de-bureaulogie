@@ -90,9 +90,9 @@ function query_source_by_unique_attr(string $attr_name, string $value, string $f
  * @param string $slug Le slug du clip
  * @param string $timecode_start
  * @param string $timecode_end
- * @return DOMNode|false
+ * @return DOMNode|Clip|false
  */
-function query_clip(string $source, string $slug, string $timecode_start, string $timecode_end, string $file_source = SOURCE_FILE): DOMNode|false
+function query_clip(string $source, string $slug, string $timecode_start, string $timecode_end, string $file_source = SOURCE_FILE, string $return = 'node'): DOMNode|Clip|false
 {
     $xpath = load_xpath($file_source, XMLNS_SOURCE_FILE);
 

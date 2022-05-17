@@ -7,6 +7,8 @@
  */
 
 require_once __DIR__ . '/const.php';
+require_once __DIR__ . '/../models/Clip.php';
+require_once __DIR__ . '/../models/ClipMetaData.php';
 
 /**
  * Retourne le timecode valide en secondes (milisecondes incluses en décimal)
@@ -108,9 +110,11 @@ function format_to_source_file(DownloadRequest $download_request): string
 /**
  * Retourne le nom de la source à partir du nom du fichier extrait, faux si une erreur se produit (format non valide)
  * @param string $filename Le nom du fichier extrait
- * @return string|false
+ * @return ClipMetaData|false
+ * @throws Exception - S'il n'y a pas autant de métadonnées que dans le model ClipMetadata
+ * @see src/models/ClipMetadata.php
  */
-function extract_metadata($filename): array|false
+function extract_metadata($filename): ClipMetaData|false
 {
     if (!is_clip_filename_valid_format($filename))
         return false;
@@ -130,5 +134,14 @@ function extract_metadata($filename): array|false
         return str_replace(array('[', ']'), '', $data);
     }, $metadata);
 
-    return $values;
+    if (4 !== count($values)) {
+        throw new Exception("Toutes les métadonnées de l'extrait n'ont pas pu être retrouvées.");
+    }
+
+    return new ClipMetaData(
+        source: $metadata[0],
+        slug: $metadata[1],
+        timecode_start: $metadata[2],
+        timecode_end: $metadata[3],
+    );
 }

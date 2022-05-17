@@ -12,6 +12,7 @@
 <!-- element extrait -->
 <!ATTLIST extraits xmlns CDATA #REQUIRED >
 <!ATTLIST extrait poste CDATA #REQUIRED >
+<!ATTLIST extrait title CDATA #REQUIRED >
 <!ELEMENT extrait (slug, description, debut, fin, auteur, cree_le) >
 <!ELEMENT slug (#PCDATA) >
 <!ELEMENT description (#PCDATA) >
