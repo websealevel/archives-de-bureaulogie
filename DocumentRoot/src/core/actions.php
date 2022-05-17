@@ -141,6 +141,7 @@ function remove_invalid_clips(string $path = PATH_CLIPS): array
     });
 
     var_dump($invalid);
+    die;
 
     return $invalid;
 }

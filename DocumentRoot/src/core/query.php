@@ -90,17 +90,27 @@ function query_source_by_unique_attr(string $attr_name, string $value, string $f
  * @param string $slug Le slug du clip
  * @param string $timecode_start
  * @param string $timecode_end
+ * @param string $return Ce qu'on veut retourner (un DOMNode ou un Clip)
  * @return DOMNode|Clip|false
  */
-function query_clip(string $source, string $slug, string $timecode_start, string $timecode_end, string $file_source = SOURCE_FILE, string $return = 'node'): DOMNode|Clip|false
+function query_clip(string $source, string $slug, string $timecode_start, string $timecode_end, string $return = 'node', string $file_source = SOURCE_FILE): DOMNode|Clip|false
 {
     $xpath = load_xpath($file_source, XMLNS_SOURCE_FILE);
 
+    var_dump($xpath);
+    die;
+
     // $query = sprintf("//ns:extraits/ns:source[@%s='%s']", $attr_name, $value);
 
-    // $match = $xpath->query($query);
+    $match = $xpath->query($query);
 
-    return false;
+    //Checks
+
+    return match ($return) {
+        'node' => $match,
+        'model' => new Clip(),
+        default => false
+    };
 }
 
 /**
