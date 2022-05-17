@@ -6,6 +6,8 @@ Il sert également de prétexte pour construire un outil en *vanilla php* pour s
 
 - [Archives de bureaulogie](#archives-de-bureaulogie)
   - [Projet : vue d'ensemble et suivi](#projet--vue-densemble-et-suivi)
+  - [Au délà de la bureaulogie, ce qu'est vraiment le codesource du projet](#au-délà-de-la-bureaulogie-ce-quest-vraiment-le-codesource-du-projet)
+  - [Forker le projet pour faire son propre outil d'édition/publication d'extraits vidéos](#forker-le-projet-pour-faire-son-propre-outil-déditionpublication-dextraits-vidéos)
   - [*Getting started*](#getting-started)
     - [Prérequis](#prérequis)
       - [Dépendences dev](#dépendences-dev)
@@ -35,6 +37,14 @@ Envie de contribuer au dépôt en proposant un extrait ? [Lisez d'abord ceci](CO
 ## Projet : vue d'ensemble et suivi
 
 Voir les specifications techniques et le backlog du projet [ici](backlog.md).
+
+## Au délà de la bureaulogie, ce qu'est vraiment le codesource du projet
+
+A venir...
+
+## Forker le projet pour faire son propre outil d'édition/publication d'extraits vidéos
+
+A venir...
 
 ## *Getting started*
 
