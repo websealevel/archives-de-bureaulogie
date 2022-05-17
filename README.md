@@ -18,7 +18,8 @@ Il sert également de prétexte pour construire un outil en *vanilla php* pour s
     - [Lancer le projet](#lancer-le-projet)
     - [Arrêter le projet](#arrêter-le-projet)
     - [Core functions (CLI)](#core-functions-cli)
-      - [checker la validation du fichier source](#checker-la-validation-du-fichier-source)
+      - [checker la validation du fichier source (`extraits.xml`)](#checker-la-validation-du-fichier-source-extraitsxml)
+    - [mettre à jour les fichiers clips à partir du fichier source (cree clips déclarés manquants, supprime les fichiers clips invalides et non déclarés)](#mettre-à-jour-les-fichiers-clips-à-partir-du-fichier-source-cree-clips-déclarés-manquants-supprime-les-fichiers-clips-invalides-et-non-déclarés)
     - [Réinitialiser la base de données](#réinitialiser-la-base-de-données)
     - [Problèmes connus](#problèmes-connus)
       - [FFMPEG / Symfony](#ffmpeg--symfony)
@@ -129,9 +130,15 @@ docker-compose down
 
 ### Core functions (CLI)
 
-#### checker la validation du fichier source
+#### checker la validation du fichier source (`extraits.xml`)
 ~~~php
 php -r "require 'src/core/validation.php'; is_source_file_valid();"
+~~~
+
+### mettre à jour les fichiers clips à partir du fichier source (cree clips déclarés manquants, supprime les fichiers clips invalides et non déclarés)
+
+~~~php
+php -r "require 'src/core/actions.php' ; action_update_clips();"
 ~~~
 
 ### Réinitialiser la base de données 
