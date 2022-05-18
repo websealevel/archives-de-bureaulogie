@@ -18,9 +18,14 @@ autoload();
  */
 function load_env(string $env_path = SRC_PATH, string $env_file = '.env')
 {
+
+    if (isset($_ENV['env_archives_de_bureaulogie.fr']))
+        return;
+
     $dotenv = Dotenv\Dotenv::createImmutable($env_path, $env_file);
     try {
         $dotenv->load();
+        $_ENV['env_archives_de_bureaulogie.fr'] = true;
     } catch (Dotenv\Exception\InvalidPathException $e) {
         error_log($e);
         throw new Exception("Impossible de charger les variables d'environnement");
