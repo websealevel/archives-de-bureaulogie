@@ -35,6 +35,6 @@ require_once __DIR__ . '/../../utils.php';
 
 <?php if (is_signup_activated()) : ?>
     <div class="sign-up">
-        <p>Pas encore de compte ? <a href="sign-up">S'inscrire</a></p>
+        <p>Pas encore de compte ? <a href="sign-up">s'inscrire</a></p>
     </div>
 <?php endif; ?>

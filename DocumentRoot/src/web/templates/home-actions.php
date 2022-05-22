@@ -35,5 +35,5 @@ require_once __DIR__ . '/../current-user.php';
     <?php endif;  ?>
 </ul>
 
-<a href="/log-out">Se déconnecter</a>
+<a href="/log-out">se déconnecter</a>
 <?php present_footer(); ?>
