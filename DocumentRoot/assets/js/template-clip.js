@@ -1,6 +1,4 @@
 jQuery(function ($) {
-    // Your jQuery code here, using the $
-
 
     /**
      * Init le src de la video source avec la valeur dans le select
@@ -12,6 +10,7 @@ jQuery(function ($) {
     /**
      * Init la liste des extraits associés à la source
      */
+
 
     /**
      * Evenement quand le select de source change
@@ -29,7 +28,6 @@ jQuery(function ($) {
         //Faire une requete et ajouter a la liste
     })
 
-
     /**
      * Soumission du formulaire de création d'extrait
      */
@@ -42,11 +40,11 @@ jQuery(function ($) {
 
         $.post('/api/v1/clip-source', data).done(function (data) {
 
-            console.log(data)
             //Si le formulaire est rejeté on récupere les erreurs et on les affiche. A faire.
+            console.log(data)
 
         }).fail(function () {
-            console.log('fail')
+            console.log('Une erreur est survenue')
         })
     });
 });
