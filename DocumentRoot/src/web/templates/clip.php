@@ -30,14 +30,14 @@ if (!current_user_can('submit_clip'))
 
 <div name="videos">
     <div class="video-source">
-        <video width="320" height="240" controls>
+        <video width="320" height="240" controls id="video-source">
             <source src="" type="video/mp4">
             Votre navigateur ne supporte pas le tag video HTML5 :(
         </video>
     </div>
 
     <div class="video-clip">
-        <video width="320" height="240" controls>
+        <video width="320" height="240" controls id="video-clip">
             <source src="" type="video/mp4">
             Votre navigateur ne supporte pas le tag video HTML5 :(
         </video>
@@ -59,4 +59,4 @@ if (!current_user_can('submit_clip'))
 
 
 
-<?php present_footer(array('template-clip')); ?>
+<?php present_footer(array('jquery-min', 'template-clip')); ?>

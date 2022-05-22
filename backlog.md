@@ -235,12 +235,13 @@ Suivi des tâches à réaliser.
 
 ### Ecran - Creer un extrait/Lister les extraits
 
-- lister tous les extraits asociés à la source sélectionnée []. 
+- lister tous les extraits asociés à la source sélectionnée []
+- en jquery manipuler la preview clip pour charger juste la vidéo sur la durée du clip []
 - afficher deux elements vidéos : source et extrait []
 - preview de la vidéo source + preview de l'extrait
 - mettre en pause la vidéo source si play video extrait et vice versa
 - indique le timecode a tout moment
-- timecode entrée et de sortie éditables
+- timecode entrée et de sortie éditables [x]
 - manipuler les timecodes via une interface graphique sur le player (luxe)
 - plusieurs cut dans un seul fichier via des marqueurs avec label des extraits, en un clic exporter tous les marqueurs (luxe)
 
@@ -292,6 +293,8 @@ A venir...
   - sur la sortie standard en mode cli [x]
 - backup : dump de la base, extraits.xml et extraits.dtd suffisent [ ]
 - recover: regenerer tous les fichiers à partir du fichier source grâce a une fonction core []
+
+
 ## Sécurité
 
 - role_has_cap a implementer !!! []

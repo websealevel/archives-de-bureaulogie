@@ -96,7 +96,7 @@ function esc_sources_to_html_select_e(string $name_attr = 'sources'): void
 
     echo sprintf('<label for="%s">%s</label>', $name_attr, $label);
 
-    echo sprintf('<select name="%s">', $name_attr);
+    echo sprintf('<select name="%s" id="%s">', $name_attr, $name_attr);
     foreach ($options as $option) {
         echo $option;
     }
