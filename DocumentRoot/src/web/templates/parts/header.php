@@ -52,7 +52,7 @@ autoload();
                     </a>
                 </p>
                 <p class="site-description">
-                    Collections publiques d'archives vidéos et de ressources bibliographiques de bureaulogie
+                    contribuez aux collections publiques d'archives vidéos et de ressources bibliographiques de bureaulogie
                 </p>
             </div>
             <nav id="site-navigation">
