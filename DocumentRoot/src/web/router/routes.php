@@ -18,13 +18,16 @@ require_once __DIR__ . '/../session.php';
 require_once __DIR__ . '/../actions/log-in.php';
 require_once __DIR__ . '/../actions/log-out.php';
 require_once __DIR__ . '/../actions/sign-up.php';
-require_once __DIR__ . '/../actions/download-source.php';
 require_once __DIR__ . '/../actions/confirm-authentification.php';
+
+
+require_once __DIR__ . '/../actions/download-source.php';
 
 /**
  * API
  */
 require_once __DIR__ . '/../api/download-source.php';
+require_once __DIR__ . '/../api/clip-source.php';
 
 /**
  * Retourne toutes les routes de l'application sous la clef de leurs méthodes respectives
@@ -80,6 +83,9 @@ function routes(): array
             },
             '/api/v1/download-source' => function () {
                 api_download_source();
+            },
+            '/api/v1/clip-source' => function () {
+                api_clip_source();
             },
         )
     );

@@ -47,7 +47,7 @@ if (!current_user_can('submit_clip'))
 </div>
 
 <main class="form-clip">
-    <form action="">
+    <form action="clip-source" id="form-clip-source" name="form-clip-source">
         <label for=" title">Titre</label>
         <input type="text" name="title">
         <label for="title">Description</label>

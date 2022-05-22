@@ -23,4 +23,25 @@ jQuery(function ($) {
             $("#video-source").show()
         }
     })
+
+
+    /**
+     * Soumission du formulaire de création d'extrait
+     */
+    //Demander un nouveau téléchargement
+    $("#form-clip-source").submit(function (event) {
+
+        event.preventDefault();
+
+        const data = $('form#form-clip-source').serialize() + '&PHPSESSID=' + PHPSESSID
+
+        $.post('/api/v1/clip-source', data).done(function (data) {
+
+            console.log(data)
+            //Si le formulaire est rejeté on récupere les erreurs et on les affiche. A faire.
+
+        }).fail(function () {
+            console.log('fail')
+        })
+    });
 });
