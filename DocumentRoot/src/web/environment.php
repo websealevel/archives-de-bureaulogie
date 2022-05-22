@@ -102,7 +102,7 @@ function in_maintenance_mode(): bool
 function is_signup_activated(): bool
 {
     if (isset($_ENV['SITE_DISABLE_SIGN_UP']))
-        return boolval($_ENV['SITE_DISABLE_SIGN_UP']);
+        return !boolval($_ENV['SITE_DISABLE_SIGN_UP']);
 
     return true;
 }

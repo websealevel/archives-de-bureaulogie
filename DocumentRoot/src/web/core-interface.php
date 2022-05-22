@@ -137,8 +137,9 @@ function esc_html_list_sources_e(string $name_attr = 'sources', string $label = 
 function map_source_to_html_item(DOMElement $source, string $html_item): string
 {
     $name = $source->getAttribute('name');
+    $path = path_source($name);
     $label = $source->getAttribute('label');
-    return sprintf('<%s name="%s">%s</%s>', $html_item, $name, $label, $html_item);
+    return sprintf('<%s name="%s">%s</%s>', $html_item, $path, $label, $html_item);
 }
 
 /**

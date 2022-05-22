@@ -29,6 +29,7 @@ if (!current_user_can('submit_clip'))
 </form>
 
 <div name="videos">
+    <h3>Source</h3>
     <div class="video-source">
         <video width="320" height="240" controls id="video-source">
             <source src="" type="video/mp4">
@@ -37,14 +38,17 @@ if (!current_user_can('submit_clip'))
     </div>
 
     <div class="video-clip">
+        <h3>Extrait</h3>
         <video width="320" height="240" controls id="video-clip">
             <source src="" type="video/mp4">
             Votre navigateur ne supporte pas le tag video HTML5 :(
         </video>
     </div>
+</div>
 
+<main class="form-clip">
     <form action="">
-        <label for="title">Titre</label>
+        <label for=" title">Titre</label>
         <input type="text" name="title">
         <label for="title">Description</label>
         <textarea name="description" rows="4" cols="50">
@@ -55,8 +59,12 @@ if (!current_user_can('submit_clip'))
         <input type="time" name="timecode_start" value="00:00:00.000">
         <input type="submit" value="Extraire">
     </form>
-</div>
+</main>
 
+<h2>Extraits existants</h2>
+<side>
+
+</side>
 
 
 <?php present_footer(array('jquery-min', 'template-clip')); ?>

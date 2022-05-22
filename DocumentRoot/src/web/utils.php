@@ -16,7 +16,7 @@ require_once __DIR__ . '/../core/const.php';
  */
 function site_title(): string
 {
-    return 'Archives de Bureaulogie';
+    return 'archives de bureaulogie';
 }
 
 /**
@@ -225,4 +225,3 @@ function validate_posted_form(array $inputs): array
 
     return $input_validations;
 }
-

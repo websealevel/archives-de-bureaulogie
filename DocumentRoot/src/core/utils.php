@@ -145,3 +145,12 @@ function extract_metadata($filename): ClipMetaData|false
         timecode_end: $values[3],
     );
 }
+
+/**
+ * Retourne le path de la vidéo source
+ * @param string $name Le nom du fichier video source
+ */
+function path_source(string $name): string
+{
+    return PATH_SOURCES . '/' . $name;
+}
