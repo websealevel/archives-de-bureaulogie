@@ -28,11 +28,33 @@ if (!current_user_can('submit_clip'))
     <?php esc_sources_to_html_select_e(); ?>
 </form>
 
-<div name="preview_source">
-    <video width="320" height="240" controls>
-        <source src="<?php esc_video_source_url_e('') ?>" type="video/mp4">
-        Votre navigateur ne supporte pas le tag video HTML5 :(
-    </video>
+<div name="videos">
+    <div class="video-source">
+        <video width="320" height="240" controls>
+            <source src="" type="video/mp4">
+            Votre navigateur ne supporte pas le tag video HTML5 :(
+        </video>
+    </div>
+
+    <div class="video-clip">
+        <video width="320" height="240" controls>
+            <source src="" type="video/mp4">
+            Votre navigateur ne supporte pas le tag video HTML5 :(
+        </video>
+    </div>
+
+    <form action="">
+        <label for="title">Titre</label>
+        <input type="text" name="title">
+        <label for="title">Description</label>
+        <textarea name="description" rows="4" cols="50">
+</textarea>
+        <label for="timecode_start">Début (HH:mm:ss:lll)</label>
+        <input type="time" name="timecode_start" value="00:00:00.000">
+        <label for="timecode_fin">Fin (HH:mm:ss:lll)</label>
+        <input type="time" name="timecode_start" value="00:00:00.000">
+        <input type="submit" value="Extraire">
+    </form>
 </div>
 
 
