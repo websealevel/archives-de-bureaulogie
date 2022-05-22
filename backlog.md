@@ -235,6 +235,8 @@ Suivi des tâches à réaliser.
 
 ### Ecran - Creer un extrait/Lister les extraits
 
+- charger la video source en fonction du select[]
+- charger la video extrait en fonction des timecodes[]
 - lister tous les extraits asociés à la source sélectionnée []
 - en jquery manipuler la preview clip pour charger juste la vidéo sur la durée du clip []
 - afficher deux elements vidéos : source et extrait []
