@@ -61,6 +61,11 @@ ul.footer-links {
 	list-style-type: none;
 }
 
+#colophon, #date{
+	text-align: center;
+	font-size: 12px;
+}
+
 .annonce{
 	font-size: 36px;
 }

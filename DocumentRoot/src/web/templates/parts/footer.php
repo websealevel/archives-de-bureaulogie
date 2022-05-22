@@ -10,6 +10,9 @@ require_once __DIR__ . '../../../../default-handlers.php';
             <a href="contact">contact</a>
         </li>
         <li>
+            <a href="faq">FAQ</a>
+        </li>
+        <li>
             <a href="https://github.com/websealevel/archives-de-bureaulogie">code source</a>
         </li>
         <li>
@@ -23,7 +26,10 @@ require_once __DIR__ . '../../../../default-handlers.php';
         </li>
     </ul>
 </footer>
-<?php echo date('Y'); ?>
+
+<div id="date">
+    <?php echo date('Y'); ?>
+</div>
 
 </div> <!-- #content !-->
 </div> <!-- #page !-->
