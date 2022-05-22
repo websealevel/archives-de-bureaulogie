@@ -16,3 +16,20 @@ html {
 	width: 1px;
 	word-wrap: normal !important;
 }
+
+
+#page{
+	color: #212529;
+	font-family: 'Lato', sans-serif;
+}
+#page {
+	width: 640px;
+	margin:auto;
+	padding: 20px 20px;
+	border: 5px double #212529;
+}
+
+form{
+	display: flex;
+	flex-direction: column;
+}

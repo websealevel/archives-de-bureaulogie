@@ -31,7 +31,7 @@ if (!current_user_can('submit_clip'))
 <div name="videos">
     <h3>Source</h3>
     <div class="video-source">
-        <video width="320" height="240" controls id="video-source">
+        <video width="600" controls id="video-source">
             <source src="" type="video/mp4">
             Votre navigateur ne supporte pas le tag video HTML5 :(
         </video>
@@ -39,7 +39,7 @@ if (!current_user_can('submit_clip'))
 
     <div class="video-clip">
         <h3>Extrait</h3>
-        <video width="320" height="240" controls id="video-clip">
+        <video width="600" height="240" controls id="video-clip">
             <source src="" type="video/mp4">
             Votre navigateur ne supporte pas le tag video HTML5 :(
         </video>
@@ -50,13 +50,13 @@ if (!current_user_can('submit_clip'))
     <form action="clip-source" id="form-clip-source" name="form-clip-source">
         <label for=" title">Titre</label>
         <input type="text" name="title">
+        <label for="timecode_start">Début </label>
+        <input type="time" name="timecode_start" value="00:00:00.000">
+        <label for="timecode_fin">Fin </label>
+        <input type="time" name="timecode_start" value="00:00:00.000">
         <label for="title">Description</label>
-        <textarea name="description" rows="4" cols="50">
-</textarea>
-        <label for="timecode_start">Début (HH:mm:ss:lll)</label>
-        <input type="time" name="timecode_start" value="00:00:00.000">
-        <label for="timecode_fin">Fin (HH:mm:ss:lll)</label>
-        <input type="time" name="timecode_start" value="00:00:00.000">
+        <textarea name="description" rows="4" cols="50"></textarea>
+
         <input type="submit" value="Extraire">
     </form>
 </main>
