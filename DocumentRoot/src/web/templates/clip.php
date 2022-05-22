@@ -61,9 +61,10 @@ if (!current_user_can('submit_clip'))
     </form>
 </main>
 
-<h2>Extraits existants</h2>
 <side>
-
+    <h2>Extraits existants</h2>
+    <!-- Rempli en jquery -->
+    <div class="list-clips></div>
 </side>
 
 

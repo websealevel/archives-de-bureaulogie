@@ -10,18 +10,23 @@ jQuery(function ($) {
     $("#video-source").attr('src', source_url)
 
     /**
-     * Mettre à jour le src de la video source quand le select source change
+     * Init la liste des extraits associés à la source
+     */
+
+    /**
+     * Evenement quand le select de source change
      */
     $("#sources").on('select', function () {
+
         const path = this.find('option:selected').attr("name");
+
         console.log(path)
-        if (path == '') {
-            $("#video-source").hide()
-        }
-        else {
-            $("#video-source").attr('src', path)
-            $("#video-source").show()
-        }
+
+        // Mettre a jour la source du tag video source.
+        $("#video-source").attr('src', path)
+
+        // Mettre à jour la liste des extraits présents
+        //Faire une requete et ajouter a la liste
     })
 
 
