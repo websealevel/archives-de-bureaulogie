@@ -29,6 +29,16 @@ html {
 	border: 5px double #212529;
 }
 
+#masthead{
+	display: flex;
+	justify-content: center;
+}
+
+#content{
+	display: grid;
+	justify-content: center;
+}
+
 form{
 	display: flex;
 	flex-direction: column;
