@@ -2,6 +2,7 @@
 
 html {
 	scroll-behavior: smooth;
+	font-size: 24px;
 }
 
 .screen-reader-text {
@@ -29,6 +30,11 @@ html {
 	border: 5px double #212529;
 }
 
+.site-footer{
+	display: flex;
+	justify-content: center;
+}
+
 #masthead{
 	display: flex;
 	justify-content: center;
@@ -42,4 +48,15 @@ html {
 form{
 	display: flex;
 	flex-direction: column;
+}
+
+.footer-links{
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-evenly;
+	gap: 30px;
+}
+
+ul.footer-links {
+	list-style-type: none;
 }
