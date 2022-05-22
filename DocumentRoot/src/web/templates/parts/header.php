@@ -43,6 +43,7 @@ autoload();
         <header id="masthead" class="site-header">
 
             <div class="site-branding">
+
                 <p class="site-title">
                     <a href="<?php esc_html_e(home_rel_url()); ?>">
                         <h1>
@@ -51,6 +52,7 @@ autoload();
                     </a>
                 </p>
                 <p class="site-description">
+                    Collections publiques d'archives vidéos et de ressources bibliographiques de bureaulogie
                 </p>
             </div>
             <nav id="site-navigation">

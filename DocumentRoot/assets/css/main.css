@@ -1,8 +1,9 @@
-@import "w3c.css";
+/* @import "w3c.css"; */
 
 html {
 	scroll-behavior: smooth;
-	font-size: 24px;
+	font-size: 16px;
+	font-family: 'Lato', Courier
 }
 
 .screen-reader-text {
@@ -21,7 +22,6 @@ html {
 
 #page{
 	color: #212529;
-	font-family: 'Lato', sans-serif;
 }
 #page {
 	width: 640px;
@@ -35,9 +35,9 @@ html {
 	justify-content: center;
 }
 
-#masthead{
-	display: flex;
-	justify-content: center;
+
+.site-description{
+	font-size: 12px;
 }
 
 #content{
@@ -59,4 +59,8 @@ form{
 
 ul.footer-links {
 	list-style-type: none;
+}
+
+.annonce{
+	font-size: 36px;
 }

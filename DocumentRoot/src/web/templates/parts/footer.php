@@ -7,19 +7,19 @@ require_once __DIR__ . '../../../../default-handlers.php';
 <footer id="colophon" class="site-footer" role="content-info">
     <ul class="footer-links">
         <li>
-            <a href="">contact</a>
+            <a href="contact">contact</a>
         </li>
         <li>
-            <a href="">code source</a>
+            <a href="https://github.com/websealevel/archives-de-bureaulogie">code source</a>
         </li>
         <li>
-            <a href="">contribuer</a>
+            <a href="https://github.com/websealevel/archives-de-bureaulogie/issues">signaler un problème</a>
         </li>
         <li>
             <a href="">nous soutenir</a>
         </li>
         <li>
-            <a href="">twitter</a>
+            <a href="https://twitter.com/archivesdb_fr">Twitter</a>
         </li>
     </ul>
 </footer>

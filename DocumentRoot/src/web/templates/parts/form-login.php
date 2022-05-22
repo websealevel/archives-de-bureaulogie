@@ -12,7 +12,7 @@
 require_once __DIR__ . '/../../utils.php';
 ?>
 
-<div class="annonce">Les archives de bureaulogie sont en cours de construction... L'ouverture est prévue courant juin 2022</div>
+<div class="annonce">Les archives de bureaulogie ouvrent bientôt leurs portes ! Ouverture prévue en Juin 2022</div>
 
 <h2>se connecter</h2>
 <div class="form-login">
