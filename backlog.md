@@ -34,6 +34,7 @@
     - [A implementer (CLI/CGI)](#a-implementer-clicgi)
   - [Sécurité](#sécurité)
   - [Features additionnelles](#features-additionnelles)
+  - [Comptes twitter](#comptes-twitter)
 
 ## Specs
 
@@ -332,3 +333,10 @@ A venir...
 - contributeurs peuvent upvote/downvote les extraits
 - creer un système de tags communautaire (modéré). Les contributeurs peuvent suggérer des tags s'ils n'existent pas déjà. Les modos peuvent les valider ou non. Ils rentrent alors dans les tags permis
 - contributeurs peuvent chercher par épisode, par titre, par tag. Tester les idées de l'architecture de l'information
+
+
+## Comptes twitter
+
+- Compte maitre archives_db
+  - compte out of context ackboo (extraits videos)
+  - compte ref biblios

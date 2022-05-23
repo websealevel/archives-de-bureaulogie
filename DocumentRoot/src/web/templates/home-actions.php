@@ -18,7 +18,7 @@ require_once __DIR__ . '/../current-user.php';
 
 <ul>
     <?php if (current_user_can('submit_clip')) :  ?>
-        <li><a href="clip">Créer un nouvel extrait</a></li>
+        <li><a href="clip">Soumettre un nouvel extrait</a></li>
     <?php endif;  ?>
 
     <?php if (current_user_can('add_source')) :  ?>
@@ -31,7 +31,7 @@ require_once __DIR__ . '/../current-user.php';
 <h3>Archives bibliographiques</h3>
 <ul>
     <?php if (current_user_can('submit_reference')) :  ?>
-        <li><a href="submit_ref">Ajouter une référence bibliographique</a></li>
+        <li><a href="submit_ref">Soumettre une référence bibliographique</a></li>
     <?php endif;  ?>
 </ul>
 
