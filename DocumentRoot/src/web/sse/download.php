@@ -21,7 +21,6 @@ session_start();
 //Check les droits
 if (!current_user_can('add_source')) {
     ob_start();
-    $foo = 'Refusé';
     echo 'data: {"content": false, "message" : "Vous n\' avez pas le droit d\'accéder à cette ressource."}';
     echo "\n\n";
     ob_end_flush();
