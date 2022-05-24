@@ -1,11 +1,3 @@
-/* @import "w3c.css"; */
-
-body {
-	scroll-behavior: smooth;
-	font-size: 16px;
-	font-family: 'arial'
-}
-
 .screen-reader-text {
 	border: 0;
 	clip: rect(1px, 1px, 1px, 1px);
@@ -17,55 +9,4 @@ body {
 	position: absolute;
 	width: 1px;
 	word-wrap: normal !important;
-}
-
-
-#page{
-	color: #212529;
-}
-#page {
-	width: 640px;
-	margin:auto;
-	padding: 20px 20px;
-	border: 5px double #212529;
-}
-
-.site-footer{
-	display: flex;
-	justify-content: center;
-}
-
-
-.site-description{
-	font-size: 12px;
-}
-
-#content{
-	display: grid;
-	justify-content: center;
-}
-
-form{
-	display: flex;
-	flex-direction: column;
-}
-
-.footer-links{
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: space-evenly;
-	gap: 30px;
-}
-
-ul.footer-links {
-	list-style-type: none;
-}
-
-#colophon, #date{
-	text-align: center;
-	font-size: 12px;
-}
-
-.annonce{
-	font-size: 36px;
 }

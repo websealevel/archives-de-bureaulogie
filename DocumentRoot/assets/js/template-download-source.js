@@ -54,6 +54,8 @@ jQuery(function ($) {
             return
         }
 
+        console.log(downloads)
+
         downloads.forEach(download => {
 
             //Si l'élément existe déjà
