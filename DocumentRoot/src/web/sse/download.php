@@ -33,7 +33,7 @@ $active_downloads = active_downloads();
 $nb_downloads = count($active_downloads);
 
 ob_start();
-echo 'data: { content: true,';
+echo '{ "content": true,';
 echo '"active_downloads" : [';
 foreach ($active_downloads as $index => $download) {
     $progression_formated = str_replace('%', '', $download['progression']);
@@ -45,17 +45,18 @@ echo ']';
 echo '}';
 echo "\n\n";
 
-$content = ob_get_contents();
-write_log($content);
+$data = ob_get_contents();
+ob_end_flush();
 
 //Valider le JSON
-if (!is_valid_json($content)) {
-    ob_end_clean();
+if (!is_valid_json($data)) {
     ob_start();
     echo 'data: {"content": false, "message" : "Les données renvoyées par le serveur ont un format JSON invalide."}';
     echo "\n\n";
     ob_end_flush();
     exit;
 }
-ob_end_flush();
+
+//Le json est valide, on l'envoie au client
+echo 'data : ' . $data;
 exit;

@@ -227,13 +227,16 @@ function validate_posted_form(array $inputs): array
 }
 
 /**
- * Indique si une chaine de caractère est un json valide
+ * Retourne vrai si la chaine de caractères est un json valide, faux sinon
  * @param string $string La chaine de caractère json a valider
- * @param bool $return_data  Optional. Default false. Indique si l'on veut récupérer le json parsé ou non
- * @
+ * @return bool
  */
-function is_valid_json($string, $return_data = false)
+function is_valid_json(string $json): bool
 {
-    $data = json_decode($string);
-    return (json_last_error() == JSON_ERROR_NONE) ? ($return_data ? $data : TRUE) : FALSE;
+    try {
+        $test = json_decode($json, null, flags: JSON_THROW_ON_ERROR);
+        return true;
+    } catch (Exception $e) {
+        return false;
+    }
 }
