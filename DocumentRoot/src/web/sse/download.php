@@ -22,7 +22,7 @@ session_start();
 if (!current_user_can('add_source')) {
     ob_start();
     $foo = 'Refusé';
-    echo 'data: {"access": "Refusé"}';
+    echo 'data: {"content": false}';
     echo "\n\n";
     ob_end_flush();
     exit;
@@ -30,17 +30,34 @@ if (!current_user_can('add_source')) {
 
 //Trouver les téléchargements en cours
 $active_downloads = active_downloads();
+$nb_downloads = count($active_downloads);
 
 ob_start();
-echo 'data: {';
+echo 'data: { content: true';
 echo '"active_downloads" : [';
-foreach ($active_downloads as $download) {
+foreach ($active_downloads as $index => $download) {
     $progression_formated = str_replace('%', '', $download['progression']);
     echo sprintf('{"id": "%s", "url": "%s", "filename": "%s", "progression": "%s", "speed": "%s" }', $download['id'], $download['url'], $download['filename'], $progression_formated, $download['speed']);
+    if ($index !== $nb_downloads)
+        echo ',';
 }
 echo ']';
 echo '}';
-
 echo "\n\n";
+
+$content = ob_get_contents();
+write_log($content);
+write_log(is_valid_json($content));
+
+//Valider le JSON
+if (!is_valid_json($content)) {
+    write_log('LE SSE renvoie un JSON Invalide');
+    ob_end_clean();
+    echo 'data: {"content": true}';
+    echo "\n\n";
+    ob_end_flush();
+    exit;
+}
+
 ob_end_flush();
 exit;

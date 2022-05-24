@@ -37,10 +37,22 @@ jQuery(function ($) {
     //Server Send Event protocol : écouter les téléchargements en cours
     const evtSource = new EventSource("sse-download-source");
     evtSource.onmessage = function (event) {
-        console.log(event)
+
 
         const json_data = JSON.parse(event.data)
+
+        console.log(json_data)
+        
+        const content = json_data['content']
+
+        if (false === content)
+            return
+
         const downloads = json_data['active_downloads']
+
+        if (typeof downloads === 'undefined'){
+            return
+        }
 
         downloads.forEach(download => {
 
@@ -64,7 +76,7 @@ jQuery(function ($) {
                     '<div class="dl-filename">' + download.filename + '</div>' +
                     '<div class="dl-progress">' +
                     '<div class="w3-light-grey">' +
-                    '<div id="bar" class= "w3-container w3-green w3-center" style="width:' + download.progression + '%">' + 
+                    '<div id="bar" class= "w3-container w3-green w3-center" style="width:' + download.progression + '%">' +
                     download.progression + '%' +
                     '</div>' +
                     '</div>' +

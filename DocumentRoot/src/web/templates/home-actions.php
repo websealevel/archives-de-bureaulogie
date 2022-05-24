@@ -13,6 +13,8 @@ require_once __DIR__ . '/../current-user.php';
 <?php present_header() ?>
 
 <h2>Bonjour <?php esc_html_e(current_user_pseudo()); ?> !</h2>
+<a href="/log-out">se déconnecter</a>
+
 
 <h3>Archives vidéos</h3>
 
@@ -35,5 +37,4 @@ require_once __DIR__ . '/../current-user.php';
     <?php endif;  ?>
 </ul>
 
-<a href="/log-out">se déconnecter</a>
 <?php present_footer(); ?>

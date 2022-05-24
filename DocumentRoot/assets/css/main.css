@@ -1,9 +1,9 @@
 /* @import "w3c.css"; */
 
-html {
+body {
 	scroll-behavior: smooth;
 	font-size: 16px;
-	font-family: 'sans-serif'
+	font-family: 'arial'
 }
 
 .screen-reader-text {

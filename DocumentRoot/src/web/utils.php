@@ -225,3 +225,15 @@ function validate_posted_form(array $inputs): array
 
     return $input_validations;
 }
+
+/**
+ * Indique si une chaine de caractère est un json valide
+ * @param string $string La chaine de caractère json a valider
+ * @param bool $return_data  Optional. Default false. Indique si l'on veut récupérer le json parsé ou non
+ * @
+ */
+function is_valid_json($string, $return_data = false)
+{
+    $data = json_decode($string);
+    return (json_last_error() == JSON_ERROR_NONE) ? ($return_data ? $data : TRUE) : FALSE;
+}
