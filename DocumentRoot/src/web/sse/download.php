@@ -22,7 +22,7 @@ session_start();
 if (!current_user_can('add_source')) {
     ob_start();
     $foo = 'Refusé';
-    echo 'data: {"content": false, "message" : "unauthorized access"}';
+    echo 'data: {"content": false, "message" : "Vous n\' avez pas le droit d\'accéder à cette ressource."}';
     echo "\n\n";
     ob_end_flush();
     exit;
@@ -51,7 +51,7 @@ $content = ob_get_contents();
 if (!is_valid_json($content)) {
     ob_end_clean();
     ob_start();
-    echo 'data: {"content": false, "message" : "invalid JSON send by the server"}';
+    echo 'data: {"content": false, "message" : "Les données renvoyées par le serveur ont un format JSON invalide."}';
     echo "\n\n";
     ob_end_flush();
     exit;

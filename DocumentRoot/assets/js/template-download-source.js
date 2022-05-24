@@ -44,6 +44,7 @@ jQuery(function ($) {
 
         //Il y a une erreur: soit le json est invalide ou pas d'autorization
         if (false === content){
+            console.error("Une erreur est survenue: " + json_data['message']); 
             return
         }
 
