@@ -46,18 +46,16 @@ echo '}';
 echo "\n\n";
 
 $content = ob_get_contents();
-write_log($content);
-write_log(is_valid_json($content));
 
 //Valider le JSON
 if (!is_valid_json($content)) {
     write_log('LE SSE renvoie un JSON Invalide');
     ob_end_clean();
-    echo 'data: {"content": true}';
+    ob_start();
+    echo 'data: {"content": false}';
     echo "\n\n";
     ob_end_flush();
     exit;
 }
-
 ob_end_flush();
 exit;
