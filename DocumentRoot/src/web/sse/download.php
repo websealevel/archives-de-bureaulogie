@@ -33,12 +33,12 @@ $active_downloads = active_downloads();
 $nb_downloads = count($active_downloads);
 
 ob_start();
-echo 'data: { content: true';
+echo 'data: { content: true,';
 echo '"active_downloads" : [';
 foreach ($active_downloads as $index => $download) {
     $progression_formated = str_replace('%', '', $download['progression']);
     echo sprintf('{"id": "%s", "url": "%s", "filename": "%s", "progression": "%s", "speed": "%s" }', $download['id'], $download['url'], $download['filename'], $progression_formated, $download['speed']);
-    if ($index !== $nb_downloads)
+    if ($index + 1 !== $nb_downloads)
         echo ',';
 }
 echo ']';
@@ -46,6 +46,7 @@ echo '}';
 echo "\n\n";
 
 $content = ob_get_contents();
+write_log($content);
 
 //Valider le JSON
 if (!is_valid_json($content)) {
