@@ -22,7 +22,7 @@ session_start();
 if (!current_user_can('add_source')) {
     ob_start();
     $foo = 'Refusé';
-    echo 'data: {"content": false}';
+    echo 'data: {"content": false, "message" : "unauthorized access"}';
     echo "\n\n";
     ob_end_flush();
     exit;
@@ -49,10 +49,9 @@ $content = ob_get_contents();
 
 //Valider le JSON
 if (!is_valid_json($content)) {
-    write_log('LE SSE renvoie un JSON Invalide');
     ob_end_clean();
     ob_start();
-    echo 'data: {"content": false}';
+    echo 'data: {"content": false, "message" : "invalid JSON send by the server"}';
     echo "\n\n";
     ob_end_flush();
     exit;

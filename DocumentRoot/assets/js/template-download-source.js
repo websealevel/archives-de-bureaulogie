@@ -26,8 +26,8 @@ jQuery(function ($) {
 
         $.post('/api/v1/download-source', data).done(function (data) {
 
-            console.log(data)
             //Si le formulaire est rejeté on récupere les erreurs et on les affiche. A faire.
+            console.log(data)
 
         }).fail(function () {
             console.log('fail')
@@ -38,15 +38,14 @@ jQuery(function ($) {
     const evtSource = new EventSource("sse-download-source");
     evtSource.onmessage = function (event) {
 
-
         const json_data = JSON.parse(event.data)
-
-        console.log(json_data)
         
         const content = json_data['content']
 
-        if (false === content)
+        //Il y a une erreur: soit le json est invalide ou pas d'autorization
+        if (false === content){
             return
+        }
 
         const downloads = json_data['active_downloads']
 
