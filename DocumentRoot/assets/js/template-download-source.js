@@ -23,7 +23,7 @@ jQuery(function ($) {
 
         event.preventDefault();
 
-        const data = $('form#form-download').serialize() + '&PHPSESSID=' + PHPSESSID
+        const data = $('form#form-download').serialize()
 
         $.post('/api/v1/download-source', data).done(function (data) {
 
