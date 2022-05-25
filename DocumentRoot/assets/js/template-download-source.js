@@ -32,6 +32,7 @@ jQuery(function ($) {
 
         }).fail(function () {
             console.log('fail')
+            return
         })
     });
 
@@ -41,7 +42,6 @@ jQuery(function ($) {
     evtSource.onmessage = function (event) {
 
         const json_data = JSON.parse(event.data)
-
 
         const content = json_data['content']
 
@@ -57,29 +57,25 @@ jQuery(function ($) {
             return
         }
 
-
         downloads.forEach(download => {
 
             //Si l'élément existe déjà
             if ($("ul#active_downloads li#" + download.id).length) {
 
                 //Mettre à jour la progression et la vitesse
-                $progress = $("ul#active_downloads progress#" + download.id + "")
-                $div_speed = $("ul#active_downloads li#" + download.id + " div.dl-speed")
+                $progress = $("progress#id-" + download.id)
+                $speed = $("ul#active_downloads li#" + download.id + " span.dl-speed")
 
-                // $progress.html(download.progression + '%')
-                // $div_speed.html(download.speed)
+                $progress.attr('value',download.progression)
+                $speed.html(download.speed)
 
             } else {
                 //Sinon, creer un nouvel item
                 $("ul#active_downloads").append(
                     '<li id="' + download.id + '">' +
-                    '<div class="dl-speed>' +
-                    download.speed +
-                    '</div>' +
-                    '<progress id=' + download.id + ' value="32" max="100">' +
-                    download.progression + '%' +
-                    '</progress>' +
+                    '<progress id=id-' + download.id + ' value="'+ download.progression+'" max="100">' +
+                    download.progression + '%</progress>' +
+                    '<span class="dl-speed">' + download.speed +'</span>' +
                     '</li>'
                 )
             }

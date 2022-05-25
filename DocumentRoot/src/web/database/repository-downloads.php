@@ -31,6 +31,8 @@ function create_download(DownloadRequest $download_request, string $account_id):
     $filename = format_to_source_file($download_request);
     $format = youtube_dl_download_format();
 
+    //Checker si déjà un téléchargement en cours (status downloading) sur la meme url. Si c'est le cas renvoyer une Notice.
+
     try {
         $id = sql_insert_download($download_request, $filename, $format, $account_id);
     } catch (PDOException $e) {

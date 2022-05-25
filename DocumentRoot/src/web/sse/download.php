@@ -31,6 +31,16 @@ if (!current_user_can('add_source')) {
 $active_downloads = active_downloads();
 $nb_downloads = count($active_downloads);
 
+//Si aucun, early exit
+if (0 === $nb_downloads) {
+    ob_start();
+    echo 'data: {"content": true, "message" : "Aucun téléchargement en cours"}';
+    echo "\n\n";
+    ob_end_flush();
+    exit;
+}
+
+//Construction de la réponse JSON
 $json = '{ "content": true, "message" : "Informations sur les téléchargements en cours",';
 $json .= '"active_downloads" : [';
 foreach ($active_downloads as $index => $download) {
@@ -53,9 +63,10 @@ if (!is_valid_json($json)) {
     exit;
 }
 
-//Le json est valide, on l'envoie au client
+//JSON valide, on l'envoie au client
 ob_start();
 echo 'data: ' . $json;
 echo "\n\n";
 ob_end_flush();
 flush();
+exit;

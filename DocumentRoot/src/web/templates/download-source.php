@@ -45,13 +45,13 @@ if (!current_user_can('add_source'))
         <div>
             <?php esc_html_form_error_msg_e('name', 'form_errors'); ?>
             <label for="name">Choisissez un identifiant court pour cette vidéo (un mot ou un nombre en minuscule) <span class="required">*</span></label>
-            <input type="text" name="name" placeholder="ex: 3" pattern="[a-z0-9#]{1,25}" title="un nom en caractères alphanumériques, sans espaces (utiliser des hyphens à la place), d'1 caractère min" value="" required>
+            <input type="text" name="name" placeholder="ex: 3" pattern="[a-z0-9#]{1,25}" title="un nom en caractères alphanumériques, sans espaces (utiliser des hyphens à la place), d'1 caractère min" value="1" required>
 
         </div>
         <div>
             <?php esc_html_form_error_msg_e('source_url', 'form_errors'); ?>
             <label for="source_url">Copiez/collez l'url de la vidéo youtube <span class="required">*</span></label>
-            <input type="url" name="source_url" title="l'url complète de la vidéo youtube" value="" required>
+            <input type="url" name="source_url" title="l'url complète de la vidéo youtube" value="https://www.youtube.com/watch?v=YglE-FnSd3g" required>
         </div>
         <div name="preview_source">
             <p>Preview</p>
