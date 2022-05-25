@@ -24,10 +24,9 @@ autoload();
     <meta name="author" content="websealevel">
     <meta name="author" content="kerprimaparte">
     <link rel="icon" type="image/x-icon" href="../assets/img/favicon.ico">
-    <!-- <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> -->
     <link rel="canonical" href="">
     <!-- Minified version -->
-    <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
+    <link rel="stylesheet" href="https://fonts.xz.style/serve/inter.css">
     <link rel="stylesheet" href="../assets/css/main.css">
     <code></code>
 </head>
