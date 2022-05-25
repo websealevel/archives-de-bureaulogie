@@ -82,7 +82,7 @@ function routes(): array
                 sign_up_user();
             },
             '/api/v1/download-source' => function () {
-                require_once __DIR__ . '/../api/download-source.php';
+                api_download_source();
             },
             '/api/v1/clip-source' => function () {
                 api_clip_source();

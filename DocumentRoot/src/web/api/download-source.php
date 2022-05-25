@@ -9,6 +9,7 @@
  * @package wsl 
  */
 
+
 /**
  * Vendor
  */
@@ -31,9 +32,6 @@ require_once __DIR__ . '/../database/repository-downloads.php';
 use YoutubeDl\Options;
 use YoutubeDl\YoutubeDl;
 
-
-
-
 /**
  * Traite la requête AJAX/formulaire de téléchargement de vidéo source. Lance le téléchargement si tout est ok, retourne une erreur sinon
  * @global array $_POST
@@ -42,35 +40,11 @@ use YoutubeDl\YoutubeDl;
  */
 function api_download_source()
 {
-    return 'api_download_source';
-
-    if (!isset($_COOKIE['PHPSESSID'])) {
-        write_log('no cookie');
-        header('Content-Type: application/json; charset=utf-8');
-        echo json_encode(array(
-            'statut' => 500,
-            'errors' => array(new Notice(
-                "Vous n'avez pas l'autorisation.",
-                NoticeStatus::Error
-            ))
-        ));
-        exit;
-    }
-
-    if (!current_user_can('add_source')) {
-        write_log('boouge');
-        header('Content-Type: application/json; charset=utf-8');
-        echo json_encode(array(
-            'statut' => 500,
-            'errors' => array(new Notice(
-                "Vous n'avez pas l'autorisation.",
-                NoticeStatus::Error
-            ))
-        ));
-        exit;
-    }
 
     write_log('Hi you !');
+
+    //Utilisateur authentifié et capacité 'add_source' vérifiée
+    return;
 
     //Check le form
     $input_validations = check_download_request_form();

@@ -25,6 +25,7 @@ jQuery(function ($) {
 
         const data = $('form#form-download').serialize()
 
+
         $.post('/api/v1/download-source', data).done(function (data) {
 
             //Si le formulaire est rejeté on récupere les erreurs et on les affiche. A faire.
@@ -36,6 +37,8 @@ jQuery(function ($) {
         })
     });
 
+
+
     //Server Send Event protocol (SSE).
 
     //Ouverture d'une connexion avec le serveur
@@ -46,7 +49,6 @@ jQuery(function ($) {
     evtSource.onerror = function (err) {
         console.error("EventSource failed:", err);
     };
-
 
     //Met a jour le dom des téléchargements en cours
     evtSource.onmessage = function (event) {

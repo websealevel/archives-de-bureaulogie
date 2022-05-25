@@ -80,7 +80,6 @@ function find_callback(string $path, string $method): callable
             present_template('404');
         };
 
-
     return  $routes[$method][$path];
 }
 

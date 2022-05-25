@@ -8,11 +8,24 @@
  * @package wsl 
  */
 
+/**
+ * Vendor
+ */
+require_once __DIR__ . '/../../../vendor/autoload.php';
+
 require_once __DIR__ . '/../utils.php';
 require_once __DIR__ . '/../current-user.php';
 require_once __DIR__ . '/../core-interface.php';
+require_once __DIR__ . '/../token.php';
 
 session_start();
+
+/**
+ * Cree un token pour consommer l'API
+ */
+$account = from_session('account_id');
+register_api_token($account);
+
 if (!current_user_can('add_source'))
     redirect('/', 'notices', array(
         new Notice('Vous n\'avez pas l\'autorisation d\'ajouter une source', NoticeStatus::Error)
