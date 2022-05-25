@@ -42,9 +42,6 @@ jQuery(function ($) {
 
         const json_data = JSON.parse(event.data)
 
-        console.log(json_data)
-
-        return
 
         const content = json_data['content']
 
@@ -60,7 +57,6 @@ jQuery(function ($) {
             return
         }
 
-        console.log(downloads)
 
         downloads.forEach(download => {
 
@@ -71,20 +67,17 @@ jQuery(function ($) {
                 $progress = $("ul#active_downloads progress#" + download.id + "")
                 $div_speed = $("ul#active_downloads li#" + download.id + " div.dl-speed")
 
-                $progress.html(download.progression + '%')
-                $div_speed.html(download.speed)
-
-                console.log(download.progression)
-                console.log(download.speed)
+                // $progress.html(download.progression + '%')
+                // $div_speed.html(download.speed)
 
             } else {
                 //Sinon, creer un nouvel item
                 $("ul#active_downloads").append(
-                    '<li" id="' + download.id + '">' +
+                    '<li id="' + download.id + '">' +
                     '<div class="dl-speed>' +
                     download.speed +
                     '</div>' +
-                    '<progress id=' + download.id + 'value=32 max=100>' +
+                    '<progress id=' + download.id + ' value="32" max="100">' +
                     download.progression + '%' +
                     '</progress>' +
                     '</li>'

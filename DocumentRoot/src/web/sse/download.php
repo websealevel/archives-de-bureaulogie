@@ -53,10 +53,8 @@ if (!is_valid_json($json)) {
     exit;
 }
 
-
-ob_start();
 //Le json est valide, on l'envoie au client
-// echo 'data: ' . $data;
+ob_start();
 echo 'data: ' . $json;
 echo "\n\n";
 ob_end_flush();
