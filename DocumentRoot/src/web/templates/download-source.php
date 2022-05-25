@@ -20,16 +20,16 @@ require_once __DIR__ . '/../database/repository-token.php';
 
 session_start();
 
+if (!current_user_can('add_source'))
+    redirect('/', 'notices', array(
+        new Notice('Vous n\'avez pas l\'autorisation d\'ajouter une source', NoticeStatus::Error)
+    ));
+
 /**
  * Cree un token pour consommer l'API
  */
 $account = from_session('account_id');
 register_api_token($account);
-
-if (!current_user_can('add_source'))
-    redirect('/', 'notices', array(
-        new Notice('Vous n\'avez pas l\'autorisation d\'ajouter une source', NoticeStatus::Error)
-    ));
 ?>
 
 <?php present_header(); ?>

@@ -13,10 +13,10 @@ require_once __DIR__ . '/../../../vendor/autoload.php';
 require_once __DIR__ . '/queries-token.php';
 
 /**
- * Enregistre et retourne un token API pour le compte avec une durée de vie limitée. 
+ * Enregistre un token API pour le compte avec une durée de vie limitée. 
  * @param string $account L'id du compte pour qui est le token
  * @param int $expiration_in_s La durée de validité du token en secondes
- * @return string|bool L'id du token inséré
+ * @return string|bool L'id du token inséré, faux en cas d'erreur
  */
 function register_api_token(string $account, int $expiration_in_s = 7200): string|bool
 {
@@ -33,4 +33,11 @@ function register_api_token(string $account, int $expiration_in_s = 7200): strin
     }
 
     return $token_id;
+}
+
+/**
+ * Retourne vrai si le token est valide, faux sinon
+ */
+function is_valid_token(string $value)
+{
 }
