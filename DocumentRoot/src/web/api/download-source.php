@@ -31,7 +31,6 @@ require_once __DIR__ . '/../database/repository-downloads.php';
 use YoutubeDl\Options;
 use YoutubeDl\YoutubeDl;
 
-
 /**
  * Traite la requête AJAX/formulaire de téléchargement de vidéo source. Lance le téléchargement si tout est ok, retourne une erreur sinon
  * @global array $_POST
@@ -40,8 +39,15 @@ use YoutubeDl\YoutubeDl;
  */
 function api_download_source()
 {
+
+    write_log('Hi !');
+
     session_id($_POST['PHPSESSID']);
-    session_start();
+
+    $start = session_start();
+
+    write_log($start);
+
 
     if (!current_user_can('add_source')) {
         header('Content-Type: application/json; charset=utf-8');
@@ -54,6 +60,8 @@ function api_download_source()
         ));
         exit;
     }
+
+    write_log('Hi you !');
 
     //Check le form
     $input_validations = check_download_request_form();
@@ -82,9 +90,6 @@ function api_download_source()
 
     $authentificated_user_id = from_session('account_id');
 
-    //Check dans le fichier source si déjà une source avec cette url
-    //Si c'est le cas on renvoie une erreur au front.
-
     $filename = format_to_source_file($download_request);
 
     $response = create_download($download_request, $authentificated_user_id);
@@ -104,14 +109,12 @@ function api_download_source()
     //En cas de formulaire valide, on lance le téléchargement
 
     $yt = new YoutubeDl();
-
     $yt->setBinPath(from_env('PATH_BIN_YOUTUBEDL'));
     $yt->setPythonPath(from_env('PATH_PYTHON'));
 
     try {
 
         //Lancer le téléchargement et écrire la progression en base.
-
         $db = connect_to_db();
 
         //Show progress
@@ -123,6 +126,10 @@ function api_download_source()
         download_change_state($download_id, DownloadState::Downloading);
 
         error_log_download($authentificated_user_id, $download_request->url, $filename, DownloadState::Downloading);
+
+
+        write_log('start download');
+        return;
 
         $collection = $yt->download(
             Options::create()
@@ -152,11 +159,7 @@ function api_download_source()
                 //Mettre à jour le fichier source.
 
                 //Générer le label à partir de series+slug
-
                 $file = $video->getFile();
-
-                //Retourner une réponse au front ?
-
                 exit;
             }
         }
@@ -169,4 +172,6 @@ function api_download_source()
         ));
         exit;
     }
+
+    return;
 }

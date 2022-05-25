@@ -36,14 +36,26 @@ jQuery(function ($) {
         })
     });
 
-    //Server Send Event protocol : écouter les téléchargements en cours
+    //Server Send Event protocol (SSE).
+
+    //Ouverture d'une connexion avec le serveur
+    var evtSource = new EventSource("sse-download-source");
+
+
+    //Erreur
+    evtSource.onerror = function (err) {
+        console.error("EventSource failed:", err);
+    };
+
+
     //Met a jour le dom des téléchargements en cours
-    const evtSource = new EventSource("sse-download-source");
     evtSource.onmessage = function (event) {
 
         const json_data = JSON.parse(event.data)
 
         const content = json_data['content']
+
+        console.log(content)
 
         //Il y a une erreur: soit le json est invalide ou pas d'autorization
         if (false === content) {
@@ -66,16 +78,16 @@ jQuery(function ($) {
                 $progress = $("progress#id-" + download.id)
                 $speed = $("ul#active_downloads li#" + download.id + " span.dl-speed")
 
-                $progress.attr('value',download.progression)
+                $progress.attr('value', download.progression)
                 $speed.html(download.speed)
 
             } else {
                 //Sinon, creer un nouvel item
                 $("ul#active_downloads").append(
                     '<li id="' + download.id + '">' +
-                    '<progress id=id-' + download.id + ' value="'+ download.progression+'" max="100">' +
+                    '<progress id=id-' + download.id + ' value="' + download.progression + '" max="100">' +
                     download.progression + '%</progress>' +
-                    '<span class="dl-speed">' + download.speed +'</span>' +
+                    '<span class="dl-speed">' + download.speed + '</span>' +
                     '</li>'
                 )
             }

@@ -20,7 +20,7 @@ require_once __DIR__ . '/../../models/enumDownloadState.php';
 
 
 /**
- * Enregistre une demande de téléchargement. Retourne l'id de la demande en cas de succès, une notice en cas d'erreur
+ * Enregistre une demande de téléchargement. Retourne l'id de la demande en cas de succès, une notice en cas d'erreur (erreur lors de l'écriture en base)
  * @param DownloadRequest $downlad_request La demande de téléchargement
  * @param string $account_id L'id du compte faisant la demande
  * @return int|Notice
