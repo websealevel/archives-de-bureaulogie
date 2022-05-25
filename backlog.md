@@ -300,6 +300,7 @@ A venir...
 
 ## Sécurité
 
+- mettre des nonces dans les formulaires []
 - role_has_cap a implementer !!! []
 - déclarer une limite d'extraits / utilisateur / source (20 par exemple) []
 - envoyer un email pour valider le compte []
