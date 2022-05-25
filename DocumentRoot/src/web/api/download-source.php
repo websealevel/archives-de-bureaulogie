@@ -44,7 +44,6 @@ function api_download_source()
     write_log('Hi you !');
 
     //Utilisateur authentifié et capacité 'add_source' vérifiée
-    return;
 
     //Check le form
     $input_validations = check_download_request_form();
@@ -71,7 +70,7 @@ function api_download_source()
 
     check_download_request($download_request);
 
-    $authentificated_user_id = from_session('account_id');
+    $authentificated_user_id = 1; // from_session('account_id');
 
     $filename = format_to_source_file($download_request);
 

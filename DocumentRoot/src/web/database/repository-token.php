@@ -28,16 +28,17 @@ function register_api_token(string $account, int $expiration_in_s = 7200): strin
     $token = $generator->generateString(120);
 
     try {
-        $token_id = sql_insert_token($token, $account, $expiration_in_s);
+        $result = sql_insert_token($token, $account, $expiration_in_s);
     } catch (Exception $e) {
     }
 
-    return $token_id;
+    return $result;
 }
 
 /**
  * Retourne vrai si le token est valide, faux sinon
  */
-function is_valid_token(string $value)
+function is_valid_token(string $value): bool
 {
+    return false;
 }
