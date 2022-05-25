@@ -25,11 +25,16 @@ function register_api_token(string $account, int $expiration_in_s = 7200): strin
 
     $generator = $factory->getGenerator(new SecurityLib\Strength(SecurityLib\Strength::MEDIUM));
 
-    $token = $generator->generateString(120);
+    $token = $generator->generateString(80);
 
     try {
         $result = sql_insert_token($token, $account, $expiration_in_s);
     } catch (Exception $e) {
+        error_log($e);
+        return new Notice(
+            "Le token n'a pas pu être généré",
+            NoticeStatus::Error
+        );
     }
 
     return $result;

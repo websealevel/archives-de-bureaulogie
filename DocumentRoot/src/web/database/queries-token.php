@@ -43,9 +43,10 @@ function sql_insert_token(string $value, string $account, int $expiration_in_sec
     $stmt->bindValue(':value', $value);
     $stmt->bindValue(':account_id', $account);
     $stmt->bindValue(':expiration_in_seconds', $expiration_in_seconds);
-    $stmt->bindValue(':created_on', time());
+    $stmt->bindValue(':created_on', date('Y-m-d H:i:s'));
 
     $stmt->execute();
 
-    return $db->lastInsertId('tokens_id_seq');
+
+    return $db->lastInsertId();
 }

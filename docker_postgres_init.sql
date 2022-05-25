@@ -56,7 +56,7 @@ CREATE TABLE downloads (
 );
 
 CREATE TABLE tokens(
-    token_id INT PRIMARY KEY,
+    token_id serial PRIMARY KEY,
     value VARCHAR(250) NOT NULL,
     account_id INT NOT NULL,
     expiration_in_seconds INT NOT NULL,

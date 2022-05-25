@@ -109,10 +109,6 @@ function api_download_source()
 
         error_log_download($authentificated_user_id, $download_request->url, $filename, DownloadState::Downloading);
 
-
-        write_log('start download');
-        return;
-
         $collection = $yt->download(
             Options::create()
                 ->downloadPath(PATH_SOURCES)
