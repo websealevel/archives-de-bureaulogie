@@ -71,6 +71,7 @@ Après une phase de tests on retiendra les paramètres d'encodage avec les valeu
   - data-transfer rate : 96 kbps [x]
   - audio bitrate/échantillonage : 48000 Hz(standard dans un fichier vidéo)  [x]
 - cut à la milliseconde [x]
+- taille maximale ([imposée par Twitter](https://help.twitter.com/en/using-twitter/twitter-videos)) : 2min20s 
 - piste audio normalisée sur l'intégralité de l'extrait (et non de la source) []
 
 Ces paramètres s'appliquent au téléchargement des vidéos sources et à l'encodage des extraits générés par l'application.
