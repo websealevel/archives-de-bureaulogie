@@ -10,8 +10,7 @@
       - [Fichier vidéo *source*](#fichier-vidéo-source)
       - [Fichier vidéo *extrait*](#fichier-vidéo-extrait)
       - [Timecode](#timecode)
-    - [Gestion des fichiers `downloads`, `sources` et `extraits`](#gestion-des-fichiers-downloads-sources-et-extraits)
-      - [Fichier `download`](#fichier-download)
+    - [Gestion des fichiers `sources` et `extraits`](#gestion-des-fichiers-sources-et-extraits)
       - [Fichier `source`](#fichier-source)
       - [Fichier `extrait`](#fichier-extrait)
     - [Twitter Bots](#twitter-bots)
@@ -97,11 +96,8 @@ Les timecodes (instant de début ou de fin de l'extrait) doivent être formatté
 
 Ils doivent être compris entre `00.00.00.000` et la durée totale de la vidéo.
 
-### Gestion des fichiers `downloads`, `sources` et `extraits`
+### Gestion des fichiers `sources` et `extraits`
 
-#### Fichier `download`
-
-Quand une nouvelle vidéo est téléchargée via l'application elle n'est pas automatiquement ajoutée aux `sources`. Elle est enregistrée dans le dossier `downloads`. Elle doit être explicitement approuvée par un administrateur pour devenir une *source*.
 
 #### Fichier `source`
 
@@ -139,7 +135,7 @@ Dire qu'on ne modifie pas quelque chose de soumis, on le valide ou non. On peut 
 ### Pages
 
 - Charte : strict sur le contenu, toute infraction a la charte, banissement (IP banni et compte suspendu)
-- Qui sommes nous ? Humour, parodie, ref à acknoo et le tribunal des bureaux
+- Qui sommes nous ? Humour, parodie, ref à ackboo et au tribunal des bureaux
 - Open source : lien vers le projet,contribuer, forker, contribuer etc...
 - Nous soutenir : lien vers patreon, expliquer pourquoi (hebergement, travail, nom de domaine, vidéos) avec des chiffres. Engagement à corriger les bugs et la sécurité mais soutien sans attendre une garantie en retour. Si le projet n'est plus maintenu les soutiens seront automatiquement cloturés.
 - Rencontré un bug ? Mettre un lien vers les issues du dépot pour en déposer une
