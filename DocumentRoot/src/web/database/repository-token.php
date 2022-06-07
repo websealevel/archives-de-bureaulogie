@@ -8,6 +8,7 @@
  *
  * @package wsl 
  */
+session_start();
 
 require_once __DIR__ . '/../../../vendor/autoload.php';
 require_once __DIR__ . '/queries-token.php';
@@ -21,23 +22,34 @@ require_once __DIR__ . '/queries-token.php';
 function register_api_token(string $account, int $expiration_in_s = 7200): string|bool
 {
 
+    $token = generate_token();
+
+    // try {
+    //     $result = sql_insert_token($token, $account, $expiration_in_s);
+    // } catch (Exception $e) {
+    //     error_log($e);
+    //     return new Notice(
+    //         "Le token n'a pas pu être généré",
+    //         NoticeStatus::Error
+    //     );
+    // }
+
+    return $token;
+}
+
+/**
+ * Retourne une chaine de caractères aléatoire
+ * @return string
+ */
+function generate_token(): string
+{
     $factory = new RandomLib\Factory;
 
     $generator = $factory->getGenerator(new SecurityLib\Strength(SecurityLib\Strength::MEDIUM));
 
     $token = $generator->generateString(80);
 
-    try {
-        $result = sql_insert_token($token, $account, $expiration_in_s);
-    } catch (Exception $e) {
-        error_log($e);
-        return new Notice(
-            "Le token n'a pas pu être généré",
-            NoticeStatus::Error
-        );
-    }
-
-    return $result;
+    return $token;
 }
 
 /**

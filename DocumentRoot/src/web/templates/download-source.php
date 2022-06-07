@@ -18,8 +18,6 @@ require_once __DIR__ . '/../current-user.php';
 require_once __DIR__ . '/../core-interface.php';
 require_once __DIR__ . '/../database/repository-token.php';
 
-session_start();
-
 if (!current_user_can('add_source'))
     redirect('/', 'notices', array(
         new Notice('Vous n\'avez pas l\'autorisation d\'ajouter une source', NoticeStatus::Error)
@@ -29,12 +27,19 @@ if (!current_user_can('add_source'))
  * Cree un token pour consommer l'API
  */
 $account = from_session('account_id');
-register_api_token($account);
+
+// /**
+//  * Fait office de nonce (previent CSRF, un jeton pour demander un téléchargement)
+//  */
+// $token = register_api_token($account);
+dump($_SESSION);
+
 ?>
 
 <?php present_header(); ?>
 
 <h2>Importer une nouvelle vidéo source aux archives</h2>
+
 
 <p>Les vidéos <em>sources</em> sont les vidéos originales et complètes à partir desquelles les extraits pourront être réalisés.</p>
 

@@ -25,7 +25,6 @@ jQuery(function ($) {
 
         const data = $('form#form-download').serialize()
 
-
         $.post('/api/v1/download-source', data).done(function (data) {
 
             //Si le formulaire est rejeté on récupere les erreurs et on les affiche. A faire.
@@ -36,8 +35,6 @@ jQuery(function ($) {
             return
         })
     });
-
-
 
     //Server Send Event protocol (SSE).
 
@@ -56,8 +53,6 @@ jQuery(function ($) {
         const json_data = JSON.parse(event.data)
 
         const content = json_data['content']
-
-        console.log(content)
 
         //Il y a une erreur: soit le json est invalide ou pas d'autorization
         if (false === content) {

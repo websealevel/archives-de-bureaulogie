@@ -9,7 +9,6 @@
  * @package wsl 
  */
 
-
 /**
  * Vendor
  */
@@ -40,8 +39,16 @@ use YoutubeDl\YoutubeDl;
  */
 function api_download_source()
 {
+    if (session_status() == PHP_SESSION_NONE) {
+        write_log('start session');
+        $result = session_start();
+        write_log($result);
+    }
 
-    write_log('Hi you !');
+    return json_encode('ok');
+    exit;
+
+    //Check le token (validité)
 
     //Utilisateur authentifié et capacité 'add_source' vérifiée
 
@@ -70,7 +77,7 @@ function api_download_source()
 
     check_download_request($download_request);
 
-    $authentificated_user_id = 1; // from_session('account_id');
+    $authentificated_user_id = from_session('account_id');
 
     $filename = format_to_source_file($download_request);
 

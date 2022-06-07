@@ -26,6 +26,7 @@ while (true) {
         echo 'data: {"content": false, "message" : "Vous n\' avez pas le droit d\'accéder à cette ressource."}';
         echo "\n\n";
         ob_end_flush();
+        exit;
     }
 
     //Trouver les téléchargements en cours
@@ -38,6 +39,7 @@ while (true) {
         echo 'data: {"content": true, "message" : "Aucun téléchargement en cours"}';
         echo "\n\n";
         ob_end_flush();
+        exit;
     }
 
     //Construction de la réponse JSON
@@ -73,9 +75,9 @@ while (true) {
     ob_end_flush();
     flush();
 
-
     if (connection_aborted()) break;
-    sleep(5);
+
+    exit;
 }
 
 exit;
