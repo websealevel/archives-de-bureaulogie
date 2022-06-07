@@ -39,9 +39,6 @@ function routes(): array
             '/' => function () {
                 present_template('home');
             },
-            '/home-actions' => function () {
-                present_template('home-actions');
-            },
             '/sign-up' => function () {
                 present_template('sign-up');
             },
@@ -70,7 +67,7 @@ function routes(): array
                 present_template('contact');
             },
             '/nous-soutenir' => function () {
-                present_template('nous_soutenir');
+                present_template('nous-soutenir');
             },
             '/faq' => function () {
                 present_template('faq');

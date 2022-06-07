@@ -28,6 +28,7 @@ require_once __DIR__ . '/../../handlers.php';
 <?php else : ?>
 
     <h2>Bonjour <?php esc_html_e(current_user_pseudo()); ?> !</h2>
+
     <a href="/log-out">se déconnecter</a>
 
     <h3>Archives vidéos</h3>
@@ -45,6 +46,7 @@ require_once __DIR__ . '/../../handlers.php';
     </ul>
 
     <h3>Archives bibliographiques</h3>
+
     <ul>
         <?php if (current_user_can('submit_reference')) :  ?>
             <li><a href="submit_ref">Soumettre une référence bibliographique</a></li>
