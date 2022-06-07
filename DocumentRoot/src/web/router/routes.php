@@ -21,7 +21,6 @@ require_once __DIR__ . '/../actions/sign-up.php';
 require_once __DIR__ . '/../actions/confirm-authentification.php';
 
 
-require_once __DIR__ . '/../actions/download-source.php';
 
 /**
  * API
@@ -38,8 +37,10 @@ function routes(): array
     return  array(
         'get' => array(
             '/' => function () {
-
                 present_template('home');
+            },
+            '/home-actions' => function () {
+                present_template('home-actions');
             },
             '/sign-up' => function () {
                 present_template('sign-up');

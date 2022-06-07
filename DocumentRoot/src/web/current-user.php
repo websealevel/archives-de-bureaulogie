@@ -40,7 +40,6 @@ function current_user_pseudo(): string
  */
 function current_user_can(string $cap): bool
 {
-
     //Check que l'utilisateur est authentifié
     if (!is_current_user_logged_in()) {
         return false;

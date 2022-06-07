@@ -48,7 +48,7 @@ dump($_SESSION);
 
 <h3>Importer</h3>
 <main class="form-add-source">
-    <form action="download-source" method="POST" id="form-download">
+    <form action="" method="POST" id="form-download">
 
         <div class="form-note">Les champs marqués d'un asterisque sont obligatoires</div>
 

@@ -184,6 +184,9 @@ function esc_video_source_url_e(string $source_name)
  */
 function is_source_already_declared(string $series, string $slug, string $url): bool
 {
+    if (!isset($series))
+        return false;
+
     $full_name = build_source_name($series, $slug);
 
     $match = query_source_by_unique_attr('name', $full_name);
