@@ -30,7 +30,7 @@ function query_declared_sources(string $file_source = SOURCE_FILE): DOMNodeList
     });
 
     if (!empty($not_found)) {
-        $message = sprintf("%s sources sont déclarées dans le fichier source mais ne sont pas présentes sur le verveur !", count($not_found));
+        $message = sprintf("%d sources sont déclarées dans le fichier source mais ne sont pas présentes sur le serveur !", count($not_found));
         throw new Exception($message);
     }
 

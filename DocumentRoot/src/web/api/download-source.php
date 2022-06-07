@@ -125,6 +125,8 @@ function api_download_source()
                 ->output($filename)
         );
 
+        write_log('downloading');
+
         foreach ($collection->getVideos() as $video) {
 
             if ($video->getError() !== null) {

@@ -1,6 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'  standalone = "no"?>
 <!DOCTYPE extraits SYSTEM "extraits.dtd">
 <extraits xmlns="https://archives-de-bureaulogie.fr/clips">
+
+    <!-- <source series="le-tribunal-des-bureaux" url="https://www.youtube.com/watch?v=msjthe2mWO4" name="le-tribunal-des-bureaux-1.mp4" label="Le tribunal des bureaux 1">
+    </source> -->
     <source series="le-tribunal-des-bureaux" url="https://www.youtube.com/watch?v=msjthe2mWO4" name="le-tribunal-des-bureaux-2.mp4" label="Le tribunal des bureaux 2">
         <extrait poste="0" title="Plantes et luminaires">
             <slug>plante-et-luminaire</slug>

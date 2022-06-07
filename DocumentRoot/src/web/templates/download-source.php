@@ -13,6 +13,7 @@
  */
 require_once __DIR__ . '/../../../vendor/autoload.php';
 
+
 require_once __DIR__ . '/../utils.php';
 require_once __DIR__ . '/../current-user.php';
 require_once __DIR__ . '/../core-interface.php';
@@ -28,18 +29,15 @@ if (!current_user_can('add_source'))
  */
 $account = from_session('account_id');
 
-// /**
-//  * Fait office de nonce (previent CSRF, un jeton pour demander un téléchargement)
-//  */
-// $token = register_api_token($account);
-dump($_SESSION);
-
+/**
+ * Fait office de nonce (previent CSRF, un jeton pour demander un téléchargement)
+ */
+$token = register_api_token($account);
 ?>
 
 <?php present_header(); ?>
 
 <h2>Importer une nouvelle vidéo source aux archives</h2>
-
 
 <p>Les vidéos <em>sources</em> sont les vidéos originales et complètes à partir desquelles les extraits pourront être réalisés.</p>
 
@@ -77,6 +75,7 @@ dump($_SESSION);
             </iframe>
         </div>
         <div>
+            <input type="hidden" name="token" value="<?php echo $token; ?>">
             <input type="submit" value="ajouter aux téléchargements">
         </div>
     </form>

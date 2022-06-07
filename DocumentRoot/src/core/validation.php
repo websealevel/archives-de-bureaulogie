@@ -74,6 +74,7 @@ function is_clip_available(string $file_name = SOURCE_FILE, $path = PATH_CLIPS)
  * @param string $file_source Optional. Le fichier source 
  * @param string $PATH_SOURCES Optional. Le path des sources
  * @return bool
+ * @throws Exception - Si la vidéo source n'a pas un format vidéo valide
  */
 function is_source_valid(string $file_name, $path = PATH_SOURCES)
 {

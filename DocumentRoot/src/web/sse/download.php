@@ -16,7 +16,7 @@ header("Content-Type: text/event-stream");
 
 //Authentification
 session_id($_REQUEST['PHPSESSID']);
-// session_start();
+session_start();
 
 while (true) {
 
