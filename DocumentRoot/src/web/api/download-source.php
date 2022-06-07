@@ -9,9 +9,6 @@
  * @package wsl 
  */
 
-if (session_status() == PHP_SESSION_NONE) {
-    session_start();
-}
 
 /**
  * Vendor
@@ -28,6 +25,7 @@ require_once __DIR__ . '/../../models/enumDownloadState.php';
  * Functions
  */
 require_once __DIR__ . '/../utils.php';
+require_once __DIR__ . '/../core-interface.php';
 require_once __DIR__ . '/../current-user.php';
 require_once __DIR__ . '/../log.php';
 require_once __DIR__ . '/../database/repository-downloads.php';
@@ -35,8 +33,6 @@ require_once __DIR__ . '/../database/repository-downloads.php';
 use YoutubeDl\Options;
 use YoutubeDl\YoutubeDl;
 
-
-api_download_source();
 
 /**
  * Traite la requête AJAX/formulaire de téléchargement de vidéo source. Lance le téléchargement si tout est ok, retourne une erreur sinon

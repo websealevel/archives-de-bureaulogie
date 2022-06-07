@@ -18,7 +18,6 @@ function resolve()
 {
     $path = get_path();
 
-
     //Special case : Server Send Events (SSE) route (écouter téléchargements en cours)
     if ('/sse-download-source' === $path) {
         require_once __DIR__ . '/../sse/download.php';
