@@ -29,7 +29,6 @@ function sign_up_user()
 
     if (!is_signup_activated())
         redirect('/');
-    session_start();
 
     if (is_current_user_logged_in())
         redirect('/', 'notices', array(

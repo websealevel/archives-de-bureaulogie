@@ -19,7 +19,6 @@ require_once __DIR__ . '/../database/queries-accounts.php';
 
 function confirm_authentification()
 {
-    session_start();
 
     $password = filter_input(INPUT_POST, 'password');
 

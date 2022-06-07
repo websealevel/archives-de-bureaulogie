@@ -6,7 +6,6 @@
  *
  * @package wsl 
  */
-session_start();
 autoload();
 require_once __DIR__ . '/../utils.php';
 require_once __DIR__ . '/../session.php';

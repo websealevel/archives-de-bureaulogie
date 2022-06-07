@@ -21,8 +21,6 @@ require_once __DIR__ . '/../database/repository-accounts.php';
  */
 function log_in()
 {
-    session_start();
-
     $form_inputs = array(
         new FormInput('login', $_POST['login'], function (string $login): InputValidation {
             if (empty($login))
@@ -80,4 +78,3 @@ function login_user_session($account)
 
     error_log_login_success($account);
 }
-

@@ -42,10 +42,6 @@ use YoutubeDl\YoutubeDl;
  */
 function api_download_source()
 {
-    if (session_status() == PHP_SESSION_NONE) {
-        session_start();
-    }
-
     //Utilisateur authentifié et capacité 'add_source' vérifiée
 
     //Check le token

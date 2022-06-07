@@ -31,6 +31,10 @@ function resolve()
         present_template('500');
     }
 
+    if (session_status() == PHP_SESSION_NONE) {
+        session_start();
+    }
+
     $callback();
 }
 

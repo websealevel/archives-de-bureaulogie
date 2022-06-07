@@ -16,6 +16,7 @@ require_once __DIR__ . '/database/repository-roles-capabilities.php';
  */
 function is_current_user_logged_in(): bool
 {
+
     if (!isset($_SESSION))
         return false;
     return boolval(from_session('user_authentificated') ?? false);

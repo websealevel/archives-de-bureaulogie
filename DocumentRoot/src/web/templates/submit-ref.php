@@ -9,7 +9,6 @@
  */
 require_once __DIR__ . '/../utils.php';
 require_once __DIR__ . '/../current-user.php';
-session_start();
 
 if (!current_user_can('submit_reference'))
     redirect('/');
