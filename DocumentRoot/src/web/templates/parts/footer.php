@@ -19,7 +19,7 @@ require_once __DIR__ . '../../../../default-handlers.php';
             <a href="https://github.com/websealevel/archives-de-bureaulogie/issues">signaler un problème</a>
         </li>
         <li>
-            <a href="">nous soutenir</a>
+            <a href="nous-soutenir">nous soutenir</a>
         </li>
         <li>
             <a href="https://twitter.com/archivesdb_fr">Twitter</a>

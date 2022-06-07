@@ -40,17 +40,12 @@ use YoutubeDl\YoutubeDl;
 function api_download_source()
 {
     if (session_status() == PHP_SESSION_NONE) {
-        write_log('start session');
-        $result = session_start();
-        write_log($result);
+        session_start();
     }
 
-    return json_encode('ok');
-    exit;
-
-    //Check le token (validité)
-
     //Utilisateur authentifié et capacité 'add_source' vérifiée
+
+    //Check le token
 
     //Check le form
     $input_validations = check_download_request_form();
@@ -148,6 +143,8 @@ function api_download_source()
                 exit;
             }
         }
+
+        exit;
     } catch (Exception $e) {
         error_log($e);
         header('Content-Type: application/json; charset=utf-8');
@@ -158,5 +155,5 @@ function api_download_source()
         exit;
     }
 
-    return;
+    exit;
 }

@@ -125,9 +125,10 @@ function present_template(string $template_name)
     if (!file_exists($path_template))
         present_template('404');
 
+
     require $path_template;
 
-    return;
+    exit;
 }
 
 /**

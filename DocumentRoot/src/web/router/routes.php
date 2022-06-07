@@ -38,6 +38,7 @@ function routes(): array
     return  array(
         'get' => array(
             '/' => function () {
+
                 present_template('home');
             },
             '/sign-up' => function () {
@@ -66,6 +67,12 @@ function routes(): array
             },
             '/contact' => function () {
                 present_template('contact');
+            },
+            '/nous-soutenir' => function () {
+                present_template('nous_soutenir');
+            },
+            '/faq' => function () {
+                present_template('faq');
             },
             '/confidentiality-policy' => function () {
                 present_template('confidentiality-policy');
