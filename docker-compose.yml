@@ -3,7 +3,9 @@ version: "3.4"
 services:
 
   php-fpm:
-    image: php:8-fpm
+    build:
+      context: ./
+      dockerfile: Dockerfile-php
     restart: always
     container_name: php-fpm
     networks:
@@ -20,7 +22,7 @@ services:
   back:
     build:
       context: ./
-      dockerfile: Dockerfile-nginx-php
+      dockerfile: Dockerfile-nginx
     depends_on:
       - db
       - php-fpm

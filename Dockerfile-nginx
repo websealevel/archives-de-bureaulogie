@@ -1,0 +1,6 @@
+FROM  nginx:1.21.6-alpine
+
+# configure timezone
+ENV TZ=Europe/Paris
+ENV DEBIAN_FRONTEND=noninteractive
+RUN apk add tzdata
