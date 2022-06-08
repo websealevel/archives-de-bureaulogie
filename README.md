@@ -131,6 +131,16 @@ La liste des options
 
 Suivez [les instructions ici](https://github.com/websealevel/local-env-docker) pour mettre en place le reverse-proxy sur votre machine, ou modifiez le `docker-compose` à votre convenance pour associer vos ports aux différents conteneurs.
 
+Pour construire le projet (premier lancement)
+~~~bash
+docker-compose up --build -d
+~~~
+
+Pour reconstruire un service, par exemple le service `back`
+~~~bash
+docker-compose build back
+~~~
+
 Pour lancer le projet
 
 ~~~bash
@@ -155,8 +165,6 @@ php -r "require 'src/core/validation.php'; is_source_file_valid();"
 ~~~php
 php -r "require 'src/core/actions.php' ; action_update_clips();"
 ~~~
-
-
 
 ### FAQ - Problèmes connus, rencontrés
 

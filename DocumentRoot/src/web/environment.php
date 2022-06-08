@@ -27,8 +27,7 @@ function load_env(string $env_path = SRC_PATH, string $env_file = '.env')
     $dotenv = Dotenv\Dotenv::createImmutable($env_path, $env_file);
 
     try {
-        $result = $dotenv->load();
-        dump($result);
+        $dotenv->load();
         $_ENV['ENV_APP_SETUP'] = true;
     } catch (Exception $e) {
         error_log($e);
@@ -36,8 +35,6 @@ function load_env(string $env_path = SRC_PATH, string $env_file = '.env')
     }
 
     load_default_values();
-
-    dump($_ENV);
 }
 
 
@@ -60,11 +57,11 @@ function load_default_values(): void
 {
 
     if (!isset($_ENV['SITE_MAINTENANCE_MODE'])) {
-        $_ENV['SITE_MAINTENANCE_MODE'] = 1;
+        $_ENV['SITE_MAINTENANCE_MODE'] = 0;
     }
 
     if (!isset($_ENV['SITE_DISABLE_SIGN_UP']))
-        $_ENV['SITE_DISABLE_SIGN_UP'] = 1;
+        $_ENV['SITE_DISABLE_SIGN_UP'] = 0;
 
     if (!isset($_ENV['PATH_BIN_FFMPEG']))
         $_ENV['PATH_BIN_FFMPEG'] = dirname(__DIR__, 2) . '/' . 'ffmpeg/ffmpeg';
