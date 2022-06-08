@@ -21,7 +21,7 @@ Il sert également de prétexte pour construire un outil en *vanilla php* pour s
     - [Arrêter le projet](#arrêter-le-projet)
     - [Core functions (CLI)](#core-functions-cli)
       - [checker la validation du fichier source (`extraits.xml`)](#checker-la-validation-du-fichier-source-extraitsxml)
-    - [mettre à jour les fichiers clips à partir du fichier source (cree clips déclarés manquants, supprime les fichiers clips invalides et non déclarés)](#mettre-à-jour-les-fichiers-clips-à-partir-du-fichier-source-cree-clips-déclarés-manquants-supprime-les-fichiers-clips-invalides-et-non-déclarés)
+      - [mettre à jour les fichiers clips à partir du fichier source (cree clips déclarés manquants, supprime les fichiers clips invalides et non déclarés)](#mettre-à-jour-les-fichiers-clips-à-partir-du-fichier-source-cree-clips-déclarés-manquants-supprime-les-fichiers-clips-invalides-et-non-déclarés)
     - [FAQ - Problèmes connus, rencontrés](#faq---problèmes-connus-rencontrés)
       - [Comment réinitialiser la base de données ?](#comment-réinitialiser-la-base-de-données-)
       - [Erreur avec la dépendence symfony/process de FFMPEG](#erreur-avec-la-dépendence-symfonyprocess-de-ffmpeg)
@@ -160,7 +160,7 @@ docker-compose down
 php -r "require 'src/core/validation.php'; is_source_file_valid();"
 ~~~
 
-### mettre à jour les fichiers clips à partir du fichier source (cree clips déclarés manquants, supprime les fichiers clips invalides et non déclarés)
+#### mettre à jour les fichiers clips à partir du fichier source (cree clips déclarés manquants, supprime les fichiers clips invalides et non déclarés)
 
 ~~~php
 php -r "require 'src/core/actions.php' ; action_update_clips();"
