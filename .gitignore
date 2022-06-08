@@ -22,7 +22,8 @@ journal.log
 DocumentRoot/.env
 DocumentRoot/web/.env
 DocumentRoot/debug.log
-DocumentRoot/*.log
+DocumentRoot/archives.access.log
+DocumentRoot/archives.error.log
 postgres-data/
 .vscode
 ~

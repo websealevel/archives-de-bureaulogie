@@ -57,11 +57,11 @@ function load_default_values(): void
 {
 
     if (!isset($_ENV['SITE_MAINTENANCE_MODE'])) {
-        $_ENV['SITE_MAINTENANCE_MODE'] = 0;
+        $_ENV['SITE_MAINTENANCE_MODE'] = 1;
     }
 
     if (!isset($_ENV['SITE_DISABLE_SIGN_UP']))
-        $_ENV['SITE_DISABLE_SIGN_UP'] = 0;
+        $_ENV['SITE_DISABLE_SIGN_UP'] = 1;
 
     if (!isset($_ENV['PATH_BIN_FFMPEG']))
         $_ENV['PATH_BIN_FFMPEG'] = dirname(__DIR__, 2) . '/' . 'ffmpeg/ffmpeg';
