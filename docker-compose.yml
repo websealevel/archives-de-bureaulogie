@@ -12,6 +12,7 @@ services:
     volumes:
       - "./DocumentRoot/:/var/www/html"
       - "./DocumentRoot/php.ini:/usr/local/etc/php/conf.d/php_app.ini"
+
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.php-${PROJECT_NAME}.rule=Host(`php.${PROJECT_NAME}.${TRAEFIK_DOMAIN}`)"
@@ -31,7 +32,6 @@ services:
       - web
     volumes:
       - "./DocumentRoot/:/var/www/html"
-      - "./DocumentRoot/.env:/var/www/html/.env"
       - "./DocumentRoot/nginx.conf:/etc/nginx/conf.d/site.conf"
     container_name: ${PROJECT_NAME}-back
     labels:

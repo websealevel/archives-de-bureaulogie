@@ -1,8 +1,8 @@
 FROM  nginx:1.21.6-alpine
 
 
-# RUN apk add --update autoconf g++ libtool make
-# RUN apk upgrade 
+RUN apk add --update autoconf g++ libtool make
+RUN apk upgrade 
 
 
 # # Install Postgre PDO
@@ -13,9 +13,9 @@ FROM  nginx:1.21.6-alpine
 
 
 # # install python (for youtube-dl)
-# RUN apk add python3
+RUN apk add python3
 
 # # configure timezone
-# ENV TZ=Europe/Paris
-# ENV DEBIAN_FRONTEND=noninteractive
-# RUN apk add tzdata
+ENV TZ=Europe/Paris
+ENV DEBIAN_FRONTEND=noninteractive
+RUN apk add tzdata

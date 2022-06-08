@@ -15,23 +15,29 @@ autoload();
 /**
  * Chare les variables d'environnement dans la global $_ENV
  * @global array $_ENV
+ * @return void
+ * @throws Exception - Si le fichier contenant les variables d'environnement ne peut être lu ou chargé
  */
 function load_env(string $env_path = SRC_PATH, string $env_file = '.env')
 {
 
-    if (isset($_ENV['env_archives_de_bureaulogie.fr']))
+    if (isset($_ENV['ENV_APP_SETUP']))
         return;
 
     $dotenv = Dotenv\Dotenv::createImmutable($env_path, $env_file);
+
     try {
-        $dotenv->load();
-        $_ENV['env_archives_de_bureaulogie.fr'] = true;
-    } catch (Dotenv\Exception\InvalidPathException $e) {
+        $result = $dotenv->load();
+        dump($result);
+        $_ENV['ENV_APP_SETUP'] = true;
+    } catch (Exception $e) {
         error_log($e);
         throw new Exception("Impossible de charger les variables d'environnement");
     }
 
     load_default_values();
+
+    dump($_ENV);
 }
 
 
@@ -52,6 +58,7 @@ function from_env(string $key): string
  */
 function load_default_values(): void
 {
+
     if (!isset($_ENV['SITE_MAINTENANCE_MODE'])) {
         $_ENV['SITE_MAINTENANCE_MODE'] = 1;
     }
