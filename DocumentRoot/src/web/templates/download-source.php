@@ -76,7 +76,7 @@ $token = register_api_token($account);
         </div>
         <div>
             <input type="hidden" name="token" value="<?php echo $token; ?>">
-            <input type="submit" value="ajouter aux téléchargements">
+            <input type="button" value="ajouter aux téléchargements">
         </div>
     </form>
 

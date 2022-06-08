@@ -215,3 +215,7 @@ Il faut supprimer le cache
 - [youtube-dl](https://github.com/ytdl-org/youtube-dl), download videos from youtube.com or other video platforms 
 - [yt-dlp](https://github.com/yt-dlp/yt-dlp#installation), un fork de youtube-dlc, lui même un fork de youtube-dl. Nouvelles features avancées, bien maintenu. Alternative envisageable.
 - [lostlesscut](https://github.com/mifi/lossless-cut), le couteau suisse de l'édition vidéo/audio pour cut la vidéo d'origine
+- [Jquery ajax](https://api.jquery.com/Jquery.ajax/)
+- [Docker- Official build of Nginx.](https://hub.docker.com/_/nginx/)
+- [nginx documentation](https://nginx.org/en/docs/)
+- [nginx beginer's guide](https://nginx.org/en/docs/beginners_guide.html)
