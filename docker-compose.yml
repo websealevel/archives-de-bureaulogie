@@ -2,7 +2,12 @@ version: "3.4"
 
 services:
 
-  #L'application web cliente
+  php-fpm:
+    image: php:8-fpm
+    volumes:
+      - "./DocumentRoot/:/data/www"
+      - "./DocumentRoot/php.ini:/usr/local/etc/php/conf.d/aooc_php.ini"
+      - "./DocumentRoot/.env:/data/www/.env"
   back:
     build:
       context: ./
@@ -14,19 +19,16 @@ services:
       - archives-de-bureaulogie
       - web
     volumes:
-      - "./DocumentRoot/:/data/www:rw"
-      - "./DocumentRoot/nginx.conf:/etc/nginx/nginx.conf"
-      - "./DocumentRoot/php.ini:/usr/local/etc/php/conf.d/aooc_php.ini"
-      - "./DocumentRoot/.env:/data/www/.env"
+      - "./DocumentRoot/:/data/www"
+      - "./DocumentRoot/nginx.conf:/etc/nginx/conf.d/site.conf"
     container_name: ${PROJECT_NAME}-back
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.back-${PROJECT_NAME}.rule=Host(`back.${PROJECT_NAME}.${TRAEFIK_DOMAIN}`)"
       - "traefik.http.routers.back-${PROJECT_NAME}.entrypoints=web"
     #Nous donne les droits en ecriture au volume (par défaut donné à root, pas cool)
-    user: "${UID}:${GID}"
 
-  #Le serveur de la base de données postgres
+    #Le serveur de la base de données postgres
   db:
     build:
       context: ./
@@ -59,7 +61,7 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.adminer-${PROJECT_NAME}.rule=Host(`adminer.${PROJECT_NAME}.${TRAEFIK_DOMAIN}`)"
       - "traefik.http.routers.adminer-${PROJECT_NAME}.entrypoints=web"
-      
+
 networks:
   archives-de-bureaulogie:
   web:
