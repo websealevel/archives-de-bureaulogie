@@ -1,13 +1,15 @@
 FROM php:8-fpm
 
 RUN apt-get update 
+RUN apt-get install -y apt-file && apt-file update
+RUN apt-get install -y htop
+
 # Install Postgre PDO
 RUN apt-get install -y libpq-dev \
     && docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql \
     && docker-php-ext-install pdo pdo_pgsql pgsql
 
 RUN apt-get -y install python3
-RUN apt-get install top
 # Timezone
 ENV TZ=Europe/Paris
 ENV DEBIAN_FRONTEND=noninteractive
