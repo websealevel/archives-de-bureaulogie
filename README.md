@@ -219,3 +219,5 @@ Il faut supprimer le cache
 - [Docker- Official build of Nginx.](https://hub.docker.com/_/nginx/)
 - [nginx documentation](https://nginx.org/en/docs/)
 - [nginx beginer's guide](https://nginx.org/en/docs/beginners_guide.html)
+- [dockerize-webserver-nginx-php8](https://marcit.eu/en/2021/04/28/dockerize-webserver-nginx-php8/)
+- Modern PHP,O'Reilly, Chapter 7, p138-146
