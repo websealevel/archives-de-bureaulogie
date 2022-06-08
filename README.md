@@ -155,6 +155,8 @@ docker-compose down
 
 ### Core functions (CLI)
 
+Des actions `core` faisabiles directement depuis la ligne de commande sur le serveur, indépendemment de l'appliaction web.
+
 #### checker la validation du fichier source (`extraits.xml`)
 ~~~php
 php -r "require 'src/core/validation.php'; is_source_file_valid();"
