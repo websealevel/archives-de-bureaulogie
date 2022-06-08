@@ -18,7 +18,7 @@ autoload();
  * @return void
  * @throws Exception - Si le fichier contenant les variables d'environnement ne peut être lu ou chargé
  */
-function load_env(string $env_path = SRC_PATH, string $env_file = '.env')
+function load_env(string $env_path = __DIR__ . '/../../', string $env_file = '.env')
 {
 
     if (isset($_ENV['ENV_APP_SETUP']))
