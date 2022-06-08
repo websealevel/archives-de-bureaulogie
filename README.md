@@ -155,7 +155,7 @@ docker-compose down
 
 ### Core functions (CLI)
 
-Des actions `core` faisabiles directement depuis la ligne de commande sur le serveur, indépendemment de l'appliaction web.
+Des tâches *core* executables directement depuis la ligne de commande sur le serveur, indépendemment de l'appliaction web.
 
 #### checker la validation du fichier source (`extraits.xml`)
 ~~~php
