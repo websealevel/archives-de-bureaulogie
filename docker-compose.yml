@@ -2,14 +2,16 @@ version: "3.4"
 
 services:
 
-
   php-fpm:
     image: php:8-fpm
     restart: always
     container_name: php-fpm
+    networks:
+      - archives-de-bureaulogie
+      - web
     volumes:
       - "./DocumentRoot/:/var/www/html"
-      - "./DocumentRoot/php.ini:/usr/local/etc/php/conf.d/aooc_php.ini"
+      - "./DocumentRoot/php.ini:/usr/local/etc/php/conf.d/php_app.ini"
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.php-${PROJECT_NAME}.rule=Host(`php.${PROJECT_NAME}.${TRAEFIK_DOMAIN}`)"
@@ -36,8 +38,7 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.back-${PROJECT_NAME}.rule=Host(`back.${PROJECT_NAME}.${TRAEFIK_DOMAIN}`)"
       - "traefik.http.routers.back-${PROJECT_NAME}.entrypoints=web"
-    
-  
+
   db:
     build:
       context: ./
