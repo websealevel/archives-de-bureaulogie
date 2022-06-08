@@ -1,5 +1,6 @@
 FROM  nginx:1.21.6-alpine
 
+
 # RUN apk add --update autoconf g++ libtool make
 # RUN apk upgrade 
 

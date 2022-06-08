@@ -2,33 +2,42 @@ version: "3.4"
 
 services:
 
+
   php-fpm:
     image: php:8-fpm
+    restart: always
+    container_name: php-fpm
     volumes:
-      - "./DocumentRoot/:/data/www"
+      - "./DocumentRoot/:/var/www/html"
       - "./DocumentRoot/php.ini:/usr/local/etc/php/conf.d/aooc_php.ini"
-      - "./DocumentRoot/.env:/data/www/.env"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.php-${PROJECT_NAME}.rule=Host(`php.${PROJECT_NAME}.${TRAEFIK_DOMAIN}`)"
+      - "traefik.http.routers.php-${PROJECT_NAME}.entrypoints=web"
   back:
     build:
       context: ./
       dockerfile: Dockerfile-nginx-php
     depends_on:
       - db
+      - php-fpm
     restart: always
+    links:
+      - php-fpm
     networks:
       - archives-de-bureaulogie
       - web
     volumes:
-      - "./DocumentRoot/:/data/www"
+      - "./DocumentRoot/:/var/www/html"
+      - "./DocumentRoot/.env:/var/www/html/.env"
       - "./DocumentRoot/nginx.conf:/etc/nginx/conf.d/site.conf"
     container_name: ${PROJECT_NAME}-back
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.back-${PROJECT_NAME}.rule=Host(`back.${PROJECT_NAME}.${TRAEFIK_DOMAIN}`)"
       - "traefik.http.routers.back-${PROJECT_NAME}.entrypoints=web"
-    #Nous donne les droits en ecriture au volume (par défaut donné à root, pas cool)
-
-    #Le serveur de la base de données postgres
+    
+  
   db:
     build:
       context: ./
