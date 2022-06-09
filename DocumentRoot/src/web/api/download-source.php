@@ -42,9 +42,9 @@ use YoutubeDl\YoutubeDl;
  */
 function api_download_source()
 {
+
     //Utilisateur authentifié et capacité 'add_source' vérifiée
 
-    write_log('foo');
     //Check le token
 
     //Check le form
@@ -126,7 +126,6 @@ function api_download_source()
                 ->output($filename)
         );
 
-        write_log('downloading');
 
         foreach ($collection->getVideos() as $video) {
 

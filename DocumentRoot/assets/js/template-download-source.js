@@ -18,7 +18,7 @@ jQuery(function ($) {
         }
     })
 
-    $("#form-download").on('click', function (event) {
+    $("#submit").on('click', function (event) {
 
         event.preventDefault();
 
@@ -30,15 +30,24 @@ jQuery(function ($) {
             url: '/api/v1/download-source',
             data: data,
             success: function (data) {
-                //Si le formulaire est rejeté on récupere les erreurs et on les affiche. A faire.
-                console.log(data)
+
+                //Si le formulaire est rejeté on récupere les erreurs et on les affiche. Ou si une erreur au lancement du dl. A faire.
+
+                //Si réussi, on récuperer le nom du fichier avec le lien pour visualiser la source (par exemple). A faire
+
+                console.error(data)
+                const errors = data.errors
+                const items = errors.map((error) => "<li>" + error.message + "</li>")
+
+                $("div.errors").html('<ul>' + items.toString() + '</ul>')
             },
             dataType: 'json',
-            error: function () {
-                console.log('ajax error')
-            },
-            timeout: 500
+            error: function (e) {
+                $("div.errors").html('<p>Une erreur est survenue</p>')
+                console.error(e)
+            }
         });
+        //Indiquer que le téléchargement a été lancé (feedback pour l'user)
     })
 
     //Server Send Event protocol (SSE).

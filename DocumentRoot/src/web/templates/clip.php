@@ -21,8 +21,6 @@ if (!current_user_can('submit_clip'))
 
 <h2>Créer un extrait</h2>
 
-<a href="/">Retour</a>
-
 <form action="">
     <?php esc_sources_to_html_select_e(); ?>
 </form>
