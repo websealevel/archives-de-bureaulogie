@@ -52,7 +52,7 @@ jQuery(function ($) {
 
     //Server Send Event protocol (SSE).
 
-    Ouverture d'une connexion avec le serveur
+    //Ouverture d'une connexion avec le serveur
     var evtSource = new EventSource("sse-download-source");
 
 
