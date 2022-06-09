@@ -43,10 +43,12 @@ function sql_insert_download(DownloadRequest $download_request, string $filename
 
     $stmt = $db->prepare($sql);
 
+    write_log('id:' . $account_id);
+
     $stmt->bindValue(':url', $download_request->url);
     $stmt->bindValue(':filename', $filename);
     $stmt->bindValue(':format', $format);
-    $stmt->bindValue(':account_id', $account_id);
+    $stmt->bindValue(':account_id', intval($account_id));
     $stmt->bindValue(':state', DownloadState::Pending->value);
     $stmt->bindValue(':created_on', date('Y-m-d H:i:s'));
     $stmt->execute();

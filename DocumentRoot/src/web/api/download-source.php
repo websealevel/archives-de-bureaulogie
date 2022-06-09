@@ -30,9 +30,10 @@ require_once __DIR__ . '/../current-user.php';
 require_once __DIR__ . '/../log.php';
 require_once __DIR__ . '/../database/repository-downloads.php';
 
-use YoutubeDl\Options;
-use YoutubeDl\YoutubeDl;
+// use YoutubeDl\Options;
+// use YoutubeDl\YoutubeDl;
 
+use CrowdStar\BackgroundProcessing\BackgroundProcessing;
 
 /**
  * Traite la requête AJAX/formulaire de téléchargement de vidéo source. Lance le téléchargement si tout est ok, retourne une erreur sinon
@@ -43,128 +44,162 @@ use YoutubeDl\YoutubeDl;
 function api_download_source()
 {
 
-    //Utilisateur authentifié et capacité 'add_source' vérifiée
+    $sum  = 0;
+    $file = sys_get_temp_dir() . DIRECTORY_SEPARATOR . 'background-processing.txt';
 
-    //Check le token
-
-    //Check le form
-    $input_validations = check_download_request_form();
-
-    $invalid_inputs = filter_invalid_inputs($input_validations);
-
-    //Retourner les erreurs sur les champs
-    if (!empty($invalid_inputs)) {
-        header('Content-Type: application/json; charset=utf-8');
-        $response =  json_encode(array(
-            'statut' => 403,
-            'errors' => array_map(function ($invalid_input) {
-                return array(
-                    'name' => $invalid_input->name,
-                    'value' => $invalid_input->value,
-                    'message' => $invalid_input->message
-                );
-            }, $invalid_inputs),
-        ));
-        echo $response;
-        exit;
-    }
-
-    //Lancement du téléchargement de la source
-
-    $download_request = new DownloadRequest(
-        $input_validations['source_url']->value,
-        $input_validations['series']->value,
-        $input_validations['name']->value,
+    // First background task added.
+    BackgroundProcessing::add(
+        // Increase $sum by the sum of given numbers. Final value of $sum is this example is 7 (1+2+4).
+        function (int ...$params) use (&$sum) {
+            sleep(10);
+            $sum += array_sum($params);
+        },
+        1,
+        2,
+        4
+    );
+    // Second background task added and will be executed after the first one.
+    BackgroundProcessing::add(
+        function () use (&$sum, $file) {
+            // Number 7 calculated from first task will be written to the file.
+            file_put_contents($file, $sum);
+        }
     );
 
-    check_download_request($download_request);
-
-    $authentificated_user_id = from_session('account_id');
-
-    $filename = format_to_source_file($download_request);
-
-    $response = create_download($download_request, $authentificated_user_id);
-
-    //En cas d'erreur d'accès à la base.
-    if ($response instanceof Notice) {
-        header('Content-Type: application/json; charset=utf-8');
-        echo json_encode(array(
-            'statut' => 403,
-            'errors' => array($response),
-        ));
-        exit;
-    }
-
-    $download_id = $response;
-
-    //En cas de formulaire valide, on lance le téléchargement
-
-    $yt = new YoutubeDl();
-    $yt->setBinPath(from_env('PATH_BIN_YOUTUBEDL'));
-    $yt->setPythonPath(from_env('PATH_PYTHON'));
-
-    try {
-
-        //Lancer le téléchargement et écrire la progression en base.
-        $db = connect_to_db();
-
-        //Show progress
-        $yt->onProgress(static function (?string $process_target, ?string $percentage, ?string $size, ?string $speed, string $eta, ?string $total_time) use ($download_id, $db): void {
-            sql_update_download($db, $download_id, $process_target, $percentage, $size, $speed, $total_time);
-        });
-
-        //Mettre l'état du download à actif
-        download_change_state($download_id, DownloadState::Downloading);
-
-        error_log_download($authentificated_user_id, $download_request->url, $filename, DownloadState::Downloading);
-
-        $collection = $yt->download(
-            Options::create()
-                ->downloadPath(PATH_SOURCES)
-                ->url($download_request->url)
-                ->format(youtube_dl_download_format())
-                ->output($filename)
-        );
+    // Send HTTP response back to the client first, then run the two background tasks added.
+    BackgroundProcessing::run();
 
 
-        foreach ($collection->getVideos() as $video) {
+    // Number 0 will be returned back to HTTP client.
+    error_log(
+        "Current sum value is {$sum}. " .
+            "Please check file {$file} in the web server; final sum value there should be 7.\n"
+    );
 
-            if ($video->getError() !== null) {
-
-                //Mettre le state du dl à failed
-                download_change_state($download_id, DownloadState::Failed);
-
-                error_log_download($authentificated_user_id, $download_request->url, $filename, DownloadState::Failed);
-
-                throw new Exception("Error downloading video: {$video->getError()}");
-            } else {
-                //Mettre le state du dl a downloaded
-                download_change_state($download_id, DownloadState::Downloaded);
-
-                //Log un message propre sur le download terminé.
-                error_log_download($authentificated_user_id, $download_request->url, $filename, DownloadState::Downloaded);
-
-                //Mettre à jour le fichier source.
-
-                //Générer le label à partir de series+slug
-                $file = $video->getFile();
-                exit;
-            }
-        }
-
-        exit;
-    } catch (Exception $e) {
-        error_log($e);
-        header('Content-Type: application/json; charset=utf-8');
-        echo json_encode(array(
-            'statut' => 500,
-            'errors' => array(new Notice('Une erreur est survenue, veuillez réessayer', NoticeStatus::Error)),
-        ));
-        exit;
-    }
 
     exit;
+
+    // //Utilisateur authentifié et capacité 'add_source' vérifiée
+
+    // //Check le token
+
+    // //Check le form
+    // $input_validations = check_download_request_form();
+
+    // $invalid_inputs = filter_invalid_inputs($input_validations);
+
+    // //Retourner les erreurs sur les champs
+    // if (!empty($invalid_inputs)) {
+    //     header('Content-Type: application/json; charset=utf-8');
+    //     $response =  json_encode(array(
+    //         'statut' => 403,
+    //         'errors' => array_map(function ($invalid_input) {
+    //             return array(
+    //                 'name' => $invalid_input->name,
+    //                 'value' => $invalid_input->value,
+    //                 'message' => $invalid_input->message
+    //             );
+    //         }, $invalid_inputs),
+    //     ));
+    //     echo $response;
+    //     exit;
+    // }
+
+    // //Lancement du téléchargement de la source
+
+    // $download_request = new DownloadRequest(
+    //     $input_validations['source_url']->value,
+    //     $input_validations['series']->value,
+    //     $input_validations['name']->value,
+    // );
+
+    // check_download_request($download_request);
+
+    // $authentificated_user_id = 1; //from_session('account_id');
+
+    // $filename = format_to_source_file($download_request);
+
+    // $response = create_download($download_request, $authentificated_user_id);
+
+    // //En cas d'erreur d'accès à la base.
+    // if ($response instanceof Notice) {
+    //     header('Content-Type: application/json; charset=utf-8');
+    //     echo json_encode(array(
+    //         'statut' => 403,
+    //         'errors' => array($response),
+    //     ));
+    //     exit;
+    // }
+
+    // $download_id = $response;
+
+    // //En cas de formulaire valide, on lance le téléchargement
+
+    // $yt = new YoutubeDl();
+    // $yt->setBinPath(from_env('PATH_BIN_YOUTUBEDL'));
+    // $yt->setPythonPath(from_env('PATH_PYTHON'));
+
+    // try {
+
+    //     //Lancer le téléchargement et écrire la progression en base.
+    //     $db = connect_to_db();
+
+    //     //Show progress
+    //     $yt->onProgress(static function (?string $process_target, ?string $percentage, ?string $size, ?string $speed, string $eta, ?string $total_time) use ($download_id, $db): void {
+    //         sql_update_download($db, $download_id, $process_target, $percentage, $size, $speed, $total_time);
+    //     });
+
+    //     //Mettre l'état du download à actif
+    //     download_change_state($download_id, DownloadState::Downloading);
+
+    //     error_log_download($authentificated_user_id, $download_request->url, $filename, DownloadState::Downloading);
+
+    //     $collection = $yt->download(
+    //         Options::create()
+    //             ->downloadPath(PATH_SOURCES)
+    //             ->url($download_request->url)
+    //             ->format(youtube_dl_download_format())
+    //             ->output($filename)
+    //     );
+
+
+    //     foreach ($collection->getVideos() as $video) {
+
+    //         if ($video->getError() !== null) {
+
+    //             //Mettre le state du dl à failed
+    //             download_change_state($download_id, DownloadState::Failed);
+
+    //             error_log_download($authentificated_user_id, $download_request->url, $filename, DownloadState::Failed);
+
+    //             throw new Exception("Error downloading video: {$video->getError()}");
+    //         } else {
+    //             //Mettre le state du dl a downloaded
+    //             download_change_state($download_id, DownloadState::Downloaded);
+
+    //             //Log un message propre sur le download terminé.
+    //             error_log_download($authentificated_user_id, $download_request->url, $filename, DownloadState::Downloaded);
+
+    //             //Mettre à jour le fichier source.
+
+    //             //Générer le label à partir de series+slug
+    //             $file = $video->getFile();
+    //         }
+    //     }
+    // } catch (Exception $e) {
+    //     error_log($e);
+    //     header('Content-Type: application/json; charset=utf-8');
+    //     echo json_encode(array(
+    //         'statut' => 500,
+    //         'errors' => array(new Notice('Une erreur est survenue, veuillez réessayer', NoticeStatus::Error)),
+    //     ));
+    // }
+
+    // exit;
 }
+
+
+
 
 
 /**

@@ -5,6 +5,7 @@
         "monolog/monolog": "^2.5",
         "symfony/var-dumper": "^6.0",
         "vlucas/phpdotenv": "^5.4",
-        "ircmaxell/random-lib": "^1.2"
+        "ircmaxell/random-lib": "^1.2",
+        "crowdstar/background-processing": "^1.0"
     }
 }
