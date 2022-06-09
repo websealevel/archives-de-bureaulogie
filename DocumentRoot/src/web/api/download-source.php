@@ -44,6 +44,7 @@ function api_download_source()
 {
     //Utilisateur authentifié et capacité 'add_source' vérifiée
 
+    write_log('foo');
     //Check le token
 
     //Check le form

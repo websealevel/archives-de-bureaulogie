@@ -14,3 +14,9 @@ RUN apt-get -y install python3
 ENV TZ=Europe/Paris
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get install -y tzdata 
+
+
+RUN apt-get install -y vim
+
+
+RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"

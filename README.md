@@ -17,6 +17,7 @@ Il sert également de prétexte pour construire un outil en *vanilla php* pour s
 - [Database credentials](#database-credentials)
 - [FFMPEG](#ffmpeg)
 - [youtube-dl](#youtube-dl-1)
+    - [Configuration php-fpm](#configuration-php-fpm)
     - [Lancer le projet](#lancer-le-projet)
     - [Arrêter le projet](#arrêter-le-projet)
     - [Core functions (CLI)](#core-functions-cli)
@@ -126,6 +127,17 @@ La liste des options
 - `PATH_BIN_YOUTUBEDL`: le chemin **relatif à DocumentRoot** de youtube-dl
 - `SITE_MAINTENANCE_MODE`: 0 pas en maintenance, 1 en maintenance
 - `SITE_DISABLE_SIGN_UP`: 0 les inscriptions sont ouvertes, 1 fermées
+
+
+### Configuration php-fpm
+
+On utilise `php-fpm` qui utilise
+
+- `$PHP_INI_DIR/php.ini` pour *php core*
+- `$PHP_INI_DIR/php-fpm.conf` comme configuration globale de php-fpm
+- `$PHP_INI_DIR/php-fpm.d/www.conf` pour la configuration de chaque pool de process php
+
+avec ici `$PHP_INI_DIR=/usr/local/etc/php`. 
 
 ### Lancer le projet
 
