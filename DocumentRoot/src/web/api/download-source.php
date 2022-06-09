@@ -101,7 +101,7 @@ function api_download_source()
 
     $db = connect_to_db();
 
-    //Déclaration d'une fonction à executed en arrière plan
+    //Déclaration d'une fonction à executer en arrière plan
     BackgroundProcessing::add(
         function () use ($yt, $download_id, $authentificated_user_id, $download_request, $filename, $db) {
 

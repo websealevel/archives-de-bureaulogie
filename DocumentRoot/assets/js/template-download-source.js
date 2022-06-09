@@ -99,6 +99,7 @@ jQuery(function ($) {
                 //Sinon, creer un nouvel item
                 $("ul#active_downloads").append(
                     '<li id="' + download.id + '">' +
+                    '<div class="name">'+ download.filename+'</div>' + 
                     '<progress id=id-' + download.id + ' value="' + download.progression + '" max="100">' +
                     download.progression + '%</progress>' +
                     '<span class="dl-speed">' + download.speed + '</span>' +

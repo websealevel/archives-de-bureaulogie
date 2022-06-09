@@ -15,7 +15,7 @@ header("Cache-Control: no-store");
 header("Content-Type: text/event-stream");
 
 //Authentification
-session_id($_REQUEST['PHPSESSID']);
+session_id($_COOKIE['PHPSESSID']);
 session_start();
 
 while (true) {
