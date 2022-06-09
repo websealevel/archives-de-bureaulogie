@@ -33,11 +33,11 @@ require_once __DIR__ . '/../../handlers.php';
 
     <ul>
         <?php if (current_user_can('submit_clip')) :  ?>
-            <li><a href="clip">Soumettre un nouvel extrait</a></li>
+            <li><a href="clip">soumettre un nouvel extrait</a></li>
         <?php endif;  ?>
 
         <?php if (current_user_can('add_source')) :  ?>
-            <li><a href="download-source">Importer une nouvelle vidéo source </a>
+            <li><a href="download-source">importer une nouvelle vidéo source</a> -
                 <?php esc_active_downloads_info_e(); ?></li>
         <?php endif;  ?>
 
@@ -47,7 +47,7 @@ require_once __DIR__ . '/../../handlers.php';
 
     <ul>
         <?php if (current_user_can('submit_reference')) :  ?>
-            <li><a href="submit_ref">Soumettre une référence bibliographique</a></li>
+            <li><a href="submit_ref">soumettre une référence bibliographique</a></li>
         <?php endif;  ?>
     </ul>
 

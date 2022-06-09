@@ -261,6 +261,6 @@ function esc_active_downloads_info_e()
     $active_downloads = active_downloads();
     if (0 === count($active_downloads))
         return;
-    esc_html_e(sprintf("(%d téléchargement(s) en cours)", count($active_downloads)));
+    esc_html_e(sprintf("%d téléchargement(s) en cours", count($active_downloads)));
     return;
 }

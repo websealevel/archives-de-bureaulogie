@@ -14,7 +14,7 @@ require_once __DIR__ . '/../../utils.php';
 
 <div class="annonce">Les archives de bureaulogie ouvrent bientôt leurs portes ! Ouverture prévue en Juin 2022</div>
 
-<h2>se connecter</h2>
+<h2>Connexion</h2>
 <div class="form-login">
     <form action="log-in" method="POST">
         <div>
@@ -27,7 +27,7 @@ require_once __DIR__ . '/../../utils.php';
             <input type="password" id="password" name="password" value="password">
             <div class="error-message"><?php esc_html_form_error_msg_e('password', 'form_errors') ?></div>
         </div>
-        <input type="submit" value="connexion">
+        <input type="submit" value="se connecter">
     </form>
 </div>
 

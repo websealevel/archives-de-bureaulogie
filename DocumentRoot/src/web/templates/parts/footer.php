@@ -10,7 +10,7 @@ require_once __DIR__ . '../../../../default-handlers.php';
             <a href="contact">contact</a>
         </li>
         <li>
-            <a href="faq">FAQ</a>
+            <a href="faq">faq</a>
         </li>
         <li>
             <a href="https://github.com/websealevel/archives-de-bureaulogie">code source</a>
@@ -22,7 +22,7 @@ require_once __DIR__ . '../../../../default-handlers.php';
             <a href="nous-soutenir">nous soutenir</a>
         </li>
         <li>
-            <a href="https://twitter.com/archivesdb_fr">Twitter</a>
+            <a href="https://twitter.com/archivesdb_fr">twitter</a>
         </li>
     </ul>
 </footer>
