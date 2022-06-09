@@ -84,7 +84,7 @@ function esc_html_breadcrumbs(string $relative_path = '/'): void
         return;
 ?>
     <div class="fil-arianne">
-        <a href="<? echo $relative_path; ?>">Retour</a>
+        <a href="<?php echo $relative_path; ?>">Retour</a>
     </div>
 <?php
     return;
