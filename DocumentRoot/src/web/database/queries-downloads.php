@@ -43,8 +43,6 @@ function sql_insert_download(DownloadRequest $download_request, string $filename
 
     $stmt = $db->prepare($sql);
 
-    write_log('id:' . $account_id);
-
     $stmt->bindValue(':url', $download_request->url);
     $stmt->bindValue(':filename', $filename);
     $stmt->bindValue(':format', $format);

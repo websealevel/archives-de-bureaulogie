@@ -33,10 +33,10 @@ jQuery(function ($) {
             success: function (data) {
 
                 //Si le formulaire est rejeté on récupere les erreurs et on les affiche. Ou si une erreur au lancement du dl. A faire.
+                console.log(data.statut)
 
                 //Si réussi, on récuperer le nom du fichier avec le lien pour visualiser la source (par exemple). A faire
-
-                console.error(data)
+            
                 const errors = data.errors
                 const items = errors.map((error) => "<li>" + error.message + "</li>")
 

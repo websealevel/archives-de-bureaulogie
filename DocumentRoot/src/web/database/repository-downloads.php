@@ -33,6 +33,13 @@ function create_download(DownloadRequest $download_request, string $account_id):
 
     //Checker si déjà un téléchargement en cours (status downloading) sur la meme url. Si c'est le cas on ne télécharge par et on renvoye une Notice.
 
+    if (already_requested($download_request)) {
+        return new Notice(
+            sprintf("Le fichier %s est déjà en cours de téléchargement.", $filename),
+            NoticeStatus::Error
+        );
+    }
+
     try {
         $id = sql_insert_download($download_request, $filename, $format, $account_id);
     } catch (PDOException $e) {
@@ -44,6 +51,26 @@ function create_download(DownloadRequest $download_request, string $account_id):
     }
 
     return $id;
+}
+
+
+/**
+ * Retourne vrai si le fichier est déjà en cours de téléchargement (url sert d'identifiant unique), faux sinon
+ * @param DownloadRequest $download_request La demande de téléchargement
+ * @return bool
+ */
+function already_requested(DownloadRequest $download_request): bool
+{
+    try {
+        $result = sql_find_pending_download_request_with_same_url($download_request->url);
+    } catch (PDOException $e) {
+        return new Notice(
+            "Une erreur est survenue",
+            NoticeStatus::Error
+        );
+    }
+
+    return boolval($result);
 }
 
 

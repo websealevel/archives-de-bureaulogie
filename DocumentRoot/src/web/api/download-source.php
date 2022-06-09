@@ -43,7 +43,22 @@ use CrowdStar\BackgroundProcessing\BackgroundProcessing;
 function api_download_source()
 {
 
-    //Utilisateur authentifié et capacité 'add_source' vérifiée
+    //Authentifier l'utilisateur
+    if (!current_user_can('add_source')) {
+        header('Content-Type: application/json; charset=utf-8');
+        $response =  json_encode(array(
+            'statut' => 403,
+            'errors' => array(
+                array(
+                    'name' => '',
+                    'value' => '',
+                    'message' => 'Vous ne disposez pas des droits nécessaires pour ajouter une vidéo source'
+                )
+            )
+        ));
+        echo $response;
+        exit;
+    }
 
     //Check le token
 
@@ -77,7 +92,8 @@ function api_download_source()
 
     check_download_request($download_request);
 
-    $authentificated_user_id = 1; //from_session('account_id');
+    $authentificated_user_id = from_session('account_id');
+
 
     $filename = format_to_source_file($download_request);
 
@@ -94,6 +110,8 @@ function api_download_source()
     }
 
     $download_id = $response;
+
+    exit;
 
     $yt = new YoutubeDl();
     $yt->setBinPath(from_env('PATH_BIN_YOUTUBEDL'));
@@ -159,6 +177,20 @@ function api_download_source()
             }
         }
     );
+
+    header('Content-Type: application/json; charset=utf-8');
+    $response =  json_encode(array(
+        'statut' => 200,
+        'errors' => array(
+            array(
+                'name' => '',
+                'value' => '',
+                'message' => 'La vidéo est en cours de téléchargement'
+            )
+        )
+    ));
+    echo $response;
+    exit;
 
     //Lancement du téléchargement de la source en tâche de fond
     BackgroundProcessing::run();
