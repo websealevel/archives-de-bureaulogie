@@ -99,9 +99,9 @@ function api_download_source()
     $yt->setBinPath(from_env('PATH_BIN_YOUTUBEDL'));
     $yt->setPythonPath(from_env('PATH_PYTHON'));
 
-    //Lancer le téléchargement et écrire la progression en base.
     $db = connect_to_db();
 
+    //Déclaration d'une fonction à executed en arrière plan
     BackgroundProcessing::add(
         function () use ($yt, $download_id, $authentificated_user_id, $download_request, $filename, $db) {
 
