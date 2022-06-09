@@ -89,10 +89,12 @@ jQuery(function ($) {
             if ($("ul#active_downloads li#" + download.id).length) {
 
                 //Mettre à jour la progression et la vitesse
-                $progress = $("progress#id-" + download.id)
+                $progress_bar = $("progress#id-" + download.id)
                 $speed = $("ul#active_downloads li#" + download.id + " span.dl-speed")
+                $progress_text = $('ul#active_downloads li div#id-' + download.id)
 
-                $progress.attr('value', download.progression)
+                $progress_text.html(download.progression+'%')
+                $progress_bar.attr('value', download.progression)
                 $speed.html(download.speed)
 
             } else {
@@ -100,6 +102,7 @@ jQuery(function ($) {
                 $("ul#active_downloads").append(
                     '<li id="' + download.id + '">' +
                     '<div class="name">'+ download.filename+'</div>' + 
+                    '<div class="progression" id=id-' + download.id +'>'+ download.progression+'%</div>' + 
                     '<progress id=id-' + download.id + ' value="' + download.progression + '" max="100">' +
                     download.progression + '%</progress>' +
                     '<span class="dl-speed">' + download.speed + '</span>' +
