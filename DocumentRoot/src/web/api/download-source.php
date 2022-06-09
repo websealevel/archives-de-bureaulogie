@@ -1,8 +1,7 @@
 <?php
 
 /**
- * Gere requete AJAX pour valider le formulaire de téléchargement d'une vidéo source
- * et enregistrer une demande de téléchargement
+ * Gere requete AJAX pour valider le formulaire de téléchargement d'une vidéo source et enregistrer une demande de téléchargement
  *
  * @link
  *
@@ -70,8 +69,6 @@ function api_download_source()
         exit;
     }
 
-    //Lancement du téléchargement de la source
-
     $download_request = new DownloadRequest(
         $input_validations['source_url']->value,
         $input_validations['series']->value,
@@ -97,8 +94,6 @@ function api_download_source()
     }
 
     $download_id = $response;
-
-    //En cas de formulaire valide, on lance le téléchargement
 
     $yt = new YoutubeDl();
     $yt->setBinPath(from_env('PATH_BIN_YOUTUBEDL'));
@@ -165,7 +160,7 @@ function api_download_source()
         }
     );
 
-    // Send HTTP response back to the client first, then run the two background tasks added.
+    //Lancement du téléchargement de la source en tâche de fond
     BackgroundProcessing::run();
 
     exit;

@@ -18,6 +18,7 @@ jQuery(function ($) {
         }
     })
 
+    //Importation (soumission du formulaire via une requete AJAX)
     $("#submit").on('click', function (event) {
 
         event.preventDefault();
@@ -50,7 +51,7 @@ jQuery(function ($) {
         //Indiquer que le téléchargement a été lancé (feedback pour l'user)
     })
 
-    //Server Send Event protocol (SSE).
+    //Server Send Event protocol (SSE) :  récuperer la progression des téléchargements
 
     //Ouverture d'une connexion avec le serveur
     var evtSource = new EventSource("sse-download-source");
