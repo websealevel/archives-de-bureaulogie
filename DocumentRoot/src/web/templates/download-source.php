@@ -75,7 +75,7 @@ $token = register_api_token($account);
         </div>
         <div>
             <input type="hidden" name="token" value="<?php echo $token; ?>">
-            <input type="button" value="importer" id="submit">
+            <input type="button" value="Importer" id="submit">
         </div>
     </form>
 

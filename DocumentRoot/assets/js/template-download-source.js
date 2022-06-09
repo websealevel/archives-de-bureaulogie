@@ -56,12 +56,6 @@ jQuery(function ($) {
     //Ouverture d'une connexion avec le serveur
     var evtSource = new EventSource("sse-download-source");
 
-
-    //Erreur
-    evtSource.onerror = function (err) {
-        console.error("EventSource failed:", err);
-    };
-
     //Met a jour le dom des téléchargements en cours
     evtSource.onmessage = function (event) {
 
@@ -82,8 +76,6 @@ jQuery(function ($) {
         }
 
         downloads.forEach(download => {
-
-            console.log(download)
 
             //Si l'élément existe déjà
             if ($("ul#active_downloads li#" + download.id).length) {
