@@ -242,4 +242,4 @@ Il faut supprimer le cache
 - [nginx documentation](https://nginx.org/en/docs/)
 - [nginx beginer's guide](https://nginx.org/en/docs/beginners_guide.html)
 - [dockerize-webserver-nginx-php8](https://marcit.eu/en/2021/04/28/dockerize-webserver-nginx-php8/)
-- Modern PHP,O'Reilly, Chapter 7, p138-146
+- *Modern PHP* by Josh Lockhart, O'Reilly, 2015, Chapter 7, *p138-146*
