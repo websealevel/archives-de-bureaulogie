@@ -167,9 +167,6 @@ function api_download_source()
 }
 
 
-
-
-
 /**
  * Vérifie la validité des champs du formulaire de demande de téléchargement de source. Retourne un tableau d'InputValidation correspondant à chaque champ avec son status valide ou non
  * @return InputValidation[] 
