@@ -52,59 +52,59 @@ jQuery(function ($) {
 
     //Server Send Event protocol (SSE).
 
-    //Ouverture d'une connexion avec le serveur
-    // var evtSource = new EventSource("sse-download-source");
+    Ouverture d'une connexion avec le serveur
+    var evtSource = new EventSource("sse-download-source");
 
 
-    // //Erreur
-    // evtSource.onerror = function (err) {
-    //     console.error("EventSource failed:", err);
-    // };
+    //Erreur
+    evtSource.onerror = function (err) {
+        console.error("EventSource failed:", err);
+    };
 
-    // //Met a jour le dom des téléchargements en cours
-    // evtSource.onmessage = function (event) {
+    //Met a jour le dom des téléchargements en cours
+    evtSource.onmessage = function (event) {
 
-    //     const json_data = JSON.parse(event.data)
+        const json_data = JSON.parse(event.data)
 
-    //     const content = json_data['content']
+        const content = json_data['content']
 
-    //     //Il y a une erreur: soit le json est invalide ou pas d'autorization
-    //     if (false === content) {
-    //         console.error("Une erreur est survenue: " + json_data['message']);
-    //         return
-    //     }
+        //Il y a une erreur: soit le json est invalide ou pas d'autorization
+        if (false === content) {
+            console.error("Une erreur est survenue: " + json_data['message']);
+            return
+        }
 
-    //     const downloads = json_data['active_downloads']
+        const downloads = json_data['active_downloads']
 
-    //     if (typeof downloads === 'undefined') {
-    //         return
-    //     }
+        if (typeof downloads === 'undefined') {
+            return
+        }
 
-    //     downloads.forEach(download => {
+        downloads.forEach(download => {
 
-    //         console.log(download)
+            console.log(download)
 
-    //         //Si l'élément existe déjà
-    //         if ($("ul#active_downloads li#" + download.id).length) {
+            //Si l'élément existe déjà
+            if ($("ul#active_downloads li#" + download.id).length) {
 
-    //             //Mettre à jour la progression et la vitesse
-    //             $progress = $("progress#id-" + download.id)
-    //             $speed = $("ul#active_downloads li#" + download.id + " span.dl-speed")
+                //Mettre à jour la progression et la vitesse
+                $progress = $("progress#id-" + download.id)
+                $speed = $("ul#active_downloads li#" + download.id + " span.dl-speed")
 
-    //             $progress.attr('value', download.progression)
-    //             $speed.html(download.speed)
+                $progress.attr('value', download.progression)
+                $speed.html(download.speed)
 
-    //         } else {
-    //             //Sinon, creer un nouvel item
-    //             $("ul#active_downloads").append(
-    //                 '<li id="' + download.id + '">' +
-    //                 '<progress id=id-' + download.id + ' value="' + download.progression + '" max="100">' +
-    //                 download.progression + '%</progress>' +
-    //                 '<span class="dl-speed">' + download.speed + '</span>' +
-    //                 '</li>'
-    //             )
-    //         }
-    //     });
-    // }
+            } else {
+                //Sinon, creer un nouvel item
+                $("ul#active_downloads").append(
+                    '<li id="' + download.id + '">' +
+                    '<progress id=id-' + download.id + ' value="' + download.progression + '" max="100">' +
+                    download.progression + '%</progress>' +
+                    '<span class="dl-speed">' + download.speed + '</span>' +
+                    '</li>'
+                )
+            }
+        });
+    }
 })
 
