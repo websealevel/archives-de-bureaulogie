@@ -23,6 +23,8 @@ function register_api_token(string $account, int $expiration_in_s = 7200): strin
 
     $token = generate_token();
 
+    $_SESSION['token_add_source'] = $token;
+
     // try {
     //     $result = sql_insert_token($token, $account, $expiration_in_s);
     // } catch (Exception $e) {

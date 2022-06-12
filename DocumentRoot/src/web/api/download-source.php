@@ -42,6 +42,8 @@ use CrowdStar\BackgroundProcessing\BackgroundProcessing;
  */
 function api_download_source()
 {
+    // session_id($_COOKIE['PHPSESSID']);
+    // session_start();
 
     //Authentifier l'utilisateur
     if (!current_user_can('add_source')) {
@@ -110,8 +112,6 @@ function api_download_source()
     }
 
     $download_id = $response;
-
-    exit;
 
     $yt = new YoutubeDl();
     $yt->setBinPath(from_env('PATH_BIN_YOUTUBEDL'));
@@ -190,7 +190,6 @@ function api_download_source()
         )
     ));
     echo $response;
-    exit;
 
     //Lancement du téléchargement de la source en tâche de fond
     BackgroundProcessing::run();

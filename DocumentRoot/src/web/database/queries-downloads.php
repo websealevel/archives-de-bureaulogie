@@ -74,7 +74,7 @@ function sql_find_pending_download_request_with_same_url(string $url): stdClass|
 
     $stmt = $db->prepare($sql);
     $stmt->bindValue(':url', $url);
-    $stmt->bindValue(':state', 'pending');
+    $stmt->bindValue(':state', 'downloading');
     $stmt->execute();
 
     return $result = $stmt->fetchObject();

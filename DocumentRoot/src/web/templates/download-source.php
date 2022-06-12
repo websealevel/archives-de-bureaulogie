@@ -24,14 +24,14 @@ if (!current_user_can('add_source'))
         new Notice('Vous n\'avez pas l\'autorisation d\'ajouter une source', NoticeStatus::Error)
     ));
 
-/**
- * Cree un token pour consommer l'API
- */
-$account = from_session('account_id');
+
+
 
 /**
+ * Délivre un jeton pour consommer l'api au compte utilisateur
  * Fait office de nonce (previent CSRF, un jeton pour demander un téléchargement)
  */
+$account = from_session('account_id');
 $token = register_api_token($account);
 ?>
 
