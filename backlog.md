@@ -223,24 +223,23 @@ Suivi des tâches
 - mettre en place un template pour déposer une issue (s'inspirer de celui de symfony)[]
 - deplacer le fichier source+dtd dans un dossier a part[]
 
-
-
 ### Ecran - Importer une source/Lister les sources
 
 - `preg_match` sur le name du formulaire ne fonctionne pas, à fixer (check_download_request_form, ligne 102) [ ]
+- checker le nonce (token) du formulaire de soumission de vidéo source []
 - télécharger une vidéo apres soumission du formulaire [x]
 - progression téléchargement [x]
 - téléchargement en arrière plan [x]
 - charger prévisualisation quand l'url est collée (js) [x]
 - lancer le téléchargement via une requete AJAX sur l'API de l'appli (non bloquant) [x]
 - si le téléchargement échoue fails gracefully sans deconnecter [x]
-- si le téléchargement va à son terme déclarer la nouvelle source dans le fichier source []
+- si le téléchargement va à son terme déclarer la nouvelle source dans le fichier source [x]
 - empecher le téléchargement si une ressource avec la meme url est déjà déclarée dans le fichier source[x]
 - empecher un téléchargement d'une ressource avec une url identique à l'urld'un téléchargement en cours (downloading)[x]
 - afficher les erreurs dans le formulaire (js) []
 - basculer dl en cours vers historique, clean interface (js) []
-- fixer bug format (plus de son)[]
-- nettoyer le cache de youtube dl après chaque dl []
+- fixer bug format (plus de son)[x]
+- nettoyer le cache de youtube dl après chaque dl [x]
 - recuperer le PID du processus youtube-dl du download []
 - proposer dans téléchargement en cours la possibilité d'annuler le dl (grace au pid) []
 
