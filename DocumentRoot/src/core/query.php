@@ -115,7 +115,7 @@ function query_clip(string $source, string $slug, string $timecode_start, string
 }
 
 /**
- * Ajoute un extrait à la source s'il n'existe pas déjà (source+timecodes identiques)
+ * Ajoute un extrait au fichier la source s'il n'existe pas déjà (source+timecodes identiques)
  * @param string $source La source du clip (son parent)
  * @param string $slug Le slug du clip
  * @param string $timecode_start
@@ -124,4 +124,32 @@ function query_clip(string $source, string $slug, string $timecode_start, string
  */
 function declare_clip(string $source, string $slug, string $timecode_start, string $timecode_end, string $file_source = SOURCE_FILE): DOMNode
 {
+}
+
+/**
+ * Ajoute une vidéo source au fichier source si elle n'existe pas déjà
+ * @param string $url L'URL de la vidéo source
+ * @param string $series La série a laquelle appartient la vidéo source
+ * @param string $slug L'identifiant appairaissant dans le nom du fichier de la vidéo source
+ * @param string $file_name_saved Le nom du fichier téléchargé (enregistré par youtube-dl)
+ * @param string $extension L'extension de la vidéo source
+ * @throws Exception - Si le nom du fichier enregistré ne correspond pas aux métadonnées de la source à déclarer
+ */
+function declare_source(string $url, string $series, string $slug, string $file_name_saved, string $extension = EXTENSION_SOURCE): DOMNode
+{
+
+    write_log(array(format_to_source_file_raw($series, $slug), basename($file_name_saved)));
+
+    if (format_to_source_file_raw($series, $slug) !== basename($file_name_saved)) {
+        throw new Exception("Le nom du fichier vidéo enregistré ne correspond pas aux métadonnées");
+    }
+
+    //On check que le fichier exite
+    if (!source_exists(basename($file_name_saved))) {
+        throw new Exception("Impossible de déclarer une source, car le fichier vidéo est introuvable dans le dossier sources");
+    }
+
+    write_log('On peut ajouter la source au fichier source !');
+
+    return new DOMNode();
 }

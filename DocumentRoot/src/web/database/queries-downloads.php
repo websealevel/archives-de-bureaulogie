@@ -158,8 +158,12 @@ function sql_change_download_state(string $download_id, DownloadState $state): i
  */
 function sql_update_download(PDO $db, string $download_id, ?string $progressTarget, string $percentage, string $size, string $speed, ?string $total_time)
 {
-    $sql =
-        'UPDATE downloads
+
+    //A refactor. Update total_time que lorsqu'il est défini (ie a la fin du dl)
+
+    if ($total_time) {
+        $sql =
+            'UPDATE downloads
     SET 
     progression = :progression,
     speed = :speed,
@@ -167,12 +171,28 @@ function sql_update_download(PDO $db, string $download_id, ?string $progressTarg
     WHERE
     id = :id';
 
-    $stmt = $db->prepare($sql);
-    $stmt->bindValue(':progression', $percentage);
-    $stmt->bindValue(':speed', $speed);
-    $stmt->bindValue(':totaltime', $total_time ?? '');
-    $stmt->bindValue(':id', $download_id);
-    $stmt->execute();
+        $stmt = $db->prepare($sql);
+        $stmt->bindValue(':progression', $percentage);
+        $stmt->bindValue(':speed', $speed);
+        $stmt->bindValue(':totaltime', $total_time);
+        $stmt->bindValue(':id', $download_id);
+        $stmt->execute();
+    } else {
+        $sql =
+            'UPDATE downloads
+            SET 
+            progression = :progression,
+            speed = :speed
+            WHERE id = :id';
+
+        $stmt = $db->prepare($sql);
+        $stmt->bindValue(':progression', $percentage);
+        $stmt->bindValue(':speed', $speed);
+        $stmt->bindValue(':id', $download_id);
+        $stmt->execute();
+    }
+
+
 
     // return the number of row affected
     return $stmt->rowCount();

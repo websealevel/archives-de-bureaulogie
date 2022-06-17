@@ -138,12 +138,11 @@ function api_download_source()
     BackgroundProcessing::add(
         function () use ($yt, $download_id, $authentificated_user_id, $download_request, $filename, $db, $path_bin_ffmpeg) {
 
-            load_env();
-
             try {
 
                 //Show progress
                 $yt->onProgress(static function (?string $process_target, ?string $percentage, ?string $size, ?string $speed, string $eta, ?string $total_time) use ($download_id, $db): void {
+
                     sql_update_download($db, $download_id, $process_target, $percentage, $size, $speed, $total_time);
                 });
 
@@ -181,13 +180,16 @@ function api_download_source()
 
                         $file = $video->getFile();
 
-
-                        //Clean cach de youtube-dl
-                        exec('python3 youtube-dl/youtube-dl ---rm-cache-dir;');
+                        //Supprime le cache de youtube-dl
+                        // exec('python3 youtube-dl/youtube-dl ---rm-cache-dir;');
 
                         // Mettre à jour le fichier source.
-                        // series, url, slug = f(series, id) name = slug.extension.
-
+                        declare_source(
+                            $download_request->url,
+                            $download_request->series_name,
+                            $download_request->id,
+                            $file
+                        );
                     }
                 }
             } catch (Exception $e) {

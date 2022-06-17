@@ -93,19 +93,16 @@ function format_to_clip_file(DOMElement $clip): string
 
     return sprintf("[%s][%s][%s][%s].%s", $source_name, $slug, $start, $end, EXTENSION_CLIP);
 }
-
-
 /**
  * Retourne une chaine de caractères formatté au format FORMAT_FILE_VIDEO_SOURCE (utilisé notamment pour générér les noms des fichiers vidéos sources)
- * @see string FORMAT_FILE_VIDEO_SOURCE
- * @param DownloadRequest $download_request
- * @return string Le nom du fichier vidéo source au format correct
+ * @param string $series_name Le nom de la série à laquelle appartient la vidéo source
+ * @param string $id L'identifiant de la vidéo source (ou slug)
+ * @param string $extension. Opt. Default = EXTENSION_SOURCE
+ * @return string
  * @throws Exception - Si le nom du fichier source n'est pas validé par le format attendu
  */
-function format_to_source_file(DownloadRequest $download_request): string
+function format_to_source_file_raw(string $series_name, string $id, string $extension = EXTENSION_SOURCE): string
 {
-    $series_name = $download_request->series_name;
-    $id = $download_request->id;
 
     $series_name = preg_replace('#[ -]+#', '-', $series_name);
     $id = preg_replace('#[ -]+#', '-', $id);
@@ -120,6 +117,22 @@ function format_to_source_file(DownloadRequest $download_request): string
     }
     return $file_name;
 }
+
+/**
+ * Retourne une chaine de caractères formatté au format FORMAT_FILE_VIDEO_SOURCE (utilisé notamment pour générér les noms des fichiers vidéos sources)
+ * @see string FORMAT_FILE_VIDEO_SOURCE
+ * @param DownloadRequest $download_request
+ * @return string Le nom du fichier vidéo source au format correct
+
+ */
+function format_to_source_file(DownloadRequest $download_request): string
+{
+    $series_name = $download_request->series_name;
+    $id = $download_request->id;
+
+    return format_to_source_file_raw($series_name, $id);
+}
+
 
 /**
  * Retourne le nom de la source à partir du nom du fichier extrait, faux si une erreur se produit (format non valide). Forme à améliorer avec de la regex plutôt et des match par groupe.
