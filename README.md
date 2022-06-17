@@ -38,7 +38,7 @@ Envie de contribuer au dépôt en proposant un extrait ? [Lisez d'abord ceci](CO
 
 ## Projet : vue d'ensemble et suivi
 
-Voir les specifications techniques et le backlog du projet [ici](backlog.md).
+Voir les [spécifications techniques et le backlog du projet](backlog.md).
 
 ## Au délà de la bureaulogie, ce qu'est vraiment le codesource du projet
 
