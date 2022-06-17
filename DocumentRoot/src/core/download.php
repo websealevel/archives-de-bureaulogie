@@ -83,6 +83,8 @@ function core_download(DownloadRequest $download_request, string $download_path 
  * @throws Exception - si l'url de la vidéo à télécharger n'est pas valide.
  * @throws Exception - si l'utilisateur essaie de télécharger une video depuis un host pas autorisé
  * @throws Exception - si le nom du fichier sous lequel est enregistré la vidéo contient des caractères invalides
+ * @throws Exception - si un téléchargement avec la même url est déjà en cous
+ * @throws Exception - si la vidéo source est déjà enregistrée dans le fichier source (extraits.xml)
  * @return void
  */
 function check_download_request(DownloadRequest $download_request): void
@@ -101,6 +103,17 @@ function check_download_request(DownloadRequest $download_request): void
     if (!is_download_request_valid($download_request)) {
         throw new \Exception("Les métadonnées associées à la vidéo source sont vides ou contiennent des caractères illégaux. Merci de soumettre des chaînes de caractères ne comprenant que des caractères alphanumériques.");
     }
+
+    //Valider qu'un téléchargement en cours (status downloading) sur la meme url n'existe pas
+    if (already_requested($download_request)) {
+        throw new \Exception("La source est déjà en cours de téléchargement.");
+    }
+
+    //Check que la video n'est pas déja enregistrée dans le fichier source
+    if (true) {
+        throw new \Exception("Cette source est déjà présente dans les archives.");
+    }
+
 
     return;
 }

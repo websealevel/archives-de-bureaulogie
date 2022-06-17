@@ -42,8 +42,6 @@ use CrowdStar\BackgroundProcessing\BackgroundProcessing;
  */
 function api_download_source()
 {
-    // session_id($_COOKIE['PHPSESSID']);
-    // session_start();
 
     //Authentifier l'utilisateur
     if (!current_user_can('add_source')) {
@@ -92,13 +90,20 @@ function api_download_source()
         $input_validations['name']->value,
     );
 
-    check_download_request($download_request);
+    try {
+        check_download_request($download_request);
+    } catch (Exception $e) {
+        $resonse =  new Notice($e->getMessage(),  NoticeStatus::Error);
+        header('Content-Type: application/json; charset=utf-8');
+        echo json_encode(array(
+            'statut' => 403,
+            'errors' => array($resonse),
+        ));
+        exit;
+    }
 
     $authentificated_user_id = from_session('account_id');
-
-
     $filename = format_to_source_file($download_request);
-
     $response = create_download($download_request, $authentificated_user_id);
 
     //En cas d'erreur d'accès à la base.
@@ -110,6 +115,8 @@ function api_download_source()
         ));
         exit;
     }
+
+    //Tous les checks sont passés, le téléchargement est executé a partir d'ici.
 
     $download_id = $response;
 
@@ -163,8 +170,11 @@ function api_download_source()
 
                         //Mettre à jour le fichier source.
 
-                        //Générer le label à partir de series+slug
                         $file = $video->getFile();
+
+                        // series, url, slug = f(series, id) name = slug.extension 
+
+                        write_log('Mise a jour du fichier source', array($file, $download_request->url));
                     }
                 }
             } catch (Exception $e) {

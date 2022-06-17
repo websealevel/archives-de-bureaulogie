@@ -10,9 +10,7 @@
  */
 
 require_once __DIR__ . '/queries-downloads.php';
-
 require_once __DIR__ . '/../utils.php';
-
 require_once __DIR__ . '/../../core/download.php';
 require_once __DIR__ . '/../../models/Notice.php';
 require_once __DIR__ . '/../../models/enumDownloadState.php';
@@ -20,7 +18,8 @@ require_once __DIR__ . '/../../models/enumDownloadState.php';
 
 
 /**
- * Enregistre une demande de téléchargement. Retourne l'id de la demande en cas de succès, une notice en cas d'erreur (erreur lors de l'écriture en base)
+ * Enregistre une demande de téléchargement. Retourne l'id de la demande en cas de succès, une notice en cas d'erreur.
+ * Une erreur est levée si un téléchargement avec la même url est déjà en cours, s'il y'a une erreur d'écriture en base.
  * @param DownloadRequest $downlad_request La demande de téléchargement
  * @param string $account_id L'id du compte faisant la demande
  * @return int|Notice
@@ -30,15 +29,6 @@ function create_download(DownloadRequest $download_request, string $account_id):
 
     $filename = format_to_source_file($download_request);
     $format = youtube_dl_download_format();
-
-    //Checker si déjà un téléchargement en cours (status downloading) sur la meme url. Si c'est le cas on ne télécharge par et on renvoye une Notice.
-
-    if (already_requested($download_request)) {
-        return new Notice(
-            sprintf("Le fichier %s est déjà en cours de téléchargement.", $filename),
-            NoticeStatus::Error
-        );
-    }
 
     try {
         $id = sql_insert_download($download_request, $filename, $format, $account_id);
