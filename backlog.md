@@ -4,7 +4,8 @@
   - [Specs](#specs)
     - [Architecture générale](#architecture-générale)
       - [Les différents composants](#les-différents-composants)
-      - [Le *fichier source*](#le-fichier-source)
+      - [Le *fichier source* (module core)](#le-fichier-source-module-core)
+      - [Module source](#module-source)
     - [Cahier des charges pour l'encodage vidéo/audio des extraits](#cahier-des-charges-pour-lencodage-vidéoaudio-des-extraits)
     - [Formattage des noms](#formattage-des-noms)
       - [Fichier vidéo *source*](#fichier-vidéo-source)
@@ -43,17 +44,21 @@
 
 Le projet a l’architecture suivante :
 
-- *fichier source* au format XML (simple à lire par les humains et les machines, permet de valider un schéma de données). Le fichier déclare l'intégralité des extraits choisis. Il est *la base de données des extraits*.
+- *fichier source* au format XML (simple à lire par les humains et les machines, permet de valider un schéma de données). Le fichier déclare l'intégralité des extraits choisis. Il est *la base de données des extraits*. Il est compris dans un module (sous-module du module *core*) qui encapsule l'acces aux fichiers (écriture/lecture), la gestion des métadonnées sur les vidéos sources et les extraits.
 - une application web qui sert d'interface utilisateur pour éditer les extraits (ajouter, modifier, supprimer) et soumettre des références bibliographiques
 - une application *core* qui se charge de lire/manipuler le fichier source pour créer/supprimer/modifier les extraits
 - des applis qui *post* à une fréquence donnée des extraits issus de cette base de données (aka les Twitter Bot)
 - une base de données pour gérer les comptes utilisateurs et les rôles associés
 
-#### Le *fichier source*
+#### Le *fichier source* (module core)
 
 La base de données des extraits est gérée par le `fichier source`. Le fichier source est `extraits.xml`. Il contient tout le travail éditorial de déclaration des extraits. Ce fichier est manipulé par différents programmes (ou à la main mais prudence !) pour gérer les extraits (création, modification, suppression).
 
 Ce fichier est **simple à éditer** et il **déclare** les extraits choisis. Il fait office de *source de vérité* et il définit l'état de la base de données d'extraits (quels extraits sont présents ou non). Pour chaque extrait, on a besoin (a) de l’url de la vidéo (b) d’un couple de timecodes début et fin de l’extrait (c) d'un slug (d) d'une description.
+
+#### Module source
+
+**GROS REFACTOR A FAIRE** : la couche fichier source devrait etre un module qui masque complètement à l'application core et à l'application web la gestion de fichiers. Ce module doit offrir une interface aux applis core et web pour checker si une source existe déjà, importer une source, ajouter un extrait, checker qu'un etrait existe déjà, etc.
 
 ### Cahier des charges pour l'encodage vidéo/audio des extraits
 
