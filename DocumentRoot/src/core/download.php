@@ -115,11 +115,14 @@ function check_download_request(DownloadRequest $download_request): void
      */
 
     //Check que la video n'est pas déja enregistrée dans le fichier source (une source avec la même url)
-    if (true) {
+    if (is_source_already_declared($download_request->series_name, $download_request->id, $download_request->url)) {
         throw new \Exception("Cette source est déjà présente dans les archives.");
     }
 
-    //Check que le fichier n'existe pas déjà
+    //Check que la vidéo à téléchargée n'a pas un nom déjà utilisé par une autre vidéo source
+    if (true) {
+        throw new \Exception("Une source avec portant ce nom existe déjà dans nos archives, veuillez en choisir un autre.");
+    }
 
 
     return;
