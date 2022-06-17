@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Les autres fonctions utils
+ * Les autres fonctions utils (manipulation de fichiers, du fichier source, etc.)
  *
  * @package wsl 
  */
@@ -29,6 +29,32 @@ function timecode_to_seconds(string $timecode): float
     $time_in_seconds = $hour * 3600 + $minute * 60 + $second + $milisecond / 1000;
 
     return $time_in_seconds;
+}
+
+/**
+ * Retourne vrai si la source est déjà déclarée (nom et url identiques ou url identiques), faux sinon
+ * @param string $series La base du nom de la source
+ * @param string $slug Le slug du nom de la source
+ * @param string $url L'url de la source
+ * @return bool
+ */
+function is_source_already_declared(string $series, string $slug, string $url): bool
+{
+    if (!isset($series))
+        return false;
+
+    $full_name = build_source_name($series, $slug);
+
+    $match = query_source_by_unique_attr('name', $full_name);
+
+    //Si aucun match par name, on check le match par url
+    if (false === $match) {
+        $url_match = query_source_by_unique_attr('url', $url);
+        $match_by_url = false !== $url_match;
+        return $match_by_url;
+    }
+
+    return true;
 }
 
 

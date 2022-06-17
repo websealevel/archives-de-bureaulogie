@@ -99,7 +99,7 @@ function check_download_request(DownloadRequest $download_request): void
         throw new \Exception("Vous essayez de télécharger une vidéo depuis un nom de domaine non autorisé, no f****** way.");
     }
 
-    //Valider les métadonnées de la vidéo a télcharger pour valider le nom du fichier
+    //Valider les métadonnées de la vidéo a télécharger pour valider le nom du fichier
     if (!is_download_request_valid($download_request)) {
         throw new \Exception("Les métadonnées associées à la vidéo source sont vides ou contiennent des caractères illégaux. Merci de soumettre des chaînes de caractères ne comprenant que des caractères alphanumériques.");
     }
@@ -109,10 +109,17 @@ function check_download_request(DownloadRequest $download_request): void
         throw new \Exception("La source est déjà en cours de téléchargement.");
     }
 
-    //Check que la video n'est pas déja enregistrée dans le fichier source
+    /**
+     * Ces deux checks font partir du module en gestion des fichiers et du fichier source. Ils devront être refactor dans un module indep.
+     * A faire.
+     */
+
+    //Check que la video n'est pas déja enregistrée dans le fichier source (une source avec la même url)
     if (true) {
         throw new \Exception("Cette source est déjà présente dans les archives.");
     }
+
+    //Check que le fichier n'existe pas déjà
 
 
     return;

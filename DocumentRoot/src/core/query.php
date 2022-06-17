@@ -10,6 +10,7 @@ require_once __DIR__ . '/const.php';
 require_once __DIR__ . '/xml.php';
 require_once __DIR__ . '/validation.php';
 
+
 /**
  * Retourne la liste des sources déclarées dans le fichier source
  * @param string $file_source Optional. Le fichier source

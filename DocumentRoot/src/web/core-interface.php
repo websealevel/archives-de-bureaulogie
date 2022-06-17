@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Toutes les fonctions de l'interface entre l'appli web et la partie core de l'appli (édition et manipulation du fichier source)
+ * Toutes les fonctions de l'interface entre l'appli web et la partie core de l'appli
  *
  * @link
  *
@@ -175,31 +175,7 @@ function esc_video_source_url_e(string $source_name)
     return;
 }
 
-/**
- * Retourne vrai si la source est déjà déclarée (nom et url identiques ou url identiques), faux sinon
- * @param string $series La base du nom de la source
- * @param string $slug Le slug du nom de la source
- * @param string $url L'url de la source
- * @return bool
- */
-function is_source_already_declared(string $series, string $slug, string $url): bool
-{
-    if (!isset($series))
-        return false;
 
-    $full_name = build_source_name($series, $slug);
-
-    $match = query_source_by_unique_attr('name', $full_name);
-
-    //Si aucun match par name, on check le match par url
-    if (false === $match) {
-        $url_match = query_source_by_unique_attr('url', $url);
-        $match_by_url = false !== $url_match;
-        return $match_by_url;
-    }
-
-    return true;
-}
 
 /**
  * Retourne le nom complet d'une source (son attribut name) à partir de sa base et de son slug/identifiant
