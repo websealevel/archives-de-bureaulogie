@@ -135,14 +135,16 @@ function format_to_source_file(DownloadRequest $download_request): string
 
 
 /**
- * Retourne une string débarassée de son extension (base), où tous les - ont été remplacés par des espaces et où la première lettre est en majuscules
+ * Retourne une string débarassée de son extension (.*), où tous les '-' ont été remplacés par des espaces et où la première lettre est en majuscules
  * @param string $file_name Le nom d'un fichier (en snake-case)
  * @return string La chaine formatée
  */
 function format_to_label(string $file_name): string
 {
-
-    return $file_name;
+    $parts = pathinfo($file_name);
+    write_log($parts);
+    $base = ucfirst($parts['filename']);
+    return str_replace('-', ' ', $base);
 }
 
 
