@@ -67,7 +67,7 @@ function api_download_source()
 
     $invalid_inputs = filter_invalid_inputs($input_validations);
 
-    write_log($invalid_inputs);
+    dump($invalid_inputs);
 
     //Retourner les erreurs sur les champs
     if (!empty($invalid_inputs)) {
@@ -278,7 +278,7 @@ function check_download_request_form(): array
             }
 
             //Seulement alphanumerique ou '#', sans espace, entre 1 et 25 caractères
-            //Ne marche pas.
+            //Ne marche pas !!
             if (!(preg_match('/[a-z0-9]{1,25}/', $name))) {
                 return new InputValidation('name', $name, "Renseignez un identifiant valide. Seuls les caratères de a à z et de 0 à 9 sont autorisés.");
             }
