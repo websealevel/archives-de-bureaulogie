@@ -96,7 +96,7 @@ function check_download_request(DownloadRequest $download_request): void
 
     //Valider le nom de domaine
     if (!is_url_domain_authorized($download_request->url)) {
-        throw new \Exception("Vous essayez de télécharger une vidéo depuis un nom de domaine non autorisé, no f****** way.");
+        throw new \Exception("Vous essayez de télécharger une vidéo depuis un nom de domaine non autorisé, no f***ing way !");
     }
 
     //Valider les métadonnées de la vidéo a télécharger pour valider le nom du fichier
@@ -120,10 +120,9 @@ function check_download_request(DownloadRequest $download_request): void
     }
 
     //Check que la vidéo à téléchargée n'a pas un nom déjà utilisé par une autre vidéo source
-    if (true) {
+    if (source_exists(format_to_source_file($download_request))) {
         throw new \Exception(sprintf("Une source du nom <em>%s</em> existe déjà dans nos archives, veuillez en choisir un autre.", format_to_source_file($download_request)));
     }
-
 
     return;
 }
@@ -135,9 +134,10 @@ function check_download_request(DownloadRequest $download_request): void
  */
 function youtube_dl_download_format(): string
 {
-    //Si on combine video et audio avec le '+', youtube-dl télécharge deux fichiers puis ffmpeg ou avconv fusionne les deux fichiers ensuite dans un format container (mp4 ou mkv).
 
-    //Le format m4e est équivalent au format mp4 pour un fichier audio.
+    //Si on combine video et audio avec le '+', youtube-dl télécharge deux fichiers puis ffmpeg fusionne les deux fichiers ensuite dans un format container (mp4 ou mkv).
+
+    //Note : le format m4e est équivalent au format mp4 pour un fichier audio.
 
     $format = sprintf(
         "bestvideo[height <=? %s][tbr<%s][ext=%s]+bestaudio[height <=? %s][ext=%s][asr <= %s]/best",

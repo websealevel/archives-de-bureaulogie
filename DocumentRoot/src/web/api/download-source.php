@@ -43,6 +43,8 @@ use CrowdStar\BackgroundProcessing\BackgroundProcessing;
 function api_download_source()
 {
 
+    load_env();
+
     //Authentifier l'utilisateur
     if (!current_user_can('add_source')) {
         header('Content-Type: application/json; charset=utf-8');
@@ -62,12 +64,9 @@ function api_download_source()
 
     //Check le token
 
-    //Check le form
-    $input_validations = check_download_request_form();
-
+    //Validation des inputs du formulaire
+    $input_validations = check_download_source_form();
     $invalid_inputs = filter_invalid_inputs($input_validations);
-
-    dump($invalid_inputs);
 
     //Retourner les erreurs sur les champs
     if (!empty($invalid_inputs)) {
@@ -95,12 +94,18 @@ function api_download_source()
     try {
         check_download_request($download_request);
     } catch (Exception $e) {
-        $resonse =  new Notice($e->getMessage(),  NoticeStatus::Error);
         header('Content-Type: application/json; charset=utf-8');
-        echo json_encode(array(
-            'statut' => 403,
-            'errors' => array($resonse),
+        $response =  json_encode(array(
+            'statut' => 405,
+            'errors' => array(
+                array(
+                    'name' => '',
+                    'value' => '',
+                    'message' => $e->getMessage()
+                )
+            )
         ));
+        echo $response;
         exit;
     }
 
@@ -128,9 +133,13 @@ function api_download_source()
 
     $db = connect_to_db();
 
+    $path_bin_ffmpeg = $_ENV['PATH_BIN_FFMPEG'];
+
     //Déclaration d'une fonction à executer en arrière plan
     BackgroundProcessing::add(
-        function () use ($yt, $download_id, $authentificated_user_id, $download_request, $filename, $db) {
+        function () use ($yt, $download_id, $authentificated_user_id, $download_request, $filename, $db, $path_bin_ffmpeg) {
+
+            load_env();
 
             try {
 
@@ -146,6 +155,7 @@ function api_download_source()
 
                 $collection = $yt->download(
                     Options::create()
+                        ->ffmpegLocation($path_bin_ffmpeg)
                         ->downloadPath(PATH_SOURCES)
                         ->url($download_request->url)
                         ->format(youtube_dl_download_format())
@@ -176,7 +186,10 @@ function api_download_source()
 
                         // series, url, slug = f(series, id) name = slug.extension 
 
-                        write_log('Mise a jour du fichier source', array($file, $download_request->url));
+                        error_log('Mise a jour du fichier source:' . $file);
+
+                        //Clean cach de youtube-dl
+                        exec('python3 youtube-dl/youtube-dl ---rm-cache-dir;');
                     }
                 }
             } catch (Exception $e) {
@@ -215,7 +228,7 @@ function api_download_source()
  * @return InputValidation[] 
  * @throws Exception - Si la série des sources valides n'est pas définie
  */
-function check_download_request_form(): array
+function check_download_source_form(): array
 {
 
     $form_inputs = array(

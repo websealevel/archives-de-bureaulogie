@@ -50,7 +50,7 @@ while (true) {
         if (!empty($download['progression']))
             $progression_formated = str_replace('%', '', $download['progression']);
         else
-            $progression_formated = '0%';
+            $progression_formated = '0';
 
         $json .= sprintf('{"id": "%s", "url": "%s", "filename": "%s", "progression": "%s", "speed": "%s" }', $download['id'], $download['url'], $download['filename'], $progression_formated, $download['speed']);
 

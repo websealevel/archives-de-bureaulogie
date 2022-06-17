@@ -34,6 +34,7 @@ jQuery(function ($) {
 
                 //Si le formulaire est rejeté on récupere les erreurs et on les affiche. Ou si une erreur au lancement du dl. A faire.
                 console.log(data.statut)
+                console.log(data)
 
                 //Si réussi, on récuperer le nom du fichier avec le lien pour visualiser la source (par exemple). A faire
             
@@ -77,6 +78,7 @@ jQuery(function ($) {
 
         downloads.forEach(download => {
 
+            console.log(download)
             //Si l'élément existe déjà
             if ($("ul#active_downloads li#" + download.id).length) {
 
@@ -96,7 +98,7 @@ jQuery(function ($) {
                     '<div class="name">'+ download.filename+'</div>' + 
                     '<div class="progression" id=id-' + download.id +'>'+ download.progression+'%</div>' + 
                     '<progress id=id-' + download.id + ' value="' + download.progression + '" max="100">' +
-                    download.progression + '%</progress>' +
+                    download.progression + '</progress>' +
                     '<span class="dl-speed">' + download.speed + '</span>' +
                     '</li>'
                 )

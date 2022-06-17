@@ -23,6 +23,17 @@ function list_files_in_dir(string $path, array $files_to_exclude = array()): arr
 }
 
 /**
+ * Retourne vrai si le fichier de la vidéo source existe, faux sinon
+ * @param string $source_name Le nom de la source
+ * @return bool
+ */
+function source_exists(string $source_name): bool
+{
+    $path_source = PATH_SOURCES . '/' . $source_name;
+    return file_exists($path_source);
+}
+
+/**
  * Supprime un fichier, renvoie vrai si la suppression a réussi, faux sinon
  * @param string $file_name Le nom du fichier à supprimer
  * @return bool

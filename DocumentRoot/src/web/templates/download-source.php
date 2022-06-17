@@ -64,7 +64,7 @@ $token = register_api_token($account);
         </p>
         <p>
             <label for="source_url">Copiez/collez l'url de la vidéo youtube <span class="required">*</span></label>
-            <input type="url" name="source_url" title="l'url complète de la vidéo youtube" value="https://www.youtube.com/watch?v=YglE-FnSd3g" required>
+            <input type="url" name="source_url" title="l'url complète de la vidéo youtube" value="https://www.youtube.com/watch?v=ef9jQ8qsEI4" required>
         </p>
         <p name="preview_source">
         <p>Preview</p>
