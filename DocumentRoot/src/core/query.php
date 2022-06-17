@@ -138,18 +138,17 @@ function declare_clip(string $source, string $slug, string $timecode_start, stri
 function declare_source(string $url, string $series, string $slug, string $file_name_saved, string $extension = EXTENSION_SOURCE): DOMNode
 {
 
-    write_log(array(format_to_source_file_raw($series, $slug), basename($file_name_saved)));
-
     if (format_to_source_file_raw($series, $slug) !== basename($file_name_saved)) {
         throw new Exception("Le nom du fichier vidéo enregistré ne correspond pas aux métadonnées");
     }
 
-    //On check que le fichier exite
+    //A faire : on devrait check avec ffprobe ici que c'est un fichier vidéo valide (et non un simple fichier texte).
     if (!source_exists(basename($file_name_saved))) {
         throw new Exception("Impossible de déclarer une source, car le fichier vidéo est introuvable dans le dossier sources");
     }
 
-    write_log('On peut ajouter la source au fichier source !');
+    //Ecrire dans le fichier XML la source
+    $element = add_source($url, $series, $slug, basename($file_name_saved));
 
-    return new DOMNode();
+    return $element;
 }

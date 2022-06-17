@@ -44,6 +44,10 @@ function api_download_source()
 {
     load_env();
 
+    declare_source('https://google.com', 'foo', 'bar', 'foo-bar.mp4');
+
+    exit;
+
     //Authentifier l'utilisateur
     if (!current_user_can('add_source')) {
         header('Content-Type: application/json; charset=utf-8');
