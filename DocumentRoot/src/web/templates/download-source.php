@@ -37,46 +37,45 @@ $token = register_api_token($account);
 
 <?php present_header(); ?>
 
-
-<h2>Importer une nouvelle vidéo source aux archives</h2>
-
 <p>Les vidéos <em>sources</em> sont les vidéos originales et complètes à partir desquelles les extraits pourront être réalisés.</p>
 
-<h3>Liste des sources présentes dans les archives</h3>
+<h2>Liste des sources présentes dans les archives</h2>
 <?php esc_html_list_sources_e(); ?>
 
-<h3>Importer</h3>
+<h2>Ajouter une vidéo source aux archives</h2>
+
 <div class="errors" style="color: red;"></div>
 <main class="form-add-source">
     <form action="" method="POST" id="form-download">
 
-        <div class="form-note">Les champs marqués d'un asterisque sont obligatoires</div>
+        <small>Les champs marqués d'un asterisque(*) sont obligatoires</small>
 
-        <div>
+        <p>
             <label for="series">Choisissez la série à laquelle appartient la source <span class="required">*</span></label>
             <select name="series" id="">
                 <option value="le-tribunal-des-bureaux" selected>Le tribunal des bureaux</option>
             </select>
-        </div>
+        </p>
 
-        <div>
+        <p>
             <label for="name">Choisissez un identifiant court pour cette vidéo (un mot ou un nombre en minuscule) <span class="required">*</span></label>
             <input type="text" name="name" placeholder="ex: 3" pattern="[a-z0-9#]{1,25}" title="un nom en caractères alphanumériques, sans espaces (utiliser des hyphens à la place), d'1 caractère min" value="1" required>
 
-        </div>
-        <div>
+        </p>
+        <p>
             <label for="source_url">Copiez/collez l'url de la vidéo youtube <span class="required">*</span></label>
             <input type="url" name="source_url" title="l'url complète de la vidéo youtube" value="https://www.youtube.com/watch?v=YglE-FnSd3g" required>
-        </div>
-        <div name="preview_source">
-            <p>Preview</p>
-            <iframe width="420" height="315" src="">
-            </iframe>
-        </div>
-        <div>
+        </p>
+        <p name="preview_source">
+        <p>Preview</p>
+        <iframe width="420" height="315" src="">
+        </iframe>
+        </p>
+        <p>
             <input type="hidden" name="token" value="<?php echo $token; ?>">
-            <input type="button" value="Importer" id="submit">
-        </div>
+            <input type="hidden" name="fax" value="">
+            <input type="button" value="Ajouter" id="submit">
+        </p>
     </form>
 
     <h3>Téléchargements en cours</h3>
