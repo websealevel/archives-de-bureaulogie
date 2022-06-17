@@ -20,6 +20,7 @@
     - [Rôles et droits associés](#rôles-et-droits-associés)
     - [Métrique des ressources (extraits et references biblios)](#métrique-des-ressources-extraits-et-references-biblios)
   - [Backlog](#backlog)
+    - [architecture](#architecture)
     - [Général](#général)
     - [Core](#core)
     - [Ecran - Importer une source/Lister les sources](#ecran---importer-une-sourcelister-les-sources)
@@ -189,7 +190,11 @@ A part
 
 ## Backlog
 
-Suivi des tâches à réaliser.
+Suivi des tâches
+
+### architecture
+
+- migrer de php-cgi/apache à php-fpm/nginx [x]
 
 ### Général
 
