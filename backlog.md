@@ -21,14 +21,14 @@
     - [Métrique des ressources (extraits et references biblios)](#métrique-des-ressources-extraits-et-references-biblios)
   - [Backlog](#backlog)
     - [Général](#général)
-    - [Code source / Dépôt](#code-source--dépôt)
+    - [Core](#core)
     - [Ecran - Importer une source/Lister les sources](#ecran---importer-une-sourcelister-les-sources)
     - [Ecran - Creer un extrait/Lister les extraits](#ecran---creer-un-extraitlister-les-extraits)
     - [Ecran Ajouter une ressource biblio](#ecran-ajouter-une-ressource-biblio)
     - [Ecran Modération des extraits vidéos](#ecran-modération-des-extraits-vidéos)
     - [Ecran Modération des ressources bibliographiques](#ecran-modération-des-ressources-bibliographiques)
   - [SEO](#seo)
-  - [Core](#core)
+  - [Core](#core-1)
     - [Unicité d'une source](#unicité-dune-source)
     - [Unicité d'un clip](#unicité-dun-clip)
     - [A implementer (CLI/CGI)](#a-implementer-clicgi)
@@ -209,15 +209,17 @@ Suivi des tâches à réaliser.
 - ecran Modération des ressources biblios
 - gestion des emails (activation du compte, suite à une modération, banissement du compte)
 
-### Code source / Dépôt
+### Core
 
-- ne pas enregistrer d'array dans `$_ENV` pour les variables d'environnement, issue déposée [ici](https://github.com/symfony/symfony/issues/46348) []
+- ne pas enregistrer d'array dans `$_ENV` pour les variables d'environnement, issue déposée [ici](https://github.com/symfony/symfony/issues/46348) [x]
 - tout basculer dans des namespaces (PSR-4) []
-- deplacer le fichier source+dtd dans un dossier a part[]
 - utiliser phpcbs et phpcs pour formatter le code au standard PHP Pro PSR []
 - generer la documentation (PSR-5 en cours) avec phpdocumentor []
 - mettre en place un template pour déposer une issue (s'inspirer de celui de symfony)[]
-  
+- deplacer le fichier source+dtd dans un dossier a part[]
+
+
+
 ### Ecran - Importer une source/Lister les sources
 
 - `preg_match` sur le name du formulaire ne fonctionne pas, à fixer (check_download_request_form, ligne 102) [ ]
@@ -228,9 +230,10 @@ Suivi des tâches à réaliser.
 - lancer le téléchargement via une requete AJAX sur l'API de l'appli (non bloquant) [x]
 - si le téléchargement échoue fails gracefully sans deconnecter [x]
 - si le téléchargement va à son terme déclarer la nouvelle source dans le fichier source []
-- empecher le téléchargement si une ressource avec la meme url est déjà déclarée dans le fichier source[]
-- empecher un téléchargement d'une ressource à une url identique si téléchargement avec la meme url "en cours"(downloading)[]
+- empecher le téléchargement si une ressource avec la meme url est déjà déclarée dans le fichier source[x]
+- empecher un téléchargement d'une ressource avec une url identique à l'urld'un téléchargement en cours (downloading)[x]
 - afficher les erreurs dans le formulaire (js) []
+- basculer dl en cours vers historique, clean interface (js) []
 - fixer bug format (plus de son)[]
 - nettoyer le cache de youtube dl après chaque dl []
 - recuperer le PID du processus youtube-dl du download []
@@ -302,8 +305,8 @@ A venir...
 
 ## Sécurité
 
-- mettre des nonces dans les formulaires []
-- role_has_cap a implementer !!! []
+- mettre des nonces (token) dans les formulaires []
+- `role_has_cap` a implementer !!! []
 - déclarer une limite d'extraits / utilisateur / source (20 par exemple) []
 - envoyer un email pour valider le compte []
 - ajouter une colonne status du compte (actif, banni)
@@ -314,8 +317,8 @@ A venir...
 - enlever la version d'apache dans la requete de reponse
 - dev un mode maintenance simple (fichier .env si c'est `On` on charge le template `maintenance.php` dès l'`index.php` avant le router) [x]
 - faire un test de pénétration []
-- couvrir de tests les droits et capabilites []
-- mettre en place des roles et capacités associes [x]
+- couvrir de tests les droits et `capabilites` []
+- mettre en place des roles et capacités associées [x]
 - creer un utilisateur twitter pour chaque twitter bot avec un role twitter_user []
 - installer un paquet qui gere les bans d'IP (type wordfence), tentatives de login repetees, brut force []
 - pour les comptes admin associer une liste blanche d'adresses IP en plus de l'authentification []
@@ -337,9 +340,7 @@ A venir...
 - creer un système de tags communautaire (modéré). Les contributeurs peuvent suggérer des tags s'ils n'existent pas déjà. Les modos peuvent les valider ou non. Ils rentrent alors dans les tags permis
 - contributeurs peuvent chercher par épisode, par titre, par tag. Tester les idées de l'architecture de l'information
 
-
 ## Comptes twitter
 
-- Compte maitre archives_db
-  - compte out of context ackboo (extraits videos)
-  - compte ref biblios
+- compte out of context ackboo (extraits videos)
+- compte refs biblios
