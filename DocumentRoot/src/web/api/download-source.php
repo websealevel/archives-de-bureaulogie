@@ -44,10 +44,6 @@ function api_download_source()
 {
     load_env();
 
-    declare_source('https://google.com', 'foo', 'bar', 'foo-bar.mp4');
-
-    exit;
-
     //Authentifier l'utilisateur
     if (!current_user_can('add_source')) {
         header('Content-Type: application/json; charset=utf-8');
@@ -188,12 +184,21 @@ function api_download_source()
                         // exec('python3 youtube-dl/youtube-dl ---rm-cache-dir;');
 
                         // Mettre à jour le fichier source.
-                        declare_source(
-                            $download_request->url,
-                            $download_request->series_name,
-                            $download_request->id,
-                            $file
-                        );
+                        try {
+                            $source_added = declare_source(
+                                $download_request->url,
+                                $download_request->series_name,
+                                $download_request->id,
+                                $file
+                            );
+                        } catch (Exception $e) {
+                            error_log($e);
+                            header('Content-Type: application/json; charset=utf-8');
+                            echo json_encode(array(
+                                'statut' => 500,
+                                'errors' => array(new Notice($e->getMessage(), NoticeStatus::Error)),
+                            ));
+                        }
                     }
                 }
             } catch (Exception $e) {

@@ -134,8 +134,10 @@ function declare_clip(string $source, string $slug, string $timecode_start, stri
  * @param string $file_name_saved Le nom du fichier téléchargé (enregistré par youtube-dl)
  * @param string $extension L'extension de la vidéo source
  * @throws Exception - Si le nom du fichier enregistré ne correspond pas aux métadonnées de la source à déclarer
+ * @throws Exception - Si le fichier enregistré n'est pas un fichier vidéo valide
+ * @throws Exception - Si la déclaration dans le fichier source n'a pas pu être enregistrée
  */
-function declare_source(string $url, string $series, string $slug, string $file_name_saved, string $extension = EXTENSION_SOURCE): DOMNode
+function declare_source(string $url, string $series, string $slug, string $file_name_saved, string $extension = EXTENSION_SOURCE): bool
 {
 
     if (format_to_source_file_raw($series, $slug) !== basename($file_name_saved)) {
@@ -147,8 +149,11 @@ function declare_source(string $url, string $series, string $slug, string $file_
         throw new Exception("Impossible de déclarer une source, car le fichier vidéo est introuvable dans le dossier sources");
     }
 
-    //Ecrire dans le fichier XML la source
-    $element = add_source($url, $series, $slug, basename($file_name_saved));
+    $result = add_source($url, $series, $slug, basename($file_name_saved));
 
-    return $element;
+    if (!$result) {
+        throw new Exception("La vidéo source n'a pas pu être déclarée et enregistrée.");
+    }
+
+    return $result;
 }
