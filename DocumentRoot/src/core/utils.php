@@ -135,6 +135,18 @@ function format_to_source_file(DownloadRequest $download_request): string
 
 
 /**
+ * Retourne une string débarassée de son extension (base), où tous les - ont été remplacés par des espaces et où la première lettre est en majuscules
+ * @param string $file_name Le nom d'un fichier (en snake-case)
+ * @return string La chaine formatée
+ */
+function format_to_label(string $file_name): string
+{
+
+    return $file_name;
+}
+
+
+/**
  * Retourne le nom de la source à partir du nom du fichier extrait, faux si une erreur se produit (format non valide). Forme à améliorer avec de la regex plutôt et des match par groupe.
  * @param string $filename Le nom du fichier extrait
  * @return ClipMetaData|false

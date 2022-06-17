@@ -7,8 +7,8 @@
  * @package wsl 
  */
 
-
 require_once __DIR__ . '/const.php';
+require_once __DIR__ . '/utils.php';
 
 /**
  * Retourne un élément enfant d'un élément par nom. Nous sommes garantis d'avoir l'élément enfant recherché grâce au schéma de validation dtd. Si ce n'est pas le cas c'est une erreur du développeur.
@@ -118,7 +118,7 @@ function add_source(string $url, string $series, string $slug, string $file_name
     $element->setAttribute('series', $series);
     $element->setAttribute('series', $series);
     $element->setAttribute('name', $file_name);
-    $element->setAttribute('label', $file_name);
+    $element->setAttribute('label', format_to_label($file_name));
 
     $root->appendChild($element);
 
