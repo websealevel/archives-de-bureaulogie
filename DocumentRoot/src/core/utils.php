@@ -142,7 +142,6 @@ function format_to_source_file(DownloadRequest $download_request): string
 function format_to_label(string $file_name): string
 {
     $parts = pathinfo($file_name);
-    write_log($parts);
     $base = ucfirst($parts['filename']);
     return str_replace('-', ' ', $base);
 }
