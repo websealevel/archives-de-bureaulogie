@@ -164,7 +164,7 @@ php_admin_flag[log_errors] = on
 
 Créer le fichier `/path/du/log/app.log` et donner donner la permission à php d'écrire dessus `touch /path/du/log/app.log && chmod 666 /path/du/log/app.log`.
 
->php-fpm n'utilise pas la configuration de php.ini. Chaque process utilise la config de php.ini mais au niveau du pool, php-fpm utilise `$PHP_INI_DIR/php-fpm.d/www.conf`.
+>php-fpm n'utilise pas la configuration définies dans `php.ini`, utilise `$PHP_INI_DIR/php-fpm.d/www.conf`. Un sujet encore à creuser
 
 ### Lancer le projet
 

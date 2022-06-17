@@ -179,16 +179,15 @@ function api_download_source()
                         //Log un message propre sur le download terminé.
                         error_log_download($authentificated_user_id, $download_request->url, $filename, DownloadState::Downloaded);
 
-                        //Mettre à jour le fichier source.
-
                         $file = $video->getFile();
 
-                        // series, url, slug = f(series, id) name = slug.extension 
-
-                        write_log('Mise a jour du fichier source :' . $file);
 
                         //Clean cach de youtube-dl
                         exec('python3 youtube-dl/youtube-dl ---rm-cache-dir;');
+
+                        // Mettre à jour le fichier source.
+                        // series, url, slug = f(series, id) name = slug.extension.
+
                     }
                 }
             } catch (Exception $e) {
