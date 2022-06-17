@@ -101,7 +101,7 @@ function check_download_request(DownloadRequest $download_request): void
 
     //Valider les métadonnées de la vidéo a télécharger pour valider le nom du fichier
     if (!is_download_request_valid($download_request)) {
-        throw new \Exception("Les métadonnées associées à la vidéo source sont vides ou contiennent des caractères illégaux. Merci de soumettre des chaînes de caractères ne comprenant que des caractères alphanumériques.");
+        throw new \Exception("Les données envoyées contiennent des caractères illégaux. Merci de soumettre des chaînes de caractères ne comprenant que des caractères alphanumériques.");
     }
 
     //Valider qu'un téléchargement en cours (status downloading) sur la meme url n'existe pas
@@ -121,7 +121,7 @@ function check_download_request(DownloadRequest $download_request): void
 
     //Check que la vidéo à téléchargée n'a pas un nom déjà utilisé par une autre vidéo source
     if (true) {
-        throw new \Exception("Une source avec portant ce nom existe déjà dans nos archives, veuillez en choisir un autre.");
+        throw new \Exception(sprintf("Une source du nom <em>%s</em> existe déjà dans nos archives, veuillez en choisir un autre.", format_to_source_file($download_request)));
     }
 
 

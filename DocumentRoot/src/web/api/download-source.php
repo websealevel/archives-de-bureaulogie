@@ -67,6 +67,8 @@ function api_download_source()
 
     $invalid_inputs = filter_invalid_inputs($input_validations);
 
+    write_log($invalid_inputs);
+
     //Retourner les erreurs sur les champs
     if (!empty($invalid_inputs)) {
         header('Content-Type: application/json; charset=utf-8');
@@ -279,11 +281,6 @@ function check_download_request_form(): array
             //Ne marche pas.
             if (!(preg_match('/[a-z0-9]{1,25}/', $name))) {
                 return new InputValidation('name', $name, "Renseignez un identifiant valide. Seuls les caratères de a à z et de 0 à 9 sont autorisés.");
-            }
-
-            //N'existe pas déjà en base.
-            if (is_source_already_declared(filter_input(INPUT_POST, 'series'), $name, filter_input(INPUT_POST, 'source_url'))) {
-                return new InputValidation('name', $name, "Cette source a déjà été déclarée. Une autre source avec la même url a été trouvée.");
             }
 
             return new InputValidation('name', strval($name), '', InputStatus::Valid);
