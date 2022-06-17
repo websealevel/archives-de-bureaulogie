@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Les autres fonctions utils (manipulation de fichiers, du fichier source, etc.)
+ * Les autres fonctions
  *
  * @package wsl 
  */
@@ -55,18 +55,6 @@ function is_source_already_declared(string $series, string $slug, string $url): 
     }
 
     return true;
-}
-
-
-
-/**
- * Supprime un fichier, renvoie vrai si la suppression a réussi, faux sinon
- * @param string $file_name Le nom du fichier à supprimer
- * @return bool
- */
-function delete_file(string $file_name): bool
-{
-    return false;
 }
 
 /**

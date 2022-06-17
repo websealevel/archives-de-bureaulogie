@@ -7,6 +7,7 @@
  */
 
 require_once __DIR__ . '/utils.php';
+require_once __DIR__ . '/files.php';
 require_once __DIR__ . '/clip.php';
 require_once __DIR__ . '/validation.php';
 require_once __DIR__ . '/download.php';
@@ -80,21 +81,7 @@ function remove_invalid_sources(string $path = PATH_SOURCES, string $format = FO
 }
 
 
-/**
- * Retourne la liste des fichiers et des dossiers dans un dossier
- * @param string $path Le path du dossier à scanner
- * @param array $files_to_exclude. Optional. Default array(). Une liste de fichiers à exclure du scan
- * @return array
- */
-function list_files_in_dir(string $path, array $files_to_exclude = array()): array
-{
-    //On récupere la liste des extraits
-    $files = scandir($path);
-    if (false === $files)
-        return array();
 
-    return array_diff($files, $files_to_exclude);
-}
 
 /**
  * Supprime les extraits non déclarés ou invalides dans le dossier des extraits
