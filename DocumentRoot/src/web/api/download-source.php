@@ -42,7 +42,6 @@ use CrowdStar\BackgroundProcessing\BackgroundProcessing;
  */
 function api_download_source()
 {
-
     load_env();
 
     //Authentifier l'utilisateur
@@ -186,7 +185,7 @@ function api_download_source()
 
                         // series, url, slug = f(series, id) name = slug.extension 
 
-                        error_log('Mise a jour du fichier source:' . $file);
+                        write_log('Mise a jour du fichier source :' . $file);
 
                         //Clean cach de youtube-dl
                         exec('python3 youtube-dl/youtube-dl ---rm-cache-dir;');

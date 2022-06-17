@@ -18,6 +18,9 @@ Il sert également de prétexte pour construire un outil en *vanilla php* pour s
 - [FFMPEG](#ffmpeg)
 - [youtube-dl](#youtube-dl-1)
     - [Configuration php-fpm](#configuration-php-fpm)
+    - [Gestion des logs](#gestion-des-logs)
+      - [Logs de nginx](#logs-de-nginx)
+      - [Logs de php-fpm](#logs-de-php-fpm)
     - [Lancer le projet](#lancer-le-projet)
     - [Arrêter le projet](#arrêter-le-projet)
     - [Core functions (CLI)](#core-functions-cli)
@@ -139,6 +142,29 @@ On utilise `php-fpm` qui utilise
 - `$PHP_INI_DIR/php-fpm.d/www.conf` pour la configuration de chaque pool de process php
 
 avec ici `$PHP_INI_DIR=/usr/local/etc/php`. 
+
+### Gestion des logs
+
+L'application dispose de plusieurs logs.
+
+#### Logs de nginx
+
+Configurés dans `nginx.conf` : `archives.access.log` et `archives.error.log`.
+
+#### Logs de php-fpm
+
+Il faut configurer le fichier `$PHP_INI_DIR/php-fpm.d/www.conf` et ajouter
+
+~~~ini
+catch_workers_output = yes
+php_flag[display_errors] = on
+php_admin_value[error_log] = /path/du/log/app.log
+php_admin_flag[log_errors] = on
+~~~
+
+Créer le fichier `/path/du/log/app.log` et donner donner la permission à php d'écrire dessus `touch /path/du/log/app.log && chmod 666 /path/du/log/app.log`.
+
+>php-fpm n'utilise pas la configuration de php.ini. Chaque process utilise la config de php.ini mais au niveau du pool, php-fpm utilise `$PHP_INI_DIR/php-fpm.d/www.conf`.
 
 ### Lancer le projet
 

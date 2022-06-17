@@ -78,7 +78,6 @@ jQuery(function ($) {
 
         downloads.forEach(download => {
 
-            console.log(download)
             //Si l'élément existe déjà
             if ($("ul#active_downloads li#" + download.id).length) {
 
