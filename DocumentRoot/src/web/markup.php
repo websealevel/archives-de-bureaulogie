@@ -20,13 +20,22 @@ function map_source_to_html_item(DOMElement $source, string $html_item): string
     $label = $source->getAttribute('label');
 
     return sprintf(
-        '
-    <%s name="%s">%s</%s>',
+        '<%s name="%s">%s</%s>',
         $html_item,
         $src,
-        html_details($label, html_video_markup($src, 500)),
+        html_details($label, html_video_markup($src, 500)) . html_download_link('foobar'),
         $html_item
     );
+}
+
+/**
+ * Retourne un lien de téléchargement d'une ressource
+ * @param string $ressource_abs_path Le chemin absolu de la ressource
+ * @return string
+ */
+function html_download_link($ressource_abs_path): string
+{
+    return '';
 }
 
 /**
@@ -34,6 +43,7 @@ function map_source_to_html_item(DOMElement $source, string $html_item): string
  * @param string $src Le path de la vidéo
  * @param int $width La largeur de la vidéo. Optional
  * @return string
+ * @link https://developer.mozilla.org/fr/docs/Web/HTML/Element/video
  */
 function html_video_markup(string $src, int $width = 400): string
 {
@@ -46,9 +56,12 @@ function html_video_markup(string $src, int $width = 400): string
 
 /**
  * Retourne une balise details HTML5
- * @param string 
+ * @param string $summary Le résumé
+ * @param string $detail Les détails
+ * @return string
+ * @link https://developer.mozilla.org/fr/docs/Web/HTML/Element/details
  */
-function html_details(string $summary, string $detail)
+function html_details(string $summary, string $detail): string
 {
     return sprintf('
     <details>
@@ -72,7 +85,6 @@ function map_declared_sources_to_html_item(string $html_item, string $filter = "
     $sources = query_declared_sources();
 
     $options = array_map(function ($source) use ($html_item) {
-        write_log($source);
         return map_source_to_html_item($source, $html_item);
     }, iterator_to_array($sources));
 

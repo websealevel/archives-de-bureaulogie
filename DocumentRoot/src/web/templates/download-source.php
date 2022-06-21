@@ -58,17 +58,16 @@ $token = register_api_token($account);
 
         <p>
             <label for="name">Choisissez un identifiant court pour cette vidéo (un mot ou un nombre en minuscule) <span class="required">*</span></label>
-            <input type="text" name="name" placeholder="ex: 3" pattern="[a-z0-9#]{1,25}" title="un nom en caractères alphanumériques, sans espaces (utiliser des hyphens à la place), d'1 caractère min" value="1" required>
+            <input type="text" name="name" placeholder="ex: 3" pattern="[a-z0-9#]{1,25}" title="un nom en caractères alphanumériques, sans espaces (utiliser des hyphens à la place), d'1 caractère min" value="" required>
 
         </p>
         <p>
             <label for="source_url">Copiez/collez l'url de la vidéo youtube <span class="required">*</span></label>
-            <input type="url" name="source_url" title="l'url complète de la vidéo youtube" value="https://www.youtube.com/watch?v=ef9jQ8qsEI4" required>
+            <input type="url" name="source_url" title="l'url complète de la vidéo youtube" value="" required>
         </p>
         <p name="preview_source">
-        <p>Preview</p>
-        <iframe width="420" height="315" src="">
-        </iframe>
+            <iframe width="420" height="315" src="">
+            </iframe>
         </p>
         <p>
             <input type="hidden" name="token" value="<?php echo $token; ?>">
@@ -86,7 +85,7 @@ $token = register_api_token($account);
     </ul>
 
 
-    <h2>Liste des sources présentes dans les archives</h2>
+    <h2>Contenu des archives</h2>
     <?php esc_html_list_sources_e(); ?>
 
 </main>
