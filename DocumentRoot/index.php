@@ -6,9 +6,9 @@
  * @package wsl 
  */
 
-require_once './src/models/Notice.php';
-require_once './src/path.php';
 require_once './src/web/environment.php';
+require_once './src/root-path.php';
+require_once './src/models/Notice.php';
 require_once './src/web/router/router.php';
 require_once './src/handlers.php';
 

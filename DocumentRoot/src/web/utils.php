@@ -11,6 +11,16 @@ require_once __DIR__ . '/log.php';
 require_once __DIR__ . '/../core/const.php';
 
 /**
+ * Charge l'autoload.php de composer pour inclure les dépendances vendor du script appelant.
+ * @return void
+ */
+function autoload(): void
+{
+    require_once __DIR__ . '/../../vendor/autoload.php';
+}
+
+
+/**
  * Retourne le titre du site.
  * @return string le titre du site.
  */
@@ -46,69 +56,6 @@ function site_url(): string
     $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
     $domain = host();
     return sprintf("%s%s", $protocol, $domain);
-}
-
-/**
- * Echappe et écrit du texte sur la sortie standard.
- * @param string $text Le texte à échapper et à écrire.
- * @return void
- */
-function esc_html_e(string $text)
-{
-    echo htmlentities($text, ENT_QUOTES, 'UTF-8');
-}
-
-/**
- * Retourne du texte échappé.
- * @param string $text Le texte à échapper.
- * @return string Le texte échappé.
- */
-function esc_html(string $text): string
-{
-    return htmlentities($text, ENT_QUOTES, 'UTF-8');
-}
-
-/**
- * Ecrit sur la sortie standard le fil d'ariane.
- * @param string $relative_path Le chemin vers lequel le fil pointe.
- * @return void
- */
-function esc_html_breadcrumbs(string $relative_path = '/'): void
-{
-    $uri_without_breadcrumbs = array(
-        '/',
-        '/confirm-authentification'
-    );
-
-    if (in_array($_SERVER['REQUEST_URI'], $uri_without_breadcrumbs))
-        return;
-?>
-    <div class="fil-arianne">
-        <a href="<?php echo $relative_path; ?>">Retour</a>
-    </div>
-<?php
-    return;
-}
-
-/**
- * Ecrit les scripts js sur la sortie standard dans une balise script.
- * @param array $scripts Les scripts js à sortir sur la sortie standard.
- * @return void
- */
-function enqueue_js_scripts(array $scripts = array())
-{
-    if (empty($scripts))
-        return;
-
-
-    echo '<script type="text/javascript">' . PHP_EOL;
-    echo 'const PHPSESSID="' . session_id() . '";' . PHP_EOL;
-    foreach ($scripts as $script) {
-        $js_script_path = sprintf("%s/js/%s.js", ASSETS_PATH, $script);
-        require $js_script_path;
-    }
-    echo '</script>';
-    return;
 }
 
 /**
@@ -166,14 +113,6 @@ function present_footer(array $js_scripts = array())
     present_template_part('footer', $js_scripts);
 }
 
-/**
- * Charge l'autoload.php de composer pour inclure les dépendances vendor du script appelant.
- * @return void
- */
-function autoload(): void
-{
-    require_once __DIR__ . '/../../vendor/autoload.php';
-}
 
 /**
  * Retrouve la valeur POSTée d'un input de formulaire.
@@ -187,6 +126,28 @@ function retrieve_value(InputValidation|string|array $input): string
 
     return $input;
 }
+
+/**
+ * Retourne le nom complet d'une source (son attribut name) à partir de sa base et de son slug/identifiant
+ * @param string $series Le nom de la série à laquelle appartient la vidéo source
+ * @param stirng $slug L'identifiant ajouté au nom de la vidéo
+ * @return string Le nom complet au format FORMAT_FILE_VIDEO_SOURCE
+ * @see FORMAT_FILE_VIDEO_SOURCE
+ */
+function build_source_name(string $series, string $slug): string
+{
+    if (empty($series) || empty($slug))
+        throw new Exception("Impossible de reconstruire le nom de la source, la base du nom ou le slug est vide");
+
+    $file_name = sprintf("%s--%s.%s", $series, $slug, EXTENSION_SOURCE);
+
+    //Check format
+    if (!preg_match('/' . FORMAT_FILE_VIDEO_SOURCE . '/', $file_name))
+        throw new Exception("Une contrainte sur le nom de la source est mauvaise car le nom reconstruit de la source n'est pas dans un format valide.");
+
+    return $file_name;
+}
+
 
 /**
  * Valide les champs de formulaires passés en argument et retourne la validation sous forme d'un tableau mappant les inputs.
