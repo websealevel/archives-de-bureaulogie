@@ -37,7 +37,7 @@ require_once __DIR__ . '/../../handlers.php';
         <?php endif;  ?>
 
         <?php if (current_user_can('add_source')) :  ?>
-            <li><a href="download-source">importer une nouvelle vidéo source</a> -
+            <li><a href="download-source">importer une nouvelle vidéo source</a>
                 <?php esc_active_downloads_info_e(); ?></li>
         <?php endif;  ?>
 
