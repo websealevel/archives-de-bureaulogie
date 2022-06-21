@@ -23,7 +23,7 @@ function map_source_to_html_item(DOMElement $source, string $html_item): string
         '<%s name="%s">%s</%s>',
         $html_item,
         $src,
-        html_details($label, html_video_markup($src, 500) . html_download_link('foobar')),
+        html_details($label, html_video_markup($src, 500) . html_download_link($src)),
         $html_item
     );
 }
@@ -33,9 +33,9 @@ function map_source_to_html_item(DOMElement $source, string $html_item): string
  * @param string $ressource_abs_path Le chemin absolu de la ressource
  * @return string
  */
-function html_download_link($ressource_abs_path): string
+function html_download_link($ressource_abs_path, $label = 'Télécharger'): string
 {
-    return $ressource_abs_path;
+    return sprintf('<a download href="%s">%s</a>', $ressource_abs_path, $label);
 }
 
 /**
