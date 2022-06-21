@@ -141,8 +141,15 @@ function map_source_to_html_item(DOMElement $source, string $html_item): string
     $name = $source->getAttribute('name');
     $src = path_source($name);
     $label = $source->getAttribute('label');
-    write_log(html_video_markup($src, 500));
-    return sprintf('<%s name="%s">%s %s</%s>', $html_item, $src, $label, html_video_markup($src, 500), $html_item);
+
+    return sprintf(
+        '
+    <%s name="%s">%s</%s>',
+        $html_item,
+        $src,
+        html_details($label, html_video_markup($src, 500)),
+        $html_item
+    );
 }
 
 /**
@@ -159,6 +166,17 @@ function html_video_markup(string $src, int $width = 400): string
     Désolé, votre navigateur ne supporte pas le tag video HTML5</video>
     ', $width, $src);
 }
+
+function html_details(string $summary, string $detail)
+{
+    return sprintf('
+    <details>
+    <summary>%s</summary>
+    %s
+    </details>
+    ', $summary, $detail);
+}
+
 
 /**
  * OUTPUT HTML
