@@ -15,6 +15,5 @@
 
 .videos {
 	display: flex;
-	background-color: red;
-	flex-direction: row;
+	gap:50px;
 }

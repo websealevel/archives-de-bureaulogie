@@ -24,7 +24,7 @@ if (!current_user_can('submit_clip'))
 <form action="">
     <?php esc_sources_to_html_select_e(show_data: array('label')); ?>
 </form>
-<div name="videos">
+<div class="videos">
     <h3>Source</h3>
     <div class="video-source">
         <video width="600" controls id="video-source">
@@ -33,28 +33,27 @@ if (!current_user_can('submit_clip'))
         </video>
     </div>
 
-    <div class="video-clip">
+    <!-- <div class="video-clip">
         <h3>Extrait</h3>
-        <video width="600" height="240" controls id="video-clip">
+        <video width="600" controls id="video-clip">
             <source src="" type="video/mp4">
             Votre navigateur ne supporte pas le tag video HTML5 :(
         </video>
-    </div>
+    </div> -->
 </div>
 
 <main class="form-clip">
     <form action="clip-source" id="form-clip-source" name="form-clip-source">
         <label for=" title">Titre</label>
-        <input type="text" name="title">
+        <input type="text" name="title" size="100">
         <label for="timecode_start">Début </label>
         <input type="time" name="timecode_start" value="00:00:00.000">
         <label for="timecode_fin">Fin </label>
         <input type="time" name="timecode_start" value="00:00:00.000">
         <label for="title">Description</label>
         <textarea name="description" rows="4" cols="50"></textarea>
-
-        <input type="button" value="Début">
-        <input type="button" value="Fin">
+        <input name="btn_clip_start" type="button" title="Définir la position courante du curseur de lecture comme timecode de départ de l'extrait" value="Démarrer l'extrait ici">
+        <input name="bt_clip_end" type="button" title="Définir la position courante du curseur de lecture comme timecode de fin de l'extrait" value="Finir l'extrait ici">
         <input type="submit" value="Extraire">
     </form>
 </main>
