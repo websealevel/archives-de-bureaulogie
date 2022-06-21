@@ -7,7 +7,7 @@
  * @package wsl 
  */
 
-require_once __DIR__ . '/../path.php';
+require_once __DIR__ . '/../root-path.php';
 require_once __DIR__ . '/utils.php';
 
 autoload();
