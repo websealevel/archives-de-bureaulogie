@@ -22,7 +22,7 @@ if (!current_user_can('submit_clip'))
 <h2>Créer un extrait</h2>
 
 <form action="">
-    <?php esc_sources_to_html_select_e(); ?>
+    <?php esc_sources_to_html_select_e(show_data: array('label')); ?>
 </form>
 <div name="videos">
     <h3>Source</h3>
@@ -53,6 +53,8 @@ if (!current_user_can('submit_clip'))
         <label for="title">Description</label>
         <textarea name="description" rows="4" cols="50"></textarea>
 
+        <input type="button" value="Début">
+        <input type="button" value="Fin">
         <input type="submit" value="Extraire">
     </form>
 </main>

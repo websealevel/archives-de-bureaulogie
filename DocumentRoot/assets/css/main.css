@@ -12,3 +12,9 @@
 	width: 1px;
 	word-wrap: normal !important;
 }
+
+.videos {
+	display: flex;
+	background-color: red;
+	flex-direction: row;
+}

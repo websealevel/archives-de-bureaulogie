@@ -245,7 +245,7 @@ function check_download_source_form(): array
         new FormInput('source_url', filter_input(INPUT_POST, 'source_url'), function (string $source_url): InputValidation {
 
             //Non vide.
-            if (!isset($source_url))
+            if (!isset($source_url) || empty($source_url))
                 return new InputValidation('source_url', $source_url, "Renseignez une url valide de source à télécharger.");
 
             //Format valide.
@@ -259,9 +259,9 @@ function check_download_source_form(): array
 
             $url_parts = parse_url($source_url);
 
-            $domain = $url_parts['host'];
+            $domain = $url_parts['host'] ?? '';
 
-            if (!in_array($domain, ALLOWED_DOMAINS_TO_DOWNLOAD_SOURCES_FROM)) {
+            if (empty($domain) || !in_array($domain, ALLOWED_DOMAINS_TO_DOWNLOAD_SOURCES_FROM)) {
                 return new InputValidation(
                     'source_url',
                     $source_url,
