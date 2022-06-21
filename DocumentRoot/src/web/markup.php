@@ -23,7 +23,7 @@ function map_source_to_html_item(DOMElement $source, string $html_item): string
         '<%s name="%s">%s</%s>',
         $html_item,
         $src,
-        html_details($label, html_video_markup($src, 500)) . html_download_link('foobar'),
+        html_details($label, html_video_markup($src, 500) . html_download_link('foobar')),
         $html_item
     );
 }
@@ -35,7 +35,7 @@ function map_source_to_html_item(DOMElement $source, string $html_item): string
  */
 function html_download_link($ressource_abs_path): string
 {
-    return '';
+    return $ressource_abs_path;
 }
 
 /**
@@ -63,6 +63,9 @@ function html_video_markup(string $src, int $width = 400): string
  */
 function html_details(string $summary, string $detail): string
 {
+
+    write_log($detail);
+
     return sprintf('
     <details>
     <summary>%s</summary>
