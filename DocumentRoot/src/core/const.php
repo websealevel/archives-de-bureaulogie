@@ -27,9 +27,16 @@ define('SOURCE_FILE', __DIR__ . '/extraits.xml');
 define('SOURCE_FILE_DTD', __DIR__ . '/extraits.dtd');
 
 /**
+ * Le dossier contenant les vidéos sources
+ */
+
+define('DIR_SOURCES', 'sources');
+
+/**
  * Le path des vidéos sources
  */
-define('PATH_SOURCES', __DIR__ . '/../../sources');
+define('PATH_SOURCES', __DIR__ . '/../../' . DIR_SOURCES);
+
 
 /**
  * Le path des extraits

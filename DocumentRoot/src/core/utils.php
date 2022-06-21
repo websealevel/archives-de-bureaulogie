@@ -192,5 +192,5 @@ function extract_metadata($filename): ClipMetaData|false
  */
 function path_source(string $name): string
 {
-    return PATH_SOURCES . '/' . $name;
+    return DIR_SOURCES . '/' . $name;
 }

@@ -39,8 +39,7 @@ $token = register_api_token($account);
 
 <p>Les vidéos <em>sources</em> sont les vidéos originales et complètes à partir desquelles les extraits pourront être réalisés.</p>
 
-<h2>Liste des sources présentes dans les archives</h2>
-<?php esc_html_list_sources_e(); ?>
+
 
 <h2>Ajouter une vidéo source aux archives</h2>
 
@@ -85,6 +84,11 @@ $token = register_api_token($account);
     <ul id="downloads-history">
         <?php esc_download_history_items_e();  ?>
     </ul>
+
+
+    <h2>Liste des sources présentes dans les archives</h2>
+    <?php esc_html_list_sources_e(); ?>
+
 </main>
 
 <?php present_footer(array('jquery-min', 'template-download-source')); ?>

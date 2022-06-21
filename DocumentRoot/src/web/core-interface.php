@@ -76,7 +76,9 @@ function map_declared_sources_to_html_item(string $html_item, string $filter = "
 
     $sources = query_declared_sources();
 
+
     $options = array_map(function ($source) use ($html_item) {
+        write_log($source);
         return map_source_to_html_item($source, $html_item);
     }, iterator_to_array($sources));
 
@@ -137,9 +139,25 @@ function esc_html_list_sources_e(string $name_attr = 'sources', string $label = 
 function map_source_to_html_item(DOMElement $source, string $html_item): string
 {
     $name = $source->getAttribute('name');
-    $path = path_source($name);
+    $src = path_source($name);
     $label = $source->getAttribute('label');
-    return sprintf('<%s name="%s">%s</%s>', $html_item, $path, $label, $html_item);
+    write_log(html_video_markup($src, 500));
+    return sprintf('<%s name="%s">%s %s</%s>', $html_item, $src, $label, html_video_markup($src, 500), $html_item);
+}
+
+/**
+ * Retourne une balise vidéo HTML5
+ * @param string $src Le path de la vidéo
+ * @param int $width La largeur de la vidéo. Optional
+ * @return string
+ */
+function html_video_markup(string $src, int $width = 400): string
+{
+    return sprintf('
+    <video controls width="%d">
+    <source src="%s" type="video/webm">
+    Désolé, votre navigateur ne supporte pas le tag video HTML5</video>
+    ', $width, $src);
 }
 
 /**
