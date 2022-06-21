@@ -33,6 +33,12 @@ define('SOURCE_FILE_DTD', __DIR__ . '/extraits.dtd');
 define('DIR_SOURCES', 'sources');
 
 /**
+ * Le dossier contenant les vidéos extraits
+ */
+
+define('DIR_CLIPS', 'extraits');
+
+/**
  * Le path des vidéos sources
  */
 define('PATH_SOURCES', __DIR__ . '/../../' . DIR_SOURCES);
@@ -41,7 +47,7 @@ define('PATH_SOURCES', __DIR__ . '/../../' . DIR_SOURCES);
 /**
  * Le path des extraits
  */
-define('PATH_CLIPS', __DIR__ . '/../../extraits');
+define('PATH_CLIPS', __DIR__ . '/../../' . DIR_CLIPS);
 
 /**
  * Le namespace du fichier source.

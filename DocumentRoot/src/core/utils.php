@@ -129,7 +129,6 @@ function format_to_source_file(DownloadRequest $download_request): string
 {
     $series_name = $download_request->series_name;
     $id = $download_request->id;
-
     return format_to_source_file_raw($series_name, $id);
 }
 
@@ -187,10 +186,20 @@ function extract_metadata($filename): ClipMetaData|false
 }
 
 /**
- * Retourne le path de la vidéo source
+ * Retourne le path de la vidéo source. Utilisé pour servir les vidéos dans l'élement html video
  * @param string $name Le nom du fichier video source
  */
 function path_source(string $name): string
 {
     return DIR_SOURCES . '/' . $name;
+}
+
+
+/**
+ * Retourne le path d'un extrait vidéo. Utilisé pour servir les vidéos dans l'élement html video
+ * @param string $name Le nom du fichier video clip
+ */
+function path_clip(string $name): string
+{
+    return DIR_CLIPS . '/' . $name;
 }
