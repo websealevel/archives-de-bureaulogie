@@ -86,7 +86,7 @@ $token = register_api_token($account);
 
 
     <h2>Contenu des archives</h2>
-    <?php esc_html_list_sources_e(); ?>
+    <?php esc_html_list_sources_e(show_data: array('details')); ?>
 
 </main>
 

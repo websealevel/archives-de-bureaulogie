@@ -24,7 +24,6 @@ if (!current_user_can('submit_clip'))
 <form action="">
     <?php esc_sources_to_html_select_e(); ?>
 </form>
-
 <div name="videos">
     <h3>Source</h3>
     <div class="video-source">

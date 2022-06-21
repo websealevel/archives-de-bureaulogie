@@ -11,19 +11,27 @@
  * Retourne une source au format option ou li HTML
  * @param DOMElement $source Un élément source
  * @param string $html_item Un élément html de liste (option ou li)
+ * @param array $show_data Les données à afficher. Optional. Default = 'label
  * @return string L'élément source au format d'option HTML
  */
-function map_source_to_html_item(DOMElement $source, string $html_item): string
+function map_source_to_html_item(DOMElement $source, string $html_item, array $show_data = array('label')): string
 {
     $name = $source->getAttribute('name');
     $src = path_source($name);
     $label = $source->getAttribute('label');
 
+    if (1 === count($show_data) && in_array('label', $show_data))
+        $html = $label;
+    else if (in_array('details', $show_data))
+        $html = html_details($label, html_video_markup($src, 500) . html_download_link($src));
+    else
+        $html = $label;
+
     return sprintf(
         '<%s name="%s">%s</%s>',
         $html_item,
         $src,
-        html_details($label, html_video_markup($src, 500) . html_download_link($src)),
+        $html,
         $html_item
     );
 }
@@ -79,7 +87,7 @@ function html_details(string $summary, string $detail): string
  * @param string $filter Un filtre sur les sources à appliquer. Optional. Default = 'all'
  * @return array 
  */
-function map_declared_sources_to_html_item(string $html_item, string $filter = "all"): array
+function map_declared_sources_to_html_item(string $html_item, array $show_data = array('label'), string $filter = "all"): array
 {
     if (!in_array($html_item, array('li', 'option'))) {
         throw new Exception("html_item invalide.");
@@ -87,8 +95,8 @@ function map_declared_sources_to_html_item(string $html_item, string $filter = "
 
     $sources = query_declared_sources();
 
-    $options = array_map(function ($source) use ($html_item) {
-        return map_source_to_html_item($source, $html_item);
+    $options = array_map(function ($source) use ($html_item, $show_data) {
+        return map_source_to_html_item($source, $html_item, $show_data);
     }, iterator_to_array($sources));
 
     return $options;
