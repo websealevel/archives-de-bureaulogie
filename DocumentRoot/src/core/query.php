@@ -186,3 +186,55 @@ function declare_source(string $url, string $series, string $slug, string $file_
 
     return $result;
 }
+
+
+/**
+ * Retourne l'élément source de l'extrait
+ * @param DOMElement $clip  Optional. L'élément clip 
+ * @return DOMElement L'élément source parent
+ */
+function declared_source_of(DOMElement $clip): DOMElement
+{
+    return $clip->parentNode;
+}
+
+/**
+ * Retourne le nom (attribut) de la source déclarée
+ * @param DOMElement $source
+ * @return string
+ */
+function source_name(DOMElement $source): string
+{
+    return $source->getAttribute('name');
+}
+
+/**
+ * Retourne un élément enfant d'un élément par nom. Nous sommes garantis d'avoir l'élément enfant recherché grâce au schéma de validation dtd. Si ce n'est pas le cas c'est une erreur du développeur.
+ * @param DOMEelement $el L'élément dont on cherche un enfant
+ * @param string $child_name Le nom de l'élément recherché
+ * @throws Exception Si $child_name est vide, si l'élément n'a pas d'enfants, si un enfant n'est pas défini
+ * @return DOMElement L'élément enfant dont le nom correspond
+ */
+function child_element_by_name(DOMElement $el, string $child_name): DOMElement
+{
+
+    if (empty($child_name))
+        throw new Exception("L'élément " . $child_name . "n'existe pas.");
+
+    if (!$el->hasChildNodes())
+        throw new Exception("L'élément " . $el->nodeName . "n'as pas d'éléments enfants.");
+
+    $childs =  $el->childNodes;
+
+    $child = $childs->item(0);
+
+    if (!isset($child))
+        throw new Exception("Le premier enfant de " . $el->nodeName . " n'est pas défini");
+    do {
+        if ($child->nodeName === $child_name) {
+            return $child;
+        }
+    } while ($child = $child->nextSibling);
+
+    throw new Exception("L'élément enfant " . $child_name . "n'existe pas !");
+}
