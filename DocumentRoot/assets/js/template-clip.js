@@ -32,8 +32,11 @@ jQuery(function ($) {
 
 
     /**
-     * Pause
+     * Pause un lecteur vidéo quand l'autre est joué et vice versa
      */
+    $("#video-source").on('play',function(){
+        console.log('source play')
+    })
 
     /**
      * Timecodes bouttons

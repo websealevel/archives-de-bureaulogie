@@ -1,25 +1,9 @@
 /* @import url("new.css"); */
 
-
-* {
-	/* Reset margins and padding */
-	margin: 0;
-	padding: 0;
-}
-
-
 body {
-	/* Center body in page */
-	margin: 0 auto;
-	padding: 2rem;
-	border-radius: 6px;
 	overflow-x: hidden;
 	word-break: break-word;
 	overflow-wrap: break-word;
-
-	font-size: 1.03rem;
-	line-height: 1.5;
-
 	box-sizing: border-box;
 }
 
@@ -49,7 +33,7 @@ body {
 }
 
 #fieldset-video-source {
-	width: 50vw;
+	width: 40vw;
 }
 
 #fieldset-video-clip {
@@ -61,10 +45,13 @@ body {
 	font-weight: bold;
 	padding: 20px;
 	margin: 20px;
-	border: 1px solid black;
+	border: 3px solid black;
 	display: inline-block;
 }
-
+fieldset{
+	padding: 20px;
+	margin: 5px;
+}
 
 
 #fieldset-edition {
