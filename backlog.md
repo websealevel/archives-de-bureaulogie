@@ -109,13 +109,13 @@ Ils doivent être compris entre `00.00.00.000` et la durée totale de la vidéo.
 
 Les fichiers *sources* sont les vidéos téléchargées depuis youtube entières et servent de source aux extraits. Elles se trouvent dans le dossier `sources`.
 
-Les fichiers *sources* **doivent respecter [un format](sources/README.md#format-du-nom)** sinon elles finiront pas être **supprimées automatiquement**.
+Les fichiers *sources* **doivent respecter [un format](./DocumentRoot/sources/README.md)** sinon elles finiront pas être **supprimées automatiquement**.
 
 #### Fichier `extrait`
 
 Les *extraits* sont les extraits vidéos des [sources](#fichiers-sources). Ils sont générés automatiquement à partir des informations fournies dans le [fichier source](#le-fichier-source). Ils se trouvent dans le dossier `extraits`.
 
-Les fichiers *extraits* **doivent respecter [un format](extraits/README.md#format-du-nom)** sinon elles finiront pas être **supprimées automatiquement**.
+Les fichiers *extraits* **doivent respecter [un format][un format](./DocumentRoot/extraits/README.md)** sinon elles finiront pas être **supprimées automatiquement**.
 
 Un extrait doit faire **au moins 1 seconde**, sinon il ne sera pas généré et une exception sera levée.
 
