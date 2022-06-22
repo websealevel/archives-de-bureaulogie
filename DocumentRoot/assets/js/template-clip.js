@@ -23,19 +23,10 @@ jQuery(function ($) {
     $("#sources").change(function () {
 
 
-        var str = "";
-        $("select option:selected").each(function () {
-            str += $(this).val() + " ";
-        });
-
-        console.log(str)
-
-        const path = this.find('option:selected').attr("name");
-
-        console.log('here')
-
+        const path = $(this).find(":selected").attr('name')
         // Mettre a jour la source du tag video source.
         $("#video-source").prop('src', path)
+        $("#video-clip").prop('src', path)
 
         // Mettre à jour la liste des extraits présents
         //Faire une requete et ajouter a la liste
