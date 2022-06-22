@@ -113,7 +113,6 @@ function present_footer(array $js_scripts = array())
     present_template_part('footer', $js_scripts);
 }
 
-
 /**
  * Retrouve la valeur POSTée d'un input de formulaire.
  * @param InputValidation|string|array $input La valeur d'un input.
@@ -126,28 +125,6 @@ function retrieve_value(InputValidation|string|array $input): string
 
     return $input;
 }
-
-/**
- * Retourne le nom complet d'une source (son attribut name) à partir de sa base et de son slug/identifiant
- * @param string $series Le nom de la série à laquelle appartient la vidéo source
- * @param stirng $slug L'identifiant ajouté au nom de la vidéo
- * @return string Le nom complet au format FORMAT_FILE_VIDEO_SOURCE
- * @see FORMAT_FILE_VIDEO_SOURCE
- */
-function build_source_name(string $series, string $slug): string
-{
-    if (empty($series) || empty($slug))
-        throw new Exception("Impossible de reconstruire le nom de la source, la base du nom ou le slug est vide");
-
-    $file_name = sprintf("%s--%s.%s", $series, $slug, EXTENSION_SOURCE);
-
-    //Check format
-    if (!preg_match('/' . FORMAT_FILE_VIDEO_SOURCE . '/', $file_name))
-        throw new Exception("Une contrainte sur le nom de la source est mauvaise car le nom reconstruit de la source n'est pas dans un format valide.");
-
-    return $file_name;
-}
-
 
 /**
  * Retourne le résultat des callback de validation enregistrées sur chaque input

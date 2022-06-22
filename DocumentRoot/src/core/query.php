@@ -86,7 +86,7 @@ function query_source_by_unique_attr(string $attr_name, string $value, string $f
 }
 
 /**
- * Retourne l'élément clip demandé
+ * Retourne l'élément clip demandé, faux s'il n'existe pas
  * @param string $source La source du clip (son parent)
  * @param string $slug Le slug du clip
  * @param string $timecode_start
@@ -98,20 +98,7 @@ function query_clip(string $source, string $slug, string $timecode_start, string
 {
     $xpath = load_xpath($file_source, XMLNS_SOURCE_FILE);
 
-    die;
-
-
-    // $query = sprintf("//ns:extraits/ns:source[@%s='%s']", $attr_name, $value);
-
-    $match = $xpath->query($query);
-
-    //Checks
-
-    return match ($return) {
-        'node' => $match,
-        'model' => new Clip(),
-        default => false
-    };
+    return false;
 }
 
 /**

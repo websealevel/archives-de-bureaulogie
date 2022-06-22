@@ -31,15 +31,6 @@ function timecode_to_seconds(string $timecode): float
     return $time_in_seconds;
 }
 
-// /**
-//  * Retourne le timecode au format hh:mm:ss:lll
-//  * @param string $timecode_in_sec
-//  * @return string
-//  */
-// function timecode_to_hour_minute_second_milisecond(string $timecode_in_sec): string
-// {
-// }
-
 /**
  * Retourne vrai si la source est déjà déclarée (nom et url identiques ou url identiques), faux sinon
  * @param string $series La base du nom de la source
@@ -75,8 +66,49 @@ function is_source_already_declared(string $series, string $slug, string $url): 
  */
 function is_clip_already_declared(string $source_name, string $timecode_start, string $timecode_end): bool
 {
+
+    $full_name = build_clip_name($source_name, $timecode_start, $timecode_end);
+    $match = query_clip();
+
+    if (false === $match)
+        return false;
+
     return true;
 }
+
+
+/**
+ * Retourne le nom complet d'une source (son attribut name) à partir de sa base et de son slug/identifiant
+ * @param string $series Le nom de la série à laquelle appartient la vidéo source
+ * @param stirng $slug L'identifiant ajouté au nom de la vidéo
+ * @return string Le nom complet au format FORMAT_FILE_VIDEO_SOURCE
+ * @see FORMAT_FILE_VIDEO_SOURCE
+ */
+function build_source_name(string $series, string $slug): string
+{
+    if (empty($series) || empty($slug))
+        throw new Exception("Impossible de reconstruire le nom de la source, la base du nom ou le slug est vide");
+
+    $file_name = sprintf("%s--%s.%s", $series, $slug, EXTENSION_SOURCE);
+
+    //Check format
+    if (!preg_match('/' . FORMAT_FILE_VIDEO_SOURCE . '/', $file_name))
+        throw new Exception("Une contrainte sur le nom de la source est mauvaise car le nom reconstruit de la source n'est pas dans un format valide.");
+
+    return $file_name;
+}
+
+/**
+ * Retourne le nom complet d'un clip à partir du nom de la vidéo source dont il dépend (attr name) et de ses timescodes formatés
+ * @param string $source Le nom de la source (attribut name) déclaré dans le fichier source
+ * @param string $timecode_start Le timecode de début du clip au format hh:mm:ss:lll
+ * @param string $timecode_end Le timecode de fin du clip au format hh:mm:ss:lll
+ * @return string
+ */
+function build_clip_name(string $source, string $timecode_start, string $timecode_end): string
+{
+}
+
 
 /**
  * Retourne le path (dont le nom du fichier) de l'extrait à sauvegarder.
