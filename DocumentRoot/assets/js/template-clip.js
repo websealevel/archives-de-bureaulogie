@@ -30,12 +30,14 @@ jQuery(function ($) {
         //On récupere le current time en secondes
         const timecode_seconds = $("#video-source").prop("currentTime")
         const hh_mm_ss_lll = seconds_to_hh_mm_ss_lll(timecode_seconds)
+        console.log(hh_mm_ss_lll)
         $("#timecode_start").val(hh_mm_ss_lll)
     })
 
     $("#btn_clip_end").click(function () {
         const timecode_seconds = $("#video-source").prop("currentTime")
         const hh_mm_ss_lll = seconds_to_hh_mm_ss_lll(timecode_seconds)
+        console.log(hh_mm_ss_lll)
         $("#timecode_end").val(hh_mm_ss_lll)
     })
 
@@ -45,7 +47,15 @@ jQuery(function ($) {
 
     $("#btn_preview").click(function () {
         const src = $("#video-source").prop('src')
-        const src_timecodes = src + '#t=10,13'
+
+        const timecode_start = $("#timecode_start").val()
+        const timecode_end = $("#timecode_end").val()
+
+        const timecode_start_in_sec = hh_mm_ss_lll_to_seconds(timecode_start)
+        const timecode_end_in_sec = hh_mm_ss_lll_to_seconds(timecode_end)
+
+        const src_timecodes = src + `#t=${timecode_start_in_sec},${timecode_end_in_sec}`
+
         const $html_video_clip = $("#video-clip")
         $html_video_clip.prop('src', src_timecodes)
         $html_video_clip.trigger('play')
@@ -55,18 +65,14 @@ jQuery(function ($) {
          */
         $html_video_clip.on('timeupdate', function () {
 
-
             if ($('#checkbox_loop_preview').is(':checked')) {
                 loop_video(this, 10, 13)
             }
-            else{
-                if(video_cip_ends(this, 13))
-                this.pause()
+            else {
+                if (has_reached_end(this, 13))
+                    this.pause()
             }
         })
-
-
-
     })
 
 
@@ -119,19 +125,44 @@ function seconds_to_hh_mm_ss_lll(timecode_seconds) {
 }
 
 /**
+ * Formate une durée au format hh:mm:ss.lll en secondes
+ * @param {string} timecode_hh_mm_ss_lll 
+ * @returns string
+ */
+function hh_mm_ss_lll_to_seconds(timecode_hh_mm_ss_lll) {
+
+    const h = timecode_hh_mm_ss_lll.substring(0, 1)
+    const m = timecode_hh_mm_ss_lll.substring(3, 4)
+    const s = timecode_hh_mm_ss_lll.substring(6, 8)
+    const l = timecode_hh_mm_ss_lll.substring(9, 11)
+
+    const seconds = parseInt(h) * 3600 + parseInt(m) * 60 + parseInt(s) + parseInt(l) / 1000
+
+    console.log('Conversion : ', timecode_hh_mm_ss_lll,seconds )
+
+    return seconds
+
+}
+
+/**
  * Joue la vidéo si le timecode courant arrive à la fin du timecode de fin
  * @param {string} video Element HTML video 
  * @param {*} start timecode de début (en secondes)
  * @param {*} end timecode de fin (en secondes)
  */
 function loop_video(video, start, end) {
-    if (video_cip_ends(video, end)) {
+    if (has_reached_end(video, end)) {
         video.currentTime = start;
         video.play();
     }
 }
 
-
-function video_cip_ends(video, end){
+/**
+ * Retourne vrai si la vidéo est arrivée au timecode de fin, faux sinon
+ * @param {*} video Element HTML video
+ * @param {*} end timecode de fin (en secondes)
+ * @returns 
+ */
+function has_reached_end(video, end) {
     return video.currentTime >= end
 }

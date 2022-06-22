@@ -49,12 +49,12 @@ if (!current_user_can('submit_clip'))
         <input type="text" name="title" size="100">
 
         <label for="timecode_start">Début </label>
-        <input type="time" name="timecode_start" id="timecode_start" value="00:00:00.000">
+        <input type="time" name="timecode_start" id="timecode_start" value="0">
 
         <label for="timecode_fin">Fin </label>
-        <input type="time" name="timecode_end" id="timecode_end" value="00:00:00.000">
+        <input type="time" name="timecode_end" id="timecode_end" value="0>
 
-        <label for="title">Description</label>
+        <label for=" title">Description</label>
         <textarea name="description" rows="4" cols="50"></textarea>
 
         <input name="btn_clip_start" id="btn_clip_start" type="button" title="Définir la position courante du curseur de lecture comme timecode de départ de l'extrait" value="Démarrer l'extrait ici">
@@ -69,7 +69,7 @@ if (!current_user_can('submit_clip'))
             <label for="checkbox_loop_preview">Prévisualisation en boucle</label>
         </fieldset>
 
-        <input type="submit" value="Extraire">
+        <input type="submit" value="Cut !">
     </form>
 </main>
 
