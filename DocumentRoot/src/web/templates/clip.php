@@ -120,7 +120,9 @@ Sinon, utiliser le bouton 'Finir l'extrait ici' prévu à cet effet">
         </fieldset>
 
         <input type="text" hidden name="token" value="<?php echo $token; ?>">
-        <input type="submit" id="btn-submit-clip" value="Cut !" class="btn-edition">
+        <div class="container-btn-submit-clip">
+            <input type="submit" id="btn-submit-clip" value="Cut !" class="btn-edition">
+        </div>
         <span id="spinner"></span>
     </form>
 </main>
