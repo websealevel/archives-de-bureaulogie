@@ -129,10 +129,8 @@ jQuery(function ($) {
         $.post('/api/v1/clip-source', data).done(function (data) {
 
             //Si le formulaire est rejeté on récupere les erreurs et on les affiche. A faire.
-            console.log(data)
-
             //Une erreur
-            if ('' !== data && 'errors' in data) {
+            if (typeof data !== 'string' &&  ''  !== data && 'errors' in data) {
 
                 const errors = data.errors
 

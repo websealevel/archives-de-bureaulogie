@@ -43,19 +43,16 @@ function api_clip_source()
         api_respond_with_error();
     }
 
-
     //Validation des inputs du formulaire
-    $input_validations = check_submit_clip_form();
-    $invalid_inputs = filter_invalid_inputs($input_validations);
-
-    write_log($invalid_inputs);
+    $inputs = check_submit_clip_form();
+    $invalid_inputs = filter_invalid_inputs($inputs);
 
     if (!empty($invalid_inputs)) {
         //Envoyez le tableau d'erreurs
         api_respond_with_error($invalid_inputs);
     }
 
-    return 'ok';
+    echo 'ok';
 
     //Utilisateur authentifié,token valide, formulaire validé. Création du clip
 
