@@ -13,22 +13,14 @@
  */
 require_once __DIR__ . '/../../../vendor/autoload.php';
 
-/**
- * Models
- */
-require_once __DIR__ . '/../../models/DonwloadRequest.php';
-require_once __DIR__ . '/../../models/enumDownloadState.php';
 
 /**
  * Functions
  */
-require_once __DIR__ . '/../utils.php';
+require_once __DIR__ . '/token.php';
 require_once __DIR__ . '/../current-user.php';
 require_once __DIR__ . '/../log.php';
-require_once __DIR__ . '/../database/repository-downloads.php';
 
-use YoutubeDl\Options;
-use YoutubeDl\YoutubeDl;
 
 /**
  * Traite la requête AJAX/formulaire de génération d'un extrait
@@ -38,5 +30,31 @@ use YoutubeDl\YoutubeDl;
  */
 function api_clip_source()
 {
-    echo 'api_clip_source';
+    load_env();
+
+    //Authentifier l'utilisateur
+    if (!current_user_can('submit_clip')) {
+        header('Content-Type: application/json; charset=utf-8');
+        $response =  json_encode(array(
+            'statut' => 403,
+            'errors' => array(
+                array(
+                    'name' => '',
+                    'value' => '',
+                    'message' => 'Vous ne disposez pas des droits nécessaires pour soumettre un extrait'
+                )
+            )
+        ));
+        echo $response;
+        exit;
+    }
+
+    write_log($_POST);
+
+
+    //Check le token
+
+    //Check le nombre de jetons disponibles pour soumettre un clip
+
+
 }

@@ -71,9 +71,6 @@ function html_video_markup(string $src, int $width = 400): string
  */
 function html_details(string $summary, string $detail): string
 {
-
-    write_log($detail);
-
     return sprintf('
     <details>
     <summary>%s</summary>

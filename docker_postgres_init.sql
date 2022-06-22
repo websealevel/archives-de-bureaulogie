@@ -55,15 +55,6 @@ CREATE TABLE downloads (
     CONSTRAINT fk_account FOREIGN KEY (account_id) REFERENCES accounts(id)
 );
 
-CREATE TABLE tokens(
-    token_id serial PRIMARY KEY,
-    value VARCHAR(250) NOT NULL,
-    account_id INT NOT NULL,
-    expiration_in_seconds INT NOT NULL,
-    created_on TIMESTAMP NOT NULL,
-    CONSTRAINT fk_account FOREIGN KEY (account_id) REFERENCES accounts(id)
-);
-
 -- Inserer les roles.
 INSERT INTO
     roles(role_id, role, role_label, ancestor)

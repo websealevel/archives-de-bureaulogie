@@ -9,11 +9,19 @@
  */
 require_once __DIR__ . '/../utils.php';
 require_once __DIR__ . '/../current-user.php';
-require_once __DIR__ . '/../core-interface.php';
+require_once __DIR__ . '/../api/token.php';
 
 
 if (!current_user_can('submit_clip'))
     redirect('/', 'notices', array(new Notice('Vous devez être authentifié pour soumettre un clip', NoticeStatus::Error)));
+
+
+/**
+ * Délivre un jeton pour consommer l'api au compte utilisateur
+ * Fait office de nonce (previent CSRF, un jeton pour demander un téléchargement)
+ */
+$account = from_session('account_id');
+$token = register_api_token($account, 'submit_clip');
 
 ?>
 
@@ -104,14 +112,13 @@ if (!current_user_can('submit_clip'))
             </div>
         </fieldset>
 
-
-
         <fieldset id="clip-options">
             <legend>Options</legend>
             <input type="checkbox" name="checkbox_loop_preview" id="checkbox_loop_preview">
             <label for="checkbox_loop_preview">Prévisualisation en boucle</label>
         </fieldset>
 
+        <input type="text" hidden name="token" value="<?php echo $token; ?>">
         <input type="submit" value="Cut !" class="btn-edition">
     </form>
 </main>
