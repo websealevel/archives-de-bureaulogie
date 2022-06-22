@@ -7,10 +7,11 @@ jQuery(function ($) {
     $("#video-source").prop('src', source_url)
     $("#video-clip").prop('src', source_url)
 
+
     /**
      * Timer
      */
-    $("#video-source").on('timeupdate', function(){
+    $("#video-source").on('timeupdate', function () {
         const timecode_seconds = $("#video-source").prop("currentTime")
         const hh_mm_ss_lll = seconds_to_hh_mm_ss_lll(timecode_seconds)
         $("#current-time").html(hh_mm_ss_lll)
@@ -19,9 +20,19 @@ jQuery(function ($) {
     /**
      * Evenement quand le select de source change
      */
-    $("#sources").on('select', function () {
+    $("#sources").change(function () {
+
+
+        var str = "";
+        $("select option:selected").each(function () {
+            str += $(this).val() + " ";
+        });
+
+        console.log(str)
 
         const path = this.find('option:selected').attr("name");
+
+        console.log('here')
 
         // Mettre a jour la source du tag video source.
         $("#video-source").prop('src', path)
@@ -34,11 +45,11 @@ jQuery(function ($) {
     /**
      * Pause un lecteur vidéo quand l'autre est joué et vice versa
      */
-    $("#video-source").on('play',function(){
+    $("#video-source").on('play', function () {
         $("#video-clip").trigger('pause')
     })
 
-    $("#video-clip").on('play',function(){
+    $("#video-clip").on('play', function () {
         $("#video-source").trigger('pause')
     })
 
@@ -84,7 +95,7 @@ jQuery(function ($) {
 
             return
         }
-        else{
+        else {
             $("div.errors").html('')
             $("#timecode_start").removeClass('error')
             $("#timecode_end").removeClass('error')
