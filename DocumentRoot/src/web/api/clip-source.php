@@ -34,27 +34,39 @@ function api_clip_source()
 
     //Authentifier l'utilisateur
     if (!current_user_can('submit_clip')) {
-        header('Content-Type: application/json; charset=utf-8');
-        $response =  json_encode(array(
-            'statut' => 403,
-            'errors' => array(
-                array(
-                    'name' => '',
-                    'value' => '',
-                    'message' => 'Vous ne disposez pas des droits nécessaires pour soumettre un extrait'
-                )
-            )
-        ));
-        echo $response;
-        exit;
+        api_respond_with_error();
     }
 
     write_log($_POST);
-
+    write_log($_SESSION);
 
     //Check le token
+    if (!($_POST['token'] && is_valid_token($_POST['token'], 'submit_clip'))) {
+        api_respond_with_error();
+    }
 
-    //Check le nombre de jetons disponibles pour soumettre un clip
+    api_respond_with_error();
+}
 
-
+/**
+ * Retourne une erreur de l'api au client, avec un message et un status code
+ * @param string $message Le message a renvoyé au client
+ * @param string $code Le code HTTP de la requête
+ * @return void
+ */
+function api_respond_with_error(string $message = 'Vous ne disposez pas des droits nécessaires', string $code = '403'): void
+{
+    header('Content-Type: application/json; charset=utf-8');
+    $response =  json_encode(array(
+        'statut' => $code,
+        'errors' => array(
+            array(
+                'name' => '',
+                'value' => '',
+                'message' => $message
+            )
+        )
+    ));
+    echo $response;
+    exit;
 }

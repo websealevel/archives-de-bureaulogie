@@ -122,6 +122,8 @@ jQuery(function ($) {
 
         event.preventDefault();
 
+        $("#btn-submit-clip").prop("disabled", true)
+
         const data = $('form#form-clip-source').serialize() + '&PHPSESSID=' + PHPSESSID
 
         $.post('/api/v1/clip-source', data).done(function (data) {
@@ -129,8 +131,16 @@ jQuery(function ($) {
             //Si le formulaire est rejeté on récupere les erreurs et on les affiche. A faire.
             console.log(data)
 
+            //Une erreur
+            if ('errors' in data) {
+                const errors = data.errors
+                const items = errors.map((error) => "<li>" + error.message + "</li>")
+                $("div.errors").html('<ul>' + items.toString() + '</ul>')
+            }
         }).fail(function () {
-            console.log('Une erreur est survenue')
+            $("div.errors").html('Hmm, il semblerait qu\'il y ait eu un problème de connexion. Veuillez rééssayer s\'il vous plaît.')
+        }).always(function () {
+            $("#btn-submit-clip").prop("disabled", false)
         })
     });
 });
