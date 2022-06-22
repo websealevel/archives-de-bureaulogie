@@ -268,8 +268,10 @@ Suivi des tâches
 
 ### Ecran Ajouter une ressource biblio
 
-- si role > modérateur, afficher la liste des ressources présentes (html)
-- formulaire avec select type de ressource (livre, article, podcast...)
+- si role > modérateur, afficher la liste des ressources présentes (html) [ ]
+- formulaire avec select type de ressource (livre, article, podcast...) [ ]
+- trimer et lower le nom de la ref et en faire une analyse sémantique pour trouver des suggestion proches en plus d'un match parfait (check d'unicité) [ ]
+- mettre en place une liste noire de mots [ ]
 
 ### Ecran Modération des extraits vidéos
 
@@ -344,6 +346,8 @@ A venir...
 - desactiver facilement les comptes Twitter []
 - desactiver facilement le site []
 - donner les droits sur les dossier sources, extraits et sur les fichiers extraits.xml et extraits.xtd à l'user d'apache www-data (seul lui et le root peuvent les ouvrir et les lire) []
+- stocker IP quand form soumis pour eventullement la bannir [ ]
+- deplacer les comptes bannis dans une autre table [ ]
 
 
 ## Features additionnelles
