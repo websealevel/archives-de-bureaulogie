@@ -271,3 +271,4 @@ Il faut supprimer le cache
 - [dockerize-webserver-nginx-php8](https://marcit.eu/en/2021/04/28/dockerize-webserver-nginx-php8/)
 - [crowdstar/background-processing](https://github.com/Crowdstar/background-processing), un paquet php assez simple pour gérer des processus en tâche de fond
 - *Modern PHP* by Josh Lockhart, O'Reilly, 2015, Chapter 7, *p138-146*
+- [mdn web docs : APIs vidéo et audio](https://developer.mozilla.org/fr/docs/Learn/JavaScript/Client-side_web_APIs/Video_and_audio_APIs)
