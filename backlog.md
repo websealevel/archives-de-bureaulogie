@@ -354,5 +354,5 @@ A venir...
 
 ## Comptes twitter
 
-- compte out of context ackboo (extraits videos)
-- compte refs biblios
+- compte [Out of Context ackboo](https://twitter.com/archivesdb_fr) pour les archives vidéos
+- compte pour les références biblios (a venir)
