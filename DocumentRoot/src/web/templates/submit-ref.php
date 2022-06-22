@@ -17,6 +17,5 @@ if (!current_user_can('submit_reference'))
 <?php present_header(); ?>
 
 <h2>Soumettre une référence bibliographique</h2>
-<a href="/">Retour</a>
 
 <?php present_footer(); ?>

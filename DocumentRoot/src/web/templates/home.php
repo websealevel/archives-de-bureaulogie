@@ -25,11 +25,11 @@ require_once __DIR__ . '/../../handlers.php';
 
 <?php else : ?>
 
-    <h2>Bonjour <?php esc_html_e(current_user_pseudo()); ?> !</h2>
+    <p>Salut <?php esc_html_e(current_user_pseudo()); ?> !</p>
 
     <a href="/log-out">se déconnecter</a>
 
-    <h3>Archives vidéos</h3>
+    <h2>archives vidéos</h2>
 
     <ul>
         <?php if (current_user_can('submit_clip')) :  ?>
@@ -43,7 +43,7 @@ require_once __DIR__ . '/../../handlers.php';
 
     </ul>
 
-    <h3>Archives bibliographiques</h3>
+    <h2>archives bibliographiques</h2>
 
     <ul>
         <?php if (current_user_can('submit_reference')) :  ?>

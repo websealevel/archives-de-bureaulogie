@@ -31,6 +31,15 @@ function timecode_to_seconds(string $timecode): float
     return $time_in_seconds;
 }
 
+// /**
+//  * Retourne le timecode au format hh:mm:ss:lll
+//  * @param string $timecode_in_sec
+//  * @return string
+//  */
+// function timecode_to_hour_minute_second_milisecond(string $timecode_in_sec): string
+// {
+// }
+
 /**
  * Retourne vrai si la source est déjà déclarée (nom et url identiques ou url identiques), faux sinon
  * @param string $series La base du nom de la source

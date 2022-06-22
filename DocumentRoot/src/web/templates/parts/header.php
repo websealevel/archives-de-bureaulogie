@@ -47,9 +47,9 @@ autoload();
                         </h1>
                     </a>
                 </p>
-                <p class="site-description">
+                <small>
                     Contribuez aux collections publiques d'archives vidéos et de ressources bibliographiques de bureaulogie
-                </p>
+                </small>
             </div>
             <nav id="site-navigation">
             </nav>

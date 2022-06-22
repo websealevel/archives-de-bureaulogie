@@ -44,16 +44,23 @@ if (!current_user_can('submit_clip'))
 
 <main class="form-clip">
     <form action="clip-source" id="form-clip-source" name="form-clip-source">
+
         <label for=" title">Titre</label>
         <input type="text" name="title" size="100">
+
         <label for="timecode_start">Début </label>
-        <input type="time" name="timecode_start" value="00:00:00.000">
+        <input type="time" name="timecode_start" id="timecode_start" value="--:--:--.---">
+
         <label for="timecode_fin">Fin </label>
-        <input type="time" name="timecode_start" value="00:00:00.000">
+        <input type="time" name="timecode_end" id="timecode_end" value="00:00:00.000">
+
         <label for="title">Description</label>
         <textarea name="description" rows="4" cols="50"></textarea>
-        <input name="btn_clip_start" type="button" title="Définir la position courante du curseur de lecture comme timecode de départ de l'extrait" value="Démarrer l'extrait ici">
-        <input name="bt_clip_end" type="button" title="Définir la position courante du curseur de lecture comme timecode de fin de l'extrait" value="Finir l'extrait ici">
+
+        <input name="btn_clip_start" id="btn_clip_start" type="button" title="Définir la position courante du curseur de lecture comme timecode de départ de l'extrait" value="Démarrer l'extrait ici">
+
+        <input name="bt_clip_end" id="btn_clip_end" type="button" title="Définir la position courante du curseur de lecture comme timecode de fin de l'extrait" value="Finir l'extrait ici">
+
         <input type="submit" value="Extraire">
     </form>
 </main>
