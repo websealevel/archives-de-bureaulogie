@@ -157,3 +157,8 @@ function is_cli(): bool
 {
     return 'cli' === php_sapi_name();
 }
+
+/**
+ * Nombre max de caractères dans un tweet (2022)
+ */
+define('TWEET_NB_MAX_CHARACTERS', 280);

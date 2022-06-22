@@ -132,16 +132,23 @@ function check_submit_clip_form()
             filter_input(INPUT_POST, 'title'),
             function (string $title): InputValidation {
 
-                /**
-                 * Taille d'un tweet
-                 */
-                $max_nb_char = 280;
+                //Ne doit pas être non vide et limite de taille
+                if (!isset($title) || empty($title) || mb_strlen($title) > TWEET_NB_MAX_CHARACTERS)
+                    return new InputValidation('title', $title, sprintf("Veuillez renseigner un titre. Celui-ci ne doit pas dépasser %s caractères", TWEET_NB_MAX_CHARACTERS));
+
+                return new InputValidation('title', $title, "", InputStatus::Valid);
+            }
+        ),
+        new FormInput(
+            'description',
+            filter_input(INPUT_POST, 'description'),
+            function (string $description): InputValidation {
 
                 //Ne doit pas être non vide et limite de taille
-                if (!isset($title) || empty($title) || mb_strlen($title) > $max_nb_char)
-                    return new InputValidation('title', $title, "Veuillez renseigner un titre pour l'extrait (nombre de caractères max : {$max_nb_char})");
+                if (!isset($description) || empty($description) || mb_strlen($description) > TWEET_NB_MAX_CHARACTERS)
+                    return new InputValidation('description', $description, sprintf("La description ne doit pas dépasser %s caractères", TWEET_NB_MAX_CHARACTERS));
 
-                return new InputValidation('title', $title, '', InputStatus::Valid);
+                return new InputValidation('description', $description, '', InputStatus::Valid);
             }
         )
 

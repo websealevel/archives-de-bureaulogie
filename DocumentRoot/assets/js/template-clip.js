@@ -136,11 +136,13 @@ jQuery(function ($) {
 
                 let items = []
 
+                console.log(errors)
+
                 for(const input in errors){
                     items.push( "<li>" + errors[input].message + "</li>")
                 }
 
-                $("div.errors").html('<ul>' + items.toString() + '</ul>')
+                $("div.errors").html('<ul>' + items.join('') + '</ul>')
             }
         }).fail(function () {
             $("div.errors").html('Hmm, il semblerait qu\'il y ait eu un problème de connexion. Veuillez rééssayer s\'il vous plaît.')
