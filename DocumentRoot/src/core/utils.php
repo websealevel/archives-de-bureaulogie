@@ -75,21 +75,36 @@ function is_clip_already_declared(string $source_name, string $timecode_start, s
         throw new Exception(sprintf("Le fichier %s existe, mais il n'est pas déclaré dans le fichier source. "));
     }
 
-    write_log($declared_source);
+    return source_has_clip($declared_source, $timecode_start, $timecode_end);
+}
+
+/**
+ * Retourne vrai si la source a un extrait déclaré avec les mêmes timecodes, faux sinon
+ * @param DOMElement $declared_source
+ * @param string $timecode_start Le timecode de départ du clip
+ * @param string $timecode_end Le timecode de fin du clip
+ */
+function source_has_clip(DOMElement $declared_source, string $timecode_start, string $timecode_end): bool
+{
+
+    if (!$declared_source->hasChildNodes())
+        return false;
+
+    $childs =  $declared_source->childNodes;
+
+    write_log($childs);
+    foreach ($childs as $child) {
+        write_log($child);
+    }
 
     return true;
-    // $full_name = build_clip_name($source_name, $timecode_start, $timecode_end);
-    // $match = query_clip();
-    // if (false === $match)
-    //     return false;
-    // return true;
 }
 
 
 /**
  * Retourne le nom complet d'une source (son attribut name) à partir de sa base et de son slug/identifiant
  * @param string $series Le nom de la série à laquelle appartient la vidéo source
- * @param stirng $slug L'identifiant ajouté au nom de la vidéo
+ * @param string $slug L'identifiant ajouté au nom de la vidéo
  * @return string Le nom complet au format FORMAT_FILE_VIDEO_SOURCE
  * @see FORMAT_FILE_VIDEO_SOURCE
  */
@@ -108,20 +123,7 @@ function build_source_name(string $series, string $slug): string
 }
 
 /**
- * Retourne le nom complet d'un clip à partir du nom de la vidéo source dont il dépend (attr name) et de ses timescodes formatés
- * @param string $source Le nom de la source (attribut name) déclaré dans le fichier source
- * @param string $timecode_start Le timecode de début du clip au format hh:mm:ss:lll
- * @param string $timecode_end Le timecode de fin du clip au format hh:mm:ss:lll
- * @return string
- */
-function build_clip_name(string $source, string $timecode_start, string $timecode_end): string
-{
-}
-
-
-/**
- * Retourne le path (dont le nom du fichier) de l'extrait à sauvegarder.
- * Le nom du fichier de l'extrait est construit à partir du slug et des timescodes.
+ * Retourne le path absolu de l'extrait à sauvegarder.
  * @param DOMElement $clip
  */
 function clip_path(DOMElement $clip): string
@@ -151,9 +153,7 @@ function format_to_clip_file(DOMElement $clip): string
 
     $end = child_element_by_name($clip, "fin")->nodeValue;
 
-    $slug = strtolower(trim(child_element_by_name($clip, "slug")->nodeValue));
-
-    return sprintf("[%s][%s][%s][%s].%s", $source_name, $slug, $start, $end, EXTENSION_CLIP);
+    return sprintf("[%s][%s][%s].%s", $source_name, $start, $end, EXTENSION_CLIP);
 }
 
 /**
