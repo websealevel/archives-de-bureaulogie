@@ -86,6 +86,7 @@ function query_source_by_unique_attr(string $attr_name, string $value, string $f
 }
 
 /**
+ * Remarque : Non implémentée.
  * Retourne l'élément clip demandé, faux s'il n'existe pas
  * @param string $source La source du clip (son parent)
  * @param string $slug Le slug du clip
