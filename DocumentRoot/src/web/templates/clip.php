@@ -63,13 +63,11 @@ if (!current_user_can('submit_clip'))
 
         <input type="button" id="btn_preview" value="Prévisualiser">
 
-        <fieldset>
+        <fieldset id="clip-options">
             <legend>Options</legend>
             <input type="checkbox" name="checkbox_loop_preview" id="checkbox_loop_preview">
             <label for="checkbox_loop_preview">Prévisualisation en boucle</label>
-
         </fieldset>
-
 
         <input type="submit" value="Extraire">
     </form>
@@ -77,8 +75,7 @@ if (!current_user_can('submit_clip'))
 
 <side>
     <h2>Extraits existants</h2>
-    <!-- Rempli en jquery -->
-    <div class="list-clips"></div>
+    <div id="list-clips-on-current-source"></div>
 </side>
 
 
