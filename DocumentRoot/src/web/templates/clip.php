@@ -43,6 +43,9 @@ if (!current_user_can('submit_clip'))
 </div>
 
 <main class="form-clip">
+
+    <div class="errors" style="color: red;"></div>
+
     <form action="clip-source" id="form-clip-source" name="form-clip-source">
 
         <label for=" title">Titre</label>

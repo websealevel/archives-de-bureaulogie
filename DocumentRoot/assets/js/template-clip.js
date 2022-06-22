@@ -46,6 +46,7 @@ jQuery(function ($) {
      */
 
     $("#btn_preview").click(function () {
+        
         const src = $("#video-source").prop('src')
 
         const timecode_start = $("#timecode_start").val()
@@ -53,6 +54,13 @@ jQuery(function ($) {
 
         const timecode_start_in_sec = hh_mm_ss_lll_to_seconds(timecode_start)
         const timecode_end_in_sec = hh_mm_ss_lll_to_seconds(timecode_end)
+
+        if (timecode_end_in_sec <= timecode_start_in_sec) {
+            $("div.errors").html("<p>Impossible de prévisualiser l'extrait : le timecode de fin doit être plus grand que le timecode de début</p>")
+            return
+        }
+        else
+            $("div.errors").html('')
 
         const src_timecodes = src + `#t=${timecode_start_in_sec},${timecode_end_in_sec}`
 
@@ -138,7 +146,7 @@ function hh_mm_ss_lll_to_seconds(timecode_hh_mm_ss_lll) {
 
     const seconds = parseInt(h) * 3600 + parseInt(m) * 60 + parseInt(s) + parseInt(l) / 1000
 
-    console.log('Conversion : ', timecode_hh_mm_ss_lll,seconds )
+    console.log('Conversion : ', timecode_hh_mm_ss_lll, seconds)
 
     return seconds
 
