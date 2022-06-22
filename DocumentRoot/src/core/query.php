@@ -127,6 +127,35 @@ function declare_clip(string $source, string $slug, string $timecode_start, stri
 }
 
 /**
+ * Ajoute un élément enfant source au noeud root. Retourne vrai si l'ajout a été bien enregistré, faux sinon
+ * @param string $url L'URL de la vidéo source
+ * @param string $series Le nom de la série à laquelle appartient la vidéo source
+ * @param string $slug Le slug de la vidéo
+ * @param string $file_name Le nom du fichier de la vidéo source
+ * @return bool 
+ * @throws
+ */
+function add_source(string $url, string $series, string $slug, string $file_name, string $file_source = SOURCE_FILE, string $namespace = XMLNS_SOURCE_FILE): bool
+{
+    $dom = load_xml($file_source);
+    $root = $dom->documentElement;
+
+    $element = $dom->createElementNS(XMLNS_SOURCE_FILE, 'source');
+
+    //Ajout des attributs
+    $element->setAttribute('url', $url);
+    $element->setAttribute('series', $series);
+    $element->setAttribute('series', $series);
+    $element->setAttribute('name', $file_name);
+    $element->setAttribute('label', format_to_label($file_name));
+
+    $root->appendChild($element);
+
+    return $dom->save(SOURCE_FILE);
+}
+
+
+/**
  * Ajoute une vidéo source au fichier source si elle n'existe pas déjà
  * @param string $url L'URL de la vidéo source
  * @param string $series La série a laquelle appartient la vidéo source
@@ -144,7 +173,7 @@ function declare_source(string $url, string $series, string $slug, string $file_
         throw new Exception("Le nom du fichier vidéo enregistré ne correspond pas aux métadonnées");
     }
 
-    //A faire : on devrait check avec ffprobe ici que c'est un fichier vidéo valide (et non un simple fichier texte).
+    //A faire : on devrait check avec ffprobe ici que c'est un fichier vidéo valide (et non un simple fichier lambda).
     if (!source_exists(basename($file_name_saved))) {
         throw new Exception("Impossible de déclarer une source, car le fichier vidéo est introuvable dans le dossier sources");
     }

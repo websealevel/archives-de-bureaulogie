@@ -96,31 +96,3 @@ function source_name(DOMElement $source): string
 {
     return $source->getAttribute('name');
 }
-
-/**
- * Ajoute un élément enfant source au noeud root. Retourne vrai si l'ajout a été bien enregistré, faux sinon
- * @param string $url L'URL de la vidéo source
- * @param string $series Le nom de la série à laquelle appartient la vidéo source
- * @param string $slug Le slug de la vidéo
- * @param string $file_name Le nom du fichier de la vidéo source
- * @return bool 
- * @throws
- */
-function add_source(string $url, string $series, string $slug, string $file_name, string $file_source = SOURCE_FILE, string $namespace = XMLNS_SOURCE_FILE): bool
-{
-    $dom = load_xml($file_source);
-    $root = $dom->documentElement;
-
-    $element = $dom->createElementNS(XMLNS_SOURCE_FILE, 'source');
-
-    //Ajout des attributs
-    $element->setAttribute('url', $url);
-    $element->setAttribute('series', $series);
-    $element->setAttribute('series', $series);
-    $element->setAttribute('name', $file_name);
-    $element->setAttribute('label', format_to_label($file_name));
-
-    $root->appendChild($element);
-
-    return $dom->save(SOURCE_FILE);
-}
