@@ -51,16 +51,17 @@ jQuery(function ($) {
         //On récupere le current time en secondes
         const timecode_seconds = $("#video-source").prop("currentTime")
         const hh_mm_ss_lll = seconds_to_hh_mm_ss_lll(timecode_seconds)
-        console.log(hh_mm_ss_lll)
         $("#timecode_start").val(hh_mm_ss_lll)
     })
 
     $("#btn_clip_end").click(function () {
         const timecode_seconds = $("#video-source").prop("currentTime")
         const hh_mm_ss_lll = seconds_to_hh_mm_ss_lll(timecode_seconds)
-        console.log(hh_mm_ss_lll)
         $("#timecode_end").val(hh_mm_ss_lll)
     })
+
+
+
 
     /**
      * Preview
@@ -109,6 +110,25 @@ jQuery(function ($) {
                     this.pause()
             }
         })
+    })
+
+    /**
+    * Prévisualisation de la traîne
+    */
+    $("#btn_preview_tail").click(function () {
+        const src = $("#video-source").prop('src')
+
+        const timecode_end = $("#timecode_end").val()
+
+        const timecode_start_in_sec = hh_mm_ss_lll_to_seconds(timecode_end)
+        const tail_duration_in_sec = $("#tail_duration_in_s").val()
+        const timecode_end_in_sec = parseInt(timecode_start_in_sec) + parseInt(tail_duration_in_sec)
+
+        const src_timecodes = src + `#t=${timecode_start_in_sec},${timecode_end_in_sec}`
+
+        const $html_video_clip = $("#video-clip")
+        $html_video_clip.prop('src', src_timecodes)
+        $html_video_clip.trigger('play')
     })
 
 
@@ -199,8 +219,6 @@ function hh_mm_ss_lll_to_seconds(timecode_hh_mm_ss_lll) {
     const l = timecode_hh_mm_ss_lll.substring(9, 11)
 
     const seconds = parseInt(h) * 3600 + parseInt(m) * 60 + parseInt(s) + parseInt(l) / 1000
-
-    console.log('Conversion : ', timecode_hh_mm_ss_lll, seconds)
 
     return seconds
 
