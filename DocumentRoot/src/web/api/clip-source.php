@@ -32,13 +32,12 @@ function api_clip_source()
 {
     load_env();
 
+    sleep(1);
+
     //Authentifier l'utilisateur
     if (!current_user_can('submit_clip')) {
         api_respond_with_error();
     }
-
-    write_log($_POST);
-
     //Check le token
     if (!($_POST['token'] && is_valid_token($_POST['token'], 'submit_clip'))) {
         api_respond_with_error();
@@ -46,13 +45,22 @@ function api_clip_source()
 
 
     //Validation des inputs du formulaire
-    $input_validations = check_download_source_form();
+    $input_validations = check_submit_clip_form();
     $invalid_inputs = filter_invalid_inputs($input_validations);
 
-    //Utilisateur authentifié et token valide. Création du clip
+    write_log($invalid_inputs);
 
+    if (!empty($invalid_inputs)) {
 
-    sleep(5);
+        //Envoyez le tableau d'erreurs
+
+        api_respond_with_error();
+    }
+
+    return 'ok';
+
+    //Utilisateur authentifié,token valide, formulaire validé. Création du clip
+
 }
 
 /**
@@ -87,15 +95,15 @@ function check_submit_clip_form()
 {
     $form_inputs = array(
 
-        new FormInput('source_url', filter_input(INPUT_POST, 'source_url'), function (string $source_url): InputValidation {
+        new FormInput('timecode_start', filter_input(INPUT_POST, 'timecode_start'), function (string $timecode_start): InputValidation {
 
             //Non vide.
-            if (!isset($source_url) || empty($source_url))
-                return new InputValidation('source_url', $source_url, "Renseignez une url valide de source à télécharger.");
+            if (!isset($timecode_start) || empty($timecode_start))
+                return new InputValidation('timecode_start', $timecode_start, "Renseignez un timecode de début non vide");
 
+            //Respecte un format regex
 
-            //Contrainte sur la chaine youtube (juste celle de canardPC)
-            return new InputValidation('source_url', $source_url, '', InputStatus::Valid);
+            return new InputValidation('timecode_start', $timecode_start, '', InputStatus::Valid);
         }),
 
     );
