@@ -272,3 +272,4 @@ Il faut supprimer le cache
 - [crowdstar/background-processing](https://github.com/Crowdstar/background-processing), un paquet php assez simple pour gérer des processus en tâche de fond
 - *Modern PHP* by Josh Lockhart, O'Reilly, 2015, Chapter 7, *p138-146*
 - [mdn web docs : APIs vidéo et audio](https://developer.mozilla.org/fr/docs/Learn/JavaScript/Client-side_web_APIs/Video_and_audio_APIs)
+- [Implementer son propre lecteur video HTML5](https://developer.mozilla.org/en-US/docs/Web/API/HTMLVideoElement)

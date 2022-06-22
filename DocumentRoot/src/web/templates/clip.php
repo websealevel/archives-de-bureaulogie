@@ -19,30 +19,38 @@ if (!current_user_can('submit_clip'))
 
 <?php present_header(); ?>
 
-<h2>Créer un extrait</h2>
-
-<form action="">
-    <?php esc_sources_to_html_select_e(show_data: array('label')); ?>
-</form>
-<div class="videos">
-    <h3>Source</h3>
-    <div class="video-source">
-        <video id="video-source" width="600" controls>
-            <source src="" type="video/mp4">
-            Votre navigateur ne supporte pas le tag video HTML5 :(
-        </video>
-    </div>
-    <h3>Extrait</h3>
-
-    <div class="video-clip">
-        <video id="video-clip" width="600" controls>
-            <source src="" type="video/mp4">
-            Votre navigateur ne supporte pas le tag video HTML5 :(
-        </video>
-    </div>
-</div>
-
 <main class="form-clip">
+
+    <h2>Créer un extrait</h2>
+
+    <form action="">
+        <?php esc_sources_to_html_select_e(show_data: array('label')); ?>
+    </form>
+
+
+    <div id="current-time" class="current-time">
+        00:00:00.000
+    </div>
+    <div class="videos">
+        <h3>Source</h3>
+
+
+
+        <div class="video-source">
+            <video id="video-source" width="600" controls>
+                <source src="" type="video/mp4">
+                Votre navigateur ne supporte pas le tag video HTML5 :(
+            </video>
+        </div>
+        <h3>Prévisualisation</h3>
+
+        <div class="video-clip">
+            <video id="video-clip" width="600" controls>
+                <source src="" type="video/mp4">
+                Votre navigateur ne supporte pas le tag video HTML5 :(
+            </video>
+        </div>
+    </div>
 
     <div class="errors" style="color: red;"></div>
 
