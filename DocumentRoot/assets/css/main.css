@@ -12,8 +12,3 @@
 	width: 1px;
 	word-wrap: normal !important;
 }
-
-.videos {
-	display: flex;
-	gap:50px;
-}

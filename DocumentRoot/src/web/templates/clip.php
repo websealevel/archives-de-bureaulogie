@@ -32,9 +32,9 @@ if (!current_user_can('submit_clip'))
             Votre navigateur ne supporte pas le tag video HTML5 :(
         </video>
     </div>
+    <h3>Extrait</h3>
 
     <div class="video-clip">
-        <h3>Extrait</h3>
         <video id="video-clip" width="600" controls>
             <source src="" type="video/mp4">
             Votre navigateur ne supporte pas le tag video HTML5 :(
@@ -49,7 +49,7 @@ if (!current_user_can('submit_clip'))
         <input type="text" name="title" size="100">
 
         <label for="timecode_start">Début </label>
-        <input type="time" name="timecode_start" id="timecode_start" value="--:--:--.---">
+        <input type="time" name="timecode_start" id="timecode_start" value="00:00:00.000">
 
         <label for="timecode_fin">Fin </label>
         <input type="time" name="timecode_end" id="timecode_end" value="00:00:00.000">

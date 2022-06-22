@@ -5,6 +5,7 @@ jQuery(function ($) {
      */
     const source_url = $("#sources").find('option:selected').attr("name")
     $("#video-source").prop('src', source_url)
+    $("#video-clip").prop('src', source_url)
 
     /**
      * Evenement quand le select de source change
@@ -53,8 +54,14 @@ jQuery(function ($) {
          * Loop preview
          */
         $html_video_clip.on('timeupdate', function () {
+
+
             if ($('#checkbox_loop_preview').is(':checked')) {
                 loop_video(this, 10, 13)
+            }
+            else{
+                if(video_cip_ends(this, 13))
+                this.pause()
             }
         })
 
@@ -118,8 +125,13 @@ function seconds_to_hh_mm_ss_lll(timecode_seconds) {
  * @param {*} end timecode de fin (en secondes)
  */
 function loop_video(video, start, end) {
-    if (video.currentTime >= end) {
+    if (video_cip_ends(video, end)) {
         video.currentTime = start;
         video.play();
     }
+}
+
+
+function video_cip_ends(video, end){
+    return video.currentTime >= end
 }
