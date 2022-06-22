@@ -52,10 +52,10 @@ if (!current_user_can('submit_clip'))
         <input type="text" name="title" size="100">
 
         <label for="timecode_start">Début </label>
-        <input type="time" name="timecode_start" id="timecode_start" value="0">
+        <input type="text" name="timecode_start" id="timecode_start" pattern="[0-9]{2}:[0-9]{2}:[0-9]{2}.[0-9]{3}" value="00:00:00.000">
 
         <label for="timecode_fin">Fin </label>
-        <input type="time" name="timecode_end" id="timecode_end" value="0>
+        <input type="text" name="timecode_end" id="timecode_end" pattern="[0-9]{2}:[0-9]{2}:[0-9]{2}.[0-9]{3}" value="00:00:00.000">
 
         <label for=" title">Description</label>
         <textarea name="description" rows="4" cols="50"></textarea>

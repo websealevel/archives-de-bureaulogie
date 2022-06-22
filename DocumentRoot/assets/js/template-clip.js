@@ -46,7 +46,7 @@ jQuery(function ($) {
      */
 
     $("#btn_preview").click(function () {
-        
+
         const src = $("#video-source").prop('src')
 
         const timecode_start = $("#timecode_start").val()
@@ -57,10 +57,17 @@ jQuery(function ($) {
 
         if (timecode_end_in_sec <= timecode_start_in_sec) {
             $("div.errors").html("<p>Impossible de prévisualiser l'extrait : le timecode de fin doit être plus grand que le timecode de début</p>")
+
+            $("#timecode_start").addClass('error')
+            $("#timecode_end").addClass('error')
+
             return
         }
-        else
+        else{
             $("div.errors").html('')
+            $("#timecode_start").removeClass('error')
+            $("#timecode_end").removeClass('error')
+        }
 
         const src_timecodes = src + `#t=${timecode_start_in_sec},${timecode_end_in_sec}`
 
@@ -74,10 +81,10 @@ jQuery(function ($) {
         $html_video_clip.on('timeupdate', function () {
 
             if ($('#checkbox_loop_preview').is(':checked')) {
-                loop_video(this, 10, 13)
+                loop_video(this, timecode_start_in_sec, timecode_end_in_sec)
             }
             else {
-                if (has_reached_end(this, 13))
+                if (has_reached_end(timecode_start_in_sec, timecode_end_in_sec))
                     this.pause()
             }
         })
