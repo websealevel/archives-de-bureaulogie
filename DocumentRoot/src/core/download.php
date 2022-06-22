@@ -110,8 +110,7 @@ function check_download_request(DownloadRequest $download_request): void
     }
 
     /**
-     * Ces deux checks font partir du module en gestion des fichiers et du fichier source. Ils devront être refactor dans un module indep.
-     * A faire.
+     * Ces deux checks font partie du module en gestion des fichiers et du fichier source. Ils devront être refactor dans un module indep.
      */
 
     //Check que la video n'est pas déja enregistrée dans le fichier source (une source avec la même url)

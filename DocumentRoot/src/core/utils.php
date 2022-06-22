@@ -59,7 +59,7 @@ function is_source_already_declared(string $series, string $slug, string $url): 
 
 /**
  * Retourne vrai si le clip est déjà déclaré (nom vidéo source et timecode début et timecode fin identiques), faux sinon
- * @param string $source_name Le nom de la source
+ * @param string $source_name Le nom de la source (attr 'name')
  * @param string $timecode_start Le timecode de départ du clip
  * @param string $timecode_end Le timecode de fin du clip
  * @return bool

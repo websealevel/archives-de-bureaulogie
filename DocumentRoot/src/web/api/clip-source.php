@@ -58,14 +58,18 @@ function api_clip_source()
     $timecode_start = $inputs['timecode_start']->value;
     $timecode_end = $inputs['timecode_end']->value;
     //Fix: on extrait le nom du fichier de l'url
-    $source =  substr_replace($inputs['source_name']->value, '', 0, strlen(DIR_SOURCES) + 1);
+    $source_name =  substr_replace($inputs['source_name']->value, '', 0, strlen(DIR_SOURCES) + 1);
 
     //Valider l'existence de la source
-
+    if (!source_exists($source_name)) {
+        api_respond_with_error(array(
+            new InputValidation('', '', "La source <i>{$source_name}</i> n'existe pas dans les archives. Veuillez en sélectionner une autre s'il vous plaît.")
+        ));
+    }
 
     //Valider les timecodes
     try {
-        $result = are_timecodes_valid_core($timecode_start, $timecode_end, $source);
+        $result = are_timecodes_valid_core($timecode_start, $timecode_end, $source_name);
         if (false === $result) {
             api_respond_with_error(array(
                 new InputValidation('', '', "Les timecodes ne sont pas valides. Veuillez les corriger s'il vous plaît.")
@@ -80,7 +84,7 @@ function api_clip_source()
     exit;
 
     //Valider que le clip n'existe pas déjà pour cette source.
-    if (is_clip_already_declared($inputs['source_name']->value, $timecode_start, $timecode_end)) {
+    if (is_clip_already_declared($source_name, $timecode_start, $timecode_end)) {
         api_respond_with_error(array(
             new InputValidation('', '', "Cet extrait existe déjà dans les archives. Veuillez en proposer un autre")
         ));
