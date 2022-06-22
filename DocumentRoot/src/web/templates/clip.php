@@ -95,7 +95,7 @@ $token = register_api_token($account, 'submit_clip');
 
                 <div class="label-input">
                     <label for="timecode_end">Fin </label>
-                    <input type="text" name="timecode_end" id="timecode_end" pattern="[0-9]{2}:[0-9]{2}:[0-9]{2}.[0-9]{3}" value="00:00:00.000">
+                    <input type="text" name="timecode_end" id="timecode_end" value="00:00:00.000">
                 </div>
 
                 <div class="label-input">

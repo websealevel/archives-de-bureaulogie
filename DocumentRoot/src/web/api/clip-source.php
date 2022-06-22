@@ -93,16 +93,40 @@ function check_submit_clip_form()
 {
     $form_inputs = array(
 
-        new FormInput('timecode_start', filter_input(INPUT_POST, 'timecode_start'), function (string $timecode_start): InputValidation {
+        new FormInput(
+            'timecode_start',
+            filter_input(INPUT_POST, 'timecode_start'),
+            function (string $timecode_start): InputValidation {
 
-            //Non vide.
-            if (!isset($timecode_start) || empty($timecode_start))
-                return new InputValidation('timecode_start', $timecode_start, "Renseignez un timecode de début non vide");
+                //Non vide.
+                if (!isset($timecode_start) || empty($timecode_start))
+                    return new InputValidation('timecode_start', $timecode_start, "Renseignez un timecode de début non vide");
 
-            //Respecte un format regex
+                //Respecte un format regex
+                if (!preg_match("=^[0-9]{2}:[0-9]{2}:[0-9]{2}\.[0-9]{3}$=", $timecode_start)) {
+                    return new InputValidation('timecode_start', $timecode_start, "Renseignez un timecode de début au format valide");
+                }
 
-            return new InputValidation('timecode_start', $timecode_start, '', InputStatus::Valid);
-        }),
+                return new InputValidation('timecode_start', $timecode_start, '', InputStatus::Valid);
+            }
+        ),
+        new FormInput(
+            'timecode_end',
+            filter_input(INPUT_POST, 'timecode_end'),
+            function (string $timecode_end): InputValidation {
+
+                //Non vide.
+                if (!isset($timecode_end) || empty($timecode_end))
+                    return new InputValidation('timecode_end', $timecode_end, "Renseignez un timecode de fin non vide");
+
+                //Respecte un format regex
+                if (!preg_match("=^[0-9]{2}:[0-9]{2}:[0-9]{2}\.[0-9]{3}$=", $timecode_end)) {
+                    return new InputValidation('timecode_start', $timecode_end, "Renseignez un timecode de fin au format valide");
+                }
+
+                return new InputValidation('timecode_end', $timecode_end, '', InputStatus::Valid);
+            }
+        ),
 
     );
 
