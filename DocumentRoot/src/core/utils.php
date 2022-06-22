@@ -67,13 +67,12 @@ function is_source_already_declared(string $series, string $slug, string $url): 
 function is_clip_already_declared(string $source_name, string $timecode_start, string $timecode_end): bool
 {
 
-    $full_name = build_clip_name($source_name, $timecode_start, $timecode_end);
-    $match = query_clip();
-
-    if (false === $match)
-        return false;
-
     return true;
+    // $full_name = build_clip_name($source_name, $timecode_start, $timecode_end);
+    // $match = query_clip();
+    // if (false === $match)
+    //     return false;
+    // return true;
 }
 
 
@@ -146,6 +145,22 @@ function format_to_clip_file(DOMElement $clip): string
 
     return sprintf("[%s][%s][%s][%s].%s", $source_name, $slug, $start, $end, EXTENSION_CLIP);
 }
+
+/**
+ * Retourne une chaine de caractères formatté au format FORMAT_FILE_VIDEO_SOURCE (utilisé notamment pour générér les noms des fichiers vidéos sources)
+ * @see string FORMAT_FILE_VIDEO_SOURCE
+ * @param DownloadRequest $download_request
+ * @return string Le nom du fichier vidéo source au format correct
+ * @link function format_to_source_file_raw
+
+ */
+function format_to_source_file(DownloadRequest $download_request): string
+{
+    $series_name = $download_request->series_name;
+    $id = $download_request->id;
+    return format_to_source_file_raw($series_name, $id);
+}
+
 /**
  * Retourne une chaine de caractères formatté au format FORMAT_FILE_VIDEO_SOURCE (utilisé notamment pour générér les noms des fichiers vidéos sources)
  * @param string $series_name Le nom de la série à laquelle appartient la vidéo source
@@ -170,21 +185,6 @@ function format_to_source_file_raw(string $series_name, string $id, string $exte
     }
     return $file_name;
 }
-
-/**
- * Retourne une chaine de caractères formatté au format FORMAT_FILE_VIDEO_SOURCE (utilisé notamment pour générér les noms des fichiers vidéos sources)
- * @see string FORMAT_FILE_VIDEO_SOURCE
- * @param DownloadRequest $download_request
- * @return string Le nom du fichier vidéo source au format correct
-
- */
-function format_to_source_file(DownloadRequest $download_request): string
-{
-    $series_name = $download_request->series_name;
-    $id = $download_request->id;
-    return format_to_source_file_raw($series_name, $id);
-}
-
 
 /**
  * Retourne une string débarassée de son extension (.*), où tous les '-' ont été remplacés par des espaces et où la première lettre est en majuscules

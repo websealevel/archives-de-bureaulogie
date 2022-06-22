@@ -222,10 +222,12 @@ function are_timecodes_within_bounds(string $start, string $end, string $file_so
     $start_in_seconds = timecode_to_seconds($start);
     $end_in_seconds = timecode_to_seconds($end);
 
+
     $clip_duration = timecode_to_seconds($end) - timecode_to_seconds($start);
 
+    write_log(array($start_in_seconds, $end_in_seconds, $source_duration_in_seconds, $clip_duration));
     return
-        $start_in_seconds > 0 &&
+        $start_in_seconds >= 0 &&
         $end_in_seconds < $source_duration_in_seconds &&
         $clip_duration < $source_duration_in_seconds;
 }
