@@ -90,12 +90,14 @@ $token = register_api_token($account, 'submit_clip');
 
                 <div class="label-input">
                     <label for="timecode_start">Début </label>
-                    <input type="text" name="timecode_start" id="timecode_start" pattern="[0-9]{2}:[0-9]{2}:[0-9]{2}.[0-9]{3}" value="00:00:00.000">
+                    <input type="text" name="timecode_start" id="timecode_start" pattern="[0-9]{2}:[0-9]{2}:[0-9]{2}.[0-9]{3}" value="00:00:00.000" title="Veuillez renseigner un timecode au format hh:mm:ss.lll. 
+Sinon, utiliser le bouton 'Démarrer l'extrait ici' prévu à cet effet">
                 </div>
 
                 <div class="label-input">
                     <label for="timecode_end">Fin </label>
-                    <input type="text" name="timecode_end" id="timecode_end" value="00:00:00.000" pattern="[0-9]{2}:[0-9]{2}:[0-9]{2}.[0-9]{3}">
+                    <input type="text" name="timecode_end" id="timecode_end" value="00:00:00.000" pattern="[0-9]{2}:[0-9]{2}:[0-9]{2}.[0-9]{3}" title="Veuillez renseigner un timecode au format hh:mm:ss.lll
+Sinon, utiliser le bouton 'Finir l'extrait ici' prévu à cet effet">
                 </div>
 
                 <div class="label-input">

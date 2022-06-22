@@ -126,24 +126,28 @@ jQuery(function ($) {
 
         const data = $('form#form-clip-source').serialize() + '&PHPSESSID=' + PHPSESSID
 
-        $.post('/api/v1/clip-source', data).done(function (data) {
+        $.post('/api/v1/clip-source', data).done(function (response) {
 
             //Si le formulaire est rejeté on récupere les erreurs et on les affiche. A faire.
             //Une erreur
-            if (typeof data !== 'string' &&  ''  !== data && 'errors' in data) {
+            if (typeof response !== 'string' && '' !== response && 'errors' in response) {
 
-                const errors = data.errors
+                const errors = response.errors
 
                 let items = []
 
-                console.log(errors)
-
-                for(const input in errors){
-                    items.push( "<li>" + errors[input].message + "</li>")
+                for (const input in errors) {
+                    items.push("<li>" + errors[input].message + "</li>")
                 }
 
                 $("div.errors").html('<ul>' + items.join('') + '</ul>')
+            } else {
+                //Clean error messages.
+                $("div.errors").html('')
+
             }
+
+
         }).fail(function () {
             $("div.errors").html('Hmm, il semblerait qu\'il y ait eu un problème de connexion. Veuillez rééssayer s\'il vous plaît.')
         }).always(function () {
@@ -236,16 +240,16 @@ const spinner_ascii = {
     element: '',
     step: function (timestamp) {
         var frame = Math.floor(timestamp * spinner_ascii.frames.length / spinner_ascii.duration) % spinner_ascii.frames.length;
-    
+
         if (!spinner_ascii.element) {
             spinner_ascii.element = window.document.getElementById('btn-submit-clip');
         }
-    
+
         ;
         spinner_ascii.element.value = 'Traitement en cours, veuillez patienter ' + spinner_ascii.frames[frame];
         spinner_ascii.requestID = window.requestAnimationFrame(spinner_ascii.step);
     },
-    frames : '▤▧▥▨'.split(''),
+    frames: '▤▧▥▨'.split(''),
     requestID: ''
 }
 
