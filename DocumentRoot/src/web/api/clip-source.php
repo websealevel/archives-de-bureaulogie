@@ -32,7 +32,8 @@ function api_clip_source()
 {
     load_env();
 
-    sleep(1);
+    //UX
+    usleep(500000);
 
     //Authentifier l'utilisateur
     if (!current_user_can('submit_clip')) {
@@ -55,8 +56,20 @@ function api_clip_source()
     //Utilisateur authentifié,token valide, formulaire validé. Création du clip
 
     //Check que timecode début < timecode fin ( pas l'inverse, et non égaux (durée extrait nulle))
+    $timecode_start = $inputs['timecode_start']->value;
+    $timecode_end = $inputs['timecode_end']->value;
+    if (!is_start_timecode_smaller_than_end_timecode($timecode_start, $timecode_end)) {
+        api_respond_with_error(array(
+            new InputValidation('', '', "Le timecode de début de l'extrait est <strong>identique ou plus grand</strong> que le timecode de fin de l'extrait. Cut impossible !")
+        ));
+    }
 
     //Check que ces timecodes n'existent pas encore pour cette source (dans le fichier xml)
+    if (is_clip_already_declared('', $timecode_start, $timecode_end)) {
+        api_respond_with_error(array(
+            new InputValidation('', '', "Cet extrait existe déjà dans les archives. Veuillez en proposer un autre")
+        ));
+    }
 
     //FFmpeg: faire un clip avec normalisation du son
 

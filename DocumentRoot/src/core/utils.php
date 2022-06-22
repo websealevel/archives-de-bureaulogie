@@ -67,6 +67,18 @@ function is_source_already_declared(string $series, string $slug, string $url): 
 }
 
 /**
+ * Retourne vrai si le clip est déjà déclaré (nom vidéo source et timecode début et timecode fin identiques), faux sinon
+ * @param string $source_name Le nom de la source
+ * @param string $timecode_start Le timecode de départ du clip
+ * @param string $timecode_end Le timecode de fin du clip
+ * @return bool
+ */
+function is_clip_already_declared(string $source_name, string $timecode_start, string $timecode_end): bool
+{
+    return true;
+}
+
+/**
  * Retourne le path (dont le nom du fichier) de l'extrait à sauvegarder.
  * Le nom du fichier de l'extrait est construit à partir du slug et des timescodes.
  * @param DOMElement $clip

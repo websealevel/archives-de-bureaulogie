@@ -104,7 +104,7 @@ Sinon, utiliser le bouton 'Finir l'extrait ici' prévu à cet effet">
 
                 <div class="label-input">
                     <label for="title">Titre </label>
-                    <textarea name="title" id="title" rows="8" cols="50" placeholder="Texte qui apparaîtra dans le tweet" maxlength="280" autocapitalize="sentences" spellcheck="true"></textarea>
+                    <textarea name="title" id="title" rows="8" cols="50" placeholder="Texte qui apparaîtra dans le tweet" maxlength="280" autocapitalize="sentences" spellcheck="true">À définir</textarea>
                 </div>
 
                 <div class="label-input">
