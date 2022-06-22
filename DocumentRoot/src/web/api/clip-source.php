@@ -52,10 +52,19 @@ function api_clip_source()
         api_respond_with_error($invalid_inputs);
     }
 
-    echo 'ok';
-
     //Utilisateur authentifié,token valide, formulaire validé. Création du clip
 
+    //Check que timecode début < timecode fin ( pas l'inverse, et non égaux (durée extrait nulle))
+
+    //Check que ces timecodes n'existent pas encore pour cette source (dans le fichier xml)
+
+    //FFmpeg: faire un clip avec normalisation du son
+
+    //Déclarer le clip dans le fichier source
+
+    //Mettre à jour côté front la liste des clips présents sur cette source
+
+    write_log('creation du clip');
 }
 
 /**
