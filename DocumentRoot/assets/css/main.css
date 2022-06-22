@@ -1,10 +1,13 @@
-/* @import url("new.css"); */
-
 body {
 	overflow-x: hidden;
 	word-break: break-word;
 	overflow-wrap: break-word;
 	box-sizing: border-box;
+}
+
+fieldset {
+	padding: 20px;
+	margin: 5px;
 }
 
 .screen-reader-text {
@@ -24,12 +27,31 @@ body {
 	border: 3px solid red;
 }
 
+.btn-edition {
+	font-size: 39px;
+	padding: 0 1vw;
+}
+
+.label-input {
+	display: flex;
+	align-items: flex-start;
+	gap: 10px;
+}
 
 .videos {
 	display: flex;
 	align-items: flex-start;
 	gap: 50px;
 	flex-wrap: wrap;
+}
+
+#current-time {
+	font-size: 40px;
+	font-weight: bold;
+	padding: 20px;
+	margin: 20px;
+	border: 3px solid black;
+	display: inline-block;
 }
 
 #fieldset-video-source {
@@ -40,26 +62,12 @@ body {
 	width: 29vw;
 }
 
-.current-time {
-	font-size: 40px;
-	font-weight: bold;
-	padding: 20px;
-	margin: 20px;
-	border: 3px solid black;
-	display: inline-block;
-}
-fieldset{
-	padding: 20px;
-	margin: 5px;
-}
-
-
 #fieldset-edition {
 	display: flex;
 	justify-content: flex-start;
 	align-items: flex-start;
 	flex-wrap: wrap;
-	align-content: flex-start; 
+	align-content: flex-start;
 	row-gap: 10px;
 	column-gap: 10px;
 }
@@ -83,15 +91,4 @@ fieldset{
 
 #clip-options {
 	margin: 10px 0;
-}
-
-.btn-edition {
-	font-size: 39px;
-	padding: 0 1vw;
-}
-
-.label-input {
-	display: flex;
-	align-items: flex-start;
-	gap: 10px;
 }

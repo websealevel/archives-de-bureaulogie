@@ -28,7 +28,7 @@ if (!current_user_can('submit_clip'))
     </form>
 
 
-    <div id="current-time" class="current-time">
+    <div id="current-time">
         00:00:00.000
     </div>
     <div class="videos">
