@@ -120,6 +120,7 @@ $token = register_api_token($account, 'submit_clip');
 
         <input type="text" hidden name="token" value="<?php echo $token; ?>">
         <input type="submit" id="btn-submit-clip" value="Cut !" class="btn-edition">
+        <span id="spinner"></span>
     </form>
 </main>
 

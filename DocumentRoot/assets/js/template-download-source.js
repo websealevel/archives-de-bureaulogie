@@ -32,16 +32,17 @@ jQuery(function ($) {
             data: data,
             success: function (data) {
 
-                //Si le formulaire est rejeté on récupere les erreurs et on les affiche
+                //Si le formulaire est rejeté on récupere les erreurs et on les affiche. Ou si une erreur au lancement du dl. A faire.
+                console.log(data.statut)
+                console.log(data)
+
+                //Si réussi, on récuperer le nom du fichier avec le lien pour visualiser la source (par exemple). A faire
+            
                 if ('errors' in data) {
                     const errors = data.errors
                     const items = errors.map((error) => "<li>" + error.message + "</li>")
                     $("div.errors").html('<ul>' + items.toString() + '</ul>')
-                    return
                 }
-
-                //Si réussi, on récuperer le nom du fichier avec le lien pour visualiser la source (par exemple). A faire
-
             },
             dataType: 'json',
             error: function (e) {
@@ -86,7 +87,7 @@ jQuery(function ($) {
                 $speed = $("ul#active_downloads li#" + download.id + " span.dl-speed")
                 $progress_text = $('ul#active_downloads li div#id-' + download.id)
 
-                $progress_text.html(download.progression + '%')
+                $progress_text.html(download.progression+'%')
                 $progress_bar.attr('value', download.progression)
                 $speed.html(download.speed)
 
@@ -94,8 +95,8 @@ jQuery(function ($) {
                 //Sinon, creer un nouvel item
                 $("ul#active_downloads").append(
                     '<li id="' + download.id + '">' +
-                    '<div class="name">' + download.filename + '</div>' +
-                    '<div class="progression" id=id-' + download.id + '>' + download.progression + '%</div>' +
+                    '<div class="name">'+ download.filename+'</div>' + 
+                    '<div class="progression" id=id-' + download.id +'>'+ download.progression+'%</div>' + 
                     '<progress id=id-' + download.id + ' value="' + download.progression + '" max="100">' +
                     download.progression + '</progress>' +
                     '<span class="dl-speed">' + download.speed + '</span>' +

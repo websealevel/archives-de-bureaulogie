@@ -21,8 +21,6 @@ jQuery(function ($) {
      * Evenement quand le select de source change
      */
     $("#sources").change(function () {
-
-
         const path = $(this).find(":selected").attr('name')
         // Mettre a jour la source du tag video source.
         $("#video-source").prop('src', path)
@@ -122,7 +120,9 @@ jQuery(function ($) {
 
         event.preventDefault();
 
+        //Disable le bouton, message traitement en cours + spinner ascii
         $("#btn-submit-clip").prop("disabled", true)
+        window.requestAnimationFrame(spinner_ascii.step);
 
         const data = $('form#form-clip-source').serialize() + '&PHPSESSID=' + PHPSESSID
 
@@ -132,7 +132,7 @@ jQuery(function ($) {
             console.log(data)
 
             //Une erreur
-            if ('errors' in data) {
+            if ('' !== data && 'errors' in data) {
                 const errors = data.errors
                 const items = errors.map((error) => "<li>" + error.message + "</li>")
                 $("div.errors").html('<ul>' + items.toString() + '</ul>')
@@ -140,6 +140,8 @@ jQuery(function ($) {
         }).fail(function () {
             $("div.errors").html('Hmm, il semblerait qu\'il y ait eu un problème de connexion. Veuillez rééssayer s\'il vous plaît.')
         }).always(function () {
+            window.cancelAnimationFrame(spinner_ascii.requestID)
+            $("#btn-submit-clip").val('Cut !')
             $("#btn-submit-clip").prop("disabled", false)
         })
     });
@@ -215,3 +217,34 @@ function loop_video(video, start, end) {
 function has_reached_end(video, end) {
     return video.currentTime >= end
 }
+
+
+/**
+ * Spinner ASCII
+ * @link source: https://codepen.io/vpegado/pen/gbOpRm
+ */
+
+const spinner_ascii = {
+    duration: 500,
+    element: '',
+    step: function (timestamp) {
+        var frame = Math.floor(timestamp * spinner_ascii.frames.length / spinner_ascii.duration) % spinner_ascii.frames.length;
+    
+        if (!spinner_ascii.element) {
+            spinner_ascii.element = window.document.getElementById('btn-submit-clip');
+        }
+    
+        ;
+        spinner_ascii.element.value = 'Traitement en cours, veuillez patienter... ' + spinner_ascii.frames[frame];
+        spinner_ascii.requestID = window.requestAnimationFrame(spinner_ascii.step);
+    },
+    frames: '▤▧▥▨'.split(''),
+    requestID: ''
+}
+
+// frames = '▙▛▜▟'.split('');
+// frames = '▤▧▥▨'.split('');
+//frames = '◴◵◶◷'.split('');
+//frames = '◩◪'.split('');
+//frames = '◰◱◲◳'.split('');
+//frames = '◐◓◑◒'.split('');

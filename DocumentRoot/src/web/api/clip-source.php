@@ -45,7 +45,8 @@ function api_clip_source()
         api_respond_with_error();
     }
 
-    api_respond_with_error();
+    //Utilisateur authentifié et token valide. Création du clip
+    sleep(5);
 }
 
 /**
