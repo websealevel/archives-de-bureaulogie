@@ -98,3 +98,8 @@ textarea {
 	margin: 0 150px;
 }
 
+#clip-options{
+	display: flex;
+	flex-direction: column;
+}
+

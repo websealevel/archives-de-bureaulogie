@@ -84,6 +84,8 @@ $token = register_api_token($account, 'submit_clip');
 
                 <input type="button" id="btn_preview" value="Prévisualiser" class="btn-edition">
 
+                <input type="button" id="btn_preview_tail" value="Prévisualiser la traîne" class="btn-edition" title="La traine correspond à la portion située juste après le timecode de fin, afin de mieux visualiser la fin du cut">
+
             </div>
 
             <div id="edition-data">
@@ -115,8 +117,19 @@ Sinon, utiliser le bouton 'Finir l'extrait ici' prévu à cet effet">
 
         <fieldset id="clip-options">
             <legend>Options</legend>
-            <input type="checkbox" name="checkbox_loop_preview" id="checkbox_loop_preview">
-            <label for="checkbox_loop_preview">Prévisualisation en boucle</label>
+
+            <div>
+                <label for="checkbox_loop_preview">Prévisualisation en boucle</label>
+                <input type="checkbox" name="checkbox_loop_preview" id="checkbox_loop_preview">
+            </div>
+
+            <div>
+                <label for="tail_duration_in_s" title="La durée de traîne correspond au nombre de secondes de vidéo après le timecode de fin qui seront prévisualisées en cliquant sur 'Prévisualiser la traîne'">Durée de traîne (s)</label>
+
+                <input type="number" name="tail_duration_in_s" id="tail_duration_in_s" value="2" min="0" max="20" title="La durée de traîne correspond au nombre de secondes de vidéo après le timecode de fin qui seront prévisualisées en cliquant sur 'Prévisualiser la traîne'">
+
+            </div>
+
         </fieldset>
 
         <input type="text" hidden name="token" value="<?php echo $token; ?>">
