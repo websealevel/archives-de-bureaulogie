@@ -88,13 +88,18 @@ function api_clip_source()
         ));
     }
 
-    //Créer le clip.
+    //=>Création du clip.
+
+    //Pour les clips : on les déclare puis on les génere (c'est comme ça qu'est pensé le core. Il parse le fichier source et génère les clips qui n'existent pas encore.)
+
+
+    //Déclarer le clip dans le fichier source
+
 
     //FFmpeg: faire un clip avec normalisation du son
     write_log('creation du clip');
     exit;
 
-    //Déclarer le clip dans le fichier source
 
     //Mettre à jour côté front la liste des clips présents sur cette source
 

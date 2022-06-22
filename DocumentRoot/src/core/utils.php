@@ -210,7 +210,8 @@ function format_to_label(string $file_name): string
 
 
 /**
- * Remarque : Ne marche plus, car j'ai retiré le slug du nom du fichier clip. Utilisé que en CLI pour le moment
+ * Remarque : Ne marche plus, car j'ai retiré le slug du nom du fichier clip. Utilisé que en CLI pour le moment.
+ * 
  * Retourne les métadonnées d'un extrait à partir de son nom de fichier, faux si une erreur se produit (format non valide). Forme à améliorer avec de la regex plutôt et des match par groupe.
  * @param string $filename Le nom du fichier extrait
  * @return ClipMetaData|false
