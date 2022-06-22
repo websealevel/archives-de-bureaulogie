@@ -35,7 +35,11 @@ jQuery(function ($) {
      * Pause un lecteur vidéo quand l'autre est joué et vice versa
      */
     $("#video-source").on('play',function(){
-        console.log('source play')
+        $("#video-clip").trigger('pause')
+    })
+
+    $("#video-clip").on('play',function(){
+        $("#video-source").trigger('pause')
     })
 
     /**
