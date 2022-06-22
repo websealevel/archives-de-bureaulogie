@@ -89,7 +89,7 @@ function build_source_name(string $series, string $slug): string
     if (empty($series) || empty($slug))
         throw new Exception("Impossible de reconstruire le nom de la source, la base du nom ou le slug est vide");
 
-    $file_name = sprintf("%s--%s.%s", $series, $slug, EXTENSION_SOURCE);
+    $file_name = sprintf("%s-%s.%s", $series, $slug, EXTENSION_SOURCE);
 
     //Check format
     if (!preg_match('/' . FORMAT_FILE_VIDEO_SOURCE . '/', $file_name))

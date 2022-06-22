@@ -39,12 +39,12 @@ function api_clip_source()
     if (!current_user_can('submit_clip')) {
         api_respond_with_error();
     }
-    //Check le token
+    //Valider le token
     if (!($_POST['token'] && is_valid_token($_POST['token'], 'submit_clip'))) {
         api_respond_with_error();
     }
 
-    //Validation des inputs du formulaire
+    //Valider le formulaire
     $inputs = check_submit_clip_form();
     $invalid_inputs = filter_invalid_inputs($inputs);
 
@@ -53,31 +53,46 @@ function api_clip_source()
         api_respond_with_error($invalid_inputs);
     }
 
-    //Utilisateur authentifié,token valide, formulaire validé. Création du clip
+    //=> Utilisateur authentifié, token valide, formulaire validé.
 
-    //Check que timecode début < timecode fin ( pas l'inverse, et non égaux (durée extrait nulle))
     $timecode_start = $inputs['timecode_start']->value;
     $timecode_end = $inputs['timecode_end']->value;
-    if (!is_start_timecode_smaller_than_end_timecode($timecode_start, $timecode_end)) {
+    //Fix: on extrait le nom du fichier de l'url
+    $source =  substr_replace($inputs['source_name']->value, '', 0, strlen(DIR_SOURCES) + 1);
+
+    //Valider les timecodes
+    try {
+        $result = are_timecodes_valid_core($timecode_start, $timecode_end, $source);
+        if (false === $result) {
+            api_respond_with_error(array(
+                new InputValidation('', '', "Les timecodes ne sont pas valides. Veuillez les corriger s'il vous plaît.")
+            ));
+        }
+    } catch (Exception $e) {
         api_respond_with_error(array(
-            new InputValidation('', '', "Le timecode de début de l'extrait est <strong>identique ou plus grand</strong> que le timecode de fin de l'extrait. Cut impossible !")
+            new InputValidation('', '', $e->getMessage())
         ));
     }
 
-    //Check que ces timecodes n'existent pas encore pour cette source (dans le fichier xml)
-    if (is_clip_already_declared('', $timecode_start, $timecode_end)) {
+    exit;
+
+    //Valider que le clip n'existe pas déjà pour cette source.
+    if (is_clip_already_declared($inputs['source_name']->value, $timecode_start, $timecode_end)) {
         api_respond_with_error(array(
             new InputValidation('', '', "Cet extrait existe déjà dans les archives. Veuillez en proposer un autre")
         ));
     }
 
+    //Créer le clip.
+
     //FFmpeg: faire un clip avec normalisation du son
+    write_log('creation du clip');
+    exit;
 
     //Déclarer le clip dans le fichier source
 
     //Mettre à jour côté front la liste des clips présents sur cette source
 
-    write_log('creation du clip');
 }
 
 /**
@@ -171,6 +186,18 @@ function check_submit_clip_form()
                     return new InputValidation('description', $description, sprintf("La description ne doit pas dépasser %s caractères", TWEET_NB_MAX_CHARACTERS));
 
                 return new InputValidation('description', $description, '', InputStatus::Valid);
+            }
+        ),
+        new FormInput(
+            'source_name',
+            filter_input(INPUT_POST, 'source_name'),
+            function (string $source_name): InputValidation {
+
+                //Ne doit pas être non vide et limite de taille
+                if (!isset($source_name) || empty($source_name))
+                    return new InputValidation('source_name', $source_name, 'Veuillez choisir une vidéo source à parti de laquelle vous souhaitez créer un extrait');
+
+                return new InputValidation('source_name', $source_name, '', InputStatus::Valid);
             }
         )
 

@@ -6,6 +6,7 @@ jQuery(function ($) {
     const source_url = $("#sources").find('option:selected').attr("name")
     $("#video-source").prop('src', source_url)
     $("#video-clip").prop('src', source_url)
+    $("#source_name").val(source_url)
 
 
     /**
@@ -21,10 +22,11 @@ jQuery(function ($) {
      * Evenement quand le select de source change
      */
     $("#sources").change(function () {
-        const path = $(this).find(":selected").attr('name')
+        const source_url = $(this).find(":selected").attr('name')
         // Mettre a jour la source du tag video source.
-        $("#video-source").prop('src', path)
-        $("#video-clip").prop('src', path)
+        $("#video-source").prop('src', source_url)
+        $("#video-clip").prop('src', source_url)
+        $("#source_name").val(source_url)
 
         // Mettre à jour la liste des extraits présents
         //Faire une requete et ajouter a la liste

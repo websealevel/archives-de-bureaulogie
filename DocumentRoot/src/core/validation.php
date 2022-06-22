@@ -139,26 +139,40 @@ function is_clip_valid(string $file_name, $path = PATH_CLIPS)
  */
 function are_timecodes_valid(DOMElement $clip, string $file_source): bool
 {
-
     $start = child_element_by_name($clip, "debut")->nodeValue;
     $end = child_element_by_name($clip, "fin")->nodeValue;
-    $slug = child_element_by_name($clip, "slug")->nodeValue;
+    // $slug = child_element_by_name($clip, "slug")->nodeValue;
 
+    return are_timecodes_valid_core($start, $end, $file_source);
+}
+
+/**
+ * Retourne vrai si les timecodes sont valides (format, min, max), lève une exception sinon
+ * @param DOMElement $clip L'extrait dont les timescodes sont à valider
+ * @param string $file_source Le path du fichier source de l'extrait
+ * @return bool
+ * @throws Exception - Si le format du timecode start est invalide
+ * @throws Exception - Si le format du timecode end est invalide
+ * @throws Exception - Si start > end
+ * @throws Exception - Si start < 0 ou end > durée de la vidée source
+ */
+function are_timecodes_valid_core(string $start, string $end, string $source): bool
+{
     if (!is_timecode_format_valid($start)) {
-        throw new Exception("Le format du timecode de début de l'extrait " . $slug . " n'est pas valide. Veuillez le corriger (voir la documentation).");
+        throw new Exception("Le format du timecode de début de l'extrait n'est pas valide. Veuillez le corriger (voir la documentation).");
     }
 
     if (!is_timecode_format_valid($end)) {
-        throw new Exception("Le format du timecode de fin de l'extrait " . $slug . " n'est pas valide. Veuillez le corriger (voir la documentation).");
+        throw new Exception("Le format du timecode de fin de l'extrait n'est pas valide. Veuillez le corriger (voir la documentation).");
     }
 
     //Checker que end > fin
     if (!is_start_timecode_smaller_than_end_timecode($start, $end)) {
-        throw new Exception("Les timecodes de début et de fin de l'extrait " . $slug . " ne sont pas valides. Le timecode de début doit être plus petit que le timecode de fin (doit référencer un moment antérieur dans la vidéo). Veuillez modifier les timecodes.");
+        throw new Exception("Le timecode de début <strong>est égal ou plus grand que le timecode de fin</strong>. Veuillez corriger les timecodes s'il vous plaît.");
     }
 
-    if (!are_timecodes_within_bounds($start, $end, $file_source)) {
-        throw new Exception("Les timecodes de début et de fin de l'extrait " . $slug . " ne sont pas valides. Le timecode de début doit être plus grand que l'instant 0 et le timecode de fin doit être plus petit que la durée de la vidéo. Veuillez modifier les timecodes.");
+    if (!are_timecodes_within_bounds($start, $end, $source)) {
+        throw new Exception("L'extrait doit faire au moins 1 seconde et être compatible avec la durée de la vidéo source. Veuillez corriger les timecodes s'il vous plaît.");
     }
 
     return true;
