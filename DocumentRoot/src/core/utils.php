@@ -62,10 +62,20 @@ function is_source_already_declared(string $series, string $slug, string $url): 
  * @param string $source_name Le nom de la source (attr 'name')
  * @param string $timecode_start Le timecode de départ du clip
  * @param string $timecode_end Le timecode de fin du clip
+ * @throws Exception - Si la video source n'est pas déclarée dans le fichier source
  * @return bool
  */
 function is_clip_already_declared(string $source_name, string $timecode_start, string $timecode_end): bool
 {
+
+    $declared_source = query_source_by_unique_attr('name', $source_name);
+
+    if (false === $declared_source) {
+        //Fatal error : cela veut dire que le fichier source est cassé.
+        throw new Exception(sprintf("Le fichier %s existe, mais il n'est pas déclaré dans le fichier source. "));
+    }
+
+    write_log($declared_source);
 
     return true;
     // $full_name = build_clip_name($source_name, $timecode_start, $timecode_end);
@@ -200,7 +210,8 @@ function format_to_label(string $file_name): string
 
 
 /**
- * Retourne le nom de la source à partir du nom du fichier extrait, faux si une erreur se produit (format non valide). Forme à améliorer avec de la regex plutôt et des match par groupe.
+ * Remarque : Ne marche plus, car j'ai retiré le slug du nom du fichier clip. Utilisé que en CLI pour le moment
+ * Retourne les métadonnées d'un extrait à partir de son nom de fichier, faux si une erreur se produit (format non valide). Forme à améliorer avec de la regex plutôt et des match par groupe.
  * @param string $filename Le nom du fichier extrait
  * @return ClipMetaData|false
  * @throws Exception - S'il n'y a pas autant de métadonnées que dans le model ClipMetadata

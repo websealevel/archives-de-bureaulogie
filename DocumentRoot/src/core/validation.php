@@ -115,7 +115,6 @@ function are_timecodes_valid(DOMElement $clip, string $file_source): bool
 {
     $start = child_element_by_name($clip, "debut")->nodeValue;
     $end = child_element_by_name($clip, "fin")->nodeValue;
-    // $slug = child_element_by_name($clip, "slug")->nodeValue;
 
     return are_timecodes_valid_core($start, $end, $file_source);
 }
@@ -196,10 +195,8 @@ function are_timecodes_within_bounds(string $start, string $end, string $file_so
     $start_in_seconds = timecode_to_seconds($start);
     $end_in_seconds = timecode_to_seconds($end);
 
-
     $clip_duration = timecode_to_seconds($end) - timecode_to_seconds($start);
 
-    write_log(array($start_in_seconds, $end_in_seconds, $source_duration_in_seconds, $clip_duration));
     return
         $start_in_seconds >= 0 &&
         $end_in_seconds < $source_duration_in_seconds &&
@@ -207,6 +204,7 @@ function are_timecodes_within_bounds(string $start, string $end, string $file_so
 }
 
 /**
+ * Remarque : Fonctionne vraiment ?
  * Retourne vrai si le format d'un timecode est valide, faux sinon
  * @param string $timecode Le timecode
  * @param string $format Le format attendu pour l'expression régulière
@@ -266,6 +264,7 @@ function is_download_request_valid(DownloadRequest $download_request)
 }
 
 /**
+ * Remarque : Utilisé que en CLI pour l'instant.
  * Retourne vrai si le nom du fichier extrait (et non son path complet) respecte le format imposé pour pouvoir être analysé et découpé (pour retrouver la source, slug et les timecodes), faux sinon
  * @param string $filename Le nom de fichier du clip
  * @return bool

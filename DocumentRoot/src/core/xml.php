@@ -57,7 +57,7 @@ function load_xml(string $file_source = SOURCE_FILE): DOMDocument
 }
 
 /**
- * Retourne le fichier source sous forme de wrapper xpath prêt à être requêter
+ * Retourne le fichier source sous forme de wrapper Xpath prêt à être requêter
  * @param string $file_source Optional. Le fichier source
  * @param string $namespace Optional. Le namespace du fichier source XML
  * @return DOMXPath

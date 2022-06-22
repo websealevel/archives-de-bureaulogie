@@ -81,8 +81,6 @@ function api_clip_source()
         ));
     }
 
-    exit;
-
     //Valider que le clip n'existe pas déjà pour cette source.
     if (is_clip_already_declared($source_name, $timecode_start, $timecode_end)) {
         api_respond_with_error(array(
