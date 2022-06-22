@@ -30,8 +30,22 @@
 	display: inline-block;
 }
 
-#form-clip-source{
+#fieldset-edition{
 	display: flex;
-	flex-direction: row;
+	justify-content: flex-start;
+	align-items: flex-start;
 	flex-wrap: wrap;
+	align-content: flex-start;
+	row-gap: 10px;
+	column-gap: 10px;
+}
+
+#edition-actions{
+	display: flex;
+	gap: 10px;
+}
+
+.btn-edition{
+	font-size: 38px;
+	padding: 0 20px;
 }

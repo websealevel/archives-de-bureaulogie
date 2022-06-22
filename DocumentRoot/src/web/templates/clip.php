@@ -56,23 +56,36 @@ if (!current_user_can('submit_clip'))
 
     <form action="clip-source" id="form-clip-source" name="form-clip-source">
 
-        <label for=" title">Titre</label>
-        <input type="text" name="title" size="100">
 
-        <label for="timecode_start">Début </label>
-        <input type="text" name="timecode_start" id="timecode_start" pattern="[0-9]{2}:[0-9]{2}:[0-9]{2}.[0-9]{3}" value="00:00:00.000">
+        <fieldset id="fieldset-edition">
+            <legend>Édition</legend>
 
-        <label for="timecode_fin">Fin </label>
-        <input type="text" name="timecode_end" id="timecode_end" pattern="[0-9]{2}:[0-9]{2}:[0-9]{2}.[0-9]{3}" value="00:00:00.000">
+            <div id="edition-actions">
+                <input name=" btn_clip_start" id="btn_clip_start" type="button" class="btn-edition" title="Définir la position courante du curseur de lecture comme timecode de départ de l'extrait" value="Démarrer l'extrait ici">
 
-        <label for=" title">Description</label>
-        <textarea name="description" rows="4" cols="50"></textarea>
+                <input name="bt_clip_end" id="btn_clip_end" type="button" class="btn-edition" title="Définir la position courante du curseur de lecture comme timecode de fin de l'extrait" value="Finir l'extrait ici">
 
-        <input name="btn_clip_start" id="btn_clip_start" type="button" title="Définir la position courante du curseur de lecture comme timecode de départ de l'extrait" value="Démarrer l'extrait ici">
+                <input type="button" id="btn_preview" value="Prévisualiser" class="btn-edition">
 
-        <input name="bt_clip_end" id="btn_clip_end" type="button" title="Définir la position courante du curseur de lecture comme timecode de fin de l'extrait" value="Finir l'extrait ici">
+            </div>
 
-        <input type="button" id="btn_preview" value="Prévisualiser">
+            <div id="edition-data">
+                <label for="timecode_start">Début </label>
+                <input type="text" name="timecode_start" id="timecode_start" pattern="[0-9]{2}:[0-9]{2}:[0-9]{2}.[0-9]{3}" value="00:00:00.000">
+
+                <label for="timecode_fin">Fin </label>
+                <input type="text" name="timecode_end" id="timecode_end" pattern="[0-9]{2}:[0-9]{2}:[0-9]{2}.[0-9]{3}" value="00:00:00.000">
+
+                <label for=" title">Titre</label>
+                <input type="text" name="title" size="100">
+
+
+                <label for=" title">Description</label>
+                <textarea name="description" rows="4" cols="50"></textarea>
+            </div>
+        </fieldset>
+
+
 
         <fieldset id="clip-options">
             <legend>Options</legend>
@@ -80,7 +93,7 @@ if (!current_user_can('submit_clip'))
             <label for="checkbox_loop_preview">Prévisualisation en boucle</label>
         </fieldset>
 
-        <input type="submit" value="Cut !">
+        <input type="submit" value="Cut !" class="btn-edition">
     </form>
 </main>
 
