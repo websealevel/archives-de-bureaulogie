@@ -60,6 +60,9 @@ function api_clip_source()
     //Fix: on extrait le nom du fichier de l'url
     $source =  substr_replace($inputs['source_name']->value, '', 0, strlen(DIR_SOURCES) + 1);
 
+    //Valider l'existence de la source
+
+
     //Valider les timecodes
     try {
         $result = are_timecodes_valid_core($timecode_start, $timecode_end, $source);

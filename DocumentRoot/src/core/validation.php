@@ -11,32 +11,6 @@ require_once __DIR__ . '/../web/environment.php';
 
 autload_core();
 
-
-/**
- * Retourne vrai si le fichier source est valide (validation via le DTD), faux sinon
- * @param string $file_source Optional. Défaut 'extraits.xml' Le fichier source contenant la déclaration des extraits
- * @return bool
- */
-function is_source_file_valid(string $file_source = SOURCE_FILE): bool
-{
-    //Check que le fichier source existe.
-    if (!file_exists($file_source)) {
-
-        throw new Exception("Le fichier source n'existe pas. Veuillez créer le fichier " . SOURCE_FILE . " pour déclarer les extraits que vous souhaitez générer.");
-
-        return false;
-    }
-
-    //Check que le fichier source a un schéma valide spéificié par le dtd.
-    $dom = new DOMDocument();
-
-    $dom->preserveWhiteSpace = false;
-
-    $dom->load($file_source);
-
-    return $dom->validate();
-}
-
 /**
  * Retourne vrai si la source existe sur la PATH_SOURCES ET qu'elle est valide, faux sinon
  * @param string $file_source Optional. Le fichier source 
