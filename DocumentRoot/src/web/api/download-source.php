@@ -316,15 +316,3 @@ function check_download_source_form(): array
 
     return $input_validations;
 }
-
-/**
- * Filtre les champs de formulaires invalides
- * @param InputValidation[] Les champs testés
- * @return InputValidation[] Les champs invalides
- */
-function filter_invalid_inputs(array $input_validations)
-{
-    return array_filter($input_validations, function (InputValidation $input) {
-        return InputStatus::Invalid === $input->status;
-    });
-}

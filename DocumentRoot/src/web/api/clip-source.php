@@ -51,10 +51,8 @@ function api_clip_source()
     write_log($invalid_inputs);
 
     if (!empty($invalid_inputs)) {
-
         //Envoyez le tableau d'erreurs
-
-        api_respond_with_error();
+        api_respond_with_error($invalid_inputs);
     }
 
     return 'ok';
@@ -65,22 +63,24 @@ function api_clip_source()
 
 /**
  * Retourne une erreur de l'api au client, avec un message et un status code
- * @param string $message Le message a renvoyé au client
+ * @param InputValidation[] $input_errors Les erreurs sur chaque champ
  * @param string $code Le code HTTP de la requête
  * @return void
  */
-function api_respond_with_error(string $message = 'Vous ne disposez pas des droits nécessaires', string $code = '403'): void
+function api_respond_with_error(array $invalid_inputs = array(
+    new InputValidation('', '', 'Les données transmises ne sont pas valides')
+), string $code = '403'): void
 {
     header('Content-Type: application/json; charset=utf-8');
     $response =  json_encode(array(
         'statut' => $code,
-        'errors' => array(
-            array(
-                'name' => '',
-                'value' => '',
-                'message' => $message
-            )
-        )
+        'errors' => array_map(function ($invalid_input) {
+            return array(
+                'name' => $invalid_input->name,
+                'value' => $invalid_input->value,
+                'message' => $invalid_input->message
+            );
+        }, $invalid_inputs)
     ));
     echo $response;
     exit;
@@ -89,6 +89,7 @@ function api_respond_with_error(string $message = 'Vous ne disposez pas des droi
 /**
  * Retourne les inputs validés (ou non) du formulaire de soumission d'extrait
  * @return InputValidation[] 
+ * @return InputValidation[] Un tableau de champs validés
  * @global $_POST
  */
 function check_submit_clip_form()

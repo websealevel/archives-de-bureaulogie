@@ -212,3 +212,15 @@ function path_clip(string $name): string
 {
     return DIR_CLIPS . '/' . $name;
 }
+
+/**
+ * Filtre les champs de formulaires invalides
+ * @param InputValidation[] Les champs testés
+ * @return InputValidation[] Les champs invalides
+ */
+function filter_invalid_inputs(array $input_validations)
+{
+    return array_filter($input_validations, function (InputValidation $input) {
+        return InputStatus::Invalid === $input->status;
+    });
+}

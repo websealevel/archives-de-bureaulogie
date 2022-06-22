@@ -133,8 +133,15 @@ jQuery(function ($) {
 
             //Une erreur
             if ('' !== data && 'errors' in data) {
+
                 const errors = data.errors
-                const items = errors.map((error) => "<li>" + error.message + "</li>")
+
+                let items = []
+
+                for(const input in errors){
+                    items.push( "<li>" + errors[input].message + "</li>")
+                }
+
                 $("div.errors").html('<ul>' + items.toString() + '</ul>')
             }
         }).fail(function () {
