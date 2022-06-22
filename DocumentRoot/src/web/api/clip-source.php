@@ -127,6 +127,23 @@ function check_submit_clip_form()
                 return new InputValidation('timecode_end', $timecode_end, '', InputStatus::Valid);
             }
         ),
+        new FormInput(
+            'title',
+            filter_input(INPUT_POST, 'title'),
+            function (string $title): InputValidation {
+
+                /**
+                 * Taille d'un tweet
+                 */
+                $max_nb_char = 280;
+
+                //Ne doit pas être non vide et limite de taille
+                if (!isset($title) || empty($title) || mb_strlen($title) > $max_nb_char)
+                    return new InputValidation('title', $title, "Veuillez renseigner un titre pour l'extrait (nombre de caractères max : {$max_nb_char})");
+
+                return new InputValidation('title', $title, '', InputStatus::Valid);
+            }
+        )
 
     );
 

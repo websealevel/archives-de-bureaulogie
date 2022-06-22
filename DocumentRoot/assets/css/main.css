@@ -10,6 +10,10 @@ fieldset {
 	margin: 5px;
 }
 
+textarea {
+	resize: none;
+  }
+
 .screen-reader-text {
 	border: 0;
 	clip: rect(1px, 1px, 1px, 1px);

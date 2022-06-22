@@ -95,19 +95,18 @@ $token = register_api_token($account, 'submit_clip');
 
                 <div class="label-input">
                     <label for="timecode_end">Fin </label>
-                    <input type="text" name="timecode_end" id="timecode_end" value="00:00:00.000">
+                    <input type="text" name="timecode_end" id="timecode_end" value="00:00:00.000" pattern="[0-9]{2}:[0-9]{2}:[0-9]{2}.[0-9]{3}">
                 </div>
 
                 <div class="label-input">
-                    <label for="title">Titre</label>
-                    <input type="text" name="title" id="title" size="100">
+                    <label for="title">Titre </label>
+                    <textarea name="title" id="title" rows="8" cols="50" placeholder="Texte qui apparaîtra dans le tweet" maxlength="280" autocapitalize="sentences" spellcheck="true"></textarea>
                 </div>
 
                 <div class="label-input">
                     <label for="description">Description</label>
-                    <textarea id="description" name="description" rows="4" cols="50"></textarea>
+                    <textarea id="description" name="description" rows="8" cols="60" placeholder="Texte additionnel" maxlength="280" autocapitalize="sentences" spellcheck="true"></textarea>
                 </div>
-
 
             </div>
         </fieldset>
