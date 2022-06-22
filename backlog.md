@@ -85,39 +85,38 @@ Ces paramètres s'appliquent au téléchargement des vidéos sources et à l'enc
 
 #### Fichier vidéo *source*
 
-Voir [ici](sources/README.md)
+Voir [ici](./DocumentRoot/sources/README.md)
 
 #### Fichier vidéo *extrait*
 
-Voir [ici](extraits/README.md)
+Voir [ici](./DocumentRoot/extraits/README.md)
 
 #### Timecode
 
-Les timecodes (instant de début ou de fin de l'extrait) doivent être formattés au format `hh.mm.ss.lll` avec 
+Les timecodes (instant de début ou de fin de l'extrait) doivent être formattés au format `hh:mm:ss.lll` avec 
 
 - `h` l'heure
 - `m` la minute
 - `s` la seconde
 - `l` la miliseconde
 
-Ils doivent être compris entre `00.00.00.000` et la durée totale de la vidéo.
+Ils doivent être compris entre `00:00:00.000` (inclus) et la durée totale de la vidéo.
 
 ### Gestion des fichiers `sources` et `extraits`
 
-
 #### Fichier `source`
 
-Les fichiers *sources* sont les vidéos téléchargées depuis youtube entières et servent de source aux extraits. Elles se trouvent dans le dossier `sources`.
+Les fichiers *sources* sont des vidéos téléchargées depuis youtube et servent de source aux extraits. Elles se trouvent dans le dossier `sources`.
 
 Les fichiers *sources* **doivent respecter [un format](./DocumentRoot/sources/README.md)** sinon elles finiront pas être **supprimées automatiquement**.
 
 #### Fichier `extrait`
 
-Les *extraits* sont les extraits vidéos des [sources](#fichiers-sources). Ils sont générés automatiquement à partir des informations fournies dans le [fichier source](#le-fichier-source). Ils se trouvent dans le dossier `extraits`.
+Les *extraits* sont les extraits vidéos issus des [sources](#fichiers-sources). Ils sont générés automatiquement **à partir** des informations fournies dans le [fichier source](#le-fichier-source). Ils se trouvent dans le dossier `extraits`.
 
-Les fichiers *extraits* **doivent respecter [un format][un format](./DocumentRoot/extraits/README.md)** sinon elles finiront pas être **supprimées automatiquement**.
+Les fichiers *extraits* **doivent respecter [un format][un format](./DocumentRoot/extraits/README.md)** sinon ils finiront pas être **supprimées automatiquement**.
 
-Un extrait doit faire **au moins 1 seconde**, sinon il ne sera pas généré et une exception sera levée.
+Un extrait doit faire **au moins 1 seconde**, sinon il ne sera pas généré et une exception sera levée et moins de **2min20s**, pour être publiable sur Twitter.
 
 ### Twitter Bots
 
@@ -204,7 +203,7 @@ Suivi des tâches
 - utliser youtube-dl en local [x]
 - utiliser ffmpeg/ffprobe en local [x]
 - pas de password recover [x]
-- ecran [Ajouter une source/Lister sources](#ecran---importer-une-sourcelister-les-sources) [][x]
+- ecran [Ajouter une source/Lister sources](#ecran---importer-une-sourcelister-les-sources) [x][x]
 - ecran [Creer un extrait/Lister les extraits](#ecran---creer-un-extraitlister-les-extraits) []
 - ecran Ajouter une entrée Biblio
 - ecran Editer une entrée Biblio  
@@ -225,7 +224,7 @@ Suivi des tâches
 
 ### Ecran - Importer une source/Lister les sources
 
-- `preg_match` sur le name du formulaire ne fonctionne pas, à fixer (check_download_request_form, ligne 102) [ ]
+- `preg_match` sur le name du formulaire ne fonctionne pas, à fixer (`check_download_request_form`, ligne 102) [ ]
 - checker le nonce (token) du formulaire de soumission de vidéo source []
 - télécharger une vidéo apres soumission du formulaire [x]
 - progression téléchargement [x]
@@ -245,24 +244,32 @@ Suivi des tâches
 
 ### Ecran - Creer un extrait/Lister les extraits
 
-- charger la video source en fonction du select[]
-- charger la video extrait en fonction des timecodes[]
-- lister tous les extraits asociés à la source sélectionnée []
-- en jquery manipuler la preview clip pour charger juste la vidéo sur la durée du clip []
-- afficher deux elements vidéos : source et extrait []
-- preview de la vidéo source + preview de l'extrait
-- mettre en pause la vidéo source si play video extrait et vice versa
-- indique le timecode a tout moment
+- charger la video source en fonction du select[x]
+- charger la video extrait en fonction des timecodes[x]
+- en jquery manipuler la preview clip pour charger juste la vidéo sur la durée du clip [x]
+- afficher deux elements vidéos : source et extrait [x]
+- preview de la vidéo source + preview de l'extrait [x]
+- mettre en pause la vidéo source si play video extrait et vice versa [x]
+- indique le timecode a tout moment [x]
 - timecode entrée et de sortie éditables [x]
-- manipuler les timecodes via une interface graphique sur le player (luxe)
-- plusieurs cut dans un seul fichier via des marqueurs avec label des extraits, en un clic exporter tous les marqueurs (luxe)
+- manipuler les timecodes via une interface graphique (sans les rentrer à la main) [x]
+- pouvoir prévisualiser un temps apres le timecode de fin [x]
+- renseigner titre, description [x]
+- options d'édition [x]
+- valider le formulaire [x]
+- valider token, authentification, cap [x]
+- valider timecodes [x]
+- valider que la source existe et qu'elle est déclarée[x]
+- déclarer l'extrait s'il n'existe pas sur la source []
+- générer l'extrait []
+- lister tous les extraits asociés à la source sélectionnée []
+- plusieurs cut dans un seul fichier via des marqueurs avec label des extraits, en un clic exporter tous les marqueurs (luxe) [éditeur custom] []
 
 
 ### Ecran Ajouter une ressource biblio
 
 - si role > modérateur, afficher la liste des ressources présentes (html)
 - formulaire avec select type de ressource (livre, article, podcast...)
-
 
 ### Ecran Modération des extraits vidéos
 
@@ -288,7 +295,7 @@ A venir...
 
 ### Unicité d'un clip
 
-- source + timecodes identiques. Si sur une meme source, deux clips ont les memes timecodes, ce sont les mêmes extraits.                
+- nom source + timecodes identiques. Si sur une meme source, deux clips ont les memes timecodes, ce sont les mêmes extraits.                
 
 ### A implementer (CLI/CGI)
 
@@ -309,7 +316,8 @@ A venir...
 
 ## Sécurité
 
-- mettre des nonces (token) dans les formulaires []
+- mettre des nonces (token) dans le formulaire de dl source []
+- mettre des nonces (token) dans le formulaire de clip [x]
 - `role_has_cap` a implementer !!! []
 - déclarer une limite d'extraits / utilisateur / source (20 par exemple) []
 - envoyer un email pour valider le compte []
@@ -317,8 +325,8 @@ A venir...
 - regarder comment mieux sécuriser les sessions [x]
 - ajouter honey pot dans le form d'inscription (voir ce que je peux faire d'autre pour éviter les spams) []
 - limiter le nb de sources extraits / user []
-- interdire de dl si espace disque donné atteint
-- enlever la version d'apache dans la requete de reponse
+- interdire de dl si espace disque donné atteint []
+- enlever la version d'apache dans la requete de reponse [x]
 - dev un mode maintenance simple (fichier .env si c'est `On` on charge le template `maintenance.php` dès l'`index.php` avant le router) [x]
 - faire un test de pénétration []
 - couvrir de tests les droits et `capabilites` []
@@ -331,7 +339,7 @@ A venir...
 - finir la confirmation d'authentification sur les actions sensibles []
 - installer un moniteur éthique pour analyser la fréquentation du site[]
 - vérifier que les error/exception handlers sont bien intégrés à chaque script [x]
-- certaines exceptions ne devraient pas logout l'utilisateur (ex téléchargement échoué), mauvais pour l'ux [x] => solution: Les try/catch localement, sinon par défaut ça deconnecte
+- certaines exceptions ne devraient pas logout l'utilisateur (ex téléchargement échoué), mauvais pour l'ux [x] => solution: Les try/catch localement, sinon par défaut ça deconnecte []
 - desactiver/activer acces aux comptes Twitter []
 - desactiver facilement les comptes Twitter []
 - desactiver facilement le site []
