@@ -7,6 +7,9 @@ jQuery(function ($) {
     $("#video-source").prop('src', source_url)
     $("#video-clip").prop('src', source_url)
 
+    /**
+     * Timer
+     */
     $("#video-source").on('timeupdate', function(){
         const timecode_seconds = $("#video-source").prop("currentTime")
         const hh_mm_ss_lll = seconds_to_hh_mm_ss_lll(timecode_seconds)

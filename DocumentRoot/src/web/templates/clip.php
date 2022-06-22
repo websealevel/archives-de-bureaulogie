@@ -70,19 +70,25 @@ if (!current_user_can('submit_clip'))
             </div>
 
             <div id="edition-data">
-                <label for="timecode_start">Début </label>
-                <input type="text" name="timecode_start" id="timecode_start" pattern="[0-9]{2}:[0-9]{2}:[0-9]{2}.[0-9]{3}" value="00:00:00.000">
 
-                <label for="timecode_fin">Fin </label>
-                <input type="text" name="timecode_end" id="timecode_end" pattern="[0-9]{2}:[0-9]{2}:[0-9]{2}.[0-9]{3}" value="00:00:00.000">
-
-                <div><label for=" title">Titre</label>
-                    <input type="text" name="title" size="100">
+                <div class="label-input">
+                    <label for="timecode_start">Début </label>
+                    <input type="text" name="timecode_start" id="timecode_start" pattern="[0-9]{2}:[0-9]{2}:[0-9]{2}.[0-9]{3}" value="00:00:00.000">
                 </div>
 
-                <div>
-                    <label for=" title">Description</label>
-                    <textarea name="description" rows="4" cols="50"></textarea>
+                <div class="label-input">
+                    <label for="timecode_end">Fin </label>
+                    <input type="text" name="timecode_end" id="timecode_end" pattern="[0-9]{2}:[0-9]{2}:[0-9]{2}.[0-9]{3}" value="00:00:00.000">
+                </div>
+
+                <div class="label-input">
+                    <label for="title">Titre</label>
+                    <input type="text" name="title" id="title" size="100">
+                </div>
+
+                <div class="label-input">
+                    <label for="description">Description</label>
+                    <textarea id="description" name="description" rows="4" cols="50"></textarea>
                 </div>
 
 
