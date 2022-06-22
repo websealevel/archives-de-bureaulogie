@@ -150,10 +150,11 @@ function build_source_name(string $series, string $slug): string
 
 
 /**
- * Valide les champs de formulaires passés en argument et retourne la validation sous forme d'un tableau mappant les inputs.
- * @param FormInput[] $inputs Les inputs demandés.
- * @return InputValidation[] Un tableau de validation d'inputs.
+ * Retourne le résultat des callback de validation enregistrées sur chaque input
+ * @param FormInput[] $inputs Les inputs et leur callbacks de validation associés
+ * @return InputValidation[] Les résultats de validation des inputs.
  * @global array $_POST
+ * @throws Exception - Si la callbacl de validation n'est pas de type Callable
  */
 function validate_posted_form(array $inputs): array
 {

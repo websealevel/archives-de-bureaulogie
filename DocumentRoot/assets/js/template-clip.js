@@ -225,7 +225,7 @@ function has_reached_end(video, end) {
  */
 
 const spinner_ascii = {
-    duration: 500,
+    duration: 900,
     element: '',
     step: function (timestamp) {
         var frame = Math.floor(timestamp * spinner_ascii.frames.length / spinner_ascii.duration) % spinner_ascii.frames.length;
@@ -235,10 +235,10 @@ const spinner_ascii = {
         }
     
         ;
-        spinner_ascii.element.value = 'Traitement en cours, veuillez patienter... ' + spinner_ascii.frames[frame];
+        spinner_ascii.element.value = 'Traitement en cours, veuillez patienter ' + spinner_ascii.frames[frame];
         spinner_ascii.requestID = window.requestAnimationFrame(spinner_ascii.step);
     },
-    frames: '▤▧▥▨'.split(''),
+    frames : '▤▧▥▨'.split(''),
     requestID: ''
 }
 

@@ -38,14 +38,20 @@ function api_clip_source()
     }
 
     write_log($_POST);
-    write_log($_SESSION);
 
     //Check le token
     if (!($_POST['token'] && is_valid_token($_POST['token'], 'submit_clip'))) {
         api_respond_with_error();
     }
 
+
+    //Validation des inputs du formulaire
+    $input_validations = check_download_source_form();
+    $invalid_inputs = filter_invalid_inputs($input_validations);
+
     //Utilisateur authentifié et token valide. Création du clip
+
+
     sleep(5);
 }
 
@@ -70,4 +76,29 @@ function api_respond_with_error(string $message = 'Vous ne disposez pas des droi
     ));
     echo $response;
     exit;
+}
+
+/**
+ * Retourne les inputs validés (ou non) du formulaire de soumission d'extrait
+ * @return InputValidation[] 
+ * @global $_POST
+ */
+function check_submit_clip_form()
+{
+    $form_inputs = array(
+
+        new FormInput('source_url', filter_input(INPUT_POST, 'source_url'), function (string $source_url): InputValidation {
+
+            //Non vide.
+            if (!isset($source_url) || empty($source_url))
+                return new InputValidation('source_url', $source_url, "Renseignez une url valide de source à télécharger.");
+
+
+            //Contrainte sur la chaine youtube (juste celle de canardPC)
+            return new InputValidation('source_url', $source_url, '', InputStatus::Valid);
+        }),
+
+    );
+
+    return validate_posted_form($form_inputs);
 }
