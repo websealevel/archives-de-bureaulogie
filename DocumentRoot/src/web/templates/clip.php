@@ -32,24 +32,33 @@ if (!current_user_can('submit_clip'))
         00:00:00.000
     </div>
     <div class="videos">
-        <h3>Source</h3>
+        <fieldset id="fieldset-video-source">
+            <legend>
+                <h3>Source</h3>
+            </legend>
+            <div class="video-source">
+                <video id="video-source" width="100%" controls>
+                    <source src="" type="video/mp4">
+                    Votre navigateur ne supporte pas le tag video HTML5 :(
+                </video>
+            </div>
+        </fieldset>
 
 
 
-        <div class="video-source">
-            <video id="video-source" width="600" controls>
-                <source src="" type="video/mp4">
-                Votre navigateur ne supporte pas le tag video HTML5 :(
-            </video>
-        </div>
-        <h3>Prévisualisation</h3>
+        <fieldset id="fieldset-video-clip">
+            <legend>
+                <h3>Prévisualisation</h3>
+            </legend>
+            <div class="video-clip">
+                <video id="video-clip" width="100%" controls>
+                    <source src="" type="video/mp4">
+                    Votre navigateur ne supporte pas le tag video HTML5 :(
+                </video>
+            </div>
+        </fieldset>
 
-        <div class="video-clip">
-            <video id="video-clip" width="600" controls>
-                <source src="" type="video/mp4">
-                Votre navigateur ne supporte pas le tag video HTML5 :(
-            </video>
-        </div>
+
     </div>
 
     <div class="errors" style="color: red;"></div>

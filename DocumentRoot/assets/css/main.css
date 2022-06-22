@@ -1,5 +1,28 @@
 /* @import url("new.css"); */
 
+
+* {
+	/* Reset margins and padding */
+	margin: 0;
+	padding: 0;
+}
+
+
+body {
+	/* Center body in page */
+	margin: 0 auto;
+	padding: 2rem;
+	border-radius: 6px;
+	overflow-x: hidden;
+	word-break: break-word;
+	overflow-wrap: break-word;
+
+	font-size: 1.03rem;
+	line-height: 1.5;
+
+	box-sizing: border-box;
+}
+
 .screen-reader-text {
 	border: 0;
 	clip: rect(1px, 1px, 1px, 1px);
@@ -13,16 +36,28 @@
 	word-wrap: normal !important;
 }
 
-.error { border:  3px solid red; }
+.error {
+	border: 3px solid red;
+}
 
 
 .videos {
 	display: flex;
-	gap:50px;
+	align-items: flex-start;
+	gap: 50px;
+	flex-wrap: wrap;
 }
 
-.current-time{
-	font-size: 38px;
+#fieldset-video-source {
+	width: 50vw;
+}
+
+#fieldset-video-clip {
+	width: 29vw;
+}
+
+.current-time {
+	font-size: 40px;
 	font-weight: bold;
 	padding: 20px;
 	margin: 20px;
@@ -30,40 +65,45 @@
 	display: inline-block;
 }
 
-#fieldset-edition{
+
+
+#fieldset-edition {
 	display: flex;
 	justify-content: flex-start;
 	align-items: flex-start;
 	flex-wrap: wrap;
-	align-content: flex-start;
+	align-content: flex-start; 
 	row-gap: 10px;
 	column-gap: 10px;
 }
 
-#edition-actions{
+#edition-actions {
 	display: flex;
+	flex-wrap: wrap;
 	gap: 10px;
 }
-#edition-data{
+
+#edition-data {
 	display: flex;
 	flex-direction: column;
-	gap: 10px;
 	justify-content: flex-start;
 	align-items: flex-start;
 	flex-wrap: wrap;
 	align-content: flex-start;
+	gap: 10px;
+
 }
 
-#clip-options{
+#clip-options {
 	margin: 10px 0;
 }
 
-.btn-edition{
-	font-size: 38px;
-	padding: 0 20px;
+.btn-edition {
+	font-size: 39px;
+	padding: 0 1vw;
 }
 
-.label-input{
+.label-input {
 	display: flex;
 	align-items: flex-start;
 	gap: 10px;

@@ -30,6 +30,11 @@ jQuery(function ($) {
         //Faire une requete et ajouter a la liste
     })
 
+
+    /**
+     * Pause
+     */
+
     /**
      * Timecodes bouttons
      */
