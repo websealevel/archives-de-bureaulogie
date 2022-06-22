@@ -27,19 +27,19 @@ if (!current_user_can('submit_clip'))
 <div class="videos">
     <h3>Source</h3>
     <div class="video-source">
-        <video width="600" controls id="video-source">
+        <video id="video-source" width="600" controls>
             <source src="" type="video/mp4">
             Votre navigateur ne supporte pas le tag video HTML5 :(
         </video>
     </div>
 
-    <!-- <div class="video-clip">
+    <div class="video-clip">
         <h3>Extrait</h3>
-        <video width="600" controls id="video-clip">
+        <video id="video-clip" width="600" controls>
             <source src="" type="video/mp4">
             Votre navigateur ne supporte pas le tag video HTML5 :(
         </video>
-    </div> -->
+    </div>
 </div>
 
 <main class="form-clip">
@@ -60,6 +60,16 @@ if (!current_user_can('submit_clip'))
         <input name="btn_clip_start" id="btn_clip_start" type="button" title="Définir la position courante du curseur de lecture comme timecode de départ de l'extrait" value="Démarrer l'extrait ici">
 
         <input name="bt_clip_end" id="btn_clip_end" type="button" title="Définir la position courante du curseur de lecture comme timecode de fin de l'extrait" value="Finir l'extrait ici">
+
+        <input type="button" id="btn_preview" value="Prévisualiser">
+
+        <fieldset>
+            <legend>Options</legend>
+            <input type="checkbox" name="checkbox_loop_preview" id="checkbox_loop_preview">
+            <label for="checkbox_loop_preview">Prévisualisation en boucle</label>
+
+        </fieldset>
+
 
         <input type="submit" value="Extraire">
     </form>

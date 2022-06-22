@@ -4,12 +4,7 @@ jQuery(function ($) {
      * Set le src de la video source a partir de la source sélectionnée
      */
     const source_url = $("#sources").find('option:selected').attr("name")
-    console.log(source_url)
-    $("#video-source").attr('src', source_url)
-
-    /**
-     * Init la liste des extraits associés à la source
-     */
+    $("#video-source").prop('src', source_url)
 
     /**
      * Evenement quand le select de source change
@@ -19,7 +14,7 @@ jQuery(function ($) {
         const path = this.find('option:selected').attr("name");
 
         // Mettre a jour la source du tag video source.
-        $("#video-source").attr('src', path)
+        $("#video-source").prop('src', path)
 
         // Mettre à jour la liste des extraits présents
         //Faire une requete et ajouter a la liste
@@ -34,18 +29,44 @@ jQuery(function ($) {
         //On récupere le current time en secondes
         const timecode_seconds = $("#video-source").prop("currentTime")
         const hh_mm_ss_lll = seconds_to_hh_mm_ss_lll(timecode_seconds)
-        console.log(hh_mm_ss_lll)
         $("#timecode_start").val(hh_mm_ss_lll)
     })
 
     $("#btn_clip_end").click(function () {
-        console.log('btn_clip_end')
+        const timecode_seconds = $("#video-source").prop("currentTime")
+        const hh_mm_ss_lll = seconds_to_hh_mm_ss_lll(timecode_seconds)
+        $("#timecode_end").val(hh_mm_ss_lll)
     })
+
+    /**
+     * Preview
+     */
+
+    $("#btn_preview").click(function () {
+        const src = $("#video-source").prop('src')
+        const src_timecodes = src + '#t=10,13'
+        const $html_video_clip = $("#video-clip")
+        $html_video_clip.prop('src', src_timecodes)
+        $html_video_clip.trigger('play')
+
+        /**
+         * Loop preview
+         */
+        $html_video_clip.on('timeupdate', function () {
+            if ($('#checkbox_loop_preview').is(':checked')) {
+                loop_video(this, 10, 13)
+            }
+        })
+
+
+
+    })
+
 
     /**
      * Soumission du formulaire de création d'extrait
      */
-    //Demander un nouveau téléchargement
+
     $("#form-clip-source").submit(function (event) {
 
         event.preventDefault();
@@ -62,6 +83,11 @@ jQuery(function ($) {
         })
     });
 });
+
+
+/**
+ * Helper functions
+ */
 
 /**
    * Formate une durée en secondes au format hh:mm:ss.lll
@@ -83,4 +109,17 @@ function seconds_to_hh_mm_ss_lll(timecode_seconds) {
     const minutes_formated = minutes < 10 ? '0' + minutes : minutes
 
     return `${hours_formatted}:${minutes_formated}:${seconds_formatted}.${miliseconds_formatted}`
+}
+
+/**
+ * Joue la vidéo si le timecode courant arrive à la fin du timecode de fin
+ * @param {string} video Element HTML video 
+ * @param {*} start timecode de début (en secondes)
+ * @param {*} end timecode de fin (en secondes)
+ */
+function loop_video(video, start, end) {
+    if (video.currentTime >= end) {
+        video.currentTime = start;
+        video.play();
+    }
 }
