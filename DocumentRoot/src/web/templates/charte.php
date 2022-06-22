@@ -23,7 +23,9 @@ present_header();
 <p>Toute contribution ou attitude provenant d'un compte qui ne respecte pas la charte sera suspendu, voire supprimé.</p>
 
 
-<p class="signature">Les Archives de Bureaulogie</p>
+<p>Page en construction...</p>
+
+<small>Les archives de bureaulogie</small>
 <p class="contact"> <a href="/contact">Nous contacter</a> </p>
 
 <?php

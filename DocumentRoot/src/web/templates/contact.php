@@ -12,10 +12,12 @@
 present_header();
 ?>
 
-<h2>Contacter les Archives de Bureaulogie</h2>
+<h2>Contacter les archives de bureaulogie</h2>
 
 
-<p class="signature">Les Archives de Bureaulogie</p>
+<p>Page en construction...</p>
+
+<small>Les archives de bureaulogie</small>
 
 <?php
 present_footer();

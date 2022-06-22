@@ -75,7 +75,7 @@ function is_clip_already_declared(string $source_name, string $timecode_start, s
         throw new Exception(sprintf("Le fichier %s existe, mais il n'est pas déclaré dans le fichier source. "));
     }
 
-    return source_has_clip($declared_source, $timecode_start, $timecode_end);
+    return source_has_this_clip($declared_source, $timecode_start, $timecode_end);
 }
 
 /**
@@ -84,7 +84,7 @@ function is_clip_already_declared(string $source_name, string $timecode_start, s
  * @param string $timecode_start Le timecode de départ du clip
  * @param string $timecode_end Le timecode de fin du clip
  */
-function source_has_clip(DOMElement $declared_source, string $timecode_start, string $timecode_end): bool
+function source_has_this_clip(DOMElement $declared_source, string $timecode_start, string $timecode_end): bool
 {
 
     if (!$declared_source->hasChildNodes())

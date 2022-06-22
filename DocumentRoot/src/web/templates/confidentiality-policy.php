@@ -14,7 +14,9 @@ present_header();
 ?>
 <h2>Politique de confidentialité des données des Archives de Bureaulogie</h2>
 
-<p class="signature">Les Archives de Bureaulogie</p>
+<p>Page en construction...</p>
+
+<small>Les archives de bureaulogie</small>
 <p class="contact"> <a href="/contact">Nous contacter</a> </p>
 
 <?php

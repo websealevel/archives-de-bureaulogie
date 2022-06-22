@@ -12,7 +12,15 @@
 present_header();
 
 
-echo '500';
+?>
+
+<h2>500</h2>
+
+<p>Page en construction...</p>
+
+<small>Les archives de Bureaulogie</small>
+
+<?php
 
 
 present_footer();
