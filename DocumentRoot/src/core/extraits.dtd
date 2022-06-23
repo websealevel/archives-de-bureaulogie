@@ -13,6 +13,7 @@
 <!ATTLIST extraits xmlns CDATA #REQUIRED >
 <!ATTLIST extrait poste CDATA #REQUIRED >
 <!ELEMENT extrait (title, description, debut, fin, auteur, cree_le) >
+<!ELEMENT title (#PCDATA) >
 <!ELEMENT description (#PCDATA) >
 <!ELEMENT debut (#PCDATA) >
 <!ELEMENT fin (#PCDATA) >

@@ -62,42 +62,49 @@ function is_source_already_declared(string $series, string $slug, string $url): 
  * @param string $source_name Le nom de la source (attr 'name')
  * @param string $timecode_start Le timecode de départ du clip
  * @param string $timecode_end Le timecode de fin du clip
- * @throws Exception - Si la video source n'est pas déclarée dans le fichier source
+ * @throws Exception - Si la video source existe mais qu'elle n'est pas déclarée dans le fichier source
  * @return bool
  */
 function is_clip_already_declared(string $source_name, string $timecode_start, string $timecode_end): bool
 {
 
-    $declared_source = query_source_by_unique_attr('name', $source_name);
+    $node_source = query_source_by_unique_attr('name', $source_name);
 
-    if (false === $declared_source) {
-        //Fatal error : cela veut dire que le fichier source est cassé.
-        throw new Exception(sprintf("Le fichier %s existe, mais il n'est pas déclaré dans le fichier source. "));
+    if (false === $node_source) {
+
+        if (source_exists($source_name)) {
+            //Fatal error : cela veut dire que le fichier source est cassé.
+            throw new Exception(sprintf("Le fichier %s existe, mais il n'est pas déclaré dans le fichier source. "));
+        }
+
+        return false;
     }
 
-    return source_has_this_clip($declared_source, $timecode_start, $timecode_end);
+    return source_has_this_clip($node_source, $timecode_start, $timecode_end);
 }
 
 /**
  * Retourne vrai si la source a un extrait déclaré avec les mêmes timecodes, faux sinon
- * @param DOMElement $declared_source
+ * @param DOMElement $node_source
  * @param string $timecode_start Le timecode de départ du clip
  * @param string $timecode_end Le timecode de fin du clip
  */
-function source_has_this_clip(DOMElement $declared_source, string $timecode_start, string $timecode_end): bool
+function source_has_this_clip(DOMElement $node_source, string $timecode_start, string $timecode_end): bool
 {
 
-    if (!$declared_source->hasChildNodes())
+    if (!$node_source->hasChildNodes())
         return false;
 
-    $childs =  $declared_source->childNodes;
+    $childs =  $node_source->childNodes;
 
-    write_log($childs);
     foreach ($childs as $child) {
-        write_log($child);
+        $start = $child->getAttribute('debut');
+        $end = $child->getAttribute('end');
+        if ($start === $timecode_start && $end === $timecode_end)
+            return true;
     }
 
-    return true;
+    return false;
 }
 
 

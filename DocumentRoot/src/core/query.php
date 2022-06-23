@@ -102,16 +102,28 @@ function query_clip(string $source, string $slug, string $timecode_start, string
     return false;
 }
 
+
 /**
- * Ajoute un extrait au fichier la source s'il n'existe pas déjà (source+timecodes identiques)
+ * Ajoute un extrait au fichier la source s'il n'existe pas déjà. Retourne le noeud ajouté en cas de succès, faux en cas d'échec
  * @param string $source La source du clip (son parent)
- * @param string $slug Le slug du clip
  * @param string $timecode_start
  * @param string $timecode_end
- * @return DOMNode Le noeud ajouté
+ * @param string $title
+ * @param string $description
+ * @param string $author
+ * @param string $created_on
+ * @return DOMNode|false Le noeud ajouté en cas de succès, faux sinon
  */
-function declare_clip(string $source, string $slug, string $timecode_start, string $timecode_end, string $file_source = SOURCE_FILE): DOMNode
+function declare_clip(string $source, string $timecode_start, string $timecode_end, string $title, string $description, string $author, string $created_on, string $file_source = SOURCE_FILE): DOMNode|false
 {
+
+    //Construire le nom du fichier avec les données
+
+    //Vérifier qu'il correspon a la regex des noms de fichier d'extraits
+
+    //Ajouter au fichier source
+
+    return false;
 }
 
 /**
@@ -197,11 +209,11 @@ function source_name(DOMElement $source): string
 }
 
 /**
- * Retourne un élément enfant d'un élément par nom. Nous sommes garantis d'avoir l'élément enfant recherché grâce au schéma de validation dtd. Si ce n'est pas le cas c'est une erreur du développeur.
+ * Retourne un élément enfant d'un élément par nom d'élément. Nous sommes *certains* d'avoir l'élément enfant recherché grâce au schéma de validation DTD. Si ce n'est pas le cas, c'est une erreur du développeur.
  * @param DOMEelement $el L'élément dont on cherche un enfant
  * @param string $child_name Le nom de l'élément recherché
- * @throws Exception Si $child_name est vide, si l'élément n'a pas d'enfants, si un enfant n'est pas défini
  * @return DOMElement L'élément enfant dont le nom correspond
+ * @throws Exception Si $child_name est vide, si l'élément n'a pas d'enfants, si un enfant n'est pas défini
  */
 function child_element_by_name(DOMElement $el, string $child_name): DOMElement
 {

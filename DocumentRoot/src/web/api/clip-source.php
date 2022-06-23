@@ -60,13 +60,6 @@ function api_clip_source()
     //Fix: on extrait le nom du fichier de l'url
     $source_name =  substr_replace($inputs['source_name']->value, '', 0, strlen(DIR_SOURCES) + 1);
 
-    //Valider l'existence de la source
-    if (!source_exists($source_name)) {
-        api_respond_with_error(array(
-            new InputValidation('', '', "La source <i>{$source_name}</i> n'existe pas dans les archives. Veuillez en sélectionner une autre s'il vous plaît.")
-        ));
-    }
-
     //Valider les timecodes
     try {
         $result = are_timecodes_valid_core($timecode_start, $timecode_end, $source_name);
@@ -92,8 +85,16 @@ function api_clip_source()
 
     //Pour les clips : on les déclare puis on les génere (c'est comme ça qu'est pensé le core. Il parse le fichier source et génère les clips qui n'existent pas encore.)
 
-
     //Déclarer le clip dans le fichier source
+    $node_clip = declare_clip(
+        $source_name,
+        $timecode_start,
+        $timecode_end,
+        $inputs['title']->value,
+        $inputs['description']->value,
+        current_user_pseudo(),
+        'le ' . date('d-m-Y') . ' à ' . date('H:m:s')
+    );
 
 
     //FFmpeg: faire un clip avec normalisation du son
