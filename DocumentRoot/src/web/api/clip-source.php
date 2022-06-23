@@ -87,7 +87,7 @@ function api_clip_source()
 
     //Déclarer le clip dans le fichier source (i.e "l'enregistrer dans les archives")
     try {
-        $result = declare_clip(
+        $extrait = declare_clip(
             $source_name,
             $timecode_start,
             $timecode_end,
@@ -97,7 +97,7 @@ function api_clip_source()
             'le ' . date('d-m-Y') . ' à ' . date('H:m:s')
         );
 
-        if (false === $result) {
+        if (false === $extrait) {
             throw new Exception("Une errer est survenue lors de l'enregistrement de l'extrait. Veuillez rééssayer.");
         }
     } catch (Exception $e) {
@@ -107,7 +107,10 @@ function api_clip_source()
     }
 
     //FFmpeg: faire un clip avec normalisation du son
+    $file = clip_source($extrait);
 
+    write_log($file);
+    exit;
 
     //Renvoyer un markup html contenant le nouveau clip à ajouter à la liste des extraits présents sur la source.
     $label = 'foobar';

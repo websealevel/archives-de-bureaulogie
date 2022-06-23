@@ -184,22 +184,25 @@ function clip_path(DOMElement $clip): string
 
 /**
  * Retourne un nom de fichier pour le clip au format FORMAT_FILE_VIDEO_CLIP
- * @see FORMAT_FILE_VIDEO_CLIP
  * @param DOMElement $clip
  * @return string
+ * @link FORMAT_FILE_VIDEO_CLIP
  */
 function format_to_clip_file(DOMElement $clip): string
 {
-
     $source = declared_source_of($clip);
-
     $source_name = basename(source_name($source), '.' . EXTENSION_SOURCE);
 
     $start = child_element_by_name($clip, "debut")->nodeValue;
-
     $end = child_element_by_name($clip, "fin")->nodeValue;
 
-    return sprintf("[%s][%s][%s].%s", $source_name, $start, $end, EXTENSION_CLIP);
+    return sprintf(
+        "%s--from-%s-to-%s.%s",
+        trim(strtolower($source_name)),
+        trim($start),
+        trim($end),
+        EXTENSION_CLIP
+    );
 }
 
 /**

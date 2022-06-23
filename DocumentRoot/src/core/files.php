@@ -50,7 +50,7 @@ function delete_file(string $file_name): bool
  * @throws Exception FFMPEG
  * @return string Le path de l'extrait crée
  */
-function clip_source(DOMElement $clip, string $file_source): string
+function clip_source(DOMElement $clip, string $file_source = SOURCE_FILE): string
 {
     $path_source = PATH_SOURCES . '/' . $file_source;
 
