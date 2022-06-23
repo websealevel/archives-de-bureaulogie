@@ -81,11 +81,11 @@ function api_clip_source()
         ));
     }
 
-    //=>Création du clip.
+    //=> Création du clip.
 
     //Pour les clips : on les déclare puis on les génere (c'est comme ça qu'est pensé le core. Il parse le fichier source et génère les clips qui n'existent pas encore.)
 
-    //Déclarer le clip dans le fichier source
+    //Déclarer le clip dans le fichier source (i.e "l'enregistrer dans les archives")
     try {
         $result = declare_clip(
             $source_name,
@@ -106,9 +106,11 @@ function api_clip_source()
         ));
     }
 
-    //FFmpeg: faire un clip avec normalisation du son
     write_log('Génération du clip...');
     exit;
+
+    //FFmpeg: faire un clip avec normalisation du son
+
 
     //Renvoyer un markup html contenant le nouveau clip à ajouter à la liste des extraits présents sur la source.
 
