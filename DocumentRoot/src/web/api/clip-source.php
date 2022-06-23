@@ -189,7 +189,7 @@ function check_submit_clip_form()
             function (string $title): InputValidation {
 
                 //Ne doit pas être non vide et limite de taille
-                if (!isset($title) || empty($title) || mb_strlen($title) > TWEET_NB_MAX_CHARACTERS)
+                if (!isset($title) || mb_strlen($title) > TWEET_NB_MAX_CHARACTERS)
                     return new InputValidation('title', $title, sprintf("Veuillez renseigner un titre. Celui-ci ne doit pas dépasser %s caractères", TWEET_NB_MAX_CHARACTERS));
 
                 return new InputValidation('title', $title, "", InputStatus::Valid);

@@ -29,7 +29,7 @@ $token = register_api_token($account, 'submit_clip');
 
 <main class="form-clip">
 
-    <h2>Créer un extrait</h2>
+    <h2>Soumettre un extrait</h2>
 
     <form action="">
         <?php esc_sources_to_html_select_e(show_data: array('label')); ?>

@@ -147,9 +147,17 @@ function declare_clip(string $source_name, string $timecode_start, string $timec
     //Ajouter l'extrait à la source parente
     $sources = $dom->getElementsByTagNameNS(XMLNS_SOURCE_FILE, 'source');
     $parent_source = find_element_by_attribute($sources, 'name', $source_name);
-    $result = $parent_source->appendChild($extrait);
+
+    if (false === $parent_source) {
+        throw new Exception("L'extrait n'a pas pu être réalisé car la vidéo source n'est plus enregistrée dans nos archives.");
+    }
+
+    $parent_source->appendChild($extrait);
 
     //Valider le DTD
+    if (!$dom->validate()) {
+        throw new Exception("L'extrait n'a pas pu être réalisé car ses métadonnées ne nous autorisent pas à l'enregistrer dans nos archives.");
+    }
 
     //Enregistrer
     return $dom->save(SOURCE_FILE);
