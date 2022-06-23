@@ -11,9 +11,9 @@
 <!ATTLIST source series (le-tribunal-des-bureaux) "le-tribunal-des-bureaux" >
 <!-- element extrait -->
 <!ATTLIST extraits xmlns CDATA #REQUIRED >
-<!ATTLIST extrait poste CDATA #REQUIRED >
-<!ELEMENT extrait (title,description, debut, fin, auteur, cree_le) >
-<!ELEMENT slug (#PCDATA) >
+<!ATTLIST extrait nb_post CDATA #REQUIRED >
+<!ATTLIST extrait statut (en_attente_de_moderation|publie) #REQUIRED >
+<!ELEMENT extrait (title, description, debut, fin, auteur, cree_le) >
 <!ELEMENT title (#PCDATA) >
 <!ELEMENT description (#PCDATA) >
 <!ELEMENT debut (#PCDATA) >

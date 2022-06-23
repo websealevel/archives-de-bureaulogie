@@ -125,6 +125,11 @@ function declare_clip(string $source_name, string $timecode_start, string $timec
 
     $extrait->setAttribute('nb_post', 0);
 
+    if (current_user_can('add_moderator'))
+        $extrait->setAttribute('statut', 'publie');
+    else
+        $extrait->setAttribute('statut', 'en_attente_de_moderation');
+
     $extrait->appendChild(
         $dom->createElementNS(XMLNS_SOURCE_FILE, 'title', $title)
     );
