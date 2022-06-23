@@ -27,7 +27,7 @@ require_once __DIR__ . '/../../utils.php';
             <input type="password" id="password" name="password" value="password">
             <div class="error-message"><?php esc_html_form_error_msg_e('password', 'form_errors') ?></div>
         </div>
-        <input type="submit" value="se connecter">
+        <input type="submit" value="se connecter" class="btn-edition">
     </form>
 </div>
 

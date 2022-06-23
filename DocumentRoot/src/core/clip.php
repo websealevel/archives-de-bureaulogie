@@ -73,12 +73,13 @@ function generate_clips(string $file_source = SOURCE_FILE): array
 /**
  * Produit un extrait de la vidéo source et retourne le path
  * @param DOMElement $clip L'élément extrait qui définit l'extrait à préparer
- * @param string $file_source Le fichier source à cliper
+ * @param string $file_source Le fichier vidéo source à cliper
  * @throws Exception FFMPEG
  * @return string Le path de l'extrait crée
  */
-function clip_source(DOMElement $clip, string $file_source = SOURCE_FILE): string
+function clip_source(DOMElement $clip, string $file_source): string
 {
+
     $path_source = PATH_SOURCES . '/' . $file_source;
 
     $ffmpeg = FFMpeg\FFMpeg::create(array(
@@ -101,8 +102,10 @@ function clip_source(DOMElement $clip, string $file_source = SOURCE_FILE): strin
 
     $format = new FFMpeg\Format\Video\X264();
 
-
     //Normaliser le son ici.
+
+    write_log('here');
+    exit;
 
     $video_clip->filters()->resample(ENCODING_OPTION_AUDIO_SAMPLING_RATE);
 

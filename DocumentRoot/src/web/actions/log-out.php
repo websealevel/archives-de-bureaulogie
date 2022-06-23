@@ -14,6 +14,7 @@ require_once __DIR__ . '/../log.php';
 
 
 /**
+ * Remarque : le redirect ne marche pas quand une erreur tombe dans handler général.
  * Déconnecte un utilisateur (en session)
  * @return void
  * @global $_SESSION
