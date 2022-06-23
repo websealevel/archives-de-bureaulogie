@@ -11,6 +11,7 @@ require_once __DIR__ . '/../models/Clip.php';
 require_once __DIR__ . '/../models/ClipMetaData.php';
 
 /**
+ * Remarque : fonction qui meriterait typiquement d'etre couverte par un test unitaire
  * Retourne le timecode valide en secondes (milisecondes incluses en décimal)
  * @param string $timecode
  * @return float Temps en secondes

@@ -161,6 +161,7 @@ function are_timecodes_valid_core(string $start, string $end, string $source): b
 function is_start_timecode_smaller_than_end_timecode(string $start, string $end): bool
 {
     //Ne fonctionne pas sur les milisecondes. Cela veut dire qu'un extrait doit faire au moins une seconde (ça me parait acceptable).
+
     $start_in_seconds = timecode_to_seconds($start);
     $end_in_seconds = timecode_to_seconds($end);
 

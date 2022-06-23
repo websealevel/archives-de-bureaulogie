@@ -150,6 +150,8 @@ jQuery(function ($) {
 
         $.post('/api/v1/clip-source', data).done(function (response) {
 
+            console.log(response)
+
             //Si le formulaire est rejeté on récupere les erreurs et on les affiche. A faire.
             //Une erreur
             if (typeof response !== 'string' && '' !== response && 'errors' in response) {
@@ -166,6 +168,10 @@ jQuery(function ($) {
             } else {
                 //Clean error messages.
                 $("div.errors").html('')
+
+                //La réponse: un markup html contenant les infos sur le nouveau clip
+                //A ajouter à la liste des clips sur la source
+                console.log(response)
 
             }
 

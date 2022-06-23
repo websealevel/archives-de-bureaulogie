@@ -106,14 +106,29 @@ function api_clip_source()
         ));
     }
 
-    write_log('Génération du clip...');
-    exit;
+    // write_log('Génération du clip...');
 
     //FFmpeg: faire un clip avec normalisation du son
 
 
     //Renvoyer un markup html contenant le nouveau clip à ajouter à la liste des extraits présents sur la source.
 
+
+    $label = 'foobar';
+    $src = 'foobar';
+
+    $html = html_details(
+        $label,
+        html_video_markup($src, 500) . html_download_link($src)
+    );
+
+    header('Content-Type: application/json; charset=utf-8');
+    $response = json_encode(array(
+        'statut' => 200,
+        'extrait' => $html
+    ));
+    echo $response;
+    exit;
 }
 
 /**
