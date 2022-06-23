@@ -73,9 +73,12 @@ $token = register_api_token($account, 'submit_clip');
 
     <form action="clip-source" id="form-clip-source" name="form-clip-source">
 
+        <small>Les champs marqués d'un asterisque(*) sont obligatoires</small>
 
         <fieldset id="fieldset-edition">
+
             <legend>Édition</legend>
+
 
             <div id="edition-actions">
                 <input name=" btn_clip_start" id="btn_clip_start" type="button" class="btn-edition" title="Définir la position courante du curseur de lecture comme timecode de départ de l'extrait" value="Démarrer l'extrait ici">
@@ -91,20 +94,20 @@ $token = register_api_token($account, 'submit_clip');
             <div id="edition-data">
 
                 <div class="label-input">
-                    <label for="timecode_start">Début </label>
+                    <label for="timecode_start">Début*</label>
                     <input type="text" name="timecode_start" id="timecode_start" pattern="[0-9]{2}:[0-9]{2}:[0-9]{2}.[0-9]{3}" value="00:00:00.000" title="Veuillez renseigner un timecode au format hh:mm:ss.lll. 
 Sinon, utiliser le bouton 'Démarrer l'extrait ici' prévu à cet effet">
                 </div>
 
                 <div class="label-input">
-                    <label for="timecode_end">Fin </label>
+                    <label for="timecode_end">Fin*</label>
                     <input type="text" name="timecode_end" id="timecode_end" value="00:00:00.000" pattern="[0-9]{2}:[0-9]{2}:[0-9]{2}.[0-9]{3}" title="Veuillez renseigner un timecode au format hh:mm:ss.lll
 Sinon, utiliser le bouton 'Finir l'extrait ici' prévu à cet effet">
                 </div>
 
                 <div class="label-input">
-                    <label for="title">Titre </label>
-                    <textarea name="title" id="title" rows="8" cols="50" placeholder="Texte qui apparaîtra dans le tweet" maxlength="280" autocapitalize="sentences" spellcheck="true">À définir</textarea>
+                    <label for="title">Titre</label>
+                    <textarea name="title" id="title" rows="8" cols="50" placeholder="Texte qui apparaîtra dans le tweet" maxlength="280" autocapitalize="sentences" spellcheck="true"></textarea>
                 </div>
 
                 <div class="label-input">

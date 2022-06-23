@@ -36,6 +36,12 @@ textarea {
 	padding: 0 1vw;
 }
 
+#sources{
+	font-size: 24px;
+	padding: 5px;
+
+}
+
 .label-input {
 	display: flex;
 	align-items: flex-start;

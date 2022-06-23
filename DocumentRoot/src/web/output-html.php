@@ -41,7 +41,7 @@ function esc_sources_to_html_select_e(string $name_attr = 'sources', array $show
 {
     $options = map_declared_sources_to_html_item('option', $show_data);
 
-    $label = 'Veuillez choisir la vidéo dont vous souhaitez faire un extrait';
+    $label = 'Veuillez choisir la vidéo dont vous souhaitez faire un extrait ';
 
     echo sprintf('<label for="%s">%s</label>', $name_attr, $label);
 

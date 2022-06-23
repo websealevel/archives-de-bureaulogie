@@ -119,21 +119,44 @@ function declare_clip(string $source_name, string $timecode_start, string $timec
     $file = build_clip_name($source_name, $timecode_start, $timecode_end);
 
     $dom = load_xml($file_source);
-    $element = $dom->createElementNS(XMLNS_SOURCE_FILE, 'extrait');
 
+    //Création de l'extrait et de tous ses éléments enfants.
+    $extrait = $dom->createElementNS(XMLNS_SOURCE_FILE, 'extrait');
+
+    $extrait->setAttribute('nb_post', 0);
+
+    $extrait->appendChild(
+        $dom->createElementNS(XMLNS_SOURCE_FILE, 'title', $title)
+    );
+    $extrait->appendChild(
+        $dom->createElementNS(XMLNS_SOURCE_FILE, 'description', $description)
+    );
+    $extrait->appendChild(
+        $dom->createElementNS(XMLNS_SOURCE_FILE, 'debut', $timecode_start)
+    );
+    $extrait->appendChild(
+        $dom->createElementNS(XMLNS_SOURCE_FILE, 'fin', $timecode_end)
+    );
+    $extrait->appendChild(
+        $dom->createElementNS(XMLNS_SOURCE_FILE, 'auteur', $author)
+    );
+    $extrait->appendChild(
+        $dom->createElementNS(XMLNS_SOURCE_FILE, 'cree_le', $created_on)
+    );
+
+    //Ajouter l'extrait à la source parente
     $sources = $dom->getElementsByTagNameNS(XMLNS_SOURCE_FILE, 'source');
+    $parent_source = find_element_by_attribute($sources, 'name', $source_name);
+    $result = $parent_source->appendChild($extrait);
 
-    $source = find_element_by_attribute($sources, 'name', $source_name);
+    //Valider le DTD
 
-    $result = $source->appendChild($element);
-
-    write_log($result);
-
+    //Enregistrer
     return $dom->save(SOURCE_FILE);
-    // return false;
 }
 
 /**
+ * Remarque : voir si on peut optimiser ces itérations avec des fonctions natives. La je veux juste que ça avance.
  * Retourne le premier element d'une liste de nodes dont l'attribut a une certaine valeur
  * @param DOMNodeList $nodes La liste de nodes dans laquelle chercher
  * @param string $attr Le nom de l'attribut sur lequel chercher
@@ -147,11 +170,11 @@ function find_element_by_attribute(DOMNodeList $nodes, string $attr, string $val
 
     $node = $nodes->item(0);
 
-    return $node;
-
     do {
-        if ($node->attributes === $node) {
-            return $node;
+        foreach ($node->attributes as $attr_name => $dom_attr) {
+            if ($attr === $attr_name && $value === $dom_attr->value) {
+                return $node;
+            }
         }
     } while ($node = $node->nextSibling);
 
