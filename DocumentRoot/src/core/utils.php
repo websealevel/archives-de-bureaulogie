@@ -98,9 +98,18 @@ function source_has_this_clip(DOMElement $node_source, string $timecode_start, s
     $childs =  $node_source->childNodes;
 
     foreach ($childs as $child) {
-        $start = $child->getAttribute('debut');
-        $end = $child->getAttribute('end');
-        if ($start === $timecode_start && $end === $timecode_end)
+
+        $start = '';
+        $end = '';
+
+        foreach ($child->childNodes as $node) {
+            if ('debut' === $node->nodeName)
+                $start = $node->nodeValue;
+            if ('fin' === $node->nodeName)
+                $end = $node->nodeValue;
+        }
+
+        if ($timecode_start === $start && $timecode_end === $end)
             return true;
     }
 

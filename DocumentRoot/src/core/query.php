@@ -141,7 +141,7 @@ function declare_clip(string $source_name, string $timecode_start, string $timec
         $dom->createElementNS(XMLNS_SOURCE_FILE, 'auteur', $author)
     );
     $extrait->appendChild(
-        $dom->createElementNS(XMLNS_SOURCE_FILE, 'cree_le2', $created_on)
+        $dom->createElementNS(XMLNS_SOURCE_FILE, 'cree_le', $created_on)
     );
 
     //Ajouter l'extrait à la source parente
