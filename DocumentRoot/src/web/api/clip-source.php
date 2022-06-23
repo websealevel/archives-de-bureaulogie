@@ -87,7 +87,7 @@ function api_clip_source()
 
     //Déclarer le clip dans le fichier source
     try {
-        $node_clip = declare_clip(
+        $result = declare_clip(
             $source_name,
             $timecode_start,
             $timecode_end,
@@ -96,6 +96,10 @@ function api_clip_source()
             current_user_pseudo(),
             'le ' . date('d-m-Y') . ' à ' . date('H:m:s')
         );
+
+        if (false === $result) {
+            throw new Exception("Une errer est survenue lors de l'enregistrement de l'extrait. Veuillez rééssayer.");
+        }
     } catch (Exception $e) {
         api_respond_with_error(array(
             new InputValidation('', '', $e->getMessage())
@@ -103,10 +107,10 @@ function api_clip_source()
     }
 
     //FFmpeg: faire un clip avec normalisation du son
-    write_log('creation du clip');
+    write_log('Génération du clip');
     exit;
 
-    //Mettre à jour côté front la liste des clips présents sur cette source
+    //Renvoyer un markup html contenant le nouveau clip à ajouter à la liste des extraits présents sur la source.
 
 }
 

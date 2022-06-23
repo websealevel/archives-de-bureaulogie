@@ -43,7 +43,7 @@ set_error_handler(function ($errno, $errstr, $errfile, $errline) {
 function fails_gracefully()
 {
     //Fails gracefully : 
-    $notice = new Notice("Oups, une erreur est survenue et vous avez été déconnecté. Veuillez nous en excusez.", NoticeStatus::ExceptionThrown);
+    $notice = new Notice('Oups, une erreur est survenue et vous avez été déconnecté, veuillez nous en excuser. Essayez de vous reconnecter. Si le problème persiste, <a href="issues">signalez le</a> pour nous aider à le corriger.', NoticeStatus::ExceptionThrown);
     log_out($notice);
     return;
 }

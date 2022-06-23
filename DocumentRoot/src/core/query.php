@@ -97,8 +97,6 @@ function query_source_by_unique_attr(string $attr_name, string $value, string $f
  */
 function query_clip(string $source, string $slug, string $timecode_start, string $timecode_end, string $return = 'node', string $file_source = SOURCE_FILE): DOMNode|Clip|false
 {
-    $xpath = load_xpath($file_source, XMLNS_SOURCE_FILE);
-
     return false;
 }
 
@@ -112,17 +110,50 @@ function query_clip(string $source, string $slug, string $timecode_start, string
  * @param string $description
  * @param string $author
  * @param string $created_on
- * @return DOMNode|false Le noeud ajouté en cas de succès, faux sinon
+ * @return int|false le nombre de bytes écrits en cas de succès, faux sinon
  */
-function declare_clip(string $source_name, string $timecode_start, string $timecode_end, string $title, string $description, string $author, string $created_on, string $file_source = SOURCE_FILE): DOMNode|false
+function declare_clip(string $source_name, string $timecode_start, string $timecode_end, string $title, string $description, string $author, string $created_on, string $file_source = SOURCE_FILE): int|false
 {
 
-    //Construire le nom du fichier avec les données
+    //Construire le nom du fichier avec les données + validation du format
     $file = build_clip_name($source_name, $timecode_start, $timecode_end);
 
-    //Vérifier qu'il correspond a la regex des noms de fichier d'extraits
+    $dom = load_xml($file_source);
+    $element = $dom->createElementNS(XMLNS_SOURCE_FILE, 'extrait');
 
-    //Ajouter au fichier source
+    $sources = $dom->getElementsByTagNameNS(XMLNS_SOURCE_FILE, 'source');
+
+    $source = find_element_by_attribute($sources, 'name', $source_name);
+
+    $result = $source->appendChild($element);
+
+    write_log($result);
+
+    return $dom->save(SOURCE_FILE);
+    // return false;
+}
+
+/**
+ * Retourne le premier element d'une liste de nodes dont l'attribut a une certaine valeur
+ * @param DOMNodeList $nodes La liste de nodes dans laquelle chercher
+ * @param string $attr Le nom de l'attribut sur lequel chercher
+ * @param string $value La valeur de l'attribut à chercher
+ * @return DOMNode|false
+ */
+function find_element_by_attribute(DOMNodeList $nodes, string $attr, string $value): DOMNode|false
+{
+    if (0 === count($nodes))
+        return false;
+
+    $node = $nodes->item(0);
+
+    return $node;
+
+    do {
+        if ($node->attributes === $node) {
+            return $node;
+        }
+    } while ($node = $node->nextSibling);
 
     return false;
 }
