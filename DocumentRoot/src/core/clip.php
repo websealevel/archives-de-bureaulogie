@@ -104,13 +104,31 @@ function clip_source(DOMElement $clip, string $file_source): string
 
     //Normaliser le son ici.
 
-    $video_clip->filters()->resample(ENCODING_OPTION_AUDIO_SAMPLING_RATE);
+    $video_clip
+        ->filters()
+        ->resample(ENCODING_OPTION_AUDIO_SAMPLING_RATE);
 
     $format
         ->setKiloBitrate(ENCODING_OPTION_VIDEO_KBPS)
         ->setAudioKiloBitrate(ENCODING_OPTION_AUDIO_KBPS);
 
     $video_clip->save($format, $path_to_save_clip);
+
+    //WIP
+
+    //Normalization à la main car [pas intégrée encore dans PHP-FFMPEG](https://github.com/PHP-FFMpeg/PHP-FFMpeg/issues/328)
+
+    //On le fait à la main en suivant ces instructions. [Option 1 : filter loudnorm](https://superuser.com/questions/323119/how-can-i-normalize-audio-using-ffmpeg)
+
+    $command = sprintf('%s -i %s -af "volumedetect" -vn -sn -dn -f null /dev/null', $_ENV['PATH_BIN_FFMPEG'], $path_to_save_clip);
+    write_log($command);
+    $output = null;
+    $retval = null;
+    exec($command, $output, $retval);
+    // exec('whoami', $output, $retval);
+    write_log("Returned with status $retval and output:\n");
+    write_log($output);
+    exit;
 
     return $path_to_save_clip;
 }

@@ -17,6 +17,12 @@ function autload_core(): void
 }
 
 /**
+ * Nombre max de caractères dans un tweet (2022)
+ */
+define('TWEET_NB_MAX_CHARACTERS', 280);
+
+
+/**
  * Taille maximale d'un clip vidéo (s) (définie par Twitter en 2022)
  */
 define('MAX_CLIP_DURATION_IN_SEC', 140);
@@ -159,8 +165,3 @@ function is_cli(): bool
 {
     return 'cli' === php_sapi_name();
 }
-
-/**
- * Nombre max de caractères dans un tweet (2022)
- */
-define('TWEET_NB_MAX_CHARACTERS', 280);
