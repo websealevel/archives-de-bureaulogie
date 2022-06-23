@@ -267,11 +267,10 @@ function is_download_request_valid(DownloadRequest $download_request)
  * Retourne vrai si le nom du fichier extrait respecte le format imposé, faux sinon
  * @param string $filename Le nom de fichier de l'extrait
  * @return bool
+ * @link FORMAT_FILE_VIDEO_CLIP
  */
 function clip_has_valid_filename_format(string $filename): bool
 {
-    write_log($filename);
     $pattern = '=^' . FORMAT_FILE_VIDEO_CLIP . '$=';
-    write_log(preg_match($pattern, $filename));
     return preg_match($pattern, $filename);
 }

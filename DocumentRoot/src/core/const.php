@@ -92,13 +92,7 @@ define('FORMAT_SLUG_VIDEO_CLIP', '[a-z0-9\-]+');
  */
 define(
     'FORMAT_FILE_VIDEO_CLIP',
-    sprintf(
-        "\[%s\][-]{2}from[-]{1}\[%s\][-]{1}to[-]{1}\[%s\]\.%s",
-        FORMAT_SOURCE_NAME_VIDEO_CLIP,
-        FORMAT_TIMECODE,
-        FORMAT_TIMECODE,
-        EXTENSION_CLIP
-    )
+    FORMAT_SOURCE_NAME_VIDEO_CLIP . '[-]{2}from[-]{1}' . FORMAT_TIMECODE . '[-]{1}to[-]{1}' . FORMAT_TIMECODE . '\.' . EXTENSION_CLIP
 );
 
 /**
