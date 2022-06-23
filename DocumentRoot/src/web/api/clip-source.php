@@ -106,14 +106,10 @@ function api_clip_source()
         ));
     }
 
-    // write_log('Génération du clip...');
-
     //FFmpeg: faire un clip avec normalisation du son
 
 
     //Renvoyer un markup html contenant le nouveau clip à ajouter à la liste des extraits présents sur la source.
-
-
     $label = 'foobar';
     $src = 'foobar';
 
