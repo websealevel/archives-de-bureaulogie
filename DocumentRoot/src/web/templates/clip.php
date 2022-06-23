@@ -54,7 +54,7 @@ $token = register_api_token($account, 'submit_clip');
 
 
 
-        <fieldset id="fieldset-video-clip">
+        <fieldset id="fieldset-video-clip" width="100%">
             <legend>
                 <h3>Prévisualisation</h3>
             </legend>
