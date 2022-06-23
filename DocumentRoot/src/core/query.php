@@ -105,7 +105,7 @@ function query_clip(string $source, string $slug, string $timecode_start, string
 
 /**
  * Ajoute un extrait au fichier la source s'il n'existe pas déjà. Retourne le noeud ajouté en cas de succès, faux en cas d'échec
- * @param string $source La source du clip (son parent)
+ * @param string $source_name Le nom (attr) de la source dont l'extrait est issu
  * @param string $timecode_start
  * @param string $timecode_end
  * @param string $title
@@ -114,10 +114,11 @@ function query_clip(string $source, string $slug, string $timecode_start, string
  * @param string $created_on
  * @return DOMNode|false Le noeud ajouté en cas de succès, faux sinon
  */
-function declare_clip(string $source, string $timecode_start, string $timecode_end, string $title, string $description, string $author, string $created_on, string $file_source = SOURCE_FILE): DOMNode|false
+function declare_clip(string $source_name, string $timecode_start, string $timecode_end, string $title, string $description, string $author, string $created_on, string $file_source = SOURCE_FILE): DOMNode|false
 {
 
     //Construire le nom du fichier avec les données
+    $file = build_clip_name($source_name, $timecode_start, $timecode_end);
 
     //Vérifier qu'il correspon a la regex des noms de fichier d'extraits
 

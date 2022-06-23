@@ -86,21 +86,25 @@ function api_clip_source()
     //Pour les clips : on les déclare puis on les génere (c'est comme ça qu'est pensé le core. Il parse le fichier source et génère les clips qui n'existent pas encore.)
 
     //Déclarer le clip dans le fichier source
-    $node_clip = declare_clip(
-        $source_name,
-        $timecode_start,
-        $timecode_end,
-        $inputs['title']->value,
-        $inputs['description']->value,
-        current_user_pseudo(),
-        'le ' . date('d-m-Y') . ' à ' . date('H:m:s')
-    );
-
+    try {
+        $node_clip = declare_clip(
+            $source_name,
+            $timecode_start,
+            $timecode_end,
+            $inputs['title']->value,
+            $inputs['description']->value,
+            current_user_pseudo(),
+            'le ' . date('d-m-Y') . ' à ' . date('H:m:s')
+        );
+    } catch (Exception $e) {
+        api_respond_with_error(array(
+            new InputValidation('', '', $e->getMessage())
+        ));
+    }
 
     //FFmpeg: faire un clip avec normalisation du son
     write_log('creation du clip');
     exit;
-
 
     //Mettre à jour côté front la liste des clips présents sur cette source
 

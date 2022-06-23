@@ -18,6 +18,7 @@ function autload_core(): void
 
 /**
  * Le fichier source (contient les déclarations des extraits)
+ * @const SOURCE_FILE Le fichier source
  */
 define('SOURCE_FILE', __DIR__ . '/extraits.xml');
 
@@ -86,6 +87,7 @@ define('FORMAT_SLUG_VIDEO_CLIP', '[a-z0-9\-]+');
 
 /**
  * Format valide d'un nom de fichier clip (extrait vidéo)
+ * @const FORMAT_FILE_VIDEO_CLIP
  */
 define(
     'FORMAT_FILE_VIDEO_CLIP',
@@ -100,6 +102,7 @@ define(
 
 /**
  * Format valide d'un nom de fichier source (vidéo)
+ * @const FORMAT_FILE_VIDEO_SOURCE
  */
 define(
     'FORMAT_FILE_VIDEO_SOURCE',
