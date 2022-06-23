@@ -150,11 +150,12 @@ function build_clip_name(string $source_name, string $timecode_start, string $ti
 
     $file_name = sprintf("%s-from%s-to%s.%s", trim(strtolower($source_name)), $timecode_start, $timecode_end, EXTENSION_CLIP);
 
+
     write_log($file_name);
 
     //Check la validité du format du nom de fichier
     if (!clip_has_valid_filename_format($file_name)) {
-        throw new Exception("Les méta données de l'extrait ne permettent pas de construire un nom valide pour le fichier extrait.");
+        throw new Exception("Les métadonnées ne permettent pas d'enregistrer l'extrait dans un format valide.");
     }
 
     return $file_name;
