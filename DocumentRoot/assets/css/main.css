@@ -36,6 +36,20 @@ textarea {
 	padding: 0 1vw;
 }
 
+.btn-controls {
+	font-size: 29px;
+	padding: 0 1vw;
+}
+
+.rewind{
+	background-color: red;
+	color:white;
+}
+.forward{
+	background-color: greenyellow;
+	color: white;
+}
+
 #sources{
 	font-size: 24px;
 	padding: 5px;
@@ -63,7 +77,7 @@ textarea {
 }
 
 
-#current-time {
+#current-time, #clip-duration {
 	font-size: 40px;
 	font-weight: bold;
 	padding: 20px;
