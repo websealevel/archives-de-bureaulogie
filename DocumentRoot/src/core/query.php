@@ -110,9 +110,13 @@ function query_clip(string $source, string $slug, string $timecode_start, string
  * @param string $description
  * @param string $author
  * @param string $created_on
- * @return int|false le nombre de bytes écrits en cas de succès, faux sinon
+ * @return DOMNode L'élement extrait ajouté
+ * @throws Exception Si l'élément sources est introuvable 
+ * @throws Exception Si l'insertion du noeud extrait dans le noeud source échoue
+ * @throws Exception Si l'insertion produit un document non valide aux yeux du DTD
+ * @throws Exception Si l'enregistrement du fichier source mis à jour échoue
  */
-function declare_clip(string $source_name, string $timecode_start, string $timecode_end, string $title, string $description, string $author, string $created_on, string $file_source = SOURCE_FILE): int|false
+function declare_clip(string $source_name, string $timecode_start, string $timecode_end, string $title, string $description, string $author, string $created_on, string $file_source = SOURCE_FILE): DOMNode
 {
 
     //Validation du format
@@ -157,7 +161,10 @@ function declare_clip(string $source_name, string $timecode_start, string $timec
         throw new Exception("L'extrait n'a pas pu être réalisé car la vidéo source n'est plus enregistrée dans nos archives.");
     }
 
-    $parent_source->appendChild($extrait);
+    $node_added = $parent_source->appendChild($extrait);
+
+    if (!($node_added instanceof DOMNode))
+        throw new Exception("Une erreur est survenue lors de l'enregistrement de l'extrait dans nos archives. Veuillez réessayez s'il vous plaît.");
 
     //Valider le DTD
     try {
@@ -174,7 +181,12 @@ function declare_clip(string $source_name, string $timecode_start, string $timec
     }
 
     //Enregistrer
-    return $dom->save(SOURCE_FILE);
+    $result = $dom->save(SOURCE_FILE);
+
+    if (false === $result)
+        throw new Exception("Une erreur est survenue lors de l'enregistrement de l'extrait dans nos archives. Veuillez réessayez s'il vous plaît.");
+
+    return $node_added;
 }
 
 /**

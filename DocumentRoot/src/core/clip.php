@@ -10,6 +10,7 @@ require_once __DIR__ . '/const.php';
 require_once __DIR__ . '/query.php';
 require_once __DIR__ . '/journaling.php';
 
+
 /**
  * Génére les clips déclarés dans le fichier source 
  * @param string file_source Optional. Le fichier source déclarant les extraits (au format XML) 
