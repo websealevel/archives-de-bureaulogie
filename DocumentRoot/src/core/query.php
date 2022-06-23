@@ -115,8 +115,8 @@ function query_clip(string $source, string $slug, string $timecode_start, string
 function declare_clip(string $source_name, string $timecode_start, string $timecode_end, string $title, string $description, string $author, string $created_on, string $file_source = SOURCE_FILE): int|false
 {
 
-    //Construire le nom du fichier avec les données + validation du format
-    $file = build_clip_name($source_name, $timecode_start, $timecode_end);
+    //Validation du format
+    build_clip_name($source_name, $timecode_start, $timecode_end);
 
     $dom = load_xml($file_source);
 
@@ -141,7 +141,7 @@ function declare_clip(string $source_name, string $timecode_start, string $timec
         $dom->createElementNS(XMLNS_SOURCE_FILE, 'auteur', $author)
     );
     $extrait->appendChild(
-        $dom->createElementNS(XMLNS_SOURCE_FILE, 'cree_le', $created_on)
+        $dom->createElementNS(XMLNS_SOURCE_FILE, 'cree_le2', $created_on)
     );
 
     //Ajouter l'extrait à la source parente
@@ -155,7 +155,16 @@ function declare_clip(string $source_name, string $timecode_start, string $timec
     $parent_source->appendChild($extrait);
 
     //Valider le DTD
-    if (!$dom->validate()) {
+    try {
+
+        // validate() lance une exception.
+        $is_valid = $dom->validate();
+
+        if (false === $is_valid) {
+            throw new Exception("L'extrait n'a pas pu être réalisé car ses métadonnées ne nous autorisent pas à l'enregistrer dans nos archives.");
+        }
+    } catch (Exception $e) {
+        write_log($e);
         throw new Exception("L'extrait n'a pas pu être réalisé car ses métadonnées ne nous autorisent pas à l'enregistrer dans nos archives.");
     }
 

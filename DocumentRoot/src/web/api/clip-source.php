@@ -107,7 +107,7 @@ function api_clip_source()
     }
 
     //FFmpeg: faire un clip avec normalisation du son
-    write_log('Génération du clip');
+    write_log('Génération du clip...');
     exit;
 
     //Renvoyer un markup html contenant le nouveau clip à ajouter à la liste des extraits présents sur la source.
