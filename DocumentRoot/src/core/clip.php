@@ -104,9 +104,6 @@ function clip_source(DOMElement $clip, string $file_source): string
 
     //Normaliser le son ici.
 
-    write_log('here');
-    exit;
-
     $video_clip->filters()->resample(ENCODING_OPTION_AUDIO_SAMPLING_RATE);
 
     $format

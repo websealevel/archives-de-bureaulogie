@@ -32,7 +32,8 @@ Il sert également de prétexte pour construire un outil en *vanilla php* pour s
         - [Expected Behavior](#expected-behavior)
         - [Steps to Reproduce](#steps-to-reproduce)
         - [Solution](#solution)
-      - [Youtube-dl renvoie l'erreur 'ERROR: unable to download video data: HTTP Error 403: Forbidden while using youtube_dl'](#youtube-dl-renvoie-lerreur-error-unable-to-download-video-data-http-error-403-forbidden-while-using-youtube_dl)
+      - [Youtube-dl renvoie l'erreur `'ERROR: unable to download video data: HTTP Error 403: Forbidden while using youtube_dl'`](#youtube-dl-renvoie-lerreur-error-unable-to-download-video-data-http-error-403-forbidden-while-using-youtube_dl)
+      - [FFMPEG renvoie une erreur `'Encoding Failed'`](#ffmpeg-renvoie-une-erreur-encoding-failed)
   - [Ressources](#ressources)
 
 <!-- ## Comment contribuer au dépôt ?
@@ -71,6 +72,7 @@ Installer `ffmpeg` et `ffprobe` dans le dossier `DocumentRoot/ffmpeg`
 Télécharger les builds static `ici` (vous pouvez aussi [recompiler le code source](https://ffmpeg.org/download.html#repositories) mais il faudra bien configurer le build pour inclure les codecs comme x264, voir `./configure --help` pour plus d'info).
 
 Copier les executables `ffmpeg` et `ffprobe` dans le dossier `DocumentRoot/ffmpeg`.
+
 
 #### youtube-dl
 
@@ -245,13 +247,18 @@ Then when the method `start()` in `Process.php` (ligne 293) iterates over the lo
 
 Ne pas enregistrer de valeur `array` dans `$_ENV` pour corriger le pb (pratique non recommandée).
 
-#### Youtube-dl renvoie l'erreur 'ERROR: unable to download video data: HTTP Error 403: Forbidden while using youtube_dl'
+#### Youtube-dl renvoie l'erreur `'ERROR: unable to download video data: HTTP Error 403: Forbidden while using youtube_dl'`
 
 Il faut supprimer le cache
 
 ~~~
 /usr/bin/python3 youtube-dl --rm-cache-dir
 ~~~
+
+#### FFMPEG renvoie une erreur `'Encoding Failed'`
+
+Cette erreur est envoyée au moment de l'écriture du fichier dans le dossier. Il faut s'assurer de donner les droits d'écriture à l'utiliasteur nginx sur le dossier.
+
 
 ## Ressources
 
