@@ -106,9 +106,11 @@ function api_clip_source()
         ));
     }
 
-    //FFmpeg: faire un clip avec normalisation du son
-    $file = clip_source($extrait);
+    /**
+     * Si ici ça échoue il est possible que des extraits déclarés ne soient pas enregistrés sous forme de fichier. Dans ce cas, donner la possibilité aux admins de mettre à jour les archives (parser le fichier source pour générer extraits manquants, supprimer extraits non enregistrés etc.) peut être intéressant.
+     */
 
+    $file = clip_source($extrait);
     write_log($file);
     exit;
 

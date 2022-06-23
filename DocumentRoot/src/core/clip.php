@@ -69,3 +69,48 @@ function generate_clips(string $file_source = SOURCE_FILE): array
 
     return $results;
 }
+
+/**
+ * Produit un extrait de la vidéo source et retourne le path
+ * @param DOMElement $clip L'élément extrait qui définit l'extrait à préparer
+ * @param string $file_source Le fichier source à cliper
+ * @throws Exception FFMPEG
+ * @return string Le path de l'extrait crée
+ */
+function clip_source(DOMElement $clip, string $file_source = SOURCE_FILE): string
+{
+    $path_source = PATH_SOURCES . '/' . $file_source;
+
+    $ffmpeg = FFMpeg\FFMpeg::create(array(
+        'ffmpeg.binaries'  => $_ENV['PATH_BIN_FFMPEG'],
+        'ffprobe.binaries' => $_ENV['PATH_BIN_FFPROBE'],
+        'timeout'          => $_ENV['FFMPEG_TIMEOUT'],
+        'ffmpeg.threads'   => $_ENV['FFMPEG_THREADS'],
+    ));
+
+    $video = $ffmpeg->open($path_source);
+
+    $from_in_seconds = timecode_to_seconds(child_element_by_name($clip, "debut")->nodeValue);
+    $to_in_seconds = timecode_to_seconds(child_element_by_name($clip, "fin")->nodeValue);
+
+    $duration = $to_in_seconds - $from_in_seconds;
+
+    $video_clip = $video->clip(FFMpeg\Coordinate\TimeCode::fromSeconds($from_in_seconds), FFMpeg\Coordinate\TimeCode::fromSeconds($duration));
+
+    $path_to_save_clip = clip_path($clip);
+
+    $format = new FFMpeg\Format\Video\X264();
+
+
+    //Normaliser le son ici.
+
+    $video_clip->filters()->resample(ENCODING_OPTION_AUDIO_SAMPLING_RATE);
+
+    $format
+        ->setKiloBitrate(ENCODING_OPTION_VIDEO_KBPS)
+        ->setAudioKiloBitrate(ENCODING_OPTION_AUDIO_KBPS);
+
+    $video_clip->save($format, $path_to_save_clip);
+
+    return $path_to_save_clip;
+}
