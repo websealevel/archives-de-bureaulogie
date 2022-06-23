@@ -73,12 +73,12 @@ define('EXTENSION_AUDIO', 'm4a');
 /**
  * Format valide d'un timecode 
  */
-define('FORMAT_TIMECODE', "[0-9]{2}:[0-9]{2}:[0-9]{2}.[0-9]{3}");
+define('FORMAT_TIMECODE', "[0-9]{2}:[0-9]{2}:[0-9]{2}\.[0-9]{3}");
 
 /**
  * Format valide du nom de la source dans le nom du fichier extrait
  */
-define('FORMAT_SOURCE_NAME_VIDEO_CLIP', '[a-z0-9\-]+');
+define('FORMAT_SOURCE_NAME_VIDEO_CLIP', '[a-z0-9\-\.]+');
 
 /**
  * Format valide du nom du slug dans le nom du fichier extrait
@@ -93,7 +93,7 @@ define('FORMAT_SLUG_VIDEO_CLIP', '[a-z0-9\-]+');
 define(
     'FORMAT_FILE_VIDEO_CLIP',
     sprintf(
-        "\[%s\][-]{2}from[-]{1}\[%s\][-]{1}to[-]{1}\[%s\].%s",
+        "\[%s\][-]{2}from[-]{1}\[%s\][-]{1}to[-]{1}\[%s\]\.%s",
         FORMAT_SOURCE_NAME_VIDEO_CLIP,
         FORMAT_TIMECODE,
         FORMAT_TIMECODE,
