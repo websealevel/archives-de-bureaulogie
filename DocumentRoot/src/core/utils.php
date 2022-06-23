@@ -109,11 +109,15 @@ function source_has_this_clip(DOMElement $node_source, string $timecode_start, s
 
 
 /**
+ * Remarque : Est ce que le preg_macth fonctionne ?
  * Retourne le nom complet d'une source (son attribut name) à partir de sa base et de son slug/identifiant
  * @param string $series Le nom de la série à laquelle appartient la vidéo source
  * @param string $slug L'identifiant ajouté au nom de la vidéo
  * @return string Le nom complet au format FORMAT_FILE_VIDEO_SOURCE
+ * @throws Exception - Si le nom du fichier source ne respecte pas le format imposé (regex)
  * @see FORMAT_FILE_VIDEO_SOURCE
+ * @global EXTENSION_SOURCE
+ * @global FORMAT_FILE_VIDEO_SOURCE
  */
 function build_source_name(string $series, string $slug): string
 {
@@ -125,6 +129,35 @@ function build_source_name(string $series, string $slug): string
     //Check format
     if (!preg_match('/' . FORMAT_FILE_VIDEO_SOURCE . '/', $file_name))
         throw new Exception("Une contrainte sur le nom de la source est mauvaise car le nom reconstruit de la source n'est pas dans un format valide.");
+
+    return $file_name;
+}
+
+/**
+ * Retourne le nom du fichier d'un extrait à partir de ses métadonnées
+ * @param DOMElement $node_source
+ * @param string $timecode_start Le timecode de départ du clip
+ * @param string $timecode_end Le timecode de fin du clip
+ * @return string
+ * @throws Exception - Si le nom du fichier construit à partir des métadonnées ne respecte pas le format (regex) imposé
+ * @global EXENTION_CLIP
+ * @global FORMAT_FILE_VIDEO_CLIP
+ */
+function build_clip_name(string $source_name, string $timecode_start, string $timecode_end)
+{
+    if (empty($source_name) || empty($timecode_start) || empty($timecode_end)) {
+        throw new Exception("Impossible construire le nom du fichier de l'extrait");
+    }
+
+    $file_name = sprintf("%s-from%s-to%s.%s", trim(strtolower($source_name)), $timecode_start, $timecode_end, EXTENSION_CLIP);
+
+
+    write_log($file_name);
+
+    //Check la validité du format du nom de fichier
+    if (!preg_match('', $file_name)) {
+        throw new Exception("Les méta données de l'extrait ne permettent pas de construire un nom valide pour le fichier extrait.");
+    }
 
     return $file_name;
 }
