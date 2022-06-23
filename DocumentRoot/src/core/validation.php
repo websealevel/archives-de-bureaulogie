@@ -145,7 +145,7 @@ function are_timecodes_valid_core(string $start, string $end, string $source): b
     }
 
     if (!are_timecodes_within_bounds($start, $end, $source)) {
-        throw new Exception("L'extrait doit faire au moins 1 seconde et être compatible avec la durée de la vidéo source. Veuillez corriger les timecodes s'il vous plaît.");
+        throw new Exception("L'extrait doit faire au moins 1 seconde et au plus 2min20s. Les timecodes doivent être compatible avec la durée de la vidéo source. Veuillez corriger les timecodes s'il vous plaît.");
     }
 
     return true;
@@ -171,7 +171,7 @@ function is_start_timecode_smaller_than_end_timecode(string $start, string $end)
 
 
 /**
- * Retourne vrai si les timecodes sont dans les limites de la durée de la vidéo (ie debut plus grand que 0 et fin plus petit que durée de la vidéo ), faux sinon
+ * Retourne vrai si les timecodes sont dans les limites de la durée de la vidéo (ie debut plus grand que 0 et fin plus petit que durée de la vidéo ), et inférieur à taille max faux sinon
  * @param string $start timecode du début
  * @param string $end timecode de fin
  * @param string $file_source Le path de la vidéo source
@@ -201,7 +201,7 @@ function are_timecodes_within_bounds(string $start, string $end, string $file_so
     return
         $start_in_seconds >= 0 &&
         $end_in_seconds < $source_duration_in_seconds &&
-        $clip_duration < $source_duration_in_seconds;
+        $clip_duration < $source_duration_in_seconds && $clip_duration < MAX_CLIP_DURATION_IN_SEC;
 }
 
 /**

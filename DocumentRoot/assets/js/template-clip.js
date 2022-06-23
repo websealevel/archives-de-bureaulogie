@@ -121,6 +121,10 @@ jQuery(function ($) {
     * Prévisualisation de la traîne
     */
     $("#btn_preview_tail").click(function () {
+
+        //Decocher la loop si cochée (sinon bug)
+        $('#checkbox_loop_preview').prop('checked',false)
+
         const src = $("#video-source").prop('src')
 
         const timecode_end = $("#timecode_end").val()

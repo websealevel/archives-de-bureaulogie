@@ -17,6 +17,11 @@ function autload_core(): void
 }
 
 /**
+ * Taille maximale d'un clip vidéo (s) (définie par Twitter en 2022)
+ */
+define('MAX_CLIP_DURATION_IN_SEC', 140);
+
+/**
  * Le fichier source (contient les déclarations des extraits)
  * @const SOURCE_FILE Le fichier source
  */

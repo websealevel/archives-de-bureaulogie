@@ -65,7 +65,7 @@ function api_clip_source()
         $result = are_timecodes_valid_core($timecode_start, $timecode_end, $source_name);
         if (false === $result) {
             api_respond_with_error(array(
-                new InputValidation('', '', "Les timecodes ne sont pas valides. Veuillez les corriger s'il vous plaît.")
+                new InputValidation('', '', "Les timecodes ne sont pas valides. Veuillez les corriger s'il vous plaît. La durée total de l'extrait doit être également inférieur à 2min et 20s")
             ));
         }
     } catch (Exception $e) {
