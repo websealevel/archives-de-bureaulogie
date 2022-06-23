@@ -196,7 +196,7 @@ function seconds_to_hh_mm_ss_lll(timecode_seconds) {
     const miliseconds = Math.floor((timecode_seconds - Math.floor(timecode_seconds)) * 1000)
     const miliseconds_formatted = miliseconds < 100 ? '0' + miliseconds : miliseconds
 
-    const seconds = parseInt(timecode_seconds, 10)
+    const seconds = Math.floor(timecode_seconds % 60)
     const seconds_formatted = seconds < 10 ? '0' + seconds : seconds
 
     const hours = Math.floor(timecode_seconds / 3600)
