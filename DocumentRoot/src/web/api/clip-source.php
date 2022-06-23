@@ -111,8 +111,6 @@ function api_clip_source()
      */
 
     $file = clip_source($extrait, $source_name);
-    write_log($file);
-    exit;
 
     //Renvoyer un markup html contenant le nouveau clip à ajouter à la liste des extraits présents sur la source.
     $label = 'foobar';

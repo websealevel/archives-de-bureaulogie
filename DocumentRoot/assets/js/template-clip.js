@@ -79,6 +79,9 @@ jQuery(function ($) {
         const timecode_start_in_sec = hh_mm_ss_lll_to_seconds(timecode_start)
         const timecode_end_in_sec = hh_mm_ss_lll_to_seconds(timecode_end)
 
+
+        console.log(timecode_start_in_sec,timecode_end_in_sec)
+
         if (timecode_end_in_sec <= timecode_start_in_sec) {
             $("div.errors").html("<p>Impossible de prévisualiser l'extrait : le timecode de fin doit être plus grand que le timecode de début</p>")
 
@@ -220,10 +223,12 @@ function seconds_to_hh_mm_ss_lll(timecode_seconds) {
  */
 function hh_mm_ss_lll_to_seconds(timecode_hh_mm_ss_lll) {
 
-    const h = timecode_hh_mm_ss_lll.substring(0, 1)
-    const m = timecode_hh_mm_ss_lll.substring(3, 4)
+    const h = timecode_hh_mm_ss_lll.substring(0, 2)
+    const m = timecode_hh_mm_ss_lll.substring(3, 5)
     const s = timecode_hh_mm_ss_lll.substring(6, 8)
-    const l = timecode_hh_mm_ss_lll.substring(9, 11)
+    const l = timecode_hh_mm_ss_lll.substring(9, 12)
+
+    console.log(h,m,s,l)
 
     const seconds = parseInt(h) * 3600 + parseInt(m) * 60 + parseInt(s) + parseInt(l) / 1000
 
