@@ -148,10 +148,7 @@ function build_clip_name(string $source_name, string $timecode_start, string $ti
         throw new Exception("Impossible construire le nom du fichier de l'extrait");
     }
 
-    $file_name = sprintf("%s-from%s-to%s.%s", trim(strtolower($source_name)), $timecode_start, $timecode_end, EXTENSION_CLIP);
-
-
-    write_log($file_name);
+    $file_name = sprintf("%s--from-%s-to-%s.%s", trim(strtolower($source_name)), $timecode_start, $timecode_end, EXTENSION_CLIP);
 
     //Check la validité du format du nom de fichier
     if (!clip_has_valid_filename_format($file_name)) {

@@ -120,7 +120,7 @@ function declare_clip(string $source_name, string $timecode_start, string $timec
     //Construire le nom du fichier avec les données
     $file = build_clip_name($source_name, $timecode_start, $timecode_end);
 
-    //Vérifier qu'il correspon a la regex des noms de fichier d'extraits
+    //Vérifier qu'il correspond a la regex des noms de fichier d'extraits
 
     //Ajouter au fichier source
 

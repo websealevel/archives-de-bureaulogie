@@ -264,12 +264,14 @@ function is_download_request_valid(DownloadRequest $download_request)
 }
 
 /**
- * Remarque : Utilisé que en CLI pour l'instant.
- * Retourne vrai si le nom du fichier extrait (et non son path complet) respecte le format imposé pour pouvoir être analysé et découpé (pour retrouver la source, slug et les timecodes), faux sinon
- * @param string $filename Le nom de fichier du clip
+ * Retourne vrai si le nom du fichier extrait respecte le format imposé, faux sinon
+ * @param string $filename Le nom de fichier de l'extrait
  * @return bool
  */
 function clip_has_valid_filename_format(string $filename): bool
 {
-    return preg_match('/' . FORMAT_FILE_VIDEO_CLIP . '/', $filename);
+    write_log($filename);
+    $pattern = '=^' . FORMAT_FILE_VIDEO_CLIP . '$=';
+    write_log(preg_match($pattern, $filename));
+    return preg_match($pattern, $filename);
 }
