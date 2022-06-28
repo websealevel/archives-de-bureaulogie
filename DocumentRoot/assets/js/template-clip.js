@@ -70,28 +70,28 @@ jQuery(function ($) {
      * Rewind/Forward buttons
      */
 
-    $("#btn_rewind_5_s").click(function(){
+    $("#btn_rewind_5_s").click(function () {
         const delay = -5
         const currentTime = $("#video-source").prop('currentTime')
         const time = (currentTime + delay) < 0 ? 0 : currentTime + delay
         $("#video-source").prop('currentTime', time)
     })
 
-    $("#btn_rewind_1_s").click(function(){
+    $("#btn_rewind_1_s").click(function () {
         const delay = -1
         const currentTime = $("#video-source").prop('currentTime')
         const time = (currentTime + delay) < 0 ? 0 : currentTime + delay
         $("#video-source").prop('currentTime', time)
     })
 
-    $("#btn_forward_1_s").click(function(){
+    $("#btn_forward_1_s").click(function () {
         const delay = 1
         const currentTime = $("#video-source").prop('currentTime')
         const time = (currentTime + delay) < 0 ? 0 : currentTime + delay
         $("#video-source").prop('currentTime', time)
     })
 
-    $("#btn_forward_5_s").click(function(){
+    $("#btn_forward_5_s").click(function () {
         const delay = 5
         const currentTime = $("#video-source").prop('currentTime')
         const time = (currentTime + delay) < 0 ? 0 : currentTime + delay
@@ -99,6 +99,90 @@ jQuery(function ($) {
     })
 
 
+    /**
+     * Raccourcis clavier
+     */
+
+    const keyboard_controls = {
+        rewind_5_s: {
+            key: 'Q',
+            code: 81,
+            shiftKey: true
+        },
+        rewind_1_s: {
+            key: 'q',
+            code: 81,
+            shiftKey: false
+        },
+        forward_1_s: {
+            key: 'd',
+            code: 68,
+            shiftKey: false
+        },
+        forward_5_s: {
+            key: 'D',
+            code: 68,
+            shiftKey: true
+        },
+        pause: {
+            key: 'Space',
+            code: 32,
+            shiftKey: false
+        },
+        clip: {
+            key: 'Enter',
+            code: 13,
+            shiftKey: false
+        }
+    }
+
+    $(document).keydown(function (event) {
+
+        const keyCode = event.originalEvent.keyCode
+        const shiftKey = event.originalEvent.shiftKey
+
+
+        if (81 === parseInt(keyCode) && shiftKey) {
+            console.log('Q')
+            return
+        }
+
+        if (81 === keyCode && !shiftKey) {
+            console.log('q')
+            return
+        }
+
+        if (81 === keyCode && !shiftKey) {
+            console.log('q')
+            return
+        }
+
+        if (68 === keyCode && !shiftKey) {
+            console.log('d')
+            return
+        }
+
+        if (68 === keyCode && !shiftKey) {
+            console.log('D')
+            return
+        }
+    })
+
+    $(document).keyup(function (event) {
+
+        const keyCode = event.originalEvent.keyCode
+        const shiftKey = event.originalEvent.shiftKey
+
+        if (32 === keyCode && !shiftKey) {
+            console.log('Space')
+            return
+        }
+
+        if (13 === keyCode && !shiftKey) {
+            console.log('Enter')
+            return
+        }
+    })
 
     /**
      * Preview
