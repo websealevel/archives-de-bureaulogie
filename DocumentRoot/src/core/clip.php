@@ -112,9 +112,10 @@ function clip_source(DOMElement $clip, string $file_source): string
 
     $video_clip->save($format, $path_to_save_clip);
 
-    //Normalization du son "à la main" car [pas intégrée encore dans PHP-FFMPEG](https://github.com/PHP-FFMpeg/PHP-FFMpeg/issues/328).
-
-    //Voir la doc : https://trac.ffmpeg.org/wiki/AudioVolume
+    /**
+     * Normalization du son "à la main" car [pas intégrée encore dans PHP-FFMPEG](https://github.com/PHP-FFMpeg/PHP-FFMpeg/issues/328).
+     * Voir la doc : https://trac.ffmpeg.org/wiki/AudioVolume
+     */
 
     /**
      * Premiere passe : détection du volume max
@@ -129,7 +130,7 @@ function clip_source(DOMElement $clip, string $file_source): string
     $correction_dB = compute_correction_db($output);
 
     /**
-     * Application d'une correction pour arriver à un volume max à 0dB et enregistrement du fichier normalisé.
+     * Deuxième passe : application d'une correction pour arriver à un volume max à 0dB, puis enregistrement du fichier avec audio normalisé.
      */
     $cmd_normalise_volume_to_0_db = sprintf('%s -i %s -af "volume=%sdB" -c:v copy -c:a aac -b:a 192k %s', $_ENV['PATH_BIN_FFMPEG'], $path_to_save_clip, $correction_dB, $path_to_save_clip . '_remastered.mp4');
 
