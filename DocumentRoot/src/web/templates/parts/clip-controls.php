@@ -39,12 +39,11 @@
         </button>
 
         <button name="btn_preview" id="btn_preview" class="btn-edition" type="button" title="Prévisualiser">
-            <div class="shortcut">z</div>
+            <div class="shortcut">P</div>
             <?php echo htmlentities('Prévisualiser'); ?>
         </button>
 
         <button name="btn_preview_tail" id="btn_preview_tail" class="btn-edition" type="button" title="La traine correspond à la portion située juste après le timecode de fin, afin de mieux visualiser la fin du cut">
-            <div class="shortcut">z</div>
             <?php echo htmlentities('Prévisualiser la traîne'); ?>
         </button>
 

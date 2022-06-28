@@ -18,8 +18,6 @@ jQuery(function ($) {
         $("#current-time").html(hh_mm_ss_lll)
     })
 
-
-
     /**
      * Evenement quand le select de source change
      */
@@ -83,49 +81,7 @@ jQuery(function ($) {
         play_pause_video_source()
     })
 
-    /**
-     * Avance le temps courant du lecteur video source de x secondes
-     * @param {*} delay_in_s L'avance en seconde à donner au currentTime (peut etre positif ou négatif)
-     */
-    function shift_current_time(delay_in_s) {
-        const delay = delay_in_s
-        const currentTime = $("#video-source").prop('currentTime')
-        const time = (currentTime + delay) < 0 ? 0 : currentTime + delay
-        $("#video-source").prop('currentTime', time)
-    }
 
-    /**
-     * Play la vidéo source si en pause et inversement
-     */
-    function play_pause_video_source() {
-        const is_playing = $("#video-source").prop('currentTime') > 0 && !$("#video-source").prop('paused')
-        if (is_playing) {
-            $("#video-source").trigger('pause')
-        } else {
-            console.log('play')
-            $("#video-source").trigger('play')
-        }
-    }
-
-    /**
-     * Met à jour le timecode de départ avec le temps courant du player video source
-     */
-    function set_timecode_start() {
-        const timecode_seconds = $("#video-source").prop("currentTime")
-        const hh_mm_ss_lll = seconds_to_hh_mm_ss_lll(timecode_seconds)
-        $("#timecode_start").val(hh_mm_ss_lll)
-        update_clip_duration()
-    }
-
-    /**
-    * Met à jour le timecode de fin avec le temps courant du player video source
-    */
-    function set_timecode_end() {
-        const timecode_seconds = $("#video-source").prop("currentTime")
-        const hh_mm_ss_lll = seconds_to_hh_mm_ss_lll(timecode_seconds)
-        $("#timecode_end").val(hh_mm_ss_lll)
-        update_clip_duration()
-    }
 
     /**
      * Raccourcis clavier
@@ -212,6 +168,11 @@ jQuery(function ($) {
             set_timecode_end()
             return
         }
+
+        if ('P' === key && shiftKey) {
+            play_pause_preview()
+            return
+        }
     })
 
 
@@ -235,12 +196,10 @@ jQuery(function ($) {
      * Preview
      */
 
-    $("#btn_preview").click(function () {
 
+    function play_pause_preview() {
 
         const preview_video_is_playing = $("#video-clip").prop('currentTime') > 0 & !$("#video-clip").prop('paused')
-
-        // console.log(preview_video_is_playing)
 
         //Si pas en lecure, play, sinon pause
         if (preview_video_is_playing) {
@@ -292,6 +251,10 @@ jQuery(function ($) {
                 }
             })
         }
+    }
+
+    $("#btn_preview").click(function () {
+        play_pause_preview()
     })
 
     /**
@@ -379,6 +342,50 @@ jQuery(function ($) {
  */
 
 /**
+    * Avance le temps courant du lecteur video source de x secondes
+    * @param {*} delay_in_s L'avance en seconde à donner au currentTime (peut etre positif ou négatif)
+    */
+function shift_current_time(delay_in_s) {
+    const delay = delay_in_s
+    const currentTime = $("#video-source").prop('currentTime')
+    const time = (currentTime + delay) < 0 ? 0 : currentTime + delay
+    $("#video-source").prop('currentTime', time)
+}
+
+/**
+ * Play la vidéo source si en pause et inversement
+ */
+function play_pause_video_source() {
+    const is_playing = $("#video-source").prop('currentTime') > 0 && !$("#video-source").prop('paused')
+    if (is_playing) {
+        $("#video-source").trigger('pause')
+    } else {
+        console.log('play')
+        $("#video-source").trigger('play')
+    }
+}
+
+/**
+ * Met à jour le timecode de départ avec le temps courant du player video source
+ */
+function set_timecode_start() {
+    const timecode_seconds = $("#video-source").prop("currentTime")
+    const hh_mm_ss_lll = seconds_to_hh_mm_ss_lll(timecode_seconds)
+    $("#timecode_start").val(hh_mm_ss_lll)
+    update_clip_duration()
+}
+
+/**
+* Met à jour le timecode de fin avec le temps courant du player video source
+*/
+function set_timecode_end() {
+    const timecode_seconds = $("#video-source").prop("currentTime")
+    const hh_mm_ss_lll = seconds_to_hh_mm_ss_lll(timecode_seconds)
+    $("#timecode_end").val(hh_mm_ss_lll)
+    update_clip_duration()
+}
+
+/**
  * Met à jour la durée de l'extrait dans l'élément #clip-duration. Réagit à un évènement qui modifie la durée de l'extrait (ie, changement des timecodes)
  * @returns void
  */
@@ -395,8 +402,8 @@ function update_clip_duration() {
         $("#clip-duration").html('valeur incorrecte')
         $("#clip-duration").removeClass('valid')
         $("#clip-duration").addClass('error')
-        return
     }
+
 
     if (duration_in_s > 140) {
         $("#clip-duration").html(duration)
