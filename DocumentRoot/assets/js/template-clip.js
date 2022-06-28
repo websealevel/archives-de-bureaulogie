@@ -77,7 +77,10 @@ jQuery(function ($) {
 
     $("#btn_forward_5_s").click(function () {
         shift_current_time(5)
+    })
 
+    $("#btn_play_pause").click(function () {
+        play_pause_video_source()
     })
 
     /**
@@ -89,6 +92,19 @@ jQuery(function ($) {
         const currentTime = $("#video-source").prop('currentTime')
         const time = (currentTime + delay) < 0 ? 0 : currentTime + delay
         $("#video-source").prop('currentTime', time)
+    }
+
+    /**
+     * Play la vidéo source si en pause et inversement
+     */
+    function play_pause_video_source() {
+        const is_playing = $("#video-source").prop('currentTime') > 0 && !$("#video-source").prop('paused')
+        if (is_playing) {
+            $("#video-source").trigger('pause')
+        } else {
+            console.log('play')
+            $("#video-source").trigger('play')
+        }
     }
 
     /**
@@ -167,12 +183,12 @@ jQuery(function ($) {
         const key = event.originalEvent.key
         const shiftKey = event.originalEvent.shiftKey
 
-        if ('q' === key && shiftKey) {
+        if ('Q' === key && shiftKey) {
             shift_current_time(-5)
             return
         }
 
-        if ('Q' === key && !shiftKey) {
+        if ('q' === key && !shiftKey) {
             shift_current_time(-1)
             return
         }
@@ -205,15 +221,7 @@ jQuery(function ($) {
         const shiftKey = event.originalEvent.shiftKey
 
         if (80 === keyCode && !shiftKey) {
-
-            const is_playing = $("#video-source").prop('currentTime') > 0 && !$("#video-source").prop('paused')
-
-            if (is_playing) {
-                $("#video-source").trigger('pause')
-            } else {
-                console.log('play')
-                $("#video-source").trigger('play')
-            }
+            play_pause_video_source()
             return
         }
 
