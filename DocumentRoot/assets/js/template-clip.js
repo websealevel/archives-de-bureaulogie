@@ -51,19 +51,11 @@ jQuery(function ($) {
      */
 
     $("#btn_clip_start").click(function () {
-
-        //On récupere le current time en secondes
-        const timecode_seconds = $("#video-source").prop("currentTime")
-        const hh_mm_ss_lll = seconds_to_hh_mm_ss_lll(timecode_seconds)
-        $("#timecode_start").val(hh_mm_ss_lll)
-        update_clip_duration()
+        set_timecode_start()
     })
 
     $("#btn_clip_end").click(function () {
-        const timecode_seconds = $("#video-source").prop("currentTime")
-        const hh_mm_ss_lll = seconds_to_hh_mm_ss_lll(timecode_seconds)
-        $("#timecode_end").val(hh_mm_ss_lll)
-        update_clip_duration()
+        set_timecode_end()
     })
 
     /**
@@ -100,6 +92,26 @@ jQuery(function ($) {
     }
 
     /**
+     * Met à jour le timecode de départ avec le temps courant du player video source
+     */
+    function set_timecode_start() {
+        const timecode_seconds = $("#video-source").prop("currentTime")
+        const hh_mm_ss_lll = seconds_to_hh_mm_ss_lll(timecode_seconds)
+        $("#timecode_start").val(hh_mm_ss_lll)
+        update_clip_duration()
+    }
+
+    /**
+    * Met à jour le timecode de fin avec le temps courant du player video source
+    */
+    function set_timecode_end() {
+        const timecode_seconds = $("#video-source").prop("currentTime")
+        const hh_mm_ss_lll = seconds_to_hh_mm_ss_lll(timecode_seconds)
+        $("#timecode_end").val(hh_mm_ss_lll)
+        update_clip_duration()
+    }
+
+    /**
      * Raccourcis clavier
      */
 
@@ -133,31 +145,51 @@ jQuery(function ($) {
             key: 'Enter',
             code: 13,
             shiftKey: true
+        },
+        clip_start: {
+            key: 'a',
+            code: 65,
+            shiftKey: false
+        },
+        clip_end: {
+            key: 'a',
+            code: 90,
+            shiftKey: false
         }
     }
 
     $(document).keydown(function (event) {
 
-        const keyCode = event.originalEvent.keyCode
+        const key = event.originalEvent.key
         const shiftKey = event.originalEvent.shiftKey
 
-        if (81 === parseInt(keyCode) && shiftKey) {
+        if ('q' === key && shiftKey) {
             shift_current_time(-5)
             return
         }
 
-        if (81 === keyCode && !shiftKey) {
+        if ('Q' === key && !shiftKey) {
             shift_current_time(-1)
             return
         }
 
-        if (68 === keyCode && !shiftKey) {
+        if ('d' === key && !shiftKey) {
             shift_current_time(1)
             return
         }
 
-        if (68 === keyCode && shiftKey) {
+        if ('D' === key && shiftKey) {
             shift_current_time(5)
+            return
+        }
+
+        if ('a' === key && !shiftKey) {
+            set_timecode_start()
+            return
+        }
+
+        if ('z' === key && !shiftKey) {
+            set_timecode_end()
             return
         }
     })
