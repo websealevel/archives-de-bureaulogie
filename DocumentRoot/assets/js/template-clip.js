@@ -66,6 +66,37 @@ jQuery(function ($) {
         update_clip_duration()
     })
 
+    /**
+     * Rewind/Forward buttons
+     */
+
+    $("#btn_rewind_5_s").click(function(){
+        const delay = -5
+        const currentTime = $("#video-source").prop('currentTime')
+        const time = (currentTime + delay) < 0 ? 0 : currentTime + delay
+        $("#video-source").prop('currentTime', time)
+    })
+
+    $("#btn_rewind_1_s").click(function(){
+        const delay = -1
+        const currentTime = $("#video-source").prop('currentTime')
+        const time = (currentTime + delay) < 0 ? 0 : currentTime + delay
+        $("#video-source").prop('currentTime', time)
+    })
+
+    $("#btn_forward_1_s").click(function(){
+        const delay = 1
+        const currentTime = $("#video-source").prop('currentTime')
+        const time = (currentTime + delay) < 0 ? 0 : currentTime + delay
+        $("#video-source").prop('currentTime', time)
+    })
+
+    $("#btn_forward_5_s").click(function(){
+        const delay = 5
+        const currentTime = $("#video-source").prop('currentTime')
+        const time = (currentTime + delay) < 0 ? 0 : currentTime + delay
+        $("#video-source").prop('currentTime', time)
+    })
 
 
 

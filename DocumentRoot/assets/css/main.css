@@ -80,7 +80,7 @@ textarea {
 	color: red;
 }
 
-.valid {
+#clip-duration.valid {
 	color: green;
 }
 
