@@ -102,8 +102,6 @@ function clip_source(DOMElement $clip, string $file_source): string
 
     $format = new FFMpeg\Format\Video\X264();
 
-    //Normaliser le son ici.
-
     $video_clip
         ->filters()
         ->resample(ENCODING_OPTION_AUDIO_SAMPLING_RATE);
@@ -114,10 +112,9 @@ function clip_source(DOMElement $clip, string $file_source): string
 
     $video_clip->save($format, $path_to_save_clip);
 
-    //Normalization à la main car [pas intégrée encore dans PHP-FFMPEG](https://github.com/PHP-FFMpeg/PHP-FFMpeg/issues/328)
+    //Normalization du son "à la main" car [pas intégrée encore dans PHP-FFMPEG](https://github.com/PHP-FFMpeg/PHP-FFMpeg/issues/328).
 
-    //On le fait à la main en suivant ces instructions. [Option 1 : filter loudnorm](https://superuser.com/questions/323119/how-can-i-normalize-audio-using-ffmpeg)
-
+    //Voir la doc : https://trac.ffmpeg.org/wiki/AudioVolume
 
     /**
      * Détection du volume max
@@ -131,18 +128,12 @@ function clip_source(DOMElement $clip, string $file_source): string
 
     $correction_dB = compute_correction_db($output);
 
-    write_log($correction_dB);
-
     /**
-     * Application d'une correction pour arriver à un volume max à 0dB
+     * Application d'une correction pour arriver à un volume max à 0dB et enregistrement du fichier normalisé.
      */
     $command_second_pass = sprintf('%s -i %s -af "volume=%sdB" -c:v copy -c:a aac -b:a 192k %s', $_ENV['PATH_BIN_FFMPEG'], $path_to_save_clip, $correction_dB, $path_to_save_clip . '_remastered.mp4');
 
-    write_log($command_second_pass);
-
     exec($command_second_pass, $output, $retval);
-
-    exit;
 
     return $path_to_save_clip;
 }
