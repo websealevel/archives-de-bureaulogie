@@ -18,6 +18,8 @@ jQuery(function ($) {
         $("#current-time").html(hh_mm_ss_lll)
     })
 
+
+
     /**
      * Evenement quand le select de source change
      */
@@ -54,12 +56,14 @@ jQuery(function ($) {
         const timecode_seconds = $("#video-source").prop("currentTime")
         const hh_mm_ss_lll = seconds_to_hh_mm_ss_lll(timecode_seconds)
         $("#timecode_start").val(hh_mm_ss_lll)
+        update_clip_duration()
     })
 
     $("#btn_clip_end").click(function () {
         const timecode_seconds = $("#video-source").prop("currentTime")
         const hh_mm_ss_lll = seconds_to_hh_mm_ss_lll(timecode_seconds)
         $("#timecode_end").val(hh_mm_ss_lll)
+        update_clip_duration()
     })
 
 
@@ -72,7 +76,7 @@ jQuery(function ($) {
     $("#btn_preview").click(function () {
 
 
-        const preview_video_is_playing = $("#video-clip").prop('currentTime') > 0 & !$("#video-clip").prop('paused') 
+        const preview_video_is_playing = $("#video-clip").prop('currentTime') > 0 & !$("#video-clip").prop('paused')
 
         // console.log(preview_video_is_playing)
 
@@ -205,9 +209,44 @@ jQuery(function ($) {
 
 
 
+
+
+
 /**
  * Helper functions
  */
+
+/**
+ * Met à jour la durée de l'extrait dans l'élément #clip-duration. Réagit à un évènement qui modifie la durée de l'extrait (ie, changement des timecodes)
+ * @returns void
+ */
+function update_clip_duration() {
+
+    const start = $("#timecode_start").val()
+    const end = $("#timecode_end").val()
+
+    const duration_in_s = hh_mm_ss_lll_to_seconds(end) - hh_mm_ss_lll_to_seconds(start)
+
+    const duration = seconds_to_hh_mm_ss_lll(duration_in_s)
+
+    if (duration_in_s < 0) {
+        $("#clip-duration").html('valeur incorrecte')
+        $("#clip-duration").removeClass('valid')
+        $("#clip-duration").addClass('error')
+        return
+    }
+
+    if (duration_in_s > 140) {
+        $("#clip-duration").html(duration)
+        $("#clip-duration").removeClass('valid')
+        $("#clip-duration").addClass('error')
+        return
+    }
+
+    $("#clip-duration").removeClass('error')
+    $("#clip-duration").addClass('valid')
+    $("#clip-duration").html(duration)
+}
 
 /**
    * Formate une durée en secondes au format hh:mm:ss.lll

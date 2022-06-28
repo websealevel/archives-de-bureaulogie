@@ -12,7 +12,7 @@ fieldset {
 
 textarea {
 	resize: none;
-  }
+}
 
 .screen-reader-text {
 	border: 0;
@@ -27,9 +27,6 @@ textarea {
 	word-wrap: normal !important;
 }
 
-.error {
-	border: 3px solid red;
-}
 
 .btn-edition {
 	font-size: 39px;
@@ -41,14 +38,8 @@ textarea {
 	padding: 0 1vw;
 }
 
-.rewind{
 
-}
-.forward{
-
-}
-
-#sources{
+#sources {
 	font-size: 24px;
 	padding: 5px;
 
@@ -67,7 +58,7 @@ textarea {
 	flex-wrap: wrap;
 }
 
-#fieldset-video-clip{
+#fieldset-video-clip {
 	height: 430px;
 	display: flex;
 	justify-content: center;
@@ -75,7 +66,8 @@ textarea {
 }
 
 
-#current-time, #clip-duration {
+#current-time,
+#clip-duration {
 	font-size: 40px;
 	font-weight: bold;
 	padding: 20px;
@@ -83,6 +75,15 @@ textarea {
 	border: 3px solid black;
 	display: inline-block;
 }
+
+#clip-duration.error {
+	color: red;
+}
+
+.valid {
+	color: green;
+}
+
 
 #fieldset-video-source {
 	width: 40vw;
@@ -118,14 +119,13 @@ textarea {
 
 }
 
-.container-btn-submit-clip{
+.container-btn-submit-clip {
 	display: flex;
 	justify-content: end;
 	margin: 0 150px;
 }
 
-#clip-options{
+#clip-options {
 	display: flex;
 	flex-direction: column;
 }
-
