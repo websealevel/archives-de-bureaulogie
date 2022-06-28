@@ -115,6 +115,10 @@ jQuery(function ($) {
      * Raccourcis clavier
      */
 
+
+    /**
+     * Pas utilisé pour le moment, sert juste de documentation.
+     */
     const keyboard_controls = {
         rewind_5_s: {
             key: 'Q',
