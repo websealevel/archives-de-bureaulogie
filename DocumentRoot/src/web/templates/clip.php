@@ -112,7 +112,16 @@ $token = register_api_token($account, 'submit_clip');
         <input type="hidden" name="token" value="<?php echo $token; ?>">
         <input type="hidden" name="source_name" id="source_name" value="">
         <div class="container-btn-submit-clip">
-            <input type="submit" id="btn-submit-clip" value="Cut !" class="btn-edition">
+
+            <button type="submit" id="btn-submit-clip" value="Cut !" class="btn-edition">
+
+                <div class="shortcut">
+                    Shift+Enter
+                </div>
+                Cut !
+
+            </button>
+
         </div>
         <span id="spinner"></span>
     </form>

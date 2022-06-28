@@ -187,7 +187,7 @@ jQuery(function ($) {
         }
 
         if (13 === keyCode && shiftKey) {
-            console.log('CLIP!')
+            post_clip()
             return
         }
     })
@@ -281,14 +281,7 @@ jQuery(function ($) {
     })
 
 
-    /**
-     * Soumission du formulaire de création d'extrait
-     */
-
-    $("#form-clip-source").submit(function (event) {
-
-        event.preventDefault();
-
+    function post_clip() {
         //Disable le bouton, message traitement en cours + spinner ascii
         $("#btn-submit-clip").prop("disabled", true)
         window.requestAnimationFrame(spinner_ascii.step);
@@ -329,12 +322,17 @@ jQuery(function ($) {
             $("#btn-submit-clip").val('Cut !')
             $("#btn-submit-clip").prop("disabled", false)
         })
+    }
+
+    /**
+     * Soumission du formulaire de création d'extrait
+     */
+
+    $("#form-clip-source").submit(function (event) {
+        event.preventDefault();
+        post_clip()
     });
 });
-
-
-
-
 
 
 /**
