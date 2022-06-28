@@ -13,7 +13,7 @@
 
     <button name="btn_play_pause" id="btn_play_pause" class="btn-controls play_pause" type="button" title="Play/Pause">
         <div class="shortcut">s</div>
-        <?php echo htmlentities('Play/Pause'); ?>
+        <?php echo htmlentities('Play'); ?>
     </button>
 
     <button name="btn_forward_1_s" id="btn_forward_1_s" class="btn-controls forward" type="button" title="Avancer de 1s">
@@ -39,11 +39,12 @@
         </button>
 
         <button name="btn_preview" id="btn_preview" class="btn-edition" type="button" title="Prévisualiser">
-            <div class="shortcut">P</div>
+            <div class="shortcut">p</div>
             <?php echo htmlentities('Prévisualiser'); ?>
         </button>
 
         <button name="btn_preview_tail" id="btn_preview_tail" class="btn-edition" type="button" title="La traine correspond à la portion située juste après le timecode de fin, afin de mieux visualiser la fin du cut">
+            <div class="shortcut">m</div>
             <?php echo htmlentities('Prévisualiser la traîne'); ?>
         </button>
 

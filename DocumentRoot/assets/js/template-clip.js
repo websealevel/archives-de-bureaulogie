@@ -169,8 +169,13 @@ jQuery(function ($) {
             return
         }
 
-        if ('P' === key && shiftKey) {
+        if ('p' === key && !shiftKey) {
             play_pause_preview()
+            return
+        }
+
+        if ('m' === key && !shiftKey) {
+            preview_trail()
             return
         }
     })
@@ -204,9 +209,10 @@ jQuery(function ($) {
         //Si pas en lecure, play, sinon pause
         if (preview_video_is_playing) {
             $("#video-clip").trigger('pause')
-            $("#btn_preview").val('Prévisualiser')
+            $("#btn_preview").prop('innerHTML','<div class="shortcut"> p</div> Prévisualiser')
+
         } else {
-            $("#btn_preview").val('Pause')
+            $("#btn_preview").prop('innerHTML','<div class="shortcut"> p</div> Pause')
             const src = $("#video-source").prop('src')
 
             const timecode_start = $("#timecode_start").val()
@@ -257,11 +263,8 @@ jQuery(function ($) {
         play_pause_preview()
     })
 
-    /**
-    * Prévisualisation de la traîne
-    */
-    $("#btn_preview_tail").click(function () {
 
+    function preview_trail() {
         //Decocher la loop si cochée (sinon bug)
         $('#checkbox_loop_preview').prop('checked', false)
 
@@ -278,6 +281,13 @@ jQuery(function ($) {
         const $html_video_clip = $("#video-clip")
         $html_video_clip.prop('src', src_timecodes)
         $html_video_clip.trigger('play')
+    }
+
+    /**
+    * Prévisualisation de la traîne
+    */
+    $("#btn_preview_tail").click(function () {
+        preview_trail()
     })
 
 
@@ -318,7 +328,7 @@ jQuery(function ($) {
             $("div.errors").html('Hmm, il semblerait qu\'il y ait eu un problème de connexion. Veuillez rééssayer s\'il vous plaît.')
         }).always(function () {
             window.cancelAnimationFrame(spinner_ascii.requestID)
-            $("#btn-submit-clip").prop('innerHTML','<div class="shortcut">Shift+Enter</div> Cut !')
+            $("#btn-submit-clip").prop('innerHTML', '<div class="shortcut">Shift+Enter</div> Cut !')
             $("#btn-submit-clip").prop("disabled", false)
         })
     }
@@ -356,8 +366,10 @@ function play_pause_video_source() {
     const is_playing = $("#video-source").prop('currentTime') > 0 && !$("#video-source").prop('paused')
     if (is_playing) {
         $("#video-source").trigger('pause')
+        $("#btn_play_pause").prop('innerHTML', '<div class="shortcut">s</div> Play')
+
     } else {
-        console.log('play')
+        $("#btn_play_pause").prop('innerHTML', '<div class="shortcut">s</div> Pause')
         $("#video-source").trigger('play')
     }
 }
