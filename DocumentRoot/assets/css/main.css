@@ -121,6 +121,7 @@ textarea {
 	font-size: 30px;
 	display: flex;
 	align-items: flex-start;
+	cursor: pointer;
 }
 
 .btn-edition{
@@ -139,6 +140,8 @@ textarea {
 }
 
 #btn-submit-clip {
+	width: auto;
 	padding: 20px;
 	font-size: 45px;
+	justify-content: center;
 }

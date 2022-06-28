@@ -114,21 +114,75 @@ function clip_source(DOMElement $clip, string $file_source): string
 
     $video_clip->save($format, $path_to_save_clip);
 
-    //WIP
-
     //Normalization à la main car [pas intégrée encore dans PHP-FFMPEG](https://github.com/PHP-FFMpeg/PHP-FFMpeg/issues/328)
 
     //On le fait à la main en suivant ces instructions. [Option 1 : filter loudnorm](https://superuser.com/questions/323119/how-can-i-normalize-audio-using-ffmpeg)
 
-    $command = sprintf('%s -i %s -af "volumedetect" -vn -sn -dn -f null /dev/null', $_ENV['PATH_BIN_FFMPEG'], $path_to_save_clip);
-    write_log($command);
+
+    /**
+     * Détection du volume max
+     */
+    $command_first_pass = sprintf('%s -i %s -filter:a volumedetect -vn -sn -dn -f null /dev/null 2>&1 | grep max_volume', $_ENV['PATH_BIN_FFMPEG'], $path_to_save_clip);
+
     $output = null;
     $retval = null;
-    exec($command, $output, $retval);
-    // exec('whoami', $output, $retval);
-    write_log("Returned with status $retval and output:\n");
-    write_log($output);
+
+    exec($command_first_pass, $output, $retval);
+
+    $correction_dB = compute_correction_db($output);
+
+    write_log($correction_dB);
+
+    /**
+     * Application d'une correction pour arriver à un volume max à 0dB
+     */
+    $command_second_pass = sprintf('%s -i %s -af "volume=%sdB" -c:v copy -c:a aac -b:a 192k %s', $_ENV['PATH_BIN_FFMPEG'], $path_to_save_clip, $correction_dB, $path_to_save_clip . '_remastered.mp4');
+
+    write_log($command_second_pass);
+
+    exec($command_second_pass, $output, $retval);
+
     exit;
 
     return $path_to_save_clip;
+}
+
+/**
+ * Retourne la correction en dB à ajouter à l'extrait pour que le volume max soit ramené à 0dB. Correction de +5dB par défaut si une erreur se produit
+ * @param array $output Le résultat de la commande avec ffmpeg et le filtre loudnorm
+ * @see http://ffmpeg.org/ffmpeg-all.html#loudnorm
+ */
+function compute_correction_db(array $output): int
+{
+
+    if (empty($output)) {
+        //Applique un db par défaut de +5dB
+        return 5;
+    }
+
+    /**
+     * Le volume max est renseignée sur la ligne "max_volume"
+     */
+
+    $pos = strpos($output[0], 'max_volume');
+
+    if (false == $pos) {
+        //Applique un db par défaut de +5dB
+        return 5;
+    }
+
+    $sub = substr($output[0], $pos);
+
+    $pos = strpos($sub, ':');
+
+    if (false == $pos) {
+        //Applique un db par défaut de +5dB
+        return 5;
+    }
+
+    $max_dB = substr($sub, $pos + 1);
+
+    $max_db_val = intval(trim($max_dB));
+
+    return $max_db_val * -1;
 }
