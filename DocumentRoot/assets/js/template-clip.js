@@ -314,12 +314,11 @@ jQuery(function ($) {
 
             }
 
-
         }).fail(function () {
             $("div.errors").html('Hmm, il semblerait qu\'il y ait eu un problème de connexion. Veuillez rééssayer s\'il vous plaît.')
         }).always(function () {
             window.cancelAnimationFrame(spinner_ascii.requestID)
-            $("#btn-submit-clip").val('Cut !')
+            $("#btn-submit-clip").prop('innerHTML','<div class="shortcut">Shift+Enter</div> Cut !')
             $("#btn-submit-clip").prop("disabled", false)
         })
     }
@@ -497,7 +496,7 @@ const spinner_ascii = {
         }
 
         ;
-        spinner_ascii.element.value = 'Traitement en cours, veuillez patienter ' + spinner_ascii.frames[frame];
+        spinner_ascii.element.innerHTML = 'Traitement en cours, veuillez patienter ' + spinner_ascii.frames[frame];
         spinner_ascii.requestID = window.requestAnimationFrame(spinner_ascii.step);
     },
     frames: '▤▧▥▨'.split(''),
