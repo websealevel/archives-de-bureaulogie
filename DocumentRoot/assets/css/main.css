@@ -128,12 +128,17 @@ textarea {
 	display: flex;
 }
 .btn-control{
-	width: 180px;
+	width: 145px;
 }
 
 .btn-control .shortcut, .btn-edition .shortcut{
-	font-size: 16px;
+	font-size: 14px;
 	margin-right: 10px;
 	font-family: 'Courier New', Courier, monospace;
 	font-style: italic;
+}
+
+#btn-submit-clip {
+	padding: 20px;
+	font-size: 45px;
 }
