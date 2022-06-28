@@ -71,33 +71,33 @@ jQuery(function ($) {
      */
 
     $("#btn_rewind_5_s").click(function () {
-        const delay = -5
-        const currentTime = $("#video-source").prop('currentTime')
-        const time = (currentTime + delay) < 0 ? 0 : currentTime + delay
-        $("#video-source").prop('currentTime', time)
+        shift_current_time(-5)
     })
 
     $("#btn_rewind_1_s").click(function () {
-        const delay = -1
-        const currentTime = $("#video-source").prop('currentTime')
-        const time = (currentTime + delay) < 0 ? 0 : currentTime + delay
-        $("#video-source").prop('currentTime', time)
+        shift_current_time(-1)
     })
 
     $("#btn_forward_1_s").click(function () {
-        const delay = 1
-        const currentTime = $("#video-source").prop('currentTime')
-        const time = (currentTime + delay) < 0 ? 0 : currentTime + delay
-        $("#video-source").prop('currentTime', time)
+        shift_current_time(1)
+
     })
 
     $("#btn_forward_5_s").click(function () {
-        const delay = 5
+        shift_current_time(5)
+
+    })
+
+    /**
+     * Avance le temps courant du lecteur video source de x secondes
+     * @param {*} delay_in_s L'avance en seconde à donner au currentTime (peut etre positif ou négatif)
+     */
+    function shift_current_time(delay_in_s) {
+        const delay = delay_in_s
         const currentTime = $("#video-source").prop('currentTime')
         const time = (currentTime + delay) < 0 ? 0 : currentTime + delay
         $("#video-source").prop('currentTime', time)
-    })
-
+    }
 
     /**
      * Raccourcis clavier
@@ -124,15 +124,15 @@ jQuery(function ($) {
             code: 68,
             shiftKey: true
         },
-        pause: {
-            key: 'Space',
-            code: 32,
+        play_pause: {
+            key: 'p',
+            code: 80,
             shiftKey: false
         },
         clip: {
             key: 'Enter',
             code: 13,
-            shiftKey: false
+            shiftKey: true
         }
     }
 
@@ -141,45 +141,48 @@ jQuery(function ($) {
         const keyCode = event.originalEvent.keyCode
         const shiftKey = event.originalEvent.shiftKey
 
-
         if (81 === parseInt(keyCode) && shiftKey) {
-            console.log('Q')
+            shift_current_time(-5)
             return
         }
 
         if (81 === keyCode && !shiftKey) {
-            console.log('q')
-            return
-        }
-
-        if (81 === keyCode && !shiftKey) {
-            console.log('q')
+            shift_current_time(-1)
             return
         }
 
         if (68 === keyCode && !shiftKey) {
-            console.log('d')
+            shift_current_time(1)
             return
         }
 
-        if (68 === keyCode && !shiftKey) {
-            console.log('D')
+        if (68 === keyCode && shiftKey) {
+            shift_current_time(5)
             return
         }
     })
+
 
     $(document).keyup(function (event) {
 
         const keyCode = event.originalEvent.keyCode
         const shiftKey = event.originalEvent.shiftKey
 
-        if (32 === keyCode && !shiftKey) {
-            console.log('Space')
+        if (80 === keyCode && !shiftKey) {
+
+            const is_playing = $("#video-source").prop('currentTime') > 0 && !$("#video-source").prop('paused')
+
+            if (is_playing) {
+                $("#video-source").trigger('pause')
+            } else {
+                console.log('play')
+                $("#video-source").trigger('play')
+            }
             return
         }
 
-        if (13 === keyCode && !shiftKey) {
-            console.log('Enter')
+        if (13 === keyCode && shiftKey) {
+            console.log('CLIP!')
             return
         }
     })
