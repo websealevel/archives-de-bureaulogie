@@ -12,7 +12,7 @@
     </button>
 
     <button name="btn_play_pause" id="btn_play_pause" class="btn-controls play_pause" type="button" title="Play/Pause">
-        <div class="shortcut">p</div>
+        <div class="shortcut">s</div>
         <?php echo htmlentities('Play/Pause'); ?>
     </button>
 
@@ -29,12 +29,12 @@
     <div id="edition-actions">
 
         <button name="btn_clip_start" id="btn_clip_start" class="btn-edition" type="button" title="Définir la position courante du curseur de lecture comme timecode de départ de l'extrait">
-            <div class="shortcut">a</div>
+            <div class="shortcut">k</div>
             <?php echo htmlentities('Démarrer l\'extrait ici'); ?>
         </button>
 
         <button name="bt_clip_end" id="bt_clip_end" class="btn-edition" type="button" title="Définir la position courante du curseur de lecture comme timecode de fin de l'extrait">
-            <div class="shortcut">z</div>
+            <div class="shortcut">l</div>
             <?php echo htmlentities('Finir l\'extrait ici'); ?>
         </button>
 

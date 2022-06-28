@@ -159,12 +159,12 @@ jQuery(function ($) {
             return
         }
 
-        if ('a' === key && !shiftKey) {
+        if ('k' === key && !shiftKey) {
             set_timecode_start()
             return
         }
 
-        if ('z' === key && !shiftKey) {
+        if ('l' === key && !shiftKey) {
             set_timecode_end()
             return
         }
@@ -181,7 +181,7 @@ jQuery(function ($) {
         const keyCode = event.originalEvent.keyCode
         const shiftKey = event.originalEvent.shiftKey
 
-        if (80 === keyCode && !shiftKey) {
+        if (83 === keyCode && !shiftKey) {
             play_pause_video_source()
             return
         }
