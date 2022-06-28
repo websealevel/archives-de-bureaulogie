@@ -71,50 +71,61 @@ jQuery(function ($) {
 
     $("#btn_preview").click(function () {
 
-        const src = $("#video-source").prop('src')
 
-        const timecode_start = $("#timecode_start").val()
-        const timecode_end = $("#timecode_end").val()
+        const preview_video_is_playing = $("#video-clip").prop('currentTime') > 0 & !$("#video-clip").prop('paused') 
 
-        const timecode_start_in_sec = hh_mm_ss_lll_to_seconds(timecode_start)
-        const timecode_end_in_sec = hh_mm_ss_lll_to_seconds(timecode_end)
+        // console.log(preview_video_is_playing)
 
+        //Si pas en lecure, play, sinon pause
+        if (preview_video_is_playing) {
+            $("#video-clip").trigger('pause')
+            $("#btn_preview").val('Prévisualiser')
+        } else {
+            $("#btn_preview").val('Pause')
+            const src = $("#video-source").prop('src')
 
-        console.log(timecode_start_in_sec,timecode_end_in_sec)
+            const timecode_start = $("#timecode_start").val()
+            const timecode_end = $("#timecode_end").val()
 
-        if (timecode_end_in_sec <= timecode_start_in_sec) {
-            $("div.errors").html("<p>Impossible de prévisualiser l'extrait : le timecode de fin doit être plus grand que le timecode de début</p>")
+            const timecode_start_in_sec = hh_mm_ss_lll_to_seconds(timecode_start)
+            const timecode_end_in_sec = hh_mm_ss_lll_to_seconds(timecode_end)
 
-            $("#timecode_start").addClass('error')
-            $("#timecode_end").addClass('error')
+            // console.log(timecode_start_in_sec, timecode_end_in_sec)
 
-            return
-        }
-        else {
-            $("div.errors").html('')
-            $("#timecode_start").removeClass('error')
-            $("#timecode_end").removeClass('error')
-        }
+            if (timecode_end_in_sec <= timecode_start_in_sec) {
+                $("div.errors").html("<p>Impossible de prévisualiser l'extrait : le timecode de fin doit être plus grand que le timecode de début</p>")
 
-        const src_timecodes = src + `#t=${timecode_start_in_sec},${timecode_end_in_sec}`
+                $("#timecode_start").addClass('error')
+                $("#timecode_end").addClass('error')
 
-        const $html_video_clip = $("#video-clip")
-        $html_video_clip.prop('src', src_timecodes)
-        $html_video_clip.trigger('play')
-
-        /**
-         * Loop preview
-         */
-        $html_video_clip.on('timeupdate', function () {
-
-            if ($('#checkbox_loop_preview').is(':checked')) {
-                loop_video(this, timecode_start_in_sec, timecode_end_in_sec)
+                return
             }
             else {
-                if (has_reached_end(timecode_start_in_sec, timecode_end_in_sec))
-                    this.pause()
+                $("div.errors").html('')
+                $("#timecode_start").removeClass('error')
+                $("#timecode_end").removeClass('error')
             }
-        })
+
+            const src_timecodes = src + `#t=${timecode_start_in_sec},${timecode_end_in_sec}`
+
+            const $html_video_clip = $("#video-clip")
+            $html_video_clip.prop('src', src_timecodes)
+            $html_video_clip.trigger('play')
+
+            /**
+             * Loop preview
+             */
+            $html_video_clip.on('timeupdate', function () {
+
+                if ($('#checkbox_loop_preview').is(':checked')) {
+                    loop_video(this, timecode_start_in_sec, timecode_end_in_sec)
+                }
+                else {
+                    if (has_reached_end(timecode_start_in_sec, timecode_end_in_sec))
+                        this.pause()
+                }
+            })
+        }
     })
 
     /**
@@ -123,7 +134,7 @@ jQuery(function ($) {
     $("#btn_preview_tail").click(function () {
 
         //Decocher la loop si cochée (sinon bug)
-        $('#checkbox_loop_preview').prop('checked',false)
+        $('#checkbox_loop_preview').prop('checked', false)
 
         const src = $("#video-source").prop('src')
 
@@ -232,7 +243,7 @@ function hh_mm_ss_lll_to_seconds(timecode_hh_mm_ss_lll) {
     const s = timecode_hh_mm_ss_lll.substring(6, 8)
     const l = timecode_hh_mm_ss_lll.substring(9, 12)
 
-    console.log(h,m,s,l)
+    // console.log(h, m, s, l)
 
     const seconds = parseInt(h) * 3600 + parseInt(m) * 60 + parseInt(s) + parseInt(l) / 1000
 
