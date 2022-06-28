@@ -404,15 +404,14 @@ function update_clip_duration() {
     const end = $("#timecode_end").val()
 
     const duration_in_s = hh_mm_ss_lll_to_seconds(end) - hh_mm_ss_lll_to_seconds(start)
-
     const duration = seconds_to_hh_mm_ss_lll(duration_in_s)
 
     if (duration_in_s < 0) {
         $("#clip-duration").html('valeur incorrecte')
         $("#clip-duration").removeClass('valid')
         $("#clip-duration").addClass('error')
+        return
     }
-
 
     if (duration_in_s > 140) {
         $("#clip-duration").html(duration)

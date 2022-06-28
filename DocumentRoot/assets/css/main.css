@@ -27,18 +27,6 @@ textarea {
 	word-wrap: normal !important;
 }
 
-
-.btn-edition {
-	font-size: 39px;
-	padding: 0 1vw;
-}
-
-.btn-controls {
-	font-size: 29px;
-	padding: 0 1vw;
-}
-
-
 #sources {
 	font-size: 24px;
 	padding: 5px;
@@ -71,19 +59,28 @@ textarea {
 	font-size: 40px;
 	font-weight: bold;
 	padding: 20px;
-	margin: 20px;
 	border: 3px solid black;
 	display: inline-block;
+	font-family: 'Courier New', Courier, monospace;
+}
+
+#current-time{
+	margin: 20px;
+}
+
+#clip-duration{
+	width: 310px;
+	text-align: center;
 }
 
 #clip-duration.error {
 	color: red;
+	font-size: 28px;
 }
 
 #clip-duration.valid {
 	color: green;
 }
-
 
 #fieldset-video-source {
 	width: 40vw;
@@ -91,16 +88,6 @@ textarea {
 
 #fieldset-video-clip {
 	width: 29vw;
-}
-
-#fieldset-edition {
-	display: flex;
-	justify-content: flex-start;
-	align-items: flex-start;
-	flex-wrap: wrap;
-	align-content: flex-start;
-	row-gap: 10px;
-	column-gap: 10px;
 }
 
 #edition-actions {
@@ -116,7 +103,6 @@ textarea {
 	flex-wrap: wrap;
 	align-content: flex-start;
 	gap: 10px;
-
 }
 
 .container-btn-submit-clip {
@@ -125,11 +111,29 @@ textarea {
 	margin: 0 150px;
 }
 
-#clip-options {
+#fieldset-controls{
 	display: flex;
-	flex-direction: column;
+	flex-wrap: wrap;
+	gap: 10px;
 }
 
-.btn-controls .shortcut, .btn-edition .shortcut{
-	color:red;
+.btn-edition, .btn-control {
+	font-size: 30px;
+	display: flex;
+	align-items: flex-start;
+}
+
+.btn-edition{
+	width: 250px;
+	display: flex;
+}
+.btn-control{
+	width: 180px;
+}
+
+.btn-control .shortcut, .btn-edition .shortcut{
+	font-size: 16px;
+	margin-right: 10px;
+	font-family: 'Courier New', Courier, monospace;
+	font-style: italic;
 }
