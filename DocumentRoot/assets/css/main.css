@@ -163,3 +163,9 @@ select {
 li{
 	margin:2px; 
 }
+
+summary .clip-item-header{
+	color: blue;
+	text-decoration: underline blue;
+	cursor: pointer;
+}
