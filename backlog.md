@@ -36,6 +36,11 @@
   - [Sécurité](#sécurité)
   - [Features additionnelles](#features-additionnelles)
   - [Comptes twitter](#comptes-twitter)
+  - [Roadmap](#roadmap)
+    - [v1.0](#v10)
+    - [v2.0](#v20)
+    - [v3.0](#v30)
+    - [v4.0](#v40)
 
 ## Specs
 
@@ -330,7 +335,6 @@ A venir...
 - interdire de dl si espace disque donné atteint []
 - enlever la version d'apache dans la requete de reponse [x]
 - dev un mode maintenance simple (fichier .env si c'est `On` on charge le template `maintenance.php` dès l'`index.php` avant le router) [x]
-- faire un test de pénétration []
 - couvrir de tests les droits et `capabilites` []
 - mettre en place des roles et capacités associées [x]
 - creer un utilisateur twitter pour chaque twitter bot avec un role twitter_user []
@@ -348,7 +352,7 @@ A venir...
 - donner les droits sur les dossier sources, extraits et sur les fichiers extraits.xml et extraits.xtd à l'user d'apache www-data (seul lui et le root peuvent les ouvrir et les lire) []
 - stocker IP quand form soumis pour eventullement la bannir [ ]
 - deplacer les comptes bannis dans une autre table [ ]
-
+- faire un test de pénétration []
 
 ## Features additionnelles
 
@@ -360,3 +364,39 @@ A venir...
 
 - compte [Out of Context ackboo](https://twitter.com/archivesdb_fr) pour les archives vidéos
 - compte pour les références biblios (a venir)
+
+## Roadmap
+
+### v1.0
+
+- se créer un compte et se connecter
+- soumettre une vidéo source
+- télécharger la vidéo source
+- éditeur d'extrait custom
+- soumettre des extraits à partir des vidéos sources
+- lister les extraits sur chaque vidéo source
+- télécharger les extraits
+
+### v2.0
+
+- mise en place des rôles
+- soumettre une référence
+- lister les références
+- télécharger une référence (format?)
+- modérer une référence si non proposée par un admin
+- [code] : refactor en respectant le PSR-4
+- implémenter la CLI pour que les admins puissent nettoyer les archives (via une UI)
+
+### v3.0
+
+- mise en place tes twitter bot
+- mise en place de la playlist
+- ecran admin twitter bots (réservé aux admins)
+
+### v4.0
+
+- développer la plateforme communautaire
+- creation de compte avec validation par email (pour éviter les spam)
+- implémenter toutes les specs de sécurité, [voir les points mentionnés ci-dessus](#sécurité)
+- mise en place de la modération
+
