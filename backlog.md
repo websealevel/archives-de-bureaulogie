@@ -324,7 +324,7 @@ A venir...
 
 ## Sécurité
 
-- mettre des nonces (token) dans le formulaire de dl source []
+- mettre des nonces (token) dans le formulaire de dl source [x]
 - mettre des nonces (token) dans le formulaire de clip [x]
 - `role_has_cap` a implementer !!! []
 - déclarer une limite d'extraits / utilisateur / source (20 par exemple) []
