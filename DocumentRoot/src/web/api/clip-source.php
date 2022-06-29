@@ -86,6 +86,9 @@ function api_clip_source()
     //Pour les clips : on les déclare puis on les génere (c'est comme ça qu'est pensé le core. Il parse le fichier source et génère les clips qui n'existent pas encore.)
 
     //Déclarer le clip dans le fichier source (i.e "l'enregistrer dans les archives")
+
+    $created_on =  date('d-m-Y H:m:s');
+
     try {
         $extrait = declare_clip(
             $source_name,
@@ -94,7 +97,7 @@ function api_clip_source()
             $inputs['title']->value,
             $inputs['description']->value,
             current_user_pseudo(),
-            'le ' . date('d-m-Y') . ' à ' . date('H:m:s')
+            $created_on
         );
 
         if (false === $extrait) {
@@ -117,14 +120,7 @@ function api_clip_source()
     //Renvoyer un markup html contenant le nouveau clip à ajouter à la liste des extraits présents sur la source.
     $src = path_clip($path_parts['basename']);
 
-    $summary = sprintf("<h3>%s %s-%s</h3>", $inputs['title']->value, $timecode_start, $timecode_end);
-
-    $details = sprintf("%s %s <small>%s</small>", html_video_markup($src, 500), $inputs['description']->value,  html_download_link($src));
-
-    $html = html_details(
-        $summary,
-        $details
-    );
+    $html = html_clip_item($inputs['title']->value, $inputs['description']->value, $timecode_start, $timecode_end, current_user_pseudo(), $created_on, $src);
 
     header('Content-Type: application/json; charset=utf-8');
     $response = json_encode(array(

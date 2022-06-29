@@ -40,21 +40,22 @@ function map_source_to_html_item(DOMElement $source, string $html_item, array $s
  * Retourne un extrait au format option ou li HTML
  * @param DOMElement $clip Un élément extrait d'une source
  * @param string $html_item Un élément html de liste (option ou li)
- * @param array $show_data Les données à afficher. Optional. Default = 'label
+ * @param array $show_data Les données à afficher. Optional. [Pas encore implémentée]
  * @return string L'élément extrait au format d'option HTML
  */
-function map_clip_to_html_item(DOMElement $clip, string $html_item, array $show_data = array('label')): string
+function map_clip_to_html_item(DOMElement $clip, string $html_item, array $show_data = array('title, description, debut, fin, auteur, cree_le'),): string
 {
-    $name = $clip->getAttribute('name');
-    $src = path_source($name);
-    $label = $clip->getAttribute('label');
 
-    if (1 === count($show_data) && in_array('label', $show_data))
-        $html = $label;
-    else if (in_array('details', $show_data))
-        $html = html_details($label, html_video_markup($src, 500) . html_download_link($src));
-    else
-        $html = $label;
+    $title = child_element_by_name($clip, 'title')->value;
+    $description = child_element_by_name($clip, 'description')->value;
+    $timecode_start = child_element_by_name($clip, 'debut')->value;
+    $timecode_end = child_element_by_name($clip, 'fin')->value;
+    $author = child_element_by_name($clip, 'auteur')->value;
+    $created_on = child_element_by_name($clip, 'cree_le')->value;
+
+    $src = '';
+
+    $html = html_clip_item($title, $description, $timecode_start, $timecode_end, $author, $created_on, $src);
 
     return sprintf(
         '<%s name="%s">%s</%s>',
@@ -62,6 +63,20 @@ function map_clip_to_html_item(DOMElement $clip, string $html_item, array $show_
         $src,
         $html,
         $html_item
+    );
+}
+
+function html_clip_item(string $title, string $description, string $timecode_start, string $timecode_end, string $author, string $created_on, string $src): string
+{
+    $src = '';
+
+    $summary = sprintf("<h3>%s %s-%s</h3>", $title, $timecode_start, $timecode_end);
+
+    $details = sprintf("%s %s <small>%s</small>", html_video_markup($src, 500), $description,  html_download_link($src));
+
+    return html_details(
+        $summary,
+        $details
     );
 }
 
@@ -132,25 +147,25 @@ function map_declared_sources_to_html_item(string $html_item = 'li', array $show
 
 /**
  * Retourne une liste de clips ordonée sous forme d'options HTML
+ * @param string $source_file Le nom du fichier de la source
  * @param string $html_item Le type d'item (li ou option). Optional. Default = li
  * @param array $show_data les données à afficher dans le markup. Optional. Default = array('label')
  * @param string $filter Un filtre sur les sources à appliquer. Optional. Default = 'all'
  * @param string $order_by L'ordre dans lequel sont présentés les extraits. Optional. Default = 'timecode_start'
  * @return array 
  */
-function map_declared_clips_to_html_item(string $html_item = 'li', array $show_data = array('label'), string $filter = "all", string $order_by = 'timecode_start'): array
+function map_declared_clips_to_html_item(string $source_file, string $html_item = 'li', string $filter = "all", string $order_by = 'timecode_start'): array
 {
     if (!in_array($html_item, array('li', 'option'))) {
         throw new Exception("html_item invalide.");
     }
 
-    $clips = new DOMNodeList();
-    //$clips = query_declared_clips_of($source);
+    $clips = query_declared_clips_of($source_file);
 
     //Les trier par ordre de timecodestart
 
-    $options = array_map(function ($source) use ($html_item, $show_data) {
-        return map_clip_to_html_item($source, $html_item, $show_data);
+    $options = array_map(function ($clip) use ($html_item) {
+        return map_clip_to_html_item($clip, $html_item);
     }, iterator_to_array($clips));
 
     return $options;

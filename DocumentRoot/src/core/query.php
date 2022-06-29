@@ -53,6 +53,29 @@ function query_declared_clips(string $file_source = SOURCE_FILE): DOMNodeList
 }
 
 /**
+ * Retourne la liste des extraits attachés à une source, une liste vide si la source n'est pas trouvée.
+ * @param string $source_filename Le nom du fichier de la vidéo source
+ * @return DOMNodeList
+ */
+function query_declared_clips_of(string $source_filename): DOMNodeList
+{
+    if (empty($source_filename))
+        return new DOMNodeList();
+
+    $source = query_source_by_unique_attr('name', $source_filename);
+
+    if (false === $source)
+        return new DOMNodeList();
+
+    if (!$source->hasChildNodes())
+        return new DOMNodeList();
+
+    $clips =  $source->childNodes;
+
+    return $clips;
+}
+
+/**
  * Retourne l'élément source dont l'attribut attr_name a la valeur $value, faux si aucun match
  * @param string $attr_name Le nom de l'attribut
  * @param string $value La valeur de l'attribut name de la source rechercé
@@ -85,20 +108,6 @@ function query_source_by_unique_attr(string $attr_name, string $value, string $f
     return false;
 }
 
-/**
- * Remarque : Non implémentée.
- * Retourne l'élément clip demandé, faux s'il n'existe pas
- * @param string $source La source du clip (son parent)
- * @param string $slug Le slug du clip
- * @param string $timecode_start
- * @param string $timecode_end
- * @param string $return Ce qu'on veut retourner (un DOMNode ou un Clip)
- * @return DOMNode|Clip|false
- */
-function query_clip(string $source, string $slug, string $timecode_start, string $timecode_end, string $return = 'node', string $file_source = SOURCE_FILE): DOMNode|Clip|false
-{
-    return false;
-}
 
 
 /**
