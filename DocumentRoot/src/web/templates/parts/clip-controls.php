@@ -43,10 +43,14 @@
     </button>
 
     <button name="btn_preview_tail" id="btn_preview_tail" class="btn-edition" type="button" title="La traine correspond à la portion située juste après le timecode de fin, afin de mieux visualiser la fin du cut">
-        <div class="shortcut">m</div>
+        <div class="shortcut">o</div>
         <?php echo htmlentities('Prévisualiser la traîne'); ?>
     </button>
 
+    <button name="btn_set_marker" id="btn_set_marker" class="btn-edition" type="button" title="Définir un marqueur à la position courante du curseur de lecture">
+        <div class="shortcut">m</div>
+        <?php echo htmlentities('Marquer pour plus tard'); ?>
+    </button>
 
     <div class="label-input">
         <label for="timecode_start">Début*</label>

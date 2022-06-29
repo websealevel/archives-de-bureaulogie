@@ -216,11 +216,19 @@ jQuery(function ($) {
             return
         }
 
-        if ('m' === key && !shiftKey) {
+        if ('o' === key && !shiftKey) {
             preview_trail()
             return
         }
+
+        if ('m' === key && !shiftKey) {
+            set_marker()
+            return
+        }
     })
+
+
+
 
     /**
     * Raccourcis claviers, traitement des évenements keyup.
@@ -360,6 +368,7 @@ function play_preview() {
         $("#timecode_start").addClass('error')
         $("#timecode_end").addClass('error')
 
+        const preview_video_is_playing = $("#video-clip").prop('currentTime') > 0 & !$("#video-clip").prop('paused')
         return
     }
     else {
@@ -436,7 +445,16 @@ function play_pause_video_source() {
 /**
  * Met à jour le timecode de départ avec le temps courant du player video source
  */
-function set_timecode_start() {
+function set_timecode_start(start_in_sec) {
+
+    console.log(start_in_sec)
+
+    if (start_in_sec) {
+        console.log('here')
+        $("#video-source").prop("currentTime", start_in_sec)
+        return
+    }
+
     const timecode_seconds = $("#video-source").prop("currentTime")
     const hh_mm_ss_lll = seconds_to_hh_mm_ss_lll(timecode_seconds)
     $("#timecode_start").val(hh_mm_ss_lll)
@@ -446,6 +464,52 @@ function set_timecode_start() {
     if (is_playing) {
         play_preview()
     }
+}
+
+/**
+ * Définit un markeur à la position courante du lecteur. Ajoute un listeneur sur le markeur pour servir de lien vers la vidéo (qui se déclenche a la position définie par le marker)
+ */
+function set_marker() {
+
+    const class_btn_delete_marker = 'btn-delete-marker'
+    const currentTime = $("#video-source").prop('currentTime')
+    const currentTime_sec = Math.trunc(parseInt(currentTime))
+    const li = `<li class="marker">${currentTime_sec} <button class="${class_btn_delete_marker}">Supprimer</button></li>`
+
+    //Check que le marker n'existe pas déjà (a la seconde pres)
+    $("#list-markers").append(li)
+
+    const $li_appended = $("#list-markers").children("li:last-child")
+
+
+    //Event listener : click sur le marqueur ou click sur supprimer
+    $li_appended.click(function (event) {
+
+        const delete_marker_btn_clicked = event.originalEvent.target.className === class_btn_delete_marker
+
+        if (delete_marker_btn_clicked) {
+            $(this).remove()
+            return
+        }
+
+        const content = $(this)[0].innerText
+
+        //On récupere le début dela position du bouton supprimer
+        const pos = content.indexOf('S')
+
+        //On récupere uniquement le temps en seconde
+        const time_part = content.substring(0, pos)
+
+        const currentTime = parseFloat(time_part)
+
+        $("#video-source").prop('currentTime', currentTime)
+
+        const source_video_is_playing = $("#video-source").prop('currentTime') > 0 & !$("#video-source").prop('paused')
+
+        if (!source_video_is_playing)
+            $("#video-source").trigger('play')
+
+    })
 }
 
 /**

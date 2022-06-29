@@ -169,3 +169,8 @@ summary .clip-item-header{
 	text-decoration: underline blue;
 	cursor: pointer;
 }
+
+.two-col-side{
+	display: flex;
+	gap: 20px;
+}

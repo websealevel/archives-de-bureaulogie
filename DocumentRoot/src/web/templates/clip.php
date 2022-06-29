@@ -128,9 +128,15 @@ $token = register_api_token($account, 'submit_clip');
     </form>
 </main>
 
-<side>
-    <h2>Extraits existants</h2>
-    <?php esc_html_list_clips_of_source_e(show_data: array('details'), name_attr: 'list-clips-on-current-source'); ?>
+<side class="two-col-side">
+    <div>
+        <?php esc_html_list_clips_of_source_e(show_data: array('details'), name_attr: 'list-clips-on-current-source'); ?>
+    </div>
+
+    <div>
+        <h2>Vos marqueurs</h2>
+        <ul name="list-markers" id="list-markers"></ul>
+    </div>
 </side>
 
 
