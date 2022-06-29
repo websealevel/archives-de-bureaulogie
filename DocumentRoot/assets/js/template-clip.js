@@ -74,11 +74,12 @@ jQuery(function ($) {
     /**
      * Boutons de controle du lecteur/edition
      */
-    $("#video-source").on('play', function () {
+    $("#video-source").on('play', function (event) {
         $("#video-clip").trigger('pause')
     })
 
-    $("#video-clip").on('play', function () {
+    $("#video-clip").on('play', function (event) {
+        ignore_if_input_text_is_focused(event)
         $("#video-source").trigger('pause')
     })
 
@@ -161,10 +162,22 @@ jQuery(function ($) {
         }
     }
 
+    function any_input_text_is_focused(event) {
+        return $("#title").is(":focus") || $("#description").is(":focus")
+    }
+
     /**
      * Raccourcis claviers, traitement des évenements keydown.
      */
     $(document).keydown(function (event) {
+
+        /**
+         * Désactiver les raccourcis si on est en focus sur un champ text ou text area
+         */
+
+        if (any_input_text_is_focused(event))
+            return
+
 
         const key = event.originalEvent.key
         const shiftKey = event.originalEvent.shiftKey
@@ -219,6 +232,8 @@ jQuery(function ($) {
         const shiftKey = event.originalEvent.shiftKey
 
         if (83 === keyCode && !shiftKey) {
+            if (any_input_text_is_focused(event))
+                return
             play_pause_video_source()
             return
         }
@@ -473,7 +488,8 @@ function update_clip_duration() {
 function seconds_to_hh_mm_ss_lll(timecode_seconds) {
 
     const miliseconds = Math.floor((timecode_seconds - Math.floor(timecode_seconds)) * 1000)
-    const miliseconds_formatted = miliseconds < 100 ? '0' + miliseconds : miliseconds
+    const miliseconds_formatted_tmp = miliseconds < 100 ? '0' + miliseconds : miliseconds
+    const miliseconds_formatted = miliseconds < 10 ? '0' + miliseconds_formatted_tmp : miliseconds_formatted_tmp
 
     const seconds = Math.floor(timecode_seconds % 60)
     const seconds_formatted = seconds < 10 ? '0' + seconds : seconds
