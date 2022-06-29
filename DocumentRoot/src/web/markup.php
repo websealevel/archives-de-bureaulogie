@@ -37,6 +37,35 @@ function map_source_to_html_item(DOMElement $source, string $html_item, array $s
 }
 
 /**
+ * Retourne un extrait au format option ou li HTML
+ * @param DOMElement $clip Un élément extrait d'une source
+ * @param string $html_item Un élément html de liste (option ou li)
+ * @param array $show_data Les données à afficher. Optional. Default = 'label
+ * @return string L'élément extrait au format d'option HTML
+ */
+function map_clip_to_html_item(DOMElement $clip, string $html_item, array $show_data = array('label')): string
+{
+    $name = $clip->getAttribute('name');
+    $src = path_source($name);
+    $label = $clip->getAttribute('label');
+
+    if (1 === count($show_data) && in_array('label', $show_data))
+        $html = $label;
+    else if (in_array('details', $show_data))
+        $html = html_details($label, html_video_markup($src, 500) . html_download_link($src));
+    else
+        $html = $label;
+
+    return sprintf(
+        '<%s name="%s">%s</%s>',
+        $html_item,
+        $src,
+        $html,
+        $html_item
+    );
+}
+
+/**
  * Retourne un lien de téléchargement d'une ressource
  * @param string $ressource_abs_path Le chemin absolu de la ressource
  * @return string
@@ -95,6 +124,26 @@ function map_declared_sources_to_html_item(string $html_item, array $show_data =
     $options = array_map(function ($source) use ($html_item, $show_data) {
         return map_source_to_html_item($source, $html_item, $show_data);
     }, iterator_to_array($sources));
+
+    return $options;
+}
+
+/**
+ * Retourne une liste de clips sous forme d'options HTML
+ * @param string $filter Un filtre sur les sources à appliquer. Optional. Default = 'all'
+ * @return array 
+ */
+function map_declared_clips_to_html_item(string $html_item, array $show_data = array('label'), string $filter = "all"): array
+{
+    if (!in_array($html_item, array('li', 'option'))) {
+        throw new Exception("html_item invalide.");
+    }
+
+    $clips = new DOMNodeList();
+
+    $options = array_map(function ($source) use ($html_item, $show_data) {
+        return map_clip_to_html_item($source, $html_item, $show_data);
+    }, iterator_to_array($clips));
 
     return $options;
 }
