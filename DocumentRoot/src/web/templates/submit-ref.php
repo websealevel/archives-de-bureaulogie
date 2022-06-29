@@ -18,4 +18,6 @@ if (!current_user_can('submit_reference'))
 
 <h2>Soumettre une référence bibliographique</h2>
 
+<p>Page en construction...</p>
+
 <?php present_footer(); ?>

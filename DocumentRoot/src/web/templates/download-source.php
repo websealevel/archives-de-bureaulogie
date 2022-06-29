@@ -72,7 +72,7 @@ $token = register_api_token($account, 'add_source');
         <p>
             <input type="hidden" name="token" value="<?php echo $token; ?>">
             <input type="hidden" name="fax" value="">
-            <input type="button" value="Ajouter" id="submit">
+            <input type="button" class="btn-edition" value="Ajouter" id="submit">
         </p>
     </form>
 

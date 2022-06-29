@@ -27,10 +27,9 @@ textarea {
 	word-wrap: normal !important;
 }
 
-#sources {
+select {
 	font-size: 24px;
 	padding: 5px;
-
 }
 
 .label-input {
@@ -150,4 +149,17 @@ textarea {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+}
+
+.site-title{
+	font-size: 50px;
+	letter-spacing: -2px;
+}
+
+.fil-arianne{
+	margin: 20px 0;
+}
+
+li{
+	margin:2px; 
 }

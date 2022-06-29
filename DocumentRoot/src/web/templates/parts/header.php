@@ -40,13 +40,11 @@ autoload();
 
             <div class="site-branding">
 
-                <p class="site-title">
-                    <a href="<?php esc_html_e(home_rel_url()); ?>">
-                        <h1>
-                            <?php esc_html_e(site_title()); ?>
-                        </h1>
-                    </a>
-                </p>
+                <a href="<?php esc_html_e(home_rel_url()); ?>">
+                    <h1 class="site-title">
+                        <?php esc_html_e(site_title()); ?>
+                    </h1>
+                </a>
                 <small>
                     Contribuez aux collections publiques d'archives vidéos et de ressources bibliographiques de bureaulogie
                 </small>
