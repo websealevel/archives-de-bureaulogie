@@ -62,6 +62,11 @@ function api_download_source()
     }
 
     //Check le token
+    //Valider le token
+    if (!($_POST['token'] && is_valid_token($_POST['token'], 'add_source'))) {
+        api_respond_with_error();
+    }
+
 
     //Validation des inputs du formulaire
     $input_validations = check_download_source_form();
