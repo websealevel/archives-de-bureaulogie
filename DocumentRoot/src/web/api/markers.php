@@ -90,8 +90,11 @@ function api_markers()
     //tmp
     $account_id = 1;
 
+    //Remplacer ça par un match.
     switch ($clean['action']) {
+
         case 'add':
+
             try {
                 $id = sql_insert_marker($clean['source_name'], $account_id, $clean['position_in_sec']);
             } catch (PDOException $e) {
@@ -104,6 +107,7 @@ function api_markers()
             //Retourner l'id du marqueur au front (servira d'uui pour le markup du marker)
 
             break;
+
         case 'remove':
 
             try {
@@ -115,9 +119,19 @@ function api_markers()
                 ));
             }
             break;
+
         case 'fetch':
             //Retourner la liste des marqueurs de l'utilisateur pour cette vidéo source.
+            try {
+                // $result = select_markers();
+            } catch (PDOException $e) {
+                error_log($e);
+                api_respond_with_error(array(
+                    new InputValidation('', '', "Impossible de récupérer les marqueurs")
+                ));
+            }
             break;
+
         default:
             api_respond_with_error();
     };
