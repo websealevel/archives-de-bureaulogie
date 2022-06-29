@@ -26,6 +26,15 @@ CREATE TABLE accounts (
     CONSTRAINT fk_role FOREIGN KEY (role_id) REFERENCES roles (role_id)
 );
 
+-- Table des marqueurs sur des clips
+CREATE TABLE clip_markers (
+    cm_id INT PRIMARY KEY,
+    cm_clip_file_name VARCHAR (255) NOT NULL,
+    cm_account_id INT NOT NULL,
+    CONSTRAINT fk_account FOREIGN KEY (cm_account_id) REFERENCES accounts (id), 
+    require_authentification_check BOOLEAN NOT NULL
+);
+
 -- Table de jointure roles-capabilities.
 CREATE TABLE roles_capabilities (
     role_id INT NOT NULL,
@@ -194,6 +203,29 @@ VALUES
         true
     );
 
+-- Voir documentation.
+-- Roles et capabilities
+-- - superadmin
+--   - ajouter un admin
+--   - changer le role de admin à modérateur
+-- - admin 
+--   - ajouter un modérateur
+--   - éditer ressources bilbio de tout le monde
+--   - lister toutes les ressources biblio
+--   - lister tous les extraits
+--   - ajouter une source
+--   - supprimer une source
+--   - bannir le compte modérateur/contributeur
+--   - changer le role de modérateur vers contributeur
+-- - modérateur
+--   - modérer une ressource biblio
+--   - modérer un extrait vidéo
+-- - contributeur
+--   - proposer un extrait vidéo
+--   - proposer une ressource biblio
+--   - voir ses extraits vidéos par source
+--   - voir ses ressources biblios
+
 INSERT INTO
     roles_capabilities(role_id, cap_id)
 VALUES
@@ -224,24 +256,3 @@ VALUES
     (1, 18),
     (1, 19);
 
--- Roles et capabilities
--- - superadmin
---   - ajouter un admin
---   - changer le role de admin à modérateur
--- - admin 
---   - ajouter un modérateur
---   - éditer ressources bilbio de tout le monde
---   - lister toutes les ressources biblio
---   - lister tous les extraits
---   - ajouter une source
---   - supprimer une source
---   - bannir le compte modérateur/contributeur
---   - changer le role de modérateur vers contributeur
--- - modérateur
---   - modérer une ressource biblio
---   - modérer un extrait vidéo
--- - contributeur
---   - proposer un extrait vidéo
---   - proposer une ressource biblio
---   - voir ses extraits vidéos par source
---   - voir ses ressources biblios
