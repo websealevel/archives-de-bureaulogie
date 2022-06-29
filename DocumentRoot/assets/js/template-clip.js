@@ -8,6 +8,32 @@ jQuery(function ($) {
     $("#video-clip").prop('src', source_url)
     $("#source_name").val(source_url)
 
+
+    /**
+     * Initialise la lite des extraits sur la source
+     */
+ 
+
+    $.post('/api/v1/list-clips', source_url).done(function (response) {
+
+        //Si le formulaire est rejeté on récupere les erreurs et on les affiche
+        if (typeof response !== 'string' && '' !== response && 'errors' in response) {
+            const errors = response.errors
+            let items = []
+            for (const input in errors) {
+                items.push("<li>" + errors[input].message + "</li>")
+            }
+            $("div.errors").html('<ul>' + items.join('') + '</ul>')
+        } else {
+
+        }
+
+    }).fail(function () {
+        $("div.errors").html('Hmm, il semblerait qu\'il y ait eu un problème de connexion. Veuillez rééssayer s\'il vous plaît.')
+    }).always(function () {
+
+    })
+
     /**
      * Timer
      */
