@@ -23,6 +23,8 @@ require_once __DIR__ . '/../../handlers.php';
 
     <?php present_template_part('form-login'); ?>
 
+
+    <div class="annonce">Les archives de bureaulogie sont en cours de construction... Elles ouvriront bientôt leurs portes au public. Merci de votre compréhension.</div>
 <?php else : ?>
 
     <p>Salut <?php esc_html_e(current_user_pseudo()); ?> !</p>

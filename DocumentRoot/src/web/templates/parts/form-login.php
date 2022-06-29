@@ -12,9 +12,9 @@
 require_once __DIR__ . '/../../utils.php';
 ?>
 
-<div class="annonce">Les archives de bureaulogie ouvriront bientôt leur portes</div>
 
-<h2>Connexion</h2>
+
+<h2>Accueil</h2>
 <div class="form-login">
     <form action="log-in" method="POST">
         <div>
@@ -23,7 +23,7 @@ require_once __DIR__ . '/../../utils.php';
             <div class="error-message"><?php esc_html_form_error_msg_e('login', 'form_errors') ?></div>
         </div>
         <div>
-            <label for="password">pot de passe </label>
+            <label for="password">mot de passe </label>
             <input type="password" id="password" name="password" value="password">
             <div class="error-message"><?php esc_html_form_error_msg_e('password', 'form_errors') ?></div>
         </div>
