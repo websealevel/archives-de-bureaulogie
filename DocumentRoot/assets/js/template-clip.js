@@ -21,6 +21,9 @@ jQuery(function ($) {
 
         const data = { source: source_url }
 
+
+        //Clear previous clips
+        $("#list-clips-on-current-source").empty()
         $.post('/api/v1/list-clips', data).done(function (response) {
 
             //Si le formulaire est rejeté on récupere les erreurs et on les affiche
@@ -33,6 +36,7 @@ jQuery(function ($) {
                 $("div.errors").html('<ul>' + items.join('') + '</ul>')
             } else {
                 const clips = response.extrait
+
                 $("#list-clips-on-current-source").append(clips)
             }
 

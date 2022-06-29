@@ -53,7 +53,12 @@ function map_clip_to_html_item(DOMElement $clip, string $html_item, array $show_
     $author = child_element_by_name($clip, 'auteur')->nodeValue;
     $created_on = child_element_by_name($clip, 'cree_le')->nodeValue;
 
-    $src = '';
+    $source = declared_source_of($clip);
+    $source_parts = pathinfo(source_name($source));
+
+    $clip_name = build_clip_name($source_parts['filename'], $timecode_start, $timecode_end);
+
+    $src = path_clip($clip_name);
 
     $html = html_clip_item($title, $description, $timecode_start, $timecode_end, $author, $created_on, $src);
 
@@ -73,9 +78,9 @@ function map_clip_to_html_item(DOMElement $clip, string $html_item, array $show_
  */
 function html_clip_item(string $title, string $description, string $timecode_start, string $timecode_end, string $author, string $created_on, string $src): string
 {
-    $summary = sprintf("<h3>%s %s-%s</h3>", $title, $timecode_start, $timecode_end);
+    $summary = sprintf('<div class="clip-item-header">%s %s-%s</div>', $title, $timecode_start, $timecode_end);
 
-    $details = sprintf("%s %s <small>%s</small>", html_video_markup($src, 500), html_download_link($src), $description);
+    $details = sprintf("%s %s <small>%s</small> <small>auteur: %s, crée le: %s</small>", html_video_markup($src, 500), html_download_link($src), $description, $author, $created_on);
 
     return html_details(
         $summary,
@@ -104,7 +109,7 @@ function html_video_markup(string $src, int $width = 400): string
 {
     return sprintf('
     <video controls width="%d">
-    <source src="%s" type="video/webm">
+    <source src="%s" type="video/mp4">
     Désolé, votre navigateur ne supporte pas le tag video HTML5</video>
     ', $width, $src);
 }
