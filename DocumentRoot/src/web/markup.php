@@ -46,12 +46,12 @@ function map_source_to_html_item(DOMElement $source, string $html_item, array $s
 function map_clip_to_html_item(DOMElement $clip, string $html_item, array $show_data = array('title, description, debut, fin, auteur, cree_le'),): string
 {
 
-    $title = child_element_by_name($clip, 'title')->value;
-    $description = child_element_by_name($clip, 'description')->value;
-    $timecode_start = child_element_by_name($clip, 'debut')->value;
-    $timecode_end = child_element_by_name($clip, 'fin')->value;
-    $author = child_element_by_name($clip, 'auteur')->value;
-    $created_on = child_element_by_name($clip, 'cree_le')->value;
+    $title = child_element_by_name($clip, 'title')->nodeValue;
+    $description = child_element_by_name($clip, 'description')->nodeValue;
+    $timecode_start = child_element_by_name($clip, 'debut')->nodeValue;
+    $timecode_end = child_element_by_name($clip, 'fin')->nodeValue;
+    $author = child_element_by_name($clip, 'auteur')->nodeValue;
+    $created_on = child_element_by_name($clip, 'cree_le')->nodeValue;
 
     $src = '';
 
