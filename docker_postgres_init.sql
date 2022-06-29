@@ -32,6 +32,7 @@ CREATE TABLE clip_markers (
     -- le nom de fichier de la source
     cm_source_name VARCHAR (255) NOT NULL,
     cm_account_id INT NOT NULL,
+    cm_position_in_sec INT NOT NULL,
     CONSTRAINT fk_account FOREIGN KEY (cm_account_id) REFERENCES accounts (id), 
     require_authentification_check BOOLEAN NOT NULL
 );

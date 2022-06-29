@@ -73,8 +73,7 @@ function api_markers()
 
     $clean['source_name'] = $source_name;
 
-    //Check position_in_sec: si pas un entier, erreur
-    //Check source_name
+    //Check position_in_sec
     if (!isset($data['position_in_sec'])) {
         api_respond_with_error();
     }
@@ -87,7 +86,18 @@ function api_markers()
 
     $clean['position_in_sec'] = $data['position_in_sec'];
 
-    write_log($clean);
+    //tmp
+    $account_id = 1;
+
+    switch ($clean['action']) {
+        case 'add':
+            $result = sql_insert_marker($clean['source_name'], $account_id, $clean['position_in_sec']);
+            break;
+        case 'delete':
+            break;
+        default:
+            api_respond_with_error();
+    };
 
     echo 'Sauvegarde du marqueur...';
 
