@@ -44,48 +44,13 @@ function api_markers()
         'position_in_sec' => FILTER_SANITIZE_ENCODED
     ));
 
-    $clean = array();
+    $clean = validate_markers_input($data);
 
-    //Check action
-    if (!isset($data['action']) && !in_array($data['action'], array(
-        'add', 'remove', 'fetch'
-    ))) {
+    if (false === $clean) {
         api_respond_with_error(array(
-            new InputValidation('', '', "Action invalide")
+            new InputValidation('', '', "Les données transmises ne sont pas correctes.")
         ));
     }
-
-    $clean['action'] = $data['action'];
-
-    //Check source_name
-    if (!isset($data['source_name'])) {
-        api_respond_with_error();
-    }
-    //Remarque: on recupere le source_name comme 'sources/{nom de la source}'. Le slash est encodé
-    $pattern = '%2F'; //slash
-    $pos = strpos($data['source_name'], '%2F');
-    $source_name = substr($data['source_name'], $pos + strlen($pattern));
-
-    if (!(source_has_valid_filename_format($source_name) && source_exists($source_name))) {
-        api_respond_with_error(array(
-            new InputValidation('', '', "Source invalide")
-        ));
-    }
-
-    $clean['source_name'] = $source_name;
-
-    //Check position_in_sec
-    if (!isset($data['position_in_sec'])) {
-        api_respond_with_error();
-    }
-
-    if (!is_numeric($data['position_in_sec'])) {
-        api_respond_with_error(array(
-            new InputValidation('', '', "Position (en secondes) invalide")
-        ));
-    }
-
-    $clean['position_in_sec'] = $data['position_in_sec'];
 
     //tmp
     $account_id = 1;
@@ -138,4 +103,51 @@ function api_markers()
 
     echo 'wip...';
     exit;
+}
+
+/**
+ * Retourne les données clean si toutes les données sont validées, faux sinon
+ * @param array $data Les données nécessaires au traitement d'une requête sur les marqueurs
+ * @return array|false
+ */
+function validate_markers_input($data): array|false
+{
+    $clean = array();
+
+    //Check action
+    if (!isset($data['action']) && !in_array($data['action'], array(
+        'add', 'remove', 'fetch'
+    ))) {
+        return false;
+    }
+
+    $clean['action'] = $data['action'];
+
+    //Check source_name
+    if (!isset($data['source_name'])) {
+        return false;
+    }
+    //Remarque: on recupere le source_name comme 'sources/{nom de la source}'. Le slash est encodé
+    $pattern = '%2F'; //slash
+    $pos = strpos($data['source_name'], '%2F');
+    $source_name = substr($data['source_name'], $pos + strlen($pattern));
+
+    if (!(source_has_valid_filename_format($source_name) && source_exists($source_name))) {
+        return false;
+    }
+
+    $clean['source_name'] = $source_name;
+
+    //Check position_in_sec
+    if (!isset($data['position_in_sec'])) {
+        return false;
+    }
+
+    if (!is_numeric($data['position_in_sec'])) {
+        return false;
+    }
+
+    $clean['position_in_sec'] = $data['position_in_sec'];
+
+    return $clean;
 }
