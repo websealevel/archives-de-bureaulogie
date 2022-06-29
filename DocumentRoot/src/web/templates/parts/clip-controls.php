@@ -56,7 +56,7 @@ Sinon, utiliser le bouton 'Démarrer l'extrait ici' prévu à cet effet">
 
     <div class="label-input">
         <label for="timecode_end">Fin*</label>
-        <input type="text" name="timecode_end" id="timecode_end" value="00:00:12.000" pattern="[0-9]{2}:[0-9]{2}:[0-9]{2}.[0-9]{3}" title="Veuillez renseigner un timecode au format hh:mm:ss.lll
+        <input type="text" name="timecode_end" id="timecode_end" value="00:00:00.000" pattern="[0-9]{2}:[0-9]{2}:[0-9]{2}.[0-9]{3}" title="Veuillez renseigner un timecode au format hh:mm:ss.lll
 Sinon, utiliser le bouton 'Finir l'extrait ici' prévu à cet effet">
     </div>
 

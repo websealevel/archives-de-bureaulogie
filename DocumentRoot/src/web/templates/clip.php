@@ -71,6 +71,7 @@ $token = register_api_token($account, 'submit_clip');
     </div>
 
     <div class="errors" style="color: red;"></div>
+    <div class="success" style="color: green;"></div>
 
     <form action="clip-source" id="form-clip-source" name="form-clip-source">
 

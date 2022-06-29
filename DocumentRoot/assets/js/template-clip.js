@@ -309,8 +309,7 @@ function post_clip() {
             //Clean error messages.
             $("div.errors").html('')
 
-            //Ajouter un message (feedback) : Extrait généré avec succes !
-            $("div.errors").html("L'extrait a été ajouté avec succès !")
+            $("div.success").html("L'extrait a été ajouté avec succès !")
 
             $("#list-clips-on-current-source").append(response.extrait)
             //La réponse: un markup html contenant les infos sur le nouveau clip
