@@ -370,18 +370,20 @@ A venir...
 
 ### v1.0
 
-- se créer un compte et se connecter
-- soumettre une vidéo source
-- télécharger la vidéo source
-- éditeur d'extrait custom
-- soumettre des extraits à partir des vidéos sources
-- produire des extraits [respectant des contraintes audio et vidéo](#cahier-des-charges-pour-lencodage-vidéoaudio-des-extraits) (dimensions, encodages, normalization audio, etc.)
-- lister les extraits sur chaque vidéo source
-- télécharger les extraits
+- se créer un compte et se connecter [x]
+- soumettre une vidéo source [x]
+- télécharger la vidéo source [x]
+- éditeur d'extrait custom [x]
+- soumettre des extraits à partir des vidéos sources [x]
+- produire des extraits [respectant des contraintes audio et vidéo] [x](#cahier-des-charges-pour-lencodage-vidéoaudio-des-extraits) (dimensions, encodages, normalization audio, etc.)
+- lister les extraits sur chaque vidéo source [x]
+- télécharger les extraits [x]
+- marquer videos sources pour plus tard, ajouter/supprimer/recuperer (persisté en base) []
 
 ### v2.0
 
 - intégration 
+- ameliorer navigation avec markeurs de clip (markeur suivant, markeur précédent)
 - mise en place des rôles
 - soumettre une référence
 - lister les références
