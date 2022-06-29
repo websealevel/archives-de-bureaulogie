@@ -473,8 +473,13 @@ function set_marker() {
 
     const class_btn_delete_marker = 'btn-delete-marker'
     const currentTime = $("#video-source").prop('currentTime')
-    const currentTime_sec = Math.trunc(parseInt(currentTime))
-    const li = `<li class="marker">${currentTime_sec} <button class="${class_btn_delete_marker}">Supprimer</button></li>`
+    const currentTime_sec = parseInt(currentTime)
+
+    const li = `<li id="${currentTime_sec}" class="marker">${currentTime_sec} <button class="${class_btn_delete_marker}">Supprimer</button></li>`
+
+    //Avoid doublon
+    if ($(`li#${currentTime_sec}`).length > 0)
+        return
 
     //Check que le marker n'existe pas déjà (a la seconde pres)
     $("#list-markers").append(li)
