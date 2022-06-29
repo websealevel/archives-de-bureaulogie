@@ -44,7 +44,7 @@ function api_markers()
         'position_in_sec' => FILTER_SANITIZE_ENCODED
     ));
 
-    $clean = validate_markers_input($data);
+    $clean = api_markers_validate_input($data);
 
     if (false === $clean) {
         api_respond_with_error(array(
@@ -110,7 +110,7 @@ function api_markers()
  * @param array $data Les données nécessaires au traitement d'une requête sur les marqueurs
  * @return array|false
  */
-function validate_markers_input($data): array|false
+function api_markers_validate_input($data): array|false
 {
     $clean = array();
 
