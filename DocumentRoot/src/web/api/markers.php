@@ -48,7 +48,7 @@ function api_markers()
 
     //Check action
     if (!isset($data['action']) && !in_array($data['action'], array(
-        'add', 'remove'
+        'add', 'remove', 'fetch'
     ))) {
         api_respond_with_error(array(
             new InputValidation('', '', "Action invalide")
@@ -115,11 +115,13 @@ function api_markers()
                 ));
             }
             break;
+        case 'fetch':
+            //Retourner la liste des marqueurs de l'utilisateur pour cette vidéo source.
+            break;
         default:
             api_respond_with_error();
     };
 
-    echo 'Sauvegarde du marqueur...';
-
+    echo 'wip...';
     exit;
 }
