@@ -50,9 +50,6 @@ if (!is_signup_activated())
         <select name="heard_about_bureaulogy" id="">
             <option hidden disabled selected value> -- choisir une réponse -- </option>
             <option value="tribunal_des_bureaux">au tribunal</option>
-            <option value="yes">oui, exactement</option>
-            <option value="not_really">pas tout à fait</option>
-            <option value="monty_python">je suis fan des Monty Python</option>
             <option value="unknow">je ne souhaite pas répondre</option>
             <option value="unknow"><i>je ne connais pas la bureaulogie</i></option>
         </select>
