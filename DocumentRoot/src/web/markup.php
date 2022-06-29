@@ -75,7 +75,7 @@ function html_clip_item(string $title, string $description, string $timecode_sta
 {
     $summary = sprintf("<h3>%s %s-%s</h3>", $title, $timecode_start, $timecode_end);
 
-    $details = sprintf("%s %s <small>%s</small>", html_video_markup($src, 500), $description,  html_download_link($src));
+    $details = sprintf("%s %s <small>%s</small>", html_video_markup($src, 500), html_download_link($src), $description);
 
     return html_details(
         $summary,
