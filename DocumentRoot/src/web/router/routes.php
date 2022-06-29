@@ -28,6 +28,7 @@ require_once __DIR__ . '/../actions/confirm-authentification.php';
 require_once __DIR__ . '/../api/download-source.php';
 require_once __DIR__ . '/../api/clip-source.php';
 require_once __DIR__ . '/../api/list-clips.php';
+require_once __DIR__ . '/../api/markers.php';
 
 /**
  * Retourne toutes les routes de l'application sous la clef de leurs méthodes respectives
@@ -95,6 +96,9 @@ function routes(): array
             },
             '/api/v1/list-clips' => function () {
                 api_list_clips();
+            },
+            '/api/v1/markers' => function () {
+                api_markers();
             },
         )
     );

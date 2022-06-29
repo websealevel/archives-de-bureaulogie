@@ -29,7 +29,7 @@ CREATE TABLE accounts (
 -- Table des marqueurs sur des clips
 CREATE TABLE clip_markers (
     cm_id INT PRIMARY KEY,
-    cm_clip_file_name VARCHAR (255) NOT NULL,
+    cm_ VARCHAR (255) NOT NULL,
     cm_account_id INT NOT NULL,
     CONSTRAINT fk_account FOREIGN KEY (cm_account_id) REFERENCES accounts (id), 
     require_authentification_check BOOLEAN NOT NULL

@@ -471,7 +471,7 @@ function set_timecode_start(start_in_sec) {
  * Fetch les marqueurs de l'utilisateur connecté enregistrée pour la vidéo source
  * @param {string} source_url 
  */
-function fetch_clip_markers_of_current_source(source_url){
+function fetch_clip_markers_of_current_source(source_url) {
 
 
 }
@@ -491,45 +491,82 @@ function set_marker() {
     if ($(`li#${currentTime_sec}`).length > 0)
         return
 
+    const data = {
+        action: 'add',
+        source_name: '',
+        position_in_sec: currentTime_sec
+    };
 
     //Envoyer une requete pour ajouter le marqueur.
 
-    //Check que le marker n'existe pas déjà (a la seconde pres)
-    $("#list-markers").append(li)
+    $.post('/api/v1/markers', data).done(function (response) {
 
-    const $li_appended = $("#list-markers").children("li:last-child")
+        console.log(response)
 
-
-    //Event listener : click sur le marqueur ou click sur supprimer
-    $li_appended.click(function (event) {
-
-        const delete_marker_btn_clicked = event.originalEvent.target.className === class_btn_delete_marker
-
-        if (delete_marker_btn_clicked) {
-
-            //Envoyer une requete pour supprimer le marqueur.
-
-            $(this).remove()
+        //Si le formulaire est rejeté on récupere les erreurs et on les affiche
+        if (typeof response !== 'string' && '' !== response && 'errors' in response) {
+            const errors = response.errors
+            let items = []
+            for (const input in errors) {
+                items.push("<li>" + errors[input].message + "</li>")
+            }
+            $("div.errors").html('<ul>' + items.join('') + '</ul>')
             return
         }
 
-        const content = $(this)[0].innerText
+        //Success
+        //Check que le marker n'existe pas déjà (a la seconde pres)
+        $("#list-markers").append(li)
 
-        //On récupere le début dela position du bouton supprimer
-        const pos = content.indexOf('S')
+        const $li_appended = $("#list-markers").children("li:last-child")
 
-        //On récupere uniquement le temps en seconde
-        const time_part = content.substring(0, pos)
+        //Event listener : click sur le marqueur ou click sur supprimer
+        $li_appended.click(function (event) {
 
-        const currentTime = parseFloat(time_part)
+            const delete_marker_btn_clicked = event.originalEvent.target.className === class_btn_delete_marker
 
-        $("#video-source").prop('currentTime', currentTime)
+            if (delete_marker_btn_clicked) {
 
-        const source_video_is_playing = $("#video-source").prop('currentTime') > 0 & !$("#video-source").prop('paused')
+                //Envoyer une requete pour supprimer le marqueur.
+                const data = {
+                    action: 'delete',
+                    source_name: '',
+                    position_in_sec: currentTime_sec
+                };
 
-        if (!source_video_is_playing)
-            $("#video-source").trigger('play')
+                // $.post('/api/v1/markers', data).done(function (response) {
+                // })
 
+                $(this).remove()
+                return
+            }
+
+            const content = $(this)[0].innerText
+
+            //On récupere le début dela position du bouton supprimer
+            const pos = content.indexOf('S')
+
+            //On récupere uniquement le temps en seconde
+            const time_part = content.substring(0, pos)
+
+            const currentTime = parseFloat(time_part)
+
+            $("#video-source").prop('currentTime', currentTime)
+
+            const source_video_is_playing = $("#video-source").prop('currentTime') > 0 & !$("#video-source").prop('paused')
+
+            if (!source_video_is_playing)
+                $("#video-source").trigger('play')
+
+        })
+
+        //Clean error messages.
+        $("div.errors").html('')
+        $("div.success").html("Le marqueur a bien été enregistré")
+
+
+    }).fail(function () {
+        $("div.errors").html('Hmm, il semblerait qu\'il y ait eu un problème de connexion. Veuillez rééssayer s\'il vous plaît.')
     })
 }
 
