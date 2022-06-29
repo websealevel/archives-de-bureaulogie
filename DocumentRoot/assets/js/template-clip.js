@@ -475,7 +475,7 @@ function set_marker() {
     const currentTime = $("#video-source").prop('currentTime')
     const currentTime_sec = parseInt(currentTime)
 
-    const li = `<li id="${currentTime_sec}" class="marker">${currentTime_sec} <button class="${class_btn_delete_marker}">Supprimer</button></li>`
+    const li = `<li id="${currentTime_sec}" class="marker"><span class="time">${currentTime_sec}</span> <button class="${class_btn_delete_marker}">Supprimer</button></li>`
 
     //Avoid doublon
     if ($(`li#${currentTime_sec}`).length > 0)

@@ -174,3 +174,9 @@ summary .clip-item-header{
 	display: flex;
 	gap: 20px;
 }
+
+li span.time{
+	text-decoration: underline blue;
+	color: blue;
+	cursor: pointer;
+}
