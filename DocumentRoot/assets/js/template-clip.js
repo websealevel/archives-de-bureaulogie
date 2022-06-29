@@ -79,7 +79,6 @@ jQuery(function ($) {
     })
 
     $("#video-clip").on('play', function (event) {
-        ignore_if_input_text_is_focused(event)
         $("#video-source").trigger('pause')
     })
 
