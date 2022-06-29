@@ -72,17 +72,17 @@ Chaque extrait sera embarqué dans un tweet. Il faut donc veiller à obtenir un 
 
 Après une phase de tests on retiendra les paramètres d'encodage avec les valeurs suivantes
 
-- piste vidéo
+- **piste vidéo**
   -  résolution max : 720p [x]
   -  format: mp4 [x]
   -  frame rate max : 30fps [x]
   -  video bitrate : 369 kbps [x]
-- piste audio
+- **piste audio**
   - data-transfer rate : 96 kbps [x]
   - audio bitrate/échantillonage : 48000 Hz(standard dans un fichier vidéo)  [x]
 - cut à la milliseconde [x]
 - taille maximale ([imposée par Twitter](https://help.twitter.com/en/using-twitter/twitter-videos)) : 2min20s [x]
-- piste audio normalisée sur l'intégralité de l'extrait (et non de la source) []
+- piste audio normalisée (volume max mis à 0dB) sur chaque extrait (et non sur la vidéo source complète) [x]
 
 Ces paramètres s'appliquent *à la fois* au téléchargement des vidéos sources et à l'encodage des extraits générés par l'application.
 
@@ -374,6 +374,7 @@ A venir...
 - télécharger la vidéo source
 - éditeur d'extrait custom
 - soumettre des extraits à partir des vidéos sources
+- produire des extraits [respectant des contraintes audio et vidéo](#cahier-des-charges-pour-lencodage-vidéoaudio-des-extraits) (dimensions, encodages, normalization audio, etc.)
 - lister les extraits sur chaque vidéo source
 - télécharger les extraits
 
