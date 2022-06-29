@@ -9,6 +9,7 @@ jQuery(function ($) {
     $("#source_name").val(source_url)
 
     fetch_clips_of_current_source(source_url)
+    fetch_clip_markers_of_current_source(source_url)
 
     /**
      * Initialise la lite des extraits sur la source
@@ -467,6 +468,15 @@ function set_timecode_start(start_in_sec) {
 }
 
 /**
+ * Fetch les marqueurs de l'utilisateur connecté enregistrée pour la vidéo source
+ * @param {string} source_url 
+ */
+function fetch_clip_markers_of_current_source(source_url){
+
+
+}
+
+/**
  * Définit un markeur à la position courante du lecteur. Ajoute un listeneur sur le markeur pour servir de lien vers la vidéo (qui se déclenche a la position définie par le marker)
  */
 function set_marker() {
@@ -481,6 +491,9 @@ function set_marker() {
     if ($(`li#${currentTime_sec}`).length > 0)
         return
 
+
+    //Envoyer une requete pour ajouter le marqueur.
+
     //Check que le marker n'existe pas déjà (a la seconde pres)
     $("#list-markers").append(li)
 
@@ -493,6 +506,9 @@ function set_marker() {
         const delete_marker_btn_clicked = event.originalEvent.target.className === class_btn_delete_marker
 
         if (delete_marker_btn_clicked) {
+
+            //Envoyer une requete pour supprimer le marqueur.
+
             $(this).remove()
             return
         }
