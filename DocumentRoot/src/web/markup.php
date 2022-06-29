@@ -110,10 +110,12 @@ function html_details(string $summary, string $detail): string
 
 /**
  * Retourne une liste de sources sous forme d'options HTML
+ * @param string $html_item Le type d'item (li ou option). Optional. Default = li
+ * @param array $show_data les données à afficher dans le markup. Optional. Default = array('label')
  * @param string $filter Un filtre sur les sources à appliquer. Optional. Default = 'all'
  * @return array 
  */
-function map_declared_sources_to_html_item(string $html_item, array $show_data = array('label'), string $filter = "all"): array
+function map_declared_sources_to_html_item(string $html_item = 'li', array $show_data = array('label'), string $filter = "all"): array
 {
     if (!in_array($html_item, array('li', 'option'))) {
         throw new Exception("html_item invalide.");
@@ -129,17 +131,22 @@ function map_declared_sources_to_html_item(string $html_item, array $show_data =
 }
 
 /**
- * Retourne une liste de clips sous forme d'options HTML
+ * Retourne une liste de clips ordonée sous forme d'options HTML
+ * @param string $html_item Le type d'item (li ou option). Optional. Default = li
+ * @param array $show_data les données à afficher dans le markup. Optional. Default = array('label')
  * @param string $filter Un filtre sur les sources à appliquer. Optional. Default = 'all'
+ * @param string $order_by L'ordre dans lequel sont présentés les extraits. Optional. Default = 'timecode_start'
  * @return array 
  */
-function map_declared_clips_to_html_item(string $html_item, array $show_data = array('label'), string $filter = "all"): array
+function map_declared_clips_to_html_item(string $html_item = 'li', array $show_data = array('label'), string $filter = "all", string $order_by = 'timecode_start'): array
 {
     if (!in_array($html_item, array('li', 'option'))) {
         throw new Exception("html_item invalide.");
     }
 
     $clips = new DOMNodeList();
+
+    //Les trier par ordre de timecodestart
 
     $options = array_map(function ($source) use ($html_item, $show_data) {
         return map_clip_to_html_item($source, $html_item, $show_data);

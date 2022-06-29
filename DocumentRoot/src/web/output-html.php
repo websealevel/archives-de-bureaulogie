@@ -83,7 +83,7 @@ function esc_html_list_sources_e(string $name_attr = 'sources', array $show_data
  * @param string $label Optional. Default no. Ajouter un label à la liste
  * @return void
  */
-function esc_html_list_clips_of_source(string $source = '', string $name_attr = 'list-clips-on-current-source', array $show_data = array('label'), string $label = '')
+function esc_html_list_clips_of_source_e(string $source = '', string $name_attr = 'list-clips-on-current-source', array $show_data = array('label'), string $label = '')
 {
     $options = map_declared_clips_to_html_item('li', $show_data);
 
