@@ -39,7 +39,7 @@
 
     <button name="btn_preview" id="btn_preview" class="btn-edition" type="button" title="Prévisualiser">
         <div class="shortcut">p</div>
-        <?php echo htmlentities('Prévisualiser'); ?>
+        <?php echo htmlentities('Prévisualiser l\'extrait'); ?>
     </button>
 
     <button name="btn_preview_tail" id="btn_preview_tail" class="btn-edition" type="button" title="La traine correspond à la portion située juste après le timecode de fin, afin de mieux visualiser la fin du cut">
@@ -47,9 +47,6 @@
         <?php echo htmlentities('Prévisualiser la traîne'); ?>
     </button>
 
-    <div id="clip-duration">
-        0
-    </div>
 
     <div class="label-input">
         <label for="timecode_start">Début*</label>

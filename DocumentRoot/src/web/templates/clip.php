@@ -39,6 +39,11 @@ $token = register_api_token($account, 'submit_clip');
     <div id="current-time">
         00:00:00.000
     </div>
+
+    <label for="clip-duration">Durée de l'extrait</label>
+    <div id="clip-duration" name="clip-duration">
+        0
+    </div>
     <div class="videos">
         <fieldset id="fieldset-video-source">
             <legend>
@@ -92,36 +97,31 @@ $token = register_api_token($account, 'submit_clip');
             </div>
         </fieldset>
 
-        <fieldset id="clip-options">
-            <legend>Options</legend>
+        <div id="container-option-btn-submit">
+            <fieldset id="clip-options">
+                <legend>Options</legend>
 
-            <div>
-                <label for="checkbox_loop_preview">Prévisualisation en boucle</label>
-                <input type="checkbox" name="checkbox_loop_preview" id="checkbox_loop_preview">
-            </div>
-
-            <div>
-                <label for="tail_duration_in_s" title="La durée de traîne correspond au nombre de secondes de vidéo après le timecode de fin qui seront prévisualisées en cliquant sur 'Prévisualiser la traîne'">Durée de traîne (s)</label>
-
-                <input type="number" name="tail_duration_in_s" id="tail_duration_in_s" value="4" min="0" max="20" title="La durée de traîne correspond au nombre de secondes de vidéo après le timecode de fin qui seront prévisualisées en cliquant sur 'Prévisualiser la traîne'">
-
-            </div>
-
-        </fieldset>
-
-        <input type="hidden" name="token" value="<?php echo $token; ?>">
-        <input type="hidden" name="source_name" id="source_name" value="">
-        <div class="container-btn-submit-clip">
-
-            <button type="submit" id="btn-submit-clip" value="Cut !" class="btn-edition">
-
-                <div class="shortcut">
-                    Shift+Enter
+                <div>
+                    <label for="checkbox_loop_preview">Prévisualisation en boucle</label>
+                    <input type="checkbox" name="checkbox_loop_preview" id="checkbox_loop_preview">
                 </div>
-                Cut !
 
-            </button>
+                <div>
+                    <label for="tail_duration_in_s" title="La durée de traîne correspond au nombre de secondes de vidéo après le timecode de fin qui seront prévisualisées en cliquant sur 'Prévisualiser la traîne'">Durée de traîne (s)</label>
 
+                    <input type="number" name="tail_duration_in_s" id="tail_duration_in_s" value="4" min="0" max="20" title="La durée de traîne correspond au nombre de secondes de vidéo après le timecode de fin qui seront prévisualisées en cliquant sur 'Prévisualiser la traîne'">
+                </div>
+            </fieldset>
+            <input type="hidden" name="token" value="<?php echo $token; ?>">
+            <input type="hidden" name="source_name" id="source_name" value="">
+            <div class="container-btn-submit-clip">
+                <button type="submit" id="btn-submit-clip" value="Cut !" class="btn-edition">
+                    <div class="shortcut">
+                        Shift+Enter
+                    </div>
+                    Cut !
+                </button>
+            </div>
         </div>
         <span id="spinner"></span>
     </form>
@@ -130,7 +130,6 @@ $token = register_api_token($account, 'submit_clip');
 <side>
     <h2>Extraits existants</h2>
     <?php esc_html_list_clips_of_source_e(show_data: array('details')); ?>
-    <div id="list-clips-on-current-source"></div>
 </side>
 
 

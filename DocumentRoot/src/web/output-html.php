@@ -85,17 +85,17 @@ function esc_html_list_sources_e(string $name_attr = 'sources', array $show_data
  */
 function esc_html_list_clips_of_source_e(string $source = '', string $name_attr = 'list-clips-on-current-source', array $show_data = array('label'), string $label = '')
 {
-    $options = map_declared_clips_to_html_item('li', $show_data);
+    // $options = map_declared_clips_to_html_item('li', $show_data);
 
-    if (!empty($label)) {
-        $label = 'Liste des extraits issus de cette source';
-        echo sprintf('<label for="%s">%s</label>', $name_attr, $label);
-    }
+    // if (!empty($label)) {
+    //     $label = 'Liste des extraits issus de cette source';
+    //     echo sprintf('<label for="%s">%s</label>', $name_attr, $label);
+    // }
 
-    echo sprintf('<ul id="%s" name="%s">', $name_attr);
-    foreach ($options as $option) {
-        echo $option;
-    }
+    echo sprintf('<ul id="%s" name="%s">', $name_attr, $name_attr);
+    // foreach ($options as $option) {
+    //     echo $option;
+    // }
     echo sprintf('</ul>');
     return;
 }

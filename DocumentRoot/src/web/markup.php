@@ -145,6 +145,7 @@ function map_declared_clips_to_html_item(string $html_item = 'li', array $show_d
     }
 
     $clips = new DOMNodeList();
+    //$clips = query_declared_clips_of($source);
 
     //Les trier par ordre de timecodestart
 
