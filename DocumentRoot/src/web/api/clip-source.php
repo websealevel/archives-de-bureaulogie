@@ -107,18 +107,23 @@ function api_clip_source()
     }
 
     /**
-     * Si ici ça échoue il est possible que des extraits déclarés ne soient pas enregistrés sous forme de fichier. Dans ce cas, donner la possibilité aux admins de mettre à jour les archives (parser le fichier source pour générer extraits manquants, supprimer extraits non enregistrés etc.) peut être intéressant.
+     * Si ici ça échoue, il est possible que des extraits déclarés ne soient pas enregistrés sous forme de fichier. Dans ce cas, donner la possibilité aux admins de mettre à jour les archives (parser le fichier source pour générer extraits manquants, supprimer extraits non enregistrés etc.) peut être intéressant.
      */
 
     $file = clip_source($extrait, $source_name);
 
+    $path_parts = pathinfo($file);
+
     //Renvoyer un markup html contenant le nouveau clip à ajouter à la liste des extraits présents sur la source.
-    $label = 'foobar';
-    $src = 'foobar';
+    $src = path_clip($path_parts['basename']);
+
+    $summary = sprintf("<h3>%s %s-%s</h3>", $inputs['title']->value, $timecode_start, $timecode_end);
+
+    $details = sprintf("%s %s <small>%s</small>", html_video_markup($src, 500), $inputs['description']->value,  html_download_link($src));
 
     $html = html_details(
-        $label,
-        html_video_markup($src, 500) . html_download_link($src)
+        $summary,
+        $details
     );
 
     header('Content-Type: application/json; charset=utf-8');

@@ -34,7 +34,7 @@
 
     <button name="btn_clip_end" id="btn_clip_end" class="btn-edition" type="button" title="Définir la position courante du curseur de lecture comme timecode de fin de l'extrait">
         <div class="shortcut">l</div>
-        <?php echo htmlentities('Finir l\'extrait ici'); ?>
+        <?php echo htmlentities('Terminer l\'extrait ici'); ?>
     </button>
 
     <button name="btn_preview" id="btn_preview" class="btn-edition" type="button" title="Prévisualiser">

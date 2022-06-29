@@ -123,18 +123,28 @@ function clip_source(DOMElement $clip, string $file_source): string
     $cmd_detect_max_volume = sprintf('%s -i %s -filter:a volumedetect -vn -sn -dn -f null /dev/null 2>&1 | grep max_volume', $_ENV['PATH_BIN_FFMPEG'], $path_to_save_clip);
 
     $output = null;
-    $retval = null;
+    $result_code = null;
 
-    exec($cmd_detect_max_volume, $output, $retval);
+    exec($cmd_detect_max_volume, $output, $result_code);
 
     $correction_dB = compute_correction_db($output);
 
     /**
-     * Deuxième passe : application d'une correction pour arriver à un volume max à 0dB, puis enregistrement du fichier avec audio normalisé.
+     * Deuxième passe : application d'une correction pour arriver à un volume max à 0dB, puis enregistrement du fichier avec audio normalisé ds un fichier temporaire
      */
-    $cmd_normalise_volume_to_0_db = sprintf('%s -i %s -af "volume=%sdB" -c:v copy -c:a aac -b:a 192k %s', $_ENV['PATH_BIN_FFMPEG'], $path_to_save_clip, $correction_dB, $path_to_save_clip . '_remastered.mp4');
 
-    exec($cmd_normalise_volume_to_0_db, $output, $retval);
+    $tmp_file = $path_to_save_clip . '_remastered_tmp.mp4';
+
+    $cmd_normalise_volume_to_0_db = sprintf('%s -i %s -af "volume=%sdB" -c:v copy -c:a aac -b:a 192k %s', $_ENV['PATH_BIN_FFMPEG'], $path_to_save_clip, $correction_dB, $tmp_file);
+
+    exec($cmd_normalise_volume_to_0_db, $output, $result_code);
+
+    $cmd_replace_tmp_file = sprintf('cp -f %s %s', $tmp_file, $path_to_save_clip);
+
+    $cmd_rm_tmp_file = sprintf('rm %s', $tmp_file);
+
+    exec($cmd_replace_tmp_file, $output, $result_code);
+    exec($cmd_rm_tmp_file, $output, $result_code);
 
     return $path_to_save_clip;
 }
