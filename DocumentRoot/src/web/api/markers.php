@@ -101,8 +101,19 @@ function api_markers()
                 ));
             }
 
+            //Retourner l'id du marqueur au front (servira d'uui pour le markup du marker)
+
             break;
         case 'delete':
+
+            try {
+                // $result = sql_delete_marker();
+            } catch (PDOException $e) {
+                error_log($e);
+                api_respond_with_error(array(
+                    new InputValidation('', '', "Impossible de supprimer le marqueur")
+                ));
+            }
             break;
         default:
             api_respond_with_error();
