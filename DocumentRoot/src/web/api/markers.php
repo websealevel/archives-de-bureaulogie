@@ -104,7 +104,7 @@ function api_markers()
             //Retourner l'id du marqueur au front (servira d'uui pour le markup du marker)
 
             break;
-        case 'delete':
+        case 'remove':
 
             try {
                 // $result = sql_delete_marker();

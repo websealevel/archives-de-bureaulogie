@@ -525,7 +525,7 @@ function set_marker() {
 
                 //Envoyer une requete pour supprimer le marqueur.
                 const data = {
-                    action: 'delete',
+                    action: 'remove',
                     source_name: '',
                     position_in_sec: currentTime_sec
                 };
