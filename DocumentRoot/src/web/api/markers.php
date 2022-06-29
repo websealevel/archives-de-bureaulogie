@@ -20,6 +20,7 @@ require_once __DIR__ . '/../../../vendor/autoload.php';
 require_once __DIR__ . '/token.php';
 require_once __DIR__ . '/../current-user.php';
 require_once __DIR__ . '/../log.php';
+require_once __DIR__ . '/../database/queries-markers.php';
 
 
 /**
@@ -91,7 +92,15 @@ function api_markers()
 
     switch ($clean['action']) {
         case 'add':
-            $result = sql_insert_marker($clean['source_name'], $account_id, $clean['position_in_sec']);
+            try {
+                $id = sql_insert_marker($clean['source_name'], $account_id, $clean['position_in_sec']);
+            } catch (PDOException $e) {
+                error_log($e);
+                api_respond_with_error(array(
+                    new InputValidation('', '', "Impossible de sauvegarder le marqueur")
+                ));
+            }
+
             break;
         case 'delete':
             break;
