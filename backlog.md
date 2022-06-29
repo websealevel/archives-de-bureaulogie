@@ -381,6 +381,7 @@ A venir...
 
 ### v2.0
 
+- intégration 
 - mise en place des rôles
 - soumettre une référence
 - lister les références
