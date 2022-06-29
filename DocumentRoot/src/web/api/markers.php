@@ -30,6 +30,66 @@ require_once __DIR__ . '/../log.php';
  */
 function api_markers()
 {
-    echo 'coucou';
+    load_env();
+
+    //Authentifier l'utilisateur
+    if (!current_user_can('submit_clip')) {
+        api_respond_with_error();
+    }
+
+    $data = filter_input_array(INPUT_POST, array(
+        'action' => FILTER_SANITIZE_ENCODED,
+        'source_name' => FILTER_SANITIZE_ENCODED,
+        'position_in_sec' => FILTER_SANITIZE_ENCODED
+    ));
+
+    $clean = array();
+
+    //Check action
+    if (!isset($data['action']) && !in_array($data['action'], array(
+        'add', 'remove'
+    ))) {
+        api_respond_with_error(array(
+            new InputValidation('', '', "Action invalide")
+        ));
+    }
+
+    $clean['action'] = $data['action'];
+
+    //Check source_name
+    if (!isset($data['source_name'])) {
+        api_respond_with_error();
+    }
+    //Remarque: on recupere le source_name comme 'sources/{nom de la source}'. Le slash est encodé
+    $pattern = '%2F'; //slash
+    $pos = strpos($data['source_name'], '%2F');
+    $source_name = substr($data['source_name'], $pos + strlen($pattern));
+
+    if (!(source_has_valid_filename_format($source_name) && source_exists($source_name))) {
+        api_respond_with_error(array(
+            new InputValidation('', '', "Source invalide")
+        ));
+    }
+
+    $clean['source_name'] = $source_name;
+
+    //Check position_in_sec: si pas un entier, erreur
+    //Check source_name
+    if (!isset($data['position_in_sec'])) {
+        api_respond_with_error();
+    }
+
+    if (!is_numeric($data['position_in_sec'])) {
+        api_respond_with_error(array(
+            new InputValidation('', '', "Position (en secondes) invalide")
+        ));
+    }
+
+    $clean['position_in_sec'] = $data['position_in_sec'];
+
+    write_log($clean);
+
+    echo 'Sauvegarde du marqueur...';
+
     exit;
 }

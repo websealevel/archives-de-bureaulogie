@@ -491,15 +491,12 @@ function set_marker() {
     if ($(`li#${currentTime_sec}`).length > 0)
         return
 
-    const data = {
-        action: 'add',
-        source_name: '',
-        position_in_sec: currentTime_sec
-    };
-
     //Envoyer une requete pour ajouter le marqueur.
-
-    $.post('/api/v1/markers', data).done(function (response) {
+    $.post('/api/v1/markers', {
+        action: 'add',
+        source_name: $("#sources").find('option:selected').attr("name"),
+        position_in_sec: currentTime_sec
+    }).done(function (response) {
 
         console.log(response)
 
@@ -515,12 +512,11 @@ function set_marker() {
         }
 
         //Success
-        //Check que le marker n'existe pas déjà (a la seconde pres)
         $("#list-markers").append(li)
 
         const $li_appended = $("#list-markers").children("li:last-child")
 
-        //Event listener : click sur le marqueur ou click sur supprimer
+        //Event listener : click sur le marqueur OU click sur supprimer.
         $li_appended.click(function (event) {
 
             const delete_marker_btn_clicked = event.originalEvent.target.className === class_btn_delete_marker

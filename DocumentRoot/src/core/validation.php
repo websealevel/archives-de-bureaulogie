@@ -275,3 +275,16 @@ function clip_has_valid_filename_format(string $filename): bool
     $pattern = '=^' . FORMAT_FILE_VIDEO_CLIP . '$=';
     return preg_match($pattern, $filename);
 }
+
+
+/**
+ * Retourne vrai si le nom de la source respecte le format imposé, faux sinon
+ * @param string $filename Le nom de fichier de l'extrait
+ * @return bool
+ * @link FORMAT_FILE_VIDEO_CLIP
+ */
+function source_has_valid_filename_format(string $filename): bool
+{
+    $pattern = '=^' . FORMAT_SOURCE_NAME_VIDEO_CLIP . '$=';
+    return preg_match($pattern, $filename);
+}
