@@ -111,7 +111,7 @@ function api_markers()
         case 'remove':
 
             try {
-                // $result = sql_delete_marker();
+                $result = sql_delete_marker();
             } catch (PDOException $e) {
                 error_log($e);
                 api_respond_with_error(array(
@@ -121,9 +121,9 @@ function api_markers()
             break;
 
         case 'fetch':
-            //Retourner la liste des marqueurs de l'utilisateur pour cette vidéo source.
+
             try {
-                // $result = select_markers();
+                $result = sql_find_markers_on_source_by_account_id();
             } catch (PDOException $e) {
                 error_log($e);
                 api_respond_with_error(array(

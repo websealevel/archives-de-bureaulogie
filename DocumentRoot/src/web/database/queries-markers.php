@@ -42,3 +42,17 @@ function sql_insert_marker(string $source_name, int $account_id, int $position_i
 
     return $db->lastInsertId('clip_markers_id_seq');
 }
+
+/**
+ * Supprime un marqueur.
+ */
+function sql_delete_marker()
+{
+}
+
+/**
+ * Retrouve les marqueurs d'une source appartenant à l'utilisateur.
+ */
+function sql_find_markers_on_source_by_account_id()
+{
+}
