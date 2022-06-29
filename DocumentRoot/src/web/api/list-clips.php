@@ -8,14 +8,11 @@
  * @package wsl 
  */
 
-
 /**
  * Functions
  */
-require_once __DIR__ . '/token.php';
 require_once __DIR__ . '/../current-user.php';
 require_once __DIR__ . '/../log.php';
-
 
 /**
  * Traite la requête AJAX/formulaire de génération d'un extrait
@@ -25,9 +22,28 @@ require_once __DIR__ . '/../log.php';
  */
 function api_list_clips()
 {
+    load_env();
+
+    //Authentifier l'utilisateur
+    if (!current_user_can('list_all_clips')) {
+        header('Content-Type: application/json; charset=utf-8');
+        $response =  json_encode(array(
+            'statut' => 403,
+            'errors' => array(
+                array(
+                    'name' => '',
+                    'value' => '',
+                    'message' => 'Vous ne disposez pas des droits nécessaires pour lister les extraits'
+                )
+            )
+        ));
+        echo $response;
+        exit;
+    }
 
     $source_url = filter_input(INPUT_POST, 'source');
 
+    //Validation du formulaire
     if (empty($source_url)) {
         api_respond_with_error(array(
             new InputValidation('', '', 'Veuillez préciser une source')
@@ -37,9 +53,13 @@ function api_list_clips()
     $path_parts = pathinfo($source_url);
     $source_file = $path_parts['basename'];
 
-    $html = map_declared_clips_to_html_item($source_file);
+    if (empty($source_file)) {
+        api_respond_with_error(array(
+            new InputValidation('', '', 'Veuillez préciser une source')
+        ));
+    }
 
-    write_log($html);
+    $html = map_declared_clips_to_html_item($source_file);
 
     header('Content-Type: application/json; charset=utf-8');
     $response = json_encode(array(

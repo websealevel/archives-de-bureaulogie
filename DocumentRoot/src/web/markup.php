@@ -65,11 +65,14 @@ function map_clip_to_html_item(DOMElement $clip, string $html_item, array $show_
         $html_item
     );
 }
-
+/**
+ * Retourne le markup d'un extrait en élément de liste
+ * @param string $title Le titre de l'extrait
+ * @param string $description La description de l'extrait
+ * @param string $src Le chemin de l'extrait
+ */
 function html_clip_item(string $title, string $description, string $timecode_start, string $timecode_end, string $author, string $created_on, string $src): string
 {
-    $src = '';
-
     $summary = sprintf("<h3>%s %s-%s</h3>", $title, $timecode_start, $timecode_end);
 
     $details = sprintf("%s %s <small>%s</small>", html_video_markup($src, 500), $description,  html_download_link($src));
