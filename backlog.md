@@ -209,7 +209,7 @@ Suivi des tâches
 - utiliser ffmpeg/ffprobe en local [x]
 - pas de password recover [x]
 - ecran [Ajouter une source/Lister sources](#ecran---importer-une-sourcelister-les-sources) [x][x]
-- ecran [Creer un extrait/Lister les extraits](#ecran---creer-un-extraitlister-les-extraits) []
+- ecran [Creer un extrait/Lister les extraits](#ecran---creer-un-extraitlister-les-extraits) [x][x]
 - ecran Ajouter une entrée Biblio
 - ecran Editer une entrée Biblio  
 - ecran Liste biblios en attente de modération  
@@ -240,7 +240,7 @@ Suivi des tâches
 - si le téléchargement va à son terme déclarer la nouvelle source dans le fichier source [x]
 - empecher le téléchargement si une ressource avec la meme url est déjà déclarée dans le fichier source[x]
 - empecher un téléchargement d'une ressource avec une url identique à l'urld'un téléchargement en cours (downloading)[x]
-- afficher les erreurs dans le formulaire (js) []
+- afficher les erreurs dans le formulaire (js) [x]
 - basculer dl en cours vers historique, clean interface (js) []
 - fixer bug format (plus de son)[x]
 - nettoyer le cache de youtube dl après chaque dl [x]
@@ -265,10 +265,11 @@ Suivi des tâches
 - valider token, authentification, cap [x]
 - valider timecodes [x]
 - valider que la source existe et qu'elle est déclarée[x]
-- déclarer l'extrait s'il n'existe pas sur la source []
-- générer l'extrait []
-- lister tous les extraits asociés à la source sélectionnée []
-- plusieurs cut dans un seul fichier via des marqueurs avec label des extraits, en un clic exporter tous les marqueurs (luxe) [éditeur custom] []
+- déclarer l'extrait s'il n'existe pas sur la source [x]
+- générer l'extrait [x]
+- lister tous les extraits asociés à la source sélectionnée [x]
+- controles custom d'édition vidéos [x]
+- déclarer des marqueurs sur les vidéos sources pour repérer des extraits à faire plus tard []
 
 
 ### Ecran Ajouter une ressource biblio
@@ -393,6 +394,7 @@ A venir...
 - mise en place tes twitter bot
 - mise en place de la playlist
 - ecran admin twitter bots (réservé aux admins)
+- SEO
 
 ### v4.0
 
