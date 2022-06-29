@@ -280,6 +280,7 @@ Cette erreur est envoyée au moment de l'écriture du fichier dans le dossier. I
 - *Modern PHP* by Josh Lockhart, O'Reilly, 2015, Chapter 7, *p138-146*
 - [mdn web docs : APIs vidéo et audio](https://developer.mozilla.org/fr/docs/Learn/JavaScript/Client-side_web_APIs/Video_and_audio_APIs)
 - [Implementer son propre lecteur video HTML5](https://developer.mozilla.org/en-US/docs/Web/API/HTMLVideoElement)
-- [Normaliser le son avec ffmpeg](https://superuser.com/questions/323119/how-can-i-normalize-audio-using-ffmpeg), un très bon post stackoverflow maitnenu depuis des années, bonne doc et pointage vers [un repo d'un bin python](https://github.com/slhck/ffmpeg-normalize) qui s'occupe de faire la normalization
+- [AudioVolume](https://trac.ffmpeg.org/wiki/AudioVolume), doc de FFMPEG sur les stratégies de normalization du son
+- [Normaliser le son avec ffmpeg](https://superuser.com/questions/323119/how-can-i-normalize-audio-using-ffmpeg), un bon post stackoverflow maitnenu depuis des années, bonne doc et pointage vers [un repo d'un bin python](https://github.com/slhck/ffmpeg-normalize) qui s'occupe de faire la normalization en une passe
 - [FFMPEG: filtre loudnorm](http://ffmpeg.org/ffmpeg-all.html#loudnorm), EBU R128 loudness normalization filter.
 - [Audio loudness, Google doc](https://developers.google.com/assistant/tools/audio-loudness), chapitre sur ffmpeg et exemple
