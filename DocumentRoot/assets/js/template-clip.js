@@ -229,7 +229,17 @@ jQuery(function ($) {
     })
 
 
-
+    /**
+     * Empecher de soumettre le form quand on press Enter dans un input text
+     */
+    $(document).ready(function () {
+        $(window).keydown(function (event) {
+            if (event.keyCode == 13) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
 
     /**
     * Raccourcis claviers, traitement des évenements keyup.
@@ -247,6 +257,7 @@ jQuery(function ($) {
         }
 
         if (13 === keyCode && shiftKey) {
+            console.log(shiftKey)
             post_clip()
             return
         }
