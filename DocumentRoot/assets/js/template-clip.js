@@ -467,7 +467,7 @@ function add_marker() {
             const delete_marker_btn_clicked = event.originalEvent.target.className === class_btn_delete_marker
 
             if (delete_marker_btn_clicked) {
-                delete_marker()
+                remove_marker(currentTime_sec)
                 return
             }
             play_source_video_at_marker_position(this)
@@ -503,10 +503,10 @@ function play_source_video_at_marker_position(marker) {
 /**
  * Supprime un markeur
  */
-function delete_marker() {
+function remove_marker(currentTime_sec) {
     $.post('/api/v1/markers', {
         action: 'remove',
-        source_name: '',
+        source_name: $("#sources").find('option:selected').attr("name"),
         position_in_sec: currentTime_sec
     }).done(function (response) {
         //Si le formulaire est rejeté on récupere les erreurs et on les affiche

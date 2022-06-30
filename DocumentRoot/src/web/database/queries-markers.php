@@ -52,7 +52,7 @@ function sql_insert_marker(string $source_name, int $account_id, int $position_i
 /**
  * Supprime un marqueur.
  */
-function sql_delete_marker()
+function sql_delete_marker(string $source_name, int $account_id, int $position_in_sec)
 {
 }
 
