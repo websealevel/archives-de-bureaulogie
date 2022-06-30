@@ -15,6 +15,8 @@ Il sert également de prétexte pour construire un outil en *vanilla php* pour s
   - [*Getting started*](#getting-started)
     - [Prérequis](#prérequis)
       - [Dépendences dev](#dépendences-dev)
+      - [Dépendences prod](#dépendences-prod)
+      - [Droits](#droits)
       - [ffmpeg et ffprobe](#ffmpeg-et-ffprobe)
       - [youtube-dl](#youtube-dl)
       - [Configuration](#configuration)
@@ -22,13 +24,11 @@ Il sert également de prétexte pour construire un outil en *vanilla php* pour s
 - [FFMPEG](#ffmpeg)
 - [youtube-dl](#youtube-dl-1)
     - [Configuration php-fpm](#configuration-php-fpm)
-    - [Configuration virtual host](#configuration-virtual-host)
+    - [Configuration du virtual host](#configuration-du-virtual-host)
       - [Nginx](#nginx)
 - [deny hidden files and files with the extensions listed below](#deny-hidden-files-and-files-with-the-extensions-listed-below)
       - [Apache](#apache)
 - [Deny access to .htaccess](#deny-access-to-htaccess)
-- [Disable directory browsing](#disable-directory-browsing)
-- [Deny access to files with extensions .ini, .psd, .log, .sh](#deny-access-to-files-with-extensions-ini-psd-log-sh)
     - [Gestion des logs](#gestion-des-logs)
       - [Logs de nginx](#logs-de-nginx)
       - [Logs de php-fpm](#logs-de-php-fpm)
@@ -100,16 +100,29 @@ Installer
 - [composer](https://getcomposer.org/)
 - [docker](https://www.docker.com/)
 - [docker-compose](https://docs.docker.com/compose/)
+- python
+- php8
   
+
+#### Dépendences prod
+
+Installer
+
+- [composer](https://getcomposer.org/)
+- python
+- php8
+
+#### Droits
+
+Vérifier que l'utilisateur qui execute les scripts PHP dispose des droits d'écritures sur les dossiers `extraits` et `sources`.
 
 #### ffmpeg et ffprobe
 
 Installer `ffmpeg` et `ffprobe` dans le dossier `DocumentRoot/ffmpeg`
 
-Télécharger les builds static [ici]() (vous pouvez aussi [recompiler le code source](https://ffmpeg.org/download.html#repositories) mais il faudra bien configurer le build pour inclure les codecs comme x264, voir `./configure --help` pour plus d'info).
+Télécharger les builds static [ici](https://ffmpeg.org/download.html#build-linux) (vous pouvez aussi [recompiler le code source](https://ffmpeg.org/download.html#repositories) mais il faudra bien configurer le build pour inclure les codecs comme `x264`, voir `./configure --help` pour plus d'info).
 
 Copier les executables `ffmpeg` et `ffprobe` dans le dossier `DocumentRoot/ffmpeg`.
-
 
 #### youtube-dl
 
@@ -182,11 +195,9 @@ On utilise `php-fpm` qui utilise
 
 avec ici `$PHP_INI_DIR=/usr/local/etc/php`. 
 
-### Configuration virtual host
+### Configuration du virtual host
 
 Il faut rediriger toutes les reqûetes vers le `index.php` à la racine du projet (le routeur fonctionne ainsi).
-
-
 
 #### Nginx
 
@@ -220,12 +231,7 @@ Dans le `.htaccess` à la racine du projet
 ~~~.htaccess
 # Deny access to .htaccess
 <Files .htaccess>
-Order allow,deny
-Deny from all
-</Files>
-# Disable directory browsing 
-Options -Indexes
-# Deny access to files with extensions .ini, .psd, .log, .sh
+Order allow,denyx264, .sh
 <FilesMatch "\.(xml|dtd|php|env|json|lock|ini|log|sh)$">
 Order allow,deny
 Deny from all
