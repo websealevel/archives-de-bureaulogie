@@ -1,53 +1,6 @@
 jQuery(function ($) {
 
-    /**
-     * Set le src de la video source a partir de la source sélectionnée
-     */
-    const source_url = $("#sources").find('option:selected').attr("name")
-    $("#video-source").prop('src', source_url)
-    $("#video-clip").prop('src', source_url)
-    $("#source_name").val(source_url)
-
-    fetch_clips_of_current_source(source_url)
-    fetch_clip_markers_of_current_source(source_url)
-
-    /**
-     * Initialise la lite des extraits sur la source
-     */
-
-    function fetch_clips_of_current_source(source_url) {
-
-        if (source_url === '')
-            return
-
-        const data = { source: source_url }
-
-
-        //Clear previous clips
-        $("#list-clips-on-current-source").empty()
-        $.post('/api/v1/list-clips', data).done(function (response) {
-
-            //Si le formulaire est rejeté on récupere les erreurs et on les affiche
-            if (typeof response !== 'string' && '' !== response && 'errors' in response) {
-                const errors = response.errors
-                let items = []
-                for (const input in errors) {
-                    items.push("<li>" + errors[input].message + "</li>")
-                }
-                $("div.errors").html('<ul>' + items.join('') + '</ul>')
-            } else {
-                const clips = response.extrait
-
-                $("#list-clips-on-current-source").append(clips)
-            }
-
-        }).fail(function () {
-            $("div.errors").html('Hmm, il semblerait qu\'il y ait eu un problème de connexion. Veuillez rééssayer s\'il vous plaît.')
-        }).always(function () {
-
-        })
-    }
-
+    init_on_landing()
 
     /**
      * Timer
@@ -63,14 +16,11 @@ jQuery(function ($) {
      */
     $("#sources").change(function () {
         const source_url = $(this).find(":selected").attr('name')
-        // Mettre a jour la source du tag video source.
         $("#video-source").prop('src', source_url)
         $("#video-clip").prop('src', source_url)
         $("#source_name").val(source_url)
-
         fetch_clips_of_current_source(source_url)
     })
-
 
     /**
      * Boutons de controle du lecteur/edition
@@ -117,67 +67,12 @@ jQuery(function ($) {
      */
 
     /**
-     * Pas utilisé pour le moment, sert juste de documentation.
-     */
-    const keyboard_controls = {
-        rewind_5_s: {
-            key: 'Q',
-            code: 81,
-            shiftKey: true
-        },
-        rewind_1_s: {
-            key: 'q',
-            code: 81,
-            shiftKey: false
-        },
-        forward_1_s: {
-            key: 'd',
-            code: 68,
-            shiftKey: false
-        },
-        forward_5_s: {
-            key: 'D',
-            code: 68,
-            shiftKey: true
-        },
-        play_pause: {
-            key: 'p',
-            code: 80,
-            shiftKey: false
-        },
-        clip: {
-            key: 'Enter',
-            code: 13,
-            shiftKey: true
-        },
-        clip_start: {
-            key: 'a',
-            code: 65,
-            shiftKey: false
-        },
-        clip_end: {
-            key: 'a',
-            code: 90,
-            shiftKey: false
-        }
-    }
-
-    function any_input_text_is_focused(event) {
-        return $("#title").is(":focus") || $("#description").is(":focus")
-    }
-
-    /**
      * Raccourcis claviers, traitement des évenements keydown.
      */
     $(document).keydown(function (event) {
 
-        /**
-         * Désactiver les raccourcis si on est en focus sur un champ text ou text area
-         */
-
         if (any_input_text_is_focused(event))
             return
-
 
         const key = event.originalEvent.key
         const shiftKey = event.originalEvent.shiftKey
@@ -290,8 +185,29 @@ jQuery(function ($) {
 
 
 /**
- * Fonctions
+ * -- Fonctions
  */
+
+/**
+* Instructions à executer au chargement de la page.
+*/
+function init_on_landing() {
+    const source_url = $("#sources").find('option:selected').attr("name")
+    $("#video-source").prop('src', source_url)
+    $("#video-clip").prop('src', source_url)
+    $("#source_name").val(source_url)
+
+    fetch_clips_of_current_source(source_url)
+    fetch_clip_markers_of_current_source(source_url)
+}
+
+/**
+ * Retourne vrai si un input text du formulaire est focus, faux sinon
+ * @returns bool
+ */
+function any_input_text_is_focused(event) {
+    return $("#title").is(":focus") || $("#description").is(":focus")
+}
 
 /**
  * Déclenche le visionnage de la traine
@@ -329,27 +245,16 @@ function post_clip() {
 
         //Si le formulaire est rejeté on récupere les erreurs et on les affiche
         if (typeof response !== 'string' && '' !== response && 'errors' in response) {
-
             const errors = response.errors
-
             let items = []
-
             for (const input in errors) {
                 items.push("<li>" + errors[input].message + "</li>")
             }
-
             $("div.errors").html('<ul>' + items.join('') + '</ul>')
         } else {
-            //Clean error messages.
             $("div.errors").html('')
-
             $("div.success").html("L'extrait a été ajouté avec succès !")
-
             $("#list-clips-on-current-source").append(response.extrait)
-            //La réponse: un markup html contenant les infos sur le nouveau clip
-            //A ajouter à la liste des clips sur la source
-            console.log(response)
-
         }
 
     }).fail(function () {
@@ -361,7 +266,10 @@ function post_clip() {
     })
 }
 
-
+/**
+ * Lance la vidéo de prévisualisation de l'extrait si elle est en pause, et vice versa.
+ * @returns void
+ */
 function play_preview() {
     $("#btn_preview").prop('innerHTML', '<div class="shortcut"> p</div> Pause')
     const src = $("#video-source").prop('src')
@@ -372,34 +280,29 @@ function play_preview() {
     const timecode_start_in_sec = hh_mm_ss_lll_to_seconds(timecode_start)
     const timecode_end_in_sec = hh_mm_ss_lll_to_seconds(timecode_end)
 
-    // console.log(timecode_start_in_sec, timecode_end_in_sec)
-
+    //Si les timecodes sont invalides.
     if (timecode_end_in_sec <= timecode_start_in_sec) {
         $("div.errors").html("<p>Impossible de prévisualiser l'extrait : le timecode de fin doit être plus grand que le timecode de début</p>")
-
         $("#timecode_start").addClass('error')
         $("#timecode_end").addClass('error')
-
         const preview_video_is_playing = $("#video-clip").prop('currentTime') > 0 & !$("#video-clip").prop('paused')
         return
     }
-    else {
-        $("div.errors").html('')
-        $("#timecode_start").removeClass('error')
-        $("#timecode_end").removeClass('error')
-    }
+
+    $("div.errors").html('')
+    $("#timecode_start").removeClass('error')
+    $("#timecode_end").removeClass('error')
+
 
     const src_timecodes = src + `#t=${timecode_start_in_sec},${timecode_end_in_sec}`
-
     const $html_video_clip = $("#video-clip")
     $html_video_clip.prop('src', src_timecodes)
     $html_video_clip.trigger('play')
 
     /**
-     * Loop preview
+     * Gestion de l'option de loop.
      */
     $html_video_clip.on('timeupdate', function () {
-
         if ($('#checkbox_loop_preview').is(':checked')) {
             loop_video(this, timecode_start_in_sec, timecode_end_in_sec)
         }
@@ -476,6 +379,41 @@ function set_timecode_start(start_in_sec) {
     if (is_playing) {
         play_preview()
     }
+}
+
+
+/**
+* Initialise la lite des extraits sur la source
+*/
+function fetch_clips_of_current_source(source_url) {
+
+    if (source_url === '')
+        return
+
+    const data = { source: source_url }
+
+    //Clear previous clips
+    $("#list-clips-on-current-source").empty()
+    $.post('/api/v1/list-clips', data).done(function (response) {
+
+        //Si le formulaire est rejeté on récupere les erreurs et on les affiche
+        if (typeof response !== 'string' && '' !== response && 'errors' in response) {
+            const errors = response.errors
+            let items = []
+            for (const input in errors) {
+                items.push("<li>" + errors[input].message + "</li>")
+            }
+            $("div.errors").html('<ul>' + items.join('') + '</ul>')
+        } else {
+            const clips = response.extrait
+            $("#list-clips-on-current-source").append(clips)
+        }
+
+    }).fail(function () {
+        $("div.errors").html('Hmm, il semblerait qu\'il y ait eu un problème de connexion. Veuillez rééssayer s\'il vous plaît.')
+    }).always(function () {
+
+    })
 }
 
 /**
@@ -720,3 +658,50 @@ const spinner_ascii = {
 //frames = '◩◪'.split('');
 //frames = '◰◱◲◳'.split('');
 //frames = '◐◓◑◒'.split('');
+
+
+/**
+ * Pas utilisé pour le moment, sert juste de documentation.
+ */
+    //  const keyboard_controls = {
+    //     rewind_5_s: {
+    //         key: 'Q',
+    //         code: 81,
+    //         shiftKey: true
+    //     },
+    //     rewind_1_s: {
+    //         key: 'q',
+    //         code: 81,
+    //         shiftKey: false
+    //     },
+    //     forward_1_s: {
+    //         key: 'd',
+    //         code: 68,
+    //         shiftKey: false
+    //     },
+    //     forward_5_s: {
+    //         key: 'D',
+    //         code: 68,
+    //         shiftKey: true
+    //     },
+    //     play_pause: {
+    //         key: 'p',
+    //         code: 80,
+    //         shiftKey: false
+    //     },
+    //     clip: {
+    //         key: 'Enter',
+    //         code: 13,
+    //         shiftKey: true
+    //     },
+    //     clip_start: {
+    //         key: 'a',
+    //         code: 65,
+    //         shiftKey: false
+    //     },
+    //     clip_end: {
+    //         key: 'a',
+    //         code: 90,
+    //         shiftKey: false
+    //     }
+    // }

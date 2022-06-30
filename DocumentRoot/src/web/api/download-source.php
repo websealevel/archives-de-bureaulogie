@@ -28,6 +28,7 @@ require_once __DIR__ . '/../core-interface.php';
 require_once __DIR__ . '/../current-user.php';
 require_once __DIR__ . '/../log.php';
 require_once __DIR__ . '/token.php';
+require_once __DIR__ . '/response.php';
 
 use YoutubeDl\Options;
 use YoutubeDl\YoutubeDl;

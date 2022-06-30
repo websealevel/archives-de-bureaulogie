@@ -131,30 +131,7 @@ function api_clip_source()
     exit;
 }
 
-/**
- * Retourne une erreur de l'api au client, avec un message et un status code
- * @param InputValidation[] $input_errors Les erreurs sur chaque champ
- * @param string $code Le code HTTP de la requête
- * @return void
- */
-function api_respond_with_error(array $invalid_inputs = array(
-    new InputValidation('', '', 'Les données transmises ne sont pas valides')
-), string $code = '403'): void
-{
-    header('Content-Type: application/json; charset=utf-8');
-    $response =  json_encode(array(
-        'statut' => $code,
-        'errors' => array_map(function ($invalid_input) {
-            return array(
-                'name' => $invalid_input->name,
-                'value' => $invalid_input->value,
-                'message' => $invalid_input->message
-            );
-        }, $invalid_inputs)
-    ));
-    echo $response;
-    exit;
-}
+
 
 /**
  * Retourne les inputs validés (ou non) du formulaire de soumission d'extrait

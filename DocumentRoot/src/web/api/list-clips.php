@@ -13,6 +13,7 @@
  */
 require_once __DIR__ . '/../current-user.php';
 require_once __DIR__ . '/../log.php';
+require_once __DIR__ . '/response.php';
 
 /**
  * Traite la requête AJAX/formulaire de génération d'un extrait
@@ -60,12 +61,6 @@ function api_list_clips()
     }
 
     $html = map_declared_clips_to_html_item($source_file);
-
-    header('Content-Type: application/json; charset=utf-8');
-    $response = json_encode(array(
-        'statut' => 200,
-        'extrait' => $html
-    ));
-    echo $response;
-    exit;
+    write_log($html);
+    api_respond_with_success(data: $html, key: 'extrait');
 }
