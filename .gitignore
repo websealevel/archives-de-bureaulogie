@@ -29,3 +29,4 @@ postgres-data/
 ~
 Capfile
 config
+log

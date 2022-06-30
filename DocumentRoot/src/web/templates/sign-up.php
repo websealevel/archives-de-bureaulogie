@@ -22,26 +22,26 @@ if (!is_signup_activated())
 
     <div>
         <label for="pseudo">Pseudo <span class="required">*</span></label>
-        <input type="text" name="pseudo" value="<?php echo "paul";/*esc_html_from_session_e('form_errors', 'pseudo')*/ ?>" required>
+        <input type="text" name="pseudo" value="" required>
         <div class="error-message"><?php esc_html_form_error_msg_e('pseudo', 'form_errors') ?></div>
     </div>
 
     <div>
         <label for="email">Email <span class="required">*</span></label>
-        <input type="email" name="email" value="<?php echo "contact@websealevel.com" /*esc_html_from_session_e('form_errors', 'email')*/ ?>" required>
+        <input type="email" name="email" value="" required>
         <div class="error-message"><?php esc_html_form_error_msg_e('email', 'form_errors') ?></div>
     </div>
 
     <div>
         <label for="password">Mot de passe <span class="required">*</span></label>
-        <input type="password" name="password" required minlength="6" maxlength="12" value="password">
+        <input type="password" name="password" required minlength="6" maxlength="12" value="">
         <div class="error-message"><?php echo  esc_html_form_error_msg_e('password', 'form_errors') ?></div>
     </div>
 
 
     <div>
         <label for="password_confirmation">Confirmer votre mot de passe <span class="required">*</span></label>
-        <input type="password" name="password_confirmation" required value="password">
+        <input type="password" name="password_confirmation" required value="">
         <div class="error-message"><?php esc_html_form_error_msg_e('password_confirmation', 'form_errors') ?></div>
     </div>
 
