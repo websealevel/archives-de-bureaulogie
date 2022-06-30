@@ -19,10 +19,6 @@ Il sert également de prétexte pour construire un outil en *vanilla php* pour s
       - [Droits](#droits)
       - [ffmpeg et ffprobe](#ffmpeg-et-ffprobe)
       - [youtube-dl](#youtube-dl)
-      - [Configuration](#configuration)
-- [Database credentials](#database-credentials)
-- [FFMPEG](#ffmpeg)
-- [youtube-dl](#youtube-dl-1)
     - [Configuration php-fpm](#configuration-php-fpm)
     - [Configuration du virtual host](#configuration-du-virtual-host)
       - [Nginx](#nginx)
@@ -32,6 +28,10 @@ Il sert également de prétexte pour construire un outil en *vanilla php* pour s
     - [Gestion des logs](#gestion-des-logs)
       - [Logs de nginx](#logs-de-nginx)
       - [Logs de php-fpm](#logs-de-php-fpm)
+    - [Configuration du projet](#configuration-du-projet)
+- [Database credentials](#database-credentials)
+- [FFMPEG](#ffmpeg)
+- [youtube-dl](#youtube-dl-1)
     - [Lancer le projet](#lancer-le-projet)
     - [Arrêter le projet](#arrêter-le-projet)
     - [Core functions (CLI)](#core-functions-cli)
@@ -138,53 +138,6 @@ Mettre à jour les dépendances du projet. Se placer à la racine du projet puis
 composer update
 ~~~
 
-#### Configuration
-
-La configuration du projet se fait dans un fichier `.env` à la racine de `DocumentRoot`. 
-
-~~~bash
-mv DocumentRoot/.env.dist DocumentRoot/.env
-~~~
-
-Voici les options par défaut. Surchargez les à votre convenance.
-
-~~~
-# Database credentials
-DB_HOST="db"
-DB_NAME="mydb"
-DB_PORT="5432"
-DB_USER="user"
-DB_PASSWORD="password"
-DB_CHARSET="utf8"
-
-# FFMPEG
-PATH_BIN_FFMPEG=ffmpeg/ffmpeg
-PATH_BIN_FFPROBE=ffmpeg/ffprobe
-FFMPEG_TIMEOUT=3600
-FFMPEG_THREADS=12
-
-# youtube-dl
-PATH_PYTHON=/usr/bin/python3
-PATH_BIN_YOUTUBEDL=youtube-dl/youtube-dl
-~~~
-
-La liste des options
-
-- `DB_HOST` : le nom d'hôte de la base de données
-- `DB_NAME` : le nom de la base de données
-- `DB_USER` : le nom de l'utilisateur de la base de données
-- `DB_PASSWORD` : le mot de passe de l'utilisateur de la base de données
-- `DB_CHARSET` : l'encodage des caractères de la base de données
-- `PATH_BIN_FFMPEG`: le chemin **relatif à DocumentRoot** du bin FFMPEG
-- `PATH_BIN_FFMPROBE`: le chemin **relatif à DocumentRoot** du bin FFMPROBE
-- `FFMPEG_TIMEOUT`: le timeout de FFMPEG
-- `FFMPEG_THREADS`: le nombre de threads utilisé par FFMPEG
-- `PATH_PYTHON`: le path de python (python3+)
-- `PATH_BIN_YOUTUBEDL`: le chemin **relatif à DocumentRoot** de youtube-dl
-- `SITE_MAINTENANCE_MODE`: 0 pas en maintenance, 1 en maintenance
-- `SITE_DISABLE_SIGN_UP`: 0 les inscriptions sont ouvertes, 1 fermées
-
-
 ### Configuration php-fpm
 
 On utilise `php-fpm` qui utilise
@@ -263,6 +216,53 @@ php_admin_flag[log_errors] = on
 Créer le fichier `/path/du/log/app.log` et donner donner la permission à php d'écrire dessus `touch /path/du/log/app.log && chmod 666 /path/du/log/app.log`.
 
 >php-fpm n'utilise pas la configuration définies dans `php.ini`, utilise `$PHP_INI_DIR/php-fpm.d/www.conf`. Un sujet encore à creuser
+
+### Configuration du projet
+
+La configuration du projet se fait dans un fichier `.env` à la racine de `DocumentRoot`. 
+
+~~~bash
+mv DocumentRoot/.env.dist DocumentRoot/.env
+~~~
+
+Voici les options par défaut. Surchargez les à votre convenance.
+
+~~~
+# Database credentials
+DB_HOST="db"
+DB_NAME="mydb"
+DB_PORT="5432"
+DB_USER="user"
+DB_PASSWORD="password"
+DB_CHARSET="utf8"
+
+# FFMPEG
+PATH_BIN_FFMPEG=ffmpeg/ffmpeg
+PATH_BIN_FFPROBE=ffmpeg/ffprobe
+FFMPEG_TIMEOUT=3600
+FFMPEG_THREADS=12
+
+# youtube-dl
+PATH_PYTHON=/usr/bin/python3
+PATH_BIN_YOUTUBEDL=youtube-dl/youtube-dl
+~~~
+
+La liste des options
+
+- `DB_HOST` : le nom d'hôte de la base de données
+- `DB_NAME` : le nom de la base de données
+- `DB_USER` : le nom de l'utilisateur de la base de données
+- `DB_PASSWORD` : le mot de passe de l'utilisateur de la base de données
+- `DB_CHARSET` : l'encodage des caractères de la base de données
+- `PATH_BIN_FFMPEG`: le chemin **relatif à DocumentRoot** du bin FFMPEG
+- `PATH_BIN_FFMPROBE`: le chemin **relatif à DocumentRoot** du bin FFMPROBE
+- `FFMPEG_TIMEOUT`: le timeout de FFMPEG
+- `FFMPEG_THREADS`: le nombre de threads utilisé par FFMPEG
+- `PATH_PYTHON`: le path de python (python3+)
+- `PATH_BIN_YOUTUBEDL`: le chemin **relatif à DocumentRoot** de youtube-dl
+- `SITE_MAINTENANCE_MODE`: 0 pas en maintenance, 1 en maintenance
+- `SITE_DISABLE_SIGN_UP`: 0 les inscriptions sont ouvertes, 1 fermées
+
 
 ### Lancer le projet
 
