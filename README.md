@@ -29,6 +29,10 @@ Il sert également de prétexte pour construire un outil en *vanilla php* pour s
       - [Logs de nginx](#logs-de-nginx)
       - [Logs de php-fpm](#logs-de-php-fpm)
     - [Configuration du projet](#configuration-du-projet)
+      - [Installer les dépendances](#installer-les-dépendances)
+        - [dev](#dev)
+        - [prod](#prod)
+        - [.env](#env)
 - [Database credentials](#database-credentials)
 - [FFMPEG](#ffmpeg)
 - [youtube-dl](#youtube-dl-1)
@@ -218,6 +222,19 @@ Créer le fichier `/path/du/log/app.log` et donner donner la permission à php d
 >php-fpm n'utilise pas la configuration définies dans `php.ini`, utilise `$PHP_INI_DIR/php-fpm.d/www.conf`. Un sujet encore à creuser
 
 ### Configuration du projet
+
+#### Installer les dépendances
+
+##### dev
+
+`composer install`
+
+##### prod
+
+`composer install --no-dev --quiet --optimize-autoloader`
+
+
+##### .env
 
 La configuration du projet se fait dans un fichier `.env` à la racine de `DocumentRoot`. 
 
