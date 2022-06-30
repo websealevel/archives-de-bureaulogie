@@ -14,23 +14,28 @@ present_header();
 
 <h2>Nous soutenir</h2>
 
-<p>Page en construction...</p>
+<h3>Soutenez Canard PC</h3>
 
-<h3>Soutenir Canard PC</h3>
+<p>Si vous souhaitez nous soutenir, <a href="https://boutique.canardpc.com/common/product-subscription/4">soutenez Canard PC</a>. D'autant plus que <a href="https://www.canardpc.com/jeu-video/au-coin-du-jeu/canard-pc-perd-des-plumes">le canard est en difficulté</a> et à besoin de vous.</p>
 
-Si vous souhaitez nous soutenir, commencez plutôt par <a href="https://boutique.canardpc.com/common/product-subscription/4">soutenir Canard PC</a>, d'autant plus que le canard perd ses plumes en ce moment.
 
-<h3>Soutenir ackboo</h3>
+<h3>Soutenez ackboo (Canard PC)</h3>
 
-Si vous souhaitez toujours nous soutenir après avoir pris votre abonnement à Canard PC, alors soutenez d'abord ackboo, père fondateur de la bureaulogie. Sans lui, les archives n'auraient pas de raison d'être.
+<p>Si après avoir pris votre abonnement chez Canard PC, vous voulez toujours nous soutenir, alors <a href="https://www.twitch.tv/canardpc/videos?filter=clips&range=7d">soutenez ackboo (et donc Canard PC), fondateur de la bureaulogie, en vous abonnant à la chaîne twitch de Canard PC</a>. Sans <a href="https://www.youtube.com/watch?v=YglE-FnSd3g&list=PLDN-m4HWH8MBKJLYIK-80qJBBkVJbPo9p">tribunal des bureaux</a>, pas d'archives de bureaulogie.</p>
 
-<h3>Soutenir les archives</h3>
 
-S'il vous reste encore quelques centimes dans les poches après avoir soutenu Canard PC et ackboo, vous pouvez nous soutenir modestement pour nous aider à couvrir les frais d'hébergement du site. Cela sera possible quand les archives seront ouvertes au public.
+<p>
+    Merci pour votre soutien à <a href="https://www.canardpc.com/">Canard PC</a>, à ackboo, à la bureaulogie et aux archives.
+</p>
 
-Merci pour votre soutien à Canard PC, ackboo et aux archives.
+<h2>Nos partenaires</h2>
 
-<small>Les archives de bureaulogie</small>
+<ul>
+    <li><a href="https://tribunal.bmagic.fr/">Greffe du Tribunal des Bureaux</a></li>
+</ul>
+
+<p><small>Les archives de bureaulogie</small></p>
+
 
 <?php
 present_footer();

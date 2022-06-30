@@ -19,12 +19,12 @@ require_once __DIR__ . '/../../utils.php';
     <form action="log-in" method="POST">
         <div>
             <label for="login">pseudo </label>
-            <input type="text" id="login" name="login" value="paul">
+            <input type="text" id="login" name="login" value="">
             <div class="error-message"><?php esc_html_form_error_msg_e('login', 'form_errors') ?></div>
         </div>
         <div>
             <label for="password">mot de passe </label>
-            <input type="password" id="password" name="password" value="password">
+            <input type="password" id="password" name="password" value="">
             <div class="error-message"><?php esc_html_form_error_msg_e('password', 'form_errors') ?></div>
         </div>
         <input type="submit" value="se connecter" class="btn-edition">
