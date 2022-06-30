@@ -20,6 +20,7 @@ jQuery(function ($) {
         $("#video-clip").prop('src', source_url)
         $("#source_name").val(source_url)
         fetch_clips_of_current_source(source_url)
+        fetch_markers_of_current_source(source_url)
     })
 
     /**
@@ -417,15 +418,35 @@ function fetch_clips_of_current_source(source_url) {
  * @param {string} source_url 
  */
 function fetch_markers_of_current_source(source_url) {
+
+    const class_btn_delete_marker = 'btn-delete-marker'
+    $("#list-markers").empty()
     $.post('/api/v1/markers', {
         action: 'fetch',
         source_name: $("#sources").find('option:selected').attr("name"),
     }).done(function (response) {
-        console.log(response)
         response.markers.forEach(marker => {
-            $("#list-markers").append(marker)
+            const li = marker_markup(marker.position_in_sec, class_btn_delete_marker)
+            $("#list-markers").append(li)
+            const $li_appended = $("#list-markers").children("li:last-child")
+
+            //Event listener : click sur le marqueur OU click sur supprimer.
+            $li_appended.click(function (event) {
+
+                const delete_marker_btn_clicked = event.originalEvent.target.className === class_btn_delete_marker
+
+                if (delete_marker_btn_clicked) {
+                    remove_marker(this, marker.position_in_sec)
+                    return
+                }
+                play_source_video_at_marker_position(this)
+            })
         });
     })
+}
+
+function marker_markup(time, class_btn_delete) {
+    return `<li id="${time}" class="marker"><span class="time">${time}</span> <button class="${class_btn_delete}">Supprimer</button></li>`
 }
 
 /**
@@ -437,7 +458,7 @@ function add_marker() {
     const currentTime = $("#video-source").prop('currentTime')
     const currentTime_sec = parseInt(currentTime)
 
-    const li = `<li id="${currentTime_sec}" class="marker"><span class="time">${currentTime_sec}</span> <button class="${class_btn_delete_marker}">Supprimer</button></li>`
+    const li = marker_markup(currentTime_sec, class_btn_delete_marker)
 
     //Avoid doublon
     if ($(`li#${currentTime_sec}`).length > 0)
