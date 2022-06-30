@@ -27,6 +27,7 @@ function cap_exists(string $cap): bool
 }
 
 /**
+ * Remarque: A implementer.
  * Retourne vrai si le rôle donne droit à la capacité
  * @param string $role Le rôle
  * @param string $cap La capacité
@@ -36,7 +37,11 @@ function cap_exists(string $cap): bool
 function role_has_cap(string $role, string $cap): bool
 {
     //Intersting stuff here!
-    return true;
+
+    if ('admin' === $role || 'superadmin' === $role)
+        return true;
+
+    return false;
 }
 
 /**
