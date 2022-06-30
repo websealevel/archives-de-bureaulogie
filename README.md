@@ -188,8 +188,10 @@ Dans le `.htaccess` à la racine du projet
 ~~~.htaccess
 # Deny access to .htaccess
 <Files .htaccess>
-Order allow,denyx264, .sh
-<FilesMatch "\.(xml|dtd|php|env|json|lock|ini|log|sh)$">
+Order allow,deny
+Deny from all
+</Files>
+<FilesMatch "\.(xml|dtd|env|json|lock|ini|log|sh)$">
 Order allow,deny
 Deny from all
 </FilesMatch>
@@ -232,7 +234,6 @@ Créer le fichier `/path/du/log/app.log` et donner donner la permission à php d
 ##### prod
 
 `composer install --no-dev --quiet --optimize-autoloader`
-
 
 ##### .env
 
