@@ -30,8 +30,8 @@ Il sert également de prétexte pour construire un outil en *vanilla php* pour s
       - [Logs de php-fpm](#logs-de-php-fpm)
     - [Configuration du projet](#configuration-du-projet)
       - [Installer les dépendances](#installer-les-dépendances)
-        - [dev](#dev)
-        - [prod](#prod)
+        - [environnement de dev](#environnement-de-dev)
+        - [environnement de prod](#environnement-de-prod)
         - [.env](#env)
 - [Database credentials](#database-credentials)
 - [FFMPEG](#ffmpeg)
@@ -136,12 +136,6 @@ Installer `youtube-dl` dans le dossier `DocumentRoot/youtube-dl` (youtube-dl a b
 curl -L https://yt-dl.org/downloads/latest/youtube-dl -o youtube-dl
 ~~~
 
-Mettre à jour les dépendances du projet. Se placer à la racine du projet puis
-
-~~~bash
-composer update
-~~~
-
 ### Configuration php-fpm
 
 On utilise `php-fpm` qui utilise
@@ -227,11 +221,19 @@ Créer le fichier `/path/du/log/app.log` et donner donner la permission à php d
 
 #### Installer les dépendances
 
-##### dev
+Mettre à jour les dépendances du projet. Se placer à la racine du projet puis
 
-`composer install`
+##### environnement de dev
 
-##### prod
+~~~bash
+composer update
+~~~
+ou
+~~~bash
+composer install
+~~~
+
+##### environnement de prod
 
 `composer install --no-dev --quiet --optimize-autoloader`
 
