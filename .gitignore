@@ -27,3 +27,5 @@ DocumentRoot/archives.error.log
 postgres-data/
 .vscode
 ~
+Capfile
+config
