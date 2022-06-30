@@ -48,7 +48,7 @@ function api_respond_with_success(string|array $data, string $key = 'data', int 
 {
     header('Content-Type: application/json; charset=utf-8');
     $response = json_encode(array(
-        'statut' => 200,
+        'statut' => $statut,
         $key => $data
     ));
     echo $response;

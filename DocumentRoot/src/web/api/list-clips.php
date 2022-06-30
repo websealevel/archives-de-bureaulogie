@@ -61,6 +61,5 @@ function api_list_clips()
     }
 
     $html = map_declared_clips_to_html_item($source_file);
-    write_log($html);
     api_respond_with_success(data: $html, key: 'extrait');
 }

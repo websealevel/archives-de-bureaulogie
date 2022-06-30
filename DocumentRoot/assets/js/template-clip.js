@@ -118,7 +118,7 @@ jQuery(function ($) {
         }
 
         if ('m' === key && !shiftKey) {
-            set_marker()
+            add_marker()
             return
         }
     })
@@ -428,7 +428,7 @@ function fetch_clip_markers_of_current_source(source_url) {
 /**
  * Définit un markeur à la position courante du lecteur. Ajoute un listeneur sur le markeur pour servir de lien vers la vidéo (qui se déclenche a la position définie par le marker)
  */
-function set_marker() {
+function add_marker() {
 
     const class_btn_delete_marker = 'btn-delete-marker'
     const currentTime = $("#video-source").prop('currentTime')
@@ -447,8 +447,6 @@ function set_marker() {
         position_in_sec: currentTime_sec
     }).done(function (response) {
 
-        console.log(response)
-
         //Si le formulaire est rejeté on récupere les erreurs et on les affiche
         if (typeof response !== 'string' && '' !== response && 'errors' in response) {
             const errors = response.errors
@@ -460,9 +458,7 @@ function set_marker() {
             return
         }
 
-        //Success
         $("#list-markers").append(li)
-
         const $li_appended = $("#list-markers").children("li:last-child")
 
         //Event listener : click sur le marqueur OU click sur supprimer.
@@ -471,38 +467,10 @@ function set_marker() {
             const delete_marker_btn_clicked = event.originalEvent.target.className === class_btn_delete_marker
 
             if (delete_marker_btn_clicked) {
-
-                //Envoyer une requete pour supprimer le marqueur.
-                const data = {
-                    action: 'remove',
-                    source_name: '',
-                    position_in_sec: currentTime_sec
-                };
-
-                // $.post('/api/v1/markers', data).done(function (response) {
-                // })
-
-                $(this).remove()
+                delete_marker()
                 return
             }
-
-            const content = $(this)[0].innerText
-
-            //On récupere le début dela position du bouton supprimer
-            const pos = content.indexOf('S')
-
-            //On récupere uniquement le temps en seconde
-            const time_part = content.substring(0, pos)
-
-            const currentTime = parseFloat(time_part)
-
-            $("#video-source").prop('currentTime', currentTime)
-
-            const source_video_is_playing = $("#video-source").prop('currentTime') > 0 & !$("#video-source").prop('paused')
-
-            if (!source_video_is_playing)
-                $("#video-source").trigger('play')
-
+            play_source_video_at_marker_position(this)
         })
 
         //Clean error messages.
@@ -512,6 +480,47 @@ function set_marker() {
 
     }).fail(function () {
         $("div.errors").html('Hmm, il semblerait qu\'il y ait eu un problème de connexion. Veuillez rééssayer s\'il vous plaît.')
+    })
+}
+
+/**
+ * Déplace le curseur à la position du marqueur et lance la vidéo si elle est en pause.
+ */
+function play_source_video_at_marker_position(marker) {
+
+    const content = $(marker)[0].innerText
+    //On récupere le début dela position du texte 'Supprimer'
+    const pos = content.indexOf('S')
+    //On récupere uniquement le temps en seconde
+    const time_part = content.substring(0, pos)
+    const currentTime = parseFloat(time_part)
+    $("#video-source").prop('currentTime', currentTime)
+    const source_video_is_playing = $("#video-source").prop('currentTime') > 0 & !$("#video-source").prop('paused')
+    if (!source_video_is_playing)
+        $("#video-source").trigger('play')
+}
+
+/**
+ * Supprime un markeur
+ */
+function delete_marker() {
+    $.post('/api/v1/markers', {
+        action: 'remove',
+        source_name: '',
+        position_in_sec: currentTime_sec
+    }).done(function (response) {
+        //Si le formulaire est rejeté on récupere les erreurs et on les affiche
+        if (typeof response !== 'string' && '' !== response && 'errors' in response) {
+            const errors = response.errors
+            let items = []
+            for (const input in errors) {
+                items.push("<li>" + errors[input].message + "</li>")
+            }
+            $("div.errors").html('<ul>' + items.join('') + '</ul>')
+            return
+        }
+        console.log(response)
+        $(this).remove()
     })
 }
 
