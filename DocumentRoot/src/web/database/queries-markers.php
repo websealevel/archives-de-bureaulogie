@@ -82,7 +82,7 @@ function sql_find_markers_on_source_by_account_id(string $source_name, int $acco
 
     $db = connect_to_db();
 
-    $sql = 'SELECT * FROM clip_markers WHERE account_id = :account_id AND source_name = :source_name';
+    $sql = 'SELECT id,position_in_sec FROM clip_markers WHERE account_id = :account_id AND source_name = :source_name';
 
     $stmt = $db->prepare($sql);
 

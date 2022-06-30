@@ -152,7 +152,6 @@ jQuery(function ($) {
         }
 
         if (13 === keyCode && shiftKey) {
-            console.log(shiftKey)
             post_clip()
             return
         }
@@ -198,7 +197,7 @@ function init_on_landing() {
     $("#source_name").val(source_url)
 
     fetch_clips_of_current_source(source_url)
-    fetch_clip_markers_of_current_source(source_url)
+    fetch_markers_of_current_source(source_url)
 }
 
 /**
@@ -362,10 +361,7 @@ function play_pause_video_source() {
  */
 function set_timecode_start(start_in_sec) {
 
-    console.log(start_in_sec)
-
     if (start_in_sec) {
-        console.log('here')
         $("#video-source").prop("currentTime", start_in_sec)
         return
     }
@@ -417,17 +413,19 @@ function fetch_clips_of_current_source(source_url) {
 }
 
 /**
- * Fetch les marqueurs de l'utilisateur connecté enregistrée pour la vidéo source
+ * Fetch les marqueurs de l'utilisateur enregistrés pour la vidéo source
  * @param {string} source_url 
  */
-function fetch_clip_markers_of_current_source(source_url) {
+function fetch_markers_of_current_source(source_url) {
     $.post('/api/v1/markers', {
         action: 'fetch',
         source_name: $("#sources").find('option:selected').attr("name"),
     }).done(function (response) {
-
+        console.log(response)
+        response.markers.forEach(marker => {
+            $("#list-markers").append(marker)
+        });
     })
-
 }
 
 /**
@@ -524,7 +522,6 @@ function remove_marker(marker, currentTime_sec) {
             $("div.errors").html('<ul>' + items.join('') + '</ul>')
             return
         }
-        console.log(response)
         $(marker).remove()
     })
 }

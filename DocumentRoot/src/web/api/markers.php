@@ -44,6 +44,7 @@ function api_markers()
         'position_in_sec' => FILTER_SANITIZE_ENCODED
     ));
 
+
     $clean = api_markers_validate_input($data);
 
     if (false === $clean) {
@@ -67,6 +68,7 @@ function api_markers()
 
             try {
                 $id = sql_insert_marker($clean['source_name'], $account_id, $clean['position_in_sec']);
+                write_log($id);
                 api_respond_with_success($id);
             } catch (PDOException $e) {
                 error_log($e);
@@ -93,7 +95,7 @@ function api_markers()
 
             try {
                 $markers = sql_find_markers_on_source_by_account_id($clean['source_name'], $account_id);
-                api_respond_with_success($markers);
+                api_respond_with_success($markers, 'markers');
             } catch (PDOException $e) {
                 error_log($e);
                 api_respond_with_error(array(
@@ -140,7 +142,10 @@ function api_markers_validate_input($data): array|false
 
     $clean['source_name'] = $source_name;
 
-    //Check position_in_sec
+    if ('fetch' === $clean['action']) {
+        return $clean;
+    }
+
     if (!isset($data['position_in_sec'])) {
         return false;
     }
