@@ -34,6 +34,17 @@ function current_user_pseudo(): string
 }
 
 /**
+ * Retourne l'id du compte de l'utilisateur authentifié
+ * @return string
+ */
+function current_user_id(): string
+{
+    if (!is_current_user_logged_in())
+        throw new Exception("L'utilisateur devrait être authentifié quand on chercher son id");
+    return from_session('account_id') ?? '';
+}
+
+/**
  * Retourne vrai si l'utilisateur authentifié a la capacité de faire cette action, faux sinon
  * @param string $cap La capacité à tester
  * @return bool

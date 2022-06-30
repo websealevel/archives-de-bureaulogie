@@ -28,13 +28,15 @@ CREATE TABLE accounts (
 
 -- Table des marqueurs sur des clips
 CREATE TABLE clip_markers (
-    cm_id INT PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     -- le nom de fichier de la source
-    cm_source_name VARCHAR (255) NOT NULL,
-    cm_account_id INT NOT NULL,
-    cm_position_in_sec INT NOT NULL,
-    CONSTRAINT fk_account FOREIGN KEY (cm_account_id) REFERENCES accounts (id), 
-    require_authentification_check BOOLEAN NOT NULL
+    source_name VARCHAR (255) NOT NULL,
+    account_id INT NOT NULL,
+    position_in_sec INT NOT NULL,
+    -- le partager avec les autres ou non (par défaut faux)
+    is_shareable BOOLEAN NOT NULL,
+    require_authentification_check BOOLEAN NOT NULL,
+    CONSTRAINT fk_account FOREIGN KEY (account_id) REFERENCES accounts (id)
 );
 
 -- Table de jointure roles-capabilities.

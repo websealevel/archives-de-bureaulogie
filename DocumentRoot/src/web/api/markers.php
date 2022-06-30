@@ -52,8 +52,13 @@ function api_markers()
         ));
     }
 
-    //tmp
-    $account_id = 1;
+    $account_id = current_user_id();
+
+    if ('' === $account_id) {
+        api_respond_with_error(array(
+            new InputValidation('', '', "Les données transmises ne sont pas correctes.")
+        ));
+    }
 
     //Remplacer ça par un match.
     switch ($clean['action']) {
