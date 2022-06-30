@@ -5,7 +5,11 @@ Les [archives de bureaulogie](https://archives-de-bureaulogie.fr) est un projet 
 Il sert également de prétexte pour construire un outil en *vanilla php* pour se former et s'amuser.
 
 - [Archives de bureaulogie](#archives-de-bureaulogie)
-  - [Projet : vue d'ensemble et suivi](#projet--vue-densemble-et-suivi)
+  - [A l'intention des utilisateur·trice·s du code](#a-lintention-des-utilisateurtrices-du-code)
+    - [*vanilla PHP first*](#vanilla-php-first)
+    - [*XML*](#xml)
+    - [Backup](#backup)
+  - [Projet: vue d'ensemble et suivi](#projet-vue-densemble-et-suivi)
   - [Au délà de la bureaulogie, ce qu'est vraiment le codesource du projet](#au-délà-de-la-bureaulogie-ce-quest-vraiment-le-codesource-du-projet)
   - [Forker le projet pour faire son propre outil d'édition/publication d'extraits vidéos](#forker-le-projet-pour-faire-son-propre-outil-déditionpublication-dextraits-vidéos)
   - [*Getting started*](#getting-started)
@@ -40,7 +44,34 @@ Il sert également de prétexte pour construire un outil en *vanilla php* pour s
 
 Envie de contribuer au dépôt en proposant un extrait ? [Lisez d'abord ceci](CONTRIBUTING.md). -->
 
-## Projet : vue d'ensemble et suivi
+## A l'intention des utilisateur·trice·s du code
+
+
+### *vanilla PHP first*
+Ce projet a été volontairement développé en *vanilla PHP* pour plusieurs raisons
+- apprendre du PHP "bas niveau"
+- apprendre des besoins fonctionnels d'une appli web
+- mieux comprendre l'intérêt d'un framework
+- mieux comprendre l'intérêt des PSR et notamment du PSR-4
+
+**Il est inutile pour le moment de proposer des `PR` sur du refactoring de code** car la version suivante sera entièrement refactorée en suivant le PSR-4. Vous pouvez [voir la roadmap du projet ici](backlog.md#roadmap). Je mettrais également de l'ordre dans [l'architecture du projet](backlog.md#architecture-générale) (séparer la partie core de la partie web).
+
+### *XML*
+
+Ce projet utilise également un fichier XML qui sert de *registre* pour suivre les sources et les extraits. J'avais envie aussi d'en apprendre plus sur le XML d'où ce choix plutôt que d'utiliser la base de données. L'idée est également de pouvoir reconstituer l'intégrale des archives à partir du fichier source `extraits.xml`. Pour cela, la partie `core` [intègre une partie CLI indépendante de l'application web](#core-functions-cli).
+
+### Backup
+
+Un backup du projet web demande donc
+- `extraits.xml`
+- `extraits.dtd`
+- `dump de la base` (comptes)
+
+Un backup du projet core demande seulement
+- `extraits.xml`
+- `extraits.dtd`
+
+## [Projet: vue d'ensemble et suivi](backlog.md)
 
 Voir les [spécifications techniques et le backlog du projet](backlog.md).
 
