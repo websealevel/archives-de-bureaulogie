@@ -22,6 +22,13 @@ Il sert également de prétexte pour construire un outil en *vanilla php* pour s
 - [FFMPEG](#ffmpeg)
 - [youtube-dl](#youtube-dl-1)
     - [Configuration php-fpm](#configuration-php-fpm)
+    - [Configuration virtual host](#configuration-virtual-host)
+      - [Nginx](#nginx)
+- [deny hidden files and files with the extensions listed below](#deny-hidden-files-and-files-with-the-extensions-listed-below)
+      - [Apache](#apache)
+- [Deny access to .htaccess](#deny-access-to-htaccess)
+- [Disable directory browsing](#disable-directory-browsing)
+- [Deny access to files with extensions .ini, .psd, .log, .sh](#deny-access-to-files-with-extensions-ini-psd-log-sh)
     - [Gestion des logs](#gestion-des-logs)
       - [Logs de nginx](#logs-de-nginx)
       - [Logs de php-fpm](#logs-de-php-fpm)
@@ -40,7 +47,6 @@ Il sert également de prétexte pour construire un outil en *vanilla php* pour s
       - [FFMPEG renvoie une erreur `'Encoding Failed'`](#ffmpeg-renvoie-une-erreur-encoding-failed)
   - [Ressources](#ressources)
 
-<!-- ## Comment contribuer au dépôt ?
 
 Envie de contribuer au dépôt en proposant un extrait ? [Lisez d'abord ceci](CONTRIBUTING.md). -->
 
@@ -100,7 +106,7 @@ Installer
 
 Installer `ffmpeg` et `ffprobe` dans le dossier `DocumentRoot/ffmpeg`
 
-Télécharger les builds static `ici` (vous pouvez aussi [recompiler le code source](https://ffmpeg.org/download.html#repositories) mais il faudra bien configurer le build pour inclure les codecs comme x264, voir `./configure --help` pour plus d'info).
+Télécharger les builds static [ici]() (vous pouvez aussi [recompiler le code source](https://ffmpeg.org/download.html#repositories) mais il faudra bien configurer le build pour inclure les codecs comme x264, voir `./configure --help` pour plus d'info).
 
 Copier les executables `ffmpeg` et `ffprobe` dans le dossier `DocumentRoot/ffmpeg`.
 
@@ -175,6 +181,59 @@ On utilise `php-fpm` qui utilise
 - `$PHP_INI_DIR/php-fpm.d/www.conf` pour la configuration de chaque pool de process php
 
 avec ici `$PHP_INI_DIR=/usr/local/etc/php`. 
+
+### Configuration virtual host
+
+Il faut rediriger toutes les reqûetes vers le `index.php` à la racine du projet (le routeur fonctionne ainsi).
+
+
+
+#### Nginx
+
+Dans le `nginx.conf` à la racine du projet.
+
+~~~nginx
+# deny hidden files and files with the extensions listed below
+    location ~ /\.|\.(?:xml|dtd|php|env|json|lock|ini|log)$ {
+        deny all;
+    }
+
+    location / {
+        try_files $uri /index.php$is_args$args;
+    }
+
+    location = /index.php {
+        try_files $uri =404;
+        fastcgi_split_path_info ^(.+\.php)(/.+)$;
+        fastcgi_index index.php;
+        include fastcgi_params;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        fastcgi_param PATH_INFO $fastcgi_path_info;
+        fastcgi_pass php-fpm:9000;
+    }
+~~~
+
+#### Apache
+
+Dans le `.htaccess` à la racine du projet
+
+~~~.htaccess
+# Deny access to .htaccess
+<Files .htaccess>
+Order allow,deny
+Deny from all
+</Files>
+# Disable directory browsing 
+Options -Indexes
+# Deny access to files with extensions .ini, .psd, .log, .sh
+<FilesMatch "\.(xml|dtd|php|env|json|lock|ini|log|sh)$">
+Order allow,deny
+Deny from all
+</FilesMatch>
+
+RewriteEngine on
+RewriteRule ^(.*)$ index.php?q=$1 [L,QSA]
+~~~
 
 ### Gestion des logs
 

@@ -34,14 +34,14 @@ if (!is_signup_activated())
 
     <div>
         <label for="password">Mot de passe <span class="required">*</span></label>
-        <input type="password" name="password" required minlength="6" maxlength="12" value="">
+        <input type="password" name="password" required minlength="6" maxlength="32" value="">
         <div class="error-message"><?php echo  esc_html_form_error_msg_e('password', 'form_errors') ?></div>
     </div>
 
 
     <div>
         <label for="password_confirmation">Confirmer votre mot de passe <span class="required">*</span></label>
-        <input type="password" name="password_confirmation" required value="">
+        <input type="password" name="password_confirmation" required minlength="6" maxlength="32" value="">
         <div class="error-message"><?php esc_html_form_error_msg_e('password_confirmation', 'form_errors') ?></div>
     </div>
 
