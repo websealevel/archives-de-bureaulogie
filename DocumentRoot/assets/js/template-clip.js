@@ -421,7 +421,12 @@ function fetch_clips_of_current_source(source_url) {
  * @param {string} source_url 
  */
 function fetch_clip_markers_of_current_source(source_url) {
+    $.post('/api/v1/markers', {
+        action: 'fetch',
+        source_name: $("#sources").find('option:selected').attr("name"),
+    }).done(function (response) {
 
+    })
 
 }
 
@@ -467,7 +472,7 @@ function add_marker() {
             const delete_marker_btn_clicked = event.originalEvent.target.className === class_btn_delete_marker
 
             if (delete_marker_btn_clicked) {
-                remove_marker(currentTime_sec)
+                remove_marker(this, currentTime_sec)
                 return
             }
             play_source_video_at_marker_position(this)
@@ -503,7 +508,7 @@ function play_source_video_at_marker_position(marker) {
 /**
  * Supprime un markeur
  */
-function remove_marker(currentTime_sec) {
+function remove_marker(marker, currentTime_sec) {
     $.post('/api/v1/markers', {
         action: 'remove',
         source_name: $("#sources").find('option:selected').attr("name"),
@@ -520,7 +525,7 @@ function remove_marker(currentTime_sec) {
             return
         }
         console.log(response)
-        $(this).remove()
+        $(marker).remove()
     })
 }
 

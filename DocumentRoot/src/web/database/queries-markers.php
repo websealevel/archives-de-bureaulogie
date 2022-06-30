@@ -51,14 +51,45 @@ function sql_insert_marker(string $source_name, int $account_id, int $position_i
 
 /**
  * Supprime un marqueur.
+ * @param string $source_name Le nom du fichier source visé par le marqueur
+ * @param int $account_id L'id du compte de l'utilisateur qui supprime le marqueur
  */
-function sql_delete_marker(string $source_name, int $account_id, int $position_in_sec)
+function sql_delete_marker(string $source_name, int $account_id, int $position_in_sec): int
 {
+
+    $db = connect_to_db();
+
+    $sql = 'DELETE FROM clip_markers WHERE account_id = :account_id AND source_name = :source_name AND position_in_sec = :position_in_sec';
+
+    $stmt = $db->prepare($sql);
+
+    $stmt->bindValue(':account_id', $account_id);
+    $stmt->bindValue(':source_name', $source_name);
+    $stmt->bindValue(':position_in_sec', $position_in_sec);
+
+    $stmt->execute();
+
+    return $stmt->rowCount();
 }
 
 /**
  * Retrouve les marqueurs d'une source appartenant à l'utilisateur.
+ * @param string $source_name Le nom du fichier source visé par le marqueur
+ * @param int $account_id L'id du compte de l'utilisateur qui possède les marqueurs
  */
-function sql_find_markers_on_source_by_account_id()
+function sql_find_markers_on_source_by_account_id(string $source_name, int $account_id): array
 {
+
+    $db = connect_to_db();
+
+    $sql = 'SELECT * FROM clip_markers WHERE account_id = :account_id AND source_name = :source_name';
+
+    $stmt = $db->prepare($sql);
+
+    $stmt->bindValue(':account_id', $account_id);
+    $stmt->bindValue(':source_name', $source_name);
+
+    $stmt->execute();
+
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }

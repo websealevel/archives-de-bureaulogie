@@ -79,7 +79,8 @@ function api_markers()
         case 'remove':
 
             try {
-                $result = sql_delete_marker($clean['source_name'], $account_id, $clean['position_in_sec']);
+                $row_affected = sql_delete_marker($clean['source_name'], $account_id, $clean['position_in_sec']);
+                api_respond_with_success($row_affected);
             } catch (PDOException $e) {
                 error_log($e);
                 api_respond_with_error(array(
@@ -91,7 +92,8 @@ function api_markers()
         case 'fetch':
 
             try {
-                $result = sql_find_markers_on_source_by_account_id();
+                $markers = sql_find_markers_on_source_by_account_id($clean['source_name'], $account_id);
+                api_respond_with_success($markers);
             } catch (PDOException $e) {
                 error_log($e);
                 api_respond_with_error(array(
@@ -103,9 +105,6 @@ function api_markers()
         default:
             api_respond_with_error();
     };
-
-    echo 'wip...';
-    exit;
 }
 
 /**
