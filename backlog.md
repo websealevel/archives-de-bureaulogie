@@ -378,7 +378,7 @@ A venir...
 - produire des extraits [respectant des contraintes audio et vidéo] [x](#cahier-des-charges-pour-lencodage-vidéoaudio-des-extraits) (dimensions, encodages, normalization audio, etc.)
 - lister les extraits sur chaque vidéo source [x]
 - télécharger les extraits [x]
-- marquer videos sources pour plus tard, ajouter/supprimer/recuperer (persisté en base) []
+- marquer videos sources pour plus tard, ajouter/supprimer/recuperer (persisté en base) [x]
 
 ### v2.0
 
