@@ -400,3 +400,4 @@ Cette erreur est envoyée au moment de l'écriture du fichier dans le dossier. I
 - [Normaliser le son avec ffmpeg](https://superuser.com/questions/323119/how-can-i-normalize-audio-using-ffmpeg), un bon post stackoverflow maitnenu depuis des années, bonne doc et pointage vers [un repo d'un bin python](https://github.com/slhck/ffmpeg-normalize) qui s'occupe de faire la normalization en une passe
 - [FFMPEG: filtre loudnorm](http://ffmpeg.org/ffmpeg-all.html#loudnorm), EBU R128 loudness normalization filter.
 - [Audio loudness, Google doc](https://developers.google.com/assistant/tools/audio-loudness), chapitre sur ffmpeg et exemple
+- [Capistrano](https://capistranorb.com/), un outil de déploiement automatique, simple, prédictible et réversible écrit en Ruby
