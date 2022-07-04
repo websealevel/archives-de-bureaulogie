@@ -65,17 +65,35 @@ $token = register_api_token($account, 'submit_clip');
                     </div>
                 </div>
 
-                <div class="label-input">
-                    <label for="timecode_start" style="width:120px" ;>Début*</label>
-                    <input type="text" name="timecode_start" id="timecode_start" pattern="[0-9]{2}:[0-9]{2}:[0-9]{2}.[0-9]{3}" value="00:00:00.000" title="Veuillez renseigner un timecode au format hh:mm:ss.lll. 
+                <div>
+                    <div class="label-input">
+                        <label for="timecode_start" style="width:120px" ;>Début*</label>
+                        <input type="text" name="timecode_start" id="timecode_start" pattern="[0-9]{2}:[0-9]{2}:[0-9]{2}.[0-9]{3}" value="00:00:00.000" title="Veuillez renseigner un timecode au format hh:mm:ss.lll. 
 Sinon, utiliser le bouton 'Démarrer l'extrait ici' prévu à cet effet" class="btn-edition">
+                    </div>
+                    <button name="" id="" class="btn-edition" type="button" title="">
+                        <div class="shortcut"></div>
+                        <?php echo htmlentities('Aller'); ?>
+                    </button>
+
+
                 </div>
 
-                <div class="label-input">
-                    <label for="timecode_end" style="width:120px">Fin*</label>
-                    <input type="text" name="timecode_end" id="timecode_end" value="00:00:00.000" pattern="[0-9]{2}:[0-9]{2}:[0-9]{2}.[0-9]{3}" title="Veuillez renseigner un timecode au format hh:mm:ss.lll
+
+                <div>
+                    <div class="label-input">
+                        <label for="timecode_end" style="width:120px">Fin*</label>
+                        <input type="text" name="timecode_end" id="timecode_end" value="00:00:00.000" pattern="[0-9]{2}:[0-9]{2}:[0-9]{2}.[0-9]{3}" title="Veuillez renseigner un timecode au format hh:mm:ss.lll
 Sinon, utiliser le bouton 'Finir l'extrait ici' prévu à cet effet" class="btn-edition">
+                    </div>
+
+
+                    <button name="" id="" class="btn-edition" type="button" title="">
+                        <div class="shortcut"></div>
+                        <?php echo htmlentities('Aller'); ?>
+                    </button>
                 </div>
+
 
             </div>
         </div>
@@ -118,6 +136,15 @@ Sinon, utiliser le bouton 'Finir l'extrait ici' prévu à cet effet" class="btn-
             </fieldset>
             <input type="hidden" name="token" value="<?php echo $token; ?>">
             <input type="hidden" name="source_name" id="source_name" value="">
+
+
+
+
+            <button name="btn_set_marker" id="btn_set_marker" class="btn-edition" type="button" title="Définir un marqueur à la position courante du curseur de lecture">
+                <div class="shortcut">m</div>
+                <?php echo htmlentities('Marquer pour plus tard'); ?>
+            </button>
+
             <div class="container-btn-submit-clip">
                 <button type="submit" id="btn-submit-clip" value="Cut !" class="btn-edition">
                     <div class="shortcut">

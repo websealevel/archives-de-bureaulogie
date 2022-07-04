@@ -244,10 +244,10 @@ function are_timecodes_valid() {
  */
 function play_pause() {
     if (video_is_playing()) {
-        $("#btn_play_pause").prop('innerHTML', '<div class="shortcut">s</div> Play')
+        $("#btn_play_pause").prop('innerHTML', '<div class="shortcut">s</div> play')
         $("#video-source").trigger('pause')
     } else {
-        $("#btn_play_pause").prop('innerHTML', '<div class="shortcut">s</div> Pause')
+        $("#btn_play_pause").prop('innerHTML', '<div class="shortcut">s</div> pause')
         $("#video-source").trigger('play')
     }
 }

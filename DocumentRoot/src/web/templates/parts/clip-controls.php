@@ -14,7 +14,7 @@
 
     <button name="btn_play_pause" id="btn_play_pause" class="btn-control play_pause" type="button" title="Play/Pause">
         <div class="shortcut">s</div>
-        <?php echo htmlentities('Play'); ?>
+        <?php echo htmlentities('play'); ?>
     </button>
 
     <button name="btn_forward_1_s" id="btn_forward_1_s" class="btn-control forward" type="button" title="Avancer de 1s">
@@ -37,19 +37,29 @@
         <?php echo htmlentities('Terminer l\'extrait ici'); ?>
     </button>
 
-    <button name="btn_preview" id="btn_preview" class="btn-edition" type="button" title="Prévisualiser">
+    <button name="btn_preview" id="btn_preview" class="btn-edition" type="button" title="Jouer l'extrait">
         <div class="shortcut">p</div>
-        <?php echo htmlentities('Prévisualiser l\'extrait'); ?>
+        <?php echo htmlentities('[play]'); ?>
+    </button>
+
+    <button name="" id="" class="btn-edition" type="button" title="">
+        <div class="shortcut"></div>
+        <?php echo htmlentities('Aller et Jouer au début de l\'extrait'); ?>
+    </button>
+
+    <button name="" id="" class="btn-edition" type="button" title="">
+        <div class="shortcut"></div>
+        <?php echo htmlentities('Aller et Jouer à la fin de l\'extrait'); ?>
+    </button>
+
+    <button name="" id="" class="btn-edition" type="button" title="">
+        <div class="shortcut"></div>
+        <?php echo htmlentities('Jouer 500ms avant le début'); ?>
     </button>
 
     <button name="btn_preview_tail" id="btn_preview_tail" class="btn-edition" type="button" title="La traine correspond à la portion située juste après le timecode de fin, afin de mieux visualiser la fin du cut">
         <div class="shortcut">o</div>
-        <?php echo htmlentities('Prévisualiser la traîne'); ?>
-    </button>
-
-    <button name="btn_set_marker" id="btn_set_marker" class="btn-edition" type="button" title="Définir un marqueur à la position courante du curseur de lecture">
-        <div class="shortcut">m</div>
-        <?php echo htmlentities('Marquer pour plus tard'); ?>
+        <?php echo htmlentities('Jouer 500ms après la fin'); ?>
     </button>
 
 
