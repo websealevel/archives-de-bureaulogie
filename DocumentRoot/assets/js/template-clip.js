@@ -66,6 +66,14 @@ jQuery(function ($) {
         play_pause()
     })
 
+    $("#btn_goto_and_play_start").click(function () {
+        goto_and_play_start()
+    })
+
+    $("#btn_goto_and_play_end").click(function () {
+        goto_and_play_end()
+    })
+
     /**
      * Raccourcis clavier
      */
@@ -134,9 +142,25 @@ jQuery(function ($) {
             goto_and_play_end()
             return
         }
+
+        if ('i' === key && !shiftKey) {
+            preview_before_start()
+            return
+        }
+        if ('p' === key && !shiftKey) {
+            preview_after_end()
+            return
+        }
     })
 
+    function preview_before_start() {
 
+
+    }
+
+    function preview_after_end() {
+
+    }
 
 
 
