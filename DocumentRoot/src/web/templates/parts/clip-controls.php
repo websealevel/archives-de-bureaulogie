@@ -22,18 +22,18 @@
             </fieldset>
 
             <fieldset>
-                <legend>Timecodes</legend>
+                <legend>Timecodes []</legend>
                 <div class="timecodes">
 
                     <div class="label-input">
-                        <label for="timecode_start" style="width:120px;">Début*</label>
+                        <label for="timecode_start" style="background-color:green; color:white;width:120px;">Début* [</label>
                         <input type=" text" name="timecode_start" id="timecode_start" pattern="[0-9]{2}:[0-9]{2}:[0-9]{2}.[0-9]{3}" value="00:00:00.000" title="Veuillez renseigner un timecode au format hh:mm:ss.lll. 
 Sinon, utiliser le bouton 'Démarrer l'extrait ici' prévu à cet effet">
                     </div>
 
 
                     <div class="label-input">
-                        <label for="timecode_end" style="width:120px;">Fin*</label>
+                        <label for="timecode_end" style="background-color:darkblue; color:white;width:120px;">Fin* ]</label>
                         <input type="text" name="timecode_end" id="timecode_end" value="00:00:00.000" pattern="[0-9]{2}:[0-9]{2}:[0-9]{2}.[0-9]{3}" title="Veuillez renseigner un timecode au format hh:mm:ss.lll
 Sinon, utiliser le bouton 'Finir l'extrait ici' prévu à cet effet">
                     </div>
@@ -51,20 +51,29 @@ Sinon, utiliser le bouton 'Finir l'extrait ici' prévu à cet effet">
     <div id="editor-navigation">
 
         <div class="first-row">
-            <button name="btn_goto_and_play_start" id="btn_goto_and_play_start" class="btn-control" type="button" title="">
+            <button name="btn_goto_and_play_start" id="btn_goto_and_play_start" class="btn-control" type="button" title="Aller au début de l'extrait et jouer" style="background-color:green; color:white">
                 <span class="shortcut">a</span>
-                <?php echo htmlentities('Aller et Jouer au début de l\'extrait'); ?>
+                <?php echo htmlentities('[ <='); ?>
             </button>
 
-            <button name="btn_goto_and_play_end" id="btn_goto_and_play_end" class="btn-control" type="button" title="">
+            <button name="btn_goto_and_play_end" id="btn_goto_and_play_end" class="btn-control" type="button" title="Aller à la fin de l'extrait et jouer" style="background-color:darkblue; color:white">
                 <span class="shortcut">z</span>
-                <?php echo htmlentities('Aller et Jouer à la fin de l\'extrait'); ?>
+                <?php echo htmlentities('=>]'); ?>
             </button>
 
+            <button name="btn_play_500ms_before_start" id="btn_play_500ms_before_start" class="btn-control" type="button" title="" style="background-color:green; color:white">
+                <span class="shortcut">i</span>
+                <?php echo htmlentities('=>['); ?>
+            </button>
+
+            <button name="btn_preview_tail" id="btn_preview_tail" class="btn-control" type="button" title="La traine correspond à la portion située juste après le timecode de fin, afin de mieux visualiser la fin du cut" style="background-color:darkblue; color:white">
+                <span class="shortcut">o</span>
+                <?php echo htmlentities(']=>'); ?>
+            </button>
 
             <button name="btn_preview" id="btn_preview" class="btn-control" type="button" title="Jouer l'extrait">
                 <span class="shortcut">p</span>
-                <?php echo htmlentities('[play]'); ?>
+                <span style="color:green">[</span>play<span style="color:darkblue">]</span>
             </button>
 
         </div>
@@ -95,24 +104,17 @@ Sinon, utiliser le bouton 'Finir l'extrait ici' prévu à cet effet">
                 <?php echo htmlentities('>>'); ?>
             </button>
 
-            <button name="btn_play_500ms_before_start" id="btn_play_500ms_before_start" class="btn-control" type="button" title="">
-                <span class="shortcut"></span>
-                <?php echo htmlentities('Jouer 500ms avant le début'); ?>
-            </button>
 
-            <button name="btn_preview_tail" id="btn_preview_tail" class="btn-control" type="button" title="La traine correspond à la portion située juste après le timecode de fin, afin de mieux visualiser la fin du cut">
-                <span class="shortcut">o</span>
-                <?php echo htmlentities('Jouer 500ms après la fin'); ?>
-            </button>
 
-            <button name="btn_clip_start" id="btn_clip_start" class="btn-control" type="button" title="Définir la position courante du curseur de lecture comme timecode de départ de l'extrait">
+
+            <button name="btn_clip_start" id="btn_clip_start" class="btn-control" type="button" title="Définir la position courante du curseur de lecture comme timecode de départ de l'extrait" style="background-color:green; color:white ;font-weight:bold;">
                 <span class="shortcut">k</span>
-                <?php echo htmlentities('Démarrer l\'extrait ici'); ?>
+                <?php echo htmlentities('['); ?>
             </button>
 
-            <button name="btn_clip_end" id="btn_clip_end" class="btn-control" type="button" title="Définir la position courante du curseur de lecture comme timecode de fin de l'extrait">
+            <button name="btn_clip_end" id="btn_clip_end" class="btn-control" type="button" title="Définir la position courante du curseur de lecture comme timecode de fin de l'extrait" style="background-color:darkblue; color:white; font-weight:bold;">
                 <span class="shortcut">l</span>
-                <?php echo htmlentities('Terminer l\'extrait ici'); ?>
+                <?php echo htmlentities(']'); ?>
             </button>
 
             <button name="btn_set_marker" id="btn_set_marker" class="btn-control" type="button" title="Définir un marqueur à la position courante du curseur de lecture">

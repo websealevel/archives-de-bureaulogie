@@ -34,8 +34,22 @@ select {
 
 .label-input {
 	display: flex;
-	align-items: flex-start;
 	gap: 10px;
+}
+
+label,
+input {
+	padding: 20px;
+}
+
+
+#btn_clip_start,
+#btn_clip_end {
+	margin: 1px
+}
+
+#btn_clip_start{
+	margin-left: 120px;
 }
 
 #fieldset-video-clip {
@@ -43,6 +57,11 @@ select {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+}
+
+#timecode_start,
+#timecode_end {
+	font-size: 32px;
 }
 
 
@@ -54,6 +73,7 @@ select {
 	border: 3px solid black;
 	display: inline-block;
 	font-family: 'Courier New', Courier, monospace;
+	margin: 5px;
 }
 
 #clip-duration {
@@ -102,18 +122,18 @@ select {
 	gap: 10px;
 }
 
-.btn-control{
-	height:150px;
-	width:150px;
+.btn-control {
+	height: 120px;
+	width: 120px;
 	font-size: 24px;
 }
 
-span.shortcut{
+span.shortcut {
 	display: block;
 }
 
 
-.btn-control .shortcut{
+.btn-control .shortcut {
 	font-size: 14px;
 	margin-right: 10px;
 	font-family: 'Courier New', Courier, monospace;
@@ -171,6 +191,10 @@ li span.time {
 	flex: 3 0 auto;
 }
 
+button{
+	cursor: pointer;
+}
+
 .video-side {
 	flex: 1 0 auto;
 	display: flex;
@@ -180,23 +204,27 @@ li span.time {
 	gap: 10px;
 }
 
-#editor-navigation{
+#editor-navigation {
 	display: flex;
 	flex-direction: column;
 	justify-content: start;
 }
 
 
-.first-row, .second-row{
+
+.first-row,
+.second-row {
 	display: flex;
 	justify-content: flex-start;
+	gap: 3px;
+	margin: 10px;
 }
 
-input {
-	padding: 10px;
+.first-row {
+	margin-left: 130px;
 }
 
-nav.footer-links{
+nav.footer-links {
 	margin-top: 50px;
 }
 
