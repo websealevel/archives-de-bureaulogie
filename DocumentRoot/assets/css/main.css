@@ -56,11 +56,11 @@ select {
 	font-family: 'Courier New', Courier, monospace;
 }
 
-#current-time{
+#current-time {
 	margin: 20px;
 }
 
-#clip-duration{
+#clip-duration {
 	width: 310px;
 	text-align: center;
 }
@@ -96,28 +96,31 @@ select {
 	margin: 0 75px;
 }
 
-#fieldset-controls{
+#fieldset-controls {
 	display: flex;
 	flex-wrap: wrap;
 	gap: 10px;
 }
 
-.btn-edition, .btn-control {
+.btn-edition,
+.btn-control {
 	font-size: 30px;
 	display: flex;
 	align-items: flex-start;
 	cursor: pointer;
 }
 
-.btn-edition{
+.btn-edition {
 	width: 250px;
 	display: flex;
 }
-.btn-control{
+
+.btn-control {
 	width: 145px;
 }
 
-.btn-control .shortcut, .btn-edition .shortcut{
+.btn-control .shortcut,
+.btn-edition .shortcut {
 	font-size: 14px;
 	margin-right: 10px;
 	font-family: 'Courier New', Courier, monospace;
@@ -131,54 +134,54 @@ select {
 	justify-content: center;
 }
 
-#container-option-btn-submit{
+#container-option-btn-submit {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 }
 
-.site-title{
+.site-title {
 	font-size: 50px;
 	letter-spacing: -2px;
 }
 
-.fil-arianne{
+.fil-arianne {
 	margin: 20px 0;
 }
 
-li{
-	margin:2px; 
+li {
+	margin: 2px;
 }
 
-summary .clip-item-header{
+summary .clip-item-header {
 	color: blue;
 	text-decoration: underline blue;
 	cursor: pointer;
 }
 
-.two-col-side{
+.two-col-side {
 	display: flex;
 	gap: 20px;
 }
 
-li span.time{
+li span.time {
 	text-decoration: underline blue;
 	color: blue;
 	cursor: pointer;
 }
 
-.video-main{
+.video-main {
 	display: flex;
 	justify-content: center;
 	width: 90%;
 	margin: auto;
 }
 
-.video{
+.video {
 	flex: 3 0 auto;
 }
 
-.video-side{
+.video-side {
 	flex: 1 0 auto;
 	display: flex;
 	flex-direction: column;
@@ -186,6 +189,20 @@ li span.time{
 	gap: 10px;
 }
 
-input{
+input {
 	padding: 10px;
+}
+
+nav.footer-links{
+	margin-top: 50px;
+}
+
+nav.footer-links ul {
+	display: flex;
+	justify-content: center;
+	list-style: none;
+}
+
+nav.footer-links ul li {
+	margin: 20px;
 }

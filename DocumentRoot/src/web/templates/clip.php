@@ -136,22 +136,17 @@ Sinon, utiliser le bouton 'Finir l'extrait ici' prévu à cet effet" class="btn-
         </div>
 
         <?php require_once 'parts/clip-controls.php' ?>
-
+        <fieldset id="clip-options">
+            <legend>Options</legend>
+            <div>
+                <label for="checkbox_loop_preview">Prévisualisation en boucle</label>
+                <input type="checkbox" name="checkbox_loop_preview" id="checkbox_loop_preview">
+            </div>
+        </fieldset>
         <div id="container-option-btn-submit">
 
-            <fieldset id="clip-options">
-                <legend>Options</legend>
-
-                <div>
-                    <label for="checkbox_loop_preview">Prévisualisation en boucle</label>
-                    <input type="checkbox" name="checkbox_loop_preview" id="checkbox_loop_preview">
-                </div>
-
-            </fieldset>
             <input type="hidden" name="token" value="<?php echo $token; ?>">
             <input type="hidden" name="source_name" id="source_name" value="">
-
-
         </div>
 
         <span id="spinner"></span>
