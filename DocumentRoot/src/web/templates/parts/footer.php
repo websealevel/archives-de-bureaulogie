@@ -4,7 +4,7 @@ require_once __DIR__ . '../../../../default-handlers.php';
 ?>
 
 
-<footer id="colophon" class="site-footer" role="content-info">
+<footer id="colophon" class="site-footer">
     <ul class="footer-links">
         <li>
             <a href="contact">contact</a>

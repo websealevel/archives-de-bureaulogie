@@ -31,21 +31,21 @@ $token = register_api_token($account, 'submit_clip');
 
     <h2>Soumettre un extrait</h2>
 
-    <form action="">
+    <form action="clip-source">
         <?php esc_sources_to_html_select_e(show_data: array('label')); ?>
     </form>
-
-
 
 
     <form action="clip-source" id="form-clip-source" name="form-clip-source">
         <small>Les champs marqués d'un asterisque(*) sont obligatoires</small>
         <div class="errors" style="color: red;"></div>
         <div class="success" style="color: green;"></div>
+
+
         <div class="video-main">
 
             <div class="video">
-                <video id="video-source" width="1000px" height="580px" controls>
+                <video id="video-source" width="1000" height="580" controls>
                     <source src="" type="video/mp4">
                     Votre navigateur ne supporte pas le tag video HTML5 :(
                 </video>
@@ -54,128 +54,120 @@ $token = register_api_token($account, 'submit_clip');
             <div class="video-side">
                 <fieldset>
                     <legend>Durée de l'extrait</legend>
-                    <div id="clip-duration" name="clip-duration">
+                    <div id="clip-duration">
                         0
                     </div>
                 </fieldset>
 
-                <div>
-                    <div id="current-time">
-                        00:00:00.000
-                    </div>
+                <div id="current-time">
+                    00:00:00.000
                 </div>
-
 
                 <div class="timecodes">
 
                     <div class="label-input">
-                        <label for="timecode_start" style="width:120px" ;>Début*</label>
+                        <label for="timecode_start" style="width:120px">Début*</label>
                         <input type="text" name="timecode_start" id="timecode_start" pattern="[0-9]{2}:[0-9]{2}:[0-9]{2}.[0-9]{3}" value="00:00:00.000" title="Veuillez renseigner un timecode au format hh:mm:ss.lll. 
 Sinon, utiliser le bouton 'Démarrer l'extrait ici' prévu à cet effet" class="btn-edition">
                     </div>
-                    <button name="" id="" class="btn-edition" type="button" title="">
-                        <div class="shortcut"></div>
+                    <button class="btn-edition" type="button" title="">
+                        <span class="shortcut"></span>
                         <?php echo htmlentities('Aller'); ?>
                     </button>
 
                     <div class="label-input">
-                        <label for="timecode_end" style="width:120px">Fin*</label>
+                        <label for="timecode_end" style="width:120px;">Fin*</label>
                         <input type="text" name="timecode_end" id="timecode_end" value="00:00:00.000" pattern="[0-9]{2}:[0-9]{2}:[0-9]{2}.[0-9]{3}" title="Veuillez renseigner un timecode au format hh:mm:ss.lll
 Sinon, utiliser le bouton 'Finir l'extrait ici' prévu à cet effet" class="btn-edition">
                     </div>
 
 
                     <button name="" id="" class="btn-edition" type="button" title="">
-                        <div class="shortcut"></div>
+                        <span class="shortcut"></span>
                         <?php echo htmlentities('Aller'); ?>
                     </button>
                 </div>
 
                 <button name="btn_rewind_5_s" id="btn_rewind_5_s" class="btn-control rewind" type="button" title="Reculer de 5s">
-                    <div class="shortcut">Q</div>
+                    <span class="shortcut">Q</span>
                     <?php echo htmlentities('<<'); ?>
                 </button>
 
                 <button name="btn_rewind_1_s" id="btn_rewind_1_s" class="btn-control rewind" type="button" title="Reculer de 1s">
-                    <div class="shortcut">q</div>
+                    <span class="shortcut">q</span>
                     <?php echo htmlentities('<'); ?>
                 </button>
 
                 <button name="btn_play_pause" id="btn_play_pause" class="btn-control play_pause" type="button" title="Play/Pause">
-                    <div class="shortcut">s</div>
+                    <span class="shortcut">s</span>
                     <?php echo htmlentities('play'); ?>
                 </button>
 
                 <button name="btn_forward_1_s" id="btn_forward_1_s" class="btn-control forward" type="button" title="Avancer de 1s">
-                    <div class="shortcut">d</div>
+                    <span class="shortcut">d</span>
                     <?php echo htmlentities('>'); ?>
                 </button>
 
                 <button name="btn_forward_5_s" id="btn_forward_5_s" class="btn-control forward" type="button" title="Avancer de 5s">
-                    <div class="shortcut">D</div>
+                    <span class="shortcut">D</span>
                     <?php echo htmlentities('>>'); ?>
                 </button>
 
-                <button name="" id="" class="btn-edition" type="button" title="">
-                    <div class="shortcut"></div>
+                <button name="btn_goto_and_play_start" id="btn_goto_and_play_start" class="btn-edition" type="button" title="">
+                    <span class="shortcut"></span>
                     <?php echo htmlentities('Aller et Jouer au début de l\'extrait'); ?>
                 </button>
 
-                <button name="" id="" class="btn-edition" type="button" title="">
-                    <div class="shortcut"></div>
+                <button name="btn_goto_and_play_end" id="btn_goto_and_play_end" class="btn-edition" type="button" title="">
+                    <span class="shortcut"></span>
                     <?php echo htmlentities('Aller et Jouer à la fin de l\'extrait'); ?>
                 </button>
 
-                <button name="" id="" class="btn-edition" type="button" title="">
-                    <div class="shortcut"></div>
+                <button name="btn_play_500ms_before_start" id="btn_play_500ms_before_start" class="btn-edition" type="button" title="">
+                    <span class="shortcut"></span>
                     <?php echo htmlentities('Jouer 500ms avant le début'); ?>
                 </button>
 
                 <button name="btn_preview_tail" id="btn_preview_tail" class="btn-edition" type="button" title="La traine correspond à la portion située juste après le timecode de fin, afin de mieux visualiser la fin du cut">
-                    <div class="shortcut">o</div>
+                    <span class="shortcut">o</span>
                     <?php echo htmlentities('Jouer 500ms après la fin'); ?>
                 </button>
-
             </div>
+        </div>
 
-            <?php require_once 'parts/clip-controls.php' ?>
+        <?php require_once 'parts/clip-controls.php' ?>
 
-            <div id="container-option-btn-submit">
+        <div id="container-option-btn-submit">
 
-                <fieldset id="clip-options">
-                    <legend>Options</legend>
+            <fieldset id="clip-options">
+                <legend>Options</legend>
 
-                    <div>
-                        <label for="checkbox_loop_preview">Prévisualisation en boucle</label>
-                        <input type="checkbox" name="checkbox_loop_preview" id="checkbox_loop_preview">
-                    </div>
+                <div>
+                    <label for="checkbox_loop_preview">Prévisualisation en boucle</label>
+                    <input type="checkbox" name="checkbox_loop_preview" id="checkbox_loop_preview">
+                </div>
 
-                    <div>
-                        <label for="tail_duration_in_s" title="La durée de traîne correspond au nombre de secondes de vidéo après le timecode de fin qui seront prévisualisées en cliquant sur 'Prévisualiser la traîne'">Durée de traîne (s)</label>
-
-                        <input type="number" name="tail_duration_in_s" id="tail_duration_in_s" value="4" min="0" max="20" title="La durée de traîne correspond au nombre de secondes de vidéo après le timecode de fin qui seront prévisualisées en cliquant sur 'Prévisualiser la traîne'">
-                    </div>
-                </fieldset>
-                <input type="hidden" name="token" value="<?php echo $token; ?>">
-                <input type="hidden" name="source_name" id="source_name" value="">
+            </fieldset>
+            <input type="hidden" name="token" value="<?php echo $token; ?>">
+            <input type="hidden" name="source_name" id="source_name" value="">
 
 
-            </div>
+        </div>
 
-            <span id="spinner"></span>
+        <span id="spinner"></span>
     </form>
 </main>
 
-<side class="two-col-side">
-    <div>
+<nav class="two-col-side">
+    <section>
         <?php esc_html_list_clips_of_source_e(show_data: array('details'), name_attr: 'list-clips-on-current-source'); ?>
-    </div>
+    </section>
 
-    <div>
+    <section>
         <h2>Vos brouillons</h2>
-        <ul name="list-markers" id="list-markers"></ul>
-    </div>
-</side>
+        <ul id="list-markers"></ul>
+    </section>
+</nav>
 
 
 <?php present_footer(array('jquery-min', 'template-clip')); ?>

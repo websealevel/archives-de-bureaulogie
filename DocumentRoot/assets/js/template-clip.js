@@ -18,8 +18,7 @@ jQuery(function ($) {
      * Evenement quand le select de source change
      */
     $("#sources").change(function () {
-        source_url = $(this).find(":selected").attr('name')
-        console.log(source_url)
+        source_url = $(this).find(":selected").attr('id')
         $("#video-source").prop('src', source_url)
         $("#video-clip").prop('src', source_url)
         $("#source_name").val(source_url)
@@ -197,7 +196,7 @@ jQuery(function ($) {
 */
 function init_on_landing() {
 
-    source_url = $("#sources").find('option:selected').attr("name")
+    source_url = $("#sources").find('option:selected').attr("id")
 
     $("#video-source").prop('src', source_url)
     $("#source_name").val(source_url)
@@ -205,7 +204,6 @@ function init_on_landing() {
     fetch_clips_of_current_source(source_url)
     fetch_markers_of_current_source(source_url)
 
-    console.log(source_url)
 }
 
 /**
@@ -295,6 +293,7 @@ function play_pause_preview() {
 }
 
 
+
 /**
  * Déclenche le visionnage de la traine
  */
@@ -307,7 +306,7 @@ function preview_trail() {
     const timecode_end = $("#timecode_end").val()
 
     const timecode_start_in_sec = hh_mm_ss_lll_to_seconds(timecode_end)
-    const tail_duration_in_sec = $("#tail_duration_in_s").val()
+    const tail_duration_in_sec = 1
     const timecode_end_in_sec = parseInt(timecode_start_in_sec) + parseInt(tail_duration_in_sec)
 
     const src_timecodes = src + `#t=${timecode_start_in_sec},${timecode_end_in_sec}`
@@ -373,7 +372,7 @@ function fetch_markers_of_current_source(source_url) {
     $("#list-markers").empty()
     $.post('/api/v1/markers', {
         action: 'fetch',
-        source_name: $("#sources").find('option:selected').attr("name"),
+        source_name: $("#sources").find('option:selected').attr("id"),
     }).done(function (response) {
         response.markers.forEach(marker => {
             const li = marker_markup(marker.position_in_sec, class_btn_delete_marker)

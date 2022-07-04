@@ -24,7 +24,7 @@ autoload();
     <meta name="author" content="websealevel">
     <meta name="author" content="kerprimaparte">
     <link rel="icon" type="image/x-icon" href="../assets/img/favicon.ico">
-    <link rel="canonical" href="">
+    <link rel="canonical" href="https://archives-de-bureaulogie.fr">
     <!-- Minified version -->
     <link rel="stylesheet" href="../assets/css/main.css">
 </head>

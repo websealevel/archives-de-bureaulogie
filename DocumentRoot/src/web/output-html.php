@@ -87,7 +87,7 @@ function esc_html_list_sources_e(string $name_attr = 'sources', array $show_data
 function esc_html_list_clips_of_source_e(string $source = '', string $name_attr = 'list-clips-on-current-source', array $show_data = array('label'), string $label = '')
 {
     echo sprintf('<h2>Extraits existants</h2>');
-    echo sprintf('<ul id="%s" name="%s">', $name_attr, $name_attr);
+    echo sprintf('<ul id="%s">', $name_attr, $name_attr);
     echo sprintf('</ul>');
     return;
 }
@@ -198,7 +198,7 @@ function enqueue_js_scripts(array $scripts = array())
         return;
 
 
-    echo '<script type="text/javascript">' . PHP_EOL;
+    echo '<script>' . PHP_EOL;
     echo 'const PHPSESSID="' . session_id() . '";' . PHP_EOL;
     foreach ($scripts as $script) {
         $js_script_path = sprintf("%s/js/%s.js", ASSETS_PATH, $script);

@@ -28,7 +28,7 @@ function map_source_to_html_item(DOMElement $source, string $html_item, array $s
         $html = $label;
 
     return sprintf(
-        '<%s name="%s">%s</%s>',
+        '<%s id="%s">%s</%s>',
         $html_item,
         $src,
         $html,
