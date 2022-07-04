@@ -70,7 +70,7 @@ function api_markers()
         case 'add':
 
             try {
-                $id = sql_insert_marker($clean['source_name'], $account_id, $clean['position_in_sec']);
+                $id = sql_insert_marker($clean['source_name'], $account_id, $clean['timecode_start_in_sec']);
                 api_respond_with_success($id);
             } catch (PDOException $e) {
                 error_log($e);
@@ -83,7 +83,7 @@ function api_markers()
         case 'remove':
 
             try {
-                $row_affected = sql_delete_marker($clean['source_name'], $account_id, $clean['position_in_sec']);
+                $row_affected = sql_delete_marker($clean['source_name'], $account_id, $clean['timecode_start_in_sec']);
                 api_respond_with_success($row_affected);
             } catch (PDOException $e) {
                 error_log($e);
@@ -126,6 +126,8 @@ function api_markers_validate_input($data): array|false
     ))) {
         return false;
     }
+
+    write_log($data);
 
     $clean['action'] = $data['action'];
 

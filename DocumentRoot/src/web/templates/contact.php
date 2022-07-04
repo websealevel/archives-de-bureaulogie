@@ -17,7 +17,7 @@ present_header();
 
 <p>Page en construction...</p>
 
-<p><a href="mailto:contact@archvies-de-bureaulogie.fr">contact@archvies-de-bureaulogie.fr</a></p>
+<p><a href="mailto:contact@archives-de-bureaulogie.fr">contact@archives-de-bureaulogie.fr</a></p>
 
 <small>Les archives de bureaulogie</small>
 

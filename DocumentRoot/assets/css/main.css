@@ -42,13 +42,20 @@ select {
 	margin:5px;
 }
 
-label,
-input {
+.label-input label {
+	padding: 20px;
+}
+
+.label-input input {
 	padding: 20px;
 }
 
 button{
 	border-radius: 1px;
+}
+.btn-edition{
+	margin: 5px 0;
+	font-size: 24px;
 }
 
 

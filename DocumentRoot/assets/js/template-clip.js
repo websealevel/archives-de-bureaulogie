@@ -493,7 +493,7 @@ function save_clip_draft() {
     //Envoyer une requete pour ajouter le marqueur.
     $.post('/api/v1/markers', {
         action: 'add',
-        source_name: $("#sources").find('option:selected').attr("name"),
+        source_name: source_url,
         timecode_start_in_sec: timecode_start_in_sec,
         timecode_end_in_sec: timecode_end_in_sec,
         title: $("textarea#title").val()

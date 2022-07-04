@@ -34,7 +34,7 @@ require_once __DIR__ . '/../../handlers.php';
     <main>
 
 
-        <h2>Archives</h2>
+        <h2>Les archives</h2>
 
         <section>
             <h3>Extraits</h3>
@@ -53,9 +53,9 @@ require_once __DIR__ . '/../../handlers.php';
 
 
         <section>
-            <h3>Consulter, proposer des références bibliographiques</h3>
+            <h3>Références bibliographiques</h3>
             <?php if (current_user_can('submit_reference')) :  ?>
-                <a href="submit_ref">soumettre une référence bibliographique</a>
+                <a href="submit_ref">Consulter, proposer des références bibliographiques</a>
             <?php endif;  ?>
         </section>
 
