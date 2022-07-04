@@ -52,20 +52,22 @@ $token = register_api_token($account, 'submit_clip');
             </div>
 
             <div class="video-side">
+                <fieldset>
+                    <legend>Durée de l'extrait</legend>
+                    <div id="clip-duration" name="clip-duration">
+                        0
+                    </div>
+                </fieldset>
+
                 <div>
                     <div id="current-time">
                         00:00:00.000
                     </div>
                 </div>
 
-                <div>
-                    <label for="clip-duration">Durée de l'extrait</label>
-                    <div id="clip-duration" name="clip-duration">
-                        0
-                    </div>
-                </div>
 
-                <div>
+                <div class="timecodes">
+
                     <div class="label-input">
                         <label for="timecode_start" style="width:120px" ;>Début*</label>
                         <input type="text" name="timecode_start" id="timecode_start" pattern="[0-9]{2}:[0-9]{2}:[0-9]{2}.[0-9]{3}" value="00:00:00.000" title="Veuillez renseigner un timecode au format hh:mm:ss.lll. 
@@ -76,11 +78,6 @@ Sinon, utiliser le bouton 'Démarrer l'extrait ici' prévu à cet effet" class="
                         <?php echo htmlentities('Aller'); ?>
                     </button>
 
-
-                </div>
-
-
-                <div>
                     <div class="label-input">
                         <label for="timecode_end" style="width:120px">Fin*</label>
                         <input type="text" name="timecode_end" id="timecode_end" value="00:00:00.000" pattern="[0-9]{2}:[0-9]{2}:[0-9]{2}.[0-9]{3}" title="Veuillez renseigner un timecode au format hh:mm:ss.lll
@@ -94,67 +91,78 @@ Sinon, utiliser le bouton 'Finir l'extrait ici' prévu à cet effet" class="btn-
                     </button>
                 </div>
 
-
-            </div>
-        </div>
-
-        <?php require_once 'parts/clip-controls.php' ?>
-
-        <fieldset id="fieldset-edition">
-
-            <legend>Métadonnées</legend>
-
-            <div id="edition-data">
-
-                <div class="label-input">
-                    <label for="title">Titre</label>
-                    <textarea name="title" id="title" rows="8" cols="50" placeholder="Texte qui apparaîtra dans le tweet" maxlength="280" autocapitalize="sentences" spellcheck="true"></textarea>
-                </div>
-
-                <div class="label-input">
-                    <label for="description">Description</label>
-                    <textarea id="description" name="description" rows="8" cols="60" placeholder="Texte additionnel" maxlength="280" autocapitalize="sentences" spellcheck="true"></textarea>
-                </div>
-
-            </div>
-        </fieldset>
-
-        <div id="container-option-btn-submit">
-            <fieldset id="clip-options">
-                <legend>Options</legend>
-
-                <div>
-                    <label for="checkbox_loop_preview">Prévisualisation en boucle</label>
-                    <input type="checkbox" name="checkbox_loop_preview" id="checkbox_loop_preview">
-                </div>
-
-                <div>
-                    <label for="tail_duration_in_s" title="La durée de traîne correspond au nombre de secondes de vidéo après le timecode de fin qui seront prévisualisées en cliquant sur 'Prévisualiser la traîne'">Durée de traîne (s)</label>
-
-                    <input type="number" name="tail_duration_in_s" id="tail_duration_in_s" value="4" min="0" max="20" title="La durée de traîne correspond au nombre de secondes de vidéo après le timecode de fin qui seront prévisualisées en cliquant sur 'Prévisualiser la traîne'">
-                </div>
-            </fieldset>
-            <input type="hidden" name="token" value="<?php echo $token; ?>">
-            <input type="hidden" name="source_name" id="source_name" value="">
-
-
-
-
-            <button name="btn_set_marker" id="btn_set_marker" class="btn-edition" type="button" title="Définir un marqueur à la position courante du curseur de lecture">
-                <div class="shortcut">m</div>
-                <?php echo htmlentities('Marquer pour plus tard'); ?>
-            </button>
-
-            <div class="container-btn-submit-clip">
-                <button type="submit" id="btn-submit-clip" value="Cut !" class="btn-edition">
-                    <div class="shortcut">
-                        Shift+Enter
-                    </div>
-                    Cut !
+                <button name="btn_rewind_5_s" id="btn_rewind_5_s" class="btn-control rewind" type="button" title="Reculer de 5s">
+                    <div class="shortcut">Q</div>
+                    <?php echo htmlentities('<<'); ?>
                 </button>
+
+                <button name="btn_rewind_1_s" id="btn_rewind_1_s" class="btn-control rewind" type="button" title="Reculer de 1s">
+                    <div class="shortcut">q</div>
+                    <?php echo htmlentities('<'); ?>
+                </button>
+
+                <button name="btn_play_pause" id="btn_play_pause" class="btn-control play_pause" type="button" title="Play/Pause">
+                    <div class="shortcut">s</div>
+                    <?php echo htmlentities('play'); ?>
+                </button>
+
+                <button name="btn_forward_1_s" id="btn_forward_1_s" class="btn-control forward" type="button" title="Avancer de 1s">
+                    <div class="shortcut">d</div>
+                    <?php echo htmlentities('>'); ?>
+                </button>
+
+                <button name="btn_forward_5_s" id="btn_forward_5_s" class="btn-control forward" type="button" title="Avancer de 5s">
+                    <div class="shortcut">D</div>
+                    <?php echo htmlentities('>>'); ?>
+                </button>
+
+                <button name="" id="" class="btn-edition" type="button" title="">
+                    <div class="shortcut"></div>
+                    <?php echo htmlentities('Aller et Jouer au début de l\'extrait'); ?>
+                </button>
+
+                <button name="" id="" class="btn-edition" type="button" title="">
+                    <div class="shortcut"></div>
+                    <?php echo htmlentities('Aller et Jouer à la fin de l\'extrait'); ?>
+                </button>
+
+                <button name="" id="" class="btn-edition" type="button" title="">
+                    <div class="shortcut"></div>
+                    <?php echo htmlentities('Jouer 500ms avant le début'); ?>
+                </button>
+
+                <button name="btn_preview_tail" id="btn_preview_tail" class="btn-edition" type="button" title="La traine correspond à la portion située juste après le timecode de fin, afin de mieux visualiser la fin du cut">
+                    <div class="shortcut">o</div>
+                    <?php echo htmlentities('Jouer 500ms après la fin'); ?>
+                </button>
+
             </div>
-        </div>
-        <span id="spinner"></span>
+
+            <?php require_once 'parts/clip-controls.php' ?>
+
+            <div id="container-option-btn-submit">
+
+                <fieldset id="clip-options">
+                    <legend>Options</legend>
+
+                    <div>
+                        <label for="checkbox_loop_preview">Prévisualisation en boucle</label>
+                        <input type="checkbox" name="checkbox_loop_preview" id="checkbox_loop_preview">
+                    </div>
+
+                    <div>
+                        <label for="tail_duration_in_s" title="La durée de traîne correspond au nombre de secondes de vidéo après le timecode de fin qui seront prévisualisées en cliquant sur 'Prévisualiser la traîne'">Durée de traîne (s)</label>
+
+                        <input type="number" name="tail_duration_in_s" id="tail_duration_in_s" value="4" min="0" max="20" title="La durée de traîne correspond au nombre de secondes de vidéo après le timecode de fin qui seront prévisualisées en cliquant sur 'Prévisualiser la traîne'">
+                    </div>
+                </fieldset>
+                <input type="hidden" name="token" value="<?php echo $token; ?>">
+                <input type="hidden" name="source_name" id="source_name" value="">
+
+
+            </div>
+
+            <span id="spinner"></span>
     </form>
 </main>
 
@@ -164,7 +172,7 @@ Sinon, utiliser le bouton 'Finir l'extrait ici' prévu à cet effet" class="btn-
     </div>
 
     <div>
-        <h2>Vos marqueurs</h2>
+        <h2>Vos brouillons</h2>
         <ul name="list-markers" id="list-markers"></ul>
     </div>
 </side>

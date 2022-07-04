@@ -68,7 +68,6 @@ function api_markers()
 
             try {
                 $id = sql_insert_marker($clean['source_name'], $account_id, $clean['position_in_sec']);
-                write_log($id);
                 api_respond_with_success($id);
             } catch (PDOException $e) {
                 error_log($e);
