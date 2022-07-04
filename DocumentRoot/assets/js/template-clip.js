@@ -1,5 +1,8 @@
 jQuery(function ($) {
 
+
+    var source_url
+
     init_on_landing()
 
     /**
@@ -15,7 +18,8 @@ jQuery(function ($) {
      * Evenement quand le select de source change
      */
     $("#sources").change(function () {
-        const source_url = $(this).find(":selected").attr('name')
+        source_url = $(this).find(":selected").attr('name')
+        console.log(source_url)
         $("#video-source").prop('src', source_url)
         $("#video-clip").prop('src', source_url)
         $("#source_name").val(source_url)
@@ -60,7 +64,7 @@ jQuery(function ($) {
     })
 
     $("#btn_play_pause").click(function () {
-        play_pause_video_source()
+        play_pause()
     })
 
     /**
@@ -148,7 +152,7 @@ jQuery(function ($) {
         if (83 === keyCode && !shiftKey) {
             if (any_input_text_is_focused(event))
                 return
-            play_pause_video_source()
+            play_pause()
             return
         }
 
@@ -192,13 +196,16 @@ jQuery(function ($) {
 * Instructions à executer au chargement de la page.
 */
 function init_on_landing() {
-    const source_url = $("#sources").find('option:selected').attr("name")
+
+    source_url = $("#sources").find('option:selected').attr("name")
+
     $("#video-source").prop('src', source_url)
-    $("#video-clip").prop('src', source_url)
     $("#source_name").val(source_url)
 
     fetch_clips_of_current_source(source_url)
     fetch_markers_of_current_source(source_url)
+
+    console.log(source_url)
 }
 
 /**
@@ -208,6 +215,85 @@ function init_on_landing() {
 function any_input_text_is_focused(event) {
     return $("#title").is(":focus") || $("#description").is(":focus")
 }
+
+/**
+ * Retourne vrai si la vidéo est en train de jouer, faux sinon
+ * @returns bool
+ */
+function video_is_playing() {
+    return $("#video-source").prop('currentTime') > 0 && !$("#video-source").prop('paused')
+}
+
+/**
+ * Retourne vrai si les timecods sont valides, faux sinon
+ * @returns bool
+ */
+function are_timecodes_valid() {
+
+    const timecode_start = $("#timecode_start").val()
+    const timecode_end = $("#timecode_end").val()
+
+    const timecode_start_in_sec = hh_mm_ss_lll_to_seconds(timecode_start)
+    const timecode_end_in_sec = hh_mm_ss_lll_to_seconds(timecode_end)
+
+    return timecode_start_in_sec < timecode_end_in_sec;
+}
+
+/**
+ * Play la vidéo source si en pause et inversement
+ */
+function play_pause() {
+    if (video_is_playing()) {
+        $("#btn_play_pause").prop('innerHTML', '<div class="shortcut">s</div> Play')
+        $("#video-source").trigger('pause')
+    } else {
+        $("#btn_play_pause").prop('innerHTML', '<div class="shortcut">s</div> Pause')
+        $("#video-source").trigger('play')
+    }
+}
+
+/**
+ * Lance la prévisualisation de l'extrait
+ * @returns 
+ */
+function play_pause_preview() {
+
+    if (!are_timecodes_valid()) {
+        $("div.errors").html("<p>Impossible de prévisualiser l'extrait : le timecode de fin doit être plus grand que le timecode de début</p>")
+        $("#timecode_start").addClass('error')
+        $("#timecode_end").addClass('error')
+        return
+    }
+
+    $("div.errors").html('')
+    $("#timecode_start").removeClass('error')
+    $("#timecode_end").removeClass('error')
+
+    const timecode_start = $("#timecode_start").val()
+    const timecode_end = $("#timecode_end").val()
+
+    const timecode_start_in_sec = hh_mm_ss_lll_to_seconds(timecode_start)
+    const timecode_end_in_sec = hh_mm_ss_lll_to_seconds(timecode_end)
+
+    const src_timecodes = source_url + `#t=${timecode_start_in_sec},${timecode_end_in_sec}`
+    $("#video-source").prop('src', src_timecodes)
+
+    /**
+     * Gestion de l'option de loop.
+     */
+    $("#video-source").on('timeupdate', function () {
+        if ($('#checkbox_loop_preview').is(':checked')) {
+            loop_video(this, timecode_start_in_sec, timecode_end_in_sec)
+        }
+        else {
+            if (has_reached_end(timecode_start_in_sec, timecode_end_in_sec))
+                this.pause()
+        }
+    })
+
+    play_pause()
+}
+
 
 /**
  * Déclenche le visionnage de la traine
@@ -225,111 +311,11 @@ function preview_trail() {
     const timecode_end_in_sec = parseInt(timecode_start_in_sec) + parseInt(tail_duration_in_sec)
 
     const src_timecodes = src + `#t=${timecode_start_in_sec},${timecode_end_in_sec}`
-
-    const $html_video_clip = $("#video-clip")
-    $html_video_clip.prop('src', src_timecodes)
-    $html_video_clip.trigger('play')
+    $("#video-source").prop('src', src_timecodes)
+    $("#video-source").trigger('play')
 }
 
-/**
- * Post le formulaire pour créer l'extrait et traiteement de la réponse.
- */
-function post_clip() {
-    //Disable le bouton, message traitement en cours + spinner ascii
-    $("#btn-submit-clip").prop("disabled", true)
-    window.requestAnimationFrame(spinner_ascii.step);
 
-    const data = $('form#form-clip-source').serialize() + '&PHPSESSID=' + PHPSESSID
-
-    $.post('/api/v1/clip-source', data).done(function (response) {
-
-        //Si le formulaire est rejeté on récupere les erreurs et on les affiche
-        if (typeof response !== 'string' && '' !== response && 'errors' in response) {
-            const errors = response.errors
-            let items = []
-            for (const input in errors) {
-                items.push("<li>" + errors[input].message + "</li>")
-            }
-            $("div.errors").html('<ul>' + items.join('') + '</ul>')
-        } else {
-            $("div.errors").html('')
-            $("div.success").html("L'extrait a été ajouté avec succès !")
-            $("#list-clips-on-current-source").append(response.extrait)
-        }
-
-    }).fail(function () {
-        $("div.errors").html('Hmm, il semblerait qu\'il y ait eu un problème de connexion. Veuillez rééssayer s\'il vous plaît.')
-    }).always(function () {
-        window.cancelAnimationFrame(spinner_ascii.requestID)
-        $("#btn-submit-clip").prop('innerHTML', '<div class="shortcut">Shift+Enter</div> Cut !')
-        $("#btn-submit-clip").prop("disabled", false)
-    })
-}
-
-/**
- * Lance la vidéo de prévisualisation de l'extrait si elle est en pause, et vice versa.
- * @returns void
- */
-function play_preview() {
-    $("#btn_preview").prop('innerHTML', '<div class="shortcut"> p</div> Pause')
-    const src = $("#video-source").prop('src')
-
-    const timecode_start = $("#timecode_start").val()
-    const timecode_end = $("#timecode_end").val()
-
-    const timecode_start_in_sec = hh_mm_ss_lll_to_seconds(timecode_start)
-    const timecode_end_in_sec = hh_mm_ss_lll_to_seconds(timecode_end)
-
-    //Si les timecodes sont invalides.
-    if (timecode_end_in_sec <= timecode_start_in_sec) {
-        $("div.errors").html("<p>Impossible de prévisualiser l'extrait : le timecode de fin doit être plus grand que le timecode de début</p>")
-        $("#timecode_start").addClass('error')
-        $("#timecode_end").addClass('error')
-        const preview_video_is_playing = $("#video-clip").prop('currentTime') > 0 & !$("#video-clip").prop('paused')
-        return
-    }
-
-    $("div.errors").html('')
-    $("#timecode_start").removeClass('error')
-    $("#timecode_end").removeClass('error')
-
-
-    const src_timecodes = src + `#t=${timecode_start_in_sec},${timecode_end_in_sec}`
-    const $html_video_clip = $("#video-clip")
-    $html_video_clip.prop('src', src_timecodes)
-    $html_video_clip.trigger('play')
-
-    /**
-     * Gestion de l'option de loop.
-     */
-    $html_video_clip.on('timeupdate', function () {
-        if ($('#checkbox_loop_preview').is(':checked')) {
-            loop_video(this, timecode_start_in_sec, timecode_end_in_sec)
-        }
-        else {
-            if (has_reached_end(timecode_start_in_sec, timecode_end_in_sec))
-                this.pause()
-        }
-    })
-}
-
-/**
-    * Play/Pause la vidéo de preview de l'extrait
-    * @returns 
-    */
-function play_pause_preview() {
-
-    const preview_video_is_playing = $("#video-clip").prop('currentTime') > 0 & !$("#video-clip").prop('paused')
-
-    //Si pas en lecure, play, sinon pause
-    if (preview_video_is_playing) {
-        $("#video-clip").trigger('pause')
-        $("#btn_preview").prop('innerHTML', '<div class="shortcut"> p</div> Prévisualiser')
-
-    } else {
-        play_preview()
-    }
-}
 
 /**
     * Avance le temps courant du lecteur video source de x secondes
@@ -340,42 +326,6 @@ function shift_current_time(delay_in_s) {
     const currentTime = $("#video-source").prop('currentTime')
     const time = (currentTime + delay) < 0 ? 0 : currentTime + delay
     $("#video-source").prop('currentTime', time)
-}
-
-/**
- * Play la vidéo source si en pause et inversement
- */
-function play_pause_video_source() {
-    const is_playing = $("#video-source").prop('currentTime') > 0 && !$("#video-source").prop('paused')
-    if (is_playing) {
-        $("#video-source").trigger('pause')
-        $("#btn_play_pause").prop('innerHTML', '<div class="shortcut">s</div> Play')
-
-    } else {
-        $("#btn_play_pause").prop('innerHTML', '<div class="shortcut">s</div> Pause')
-        $("#video-source").trigger('play')
-    }
-}
-
-/**
- * Met à jour le timecode de départ avec le temps courant du player video source
- */
-function set_timecode_start(start_in_sec) {
-
-    if (start_in_sec) {
-        $("#video-source").prop("currentTime", start_in_sec)
-        return
-    }
-
-    const timecode_seconds = $("#video-source").prop("currentTime")
-    const hh_mm_ss_lll = seconds_to_hh_mm_ss_lll(timecode_seconds)
-    $("#timecode_start").val(hh_mm_ss_lll)
-    update_clip_duration()
-    //Si preview est en cours, la relancer avec nouvelle valeur de timecode start
-    const is_playing = $("#video-clip").prop('currentTime') > 0 && !$("#video-clip").prop('paused')
-    if (is_playing) {
-        play_preview()
-    }
 }
 
 
@@ -517,10 +467,10 @@ function play_source_video_at_marker_position(marker) {
     const pos = content.indexOf('S')
     //On récupere uniquement le temps en seconde
     const time_part = content.substring(0, pos)
-    const currentTime = parseFloat(time_part)
-    $("#video-source").prop('currentTime', currentTime)
-    const source_video_is_playing = $("#video-source").prop('currentTime') > 0 & !$("#video-source").prop('paused')
-    if (!source_video_is_playing)
+
+    $("#video-source").prop('currentmTime', time_part)
+
+    if (!video_is_playing())
         $("#video-source").trigger('play')
 }
 
@@ -548,6 +498,16 @@ function remove_marker(marker, currentTime_sec) {
 }
 
 /**
+ * Met à jour le timecode de départ avec le temps courant du player video source
+ */
+function set_timecode_start(start_in_sec) {
+    const timecode_seconds = $("#video-source").prop("currentTime")
+    const hh_mm_ss_lll = seconds_to_hh_mm_ss_lll(timecode_seconds)
+    $("#timecode_start").val(hh_mm_ss_lll)
+    update_clip_duration()
+}
+
+/**
 * Met à jour le timecode de fin avec le temps courant du player video source
 */
 function set_timecode_end() {
@@ -555,12 +515,6 @@ function set_timecode_end() {
     const hh_mm_ss_lll = seconds_to_hh_mm_ss_lll(timecode_seconds)
     $("#timecode_end").val(hh_mm_ss_lll)
     update_clip_duration()
-
-    //Si preview est en cours, la relancer avec nouvelle valeur de timecode end
-    const is_playing = $("#video-clip").prop('currentTime') > 0 && !$("#video-clip").prop('paused')
-    if (is_playing) {
-        play_preview()
-    }
 }
 
 /**
@@ -629,8 +583,6 @@ function hh_mm_ss_lll_to_seconds(timecode_hh_mm_ss_lll) {
     const s = timecode_hh_mm_ss_lll.substring(6, 8)
     const l = timecode_hh_mm_ss_lll.substring(9, 12)
 
-    // console.log(h, m, s, l)
-
     const seconds = parseInt(h) * 3600 + parseInt(m) * 60 + parseInt(s) + parseInt(l) / 1000
 
     return seconds
@@ -684,56 +636,37 @@ const spinner_ascii = {
     requestID: ''
 }
 
-// frames = '▙▛▜▟'.split('');
-// frames = '▤▧▥▨'.split('');
-//frames = '◴◵◶◷'.split('');
-//frames = '◩◪'.split('');
-//frames = '◰◱◲◳'.split('');
-//frames = '◐◓◑◒'.split('');
-
-
 /**
- * Pas utilisé pour le moment, sert juste de documentation.
+ * Post le formulaire pour créer l'extrait et traiteement de la réponse.
  */
-    //  const keyboard_controls = {
-    //     rewind_5_s: {
-    //         key: 'Q',
-    //         code: 81,
-    //         shiftKey: true
-    //     },
-    //     rewind_1_s: {
-    //         key: 'q',
-    //         code: 81,
-    //         shiftKey: false
-    //     },
-    //     forward_1_s: {
-    //         key: 'd',
-    //         code: 68,
-    //         shiftKey: false
-    //     },
-    //     forward_5_s: {
-    //         key: 'D',
-    //         code: 68,
-    //         shiftKey: true
-    //     },
-    //     play_pause: {
-    //         key: 'p',
-    //         code: 80,
-    //         shiftKey: false
-    //     },
-    //     clip: {
-    //         key: 'Enter',
-    //         code: 13,
-    //         shiftKey: true
-    //     },
-    //     clip_start: {
-    //         key: 'a',
-    //         code: 65,
-    //         shiftKey: false
-    //     },
-    //     clip_end: {
-    //         key: 'a',
-    //         code: 90,
-    //         shiftKey: false
-    //     }
-    // }
+function post_clip() {
+    //Disable le bouton, message traitement en cours + spinner ascii
+    $("#btn-submit-clip").prop("disabled", true)
+    window.requestAnimationFrame(spinner_ascii.step);
+
+    const data = $('form#form-clip-source').serialize() + '&PHPSESSID=' + PHPSESSID
+
+    $.post('/api/v1/clip-source', data).done(function (response) {
+
+        //Si le formulaire est rejeté on récupere les erreurs et on les affiche
+        if (typeof response !== 'string' && '' !== response && 'errors' in response) {
+            const errors = response.errors
+            let items = []
+            for (const input in errors) {
+                items.push("<li>" + errors[input].message + "</li>")
+            }
+            $("div.errors").html('<ul>' + items.join('') + '</ul>')
+        } else {
+            $("div.errors").html('')
+            $("div.success").html("L'extrait a été ajouté avec succès !")
+            $("#list-clips-on-current-source").append(response.extrait)
+        }
+
+    }).fail(function () {
+        $("div.errors").html('Hmm, il semblerait qu\'il y ait eu un problème de connexion. Veuillez rééssayer s\'il vous plaît.')
+    }).always(function () {
+        window.cancelAnimationFrame(spinner_ascii.requestID)
+        $("#btn-submit-clip").prop('innerHTML', '<div class="shortcut">Shift+Enter</div> Cut !')
+        $("#btn-submit-clip").prop("disabled", false)
+    })
+}

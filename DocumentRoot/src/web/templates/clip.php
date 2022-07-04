@@ -45,7 +45,7 @@ $token = register_api_token($account, 'submit_clip');
         <div class="video-main">
 
             <div class="video">
-                <video id="video-source" width="90%" controls>
+                <video id="video-source" width="1000px" height="580px" controls>
                     <source src="" type="video/mp4">
                     Votre navigateur ne supporte pas le tag video HTML5 :(
                 </video>
