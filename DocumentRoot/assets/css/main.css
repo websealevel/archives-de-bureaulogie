@@ -42,6 +42,10 @@ input {
 	padding: 20px;
 }
 
+button{
+	border-radius: 1px;
+}
+
 
 #btn_clip_start,
 #btn_clip_end {
