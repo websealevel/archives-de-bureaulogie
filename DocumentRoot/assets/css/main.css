@@ -14,6 +14,10 @@ textarea {
 	resize: none;
 }
 
+#video-source{
+	min-width: 1200px;
+}
+
 .screen-reader-text {
 	border: 0;
 	clip: rect(1px, 1px, 1px, 1px);
@@ -35,6 +39,7 @@ select {
 .label-input {
 	display: flex;
 	gap: 10px;
+	margin:5px;
 }
 
 label,
@@ -129,19 +134,18 @@ button{
 .btn-control {
 	height: 120px;
 	width: 120px;
-	font-size: 24px;
+	font-size: 30px;
 }
 
 span.shortcut {
 	display: block;
 }
 
-
 .btn-control .shortcut {
-	font-size: 14px;
-	margin-right: 10px;
+	font-size: 12px;
 	font-family: 'Courier New', Courier, monospace;
 	font-style: italic;
+	text-align: left;
 }
 
 #btn-submit-clip {
@@ -149,6 +153,10 @@ span.shortcut {
 	padding: 20px;
 	font-size: 45px;
 	justify-content: center;
+}
+
+#btn_set_marker, #btn_clip_start, #btn_clip_end{
+	width: 300px;
 }
 
 #container-option-btn-submit {

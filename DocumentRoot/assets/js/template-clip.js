@@ -74,6 +74,14 @@ jQuery(function ($) {
         goto_and_play_end()
     })
 
+    $("#btn_play_500ms_before_start").click(function () {
+        preview_before_start()
+    })
+
+    $("#btn_play_500ms_after_end").click(function () {
+        preview_after_end()
+    })
+
     /**
      * Raccourcis clavier
      */
@@ -143,24 +151,15 @@ jQuery(function ($) {
             return
         }
 
-        if ('i' === key && !shiftKey) {
+        if ('w' === key && !shiftKey) {
             preview_before_start()
             return
         }
-        if ('p' === key && !shiftKey) {
+        if ('x' === key && !shiftKey) {
             preview_after_end()
             return
         }
     })
-
-    function preview_before_start() {
-
-
-    }
-
-    function preview_after_end() {
-
-    }
 
 
 
@@ -240,6 +239,40 @@ function init_on_landing() {
     fetch_clips_of_current_source(source_url)
     fetch_markers_of_current_source(source_url)
 
+}
+
+function preview_before_start(tail_duration_in_sec = 1.5) {
+    //Decocher la loop si cochée (sinon bug)
+    $('#checkbox_loop_preview').prop('checked', false)
+
+    const timecode_start = $("#timecode_start").val()
+
+    const timecode_start_in_sec = hh_mm_ss_lll_to_seconds(timecode_start)
+
+    const timecode_start_in_sec_delay = timecode_start_in_sec - tail_duration_in_sec
+
+    if (timecode_start_in_sec_delay < 0)
+        return
+
+    const src_timecodes = source_url + `#t=${start},${timecode_start}`
+
+    $("#video-source").prop('src', src_timecodes)
+    playvideo()
+}
+
+function preview_after_end(tail_duration_in_sec = 1.5) {
+
+    //Decocher la loop si cochée (sinon bug)
+    $('#checkbox_loop_preview').prop('checked', false)
+
+    const timecode_end = $("#timecode_end").val()
+
+    const timecode_start_in_sec = hh_mm_ss_lll_to_seconds(timecode_end)
+    const timecode_end_in_sec = parseInt(timecode_start_in_sec) + tail_duration_in_sec
+
+    const src_timecodes = source_url + `#t=${timecode_start_in_sec},${timecode_end_in_sec}`
+    $("#video-source").prop('src', src_timecodes)
+    playvideo()
 }
 
 function playvideo() {
@@ -355,29 +388,6 @@ function play_pause_preview() {
 
     play_pause()
 }
-
-
-
-/**
- * Déclenche le visionnage de la traine
- */
-function preview_trail() {
-    //Decocher la loop si cochée (sinon bug)
-    $('#checkbox_loop_preview').prop('checked', false)
-
-    const src = $("#video-source").prop('src')
-
-    const timecode_end = $("#timecode_end").val()
-
-    const timecode_start_in_sec = hh_mm_ss_lll_to_seconds(timecode_end)
-    const tail_duration_in_sec = 1
-    const timecode_end_in_sec = parseInt(timecode_start_in_sec) + parseInt(tail_duration_in_sec)
-
-    const src_timecodes = src + `#t=${timecode_start_in_sec},${timecode_end_in_sec}`
-    $("#video-source").prop('src', src_timecodes)
-    $("#video-source").trigger('play')
-}
-
 
 
 /**

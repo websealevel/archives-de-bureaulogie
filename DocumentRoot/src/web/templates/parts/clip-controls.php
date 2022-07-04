@@ -1,6 +1,6 @@
 <?php
-$color_start = 'background-color:yellow';
-$color_end = 'background-color:pink';
+$color_start = '';
+$color_end = '';
 ?>
 
 <form action="clip-source" id="form-clip-source" name="form-clip-source">
@@ -31,14 +31,14 @@ $color_end = 'background-color:pink';
                 <div class="timecodes">
 
                     <div class="label-input">
-                        <label for="timecode_start" style="<?php echo $color_start; ?>; color:white;width:120px;">Début* [</label>
+                        <label for="timecode_start" style="<?php echo $color_start; ?>; width:120px;">Début* [</label>
                         <input type=" text" name="timecode_start" id="timecode_start" pattern="[0-9]{2}:[0-9]{2}:[0-9]{2}.[0-9]{3}" value="00:00:00.000" title="Veuillez renseigner un timecode au format hh:mm:ss.lll. 
 Sinon, utiliser le bouton 'Démarrer l'extrait ici' prévu à cet effet">
                     </div>
 
 
                     <div class="label-input">
-                        <label for="timecode_end" style="<?php echo $color_end; ?>; color:white;width:120px;">Fin* ]</label>
+                        <label for="timecode_end" style="<?php echo $color_end; ?>; width:120px;">Fin* ]</label>
                         <input type="text" name="timecode_end" id="timecode_end" value="00:00:00.000" pattern="[0-9]{2}:[0-9]{2}:[0-9]{2}.[0-9]{3}" title="Veuillez renseigner un timecode au format hh:mm:ss.lll
 Sinon, utiliser le bouton 'Finir l'extrait ici' prévu à cet effet">
                     </div>
@@ -58,75 +58,72 @@ Sinon, utiliser le bouton 'Finir l'extrait ici' prévu à cet effet">
     <div id="editor-navigation">
 
         <div class="first-row">
-            <button name="btn_goto_and_play_start" id="btn_goto_and_play_start" class="btn-control" type="button" title="Aller au début de l'extrait et jouer" style="<?php echo $color_start; ?>; color:white">
+            <button id="btn_goto_and_play_start" class="btn-control" type="button" title="Aller au début de l'extrait et jouer" style="<?php echo $color_start; ?>;  ">
                 <span class="shortcut">a</span>
-                <?php echo htmlentities('[ <='); ?>
+                <?php echo htmlentities('[<='); ?>
             </button>
 
-            <button name="btn_goto_and_play_end" id="btn_goto_and_play_end" class="btn-control" type="button" title="Aller à la fin de l'extrait et jouer" style="<?php echo $color_end; ?>; color:white">
+            <button id="btn_goto_and_play_end" class="btn-control" type="button" title="Aller à la fin de l'extrait et jouer" style="<?php echo $color_end; ?>;  ">
                 <span class="shortcut">z</span>
                 <?php echo htmlentities('=>]'); ?>
             </button>
 
-            <button name="btn_play_500ms_before_start" id="btn_play_500ms_before_start" class="btn-control" type="button" title="" style="<?php echo $color_start; ?>; color:white">
-                <span class="shortcut">i</span>
+            <button id="btn_play_500ms_before_start" class="btn-control" type="button" title="" style="<?php echo $color_start; ?>;  ">
+                <span class="shortcut">w</span>
                 <?php echo htmlentities('=>['); ?>
             </button>
 
-            <button name="btn_preview_tail" id="btn_preview_tail" class="btn-control" type="button" title="La traine correspond à la portion située juste après le timecode de fin, afin de mieux visualiser la fin du cut" style="background-color:; color:white">
-                <span class="shortcut">o</span>
+            <button id="btn_play_500ms_after_end" class="btn-control" type="button" title="La traine correspond à la portion située juste après le timecode de fin, afin de mieux visualiser la fin du cut">
+                <span class="shortcut">x</span>
                 <?php echo htmlentities(']=>'); ?>
             </button>
 
-            <button name="btn_preview" id="btn_preview" class="btn-control" type="button" title="Jouer l'extrait">
+            <button id="btn_preview" class="btn-control" type="button" title="Jouer l'extrait">
                 <span class="shortcut">p</span>
-                <span style="color:green">[</span>play<span style="color:darkblue">]</span>
+                <?php echo htmlentities('[play]'); ?>
             </button>
 
         </div>
 
         <div class="second-row">
-            <button name=" btn_rewind_5_s" id="btn_rewind_5_s" class="btn-control rewind" type="button" title="Reculer de 5s">
+            <button id="btn_rewind_5_s" class="btn-control rewind" type="button" title="Reculer de 5s">
                 <span class="shortcut">Q</span>
                 <?php echo htmlentities('<<'); ?>
             </button>
 
-            <button name="btn_rewind_1_s" id="btn_rewind_1_s" class="btn-control rewind" type="button" title="Reculer de 1s">
+            <button id="btn_rewind_1_s" class="btn-control rewind" type="button" title="Reculer de 1s">
                 <span class="shortcut">q</span>
                 <?php echo htmlentities('<'); ?>
             </button>
 
-            <button name="btn_play_pause" id="btn_play_pause" class="btn-control play_pause" type="button" title="Play/Pause">
+            <button id="btn_play_pause" class="btn-control play_pause" type="button" title="Play/Pause">
                 <span class="shortcut">s</span>
                 <?php echo htmlentities('play'); ?>
             </button>
 
-            <button name="btn_forward_1_s" id="btn_forward_1_s" class="btn-control forward" type="button" title="Avancer de 1s">
+            <button id="btn_forward_1_s" class="btn-control forward" type="button" title="Avancer de 1s">
                 <span class="shortcut">d</span>
                 <?php echo htmlentities('>'); ?>
             </button>
 
-            <button name="btn_forward_5_s" id="btn_forward_5_s" class="btn-control forward" type="button" title="Avancer de 5s">
+            <button id="btn_forward_5_s" class="btn-control forward" type="button" title="Avancer de 5s">
                 <span class="shortcut">D</span>
                 <?php echo htmlentities('>>'); ?>
             </button>
 
-
-
-
-            <button name="btn_clip_start" id="btn_clip_start" class="btn-control" type="button" title="Définir la position courante du curseur de lecture comme timecode de départ de l'extrait" style="<?php echo $color_start; ?>; color:white ;font-weight:bold;">
+            <button id="btn_clip_start" class="btn-control" type="button" title="Définir la position courante du curseur de lecture comme timecode de départ de l'extrait" style="<?php echo $color_start; ?>;   ;font-weight:bold;">
                 <span class="shortcut">k</span>
-                <?php echo htmlentities('['); ?>
+                <?php echo htmlentities('[marquer le début de l\'extrait'); ?>
             </button>
 
-            <button name="btn_clip_end" id="btn_clip_end" class="btn-control" type="button" title="Définir la position courante du curseur de lecture comme timecode de fin de l'extrait" style="<?php echo $color_end; ?>; color:white; font-weight:bold;">
+            <button id="btn_clip_end" class="btn-control" type="button" title="Définir la position courante du curseur de lecture comme timecode de fin de l'extrait" style="<?php echo $color_end; ?>;  ; font-weight:bold;">
                 <span class="shortcut">l</span>
-                <?php echo htmlentities(']'); ?>
+                <?php echo htmlentities('marquer la fin de l\'extrait]'); ?>
             </button>
 
-            <button name="btn_set_marker" id="btn_set_marker" class="btn-control" type="button" title="Définir un marqueur à la position courante du curseur de lecture">
+            <button id="btn_set_marker" class="btn-control" type="button" title="Définir un marqueur à la position courante du curseur de lecture">
                 <span class="shortcut">m</span>
-                <?php echo htmlentities('Enregistrer le brouillon'); ?>
+                <?php echo htmlentities('enregistrer le brouillon'); ?>
             </button>
         </div>
     </div>
@@ -146,8 +143,6 @@ Sinon, utiliser le bouton 'Finir l'extrait ici' prévu à cet effet">
             </div>
 
         </div>
-
-
 
         <div class="container-btn-submit-clip">
             <button type="submit" id="btn-submit-clip" value="Cut !" class="btn-control">
