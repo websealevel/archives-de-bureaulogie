@@ -1,6 +1,6 @@
 <fieldset id="fieldset-controls">
 
-    <legend>Édition</legend>
+    <legend>Éditer</legend>
 
     <button name="btn_clip_start" id="btn_clip_start" class="btn-edition" type="button" title="Définir la position courante du curseur de lecture comme timecode de départ de l'extrait">
         <span class="shortcut">k</span>

@@ -189,6 +189,10 @@ li span.time {
 	gap: 10px;
 }
 
+#editor-navigation{
+	display: flex;
+}
+
 input {
 	padding: 10px;
 }
