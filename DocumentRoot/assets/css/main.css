@@ -102,25 +102,18 @@ select {
 	gap: 10px;
 }
 
-.btn-edition,
-.btn-control {
-	font-size: 30px;
-	display: flex;
-	align-items: flex-start;
-	cursor: pointer;
+.btn-control{
+	height:150px;
+	width:150px;
+	font-size: 24px;
 }
 
-.btn-edition {
-	width: 250px;
-	display: flex;
+span.shortcut{
+	display: block;
 }
 
-.btn-control {
-	width: 145px;
-}
 
-.btn-control .shortcut,
-.btn-edition .shortcut {
+.btn-control .shortcut{
 	font-size: 14px;
 	margin-right: 10px;
 	font-family: 'Courier New', Courier, monospace;
@@ -172,9 +165,6 @@ li span.time {
 
 .video-main {
 	display: flex;
-	justify-content: center;
-	width: 90%;
-	margin: auto;
 }
 
 .video {
@@ -186,11 +176,20 @@ li span.time {
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
+	justify-content: flex-end;
 	gap: 10px;
 }
 
 #editor-navigation{
 	display: flex;
+	flex-direction: column;
+	justify-content: start;
+}
+
+
+.first-row, .second-row{
+	display: flex;
+	justify-content: flex-start;
 }
 
 input {

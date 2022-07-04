@@ -125,7 +125,19 @@ jQuery(function ($) {
             add_marker()
             return
         }
+
+        if ('a' === key && !shiftKey) {
+            goto_and_play_start()
+            return
+        }
+        if ('z' === key && !shiftKey) {
+            goto_and_play_end()
+            return
+        }
     })
+
+
+
 
 
     /**
@@ -204,6 +216,34 @@ function init_on_landing() {
     fetch_clips_of_current_source(source_url)
     fetch_markers_of_current_source(source_url)
 
+}
+
+function playvideo() {
+    if (video_is_playing())
+        return
+    $("#btn_play_pause").prop('innerHTML', '<div class="shortcut">s</div> pause')
+    $("#video-source").trigger('play')
+}
+
+
+
+function goto_and_play_start() {
+    const timecode_start = $("#timecode_start").val()
+    const timecode_start_in_sec = hh_mm_ss_lll_to_seconds(timecode_start)
+    const src_timecodes = source_url + `#t=${timecode_start_in_sec}`
+    console.log(src_timecodes)
+    $("#video-source").prop('src', src_timecodes)
+    playvideo()
+}
+
+
+function goto_and_play_end() {
+    const timecode = $("#timecode_end").val()
+    const timecode_in_sec = hh_mm_ss_lll_to_seconds(timecode)
+    const src_timecodes = source_url + `#t=${timecode_in_sec}`
+    console.log(src_timecodes)
+    $("#video-source").prop('src', src_timecodes)
+    playvideo()
 }
 
 /**
