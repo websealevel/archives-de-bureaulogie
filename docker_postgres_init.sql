@@ -32,7 +32,9 @@ CREATE TABLE clip_markers (
     -- le nom de fichier de la source
     source_name VARCHAR (255) NOT NULL,
     account_id INT NOT NULL,
-    position_in_sec INT NOT NULL,
+    timecode_start_in_sec INT NOT NULL,
+    timecode_end_in_sec INT NOT NULL,
+    title VARCHAR (255) NOT NULL,
     -- le partager avec les autres ou non (par défaut faux)
     is_shareable BOOLEAN NOT NULL,
     require_authentification_check BOOLEAN NOT NULL,

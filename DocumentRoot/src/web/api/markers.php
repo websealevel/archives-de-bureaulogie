@@ -41,11 +41,14 @@ function api_markers()
     $data = filter_input_array(INPUT_POST, array(
         'action' => FILTER_SANITIZE_ENCODED,
         'source_name' => FILTER_SANITIZE_ENCODED,
-        'position_in_sec' => FILTER_SANITIZE_ENCODED
+        'timecode_start_in_sec' => FILTER_SANITIZE_ENCODED,
+        'timecode_end_in_sec' => FILTER_SANITIZE_ENCODED,
+        'title' => FILTER_SANITIZE_ENCODED,
     ));
 
-
     $clean = api_markers_validate_input($data);
+
+    write_log($clean);
 
     if (false === $clean) {
         api_respond_with_error(array(
@@ -145,15 +148,27 @@ function api_markers_validate_input($data): array|false
         return $clean;
     }
 
-    if (!isset($data['position_in_sec'])) {
+    if (!isset($data['timecode_start_in_sec'])) {
         return false;
     }
 
-    if (!is_numeric($data['position_in_sec'])) {
+    if (!is_numeric($data['timecode_start_in_sec'])) {
         return false;
     }
 
-    $clean['position_in_sec'] = $data['position_in_sec'];
+    $clean['timecode_start_in_sec'] = $data['timecode_start_in_sec'];
+
+    if (!isset($data['timecode_end_in_sec'])) {
+        return false;
+    }
+
+    if (!is_numeric($data['timecode_end_in_sec'])) {
+        return false;
+    }
+
+    $clean['timecode_end_in_sec'] = $data['timecode_end_in_sec'];
+
+    $clean['title'] = htmlentities($data['title']);
 
     return $clean;
 }

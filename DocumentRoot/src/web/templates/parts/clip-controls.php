@@ -5,8 +5,7 @@ $color_end = '';
 
 <form action="clip-source" id="form-clip-source" name="form-clip-source">
     <small>Les champs marqués d'un asterisque(*) sont obligatoires</small>
-    <div class="errors" style="color: red;"></div>
-    <div class="success" style="color: green;"></div>
+
 
 
     <div class="video-main">
@@ -19,6 +18,13 @@ $color_end = '';
         </div>
 
         <div class="video-side">
+
+            <fieldset>
+                <legend>Log</legend>
+                <div class="errors" style="color: red;"></div>
+                <div class="success" style="color: green;"></div>
+            </fieldset>
+
             <fieldset>
                 <legend>Durée de l'extrait</legend>
                 <div id="clip-duration">
@@ -58,12 +64,12 @@ Sinon, utiliser le bouton 'Finir l'extrait ici' prévu à cet effet">
     <div id="editor-navigation">
 
         <div class="first-row">
-            <button id="btn_goto_and_play_start" class="btn-control" type="button" title="Aller au début de l'extrait et jouer" style="<?php echo $color_start; ?>;  ">
+            <button id="btn_goto_and_play_start" class="btn-control" type="button" title="Aller au timecode de début" style="<?php echo $color_start; ?>;  ">
                 <span class="shortcut">a</span>
                 <?php echo htmlentities('[<='); ?>
             </button>
 
-            <button id="btn_goto_and_play_end" class="btn-control" type="button" title="Aller à la fin de l'extrait et jouer" style="<?php echo $color_end; ?>;  ">
+            <button id="btn_goto_and_play_end" class="btn-control" type="button" title="Aller au timecode de fin " style="<?php echo $color_end; ?>;  ">
                 <span class="shortcut">z</span>
                 <?php echo htmlentities('=>]'); ?>
             </button>
@@ -135,7 +141,7 @@ Sinon, utiliser le bouton 'Finir l'extrait ici' prévu à cet effet">
                 <?php echo htmlentities('marquer la fin de l\'extrait]'); ?>
             </button>
 
-            <button id="btn_set_marker" class="btn-control" type="button" title="Définir un marqueur à la position courante du curseur de lecture">
+            <button id="btn_save_clip_draft" class="btn-control" type="button" title="Définir un marqueur à la position courante du curseur de lecture">
                 <span class="shortcut">m</span>
                 <?php echo htmlentities('enregistrer le brouillon'); ?>
             </button>

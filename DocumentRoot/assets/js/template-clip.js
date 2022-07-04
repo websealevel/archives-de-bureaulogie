@@ -82,6 +82,10 @@ jQuery(function ($) {
         preview_after_end()
     })
 
+    $("#btn_save_clip_draft").click(function () {
+        save_clip_draft()
+    })
+
     /**
      * Raccourcis clavier
      */
@@ -138,7 +142,7 @@ jQuery(function ($) {
         }
 
         if ('m' === key && !shiftKey) {
-            add_marker()
+            save_clip_draft()
             return
         }
 
@@ -205,13 +209,6 @@ jQuery(function ($) {
     })
 
     /**
-    * Prévisualisation de la traîne
-    */
-    $("#btn_preview_tail").click(function () {
-        preview_trail()
-    })
-
-    /**
      * Soumission du formulaire de création d'extrait
      */
 
@@ -254,7 +251,7 @@ function preview_before_start(tail_duration_in_sec = 1.5) {
     if (timecode_start_in_sec_delay < 0)
         return
 
-    const src_timecodes = source_url + `#t=${start},${timecode_start}`
+    const src_timecodes = source_url + `#t=${timecode_start_in_sec_delay},${timecode_start}`
 
     $("#video-source").prop('src', src_timecodes)
     playvideo()
@@ -290,7 +287,7 @@ function goto_and_play_start() {
     const src_timecodes = source_url + `#t=${timecode_start_in_sec}`
     console.log(src_timecodes)
     $("#video-source").prop('src', src_timecodes)
-    playvideo()
+    // playvideo()
 }
 
 
@@ -300,7 +297,7 @@ function goto_and_play_end() {
     const src_timecodes = source_url + `#t=${timecode_in_sec}`
     console.log(src_timecodes)
     $("#video-source").prop('src', src_timecodes)
-    playvideo()
+    // playvideo()
 }
 
 /**
@@ -475,23 +472,30 @@ function marker_markup(time, class_btn_delete) {
 /**
  * Définit un markeur à la position courante du lecteur. Ajoute un listeneur sur le markeur pour servir de lien vers la vidéo (qui se déclenche a la position définie par le marker)
  */
-function add_marker() {
+function save_clip_draft() {
 
     const class_btn_delete_marker = 'btn-delete-marker'
-    const currentTime = $("#video-source").prop('currentTime')
-    const currentTime_sec = parseInt(currentTime)
 
-    const li = marker_markup(currentTime_sec, class_btn_delete_marker)
+    const timecode_start = $("#timecode_start").val()
+
+    const timecode_end = $("#timecode_end").val()
+
+    const timecode_start_in_sec = hh_mm_ss_lll_to_seconds(timecode_start)
+    const timecode_end_in_sec = hh_mm_ss_lll_to_seconds(timecode_end)
+
+    const li = marker_markup(timecode_start_in_sec, class_btn_delete_marker)
 
     //Avoid doublon
-    if ($(`li#${currentTime_sec}`).length > 0)
-        return
+    // if ($(`li#${currentTime_sec}`).length > 0)
+    //     return
 
     //Envoyer une requete pour ajouter le marqueur.
     $.post('/api/v1/markers', {
         action: 'add',
         source_name: $("#sources").find('option:selected').attr("name"),
-        position_in_sec: currentTime_sec
+        timecode_start_in_sec: timecode_start_in_sec,
+        timecode_end_in_sec: timecode_end_in_sec,
+        title: $("textarea#title").val()
     }).done(function (response) {
 
         //Si le formulaire est rejeté on récupere les erreurs et on les affiche
@@ -522,11 +526,11 @@ function add_marker() {
 
         //Clean error messages.
         $("div.errors").html('')
-        $("div.success").html("Le marqueur a bien été enregistré")
+        $("div.success").html("Le brouillon a bien été enregistré")
 
 
     }).fail(function () {
-        $("div.errors").html('Hmm, il semblerait qu\'il y ait eu un problème de connexion. Veuillez rééssayer s\'il vous plaît.')
+        $("div.errors").html('Hmm, il semblerait qu\'il y ait eu un problème de connexion avec le serveur. Ré-essayez svp.')
     })
 }
 
