@@ -36,46 +36,49 @@ $token = register_api_token($account, 'submit_clip');
     </form>
 
 
-    <div id="current-time">
-        00:00:00.000
-    </div>
 
-    <label for="clip-duration">Durée de l'extrait</label>
-    <div id="clip-duration" name="clip-duration">
-        0
-    </div>
-    <div class="videos">
-        <fieldset id="fieldset-video-source">
-            <legend>
-                <h3>Source</h3>
-            </legend>
-            <div class="video-source">
-                <video id="video-source" width="100%" controls>
-                    <source src="" type="video/mp4">
-                    Votre navigateur ne supporte pas le tag video HTML5 :(
-                </video>
-            </div>
-        </fieldset>
-
-        <fieldset id="fieldset-video-clip" width="100%">
-            <legend>
-                <h3>Prévisualisation</h3>
-            </legend>
-            <div class="video-clip">
-                <video id="video-clip" width="100%">
-                    <source src="" type="video/mp4">
-                    Votre navigateur ne supporte pas le tag video HTML5 :(
-                </video>
-            </div>
-        </fieldset>
-    </div>
-
-    <div class="errors" style="color: red;"></div>
-    <div class="success" style="color: green;"></div>
 
     <form action="clip-source" id="form-clip-source" name="form-clip-source">
-
         <small>Les champs marqués d'un asterisque(*) sont obligatoires</small>
+        <div class="errors" style="color: red;"></div>
+        <div class="success" style="color: green;"></div>
+        <div class="video-main">
+
+            <div class="video">
+                <video id="video-source" width="90%" controls>
+                    <source src="" type="video/mp4">
+                    Votre navigateur ne supporte pas le tag video HTML5 :(
+                </video>
+            </div>
+
+            <div class="video-side">
+                <div>
+                    <div id="current-time">
+                        00:00:00.000
+                    </div>
+                </div>
+
+                <div>
+                    <label for="clip-duration">Durée de l'extrait</label>
+                    <div id="clip-duration" name="clip-duration">
+                        0
+                    </div>
+                </div>
+
+                <div class="label-input">
+                    <label for="timecode_start" style="width:120px" ;>Début*</label>
+                    <input type="text" name="timecode_start" id="timecode_start" pattern="[0-9]{2}:[0-9]{2}:[0-9]{2}.[0-9]{3}" value="00:00:00.000" title="Veuillez renseigner un timecode au format hh:mm:ss.lll. 
+Sinon, utiliser le bouton 'Démarrer l'extrait ici' prévu à cet effet" class="btn-edition">
+                </div>
+
+                <div class="label-input">
+                    <label for="timecode_end" style="width:120px">Fin*</label>
+                    <input type="text" name="timecode_end" id="timecode_end" value="00:00:00.000" pattern="[0-9]{2}:[0-9]{2}:[0-9]{2}.[0-9]{3}" title="Veuillez renseigner un timecode au format hh:mm:ss.lll
+Sinon, utiliser le bouton 'Finir l'extrait ici' prévu à cet effet" class="btn-edition">
+                </div>
+
+            </div>
+        </div>
 
         <?php require_once 'parts/clip-controls.php' ?>
 

@@ -4,8 +4,49 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2ec17e99feac278e4a8707b8161a07ba",
+    "content-hash": "c607dfeb361ba132a403bdd542887b0d",
     "packages": [
+        {
+            "name": "crowdstar/background-processing",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Crowdstar/background-processing.git",
+                "reference": "057c3e64cc1c5a7ef138b91a5417471b76c4fa75"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Crowdstar/background-processing/zipball/057c3e64cc1c5a7ef138b91a5417471b76c4fa75",
+                "reference": "057c3e64cc1c5a7ef138b91a5417471b76c4fa75",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.0"
+            },
+            "require-dev": {
+                "guzzlehttp/guzzle": "~6.2",
+                "phpunit/phpunit": "~6.0",
+                "squizlabs/php_codesniffer": ">=2.0",
+                "symfony/cache": ">=3.0.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "CrowdStar\\BackgroundProcessing\\": "src/CrowdStar/BackgroundProcessing/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "description": "To continue processing PHP after having HTTP response sent back to the client under PHP-FPM.",
+            "homepage": "https://www.glu.com",
+            "support": {
+                "issues": "https://github.com/Crowdstar/background-processing/issues",
+                "source": "https://github.com/Crowdstar/background-processing/tree/1.0.1"
+            },
+            "time": "2019-01-14T17:46:53+00:00"
+        },
         {
             "name": "evenement/evenement",
             "version": "v3.0.1",
