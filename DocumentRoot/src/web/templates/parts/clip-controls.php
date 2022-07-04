@@ -68,12 +68,12 @@ Sinon, utiliser le bouton 'Finir l'extrait ici' prévu à cet effet">
                 <?php echo htmlentities('=>]'); ?>
             </button>
 
-            <button id="btn_play_500ms_before_start" class="btn-control" type="button" title="" style="<?php echo $color_start; ?>;  ">
+            <button id="btn_play_500ms_before_start" class="btn-control" type="button" title="Visualiser 1.5s avant le timecode de début" style="<?php echo $color_start; ?>;  ">
                 <span class="shortcut">w</span>
                 <?php echo htmlentities('=>['); ?>
             </button>
 
-            <button id="btn_play_500ms_after_end" class="btn-control" type="button" title="La traine correspond à la portion située juste après le timecode de fin, afin de mieux visualiser la fin du cut">
+            <button id="btn_play_500ms_after_end" class="btn-control" type="button" title="Visualiser 1.5s après le timecode de fin">
                 <span class="shortcut">x</span>
                 <?php echo htmlentities(']=>'); ?>
             </button>
@@ -82,6 +82,20 @@ Sinon, utiliser le bouton 'Finir l'extrait ici' prévu à cet effet">
                 <span class="shortcut">p</span>
                 <?php echo htmlentities('[play]'); ?>
             </button>
+
+            <div id="edition-data">
+
+                <div class="label-input">
+                    <label for="title">Titre</label>
+                    <textarea name="title" id="title" rows="8" cols="50" placeholder="Texte qui apparaîtra dans le tweet" maxlength="280" autocapitalize="sentences" spellcheck="true"></textarea>
+                </div>
+
+                <div class="label-input">
+                    <label for="description">Description</label>
+                    <textarea id="description" name="description" rows="8" cols="60" placeholder="Texte additionnel" maxlength="280" autocapitalize="sentences" spellcheck="true"></textarea>
+                </div>
+
+            </div>
 
         </div>
 
@@ -128,44 +142,26 @@ Sinon, utiliser le bouton 'Finir l'extrait ici' prévu à cet effet">
         </div>
     </div>
 
-    <div id="data">
-
-        <div id="edition-data">
-
-            <div class="label-input">
-                <label for="title">Titre</label>
-                <textarea name="title" id="title" rows="8" cols="50" placeholder="Texte qui apparaîtra dans le tweet" maxlength="280" autocapitalize="sentences" spellcheck="true"></textarea>
-            </div>
-
-            <div class="label-input">
-                <label for="description">Description</label>
-                <textarea id="description" name="description" rows="8" cols="60" placeholder="Texte additionnel" maxlength="280" autocapitalize="sentences" spellcheck="true"></textarea>
-            </div>
-
-        </div>
-
-        <div class="container-btn-submit-clip">
-            <button type="submit" id="btn-submit-clip" value="Cut !" class="btn-control">
-                <span class="shortcut">
-                    Shift+Enter
-                </span>
-                Cut !
-            </button>
-        </div>
-    </div>
-
-    <fieldset id="clip-options">
-        <legend>Options</legend>
-        <div>
+    <div class="last-row">
+        <fieldset id=" clip-options">
+            <legend>Options</legend>
             <label for="checkbox_loop_preview">Prévisualisation en boucle</label>
             <input type="checkbox" name="checkbox_loop_preview" id="checkbox_loop_preview">
-        </div>
-    </fieldset>
+        </fieldset>
 
-    <div id="container-option-btn-submit">
-        <input type="hidden" name="token" value="<?php echo $token; ?>">
-        <input type="hidden" name="source_name" id="source_name" value="">
+        <button type="submit" id="btn-submit-clip" value="Cut !" class="btn-control">
+            <span class="shortcut">
+                Shift+Enter
+            </span>
+            Cut !
+        </button>
+
+        <div id="container-option-btn-submit">
+            <input type="hidden" name="token" value="<?php echo $token; ?>">
+            <input type="hidden" name="source_name" id="source_name" value="">
+        </div>
     </div>
+
 
     <span id="spinner"></span>
 </form>

@@ -553,7 +553,7 @@ function play_source_video_at_marker_position(marker) {
 function remove_marker(marker, currentTime_sec) {
     $.post('/api/v1/markers', {
         action: 'remove',
-        source_name: $("#sources").find('option:selected').attr("name"),
+        source_name: $("#sources").find('option:selected').attr("id"),
         position_in_sec: currentTime_sec
     }).done(function (response) {
         //Si le formulaire est rejeté on récupere les erreurs et on les affiche

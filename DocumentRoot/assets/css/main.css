@@ -119,11 +119,7 @@ button{
 	gap: 10px;
 }
 
-.container-btn-submit-clip {
-	display: flex;
-	justify-content: end;
-	margin: 0 75px;
-}
+
 
 #fieldset-controls {
 	display: flex;
@@ -149,7 +145,8 @@ span.shortcut {
 }
 
 #btn-submit-clip {
-	width: auto;
+	width: 300px;
+
 	padding: 20px;
 	font-size: 45px;
 	justify-content: center;
@@ -225,7 +222,7 @@ button{
 
 
 .first-row,
-.second-row {
+.second-row, .last-row {
 	display: flex;
 	justify-content: flex-start;
 	gap: 3px;
@@ -234,6 +231,10 @@ button{
 
 .first-row {
 	margin-left: 130px;
+}
+
+.last-row{
+	justify-content: flex-end;
 }
 
 nav.footer-links {
