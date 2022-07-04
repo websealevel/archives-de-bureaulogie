@@ -56,13 +56,13 @@ select {
 	font-family: 'Courier New', Courier, monospace;
 }
 
-#current-time {
-	margin: 20px;
-}
-
 #clip-duration {
 	width: 310px;
 	text-align: center;
+	font-size: 30px;
+	padding: 15px;
+	border: 2px solid black;
+
 }
 
 #clip-duration.error {
