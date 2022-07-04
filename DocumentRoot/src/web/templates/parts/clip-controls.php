@@ -21,8 +21,9 @@ $color_end = '';
 
             <fieldset>
                 <legend>Log</legend>
+
                 <div class="errors" style="color: red;"></div>
-                <div class="success" style="color: green;"></div>
+                <div class="success" style="color: green;">Bienvenue, <?php esc_html_e(current_user_pseudo()); ?></div>
             </fieldset>
 
             <fieldset>

@@ -427,6 +427,7 @@ function fetch_clips_of_current_source(source_url) {
         }
 
     }).fail(function () {
+        $("div.success").html('')
         $("div.errors").html('Hmm, il semblerait qu\'il y ait eu un problème de connexion. Veuillez rééssayer s\'il vous plaît.')
     }).always(function () {
 
@@ -505,6 +506,7 @@ function save_clip_draft() {
             for (const input in errors) {
                 items.push("<li>" + errors[input].message + "</li>")
             }
+            $("div.success").html('')
             $("div.errors").html('<ul>' + items.join('') + '</ul>')
             return
         }
@@ -567,10 +569,13 @@ function remove_marker(marker, currentTime_sec) {
             for (const input in errors) {
                 items.push("<li>" + errors[input].message + "</li>")
             }
+            $("div.success").html('')
             $("div.errors").html('<ul>' + items.join('') + '</ul>')
             return
         }
         $(marker).remove()
+        $("div.success").html('Le brouillon a bien été supprimé')
+
     })
 }
 
@@ -732,6 +737,7 @@ function post_clip() {
             for (const input in errors) {
                 items.push("<li>" + errors[input].message + "</li>")
             }
+            $("div.success").html('')
             $("div.errors").html('<ul>' + items.join('') + '</ul>')
         } else {
             $("div.errors").html('')

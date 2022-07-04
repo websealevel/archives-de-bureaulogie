@@ -141,7 +141,7 @@ function are_timecodes_valid_core(string $start, string $end, string $source): b
 
     //Checker que end > fin
     if (!is_start_timecode_smaller_than_end_timecode($start, $end)) {
-        throw new Exception("Le timecode de début <strong>est égal ou plus grand que le timecode de fin</strong>. Veuillez corriger les timecodes s'il vous plaît.");
+        throw new Exception("Le timecode de début doit être plus petit que le timecode de fin. Veuillez les corriger.");
     }
 
     if (!are_timecodes_within_bounds($start, $end, $source)) {
