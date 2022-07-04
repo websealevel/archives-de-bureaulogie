@@ -31,27 +31,36 @@ require_once __DIR__ . '/../../handlers.php';
 
     <a href="/log-out">se déconnecter</a>
 
-    <h2>archives vidéos</h2>
+    <main>
 
-    <ul>
-        <?php if (current_user_can('submit_clip')) :  ?>
-            <li><a href="clip">soumettre un nouvel extrait</a></li>
-        <?php endif;  ?>
 
-        <?php if (current_user_can('add_source')) :  ?>
-            <li><a href="download-source">importer une nouvelle vidéo source</a>
-                <?php esc_active_downloads_info_e(); ?></li>
-        <?php endif;  ?>
+        <h2>Archives</h2>
 
-    </ul>
+        <section>
+            <h3>Extraits</h3>
+            <?php if (current_user_can('submit_clip')) :  ?>
+                <a href="clip">Consulter, éditer les extraits vidéos</a>
+            <?php endif;  ?>
+        </section>
 
-    <h2>archives bibliographiques</h2>
+        <section>
+            <h3>Vidéos sources</h3>
+            <?php if (current_user_can('add_source')) :  ?>
+                <a href="download-source">Consulter, importer les vidéos sources</a>
+                <?php esc_active_downloads_info_e(); ?>
+            <?php endif;  ?>
+        </section>
 
-    <ul>
-        <?php if (current_user_can('submit_reference')) :  ?>
-            <li><a href="submit_ref">soumettre une référence bibliographique</a></li>
-        <?php endif;  ?>
-    </ul>
+
+        <section>
+            <h3>Consulter, proposer des références bibliographiques</h3>
+            <?php if (current_user_can('submit_reference')) :  ?>
+                <a href="submit_ref">soumettre une référence bibliographique</a>
+            <?php endif;  ?>
+        </section>
+
+
+    </main>
 
 <?php endif; ?>
 
