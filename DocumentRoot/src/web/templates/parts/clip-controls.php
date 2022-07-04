@@ -1,3 +1,8 @@
+<?php
+$color_start = 'background-color:yellow';
+$color_end = 'background-color:pink';
+?>
+
 <form action="clip-source" id="form-clip-source" name="form-clip-source">
     <small>Les champs marqués d'un asterisque(*) sont obligatoires</small>
     <div class="errors" style="color: red;"></div>
@@ -26,14 +31,14 @@
                 <div class="timecodes">
 
                     <div class="label-input">
-                        <label for="timecode_start" style="background-color:green; color:white;width:120px;">Début* [</label>
+                        <label for="timecode_start" style="<?php echo $color_start; ?>; color:white;width:120px;">Début* [</label>
                         <input type=" text" name="timecode_start" id="timecode_start" pattern="[0-9]{2}:[0-9]{2}:[0-9]{2}.[0-9]{3}" value="00:00:00.000" title="Veuillez renseigner un timecode au format hh:mm:ss.lll. 
 Sinon, utiliser le bouton 'Démarrer l'extrait ici' prévu à cet effet">
                     </div>
 
 
                     <div class="label-input">
-                        <label for="timecode_end" style="background-color:darkblue; color:white;width:120px;">Fin* ]</label>
+                        <label for="timecode_end" style="<?php echo $color_end; ?>; color:white;width:120px;">Fin* ]</label>
                         <input type="text" name="timecode_end" id="timecode_end" value="00:00:00.000" pattern="[0-9]{2}:[0-9]{2}:[0-9]{2}.[0-9]{3}" title="Veuillez renseigner un timecode au format hh:mm:ss.lll
 Sinon, utiliser le bouton 'Finir l'extrait ici' prévu à cet effet">
                     </div>
@@ -48,25 +53,27 @@ Sinon, utiliser le bouton 'Finir l'extrait ici' prévu à cet effet">
         </div>
     </div>
 
+
+
     <div id="editor-navigation">
 
         <div class="first-row">
-            <button name="btn_goto_and_play_start" id="btn_goto_and_play_start" class="btn-control" type="button" title="Aller au début de l'extrait et jouer" style="background-color:green; color:white">
+            <button name="btn_goto_and_play_start" id="btn_goto_and_play_start" class="btn-control" type="button" title="Aller au début de l'extrait et jouer" style="<?php echo $color_start; ?>; color:white">
                 <span class="shortcut">a</span>
                 <?php echo htmlentities('[ <='); ?>
             </button>
 
-            <button name="btn_goto_and_play_end" id="btn_goto_and_play_end" class="btn-control" type="button" title="Aller à la fin de l'extrait et jouer" style="background-color:darkblue; color:white">
+            <button name="btn_goto_and_play_end" id="btn_goto_and_play_end" class="btn-control" type="button" title="Aller à la fin de l'extrait et jouer" style="<?php echo $color_end; ?>; color:white">
                 <span class="shortcut">z</span>
                 <?php echo htmlentities('=>]'); ?>
             </button>
 
-            <button name="btn_play_500ms_before_start" id="btn_play_500ms_before_start" class="btn-control" type="button" title="" style="background-color:green; color:white">
+            <button name="btn_play_500ms_before_start" id="btn_play_500ms_before_start" class="btn-control" type="button" title="" style="<?php echo $color_start; ?>; color:white">
                 <span class="shortcut">i</span>
                 <?php echo htmlentities('=>['); ?>
             </button>
 
-            <button name="btn_preview_tail" id="btn_preview_tail" class="btn-control" type="button" title="La traine correspond à la portion située juste après le timecode de fin, afin de mieux visualiser la fin du cut" style="background-color:darkblue; color:white">
+            <button name="btn_preview_tail" id="btn_preview_tail" class="btn-control" type="button" title="La traine correspond à la portion située juste après le timecode de fin, afin de mieux visualiser la fin du cut" style="background-color:; color:white">
                 <span class="shortcut">o</span>
                 <?php echo htmlentities(']=>'); ?>
             </button>
@@ -107,12 +114,12 @@ Sinon, utiliser le bouton 'Finir l'extrait ici' prévu à cet effet">
 
 
 
-            <button name="btn_clip_start" id="btn_clip_start" class="btn-control" type="button" title="Définir la position courante du curseur de lecture comme timecode de départ de l'extrait" style="background-color:green; color:white ;font-weight:bold;">
+            <button name="btn_clip_start" id="btn_clip_start" class="btn-control" type="button" title="Définir la position courante du curseur de lecture comme timecode de départ de l'extrait" style="<?php echo $color_start; ?>; color:white ;font-weight:bold;">
                 <span class="shortcut">k</span>
                 <?php echo htmlentities('['); ?>
             </button>
 
-            <button name="btn_clip_end" id="btn_clip_end" class="btn-control" type="button" title="Définir la position courante du curseur de lecture comme timecode de fin de l'extrait" style="background-color:darkblue; color:white; font-weight:bold;">
+            <button name="btn_clip_end" id="btn_clip_end" class="btn-control" type="button" title="Définir la position courante du curseur de lecture comme timecode de fin de l'extrait" style="<?php echo $color_end; ?>; color:white; font-weight:bold;">
                 <span class="shortcut">l</span>
                 <?php echo htmlentities(']'); ?>
             </button>
