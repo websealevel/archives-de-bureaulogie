@@ -438,12 +438,16 @@ function fetch_clips_of_current_source(source_url) {
  */
 function fetch_clip_drafs_of_current_source(source_url) {
 
-    const class_btn_delete_marker = 'btn-delete-marker'
+    const class_btn_delete_draft = 'btn-delete-draft'
+    const class_btn_load_draft = 'btn-load-draft'
+
     $("#list-markers").empty()
+
     $.post('/api/v1/markers', {
         action: 'fetch',
         source_name: $("#sources").find('option:selected').attr("id"),
     }).done(function (response) {
+
         response.markers.forEach(marker => {
 
             const li = marker_markup(
@@ -451,28 +455,65 @@ function fetch_clip_drafs_of_current_source(source_url) {
                 marker.timecode_start_in_sec,
                 marker.timecode_end_in_sec,
                 marker.title,
-                class_btn_delete_marker)
+                class_btn_delete_draft,
+                class_btn_load_draft)
 
             $("#list-markers").append(li)
+
             const $li_appended = $("#list-markers").children("li:last-child")
 
-            //Event listener : click sur le marqueur OU click sur supprimer.
-            $li_appended.click(function (event) {
+            item_draft_add_listeners($li_appended)
+        })
+    });
+}
 
-                const delete_marker_btn_clicked = event.originalEvent.target.className === class_btn_delete_marker
+function item_draft_add_listeners($item_draft) {
 
-                if (delete_marker_btn_clicked) {
-                    remove_marker(this, marker.position_in_sec)
-                    return
-                }
-                play_source_video_at_marker_position(this)
-            })
-        });
+    const class_btn_delete_draft = 'btn-delete-draft'
+    const class_btn_load_draft = 'btn-load-draft'
+
+    //Event listener : click sur le marqueur OU click sur supprimer.
+    $item_draft.click(function (event) {
+
+        const delete_marker_btn_is_clicked = event.originalEvent.target.className === class_btn_delete_draft
+        const load_marker_btn_is_clicked = event.originalEvent.target.className === class_btn_load_draft
+
+        if (delete_marker_btn_is_clicked) {
+            remove_marker(this)
+            return
+        }
+
+        if (load_marker_btn_is_clicked) {
+            load_marker(this)
+            return
+        }
     })
 }
 
-function marker_markup(uid, timecode_start, timecode_end, title, class_btn_delete) {
-    return `<li id="${uid}" class="marker"> <span>${title}</span> <span class="time">${timecode_start}</span> - <span class="time">${timecode_end}</span> <button class="${class_btn_delete}">Supprimer</button></li>`
+function load_marker(item_draft){
+
+    const data = {
+        timecode_start: $(item_draft).attr('data-timecodestart'),
+        timecode_end: $(item_draft).attr('data-timecodeend'),
+        title: $(item_draft).attr('data-title')
+    }
+
+    set_timecode_start(data.timecode_start)
+    set_timecode_end(data.timecode_end)
+    $("textarea#title").val(data.title)
+
+    $("div.success").html('Le brouillon a été chargé')
+    $("div.errors").html('')
+}
+
+function marker_markup(uid, timecode_start, timecode_end, title, class_btn_delete, class_btn_load) {
+    return `<li id="${uid}" data-title="${title}" data-timecodestart="${timecode_start}"  data-timecodeend="${timecode_end}" class="marker"> 
+    <span>${title}</span> 
+    <span class="time">${timecode_start}</span> - 
+    <span class="time">${timecode_end}</span> 
+    <button class="${class_btn_load}">Charger le brouillon</button>
+    <button class="${class_btn_delete}">Supprimer</button>
+    </li>`
 }
 
 /**
@@ -480,7 +521,10 @@ function marker_markup(uid, timecode_start, timecode_end, title, class_btn_delet
  */
 function save_clip_draft() {
 
-    const class_btn_delete_marker = 'btn-delete-marker'
+    const class_btn_delete_draft = 'btn-delete-draft'
+    const class_btn_load_draft = 'btn-load-draft'
+
+
     const timecode_start = $("#timecode_start").val()
     const timecode_end = $("#timecode_end").val()
     const timecode_start_in_sec = hh_mm_ss_lll_to_seconds(timecode_start)
@@ -509,21 +553,19 @@ function save_clip_draft() {
         }
 
         const uid = response.data
-        const li = marker_markup(uid, timecode_start_in_sec, timecode_end_in_sec, title, class_btn_delete_marker)
+
+        const li = marker_markup(
+            uid,
+            timecode_start_in_sec,
+            timecode_end_in_sec, title,
+            class_btn_delete_draft,
+            class_btn_load_draft)
+
         $("#list-markers").append(li)
+
         const $li_appended = $("#list-markers").children("li:last-child")
 
-        //Event listener : click sur le marqueur OU click sur supprimer.
-        $li_appended.click(function (event) {
-
-            const delete_marker_btn_clicked = event.originalEvent.target.className === class_btn_delete_marker
-
-            if (delete_marker_btn_clicked) {
-                remove_marker(this)
-                return
-            }
-            play_source_video_at_marker_position(this)
-        })
+        item_draft_add_listeners($li_appended)
 
         //Clean error messages.
         $("div.errors").html('')
@@ -539,6 +581,7 @@ function save_clip_draft() {
  * Supprime un brouillon
  */
 function remove_marker(marker) {
+
     $.post('/api/v1/markers', {
         action: 'remove',
         marker_id: $(marker).prop('id'),
@@ -558,23 +601,6 @@ function remove_marker(marker) {
         $("div.success").html('Le brouillon a bien été supprimé')
 
     })
-}
-
-/**
- * Déplace le curseur à la position du marqueur et lance la vidéo si elle est en pause.
- */
-function play_source_video_at_marker_position(marker) {
-
-    const content = $(marker)[0].innerText
-    //On récupere le début dela position du texte 'Supprimer'
-    const pos = content.indexOf('S')
-    //On récupere uniquement le temps en seconde
-    const time_part = content.substring(0, pos)
-
-    $("#video-source").prop('currentmTime', time_part)
-
-    if (!video_is_playing())
-        $("#video-source").trigger('play')
 }
 
 

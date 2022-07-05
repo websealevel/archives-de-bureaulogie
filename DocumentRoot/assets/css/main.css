@@ -191,11 +191,6 @@ summary .clip-item-header {
 	gap: 20px;
 }
 
-li span.time {
-	text-decoration: underline blue;
-	color: blue;
-	cursor: pointer;
-}
 
 .video-main {
 	display: flex;
