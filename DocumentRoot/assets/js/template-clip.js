@@ -271,6 +271,10 @@ function preview_after_end(tail_duration_in_sec = 1.5) {
     playvideo()
 }
 
+/**
+ * Lance la vidéo si elle est en pause
+ * @returns 
+ */
 function playvideo() {
     if (video_is_playing())
         return
@@ -279,7 +283,10 @@ function playvideo() {
 }
 
 
-
+/**
+ * Déplace le curseur au timecode début
+ * @returns 
+ */
 function goto_and_play_start() {
     console.log(source_url)
     const timecode_start = $("#timecode_start").val()
@@ -289,7 +296,10 @@ function goto_and_play_start() {
     // playvideo()
 }
 
-
+/**
+ * Déplace le curseur au timecode fin
+ * @returns 
+ */
 function goto_and_play_end() {
     const timecode = $("#timecode_end").val()
     const timecode_in_sec = hh_mm_ss_lll_to_seconds(timecode)
@@ -349,6 +359,7 @@ function play_pause() {
 function play_pause_preview() {
 
     if (!are_timecodes_valid()) {
+        $("div.success").html('')
         $("div.errors").html("<p>Impossible de prévisualiser l'extrait : le timecode de fin doit être plus grand que le timecode de début</p>")
         $("#timecode_start").addClass('error')
         $("#timecode_end").addClass('error')
