@@ -1,6 +1,9 @@
 jQuery(function ($) {
 
 
+    /**
+     * Variable globale : url de la vidéo source en cours d'édition
+     */
     var source_url
 
     init_on_landing()
@@ -54,7 +57,6 @@ jQuery(function ($) {
 
     $("#btn_forward_1_s").click(function () {
         shift_current_time(1)
-
     })
 
     $("#btn_forward_5_s").click(function () {
@@ -85,9 +87,17 @@ jQuery(function ($) {
         save_clip_draft()
     })
 
+    $("#btn_preview").click(function () {
+        play_pause_preview()
+    })
+
     /**
-     * Raccourcis clavier
+     * Soumission du formulaire de création d'extrait
      */
+    $("#form-clip-source").submit(function (event) {
+        event.preventDefault();
+        post_clip()
+    });
 
     /**
      * Raccourcis claviers, traitement des évenements keydown.
@@ -132,11 +142,6 @@ jQuery(function ($) {
 
         if ('p' === key && !shiftKey) {
             play_pause_preview()
-            return
-        }
-
-        if ('o' === key && !shiftKey) {
-            preview_trail()
             return
         }
 
@@ -199,22 +204,7 @@ jQuery(function ($) {
         }
     })
 
-    /**
-     * Preview
-     */
 
-    $("#btn_preview").click(function () {
-        play_pause_preview()
-    })
-
-    /**
-     * Soumission du formulaire de création d'extrait
-     */
-
-    $("#form-clip-source").submit(function (event) {
-        event.preventDefault();
-        post_clip()
-    });
 });
 
 
