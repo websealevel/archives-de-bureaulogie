@@ -31,9 +31,6 @@ Il sert également de prétexte pour construire un outil en *vanilla php* pour s
         - [environnement de dev](#environnement-de-dev)
         - [environnement de prod](#environnement-de-prod)
         - [.env](#env)
-- [Database credentials](#database-credentials)
-- [FFMPEG](#ffmpeg)
-- [youtube-dl](#youtube-dl-1)
     - [Lancer le projet](#lancer-le-projet)
     - [Arrêter le projet](#arrêter-le-projet)
     - [Core functions (CLI)](#core-functions-cli)
@@ -228,11 +225,17 @@ Mettre à jour les dépendances du projet. Se placer à la racine du projet puis
 ##### environnement de dev
 
 ~~~bash
+
 composer update
+
 ~~~
+
 ou
+
 ~~~bash
+
 composer install
+
 ~~~
 
 ##### environnement de prod
@@ -249,7 +252,8 @@ mv DocumentRoot/.env.dist DocumentRoot/.env
 
 Voici les options par défaut. Surchargez les à votre convenance.
 
-~~~
+```bash
+
 # Database credentials
 DB_HOST="db"
 DB_NAME="mydb"
@@ -267,7 +271,7 @@ FFMPEG_THREADS=12
 # youtube-dl
 PATH_PYTHON=/usr/bin/python3
 PATH_BIN_YOUTUBEDL=youtube-dl/youtube-dl
-~~~
+```
 
 La liste des options
 
