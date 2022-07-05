@@ -179,7 +179,7 @@ Dans le `nginx.conf` à la racine du projet.
 
 Dans le `.htaccess` à la racine du projet
 
-~~~.htaccess
+~~~
 # Deny access to .htaccess
 <Files .htaccess>
 Order allow,deny
