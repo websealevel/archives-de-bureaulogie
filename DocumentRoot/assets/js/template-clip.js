@@ -20,7 +20,6 @@ jQuery(function ($) {
     $("#sources").change(function () {
         source_url = $(this).find(":selected").attr('id')
         $("#video-source").prop('src', source_url)
-        $("#video-clip").prop('src', source_url)
         $("#source_name").val(source_url)
         fetch_clips_of_current_source(source_url)
         fetch_clip_drafs_of_current_source(source_url)
@@ -282,6 +281,7 @@ function playvideo() {
 
 
 function goto_and_play_start() {
+    console.log(source_url)
     const timecode_start = $("#timecode_start").val()
     const timecode_start_in_sec = hh_mm_ss_lll_to_seconds(timecode_start)
     const src_timecodes = source_url + `#t=${timecode_start_in_sec}`

@@ -65,7 +65,7 @@ button{
 }
 
 #btn_clip_start{
-	margin-left: 120px;
+	margin-left: 30px;
 }
 
 #fieldset-video-clip {
@@ -110,7 +110,6 @@ button{
 	color: green;
 }
 
-
 #edition-actions {
 	display: flex;
 	flex-wrap: wrap;
@@ -125,8 +124,6 @@ button{
 	align-content: flex-start;
 	gap: 10px;
 }
-
-
 
 #fieldset-controls {
 	display: flex;
@@ -159,10 +156,6 @@ span.shortcut {
 	justify-content: center;
 }
 
-form{
-	margin: 10px;
-}
-
 #btn_save_clip_draft, #btn_clip_start, #btn_clip_end{
 	width: 300px;
 }
@@ -191,7 +184,6 @@ summary .clip-item-header {
 	gap: 20px;
 }
 
-
 .video-main {
 	display: flex;
 }
@@ -218,18 +210,12 @@ button{
 	justify-content: start;
 }
 
-
-
 .first-row,
 .second-row, .last-row {
 	display: flex;
 	justify-content: flex-start;
 	gap: 3px;
 	margin: 10px;
-}
-
-.first-row {
-	margin-left: 130px;
 }
 
 .last-row{
