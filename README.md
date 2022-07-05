@@ -154,7 +154,7 @@ Il faut rediriger toutes les reqûetes vers le `index.php` à la racine du proje
 
 Dans le `nginx.conf` à la racine du projet.
 
-~~~nginx
+~~~
 # deny hidden files and files with the extensions listed below
     location ~ /\.|\.(?:xml|dtd|php|env|json|lock|ini|log)$ {
         deny all;
