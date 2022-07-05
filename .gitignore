@@ -9,6 +9,7 @@ DocumentRoot/downloads/*
 !/DocumentRoot/downloads/README.md
 !/DocumentRoot/downloads/index.php
 DocumentRoot/ffmpeg/*
+DocumentRoot/composer.lock
 !/DocumentRoot/ffmpeg/index.php
 !/DocumentRoot/ffmpeg/README.md
 /DocumentRoot/youtube-dl/youtube-dl
