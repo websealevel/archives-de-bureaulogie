@@ -134,12 +134,12 @@ Sinon, utiliser le bouton 'Finir l'extrait ici' prévu à cet effet">
 
             <button id="btn_clip_start" class="btn-control" type="button" title="Définir la position courante du curseur de lecture comme timecode de départ de l'extrait" style="<?php echo $color_start; ?>;   ;font-weight:bold;">
                 <span class="shortcut">k</span>
-                <?php echo htmlentities('[marquer le début de l\'extrait'); ?>
+                <?php echo htmlentities('[débuter l\'extrait ici'); ?>
             </button>
 
             <button id="btn_clip_end" class="btn-control" type="button" title="Définir la position courante du curseur de lecture comme timecode de fin de l'extrait" style="<?php echo $color_end; ?>;  ; font-weight:bold;">
                 <span class="shortcut">l</span>
-                <?php echo htmlentities('marquer la fin de l\'extrait]'); ?>
+                <?php echo htmlentities('finir l\'extrait ici]'); ?>
             </button>
 
             <button id="btn_save_clip_draft" class="btn-control" type="button" title="Définir un marqueur à la position courante du curseur de lecture">

@@ -288,12 +288,10 @@ function playvideo() {
  * @returns 
  */
 function goto_and_play_start() {
-    console.log(source_url)
     const timecode_start = $("#timecode_start").val()
     const timecode_start_in_sec = hh_mm_ss_lll_to_seconds(timecode_start)
     const src_timecodes = source_url + `#t=${timecode_start_in_sec}`
     $("#video-source").prop('src', src_timecodes)
-    // playvideo()
 }
 
 /**
@@ -305,7 +303,6 @@ function goto_and_play_end() {
     const timecode_in_sec = hh_mm_ss_lll_to_seconds(timecode)
     const src_timecodes = source_url + `#t=${timecode_in_sec}`
     $("#video-source").prop('src', src_timecodes)
-    // playvideo()
 }
 
 /**
@@ -501,7 +498,7 @@ function item_draft_add_listeners($item_draft) {
     })
 }
 
-function load_marker(item_draft){
+function load_marker(item_draft) {
 
     const data = {
         timecode_start: $(item_draft).attr('data-timecodestart'),
