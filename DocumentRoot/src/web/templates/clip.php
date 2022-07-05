@@ -38,18 +38,18 @@ $token = register_api_token($account, 'submit_clip');
     <?php require_once 'parts/clip-controls.php' ?>
 
 
-</main>
+    <section>
 
-<nav class="two-col-side">
+        <h2>Vos brouillons</h2>
+        <ul id="list-markers"></ul>
+    </section>
+
     <section>
         <?php esc_html_list_clips_of_source_e(show_data: array('details'), name_attr: 'list-clips-on-current-source'); ?>
     </section>
 
-    <section>
-        <h2>Vos brouillons</h2>
-        <ul id="list-markers"></ul>
-    </section>
-</nav>
+
+</main>
 
 
 <?php present_footer(array('jquery-min', 'template-clip')); ?>
