@@ -561,10 +561,10 @@ function save_clip_draft() {
             return
         }
 
-        const uid = response.data
+        const marker_id = response.data
 
         const li = marker_markup(
-            uid,
+            marker_id,
             timecode_start_in_sec,
             timecode_end_in_sec, title,
             class_btn_delete_draft,
@@ -582,6 +582,7 @@ function save_clip_draft() {
 
 
     }).fail(function () {
+        $("div.success").html('')
         $("div.errors").html('Hmm, il semblerait qu\'il y ait eu un problème de connexion avec le serveur. Ré-essayez svp.')
     })
 }
@@ -607,8 +608,8 @@ function remove_marker(marker) {
             return
         }
         $(marker).remove()
+        $("div.errors").html('')
         $("div.success").html('Le brouillon a bien été supprimé')
-
     })
 }
 
@@ -781,6 +782,7 @@ function post_clip() {
         }
 
     }).fail(function () {
+        $("div.success").html('')
         $("div.errors").html('Hmm, il semblerait qu\'il y ait eu un problème de connexion. Veuillez rééssayer s\'il vous plaît.')
     }).always(function () {
         window.cancelAnimationFrame(spinner_ascii.requestID)
