@@ -275,31 +275,36 @@ function playvideo() {
 
 
 /**
- * Déplace le curseur au timecode début
+ * Déplace le curseur au timecode début et reprend la lecture de la vidéo si elle était en cours
  * @returns 
  */
 function goto_and_play_start() {
 
+    const is_playing =  video_is_playing()
     const timecode_start = $("#timecode_start").val()
     const timecode_start_in_sec = hh_mm_ss_lll_to_seconds(timecode_start)
     const src_timecodes = current_source() + `#t=${timecode_start_in_sec}`
-    console.log(src_timecodes)
     $("#video-source").prop('src', src_timecodes)
+    if (is_playing)
+        playvideo()
 }
 
-function current_source(){
+function current_source() {
     return $("#sources").find(":selected").attr('id')
 }
 
 /**
- * Déplace le curseur au timecode fin
+ * Déplace le curseur au timecode fin et reprend la lecture de la vidéo si elle était en cours
  * @returns 
  */
 function goto_and_play_end() {
+    const is_playing =  video_is_playing()
     const timecode = $("#timecode_end").val()
     const timecode_in_sec = hh_mm_ss_lll_to_seconds(timecode)
     const src_timecodes = current_source() + `#t=${timecode_in_sec}`
     $("#video-source").prop('src', src_timecodes)
+    if (is_playing)
+        playvideo()
 }
 
 /**
