@@ -14,6 +14,8 @@
     - [Gestion des fichiers `sources` et `extraits`](#gestion-des-fichiers-sources-et-extraits)
       - [Fichier `source`](#fichier-source)
       - [Fichier `extrait`](#fichier-extrait)
+    - [Unicité d'une source](#unicité-dune-source)
+    - [Unicité d'un clip](#unicité-dun-clip)
     - [Twitter Bots](#twitter-bots)
     - [Modération](#modération)
     - [Pages](#pages)
@@ -28,10 +30,8 @@
     - [Ecran Ajouter une ressource biblio](#ecran-ajouter-une-ressource-biblio)
     - [Ecran Modération des extraits vidéos](#ecran-modération-des-extraits-vidéos)
     - [Ecran Modération des ressources bibliographiques](#ecran-modération-des-ressources-bibliographiques)
-  - [SEO](#seo)
-  - [Core](#core-1)
-    - [Unicité d'une source](#unicité-dune-source)
-    - [Unicité d'un clip](#unicité-dun-clip)
+    - [SEO](#seo)
+    - [Core](#core-1)
     - [A implementer (CLI/CGI)](#a-implementer-clicgi)
   - [Sécurité](#sécurité)
   - [Features additionnelles](#features-additionnelles)
@@ -122,6 +122,14 @@ Les *extraits* sont les extraits vidéos issus des [sources](#fichiers-sources).
 Les fichiers *extraits* **doivent respecter [un format][un format](./DocumentRoot/extraits/README.md)** sinon ils finiront pas être **supprimées automatiquement**.
 
 Un extrait doit faire **au moins 1 seconde**, sinon il ne sera pas généré et une exception sera levée et moins de **2min20s**, pour être publiable sur Twitter.
+
+### Unicité d'une source
+
+- url
+
+### Unicité d'un clip
+
+- nom source + timecodes identiques. Si sur une meme source, deux clips ont les memes timecodes, ce sont les mêmes extraits.  
 
 ### Twitter Bots
 
@@ -287,23 +295,16 @@ A venir...
 
 A venir...
 
-## SEO
+### SEO
 
 - ajouter un sitemap
 - robots
 - revoir les méta de header pour les mettre a jour SEO [x]
 - adapter les métas pour chaque page []
   
-## Core
+### Core
 
-
-### Unicité d'une source
-
-- url
-
-### Unicité d'un clip
-
-- nom source + timecodes identiques. Si sur une meme source, deux clips ont les memes timecodes, ce sont les mêmes extraits.                
+              
 
 ### A implementer (CLI/CGI)
 
