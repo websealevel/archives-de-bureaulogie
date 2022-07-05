@@ -22,9 +22,7 @@ Il sert également de prétexte pour construire un outil en *vanilla php* pour s
     - [Configuration php-fpm](#configuration-php-fpm)
     - [Configuration du virtual host](#configuration-du-virtual-host)
       - [Nginx](#nginx)
-- [deny hidden files and files with the extensions listed below](#deny-hidden-files-and-files-with-the-extensions-listed-below)
       - [Apache](#apache)
-- [Deny access to .htaccess](#deny-access-to-htaccess)
     - [Gestion des logs](#gestion-des-logs)
       - [Logs de nginx](#logs-de-nginx)
       - [Logs de php-fpm](#logs-de-php-fpm)
@@ -154,7 +152,8 @@ Il faut rediriger toutes les reqûetes vers le `index.php` à la racine du proje
 
 Dans le `nginx.conf` à la racine du projet.
 
-~~~bash
+```bash
+
 # deny hidden files and files with the extensions listed below
     location ~ /\.|\.(?:xml|dtd|php|env|json|lock|ini|log)$ {
         deny all;
@@ -173,13 +172,15 @@ Dans le `nginx.conf` à la racine du projet.
         fastcgi_param PATH_INFO $fastcgi_path_info;
         fastcgi_pass php-fpm:9000;
     }
-~~~
+
+```
 
 #### Apache
 
 Dans le `.htaccess` à la racine du projet
 
-~~~bash
+```bash
+
 # Deny access to .htaccess
 <Files .htaccess>
 Order allow,deny
@@ -192,7 +193,8 @@ Deny from all
 
 RewriteEngine on
 RewriteRule ^(.*)$ index.php?q=$1 [L,QSA]
-~~~
+
+```
 
 ### Gestion des logs
 
