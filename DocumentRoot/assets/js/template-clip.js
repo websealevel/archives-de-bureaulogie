@@ -23,7 +23,7 @@ jQuery(function ($) {
         $("#video-clip").prop('src', source_url)
         $("#source_name").val(source_url)
         fetch_clips_of_current_source(source_url)
-        fetch_markers_of_current_source(source_url)
+        fetch_clip_drafs_of_current_source(source_url)
     })
 
     /**
@@ -234,7 +234,7 @@ function init_on_landing() {
     $("#source_name").val(source_url)
 
     fetch_clips_of_current_source(source_url)
-    fetch_markers_of_current_source(source_url)
+    fetch_clip_drafs_of_current_source(source_url)
 
 }
 
@@ -285,7 +285,6 @@ function goto_and_play_start() {
     const timecode_start = $("#timecode_start").val()
     const timecode_start_in_sec = hh_mm_ss_lll_to_seconds(timecode_start)
     const src_timecodes = source_url + `#t=${timecode_start_in_sec}`
-    console.log(src_timecodes)
     $("#video-source").prop('src', src_timecodes)
     // playvideo()
 }
@@ -295,7 +294,6 @@ function goto_and_play_end() {
     const timecode = $("#timecode_end").val()
     const timecode_in_sec = hh_mm_ss_lll_to_seconds(timecode)
     const src_timecodes = source_url + `#t=${timecode_in_sec}`
-    console.log(src_timecodes)
     $("#video-source").prop('src', src_timecodes)
     // playvideo()
 }
@@ -435,10 +433,10 @@ function fetch_clips_of_current_source(source_url) {
 }
 
 /**
- * Fetch les marqueurs de l'utilisateur enregistrés pour la vidéo source
+ * Fetch les brouillons de clips de l'utilisateur enregistrés pour la vidéo source
  * @param {string} source_url 
  */
-function fetch_markers_of_current_source(source_url) {
+function fetch_clip_drafs_of_current_source(source_url) {
 
     const class_btn_delete_marker = 'btn-delete-marker'
     $("#list-markers").empty()
@@ -447,7 +445,14 @@ function fetch_markers_of_current_source(source_url) {
         source_name: $("#sources").find('option:selected').attr("id"),
     }).done(function (response) {
         response.markers.forEach(marker => {
-            const li = marker_markup(marker.position_in_sec, class_btn_delete_marker)
+
+            const li = marker_markup(
+                marker.id,
+                marker.timecode_start_in_sec,
+                marker.timecode_end_in_sec,
+                marker.title,
+                class_btn_delete_marker)
+
             $("#list-markers").append(li)
             const $li_appended = $("#list-markers").children("li:last-child")
 
@@ -466,8 +471,8 @@ function fetch_markers_of_current_source(source_url) {
     })
 }
 
-function marker_markup(time, class_btn_delete) {
-    return `<li id="${time}" class="marker"><span class="time">${time}</span> <button class="${class_btn_delete}">Supprimer</button></li>`
+function marker_markup(uid, timecode_start, timecode_end, title, class_btn_delete) {
+    return `<li id="${uid}" class="marker"> <span>${title}</span> <span class="time">${timecode_start}</span> - <span class="time">${timecode_end}</span> <button class="${class_btn_delete}">Supprimer</button></li>`
 }
 
 /**
@@ -476,19 +481,11 @@ function marker_markup(time, class_btn_delete) {
 function save_clip_draft() {
 
     const class_btn_delete_marker = 'btn-delete-marker'
-
     const timecode_start = $("#timecode_start").val()
-
     const timecode_end = $("#timecode_end").val()
-
     const timecode_start_in_sec = hh_mm_ss_lll_to_seconds(timecode_start)
     const timecode_end_in_sec = hh_mm_ss_lll_to_seconds(timecode_end)
-
-    const li = marker_markup(timecode_start_in_sec, class_btn_delete_marker)
-
-    //Avoid doublon
-    // if ($(`li#${currentTime_sec}`).length > 0)
-    //     return
+    const title = $("textarea#title").val()
 
     //Envoyer une requete pour ajouter le marqueur.
     $.post('/api/v1/markers', {
@@ -496,7 +493,7 @@ function save_clip_draft() {
         source_name: source_url,
         timecode_start_in_sec: timecode_start_in_sec,
         timecode_end_in_sec: timecode_end_in_sec,
-        title: $("textarea#title").val()
+        title: title
     }).done(function (response) {
 
         //Si le formulaire est rejeté on récupere les erreurs et on les affiche
@@ -511,6 +508,8 @@ function save_clip_draft() {
             return
         }
 
+        const uid = response.data
+        const li = marker_markup(uid, timecode_start_in_sec, timecode_end_in_sec, title, class_btn_delete_marker)
         $("#list-markers").append(li)
         const $li_appended = $("#list-markers").children("li:last-child")
 
@@ -520,7 +519,7 @@ function save_clip_draft() {
             const delete_marker_btn_clicked = event.originalEvent.target.className === class_btn_delete_marker
 
             if (delete_marker_btn_clicked) {
-                remove_marker(this, currentTime_sec)
+                remove_marker(this)
                 return
             }
             play_source_video_at_marker_position(this)
@@ -533,6 +532,31 @@ function save_clip_draft() {
 
     }).fail(function () {
         $("div.errors").html('Hmm, il semblerait qu\'il y ait eu un problème de connexion avec le serveur. Ré-essayez svp.')
+    })
+}
+
+/**
+ * Supprime un brouillon
+ */
+function remove_marker(marker) {
+    $.post('/api/v1/markers', {
+        action: 'remove',
+        marker_id: $(marker).prop('id'),
+    }).done(function (response) {
+        //Si le formulaire est rejeté on récupere les erreurs et on les affiche
+        if (typeof response !== 'string' && '' !== response && 'errors' in response) {
+            const errors = response.errors
+            let items = []
+            for (const input in errors) {
+                items.push("<li>" + errors[input].message + "</li>")
+            }
+            $("div.success").html('')
+            $("div.errors").html('<ul>' + items.join('') + '</ul>')
+            return
+        }
+        $(marker).remove()
+        $("div.success").html('Le brouillon a bien été supprimé')
+
     })
 }
 
@@ -553,31 +577,7 @@ function play_source_video_at_marker_position(marker) {
         $("#video-source").trigger('play')
 }
 
-/**
- * Supprime un markeur
- */
-function remove_marker(marker, currentTime_sec) {
-    $.post('/api/v1/markers', {
-        action: 'remove',
-        source_name: $("#sources").find('option:selected').attr("id"),
-        position_in_sec: currentTime_sec
-    }).done(function (response) {
-        //Si le formulaire est rejeté on récupere les erreurs et on les affiche
-        if (typeof response !== 'string' && '' !== response && 'errors' in response) {
-            const errors = response.errors
-            let items = []
-            for (const input in errors) {
-                items.push("<li>" + errors[input].message + "</li>")
-            }
-            $("div.success").html('')
-            $("div.errors").html('<ul>' + items.join('') + '</ul>')
-            return
-        }
-        $(marker).remove()
-        $("div.success").html('Le brouillon a bien été supprimé')
 
-    })
-}
 
 /**
  * Met à jour le timecode de départ avec le temps courant du player video source

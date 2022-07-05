@@ -44,11 +44,10 @@ function api_markers()
         'timecode_start_in_sec' => FILTER_SANITIZE_ENCODED,
         'timecode_end_in_sec' => FILTER_SANITIZE_ENCODED,
         'title' => FILTER_SANITIZE_ENCODED,
+        'marker_id' => FILTER_SANITIZE_NUMBER_INT
     ));
 
     $clean = api_markers_validate_input($data);
-
-    write_log($clean);
 
     if (false === $clean) {
         api_respond_with_error(array(
@@ -70,7 +69,7 @@ function api_markers()
         case 'add':
 
             try {
-                $id = sql_insert_marker($clean['source_name'], $account_id, $clean['timecode_start_in_sec']);
+                $id = sql_insert_marker($clean['source_name'], $account_id, floatval($clean['timecode_start_in_sec']), floatval($clean['timecode_end_in_sec']), $clean['title']);
                 api_respond_with_success($id);
             } catch (PDOException $e) {
                 error_log($e);
@@ -83,7 +82,7 @@ function api_markers()
         case 'remove':
 
             try {
-                $row_affected = sql_delete_marker($clean['source_name'], $account_id, $clean['timecode_start_in_sec']);
+                $row_affected = sql_delete_marker($account_id, $clean['marker_id']);
                 api_respond_with_success($row_affected);
             } catch (PDOException $e) {
                 error_log($e);
@@ -127,9 +126,16 @@ function api_markers_validate_input($data): array|false
         return false;
     }
 
-    write_log($data);
-
     $clean['action'] = $data['action'];
+
+
+    if ('remove' === $clean['action']) {
+        if (isset($data['marker_id']) && is_numeric($data['marker_id'])) {
+            $clean['marker_id'] = $data['marker_id'];
+        }
+
+        return $clean;
+    }
 
     //Check source_name
     if (!isset($data['source_name'])) {
