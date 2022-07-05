@@ -23,7 +23,6 @@ jQuery(function ($) {
     $("#sources").change(function () {
         source_url = $(this).find(":selected").attr('id')
         $("#video-source").prop('src', source_url)
-        $("#source_name").val(source_url)
         fetch_clips_of_current_source(source_url)
         fetch_clip_drafs_of_current_source(source_url)
     })
@@ -217,7 +216,7 @@ jQuery(function ($) {
 */
 function init_on_landing() {
 
-    source_url = $("#sources").find('option:selected').attr("id")
+    source_url = current_source()
 
     $("#video-source").prop('src', source_url)
     $("#source_name").val(source_url)
@@ -230,6 +229,8 @@ function init_on_landing() {
 function preview_before_start(tail_duration_in_sec = 1.5) {
     //Decocher la loop si cochée (sinon bug)
     $('#checkbox_loop_preview').prop('checked', false)
+
+    const source_url = current_source()
 
     const timecode_start = $("#timecode_start").val()
 
@@ -256,7 +257,7 @@ function preview_after_end(tail_duration_in_sec = 1.5) {
     const timecode_start_in_sec = hh_mm_ss_lll_to_seconds(timecode_end)
     const timecode_end_in_sec = parseInt(timecode_start_in_sec) + tail_duration_in_sec
 
-    const src_timecodes = source_url + `#t=${timecode_start_in_sec},${timecode_end_in_sec}`
+    const src_timecodes = current_source() + `#t=${timecode_start_in_sec},${timecode_end_in_sec}`
     $("#video-source").prop('src', src_timecodes)
     playvideo()
 }
@@ -278,10 +279,16 @@ function playvideo() {
  * @returns 
  */
 function goto_and_play_start() {
+
     const timecode_start = $("#timecode_start").val()
     const timecode_start_in_sec = hh_mm_ss_lll_to_seconds(timecode_start)
-    const src_timecodes = source_url + `#t=${timecode_start_in_sec}`
+    const src_timecodes = current_source() + `#t=${timecode_start_in_sec}`
+    console.log(src_timecodes)
     $("#video-source").prop('src', src_timecodes)
+}
+
+function current_source(){
+    return $("#sources").find(":selected").attr('id')
 }
 
 /**
@@ -291,7 +298,7 @@ function goto_and_play_start() {
 function goto_and_play_end() {
     const timecode = $("#timecode_end").val()
     const timecode_in_sec = hh_mm_ss_lll_to_seconds(timecode)
-    const src_timecodes = source_url + `#t=${timecode_in_sec}`
+    const src_timecodes = current_source() + `#t=${timecode_in_sec}`
     $("#video-source").prop('src', src_timecodes)
 }
 
@@ -363,7 +370,7 @@ function play_pause_preview() {
     const timecode_start_in_sec = hh_mm_ss_lll_to_seconds(timecode_start)
     const timecode_end_in_sec = hh_mm_ss_lll_to_seconds(timecode_end)
 
-    const src_timecodes = source_url + `#t=${timecode_start_in_sec},${timecode_end_in_sec}`
+    const src_timecodes = current_source() + `#t=${timecode_start_in_sec},${timecode_end_in_sec}`
     $("#video-source").prop('src', src_timecodes)
 
     /**
@@ -533,7 +540,7 @@ function save_clip_draft() {
     //Envoyer une requete pour ajouter le marqueur.
     $.post('/api/v1/markers', {
         action: 'add',
-        source_name: source_url,
+        source_name: current_source(),
         timecode_start_in_sec: timecode_start_in_sec,
         timecode_end_in_sec: timecode_end_in_sec,
         title: title

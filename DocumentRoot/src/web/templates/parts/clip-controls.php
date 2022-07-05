@@ -4,8 +4,10 @@ $color_end = '';
 ?>
 
 <form action="clip-source" id="form-clip-source" name="form-clip-source">
-    <small>Les champs marqués d'un asterisque(*) sont obligatoires</small>
 
+    <p>
+        <small>Les champs marqués d'un asterisque(*) sont obligatoires</small>
+    </p>
 
 
     <div class="video-main">
@@ -67,12 +69,12 @@ Sinon, utiliser le bouton 'Finir l'extrait ici' prévu à cet effet">
         <div class="first-row">
             <button id="btn_goto_and_play_start" class="btn-control" type="button" title="Aller au timecode de début" style="<?php echo $color_start; ?>;  ">
                 <span class="shortcut">a</span>
-                <?php echo htmlentities('[<='); ?>
+                <?php echo htmlentities('[<---'); ?>
             </button>
 
             <button id="btn_goto_and_play_end" class="btn-control" type="button" title="Aller au timecode de fin " style="<?php echo $color_end; ?>;  ">
                 <span class="shortcut">z</span>
-                <?php echo htmlentities('=>]'); ?>
+                <?php echo htmlentities('--->]'); ?>
             </button>
 
             <button id="btn_play_500ms_before_start" class="btn-control" type="button" title="Visualiser 1.5s avant le timecode de début" style="<?php echo $color_start; ?>;  ">
