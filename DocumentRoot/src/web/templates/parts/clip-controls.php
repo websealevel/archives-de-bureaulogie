@@ -81,30 +81,26 @@ Sinon, utiliser le bouton 'Finir l'extrait ici' prévu à cet effet">
                 <span class="shortcut">w</span>
                 <?php echo htmlentities('=>['); ?>
             </button>
-
+            <button id="btn_preview" class="btn-control" type="button" title="Jouer l'extrait">
+                <span class="shortcut">p</span>
+                <?php echo htmlentities('[play]'); ?>
+            </button>
             <button id="btn_play_500ms_after_end" class="btn-control" type="button" title="Visualiser 1.5s après le timecode de fin">
                 <span class="shortcut">x</span>
                 <?php echo htmlentities(']=>'); ?>
             </button>
 
-            <button id="btn_preview" class="btn-control" type="button" title="Jouer l'extrait">
-                <span class="shortcut">p</span>
-                <?php echo htmlentities('[play]'); ?>
+
+
+            <button id="btn_clip_start" class="btn-control" type="button" title="Définir la position courante du curseur de lecture comme timecode de départ de l'extrait" style="<?php echo $color_start; ?>;   ;font-weight:bold;">
+                <span class="shortcut">k</span>
+                <?php echo htmlentities('[débuter l\'extrait ici'); ?>
             </button>
 
-            <div id="edition-data">
-
-                <div class="label-input">
-                    <label for="title">Titre</label>
-                    <textarea name="title" id="title" rows="2" cols="50" placeholder="Texte qui apparaîtra dans le tweet" maxlength="280" autocapitalize="sentences" spellcheck="true"></textarea>
-                </div>
-
-                <div class="label-input">
-                    <label for="description">Description</label>
-                    <textarea id="description" name="description" rows="3" cols="80" placeholder="Texte additionnel" maxlength="280" autocapitalize="sentences" spellcheck="true"></textarea>
-                </div>
-
-            </div>
+            <button id="btn_clip_end" class="btn-control" type="button" title="Définir la position courante du curseur de lecture comme timecode de fin de l'extrait" style="<?php echo $color_end; ?>;  ; font-weight:bold;">
+                <span class="shortcut">l</span>
+                <?php echo htmlentities('finir l\'extrait ici]'); ?>
+            </button>
 
         </div>
 
@@ -134,15 +130,17 @@ Sinon, utiliser le bouton 'Finir l'extrait ici' prévu à cet effet">
                 <?php echo htmlentities('>>'); ?>
             </button>
 
-            <button id="btn_clip_start" class="btn-control" type="button" title="Définir la position courante du curseur de lecture comme timecode de départ de l'extrait" style="<?php echo $color_start; ?>;   ;font-weight:bold;">
-                <span class="shortcut">k</span>
-                <?php echo htmlentities('[débuter l\'extrait ici'); ?>
-            </button>
 
-            <button id="btn_clip_end" class="btn-control" type="button" title="Définir la position courante du curseur de lecture comme timecode de fin de l'extrait" style="<?php echo $color_end; ?>;  ; font-weight:bold;">
-                <span class="shortcut">l</span>
-                <?php echo htmlentities('finir l\'extrait ici]'); ?>
-            </button>
+
+            <div class="label-input">
+                <label for="title">Titre</label>
+                <textarea name="title" id="title" rows="2" cols="30" placeholder="Texte qui apparaîtra dans le tweet" maxlength="280" autocapitalize="sentences" spellcheck="true"></textarea>
+            </div>
+
+            <div class="label-input">
+                <label for="description">Description</label>
+                <textarea id="description" name="description" rows="3" cols="50" placeholder="Texte additionnel" maxlength="280" autocapitalize="sentences" spellcheck="true"></textarea>
+            </div>
 
             <button id="btn_save_clip_draft" class="btn-control" type="button" title="Définir un marqueur à la position courante du curseur de lecture">
                 <span class="shortcut">m</span>
