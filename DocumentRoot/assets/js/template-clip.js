@@ -498,8 +498,9 @@ function load_marker(item_draft){
         title: $(item_draft).attr('data-title')
     }
 
-    set_timecode_start(data.timecode_start)
-    set_timecode_end(data.timecode_end)
+    $("#timecode_start").val(seconds_to_hh_mm_ss_lll(data.timecode_start))
+    $("#timecode_end").val(seconds_to_hh_mm_ss_lll(data.timecode_end))
+    update_clip_duration()
     $("textarea#title").val(data.title)
 
     $("div.success").html('Le brouillon a été chargé')
