@@ -129,12 +129,12 @@ jQuery(function ($) {
             return
         }
 
-        if ('k' === key && !shiftKey) {
+        if ('i' === key && !shiftKey) {
             set_timecode_start()
             return
         }
 
-        if ('l' === key && !shiftKey) {
+        if ('o' === key && !shiftKey) {
             set_timecode_end()
             return
         }

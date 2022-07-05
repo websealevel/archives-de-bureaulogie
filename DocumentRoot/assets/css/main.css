@@ -14,7 +14,7 @@ textarea {
 	resize: none;
 }
 
-#video-source{
+#video-source {
 	min-width: 1120px;
 }
 
@@ -39,7 +39,7 @@ select {
 .label-input {
 	display: flex;
 	gap: 10px;
-	margin:5px;
+	margin: 5px;
 }
 
 .label-input label {
@@ -50,10 +50,11 @@ select {
 	padding: 20px;
 }
 
-button{
+button {
 	border-radius: 1px;
 }
-.btn-edition{
+
+.btn-edition {
 	margin: 5px 0;
 	font-size: 24px;
 }
@@ -64,7 +65,7 @@ button{
 	margin: 1px
 }
 
-#btn_clip_start{
+#btn_clip_start {
 	margin-left: 30px;
 }
 
@@ -156,7 +157,9 @@ span.shortcut {
 	justify-content: center;
 }
 
-#btn_save_clip_draft, #btn_clip_start, #btn_clip_end{
+#btn_save_clip_draft,
+#btn_clip_start,
+#btn_clip_end {
 	width: 300px;
 }
 
@@ -192,7 +195,7 @@ summary .clip-item-header {
 	width: 80%;
 }
 
-button{
+button {
 	cursor: pointer;
 }
 
@@ -211,15 +214,21 @@ button{
 }
 
 .first-row,
-.second-row, .last-row {
+.second-row,
+.last-row {
 	display: flex;
 	justify-content: flex-start;
 	gap: 3px;
 	margin: 10px;
 }
 
+.second-row .btn-control {
+	height: 80px;
+	width: 80px;
+	font-size: 24px;
+}
 
-.last-row{
+.last-row {
 	justify-content: flex-end;
 }
 

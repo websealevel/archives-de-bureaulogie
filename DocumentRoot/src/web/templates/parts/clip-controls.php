@@ -77,6 +77,15 @@ Sinon, utiliser le bouton 'Finir l'extrait ici' prévu à cet effet">
                 <?php echo htmlentities('--->]'); ?>
             </button>
 
+            <button id="btn_clip_start" class="btn-control" type="button" title="Définir la position courante du curseur de lecture comme timecode de départ de l'extrait" style="<?php echo $color_start; ?>;   ;font-weight:bold;">
+                <span class="shortcut">i</span>
+                <?php echo htmlentities('[débuter l\'extrait ici'); ?>
+            </button>
+
+            <button id="btn_clip_end" class="btn-control" type="button" title="Définir la position courante du curseur de lecture comme timecode de fin de l'extrait" style="<?php echo $color_end; ?>;  ; font-weight:bold;">
+                <span class="shortcut">o</span>
+                <?php echo htmlentities('finir l\'extrait ici]'); ?>
+            </button>
             <button id="btn_play_500ms_before_start" class="btn-control" type="button" title="Visualiser 1.5s avant le timecode de début" style="<?php echo $color_start; ?>;  ">
                 <span class="shortcut">w</span>
                 <?php echo htmlentities('=>['); ?>
@@ -92,15 +101,7 @@ Sinon, utiliser le bouton 'Finir l'extrait ici' prévu à cet effet">
 
 
 
-            <button id="btn_clip_start" class="btn-control" type="button" title="Définir la position courante du curseur de lecture comme timecode de départ de l'extrait" style="<?php echo $color_start; ?>;   ;font-weight:bold;">
-                <span class="shortcut">k</span>
-                <?php echo htmlentities('[débuter l\'extrait ici'); ?>
-            </button>
 
-            <button id="btn_clip_end" class="btn-control" type="button" title="Définir la position courante du curseur de lecture comme timecode de fin de l'extrait" style="<?php echo $color_end; ?>;  ; font-weight:bold;">
-                <span class="shortcut">l</span>
-                <?php echo htmlentities('finir l\'extrait ici]'); ?>
-            </button>
 
         </div>
 
