@@ -96,6 +96,13 @@ function api_markers()
 
             try {
                 $markers = sql_find_markers_on_source_by_account_id($clean['source_name'], $account_id);
+
+                foreach ($markers as $marker) {
+                    $marker['title'] = htmlentities($marker['title'], ENT_QUOTES, 'UTF-8');
+                }
+
+                write_log($markers);
+
                 api_respond_with_success($markers, 'markers');
             } catch (PDOException $e) {
                 error_log($e);
@@ -131,7 +138,7 @@ function api_markers_validate_input($data): array|false
 
     if ('remove' === $clean['action']) {
         if (isset($data['marker_id']) && is_numeric($data['marker_id'])) {
-            $clean['marker_id'] = $data['marker_id'];
+            $clean['marker_id'] = htmlentities($data['marker_id']);
         }
 
         return $clean;
@@ -176,7 +183,7 @@ function api_markers_validate_input($data): array|false
 
     $clean['timecode_end_in_sec'] = $data['timecode_end_in_sec'];
 
-    $clean['title'] = htmlentities($data['title']);
+    $clean['title'] = $data['title'];
 
     return $clean;
 }
