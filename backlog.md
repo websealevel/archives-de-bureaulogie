@@ -31,8 +31,7 @@
     - [Ecran Modération des extraits vidéos](#ecran-modération-des-extraits-vidéos)
     - [Ecran Modération des ressources bibliographiques](#ecran-modération-des-ressources-bibliographiques)
     - [SEO](#seo)
-    - [Core](#core-1)
-    - [A implementer (CLI/CGI)](#a-implementer-clicgi)
+    - [Core (CLI/CGI)](#core-clicgi)
   - [Sécurité](#sécurité)
   - [Features additionnelles](#features-additionnelles)
   - [Comptes twitter](#comptes-twitter)
@@ -302,11 +301,9 @@ A venir...
 - revoir les méta de header pour les mettre a jour SEO [x]
 - adapter les métas pour chaque page []
   
-### Core
+### Core (CLI/CGI)
 
-              
-
-### A implementer (CLI/CGI)
+Partie core de l'application, indépendante de l'appli web
 
 - action_update_clips[ ]
   - generate_clips[x]
