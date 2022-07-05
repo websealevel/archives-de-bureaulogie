@@ -17,9 +17,8 @@ Il sert également de prétexte pour construire un outil en *vanilla php* pour s
       - [Dépendences dev](#dépendences-dev)
       - [Dépendences prod](#dépendences-prod)
       - [Droits](#droits)
-      - [ffmpeg et ffprobe](#ffmpeg-et-ffprobe)
-      - [youtube-dl](#youtube-dl)
-    - [Configuration php-fpm](#configuration-php-fpm)
+      - [ffmpeg, ffprobe et youtube-dl](#ffmpeg-ffprobe-et-youtube-dl)
+    - [Configuration de php-fpm](#configuration-de-php-fpm)
     - [Configuration du virtual host](#configuration-du-virtual-host)
       - [Nginx](#nginx)
       - [Apache](#apache)
@@ -30,7 +29,7 @@ Il sert également de prétexte pour construire un outil en *vanilla php* pour s
       - [Installer les dépendances](#installer-les-dépendances)
         - [environnement de dev](#environnement-de-dev)
         - [environnement de prod](#environnement-de-prod)
-        - [.env](#env)
+        - [le fichier `.env`](#le-fichier-env)
     - [Lancer le projet](#lancer-le-projet)
     - [Arrêter le projet](#arrêter-le-projet)
     - [Core functions (CLI)](#core-functions-cli)
@@ -46,8 +45,6 @@ Il sert également de prétexte pour construire un outil en *vanilla php* pour s
       - [FFMPEG renvoie une erreur `'Encoding Failed'`](#ffmpeg-renvoie-une-erreur-encoding-failed)
   - [Ressources](#ressources)
 
-
-Envie de contribuer au dépôt en proposant un extrait ? [Lisez d'abord ceci](CONTRIBUTING.md). -->
 
 ## A l'intention des utilisateur·trice·s du code
 
@@ -94,8 +91,6 @@ A venir...
 
 #### Dépendences dev
 
-Installer
-
 - [composer](https://getcomposer.org/)
 - [docker](https://www.docker.com/)
 - [docker-compose](https://docs.docker.com/compose/)
@@ -105,8 +100,6 @@ Installer
 
 #### Dépendences prod
 
-Installer
-
 - [composer](https://getcomposer.org/)
 - python
 - php8
@@ -115,7 +108,7 @@ Installer
 
 Vérifier que l'utilisateur qui execute les scripts PHP dispose des droits d'écritures sur les dossiers `extraits` et `sources`.
 
-#### ffmpeg et ffprobe
+#### ffmpeg, ffprobe et youtube-dl
 
 Installer `ffmpeg` et `ffprobe` dans le dossier `DocumentRoot/ffmpeg`
 
@@ -123,15 +116,13 @@ Télécharger les builds static [ici](https://ffmpeg.org/download.html#build-lin
 
 Copier les executables `ffmpeg` et `ffprobe` dans le dossier `DocumentRoot/ffmpeg`.
 
-#### youtube-dl
-
 Installer `youtube-dl` dans le dossier `DocumentRoot/youtube-dl` (youtube-dl a besoin de python3.2+ pour fonctionner).
 
 ~~~bash
 curl -L https://yt-dl.org/downloads/latest/youtube-dl -o youtube-dl
 ~~~
 
-### Configuration php-fpm
+### Configuration de php-fpm
 
 On utilise `php-fpm` qui utilise
 
@@ -242,7 +233,7 @@ composer install
 
 `composer install --no-dev --quiet --optimize-autoloader`
 
-##### .env
+##### le fichier `.env`
 
 La configuration du projet se fait dans un fichier `.env` à la racine de `DocumentRoot`. 
 
@@ -250,7 +241,7 @@ La configuration du projet se fait dans un fichier `.env` à la racine de `Docum
 mv DocumentRoot/.env.dist DocumentRoot/.env
 ~~~
 
-Voici les options par défaut. Surchargez les à votre convenance.
+Voici les options par défaut. Redéfinissez-les selon vos usages.
 
 ```bash
 
