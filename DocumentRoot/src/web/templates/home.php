@@ -17,6 +17,8 @@ require_once __DIR__ . '/../../handlers.php';
 
 ?>
 
+<?php phpinfo(); ?>
+
 <?php present_header(); ?>
 
 <?php if (!is_current_user_logged_in()) : ?>
