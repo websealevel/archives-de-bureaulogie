@@ -35,7 +35,6 @@ require_once __DIR__ . '/../../handlers.php';
 
     <main>
 
-
         <h2>Les archives</h2>
 
         <section>

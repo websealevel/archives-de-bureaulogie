@@ -398,3 +398,4 @@ Cette erreur est envoyée au moment de l'écriture du fichier dans le dossier. I
 - [FFMPEG: filtre loudnorm](http://ffmpeg.org/ffmpeg-all.html#loudnorm), EBU R128 loudness normalization filter.
 - [Audio loudness, Google doc](https://developers.google.com/assistant/tools/audio-loudness), chapitre sur ffmpeg et exemple
 - [Capistrano](https://capistranorb.com/), un outil de déploiement automatique, simple, prédictible et réversible écrit en Ruby
+- [Extension memcached](https://pecl.php.net/package/memcached)

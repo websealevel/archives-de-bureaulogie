@@ -13,7 +13,7 @@ services:
       - web
     volumes:
       - "./DocumentRoot/:/var/www/html"
-      - "./DocumentRoot/php.ini:/usr/local/etc/php/conf.d/php_app.ini"
+      - "./DocumentRoot/env_php/dev/php.ini:/usr/local/etc/php/conf.d/archives.ini"
     labels:
       - "traefik.enable=false"
 
