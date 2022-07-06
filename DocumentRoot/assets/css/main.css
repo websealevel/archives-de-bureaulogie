@@ -240,6 +240,7 @@ nav.footer-links ul {
 	display: flex;
 	justify-content: center;
 	list-style: none;
+	flex-wrap: wrap;
 }
 
 nav.footer-links ul li {
