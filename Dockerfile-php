@@ -2,7 +2,7 @@ FROM php:8-fpm
 
 RUN apt-get update 
 RUN apt-get install -y apt-file && apt-file update
-RUN apt-get install -y htop
+RUN apt-get install -y htop grep
 RUN apt-get install -y zlib1g zlib1g-dev
 
 
