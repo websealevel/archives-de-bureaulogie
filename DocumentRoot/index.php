@@ -13,10 +13,6 @@ require_once './src/web/router/router.php';
 require_once './src/handlers.php';
 
 
-
-phpinfo();
-// exit;
-
 load_env();
 
 if (in_maintenance_mode()) {

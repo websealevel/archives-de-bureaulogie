@@ -68,8 +68,10 @@ function log_in()
 function login_user_session($account)
 {
 
-    if (!isset($_SESSION))
+    if (!isset($_SESSION)) {
         throw new Exception("Aucune session n'est ouverte");
+    }
+
 
     $_SESSION['user_authentificated'] = true;
     $_SESSION['pseudo'] = $account->pseudo;

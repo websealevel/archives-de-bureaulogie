@@ -33,6 +33,7 @@
     - [SEO](#seo)
     - [Core (CLI/CGI)](#core-clicgi)
   - [Sécurité](#sécurité)
+  - [Gestion des sessions](#gestion-des-sessions)
   - [Features additionnelles](#features-additionnelles)
   - [Comptes twitter](#comptes-twitter)
   - [Roadmap](#roadmap)
@@ -352,6 +353,11 @@ Partie core de l'application, indépendante de l'appli web
 - stocker IP quand form soumis pour eventullement la bannir [ ]
 - deplacer les comptes bannis dans une autre table [ ]
 - faire un test de pénétration []
+
+
+## Gestion des sessions
+
+- utiliser memcached ou redis pour optimiser gestion des sessions
 
 ## Features additionnelles
 
