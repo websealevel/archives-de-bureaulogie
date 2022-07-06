@@ -24,7 +24,7 @@ Il sert également de prétexte pour construire un outil en *vanilla php* pour s
       - [Apache](#apache)
     - [Gestion des logs](#gestion-des-logs)
       - [Logs de nginx](#logs-de-nginx)
-      - [Logs de php-fpm](#logs-de-php-fpm)
+      - [Logs de php-fpm (dev)](#logs-de-php-fpm-dev)
     - [Configuration du projet](#configuration-du-projet)
       - [Installer les dépendances](#installer-les-dépendances)
         - [environnement de dev](#environnement-de-dev)
@@ -192,7 +192,7 @@ L'application dispose de plusieurs logs.
 
 Configurés dans `nginx.conf` : `archives.access.log` et `archives.error.log`.
 
-#### Logs de php-fpm
+#### Logs de php-fpm (dev)
 
 Il faut configurer le fichier `$PHP_INI_DIR/php-fpm.d/www.conf` et ajouter
 
@@ -204,8 +204,6 @@ php_admin_flag[log_errors] = on
 ~~~
 
 Créer le fichier `/path/du/log/app.log` et donner donner la permission à php d'écrire dessus `touch /path/du/log/app.log && chmod 666 /path/du/log/app.log`.
-
->php-fpm n'utilise pas la configuration définies dans `php.ini`, utilise `$PHP_INI_DIR/php-fpm.d/www.conf`. Un sujet encore à creuser
 
 ### Configuration du projet
 
