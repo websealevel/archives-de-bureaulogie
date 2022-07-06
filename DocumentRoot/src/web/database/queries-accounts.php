@@ -83,7 +83,7 @@ function sql_find_account_by_pseudo(string $pseudo)
     $sql =
         'SELECT 
         id,pseudo,password 
-        FROM public.accounts 
+        FROM "public"."accounts"
         where pseudo = :pseudo ';
 
     $stmt = $db->prepare($sql);
@@ -129,7 +129,7 @@ function sql_find_role_of_account(string $id): string
 
     $role_id = $result_role_id->role_id;
 
-    $sql_role_name = 'SELECT role FROM roles where role_id = :role_id';
+    $sql_role_name = 'SELECT role FROM public.roles where role_id = :role_id';
     $stmt = $db->prepare($sql_role_name);
     $stmt->bindValue(':role_id', $role_id);
     $stmt->execute();
