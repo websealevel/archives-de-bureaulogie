@@ -29,7 +29,7 @@ function sql_insert_account(string $pseudo, string $password, string $email, str
         throw new Exception(sprintf("Le role %s n'existe pas", $role));
     }
 
-    $sql = 'INSERT INTO accounts(
+    $sql = 'INSERT INTO public.accounts(
             pseudo, 
             password, 
             email, 
@@ -83,7 +83,7 @@ function sql_find_account_by_pseudo(string $pseudo)
     $sql =
         'SELECT 
         id,pseudo,password 
-        FROM accounts 
+        FROM public.accounts 
         where pseudo = :pseudo ';
 
     $stmt = $db->prepare($sql);
@@ -102,7 +102,7 @@ function sql_find_account_by_id(string $id): stdClass|false
 {
 
     $db = connect_to_db();
-    $sql = 'SELECT id, pseudo, password FROM accounts where id = :id';
+    $sql = 'SELECT id, pseudo, password FROM public.accounts where id = :id';
     $stmt = $db->prepare($sql);
     $stmt->bindValue(':id', $id);
     $stmt->execute();
@@ -120,7 +120,7 @@ function sql_find_role_of_account(string $id): string
 
     $db = connect_to_db();
 
-    $sql_role_id = 'SELECT role_id FROM accounts where id = :id';
+    $sql_role_id = 'SELECT role_id FROM public.accounts where id = :id';
     $stmt = $db->prepare($sql_role_id);
     $stmt->bindValue(':id', $id);
     $stmt->execute();

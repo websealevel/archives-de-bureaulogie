@@ -18,7 +18,7 @@ require_once __DIR__ . '/connection.php';
 function sql_find_role_id_by_name(string $role): stdClass
 {
     $db = connect_to_db();
-    $sql = 'SELECT role_id FROM roles where role = :role';
+    $sql = 'SELECT role_id FROM public.roles where role = :role';
     $stmt = $db->prepare($sql);
     $stmt->bindValue(':role', $role);
     $stmt->execute();
@@ -34,7 +34,7 @@ function sql_find_capacity_by_name(string $cap): stdClass
 {
 
     $db = connect_to_db();
-    $sql = 'SELECT cap_id FROM capabilities where cap = :cap';
+    $sql = 'SELECT cap_id FROM public.capabilities where cap = :cap';
     $stmt = $db->prepare($sql);
     $stmt->bindValue(':cap', $cap);
     $stmt->execute();

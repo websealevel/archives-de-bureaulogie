@@ -26,7 +26,7 @@ function sql_insert_marker(string $source_name, int $account_id, float $timecode
 
     $db = connect_to_db();
 
-    $sql = 'INSERT INTO clip_markers(
+    $sql = 'INSERT INTO public.clip_markers(
             source_name, 
             account_id, 
             timecode_start_in_sec,
@@ -68,7 +68,7 @@ function sql_delete_marker(int $account_id, int $marker_id): int
 
     $db = connect_to_db();
 
-    $sql = 'DELETE FROM clip_markers WHERE account_id = :account_id AND id = :marker_id';
+    $sql = 'DELETE FROM public.clip_markers WHERE account_id = :account_id AND id = :marker_id';
 
     $stmt = $db->prepare($sql);
 

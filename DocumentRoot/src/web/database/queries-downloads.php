@@ -25,7 +25,7 @@ function sql_insert_download(DownloadRequest $download_request, string $filename
 {
     $db = connect_to_db();
 
-    $sql = 'INSERT INTO downloads(
+    $sql = 'INSERT INTO public.downloads(
             url, 
             filename, 
             format, 
@@ -67,7 +67,7 @@ function sql_find_pending_download_request_with_same_url(string $url): stdClass|
     $sql =
         'SELECT 
         id
-        FROM downloads 
+        FROM public.downloads 
         where url = :url
         AND
         state = :state ';
@@ -92,7 +92,7 @@ function sql_find_active_downloads(): array|bool
     $sql =
         'SELECT 
         id,url,format,filename,progression,speed
-        FROM downloads 
+        FROM public.downloads 
         WHERE state = :state';
 
     $stmt = $db->prepare($sql);
@@ -114,7 +114,7 @@ function sql_find_all_terminated_downloads(): array|bool
     $sql =
         'SELECT 
         id,url,format,filename,created_on,account_id,state,totaltime
-        FROM downloads 
+        FROM public.downloads 
         where state = :state_1
         OR
         state = :state_2 ';
@@ -138,7 +138,7 @@ function sql_change_download_state(string $download_id, DownloadState $state): i
     $db = connect_to_db();
 
     $sql =
-        'UPDATE downloads 
+        'UPDATE public.downloads 
         SET state = :state
         WHERE id = :id
         ';
@@ -163,7 +163,7 @@ function sql_update_download(PDO $db, string $download_id, ?string $progressTarg
 
     if ($total_time) {
         $sql =
-            'UPDATE downloads
+            'UPDATE public.downloads
     SET 
     progression = :progression,
     speed = :speed,
