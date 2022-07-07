@@ -36,6 +36,7 @@
   - [Gestion des sessions](#gestion-des-sessions)
   - [Features additionnelles](#features-additionnelles)
   - [Comptes twitter](#comptes-twitter)
+  - [Backup](#backup)
   - [Roadmap](#roadmap)
     - [v1.0](#v10)
     - [v2.0](#v20)
@@ -369,6 +370,19 @@ Partie core de l'application, indépendante de l'appli web
 
 - compte [Out of Context ackboo](https://twitter.com/archivesdb_fr) pour les archives vidéos
 - compte pour les références biblios (a venir)
+
+
+## Backup
+
+Un backup du projet web demande donc
+- `extraits.xml`
+- `extraits.dtd`
+- `dump de la base` (comptes)
+
+Un backup du projet core demande seulement
+- `extraits.xml`
+- `extraits.dtd`
+
 
 ## Roadmap
 

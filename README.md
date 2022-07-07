@@ -8,14 +8,12 @@ Il sert également de prétexte pour construire un outil en *vanilla php* pour s
   - [A l'intention des utilisateur·trice·s du code](#a-lintention-des-utilisateurtrices-du-code)
     - [*vanilla PHP first*](#vanilla-php-first)
     - [*XML*](#xml)
-    - [Backup](#backup)
   - [Projet: vue d'ensemble et suivi](#projet-vue-densemble-et-suivi)
   - [Au délà de la bureaulogie, ce qu'est vraiment le codesource du projet](#au-délà-de-la-bureaulogie-ce-quest-vraiment-le-codesource-du-projet)
   - [Forker le projet pour faire son propre outil d'édition/publication d'extraits vidéos](#forker-le-projet-pour-faire-son-propre-outil-déditionpublication-dextraits-vidéos)
   - [*Getting started*](#getting-started)
     - [Prérequis](#prérequis)
-      - [Dépendences dev](#dépendences-dev)
-      - [Dépendences prod](#dépendences-prod)
+      - [Dépendences](#dépendences)
       - [Droits](#droits)
       - [ffmpeg, ffprobe et youtube-dl](#ffmpeg-ffprobe-et-youtube-dl)
     - [Configuration de php-fpm](#configuration-de-php-fpm)
@@ -23,8 +21,6 @@ Il sert également de prétexte pour construire un outil en *vanilla php* pour s
       - [Nginx](#nginx)
       - [Apache](#apache)
     - [Gestion des logs](#gestion-des-logs)
-      - [Logs de nginx](#logs-de-nginx)
-      - [Logs de php-fpm (dev)](#logs-de-php-fpm-dev)
     - [Configuration du projet](#configuration-du-projet)
       - [Installer les dépendances](#installer-les-dépendances)
         - [environnement de dev](#environnement-de-dev)
@@ -62,16 +58,6 @@ Ce projet a été volontairement développé en *vanilla PHP* pour plusieurs rai
 
 Ce projet utilise également un fichier XML qui sert de *registre* pour suivre les sources et les extraits. J'avais envie aussi d'en apprendre plus sur le XML d'où ce choix plutôt que d'utiliser la base de données. L'idée est également de pouvoir reconstituer l'intégrale des archives à partir du fichier source `extraits.xml`. Pour cela, la partie `core` [intègre une partie CLI indépendante de l'application web](#core-functions-cli).
 
-### Backup
-
-Un backup du projet web demande donc
-- `extraits.xml`
-- `extraits.dtd`
-- `dump de la base` (comptes)
-
-Un backup du projet core demande seulement
-- `extraits.xml`
-- `extraits.dtd`
 
 ## [Projet: vue d'ensemble et suivi](backlog.md)
 
@@ -79,7 +65,7 @@ Voir les [spécifications techniques et le backlog du projet](backlog.md).
 
 ## Au délà de la bureaulogie, ce qu'est vraiment le codesource du projet
 
-A venir...
+Ce projet est une plateforme collaborative d'édition vidéo.
 
 ## Forker le projet pour faire son propre outil d'édition/publication d'extraits vidéos
 
@@ -89,18 +75,11 @@ A venir...
 
 ### Prérequis
 
-#### Dépendences dev
+#### Dépendences
 
 - [composer](https://getcomposer.org/)
 - [docker](https://www.docker.com/)
 - [docker-compose](https://docs.docker.com/compose/)
-- python
-- php8
-  
-
-#### Dépendences prod
-
-- [composer](https://getcomposer.org/)
 - python
 - php8
 
@@ -126,11 +105,10 @@ curl -L https://yt-dl.org/downloads/latest/youtube-dl -o youtube-dl
 
 On utilise `php-fpm` qui utilise
 
-- `$PHP_INI_DIR/php.ini` pour *php core*
-- `$PHP_INI_DIR/php-fpm.conf` comme configuration globale de php-fpm
+- `$PHP_INI_DIR/php.ini` pour les process PHP
 - `$PHP_INI_DIR/php-fpm.d/www.conf` pour la configuration de chaque pool de process php
 
-avec ici `$PHP_INI_DIR=/usr/local/etc/php`. 
+avec ici `$PHP_INI_DIR=/usr/local/etc/php/{version}`. 
 
 ### Configuration du virtual host
 
@@ -186,24 +164,7 @@ RewriteRule ^(.*)$ index.php?q=$1 [L,QSA]
 
 ### Gestion des logs
 
-L'application dispose de plusieurs logs.
-
-#### Logs de nginx
-
 Configurés dans `nginx.conf` : `archives.access.log` et `archives.error.log`.
-
-#### Logs de php-fpm (dev)
-
-Il faut configurer le fichier `$PHP_INI_DIR/php-fpm.d/www.conf` et ajouter
-
-~~~ini
-catch_workers_output = yes
-php_flag[display_errors] = on
-php_admin_value[error_log] = /path/du/log/app.log
-php_admin_flag[log_errors] = on
-~~~
-
-Créer le fichier `/path/du/log/app.log` et donner donner la permission à php d'écrire dessus `touch /path/du/log/app.log && chmod 666 /path/du/log/app.log`.
 
 ### Configuration du projet
 
