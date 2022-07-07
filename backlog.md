@@ -33,9 +33,20 @@
     - [SEO](#seo)
     - [Core (CLI/CGI)](#core-clicgi)
   - [Sécurité](#sécurité)
+  - [Performances](#performances)
   - [Gestion des sessions](#gestion-des-sessions)
   - [Features additionnelles](#features-additionnelles)
   - [Comptes twitter](#comptes-twitter)
+  - [Référence biblio](#référence-biblio)
+    - [Livre](#livre)
+    - [Podcasts](#podcasts)
+    - [Film](#film)
+    - [Série](#série)
+    - [Artiste](#artiste)
+    - [Chaine youtube](#chaine-youtube)
+    - [Auteure (a asocier aux livres)](#auteure-a-asocier-aux-livres)
+    - [Editeurs (a associer aux libres)](#editeurs-a-associer-aux-libres)
+    - [Article scientifiques](#article-scientifiques)
   - [Backup](#backup)
   - [Roadmap](#roadmap)
     - [v1.0](#v10)
@@ -356,6 +367,14 @@ Partie core de l'application, indépendante de l'appli web
 - faire un test de pénétration []
 
 
+
+## Performances
+
+- remplacer mp4 par webm
+- utiliser directement la source url youtube au lieu de l'url de la video sur le serveur []
+- creer une vidéo temporaire webm de moindre qualité a servir pour l'édition d'extrait (ce sera plus performeant) (mais garder la vidéo originale de bonne qualité)
+
+
 ## Gestion des sessions
 
 - utiliser memcached ou redis pour optimiser gestion des sessions
@@ -371,6 +390,67 @@ Partie core de l'application, indépendante de l'appli web
 - compte [Out of Context ackboo](https://twitter.com/archivesdb_fr) pour les archives vidéos
 - compte pour les références biblios (a venir)
 
+
+## Référence biblio 
+
+- id*
+  
+### Livre
+
+- titre*
+- editeur
+- ISBN
+- auteur(e)s*
+- année de publication
+- nombre de pages
+- langue
+
+### Podcasts
+
+- nom série*
+- nom radio
+- nom animateur
+
+### Film
+
+- nom du film*
+- realisateur
+- année de production*
+- producteur
+
+### Série
+
+- nom de la série*
+- réalisateur
+- nb de saisons 
+- année de production*
+- nb d'épisodes
+
+### Artiste
+
+- nom*
+- domaine (groupe, musicien solo, danceur, architecte, etc.)*
+
+### Chaine youtube
+
+- nom*
+
+### Auteure (a asocier aux livres)
+
+- prenom
+- nom auteur
+
+### Editeurs (a associer aux libres)
+
+- nom maison d'édition
+
+### Article scientifiques
+
+- nom journal
+- numero
+- nom article
+- auteurs
+- année
 
 ## Backup
 
