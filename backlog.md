@@ -47,6 +47,8 @@
     - [Auteure (a asocier aux livres)](#auteure-a-asocier-aux-livres)
     - [Editeurs (a associer aux libres)](#editeurs-a-associer-aux-libres)
     - [Article scientifiques](#article-scientifiques)
+  - [Magazine/Journal](#magazinejournal)
+  - [Critique](#critique)
   - [Backup](#backup)
   - [Roadmap](#roadmap)
     - [v1.0](#v10)
@@ -394,16 +396,19 @@ Partie core de l'application, indépendante de l'appli web
 ## Référence biblio 
 
 - id*
+- image
   
 ### Livre
 
 - titre*
 - editeur
 - ISBN
-- auteur(e)s*
+- auteur(e)s* (1-N)
 - année de publication
 - nombre de pages
 - langue
+- 4eme de couverture (résumé)
+- critiques (1-N)
 
 ### Podcasts
 
@@ -451,6 +456,15 @@ Partie core de l'application, indépendante de l'appli web
 - nom article
 - auteurs
 - année
+
+## Magazine/Journal
+
+- nom
+- année de création
+
+## Critique
+
+- auteur (fk auteur)
 
 ## Backup
 
