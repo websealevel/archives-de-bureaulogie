@@ -86,7 +86,7 @@ Sinon, utiliser le bouton 'Finir l'extrait ici' prévu à cet effet">
                 <span class="shortcut">o</span>
                 <?php echo htmlentities('finir l\'extrait ici]'); ?>
             </button>
-            <button id="btn_play_500ms_before_start" class="btn-control" type="button" title="Visualiser 1.5s avant le timecode de début" style="<?php echo $color_start; ?>;  ">
+            <button id="btn_play_500ms_before_start" class="btn-control" type="button" title="Visualiser 2s avant le timecode de début" style="<?php echo $color_start; ?>;  ">
                 <span class="shortcut">w</span>
                 <?php echo htmlentities('=>['); ?>
             </button>
@@ -94,7 +94,7 @@ Sinon, utiliser le bouton 'Finir l'extrait ici' prévu à cet effet">
                 <span class="shortcut">p</span>
                 <?php echo htmlentities('[play]'); ?>
             </button>
-            <button id="btn_play_500ms_after_end" class="btn-control" type="button" title="Visualiser 1.5s après le timecode de fin">
+            <button id="btn_play_500ms_after_end" class="btn-control" type="button" title="Visualiser 2s après le timecode de fin">
                 <span class="shortcut">x</span>
                 <?php echo htmlentities(']=>'); ?>
             </button>

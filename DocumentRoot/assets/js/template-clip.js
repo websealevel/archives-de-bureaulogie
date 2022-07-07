@@ -226,7 +226,7 @@ function init_on_landing() {
 
 }
 
-function preview_before_start(tail_duration_in_sec = 1.5) {
+function preview_before_start(tail_duration_in_sec = 2) {
     //Decocher la loop si cochée (sinon bug)
     $('#checkbox_loop_preview').prop('checked', false)
 
@@ -247,7 +247,7 @@ function preview_before_start(tail_duration_in_sec = 1.5) {
     playvideo()
 }
 
-function preview_after_end(tail_duration_in_sec = 1.5) {
+function preview_after_end(tail_duration_in_sec = 2) {
 
     //Decocher la loop si cochée (sinon bug)
     $('#checkbox_loop_preview').prop('checked', false)
