@@ -241,7 +241,7 @@ function preview_before_start(tail_duration_in_sec = 2) {
     if (timecode_start_in_sec_delay < 0)
         return
 
-    const src_timecodes = source_url + `#t=${timecode_start_in_sec_delay},${timecode_start}`
+    const src_timecodes = source_url + `#t=${timecode_start_in_sec_delay},${timecode_start_in_sec}`
 
     $("#video-source").prop('src', src_timecodes)
     playvideo()
@@ -255,7 +255,7 @@ function preview_after_end(tail_duration_in_sec = 2) {
     const timecode_end = $("#timecode_end").val()
 
     const timecode_start_in_sec = hh_mm_ss_lll_to_seconds(timecode_end)
-    const timecode_end_in_sec = parseInt(timecode_start_in_sec) + tail_duration_in_sec
+    const timecode_end_in_sec = timecode_start_in_sec + tail_duration_in_sec
 
     const src_timecodes = current_source() + `#t=${timecode_start_in_sec},${timecode_end_in_sec}`
     $("#video-source").prop('src', src_timecodes)
