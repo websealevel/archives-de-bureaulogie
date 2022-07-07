@@ -32,7 +32,7 @@ CREATE TABLE clip_markers (
     -- le nom de fichier de la source
     source_name VARCHAR (255) NOT NULL,
     account_id INT NOT NULL,
-    timecode_start_in_sec float ,
+    timecode_start_in_sec float,
     timecode_end_in_sec float,
     title VARCHAR (255) NOT NULL,
     -- le partager avec les autres ou non (par défaut faux)
@@ -68,6 +68,78 @@ CREATE TABLE downloads (
     -- pending, downloading, downloaded, failed
     created_on TIMESTAMP NOT NULL,
     CONSTRAINT fk_account FOREIGN KEY (account_id) REFERENCES accounts(id)
+);
+
+--reference biblio
+CREATE TABLE reference (
+    --commun a toutes les refs
+    id serial PRIMARY KEY,
+    title VARCHAR(300) NOT NULL,
+    reference_type_id INT NOT NULL,
+    CONSTRAINT fk_type FOREIGN KEY (reference_type_id) REFERENCES reference_type(id),
+    path_cover VARCHAR(255) NOT NULL,
+    -- champs livre
+    editor_id INT NOT NULL,
+    CONSTRAINT fk_editor FOREIGN KEY (editor_id) REFERENCES editor(id),
+    ISBN INT,
+    year_of_publication TIMESTAMP,
+    nb_pages INT,
+    back_cover VARCHAR(500),
+    -- site web
+    url VARCHAR(300),
+    -- podcast
+    show_name VARCHAR(250),
+    radio_name VARCHAR(250) -- film
+    director_name VARCHAR(250),
+    year_of_production VARCHAR(250),
+    produceur_name VARCHAR(250),
+    -- serie
+    nb_seasons INT NOT NULL,
+    nb_episodes INT,
+    -- chaine YT
+    year_of_creation TIMESTAMP NOT NULL,
+    nb_followers INT,
+    --article scientifique
+    journal_name VARCHAR(250) NOT NULL,
+    volume INT NOT NULL,
+    --magazine, journal
+);
+
+-- l'éditeur d'une reference
+CREATE TABLE editor(id serial PRIMARY KEY);
+
+CREATE TABLE author(
+    id serial PRIMARY KEY,
+    first_name VARCHAR(200) NOT NULL,
+    last_name VARCHAR(200) NOT NULL,
+    biography VARCHAR(800)
+);
+
+-- journal, magazine
+CREATE TABLE journal(
+    id serial PRIMARY KEY,
+    name VARCHAR(250) NOT NULL,
+    year_of_creation INT NOT NULL
+);
+
+-- critique (table de jointure)
+-- Contrainte a écrire: il faut journal_id ou author_id mais pas les deux
+--                              PK (author_id ou reference_id, year_of_publication, reference_id)
+CREATE TABLE critics(
+    author_id INT,
+    journal_id INT,
+    reference_id INT NOT NULL,
+    CONSTRAINT fk_author FOREIGN KEY (author_id) REFERENCES author(id),
+    CONSTRAINT fk_journal FOREIGN KEY (journal_id) REFERENCES journal(id),
+    CONSTRAINT fk_reference FOREIGN KEY (reference_id) REFERENCES reference(id),
+    text VARCHAR(800) NOT NULL,
+    year_of_publication TIMESTAMP NOT NULL,
+);
+
+-- le type de reference
+CREATE TABLE reference_type(
+    id serial PRIMARY KEY,
+    name VARCHAR(200) NOT NULL,
 );
 
 -- Inserer les roles.
@@ -231,7 +303,6 @@ VALUES
 --   - proposer une ressource biblio
 --   - voir ses extraits vidéos par source
 --   - voir ses ressources biblios
-
 INSERT INTO
     roles_capabilities(role_id, cap_id)
 VALUES
@@ -261,4 +332,3 @@ VALUES
     (1, 17),
     (1, 18),
     (1, 19);
-

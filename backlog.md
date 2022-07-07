@@ -39,15 +39,16 @@
   - [Comptes twitter](#comptes-twitter)
   - [Référence biblio](#référence-biblio)
     - [Livre](#livre)
+    - [Site web](#site-web)
     - [Podcasts](#podcasts)
     - [Film](#film)
     - [Série](#série)
     - [Artiste](#artiste)
     - [Chaine youtube](#chaine-youtube)
-    - [Auteure (a asocier aux livres)](#auteure-a-asocier-aux-livres)
-    - [Editeurs (a associer aux libres)](#editeurs-a-associer-aux-libres)
     - [Article scientifiques](#article-scientifiques)
   - [Magazine/Journal](#magazinejournal)
+    - [Auteure (a asocier aux livres)](#auteure-a-asocier-aux-livres)
+    - [Editeurs (a associer aux libres)](#editeurs-a-associer-aux-libres)
   - [Critique](#critique)
   - [Backup](#backup)
   - [Roadmap](#roadmap)
@@ -397,6 +398,7 @@ Partie core de l'application, indépendante de l'appli web
 
 - id*
 - image
+- type : livre, siteweb,podcast,film,serie,chaine YT,article,magazine,journal
   
 ### Livre
 
@@ -406,9 +408,12 @@ Partie core de l'application, indépendante de l'appli web
 - auteur(e)s* (1-N)
 - année de publication
 - nombre de pages
-- langue
 - 4eme de couverture (résumé)
 - critiques (1-N)
+
+### Site web
+
+- nom du site
 
 ### Podcasts
 
@@ -440,6 +445,19 @@ Partie core de l'application, indépendante de l'appli web
 
 - nom*
 
+### Article scientifiques
+
+- nom journal
+- numero
+- nom article
+- auteurs 1-N
+- année
+
+## Magazine/Journal
+
+- nom
+- année de création
+
 ### Auteure (a asocier aux livres)
 
 - prenom
@@ -448,19 +466,6 @@ Partie core de l'application, indépendante de l'appli web
 ### Editeurs (a associer aux libres)
 
 - nom maison d'édition
-
-### Article scientifiques
-
-- nom journal
-- numero
-- nom article
-- auteurs
-- année
-
-## Magazine/Journal
-
-- nom
-- année de création
 
 ## Critique
 
