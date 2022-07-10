@@ -145,7 +145,7 @@ function are_timecodes_valid_core(string $start, string $end, string $source): b
     }
 
     if (!are_timecodes_within_bounds($start, $end, $source)) {
-        throw new Exception("L'extrait doit faire au moins 1 seconde et au plus 2min20s. Les timecodes doivent être compatible avec la durée de la vidéo source. Veuillez corriger les timecodes s'il vous plaît.");
+        throw new Exception("L'extrait doit faire au moins 1 seconde et au plus 2min20s. Les timecodes doivent également être compatible avec la durée de la vidéo source. Veuillez corriger les timecodes s'il vous plaît.");
     }
 
     return true;
@@ -182,6 +182,8 @@ function are_timecodes_within_bounds(string $start, string $end, string $file_so
 
     $path_file_source = PATH_SOURCES . '/' . $file_source;
 
+    write_log($path_file_source);
+
     //Validate media file
     $ffprobe = FFMpeg\FFProbe::create(array(
         'ffprobe.binaries' => from_env('PATH_BIN_FFPROBE'),
@@ -193,10 +195,16 @@ function are_timecodes_within_bounds(string $start, string $end, string $file_so
         ->first()
         ->get('duration');
 
+
+    write_log(array($start,$end));
+
     $start_in_seconds = timecode_to_seconds($start);
     $end_in_seconds = timecode_to_seconds($end);
 
-    $clip_duration = timecode_to_seconds($end) - timecode_to_seconds($start);
+    write_log(array($start_in_seconds,$end_in_seconds, $source_duration_in_seconds));
+
+
+    $clip_duration = $end_in_seconds - $start_in_seconds;
 
     return
         $start_in_seconds >= 0 &&
