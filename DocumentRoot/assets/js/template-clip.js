@@ -775,10 +775,6 @@ function post_clip() {
         PHPSESSID: PHPSESSID
     }
 
-    // const data = $('form#form-clip-source').serialize() + '&PHPSESSID=' + PHPSESSID
-
-    console.log(data)
-
     $.post('/api/v1/clip-source', data).done(function (response) {
 
         //Si le formulaire est rejeté on récupere les erreurs et on les affiche
