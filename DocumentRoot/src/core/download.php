@@ -137,10 +137,12 @@ function youtube_dl_download_format(): string
     //Si on combine video et audio avec le '+', youtube-dl télécharge deux fichiers puis ffmpeg fusionne les deux fichiers ensuite dans un format container (mp4 si compatibles ou mkv si les deux formats ne le sont pas).
     //Note : le format m4e est équivalent au format mp4 pour un fichier audio.
 
+    //Les formats codes s'otbtiennetn listant les formats youtube-dl -F URL
     //format code video webm 720p
     $format_code_video_mp4 = '136';
     //format code audio webm 48000khz
     $format_code_audio_m4a = '140';
+
 
     // $format = sprintf(
     //     "bestvideo[height<=%s][tbr<%s][ext=%s]+bestaudio[ext=%s][asr <= %s]/best",
@@ -152,6 +154,8 @@ function youtube_dl_download_format(): string
     //     ENCODING_OPTION_AUDIO_SAMPLING_RATE
     // );
 
+    //Pour format webm, les formats donnent 247+249
+    //Pour format mp4, les formats donnent 136+140
     $format = sprintf("%s+%s", $format_code_video_mp4, $format_code_audio_m4a);
 
     return $format;
