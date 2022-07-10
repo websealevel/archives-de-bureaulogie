@@ -101,8 +101,6 @@ function api_markers()
                     $marker['title'] = htmlentities($marker['title'], ENT_QUOTES, 'UTF-8');
                 }
 
-                write_log($markers);
-
                 api_respond_with_success($markers, 'markers');
             } catch (PDOException $e) {
                 error_log($e);

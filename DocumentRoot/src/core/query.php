@@ -185,7 +185,6 @@ function declare_clip(string $source_name, string $timecode_start, string $timec
             throw new Exception("L'extrait n'a pas pu être réalisé car ses métadonnées ne nous autorisent pas à l'enregistrer dans nos archives.");
         }
     } catch (Exception $e) {
-        write_log($e);
         throw new Exception("L'extrait n'a pas pu être réalisé car ses métadonnées ne nous autorisent pas à l'enregistrer dans nos archives.");
     }
 

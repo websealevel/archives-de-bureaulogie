@@ -182,27 +182,17 @@ function are_timecodes_within_bounds(string $start, string $end, string $file_so
 
     $path_file_source = PATH_SOURCES . '/' . $file_source;
 
-    write_log($path_file_source);
-
     //Validate media file
     $ffprobe = FFMpeg\FFProbe::create(array(
         'ffprobe.binaries' => from_env('PATH_BIN_FFPROBE'),
     ));;
 
     $source_duration_in_seconds = $ffprobe
-        ->streams($path_file_source)
-        ->videos()
-        ->first()
+        ->format($path_file_source)
         ->get('duration');
-
-
-    write_log(array($start,$end));
 
     $start_in_seconds = timecode_to_seconds($start);
     $end_in_seconds = timecode_to_seconds($end);
-
-    write_log(array($start_in_seconds,$end_in_seconds, $source_duration_in_seconds));
-
 
     $clip_duration = $end_in_seconds - $start_in_seconds;
 
