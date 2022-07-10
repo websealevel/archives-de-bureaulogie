@@ -764,7 +764,20 @@ function post_clip() {
     $("#btn-submit-clip").prop("disabled", true)
     window.requestAnimationFrame(spinner_ascii.step);
 
-    const data = $('form#form-clip-source').serialize() + '&PHPSESSID=' + PHPSESSID
+
+    const data = {
+        timecode_start: $("#timecode_start").val(),
+        timecode_end: $("#timecode_end").val(),
+        title: $("#title").val(),
+        description: $("#description").val(),
+        token: $("#token").val(),
+        source_name: $("#sources").find('option:selected').attr("id"),
+        PHPSESSID: PHPSESSID
+    }
+
+    // const data = $('form#form-clip-source').serialize() + '&PHPSESSID=' + PHPSESSID
+
+    console.log(data)
 
     $.post('/api/v1/clip-source', data).done(function (response) {
 
