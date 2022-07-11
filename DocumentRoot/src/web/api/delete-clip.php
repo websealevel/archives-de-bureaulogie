@@ -9,15 +9,11 @@
  */
 
 
-function api_delete_clip(){
+function api_delete_clip()
+{
 
 
     load_env();
-
-    write_log($_POST);
-
-    //Verifier: login, user_can, token, extrait existe (ainsi que sa source), email donné correspond à l'email de l'utilisateur en session (aka l'extrait lui appartient)
-
 
     //Authentifier l'utilisateur+autorization
     if (!current_user_can('remove_clip')) {
@@ -39,17 +35,15 @@ function api_delete_clip(){
         api_respond_with_error($invalid_inputs);
     }
 
-
-
     write_log('so far so good...');
-
 }
 
 
 /**
  * Valide le formulaire de suppression d'extrait. L'extrait doit être déclaré (ainsi que sa source) et appartenir à l'utilisateur (email de l'extrait match l'email en session de l'utilisateur connecté)
  */
-function check_delete_clip_form(){
+function check_delete_clip_form()
+{
 
     //Extrait existe
     //Email correspond à celui en session
@@ -67,14 +61,13 @@ function check_delete_clip_form(){
                 $path_parts = pathinfo($clip_name);
                 $basename = $path_parts['basename'];
 
-                if(!clip_has_valid_filename_format($basename)){
+                if (!clip_has_valid_filename_format($basename)) {
                     return new InputValidation('clip_name', $clip_name, "Le nom du clip à supprimer est invalide");
                 }
 
+                //Clip déclaré
                 $metadata = extract_metadata_from_clip_name($basename);
-
-               //Clip déclaré
-                if(!is_clip_already_declared($metadata['source'],$metadata['timecode_start'], $metadata['timecode_end'])){
+                if (!is_clip_already_declared($metadata['source_name'], $metadata['timecode_start'], $metadata['timecode_end'])) {
                     return new InputValidation('clip_name', $clip_name, "Impossible de supprimer l'extrait car il n'est pas déclaré.");
                 }
 
@@ -88,9 +81,8 @@ function check_delete_clip_form(){
             function (string $author_email): InputValidation {
 
                 //Non vide.
-                if (!isset($author_email) || empty($author_email))
+                if (!isset($author_email) || empty($author_email) || !filter_var($author_email, FILTER_VALIDATE_EMAIL))
                     return new InputValidation('author_email', $author_email, "Renseignez l'email de l'auteur du clip à supprimer");
-
 
                 //Email match email de l'utilisateur en session
 
@@ -100,5 +92,4 @@ function check_delete_clip_form(){
     );
 
     return validate_posted_form($form_inputs);
-
 }

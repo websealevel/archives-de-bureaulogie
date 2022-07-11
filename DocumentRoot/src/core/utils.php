@@ -180,7 +180,7 @@ function extract_metadata_from_clip_name(string $clipname):array{
         throw new Exception("Impossible d'extrait les informations du nom du clip car il est vide");
     }
 
-    $result['source'] = substr($clipname, 0,  strpos($clipname, '--from'));
+    $result['source_name'] = substr($clipname, 0,  strpos($clipname, '--from')) . '.' . EXTENSION_SOURCE;
     $result['timecode_start'] = substr($clipname,  strpos($clipname, '--from-') + strlen('--from-'), 12);
     $result['timecode_end'] = substr($clipname,  strpos($clipname, '-to-') + strlen('-to-'), 12);
 
