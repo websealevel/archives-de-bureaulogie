@@ -14,6 +14,8 @@ function api_delete_clip(){
 
     load_env();
 
+    write_log($_POST);
+
     //Verifier: login, user_can, token, extrait existe (ainsi que sa source), email donné correspond à l'email de l'utilisateur en session (aka l'extrait lui appartient)
 
 
@@ -52,7 +54,37 @@ function check_delete_clip_form(){
     //Extrait existe
     //Email correspond à celui en session
     $form_inputs = array(
+        new FormInput(
+            'clip_name',
+            filter_input(INPUT_POST, 'clip_name'),
+            function (string $clip_name): InputValidation {
 
+                //Non vide.
+                if (!isset($clip_name) || empty($clip_name))
+                    return new InputValidation('clip_name', $clip_name, "Renseignez un nom d'extrait à supprimer");
+
+
+                //Clip déclaré
+
+                return new InputValidation('clip_name', $clip_name, '', InputStatus::Valid);
+            }
+        ),
+
+        new FormInput(
+            'author_email',
+            filter_input(INPUT_POST, 'author_email'),
+            function (string $author_email): InputValidation {
+
+                //Non vide.
+                if (!isset($author_email) || empty($author_email))
+                    return new InputValidation('author_email', $author_email, "Renseignez l'email de l'auteur du clip à supprimer");
+
+
+                //Email match email de l'utilisateur en session
+
+                return new InputValidation('clip_name', $author_email, '', InputStatus::Valid);
+            }
+        ),
     );
 
     return validate_posted_form($form_inputs);

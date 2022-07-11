@@ -923,6 +923,8 @@ function delete_clip(clip) {
     //Envoyer: name de l'extrait (contient les timecodes, nom de la source), l'email de l'utilisateur
 
     $.post('/api/v1/delete-clip', {
+        author_email: 'foo@bar.com',
+        clip_name: 'foobar',
         token: $("#token_delete_clip").val(),
         source_name: $("#sources").find('option:selected').attr("id"),
         PHPSESSID: PHPSESSID
