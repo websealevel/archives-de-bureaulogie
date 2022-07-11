@@ -1,29 +1,23 @@
-jQuery(function ($) {
-
-    /**
+/**
      * Variable globale : url de la vidéo source en cours d'édition
      */
-    var source_url
-    /**
-     * Variable globale : le player youtube
-     */
-    var youtube_player;
+var source_url
+/**
+ * Variable globale : le player youtube
+ */
+var youtube_player;
 
-    /**
-     * Variable globale : états divers liés à la preview,loop
-     */
-    var state;
+/**
+ * Variable globale : états divers liés à la preview,loop
+ */
+const state = {
+    tail: 3,
+    preview: ''
+};
+
+jQuery(function ($) {
 
     init_on_landing()
-
-    /**
-     * Timer
-     */
-    $("#video-source").on('timeupdate', function () {
-        const timecode_seconds = $("#video-source").prop("currentTime")
-        const hh_mm_ss_lll = seconds_to_hh_mm_ss_lll(timecode_seconds)
-        $("#current-time").html(hh_mm_ss_lll)
-    })
 
     /**
      * Evenement quand le select de source change
@@ -76,11 +70,11 @@ jQuery(function ($) {
     })
 
     $("#btn_play_500ms_before_start").click(function () {
-        preview_before_start()
+        preview_before_start(state.tail)
     })
 
     $("#btn_play_500ms_after_end").click(function () {
-        preview_after_end()
+        preview_after_end(state.tail)
     })
 
     $("#btn_save_clip_draft").click(function () {
@@ -160,11 +154,11 @@ jQuery(function ($) {
         }
 
         if ('w' === key && !shiftKey) {
-            preview_before_start()
+            preview_before_start(state.tail)
             return
         }
         if ('x' === key && !shiftKey) {
-            preview_after_end()
+            preview_after_end(state.tail)
             return
         }
     })
@@ -245,7 +239,7 @@ function init_youtube_player(video_id) {
 
     first_script_tag.parentNode.insertBefore(tag, first_script_tag);
 
-    window.onYouTubeIframeAPIReady = function () {
+    onYouTubeIframeAPIReady = function () {
 
         youtube_player = new YT.Player('youtube-player',
             {
@@ -255,8 +249,8 @@ function init_youtube_player(video_id) {
                 playerVars: {
                     'autohide': 0,
                     'cc_load_policy': 0,
-                    'controls': 2,
-                    'disablekb': 0,
+                    'controls': 3,
+                    'disablekb': 1,
                     'iv_load_policy': 3,
                     'modestbranding': 1,
                     'rel': 0,
@@ -264,25 +258,25 @@ function init_youtube_player(video_id) {
                     'showinfo': 0
                 },
                 events: {
-                    'onError': onError,
-                    'onReady': onReady,
+                    'onError': function () {
+
+                    },
+                    'onReady': function () {
+
+                    },
                     'onStateChange': onStateChange
                 }
-            });
+            })
 
-        // Add private data to the YouTube object
-        youtube_player.personalPlayer = {
-            'currentTimeSliding': false,
-            'errors': []
-        };
+        setInterval(function () {
+            if (youtube_player.hasOwnProperty('getPlayerState')) {
+                const timecode_seconds = youtube_player.getCurrentTime()
+                const hh_mm_ss_lll = seconds_to_hh_mm_ss_lll(timecode_seconds)
+                $("#current-time").html(hh_mm_ss_lll)
+            }
+
+        }, 500);
     }
-}
-
-function onError() {
-    console.log('Error')
-}
-
-function onReady() {
 }
 
 /**
@@ -332,7 +326,7 @@ function youtube_video_id(url) {
  * @param {int} tail_duration_in_sec 
  * @returns 
  */
-function start_end_seconds_before(tail_duration_in_sec = 2) {
+function start_end_seconds_before(tail_duration_in_sec) {
 
     const timecode_start = $("#timecode_start").val()
 
@@ -351,7 +345,7 @@ function start_end_seconds_before(tail_duration_in_sec = 2) {
  * @param {int} tail_duration_in_sec 
  * @returns 
  */
-function start_end_seconds_after(tail_duration_in_sec = 2) {
+function start_end_seconds_after(tail_duration_in_sec) {
 
     const timecode_start = $("#timecode_end").val()
 
@@ -366,22 +360,56 @@ function start_end_seconds_after(tail_duration_in_sec = 2) {
 }
 
 
-function onStateChange(state) {
-    if (state.data === YT.PlayerState.ENDED) {
-        const start_end = start_end_seconds_before(tail_duration_in_sec)
-        youtube_player.seekTo(start_end.start);
+
+function onStateChange(event) {
+
+
+
+    if (event.data === YT.PlayerState.ENDED) {
+
+        if (state.preview && state.preview === 'before_start') {
+            const start_end = start_end_seconds_before(state.tail)
+            youtube_player.seekTo(start_end.start)
+            youtube_player.pauseVideo()
+            state.preview = ''
+            return
+        }
+
+        if (state.preview && state.preview === 'after_end') {
+            const start_end = start_end_seconds_after(state.tail)
+            youtube_player.seekTo(start_end.start)
+            youtube_player.pauseVideo()
+            state.preview = ''
+            return
+        }
+
+        if (state.preview && state.preview === 'preview_clip') {
+
+            if (state.loop) {
+                goto_and_play_start()
+                return
+            }
+
+            youtube_player.pauseVideo()
+            state.preview = ''
+            return
+        }
+
+
     }
 }
 
-function preview_before_start(tail_duration_in_sec = 2) {
+function preview_before_start(tail_duration_in_sec) {
     //Decocher la loop si cochée (sinon bug)
     $('#checkbox_loop_preview').prop('checked', false)
 
-    const start_end = start_end_seconds(tail_duration_in_sec)
+    const start_end = start_end_seconds_before(tail_duration_in_sec)
 
-    console.log(start_end)
     if (start_end.start < 0)
         return
+
+    state.preview = 'before_start'
+    state.loop = false
 
     youtube_player.loadVideoById({
         videoId: youtube_video_id(source_url),
@@ -392,12 +420,15 @@ function preview_before_start(tail_duration_in_sec = 2) {
     playvideo()
 }
 
-function preview_after_end(tail_duration_in_sec = 2) {
+function preview_after_end(tail_duration_in_sec) {
 
     //Decocher la loop si cochée (sinon bug)
     $('#checkbox_loop_preview').prop('checked', false)
 
     const start_end = start_end_seconds_after(tail_duration_in_sec)
+
+    state.preview = 'after_end'
+    state.loop = false
 
     youtube_player.loadVideoById({
         videoId: youtube_video_id(source_url),
@@ -465,9 +496,14 @@ function play_pause_preview() {
     const timecode_start_in_sec = hh_mm_ss_lll_to_seconds(timecode_start)
     const timecode_end_in_sec = hh_mm_ss_lll_to_seconds(timecode_end)
 
-    /**
-     * Gestion de l'option de loop.
-     */
+    state.preview = 'preview_clip'
+    state.loop = $("#checkbox_loop_preview").prop('checked')
+
+    youtube_player.loadVideoById({
+        videoId: youtube_video_id(source_url),
+        startSeconds: timecode_start_in_sec,
+        endSeconds: timecode_end_in_sec
+    })
 
     play_pause()
 }
@@ -606,12 +642,16 @@ function marker_markup(uid, timecode_start, timecode_end, title, class_btn_delet
 }
 
 
+function currentTime() {
+    return youtube_player.getCurrentTime()
+}
+
 
 /**
  * Met à jour le timecode de départ avec le temps courant du player video source
  */
 function set_timecode_start(start_in_sec) {
-    const timecode_seconds = youtube_player.getCurrentTime()
+    const timecode_seconds = currentTime()
     const hh_mm_ss_lll = seconds_to_hh_mm_ss_lll(timecode_seconds)
     $("#timecode_start").val(hh_mm_ss_lll)
     update_clip_duration()
@@ -621,7 +661,7 @@ function set_timecode_start(start_in_sec) {
 * Met à jour le timecode de fin avec le temps courant du player video source
 */
 function set_timecode_end() {
-    const timecode_seconds = youtube_player.getCurrentTime()
+    const timecode_seconds = currentTime()
     const hh_mm_ss_lll = seconds_to_hh_mm_ss_lll(timecode_seconds)
     $("#timecode_end").val(hh_mm_ss_lll)
     update_clip_duration()
@@ -640,7 +680,7 @@ function update_clip_duration() {
     const duration = seconds_to_hh_mm_ss_lll(duration_in_s)
 
     if (duration_in_s < 0) {
-        $("#clip-duration").html('valeur incorrecte')
+        $("#clip-duration").html('?')
         $("#clip-duration").removeClass('valid')
         $("#clip-duration").addClass('error')
         return
@@ -729,6 +769,8 @@ function post_clip() {
         PHPSESSID: PHPSESSID
     }
 
+    console.log(data)
+
     $.post('/api/v1/clip-source', data).done(function (response) {
 
         //Si le formulaire est rejeté on récupere les erreurs et on les affiche
@@ -770,6 +812,9 @@ function save_clip_draft() {
     const timecode_start_in_sec = hh_mm_ss_lll_to_seconds(timecode_start)
     const timecode_end_in_sec = hh_mm_ss_lll_to_seconds(timecode_end)
     const title = $("textarea#title").val()
+
+
+    console.log(current_source())
 
     //Envoyer une requete pour ajouter le marqueur.
     $.post('/api/v1/markers', {

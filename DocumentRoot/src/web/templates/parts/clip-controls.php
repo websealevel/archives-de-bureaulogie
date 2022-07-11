@@ -50,6 +50,9 @@ Sinon, utiliser le bouton 'Finir l'extrait ici' prévu à cet effet">
                 <div id="clip-duration">
                     0
                 </div>
+                <div id="current-time">
+                    0
+                </div>
             </fieldset>
 
 
