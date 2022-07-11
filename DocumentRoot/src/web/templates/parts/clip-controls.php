@@ -13,11 +13,12 @@ $color_end = '';
     <small>Conseil : pour masquer les vidéos recommandées lorsque la vidéo est mise en pause, installer l'extension <a href="https://addons.mozilla.org/en-US/firefox/addon/ublock-origin/">uBlock Origin</a>. Aller dans les <em>Settings</em> de l'extension, puis <em>My filters</em> et ajouter la règle suivante <code>youtube.com##.ytp-pause-overlay</code>. Appliquer les cahngements puis rechargez la page.</small>
     </p>
 
-
+    <div id="current-time">
+                    0
+                </div>
     <div class="video-main">
 
         <div id="youtube-player"></div>
-
         <div class="video-side">
 
             <fieldset>
@@ -50,12 +51,7 @@ Sinon, utiliser le bouton 'Finir l'extrait ici' prévu à cet effet">
                 <div id="clip-duration">
                     0
                 </div>
-                <div id="current-time">
-                    0
-                </div>
             </fieldset>
-
-
         </div>
     </div>
 
