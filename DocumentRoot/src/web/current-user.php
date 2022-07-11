@@ -29,8 +29,14 @@ function is_current_user_logged_in(): bool
 function current_user_pseudo(): string
 {
     if (!is_current_user_logged_in())
-        throw new Exception("L'utilisateur devrait être authentifié quand on chercher son pseudo");
+        throw new Exception("L'utilisateur devrait être authentifié quand on cherche son pseudo");
     return from_session('pseudo') ?? 'cher·e inconnu·e';
+}
+
+function current_user_email():string{
+    if (!is_current_user_logged_in())
+        throw new Exception("L'utilisateur devrait être authentifié quand on cherche son email");
+    return from_session('email') ?? 'email inconnu';
 }
 
 /**

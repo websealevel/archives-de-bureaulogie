@@ -98,7 +98,8 @@ function api_clip_source()
             $inputs['title']->value,
             $inputs['description']->value,
             current_user_pseudo(),
-            $created_on
+            $created_on,
+            current_user_email()
         );
 
         if (false === $extrait) {

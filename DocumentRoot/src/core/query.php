@@ -125,10 +125,12 @@ function query_source_by_unique_attr(string $attr_name, string $value, string $f
  * @throws Exception Si l'insertion produit un document non valide aux yeux du DTD
  * @throws Exception Si l'enregistrement du fichier source mis à jour échoue
  */
-function declare_clip(string $source_name, string $timecode_start, string $timecode_end, string $title, string $description, string $author, string $created_on, string $file_source = SOURCE_FILE): DOMNode
+function declare_clip(string $source_name, string $timecode_start, string $timecode_end, string $title, string $description, string $author, string $created_on, string $email, string $file_source = SOURCE_FILE): DOMNode
 {
 
-    //Validation du format
+    write_log($email);
+
+    //Validation du format (throw exception si format invalide)
     build_clip_name($source_name, $timecode_start, $timecode_end);
 
     $dom = load_xml($file_source);
@@ -159,7 +161,7 @@ function declare_clip(string $source_name, string $timecode_start, string $timec
         $dom->createElementNS(XMLNS_SOURCE_FILE, 'auteur', $author)
     );
     $extrait->appendChild(
-        $dom->createElementNS(XMLNS_SOURCE_FILE, 'email', $author)
+        $dom->createElementNS(XMLNS_SOURCE_FILE, 'email', $email)
     );
     $extrait->appendChild(
         $dom->createElementNS(XMLNS_SOURCE_FILE, 'cree_le', $created_on)
