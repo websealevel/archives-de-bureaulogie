@@ -925,6 +925,7 @@ function delete_clip(clip) {
         source_name: $("#sources").find('option:selected').attr("id"),
         PHPSESSID: PHPSESSID
     }).done(function (response) {
+        console.log(response)
         //Si le formulaire est rejeté on récupere les erreurs et on les affiche
         if (typeof response !== 'string' && '' !== response && 'errors' in response) {
             const errors = response.errors
@@ -936,8 +937,7 @@ function delete_clip(clip) {
             $("div.errors").html('<ul>' + items.join('') + '</ul>')
             return
         }
-        console.log(response)
-        // $(clip).remove()
+        $(clip).remove()
         $("div.errors").html('')
         $("div.success").html('Votre clip a été supprimé avec succès')
     })

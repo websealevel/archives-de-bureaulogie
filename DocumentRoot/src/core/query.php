@@ -288,15 +288,42 @@ function declare_source(string $url, string $series, string $slug, string $file_
 }
 
 /**
+ * Remarque: fait de manière tres procédurale. A réécrire éventuellement avec xquery.
  * Supprime la clip du fichier source, issu de la source 'source_name' avec les timecode timecode_start et timecode_end. Renvoie vrai si la suppression a échoué, faux sinon
  * @param string $source_name Le nom de la source dont est issu le clip
  * @param string $timecode_start Le timecode de début
  * @param string $timecode_end Le timecode de fin
  * @return bool
  */
-function remove_clip(string $source_name, string $timecode_start, string $timecode_end)
+function remove_clip(string $source_name, string $timecode_start, string $timecode_end, string $file_source = SOURCE_FILE)
 {
 
+    $dom = load_xml($file_source);
+
+    $root = $dom->documentElement;
+
+    $sources = $root->getElementsByTagName('source');
+
+    foreach ($sources as $source) {
+
+        if ($source->getAttribute('name') === $source_name) {
+
+            $clips = $source->childNodes;
+
+            foreach ($clips as $clip) {
+
+                $debut = child_element_by_name($clip, 'debut');
+                $fin = child_element_by_name($clip, 'fin');
+
+                if ($debut->nodeValue === $timecode_start && $fin->nodeValue === $timecode_end) {
+                    $clip->parentNode->removeChild($clip);
+                    $message = sprintf("Le clip de la source %s start:%s end:%s a été supprimé par %s", $source_name, $timecode_start, $timecode_end, current_user_email());
+                    error_log($message);
+                    return $dom->save(SOURCE_FILE);
+                }
+            }
+        }
+    }
 
     return false;
 }

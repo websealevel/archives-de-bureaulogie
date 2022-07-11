@@ -174,8 +174,9 @@ function build_clip_name(string $source_name, string $timecode_start, string $ti
  * @param string $clipname Le nom du clip
  * @return array
  */
-function extract_metadata_from_clip_name(string $clipname):array{
-    
+function extract_metadata_from_clip_name(string $clipname): array
+{
+
     if (empty($clipname)) {
         throw new Exception("Impossible d'extrait les informations du nom du clip car il est vide");
     }

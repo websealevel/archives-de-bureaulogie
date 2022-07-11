@@ -41,7 +41,5 @@ function source_exists(string $source_name): bool
 function delete_file_clip(string $file_name): bool
 {
     $path = PATH_CLIPS . '/' . $file_name;
-    write_log($path);
-    return $path;
-    // return unlink($path);
+    return unlink($path);
 }
