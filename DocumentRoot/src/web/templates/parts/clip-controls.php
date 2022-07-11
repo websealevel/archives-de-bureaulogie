@@ -16,7 +16,6 @@ $random_phrases = array(
     "A votre service.",
     "J'ai été mis à jour, et vous ?",
     "La bureaulogie peut sauver l'humanité. Enfin, je crois...",
-    "J'ai vu tant de bureaux. De l'espoirt et du désespoir",
     "",
 );
 $rando_key = array_rand($random_phrases, 1);

@@ -63,8 +63,17 @@ function check_delete_clip_form(){
                 if (!isset($clip_name) || empty($clip_name))
                     return new InputValidation('clip_name', $clip_name, "Renseignez un nom d'extrait à supprimer");
 
+                //Clip au bon format
+                if(!clip_has_valid_filename_format($clip_name)){
+                    return new InputValidation('clip_name', $clip_name, "Le nom du clip à supprimer est invalide");
+                }
+                
+                $metadata = extract_metadata_from_clip_name($clip_name);
 
-                //Clip déclaré
+               //Clip déclaré
+                if(!is_clip_already_declared($metadata['source'],$metadata['timecode_start'], $metadata['timecode_end'])){
+                    return new InputValidation('clip_name', $clip_name, "Impossible de supprimer l'extrait car il n'est pas déclaré.");
+                }
 
                 return new InputValidation('clip_name', $clip_name, '', InputStatus::Valid);
             }

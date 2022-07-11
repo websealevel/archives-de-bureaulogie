@@ -169,6 +169,25 @@ function build_clip_name(string $source_name, string $timecode_start, string $ti
 }
 
 /**
+ * Retourne un tableau contenant les informations contenues dans le nom du fichier source (source_name, timecode_start,timecode_end)
+ * @param string $clipname Le nom du clip
+ * @return array
+ */
+function extract_metadata_from_clip_name(string $clipname):array{
+    
+    if (empty($clipname)) {
+        throw new Exception("Impossible d'extrait les informations du nom du clip car il est vide");
+    }
+
+
+    return array(
+        'source' => '',
+        'timecode_start' => '',
+        '$timecode_end' => ''
+    );
+}
+
+/**
  * Retourne le path absolu de l'extrait à sauvegarder.
  * @param DOMElement $clip
  */
@@ -259,7 +278,7 @@ function format_to_label(string $file_name): string
 
 
 /**
- * Remarque : Ne marche plus, car j'ai retiré le slug du nom du fichier clip. Utilisé que en CLI pour le moment.
+ * Remarque : DEPRECIE.Ne marche plus, car j'ai retiré le slug du nom du fichier clip. Utilisé que en CLI pour le moment.
  * 
  * Retourne les métadonnées d'un extrait à partir de son nom de fichier, faux si une erreur se produit (format non valide). Forme à améliorer avec de la regex plutôt et des match par groupe.
  * @param string $filename Le nom du fichier extrait
