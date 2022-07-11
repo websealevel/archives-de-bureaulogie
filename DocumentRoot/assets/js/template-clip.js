@@ -5,14 +5,9 @@ jQuery(function ($) {
      * Variable globale : url de la vidéo source en cours d'édition
      */
     var source_url
-    var youTubePlayer;
+    var youtube_player;
 
     init_on_landing()
-
-    console.log('coucou')
-
-
-
 
     /**
      * Timer
@@ -216,19 +211,20 @@ jQuery(function ($) {
  * -- Fonctions
  */
 
-function youtube_video_id(url) {
-    const pos = url.indexOf('?')
-    return url.substring(pos + 1)
-}
+
 /**
 * Instructions à executer au chargement de la page.
+* - initialisation du player embed youtube
+* - recuperation des clips sur la source
+* - recuperation des brouillons de clips sur la source
 */
 function init_on_landing() {
 
     source_url = current_source()
+
     const video_id = youtube_video_id(source_url)
 
-    init_youtube_player('XiZs_Pt9WDM')
+    init_youtube_player(video_id)
 
     fetch_clips_of_current_source(source_url)
     fetch_clip_drafs_of_current_source(source_url)
@@ -249,7 +245,7 @@ function init_youtube_player(video_id) {
 
     window.onYouTubeIframeAPIReady = function () {
 
-        youTubePlayer = new YT.Player('youtube-player',
+        youtube_player = new YT.Player('youtube-player',
             {
                 videoId: video_id,
                 height: '300',
@@ -262,7 +258,7 @@ function init_youtube_player(video_id) {
             });
 
         // Add private data to the YouTube object
-        youTubePlayer.personalPlayer = {
+        youtube_player.personalPlayer = {
             'currentTimeSliding': false,
             'errors': []
         };
@@ -279,7 +275,11 @@ function onReady() {
 
 function onStateChange() {
     console.log('State change')
+}
 
+function youtube_video_id(url) {
+    const pos = url.indexOf('=')
+    return url.substring(pos + 1)
 }
 
 function preview_before_start(tail_duration_in_sec = 2) {
