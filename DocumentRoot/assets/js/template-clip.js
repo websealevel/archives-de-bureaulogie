@@ -918,12 +918,8 @@ function delete_clip_draft(marker) {
  */
 function delete_clip(clip) {
 
-    console.log(clip)
-
-    //Envoyer: name de l'extrait (contient les timecodes, nom de la source), l'email de l'utilisateur
-
     $.post('/api/v1/delete-clip', {
-        author_email: 'foo@bar.com',
+        author_email: $(clip).find('.btn-delete-clip').attr('id'),
         clip_name: $(clip).attr('name'),
         token: $("#token_delete_clip").val(),
         source_name: $("#sources").find('option:selected').attr("id"),

@@ -287,6 +287,20 @@ function declare_source(string $url, string $series, string $slug, string $file_
     return $result;
 }
 
+/**
+ * Supprime la clip du fichier source, issu de la source 'source_name' avec les timecode timecode_start et timecode_end. Renvoie vrai si la suppression a échoué, faux sinon
+ * @param string $source_name Le nom de la source dont est issu le clip
+ * @param string $timecode_start Le timecode de début
+ * @param string $timecode_end Le timecode de fin
+ * @return bool
+ */
+function remove_clip(string $source_name, string $timecode_start, string $timecode_end)
+{
+
+
+    return false;
+}
+
 
 /**
  * Retourne l'élément source de l'extrait

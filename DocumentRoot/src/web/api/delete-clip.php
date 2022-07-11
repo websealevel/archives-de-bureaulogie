@@ -35,7 +35,24 @@ function api_delete_clip()
         api_respond_with_error($invalid_inputs);
     }
 
-    write_log('so far so good...');
+    $clean['clip_name'] = filter_input(INPUT_POST, 'clip_name');
+
+    //Supprimer le fichier
+
+    $path_parts = pathinfo($clean['clip_name']);
+    $basename = $path_parts['basename'];
+
+    $result = delete_clip($basename);
+
+    if (!$result) {
+        $message = sprintf("Le fichier %s n'a pas pu être supprimé mais il a été déclaré au moment de la demande de suppression", $basename);
+        error_log($message);
+    }
+
+    //Supprimer la declaration
+
+
+
 }
 
 
@@ -85,6 +102,8 @@ function check_delete_clip_form()
                     return new InputValidation('author_email', $author_email, "Renseignez l'email de l'auteur du clip à supprimer");
 
                 //Email match email de l'utilisateur en session
+                if ($author_email !== current_user_email())
+                    return new InputValidation('author_email', $author_email, "Ce clip ne vous appartient pas, vous ne pouvez pas le supprimer");
 
                 return new InputValidation('clip_name', $author_email, '', InputStatus::Valid);
             }
