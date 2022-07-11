@@ -6,6 +6,7 @@ jQuery(function ($) {
      */
     var source_url
     var youtube_player;
+    var state;
 
     init_on_landing()
 
@@ -229,6 +230,7 @@ function current_source() {
 
 
 /**
+ * Initialisation et instanciation du player embed youtube
  * @see https://developers.google.com/youtube/iframe_api_reference
  */
 function init_youtube_player(video_id) {
@@ -274,78 +276,11 @@ function init_youtube_player(video_id) {
     }
 }
 
-/**
- * Retourne true si the player is playing, false sinon
- */
-function video_is_playing() {
-    'use strict';
-    return youtube_player && youtube_player.hasOwnProperty('getPlayerState') && youtube_player.getPlayerState() === 1;
-}
-
-/**
- * Seek the video to the currentTime.
- * (And mark that the HTML slider *don't* move.)
- *
- * :param currentTime: 0 <= number <= 100
- */
-function youTubePlayerCurrentTimeChange(currentTime) {
-    'use strict';
-    youtube_player.seekTo(currentTime * youtube_player.getDuration() / 100, true);
-}
-
-
 function onError() {
     console.log('Error')
 }
 
 function onReady() {
-}
-
-function onStateChange() {
-
-}
-
-/**
- * Retourne l'id de la vidéo youtube
- * @param {string} url 
- * @returns 
- */
-function youtube_video_id(url) {
-    const pos = url.indexOf('=')
-    return url.substring(pos + 1)
-}
-
-function preview_before_start(tail_duration_in_sec = 2) {
-    //Decocher la loop si cochée (sinon bug)
-    $('#checkbox_loop_preview').prop('checked', false)
-
-
-    const timecode_start = $("#timecode_start").val()
-
-    const timecode_start_in_sec = hh_mm_ss_lll_to_seconds(timecode_start)
-
-    const timecode_start_in_sec_delay = timecode_start_in_sec - tail_duration_in_sec
-
-    if (timecode_start_in_sec_delay < 0)
-        return
-
-    youtube_player.seekTo(timecode_start_in_sec_delay)
-    playvideo()
-}
-
-function preview_after_end(tail_duration_in_sec = 2) {
-
-    //Decocher la loop si cochée (sinon bug)
-    $('#checkbox_loop_preview').prop('checked', false)
-
-    const timecode_end = $("#timecode_end").val()
-
-    const timecode_start_in_sec = hh_mm_ss_lll_to_seconds(timecode_end)
-    const timecode_end_in_sec = timecode_start_in_sec + tail_duration_in_sec
-
-    const src_timecodes = current_source() + `#t=${timecode_start_in_sec},${timecode_end_in_sec}`
-    $("#video-source").prop('src', src_timecodes)
-    playvideo()
 }
 
 /**
@@ -370,6 +305,105 @@ function play_pause() {
         $("#btn_play_pause").prop('innerHTML', '<div class="shortcut">s</div> pause')
         youtube_player.playVideo()
     }
+}
+
+/**
+ * Retourne true si the player is playing, false sinon
+ */
+function video_is_playing() {
+    'use strict';
+    return youtube_player && youtube_player.hasOwnProperty('getPlayerState') && youtube_player.getPlayerState() === 1;
+}
+
+/**
+ * Retourne l'id de la vidéo youtube
+ * @param {string} url 
+ * @returns 
+ */
+function youtube_video_id(url) {
+    const pos = url.indexOf('=')
+    return url.substring(pos + 1)
+}
+
+/**
+ * Retourne un objet JSON avec les timecodes de début et de fin (preview avant le début de l'extrait)
+ * @param {int} tail_duration_in_sec 
+ * @returns 
+ */
+function start_end_seconds_before(tail_duration_in_sec = 2) {
+
+    const timecode_start = $("#timecode_start").val()
+
+    const end = hh_mm_ss_lll_to_seconds(timecode_start)
+
+    const start = end - tail_duration_in_sec
+
+    return {
+        start: start,
+        end: end
+    }
+}
+
+/**
+ * Retourne un objet JSON avec les timecodes de début et de fin (preview apres la fin de l'extrait)
+ * @param {int} tail_duration_in_sec 
+ * @returns 
+ */
+function start_end_seconds_after(tail_duration_in_sec = 2) {
+
+    const timecode_start = $("#timecode_end").val()
+
+    const start = hh_mm_ss_lll_to_seconds(timecode_start)
+
+    const end = start + tail_duration_in_sec
+
+    return {
+        start: start,
+        end: end
+    }
+}
+
+
+function onStateChange(state) {
+    if (state.data === YT.PlayerState.ENDED) {
+        const start_end = start_end_seconds_before(tail_duration_in_sec)
+        youtube_player.seekTo(start_end.start);
+    }
+}
+
+function preview_before_start(tail_duration_in_sec = 2) {
+    //Decocher la loop si cochée (sinon bug)
+    $('#checkbox_loop_preview').prop('checked', false)
+
+    const start_end = start_end_seconds(tail_duration_in_sec)
+
+    console.log(start_end)
+    if (start_end.start < 0)
+        return
+
+    youtube_player.loadVideoById({
+        videoId: youtube_video_id(source_url),
+        startSeconds: start_end.start,
+        endSeconds: start_end.end
+    })
+
+    playvideo()
+}
+
+function preview_after_end(tail_duration_in_sec = 2) {
+
+    //Decocher la loop si cochée (sinon bug)
+    $('#checkbox_loop_preview').prop('checked', false)
+
+    const start_end = start_end_seconds_after(tail_duration_in_sec)
+
+    youtube_player.loadVideoById({
+        videoId: youtube_video_id(source_url),
+        startSeconds: start_end.start,
+        endSeconds: start_end.end
+    })
+
+    playvideo()
 }
 
 
@@ -404,9 +438,6 @@ function goto_and_play_end() {
 function any_input_text_is_focused(event) {
     return $("#title").is(":focus") || $("#description").is(":focus")
 }
-
-
-
 
 /**
  * Lance la prévisualisation de l'extrait
