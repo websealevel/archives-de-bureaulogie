@@ -920,8 +920,10 @@ function delete_clip(clip) {
 
     console.log(clip)
 
+    //Envoyer: name de l'extrait (contient les timecodes, nom de la source), l'email de l'utilisateur
+
     $.post('/api/v1/delete-clip', {
-        action: 'delete'
+
     }).done(function (response) {
         //Si le formulaire est rejeté on récupere les erreurs et on les affiche
         if (typeof response !== 'string' && '' !== response && 'errors' in response) {
