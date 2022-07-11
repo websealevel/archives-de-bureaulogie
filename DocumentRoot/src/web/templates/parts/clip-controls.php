@@ -10,11 +10,14 @@ $random_phrases = array(
     "Comment allez-vous aujourd'hui ?",
     "",
     "Je suis ravi de vous revoir.",
+    "Je suis ravie de vous revoir.",
     "La bureaulogie n'attend pas.",
     "La bureaulogie a besoin de vous.",
-    "C'est un plaisir de travailler avec vous.",
     "A votre service.",
     "J'ai été mis à jour, et vous ?",
+    "La bureaulogie peut sauver l'humanité. Enfin, je crois...",
+    "J'ai vu tant de bureaux. De l'espoirt et du désespoir",
+    "",
 );
 $rando_key = array_rand($random_phrases, 1);
 $phrase = $random_phrases[$rando_key];
