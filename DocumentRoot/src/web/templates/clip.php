@@ -21,7 +21,8 @@ if (!current_user_can('submit_clip'))
  * Fait office de nonce (previent CSRF, un jeton pour demander un téléchargement)
  */
 $account = from_session('account_id');
-$token = register_api_token($account, 'submit_clip');
+$token_submit_clip = register_api_token($account, 'submit_clip');
+$token_delete_clip = register_api_token($account, 'delete_clip');
 
 ?>
 

@@ -156,7 +156,8 @@ Sinon, utiliser le bouton 'Finir l'extrait ici' prévu à cet effet">
         </button>
 
         <div id="container-option-btn-submit">
-            <input type="hidden" name="token" id="token" value="<?php echo $token; ?>">
+            <input type="hidden" name="token" id="token" value="<?php echo $token_submit_clip; ?>">
+            <input type="hidden" name="token_delete_clip" id="token_delete_clip" value="<?php echo $token_delete_clip; ?>">
             <input type="hidden" name="source_name" id="source_name" value="">
         </div>
     </div>

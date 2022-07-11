@@ -923,7 +923,9 @@ function delete_clip(clip) {
     //Envoyer: name de l'extrait (contient les timecodes, nom de la source), l'email de l'utilisateur
 
     $.post('/api/v1/delete-clip', {
-
+        token: $("#token_delete_clip").val(),
+        source_name: $("#sources").find('option:selected').attr("id"),
+        PHPSESSID: PHPSESSID
     }).done(function (response) {
         //Si le formulaire est rejeté on récupere les erreurs et on les affiche
         if (typeof response !== 'string' && '' !== response && 'errors' in response) {
@@ -936,7 +938,7 @@ function delete_clip(clip) {
             $("div.errors").html('<ul>' + items.join('') + '</ul>')
             return
         }
-        $(clip).remove()
+        // $(clip).remove()
         $("div.errors").html('')
         $("div.success").html('Votre clip a été supprimé avec succès')
     })
