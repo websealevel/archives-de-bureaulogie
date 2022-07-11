@@ -17,7 +17,6 @@ const state = {
 
 jQuery(function ($) {
 
-    init_on_landing()
 
     /**
      * Evenement quand le select de source change
@@ -195,6 +194,8 @@ jQuery(function ($) {
             return
         }
     })
+
+    init_on_landing()
 });
 
 /**
@@ -279,6 +280,45 @@ function init_youtube_player(video_id) {
     }
 }
 
+function onStateChange(event) {
+
+    //Hack: pour garder les raccourcis claviers utilisables il faut faire perdre le focus au player
+
+
+    if (event.data === YT.PlayerState.ENDED) {
+
+        if (state.preview && state.preview === 'before_start') {
+            const start_end = start_end_seconds_before(state.tail)
+            youtube_player.seekTo(start_end.start)
+            youtube_player.pauseVideo()
+            state.preview = ''
+            return
+        }
+
+        if (state.preview && state.preview === 'after_end') {
+            const start_end = start_end_seconds_after(state.tail)
+            youtube_player.seekTo(start_end.start)
+            youtube_player.pauseVideo()
+            state.preview = ''
+            return
+        }
+
+        if (state.preview && state.preview === 'preview_clip') {
+
+            if (state.loop) {
+                goto_and_play_start()
+                return
+            }
+
+            youtube_player.pauseVideo()
+            state.preview = ''
+            return
+        }
+
+
+    }
+}
+
 /**
  * Lance la vidéo si elle est en pause
  * @returns 
@@ -359,45 +399,6 @@ function start_end_seconds_after(tail_duration_in_sec) {
     }
 }
 
-
-
-function onStateChange(event) {
-
-
-
-    if (event.data === YT.PlayerState.ENDED) {
-
-        if (state.preview && state.preview === 'before_start') {
-            const start_end = start_end_seconds_before(state.tail)
-            youtube_player.seekTo(start_end.start)
-            youtube_player.pauseVideo()
-            state.preview = ''
-            return
-        }
-
-        if (state.preview && state.preview === 'after_end') {
-            const start_end = start_end_seconds_after(state.tail)
-            youtube_player.seekTo(start_end.start)
-            youtube_player.pauseVideo()
-            state.preview = ''
-            return
-        }
-
-        if (state.preview && state.preview === 'preview_clip') {
-
-            if (state.loop) {
-                goto_and_play_start()
-                return
-            }
-
-            youtube_player.pauseVideo()
-            state.preview = ''
-            return
-        }
-
-
-    }
-}
 
 function preview_before_start(tail_duration_in_sec) {
     //Decocher la loop si cochée (sinon bug)
