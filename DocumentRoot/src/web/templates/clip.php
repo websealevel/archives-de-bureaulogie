@@ -50,5 +50,5 @@ $token = register_api_token($account, 'submit_clip');
 
 
 </main>
-
+<script src="https://cdn.plyr.io/3.7.2/plyr.js"></script>
 <?php present_footer(array('jquery-min', 'template-clip')); ?>

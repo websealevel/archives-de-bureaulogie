@@ -7,17 +7,15 @@ $color_end = '';
 
     <p>
         <small>Les champs marqués d'un asterisque(*) sont obligatoires</small>
+       
+    </p>
+
+    <p>
+    <small>Conseil : pour masquer les vidéos recommandées lorsque la vidéo est mise en pause, installer l'extension <a href="https://addons.mozilla.org/en-US/firefox/addon/ublock-origin/">uBlock Origin</a>. Aller dans les <em>Settings</em> de l'extension, puis <em>My filters</em> et ajouter la règle suivante <code>youtube.com##.ytp-pause-overlay</code>. Appliquer les cahngements puis rechargez la page.</small>
     </p>
 
 
     <div class="video-main">
-
-        <!-- <div class="video">
-            <video id="video-source" width="100%" height="580" controls>
-                <source src="" type="video/mp4">
-                Votre navigateur ne supporte pas le tag video HTML5 :(
-            </video>
-        </div> -->
 
         <div id="youtube-player"></div>
 
@@ -29,8 +27,6 @@ $color_end = '';
                 <div class="errors" style="color: red;"></div>
                 <div class="success" style="color: green;">Bienvenue, <?php esc_html_e(current_user_pseudo()); ?></div>
             </fieldset>
-
-           
 
             <fieldset>
                 <legend>Timecodes []</legend>

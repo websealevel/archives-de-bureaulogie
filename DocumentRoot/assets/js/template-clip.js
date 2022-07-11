@@ -248,8 +248,19 @@ function init_youtube_player(video_id) {
         youtube_player = new YT.Player('youtube-player',
             {
                 videoId: video_id,
-                height: '300',
-                width: '600',
+                height: '647',
+                width: '1150',
+                playerVars: {
+                    'autohide': 0,
+                    'cc_load_policy': 0,
+                    'controls': 2,
+                    'disablekb': 1,
+                    'iv_load_policy': 3,
+                    'modestbranding': 1,
+                    'rel': 0,
+                    'listType': 'playlist',
+                    'showinfo': 0
+                },
                 events: {
                     'onError': onError,
                     'onReady': onReady,
