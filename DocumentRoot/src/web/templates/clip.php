@@ -14,7 +14,7 @@ require_once __DIR__ . '/../api/token.php';
 
 if (!current_user_can('submit_clip'))
     redirect('/', 'notices', array(new Notice('Vous devez être authentifié pour soumettre un clip', NoticeStatus::Error)));
-
+    
 
 /**
  * Délivre un jeton pour consommer l'api au compte utilisateur
@@ -50,6 +50,5 @@ $token = register_api_token($account, 'submit_clip');
 
 
 </main>
-
 
 <?php present_footer(array('jquery-min', 'template-clip')); ?>

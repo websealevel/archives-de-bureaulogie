@@ -12,17 +12,14 @@ $color_end = '';
 
     <div class="video-main">
 
-        <div class="video">
+        <!-- <div class="video">
             <video id="video-source" width="100%" height="580" controls>
                 <source src="" type="video/mp4">
                 Votre navigateur ne supporte pas le tag video HTML5 :(
             </video>
-        </div>
+        </div> -->
 
-        <div class="yt-iframe-container">
-        <iframe id="player" width="420" height="315" src="">
-            </iframe>
-        </div>
+        <div id="youtube-player"></div>
 
         <div class="video-side">
 

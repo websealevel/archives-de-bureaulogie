@@ -5,8 +5,14 @@ jQuery(function ($) {
      * Variable globale : url de la vidéo source en cours d'édition
      */
     var source_url
+    var youTubePlayer;
 
     init_on_landing()
+
+    console.log('coucou')
+
+
+
 
     /**
      * Timer
@@ -206,25 +212,73 @@ jQuery(function ($) {
 
 });
 
-
 /**
  * -- Fonctions
  */
 
+function youtube_video_id(url) {
+    const pos = url.indexOf('?')
+    return url.substring(pos + 1)
+}
 /**
 * Instructions à executer au chargement de la page.
 */
 function init_on_landing() {
 
     source_url = current_source()
+    const video_id = youtube_video_id(source_url)
 
-    $("#video-source").prop('src', source_url)
-    $("#source_name").val(source_url)
-    const embed_url = source_url.replace('watch?v=', 'embed/');
-    $("#player").prop('src', embed_url)
+    init_youtube_player('XiZs_Pt9WDM')
 
     fetch_clips_of_current_source(source_url)
     fetch_clip_drafs_of_current_source(source_url)
+}
+
+/**
+ * @see https://developers.google.com/youtube/iframe_api_reference
+ */
+function init_youtube_player(video_id) {
+
+    var tag = document.createElement('script');
+
+    tag.src = 'https://www.youtube.com/iframe_api';
+
+    var first_script_tag = document.getElementsByTagName('script')[0];
+
+    first_script_tag.parentNode.insertBefore(tag, first_script_tag);
+
+    window.onYouTubeIframeAPIReady = function () {
+
+        youTubePlayer = new YT.Player('youtube-player',
+            {
+                videoId: video_id,
+                height: '300',
+                width: '600',
+                events: {
+                    'onError': onError,
+                    'onReady': onReady,
+                    'onStateChange': onStateChange
+                }
+            });
+
+        // Add private data to the YouTube object
+        youTubePlayer.personalPlayer = {
+            'currentTimeSliding': false,
+            'errors': []
+        };
+    }
+}
+
+function onError() {
+    console.log('Error')
+}
+
+function onReady() {
+    console.log('Ready')
+}
+
+function onStateChange() {
+    console.log('State change')
 
 }
 
@@ -282,7 +336,7 @@ function playvideo() {
  */
 function goto_and_play_start() {
 
-    const is_playing =  video_is_playing()
+    const is_playing = video_is_playing()
     const timecode_start = $("#timecode_start").val()
     const timecode_start_in_sec = hh_mm_ss_lll_to_seconds(timecode_start)
     const src_timecodes = current_source() + `#t=${timecode_start_in_sec}`
@@ -300,7 +354,7 @@ function current_source() {
  * @returns 
  */
 function goto_and_play_end() {
-    const is_playing =  video_is_playing()
+    const is_playing = video_is_playing()
     const timecode = $("#timecode_end").val()
     const timecode_in_sec = hh_mm_ss_lll_to_seconds(timecode)
     const src_timecodes = current_source() + `#t=${timecode_in_sec}`
