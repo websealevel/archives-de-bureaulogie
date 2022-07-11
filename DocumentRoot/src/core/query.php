@@ -317,7 +317,7 @@ function remove_clip(string $source_name, string $timecode_start, string $timeco
 
                 if ($debut->nodeValue === $timecode_start && $fin->nodeValue === $timecode_end) {
                     $clip->parentNode->removeChild($clip);
-                    $message = sprintf("Le clip de la source %s start:%s end:%s a été supprimé par %s", $source_name, $timecode_start, $timecode_end, current_user_email());
+                    $message = sprintf("Le clip de la source %s start:%s end:%s a été supprimé par %s (id:%s)", $source_name, $timecode_start, $timecode_end, current_user_email(), current_user_id());
                     error_log($message);
                     return $dom->save(SOURCE_FILE);
                 }

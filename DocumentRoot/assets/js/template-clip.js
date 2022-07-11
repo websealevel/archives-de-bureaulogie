@@ -294,8 +294,6 @@ function init_youtube_player(video_id) {
 
 function onStateChange(event) {
 
-    console.log('onStateChange', event)
-
     if (event.data === YT.PlayerState.ENDED) {
 
         if (state.preview && state.preview === 'before_start') {
@@ -531,118 +529,7 @@ function shift_current_time(delay_in_s) {
 }
 
 
-/**
-* Initialise la lite des extraits sur la source
-*/
-function fetch_clips_of_current_source(source_url) {
 
-    if (source_url === '')
-        return
-
-    const data = { source: $("#sources").find('option:selected').attr("id") }
-
-    //Clear previous clips
-    $("#list-clips-on-current-source").empty()
-    $.post('/api/v1/list-clips', data).done(function (response) {
-
-        //Si le formulaire est rejeté on récupere les erreurs et on les affiche
-        if (typeof response !== 'string' && '' !== response && 'errors' in response) {
-            const errors = response.errors
-            let items = []
-            for (const input in errors) {
-                items.push("<li>" + errors[input].message + "</li>")
-            }
-            $("div.errors").html('<ul>' + items.join('') + '</ul>')
-        } else {
-
-            const clips = response.extrait
-            clips.forEach(clip => {
-                $("#list-clips-on-current-source").append(clip)
-                const $li_appended = $("#list-clips-on-current-source").children("li:last-child")
-                clip_add_listeners($li_appended)
-            })
-        }
-
-    }).fail(function () {
-        $("div.success").html('')
-        $("div.errors").html('Hmm, il semblerait qu\'il y ait eu un problème de connexion. Veuillez rééssayer s\'il vous plaît.')
-    }).always(function () {
-
-    })
-}
-
-function clip_add_listeners(clip) {
-
-    const class_btn_delete_clip = 'btn-delete-clip'
-
-    clip.click(function (event) {
-        const delete_btn_is_clicked = event.originalEvent.target.className === class_btn_delete_clip
-        if (delete_btn_is_clicked) {
-            delete_clip(this)
-            return
-        }
-    })
-}
-
-
-
-/**
- * Fetch les brouillons de clips de l'utilisateur enregistrés pour la vidéo source
- * @param {string} source_url 
- */
-function fetch_clip_drafs_of_current_source(source_url) {
-
-    const class_btn_delete_draft = 'btn-delete-draft'
-    const class_btn_load_draft = 'btn-load-draft'
-
-    $("#list-markers").empty()
-
-    $.post('/api/v1/markers', {
-        action: 'fetch',
-        source_name: $("#sources").find('option:selected').attr("id"),
-    }).done(function (response) {
-
-        response.markers.forEach(marker => {
-
-            const li = marker_markup(
-                marker.id,
-                marker.timecode_start_in_sec,
-                marker.timecode_end_in_sec,
-                marker.title,
-                class_btn_delete_draft,
-                class_btn_load_draft)
-
-            $("#list-markers").append(li)
-
-            const $li_appended = $("#list-markers").children("li:last-child")
-
-            item_draft_add_listeners($li_appended)
-        })
-    });
-}
-
-function item_draft_add_listeners($item_draft) {
-
-    const class_btn_delete_draft = 'btn-delete-draft'
-    const class_btn_load_draft = 'btn-load-draft'
-
-    //Event listener : click sur le marqueur OU click sur supprimer.
-    $item_draft.click(function (event) {
-
-        const delete_marker_btn_is_clicked = event.originalEvent.target.className === class_btn_delete_draft
-        const load_marker_btn_is_clicked = event.originalEvent.target.className === class_btn_load_draft
-
-        if (delete_marker_btn_is_clicked) {
-            delete_clip_draft(this)
-            return
-        }
-
-        if (load_marker_btn_is_clicked) {
-            load_clip_draft_on_player(this)
-            return
-        }
-    })
-}
 
 function load_clip_draft_on_player(item_draft) {
 
@@ -810,9 +697,13 @@ function post_clip() {
             $("div.success").html('')
             $("div.errors").html('<ul>' + items.join('') + '</ul>')
         } else {
+            console.log(response)
             $("div.errors").html('')
             $("div.success").html("L'extrait a été ajouté avec succès !")
             $("#list-clips-on-current-source").append(response.extrait)
+            const $li_appended = $("#list-clips-on-current-source").children("li:last-child")
+            console.log($li_appended)
+            clip_add_listeners($li_appended)
         }
 
     }).fail(function () {
@@ -822,6 +713,122 @@ function post_clip() {
         window.cancelAnimationFrame(spinner_ascii.requestID)
         $("#btn-submit-clip").prop('innerHTML', '<div class="shortcut">Shift+Enter</div> Cut !')
         $("#btn-submit-clip").prop("disabled", false)
+    })
+}
+
+/**
+* Initialise la lite des extraits sur la source
+*/
+function fetch_clips_of_current_source(source_url) {
+
+    if (source_url === '')
+        return
+
+    const data = { source: $("#sources").find('option:selected').attr("id") }
+
+    //Clear previous clips
+    $("#list-clips-on-current-source").empty()
+    $.post('/api/v1/list-clips', data).done(function (response) {
+
+        //Si le formulaire est rejeté on récupere les erreurs et on les affiche
+        if (typeof response !== 'string' && '' !== response && 'errors' in response) {
+            const errors = response.errors
+            let items = []
+            for (const input in errors) {
+                items.push("<li>" + errors[input].message + "</li>")
+            }
+            $("div.errors").html('<ul>' + items.join('') + '</ul>')
+        } else {
+
+            const clips = response.extrait
+            clips.forEach(clip => {
+                $("#list-clips-on-current-source").append(clip)
+                const $li_appended = $("#list-clips-on-current-source").children("li:last-child")
+                clip_add_listeners($li_appended)
+            })
+        }
+
+    }).fail(function () {
+        $("div.success").html('')
+        $("div.errors").html('Hmm, il semblerait qu\'il y ait eu un problème de connexion. Veuillez rééssayer s\'il vous plaît.')
+    }).always(function () {
+
+    })
+}
+
+/**
+ * Ajoute un écouteur d'évenement sur le bouton 'Supprimer' d'un item extrait
+ * @param {*} clip 
+ */
+function clip_add_listeners(clip) {
+
+    const class_btn_delete_clip = 'btn-delete-clip'
+
+    clip.click(function (event) {
+
+        const delete_btn_is_clicked = event.originalEvent.target.className === class_btn_delete_clip
+        if (delete_btn_is_clicked) {
+            delete_clip(this)
+            return
+        }
+    })
+}
+
+/**
+ * Fetch les brouillons de clips de l'utilisateur enregistrés pour la vidéo source
+ * @param {string} source_url 
+ */
+function fetch_clip_drafs_of_current_source(source_url) {
+
+    const class_btn_delete_draft = 'btn-delete-draft'
+    const class_btn_load_draft = 'btn-load-draft'
+
+    $("#list-markers").empty()
+
+    $.post('/api/v1/markers', {
+        action: 'fetch',
+        source_name: $("#sources").find('option:selected').attr("id"),
+    }).done(function (response) {
+
+        response.markers.forEach(marker => {
+
+            const li = marker_markup(
+                marker.id,
+                marker.timecode_start_in_sec,
+                marker.timecode_end_in_sec,
+                marker.title,
+                class_btn_delete_draft,
+                class_btn_load_draft)
+
+            $("#list-markers").append(li)
+
+            const $li_appended = $("#list-markers").children("li:last-child")
+
+            item_draft_add_listeners($li_appended)
+        })
+    });
+}
+
+function item_draft_add_listeners($item_draft) {
+
+    const class_btn_delete_draft = 'btn-delete-draft'
+    const class_btn_load_draft = 'btn-load-draft'
+
+    //Event listener : click sur le marqueur OU click sur supprimer.
+    $item_draft.click(function (event) {
+
+        const delete_marker_btn_is_clicked = event.originalEvent.target.className === class_btn_delete_draft
+        const load_marker_btn_is_clicked = event.originalEvent.target.className === class_btn_load_draft
+
+        if (delete_marker_btn_is_clicked) {
+            delete_clip_draft(this)
+            return
+        }
+
+        if (load_marker_btn_is_clicked) {
+            load_clip_draft_on_player(this)
+            return
+        }
     })
 }
 
