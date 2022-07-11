@@ -23,7 +23,6 @@ function api_delete_clip()
         api_respond_with_error();
     }
 
-
     //Valider le formulaire
     $inputs = check_delete_clip_form();
     $invalid_inputs = filter_invalid_inputs($inputs);
@@ -48,6 +47,7 @@ function api_delete_clip()
     }
 
     //Supprimer la declaration
+
     $metadata = extract_metadata_from_clip_name($basename);
 
     $clip_removed_from_source = remove_clip($metadata['source_name'], $metadata['timecode_start'], $metadata['timecode_end']);

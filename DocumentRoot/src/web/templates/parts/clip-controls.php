@@ -30,24 +30,14 @@ $phrase = $random_phrases[$rando_key];
     </p>
 
     <p>
-    <small>Conseil : pour masquer les vidéos recommandées lorsque la vidéo est mise en pause, installer l'extension <a href="https://addons.mozilla.org/en-US/firefox/addon/ublock-origin/">uBlock Origin</a>. Aller dans les <em>Settings</em> de l'extension, puis <em>My filters</em> et ajouter la règle suivante <code>youtube.com##.ytp-pause-overlay</code>. Appliquer les cahngements puis rechargez la page.</small>
+        <small>Conseil : pour masquer les vidéos recommandées lorsque la vidéo est mise en pause, installer l'extension <a href="https://addons.mozilla.org/en-US/firefox/addon/ublock-origin/">uBlock Origin</a>. Aller dans les <em>Settings</em> de l'extension, puis <em>My filters</em> et ajouter la règle suivante <code>youtube.com##.ytp-pause-overlay</code>. Appliquer les cahngements puis rechargez la page.</small>
     </p>
 
-    <div id="current-time">
-                    0
-                </div>
+
     <div class="video-main">
 
         <div id="youtube-player"></div>
         <div class="video-side">
-
-            <fieldset>
-                <legend>HAL 9000 (bureaulogy IA project)</legend>
-
-                <div class="errors" style="color: red;"></div>
-                <div class="success" style="color: green;">Bienvenue, <?php esc_html_e(current_user_pseudo()); ?>. <?php echo $phrase; ?> </div>
-            </fieldset>
-
             <fieldset>
                 <legend>Timecodes []</legend>
                 <div class="timecodes">
@@ -57,7 +47,6 @@ $phrase = $random_phrases[$rando_key];
                         <input type=" text" name="timecode_start" id="timecode_start" pattern="[0-9]{2}:[0-9]{2}:[0-9]{2}.[0-9]{3}" value="00:00:00.000" title="Veuillez renseigner un timecode au format hh:mm:ss.lll. 
 Sinon, utiliser le bouton 'Démarrer l'extrait ici' prévu à cet effet">
                     </div>
-
 
                     <div class="label-input">
                         <label for="timecode_end" style="<?php echo $color_end; ?>; width:120px;">Fin* ]</label>
@@ -72,6 +61,14 @@ Sinon, utiliser le bouton 'Finir l'extrait ici' prévu à cet effet">
                     0
                 </div>
             </fieldset>
+            <fieldset>
+                <legend>HAL 9000 (bureaulogy IA project)</legend>
+
+                <div class="errors" style="color: red;"></div>
+                <div class="success" style="color: green;">Bienvenue, <?php esc_html_e(current_user_pseudo()); ?>. <?php echo $phrase; ?> </div>
+            </fieldset>
+
+
         </div>
     </div>
 
@@ -110,10 +107,9 @@ Sinon, utiliser le bouton 'Finir l'extrait ici' prévu à cet effet">
                 <?php echo htmlentities(']=>'); ?>
             </button>
 
-
-        
-
-
+            <div id="current-time">
+                0
+            </div>
         </div>
 
         <div class="second-row">
@@ -141,8 +137,6 @@ Sinon, utiliser le bouton 'Finir l'extrait ici' prévu à cet effet">
                 <span class="shortcut">D</span>
                 <?php echo htmlentities('>>'); ?>
             </button>
-
-
 
             <div class="label-input">
                 <label for="title">Titre</label>

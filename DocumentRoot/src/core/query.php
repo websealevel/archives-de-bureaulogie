@@ -297,7 +297,6 @@ function declare_source(string $url, string $series, string $slug, string $file_
  */
 function remove_clip(string $source_name, string $timecode_start, string $timecode_end, string $file_source = SOURCE_FILE)
 {
-
     $dom = load_xml($file_source);
 
     $root = $dom->documentElement;
@@ -324,7 +323,6 @@ function remove_clip(string $source_name, string $timecode_start, string $timeco
             }
         }
     }
-
     return false;
 }
 
