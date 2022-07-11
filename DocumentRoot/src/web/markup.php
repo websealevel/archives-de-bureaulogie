@@ -19,6 +19,7 @@ function map_source_to_html_item(DOMElement $source, string $html_item, array $s
     $name = $source->getAttribute('name');
     $src = path_source($name);
     $label = $source->getAttribute('label');
+    $url = $source->getAttribute('url');
 
     if (1 === count($show_data) && in_array('label', $show_data))
         $html = $label;
@@ -28,9 +29,10 @@ function map_source_to_html_item(DOMElement $source, string $html_item, array $s
         $html = $label;
 
     return sprintf(
-        '<%s id="%s">%s</%s>',
+        '<%s id="%s" data-url="%s">%s</%s>',
         $html_item,
         $src,
+        $url,
         $html,
         $html_item
     );

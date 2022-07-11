@@ -220,6 +220,8 @@ function init_on_landing() {
 
     $("#video-source").prop('src', source_url)
     $("#source_name").val(source_url)
+    const embed_url = source_url.replace('watch?v=', 'embed/');
+    $("#player").prop('src', embed_url)
 
     fetch_clips_of_current_source(source_url)
     fetch_clip_drafs_of_current_source(source_url)
@@ -290,7 +292,7 @@ function goto_and_play_start() {
 }
 
 function current_source() {
-    return $("#sources").find(":selected").attr('id')
+    return $("#sources").find(":selected").attr('data-url')
 }
 
 /**

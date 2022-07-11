@@ -19,6 +19,11 @@ $color_end = '';
             </video>
         </div>
 
+        <div class="yt-iframe-container">
+        <iframe id="player" width="420" height="315" src="">
+            </iframe>
+        </div>
+
         <div class="video-side">
 
             <fieldset>
@@ -28,12 +33,7 @@ $color_end = '';
                 <div class="success" style="color: green;">Bienvenue, <?php esc_html_e(current_user_pseudo()); ?></div>
             </fieldset>
 
-            <fieldset>
-                <legend>Durée de l'extrait</legend>
-                <div id="clip-duration">
-                    0
-                </div>
-            </fieldset>
+           
 
             <fieldset>
                 <legend>Timecodes []</legend>
@@ -52,13 +52,17 @@ Sinon, utiliser le bouton 'Démarrer l'extrait ici' prévu à cet effet">
 Sinon, utiliser le bouton 'Finir l'extrait ici' prévu à cet effet">
                     </div>
                 </div>
+
+
+                <div>Durée de l'extrait</div>
+                <div id="clip-duration">
+                    0
+                </div>
             </fieldset>
 
 
         </div>
     </div>
-
-
 
     <div id="editor-navigation">
 
@@ -96,7 +100,7 @@ Sinon, utiliser le bouton 'Finir l'extrait ici' prévu à cet effet">
             </button>
 
 
-
+        
 
 
         </div>
