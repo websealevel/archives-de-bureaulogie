@@ -554,8 +554,13 @@ function fetch_clips_of_current_source(source_url) {
             }
             $("div.errors").html('<ul>' + items.join('') + '</ul>')
         } else {
+
             const clips = response.extrait
-            $("#list-clips-on-current-source").append(clips)
+            clips.forEach(clip => {
+                $("#list-clips-on-current-source").append(clip)
+                const $li_appended = $("#list-clips-on-current-source").children("li:last-child")
+                clip_add_listeners($li_appended)
+            })
         }
 
     }).fail(function () {
@@ -565,6 +570,21 @@ function fetch_clips_of_current_source(source_url) {
 
     })
 }
+
+function clip_add_listeners(clip) {
+
+    const class_btn_delete_clip = 'btn-delete-clip'
+
+    clip.click(function (event) {
+        const delete_btn_is_clicked = event.originalEvent.target.className === class_btn_delete_clip
+        if (delete_btn_is_clicked) {
+            delete_clip(this)
+            return
+        }
+    })
+}
+
+
 
 /**
  * Fetch les brouillons de clips de l'utilisateur enregistrés pour la vidéo source
@@ -890,6 +910,33 @@ function delete_clip_draft(marker) {
         $(marker).remove()
         $("div.errors").html('')
         $("div.success").html('Le brouillon a bien été supprimé')
+    })
+}
+
+/**
+ * Supprime un clip si l'utilisateur en est l'auteur
+ */
+function delete_clip(clip) {
+
+    console.log(clip)
+
+    $.post('/api/v1/delete-clip', {
+        action: 'delete'
+    }).done(function (response) {
+        //Si le formulaire est rejeté on récupere les erreurs et on les affiche
+        if (typeof response !== 'string' && '' !== response && 'errors' in response) {
+            const errors = response.errors
+            let items = []
+            for (const input in errors) {
+                items.push("<li>" + errors[input].message + "</li>")
+            }
+            $("div.success").html('')
+            $("div.errors").html('<ul>' + items.join('') + '</ul>')
+            return
+        }
+        $(clip).remove()
+        $("div.errors").html('')
+        $("div.success").html('Votre clip a été supprimé avec succès')
     })
 }
 

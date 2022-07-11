@@ -28,6 +28,7 @@ require_once __DIR__ . '/../actions/confirm-authentification.php';
 require_once __DIR__ . '/../api/download-source.php';
 require_once __DIR__ . '/../api/clip-source.php';
 require_once __DIR__ . '/../api/list-clips.php';
+require_once __DIR__ . '/../api/delete-clip.php';
 require_once __DIR__ . '/../api/markers.php';
 
 /**
@@ -99,6 +100,9 @@ function routes(): array
             },
             '/api/v1/markers' => function () {
                 api_markers();
+            },
+            '/api/v1/delete-clip' => function () {
+                api_delete_clip();
             },
         )
     );

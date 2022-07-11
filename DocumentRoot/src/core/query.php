@@ -128,8 +128,6 @@ function query_source_by_unique_attr(string $attr_name, string $value, string $f
 function declare_clip(string $source_name, string $timecode_start, string $timecode_end, string $title, string $description, string $author, string $created_on, string $email, string $file_source = SOURCE_FILE): DOMNode
 {
 
-    write_log($email);
-
     //Validation du format (throw exception si format invalide)
     build_clip_name($source_name, $timecode_start, $timecode_end);
 

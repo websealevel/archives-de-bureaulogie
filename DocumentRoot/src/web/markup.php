@@ -54,6 +54,7 @@ function map_clip_to_html_item(DOMElement $clip, string $html_item, array $show_
     $timecode_end = child_element_by_name($clip, 'fin')->nodeValue;
     $author = child_element_by_name($clip, 'auteur')->nodeValue;
     $created_on = child_element_by_name($clip, 'cree_le')->nodeValue;
+    $email = child_element_by_name($clip, 'email')->nodeValue;
 
     $source = declared_source_of($clip);
     $source_parts = pathinfo(source_name($source));
@@ -62,7 +63,7 @@ function map_clip_to_html_item(DOMElement $clip, string $html_item, array $show_
 
     $src = path_clip($clip_name);
 
-    $html = html_clip_item($title, $description, $timecode_start, $timecode_end, $author, $created_on, $src);
+    $html = html_clip_item($title, $description, $timecode_start, $timecode_end, $author, $created_on, $src, $email);
 
     return sprintf(
         '<%s name="%s">%s</%s>',
@@ -78,12 +79,10 @@ function map_clip_to_html_item(DOMElement $clip, string $html_item, array $show_
  * @param string $description La description de l'extrait
  * @param string $src Le chemin de l'extrait
  */
-function html_clip_item(string $title, string $description, string $timecode_start, string $timecode_end, string $author, string $created_on, string $src): string
+function html_clip_item(string $title, string $description, string $timecode_start, string $timecode_end, string $author, string $created_on, string $src, string $email): string
 {
 
-    write_log($author);
-
-    $summary = sprintf('<div class="clip-item-header">%s %s-%s </div>%s <button id="">Supprimer</button>', $title, $timecode_start, $timecode_end, html_download_link($src));
+    $summary = sprintf('<div class="clip-item-header">%s %s-%s </div>%s <button class="btn-delete-clip" id="%s">Supprimer</button>', $title, $timecode_start, $timecode_end, html_download_link($src), $email);
 
     $details = sprintf("%s %s <small>%s</small> <small>auteur: %s, crée le: %s</small>", html_video_markup($src, 500), html_download_link($src), $description, $author, $created_on);
 
