@@ -1,6 +1,21 @@
 <?php
 $color_start = '';
 $color_end = '';
+
+/**
+ * Fait à la va vite pour le fun
+ */
+$random_phrases = array(
+    "Belle journée n'est-ce pas ?",
+    "Comment allez-vous aujourd'hui ?",
+    "",
+    "Je suis ravi de vous revoir",
+    "La bureaulogie n'attend pas",
+    "La bureaulogie a besoin de vous",
+);
+$rando_key = array_rand($random_phrases, 1);
+$phrase = $random_phrases[$rando_key];
+
 ?>
 
 <form action="clip-source" id="form-clip-source" name="form-clip-source">
@@ -22,10 +37,10 @@ $color_end = '';
         <div class="video-side">
 
             <fieldset>
-                <legend>Log</legend>
+                <legend>HAL 9000 (bureaulogy IA project)</legend>
 
                 <div class="errors" style="color: red;"></div>
-                <div class="success" style="color: green;">Bienvenue, <?php esc_html_e(current_user_pseudo()); ?></div>
+                <div class="success" style="color: green;">Bienvenue, <?php esc_html_e(current_user_pseudo()); ?>. <?php echo $phrase; ?> </div>
             </fieldset>
 
             <fieldset>
