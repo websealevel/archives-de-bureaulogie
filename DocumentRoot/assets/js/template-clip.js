@@ -529,7 +529,7 @@ function fetch_clips_of_current_source(source_url) {
     if (source_url === '')
         return
 
-    const data = { source: source_url }
+    const data = { source: $("#sources").find('option:selected').attr("id") }
 
     //Clear previous clips
     $("#list-clips-on-current-source").empty()
@@ -758,7 +758,6 @@ function post_clip() {
     $("#btn-submit-clip").prop("disabled", true)
     window.requestAnimationFrame(spinner_ascii.step);
 
-
     const data = {
         timecode_start: $("#timecode_start").val(),
         timecode_end: $("#timecode_end").val(),
@@ -768,8 +767,6 @@ function post_clip() {
         source_name: $("#sources").find('option:selected').attr("id"),
         PHPSESSID: PHPSESSID
     }
-
-    console.log(data)
 
     $.post('/api/v1/clip-source', data).done(function (response) {
 
@@ -812,9 +809,6 @@ function save_clip_draft() {
     const timecode_start_in_sec = hh_mm_ss_lll_to_seconds(timecode_start)
     const timecode_end_in_sec = hh_mm_ss_lll_to_seconds(timecode_end)
     const title = $("textarea#title").val()
-
-
-    console.log(current_source())
 
     //Envoyer une requete pour ajouter le marqueur.
     $.post('/api/v1/markers', {
