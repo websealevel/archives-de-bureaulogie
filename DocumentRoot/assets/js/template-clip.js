@@ -924,7 +924,7 @@ function delete_clip(clip) {
 
     $.post('/api/v1/delete-clip', {
         author_email: 'foo@bar.com',
-        clip_name: 'foobar',
+        clip_name: $(clip).attr('name'),
         token: $("#token_delete_clip").val(),
         source_name: $("#sources").find('option:selected').attr("id"),
         PHPSESSID: PHPSESSID

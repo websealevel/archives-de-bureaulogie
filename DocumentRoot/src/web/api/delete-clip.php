@@ -64,11 +64,14 @@ function check_delete_clip_form(){
                     return new InputValidation('clip_name', $clip_name, "Renseignez un nom d'extrait à supprimer");
 
                 //Clip au bon format
-                if(!clip_has_valid_filename_format($clip_name)){
+                $path_parts = pathinfo($clip_name);
+                $basename = $path_parts['basename'];
+
+                if(!clip_has_valid_filename_format($basename)){
                     return new InputValidation('clip_name', $clip_name, "Le nom du clip à supprimer est invalide");
                 }
-                
-                $metadata = extract_metadata_from_clip_name($clip_name);
+
+                $metadata = extract_metadata_from_clip_name($basename);
 
                //Clip déclaré
                 if(!is_clip_already_declared($metadata['source'],$metadata['timecode_start'], $metadata['timecode_end'])){

@@ -169,6 +169,7 @@ function build_clip_name(string $source_name, string $timecode_start, string $ti
 }
 
 /**
+ * Remarque: A réécrire avec les FORMAT définis
  * Retourne un tableau contenant les informations contenues dans le nom du fichier source (source_name, timecode_start,timecode_end)
  * @param string $clipname Le nom du clip
  * @return array
@@ -179,12 +180,11 @@ function extract_metadata_from_clip_name(string $clipname):array{
         throw new Exception("Impossible d'extrait les informations du nom du clip car il est vide");
     }
 
+    $result['source'] = substr($clipname, 0,  strpos($clipname, '--from'));
+    $result['timecode_start'] = substr($clipname,  strpos($clipname, '--from-') + strlen('--from-'), 12);
+    $result['timecode_end'] = substr($clipname,  strpos($clipname, '-to-') + strlen('-to-'), 12);
 
-    return array(
-        'source' => '',
-        'timecode_start' => '',
-        '$timecode_end' => ''
-    );
+    return $result;
 }
 
 /**
