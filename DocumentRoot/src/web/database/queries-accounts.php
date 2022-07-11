@@ -82,7 +82,7 @@ function sql_find_account_by_pseudo(string $pseudo)
 
     $sql =
         'SELECT 
-        id,pseudo,password 
+        id,pseudo,password,email 
         FROM "public"."accounts"
         where pseudo = :pseudo ';
 

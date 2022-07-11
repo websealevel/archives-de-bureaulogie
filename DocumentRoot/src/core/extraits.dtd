@@ -19,4 +19,5 @@
 <!ELEMENT debut (#PCDATA) >
 <!ELEMENT fin (#PCDATA) >
 <!ELEMENT auteur (#PCDATA) >
+<!ELEMENT email (#PCDATA) >
 <!ELEMENT cree_le (#PCDATA) >

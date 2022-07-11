@@ -72,10 +72,10 @@ function login_user_session($account)
         throw new Exception("Aucune session n'est ouverte");
     }
 
-
     $_SESSION['user_authentificated'] = true;
     $_SESSION['pseudo'] = $account->pseudo;
     $_SESSION['account_id'] = $account->id;
+    $_SESSION['email'] = $account->email;
 
 
     error_log_login_success($account);

@@ -39,6 +39,7 @@ function api_clip_source()
     if (!current_user_can('submit_clip')) {
         api_respond_with_error();
     }
+
     //Valider le token
     if (!($_POST['token'] && is_valid_token($_POST['token'], 'submit_clip'))) {
         api_respond_with_error();
