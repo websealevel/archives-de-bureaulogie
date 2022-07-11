@@ -7,7 +7,6 @@ $color_end = '';
 
     <p>
         <small>Les champs marqués d'un asterisque(*) sont obligatoires</small>
-       
     </p>
 
     <p>

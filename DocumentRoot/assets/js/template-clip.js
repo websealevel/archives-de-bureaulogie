@@ -31,13 +31,6 @@ jQuery(function ($) {
     /**
      * Boutons de controle du lecteur/edition
      */
-    $("#video-source").on('play', function (event) {
-        $("#video-clip").trigger('pause')
-    })
-
-    $("#video-clip").on('play', function (event) {
-        $("#video-source").trigger('pause')
-    })
 
     $("#btn_clip_start").click(function () {
         set_timecode_start()
@@ -230,6 +223,11 @@ function init_on_landing() {
     fetch_clip_drafs_of_current_source(source_url)
 }
 
+function current_source() {
+    return $("#sources").find(":selected").attr('data-url')
+}
+
+
 /**
  * @see https://developers.google.com/youtube/iframe_api_reference
  */
@@ -254,7 +252,7 @@ function init_youtube_player(video_id) {
                     'autohide': 0,
                     'cc_load_policy': 0,
                     'controls': 2,
-                    'disablekb': 1,
+                    'disablekb': 0,
                     'iv_load_policy': 3,
                     'modestbranding': 1,
                     'rel': 0,
@@ -276,18 +274,42 @@ function init_youtube_player(video_id) {
     }
 }
 
+/**
+ * Retourne true si the player is playing, false sinon
+ */
+function video_is_playing() {
+    'use strict';
+    return youtube_player && youtube_player.hasOwnProperty('getPlayerState') && youtube_player.getPlayerState() === 1;
+}
+
+/**
+ * Seek the video to the currentTime.
+ * (And mark that the HTML slider *don't* move.)
+ *
+ * :param currentTime: 0 <= number <= 100
+ */
+function youTubePlayerCurrentTimeChange(currentTime) {
+    'use strict';
+    youtube_player.seekTo(currentTime * youtube_player.getDuration() / 100, true);
+}
+
+
 function onError() {
     console.log('Error')
 }
 
 function onReady() {
-    console.log('Ready')
 }
 
 function onStateChange() {
-    console.log('State change')
+
 }
 
+/**
+ * Retourne l'id de la vidéo youtube
+ * @param {string} url 
+ * @returns 
+ */
 function youtube_video_id(url) {
     const pos = url.indexOf('=')
     return url.substring(pos + 1)
@@ -297,7 +319,6 @@ function preview_before_start(tail_duration_in_sec = 2) {
     //Decocher la loop si cochée (sinon bug)
     $('#checkbox_loop_preview').prop('checked', false)
 
-    const source_url = current_source()
 
     const timecode_start = $("#timecode_start").val()
 
@@ -308,9 +329,7 @@ function preview_before_start(tail_duration_in_sec = 2) {
     if (timecode_start_in_sec_delay < 0)
         return
 
-    const src_timecodes = source_url + `#t=${timecode_start_in_sec_delay},${timecode_start_in_sec}`
-
-    $("#video-source").prop('src', src_timecodes)
+    youtube_player.seekTo(timecode_start_in_sec_delay)
     playvideo()
 }
 
@@ -337,7 +356,20 @@ function playvideo() {
     if (video_is_playing())
         return
     $("#btn_play_pause").prop('innerHTML', '<div class="shortcut">s</div> pause')
-    $("#video-source").trigger('play')
+    youtube_player.playVideo()
+}
+
+/**
+ * Play la vidéo source si en pause et inversement
+ */
+function play_pause() {
+    if (video_is_playing()) {
+        $("#btn_play_pause").prop('innerHTML', '<div class="shortcut">s</div> play')
+        youtube_player.pauseVideo()
+    } else {
+        $("#btn_play_pause").prop('innerHTML', '<div class="shortcut">s</div> pause')
+        youtube_player.playVideo()
+    }
 }
 
 
@@ -346,18 +378,11 @@ function playvideo() {
  * @returns 
  */
 function goto_and_play_start() {
-
-    const is_playing = video_is_playing()
     const timecode_start = $("#timecode_start").val()
-    const timecode_start_in_sec = hh_mm_ss_lll_to_seconds(timecode_start)
-    const src_timecodes = current_source() + `#t=${timecode_start_in_sec}`
-    $("#video-source").prop('src', src_timecodes)
-    if (is_playing)
+    const timecode_in_sec = hh_mm_ss_lll_to_seconds(timecode_start)
+    youtube_player.seekTo(timecode_in_sec)
+    if (video_is_playing())
         playvideo()
-}
-
-function current_source() {
-    return $("#sources").find(":selected").attr('data-url')
 }
 
 /**
@@ -365,12 +390,10 @@ function current_source() {
  * @returns 
  */
 function goto_and_play_end() {
-    const is_playing = video_is_playing()
     const timecode = $("#timecode_end").val()
     const timecode_in_sec = hh_mm_ss_lll_to_seconds(timecode)
-    const src_timecodes = current_source() + `#t=${timecode_in_sec}`
-    $("#video-source").prop('src', src_timecodes)
-    if (is_playing)
+    youtube_player.seekTo(timecode_in_sec)
+    if (video_is_playing())
         playvideo()
 }
 
@@ -382,41 +405,8 @@ function any_input_text_is_focused(event) {
     return $("#title").is(":focus") || $("#description").is(":focus")
 }
 
-/**
- * Retourne vrai si la vidéo est en train de jouer, faux sinon
- * @returns bool
- */
-function video_is_playing() {
-    return $("#video-source").prop('currentTime') > 0 && !$("#video-source").prop('paused')
-}
 
-/**
- * Retourne vrai si les timecods sont valides, faux sinon
- * @returns bool
- */
-function are_timecodes_valid() {
 
-    const timecode_start = $("#timecode_start").val()
-    const timecode_end = $("#timecode_end").val()
-
-    const timecode_start_in_sec = hh_mm_ss_lll_to_seconds(timecode_start)
-    const timecode_end_in_sec = hh_mm_ss_lll_to_seconds(timecode_end)
-
-    return timecode_start_in_sec < timecode_end_in_sec;
-}
-
-/**
- * Play la vidéo source si en pause et inversement
- */
-function play_pause() {
-    if (video_is_playing()) {
-        $("#btn_play_pause").prop('innerHTML', '<div class="shortcut">s</div> play')
-        $("#video-source").trigger('pause')
-    } else {
-        $("#btn_play_pause").prop('innerHTML', '<div class="shortcut">s</div> pause')
-        $("#video-source").trigger('play')
-    }
-}
 
 /**
  * Lance la prévisualisation de l'extrait
@@ -442,21 +432,9 @@ function play_pause_preview() {
     const timecode_start_in_sec = hh_mm_ss_lll_to_seconds(timecode_start)
     const timecode_end_in_sec = hh_mm_ss_lll_to_seconds(timecode_end)
 
-    const src_timecodes = current_source() + `#t=${timecode_start_in_sec},${timecode_end_in_sec}`
-    $("#video-source").prop('src', src_timecodes)
-
     /**
      * Gestion de l'option de loop.
      */
-    $("#video-source").on('timeupdate', function () {
-        if ($('#checkbox_loop_preview').is(':checked')) {
-            loop_video(this, timecode_start_in_sec, timecode_end_in_sec)
-        }
-        else {
-            if (has_reached_end(timecode_start_in_sec, timecode_end_in_sec))
-                this.pause()
-        }
-    })
 
     play_pause()
 }
@@ -468,9 +446,9 @@ function play_pause_preview() {
     */
 function shift_current_time(delay_in_s) {
     const delay = delay_in_s
-    const currentTime = $("#video-source").prop('currentTime')
+    const currentTime = youtube_player.getCurrentTime()
     const time = (currentTime + delay) < 0 ? 0 : currentTime + delay
-    $("#video-source").prop('currentTime', time)
+    youtube_player.seekTo(time)
 }
 
 
@@ -556,18 +534,18 @@ function item_draft_add_listeners($item_draft) {
         const load_marker_btn_is_clicked = event.originalEvent.target.className === class_btn_load_draft
 
         if (delete_marker_btn_is_clicked) {
-            remove_marker(this)
+            delete_clip_draft(this)
             return
         }
 
         if (load_marker_btn_is_clicked) {
-            load_marker(this)
+            load_clip_draft_on_player(this)
             return
         }
     })
 }
 
-function load_marker(item_draft) {
+function load_clip_draft_on_player(item_draft) {
 
     const data = {
         timecode_start: $(item_draft).attr('data-timecodestart'),
@@ -594,101 +572,13 @@ function marker_markup(uid, timecode_start, timecode_end, title, class_btn_delet
     </li>`
 }
 
-/**
- * Définit un markeur à la position courante du lecteur. Ajoute un listeneur sur le markeur pour servir de lien vers la vidéo (qui se déclenche a la position définie par le marker)
- */
-function save_clip_draft() {
-
-    const class_btn_delete_draft = 'btn-delete-draft'
-    const class_btn_load_draft = 'btn-load-draft'
-
-
-    const timecode_start = $("#timecode_start").val()
-    const timecode_end = $("#timecode_end").val()
-    const timecode_start_in_sec = hh_mm_ss_lll_to_seconds(timecode_start)
-    const timecode_end_in_sec = hh_mm_ss_lll_to_seconds(timecode_end)
-    const title = $("textarea#title").val()
-
-    //Envoyer une requete pour ajouter le marqueur.
-    $.post('/api/v1/markers', {
-        action: 'add',
-        source_name: current_source(),
-        timecode_start_in_sec: timecode_start_in_sec,
-        timecode_end_in_sec: timecode_end_in_sec,
-        title: title
-    }).done(function (response) {
-
-        //Si le formulaire est rejeté on récupere les erreurs et on les affiche
-        if (typeof response !== 'string' && '' !== response && 'errors' in response) {
-            const errors = response.errors
-            let items = []
-            for (const input in errors) {
-                items.push("<li>" + errors[input].message + "</li>")
-            }
-            $("div.success").html('')
-            $("div.errors").html('<ul>' + items.join('') + '</ul>')
-            return
-        }
-
-        const marker_id = response.data
-
-        const li = marker_markup(
-            marker_id,
-            timecode_start_in_sec,
-            timecode_end_in_sec, title,
-            class_btn_delete_draft,
-            class_btn_load_draft)
-
-        $("#list-markers").append(li)
-
-        const $li_appended = $("#list-markers").children("li:last-child")
-
-        item_draft_add_listeners($li_appended)
-
-        //Clean error messages.
-        $("div.errors").html('')
-        $("div.success").html("Le brouillon a bien été enregistré")
-
-
-    }).fail(function () {
-        $("div.success").html('')
-        $("div.errors").html('Hmm, il semblerait qu\'il y ait eu un problème de connexion avec le serveur. Ré-essayez svp.')
-    })
-}
-
-/**
- * Supprime un brouillon
- */
-function remove_marker(marker) {
-
-    $.post('/api/v1/markers', {
-        action: 'remove',
-        marker_id: $(marker).prop('id'),
-    }).done(function (response) {
-        //Si le formulaire est rejeté on récupere les erreurs et on les affiche
-        if (typeof response !== 'string' && '' !== response && 'errors' in response) {
-            const errors = response.errors
-            let items = []
-            for (const input in errors) {
-                items.push("<li>" + errors[input].message + "</li>")
-            }
-            $("div.success").html('')
-            $("div.errors").html('<ul>' + items.join('') + '</ul>')
-            return
-        }
-        $(marker).remove()
-        $("div.errors").html('')
-        $("div.success").html('Le brouillon a bien été supprimé')
-    })
-}
-
 
 
 /**
  * Met à jour le timecode de départ avec le temps courant du player video source
  */
 function set_timecode_start(start_in_sec) {
-    const timecode_seconds = $("#video-source").prop("currentTime")
+    const timecode_seconds = youtube_player.getCurrentTime()
     const hh_mm_ss_lll = seconds_to_hh_mm_ss_lll(timecode_seconds)
     $("#timecode_start").val(hh_mm_ss_lll)
     update_clip_duration()
@@ -698,7 +588,7 @@ function set_timecode_start(start_in_sec) {
 * Met à jour le timecode de fin avec le temps courant du player video source
 */
 function set_timecode_end() {
-    const timecode_seconds = $("#video-source").prop("currentTime")
+    const timecode_seconds = youtube_player.getCurrentTime()
     const hh_mm_ss_lll = seconds_to_hh_mm_ss_lll(timecode_seconds)
     $("#timecode_end").val(hh_mm_ss_lll)
     update_clip_duration()
@@ -764,63 +654,27 @@ function seconds_to_hh_mm_ss_lll(timecode_seconds) {
  * @returns string
  */
 function hh_mm_ss_lll_to_seconds(timecode_hh_mm_ss_lll) {
-
     const h = timecode_hh_mm_ss_lll.substring(0, 2)
     const m = timecode_hh_mm_ss_lll.substring(3, 5)
     const s = timecode_hh_mm_ss_lll.substring(6, 8)
     const l = timecode_hh_mm_ss_lll.substring(9, 12)
-
     const seconds = parseInt(h) * 3600 + parseInt(m) * 60 + parseInt(s) + parseInt(l) / 1000
-
     return seconds
-
 }
 
 /**
- * Joue la vidéo si le timecode courant arrive à la fin du timecode de fin
- * @param {string} video Element HTML video 
- * @param {*} start timecode de début (en secondes)
- * @param {*} end timecode de fin (en secondes)
+ * Retourne vrai si les timecods sont valides, faux sinon
+ * @returns bool
  */
-function loop_video(video, start, end) {
-    if (has_reached_end(video, end)) {
-        video.currentTime = start;
-        video.play();
-    }
-}
+function are_timecodes_valid() {
 
-/**
- * Retourne vrai si la vidéo est arrivée au timecode de fin, faux sinon
- * @param {*} video Element HTML video
- * @param {*} end timecode de fin (en secondes)
- * @returns 
- */
-function has_reached_end(video, end) {
-    return video.currentTime >= end
-}
+    const timecode_start = $("#timecode_start").val()
+    const timecode_end = $("#timecode_end").val()
 
+    const timecode_start_in_sec = hh_mm_ss_lll_to_seconds(timecode_start)
+    const timecode_end_in_sec = hh_mm_ss_lll_to_seconds(timecode_end)
 
-/**
- * Spinner ASCII
- * @link source: https://codepen.io/vpegado/pen/gbOpRm
- */
-
-const spinner_ascii = {
-    duration: 900,
-    element: '',
-    step: function (timestamp) {
-        var frame = Math.floor(timestamp * spinner_ascii.frames.length / spinner_ascii.duration) % spinner_ascii.frames.length;
-
-        if (!spinner_ascii.element) {
-            spinner_ascii.element = window.document.getElementById('btn-submit-clip');
-        }
-
-        ;
-        spinner_ascii.element.innerHTML = 'Traitement en cours, veuillez patienter ' + spinner_ascii.frames[frame];
-        spinner_ascii.requestID = window.requestAnimationFrame(spinner_ascii.step);
-    },
-    frames: '▤▧▥▨'.split(''),
-    requestID: ''
+    return timecode_start_in_sec < timecode_end_in_sec;
 }
 
 /**
@@ -868,3 +722,115 @@ function post_clip() {
         $("#btn-submit-clip").prop("disabled", false)
     })
 }
+
+/**
+ * Enregistre un clip brouillon. Ajoute un listeneur sur le markeur pour servir de lien vers la vidéo (qui se déclenche a la position définie par le marker)
+ */
+function save_clip_draft() {
+
+    const class_btn_delete_draft = 'btn-delete-draft'
+    const class_btn_load_draft = 'btn-load-draft'
+
+
+    const timecode_start = $("#timecode_start").val()
+    const timecode_end = $("#timecode_end").val()
+    const timecode_start_in_sec = hh_mm_ss_lll_to_seconds(timecode_start)
+    const timecode_end_in_sec = hh_mm_ss_lll_to_seconds(timecode_end)
+    const title = $("textarea#title").val()
+
+    //Envoyer une requete pour ajouter le marqueur.
+    $.post('/api/v1/markers', {
+        action: 'add',
+        source_name: current_source(),
+        timecode_start_in_sec: timecode_start_in_sec,
+        timecode_end_in_sec: timecode_end_in_sec,
+        title: title
+    }).done(function (response) {
+
+        //Si le formulaire est rejeté on récupere les erreurs et on les affiche
+        if (typeof response !== 'string' && '' !== response && 'errors' in response) {
+            const errors = response.errors
+            let items = []
+            for (const input in errors) {
+                items.push("<li>" + errors[input].message + "</li>")
+            }
+            $("div.success").html('')
+            $("div.errors").html('<ul>' + items.join('') + '</ul>')
+            return
+        }
+
+        const marker_id = response.data
+
+        const li = marker_markup(
+            marker_id,
+            timecode_start_in_sec,
+            timecode_end_in_sec, title,
+            class_btn_delete_draft,
+            class_btn_load_draft)
+
+        $("#list-markers").append(li)
+
+        const $li_appended = $("#list-markers").children("li:last-child")
+
+        item_draft_add_listeners($li_appended)
+
+        //Clean error messages.
+        $("div.errors").html('')
+        $("div.success").html("Le brouillon a bien été enregistré")
+
+
+    }).fail(function () {
+        $("div.success").html('')
+        $("div.errors").html('Hmm, il semblerait qu\'il y ait eu un problème de connexion avec le serveur. Ré-essayez svp.')
+    })
+}
+
+/**
+ * Supprime un brouillon
+ */
+function delete_clip_draft(marker) {
+
+    $.post('/api/v1/markers', {
+        action: 'remove',
+        marker_id: $(marker).prop('id'),
+    }).done(function (response) {
+        //Si le formulaire est rejeté on récupere les erreurs et on les affiche
+        if (typeof response !== 'string' && '' !== response && 'errors' in response) {
+            const errors = response.errors
+            let items = []
+            for (const input in errors) {
+                items.push("<li>" + errors[input].message + "</li>")
+            }
+            $("div.success").html('')
+            $("div.errors").html('<ul>' + items.join('') + '</ul>')
+            return
+        }
+        $(marker).remove()
+        $("div.errors").html('')
+        $("div.success").html('Le brouillon a bien été supprimé')
+    })
+}
+
+/**
+ * Spinner ASCII
+ * @link source: https://codepen.io/vpegado/pen/gbOpRm
+ */
+
+const spinner_ascii = {
+    duration: 900,
+    element: '',
+    step: function (timestamp) {
+        var frame = Math.floor(timestamp * spinner_ascii.frames.length / spinner_ascii.duration) % spinner_ascii.frames.length;
+
+        if (!spinner_ascii.element) {
+            spinner_ascii.element = window.document.getElementById('btn-submit-clip');
+        }
+
+        ;
+        spinner_ascii.element.innerHTML = 'Traitement en cours, veuillez patienter ' + spinner_ascii.frames[frame];
+        spinner_ascii.requestID = window.requestAnimationFrame(spinner_ascii.step);
+    },
+    frames: '▤▧▥▨'.split(''),
+    requestID: ''
+}
+
