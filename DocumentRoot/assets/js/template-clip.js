@@ -169,8 +169,6 @@ jQuery(function ($) {
         }
     })
 
-
-
     /**
      * Empecher de soumettre le form quand on press Enter dans un input text
      */
@@ -203,8 +201,6 @@ jQuery(function ($) {
             return
         }
     })
-
-
 });
 
 /**
