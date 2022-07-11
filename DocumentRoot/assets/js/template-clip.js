@@ -1,11 +1,17 @@
 jQuery(function ($) {
 
-
     /**
      * Variable globale : url de la vidéo source en cours d'édition
      */
     var source_url
+    /**
+     * Variable globale : le player youtube
+     */
     var youtube_player;
+
+    /**
+     * Variable globale : états divers liés à la preview,loop
+     */
     var state;
 
     init_on_landing()
