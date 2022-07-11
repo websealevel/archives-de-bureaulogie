@@ -936,6 +936,7 @@ function delete_clip(clip) {
             $("div.errors").html('<ul>' + items.join('') + '</ul>')
             return
         }
+        console.log(response)
         // $(clip).remove()
         $("div.errors").html('')
         $("div.success").html('Votre clip a été supprimé avec succès')

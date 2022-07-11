@@ -136,15 +136,7 @@ function remove_invalid_clips(string $path = PATH_CLIPS): array
     return $invalid;
 }
 
-/**
- * Supprime un extrait sur le PATH_CLIP. Renvoie vrai si la suppression a réussi, faux sinon
- * @param string $file_name Le nom du fichier extrait à supprimer
- * @return bool
- */
-function remove_clip(string $file_name): bool
-{
-    return false;
-}
+
 
 /**
  * Supprime les sources qui ne sont pas déclarées dans le fichier source

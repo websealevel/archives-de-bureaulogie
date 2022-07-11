@@ -38,7 +38,7 @@ function source_exists(string $source_name): bool
  * @param string $file_name Le nom du fichier à supprimer
  * @return bool
  */
-function delete_clip(string $file_name): bool
+function delete_file_clip(string $file_name): bool
 {
     $path = PATH_CLIPS . '/' . $file_name;
     write_log($path);

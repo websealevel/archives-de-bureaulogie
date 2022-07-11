@@ -11,8 +11,6 @@
 
 function api_delete_clip()
 {
-
-
     load_env();
 
     //Authentifier l'utilisateur+autorization
@@ -42,17 +40,25 @@ function api_delete_clip()
     $path_parts = pathinfo($clean['clip_name']);
     $basename = $path_parts['basename'];
 
-    $result = delete_clip($basename);
+    $file_deleted = delete_file_clip($basename);
 
-    if (!$result) {
+    if (!$file_deleted) {
         $message = sprintf("Le fichier %s n'a pas pu être supprimé mais il a été déclaré au moment de la demande de suppression", $basename);
         error_log($message);
     }
 
     //Supprimer la declaration
+    $metadata = extract_metadata_from_clip_name($basename);
 
+    $clip_removed_from_source = remove_clip($metadata['source_name'], $metadata['timecode_start'], $metadata['timecode_end']);
 
+    if (!$clip_removed_from_source) {
+        $message = sprintf("Le clip %s n'a pas pu être retiré du fichier source", $basename);
+        error_log($message);
+        api_respond_with_error(array(new InputValidation('', '', "Le clip n'a pas pu être supprimé. Une erreur est survenue.")));
+    }
 
+    api_respond_with_success(data: array(), key: 'extrait');
 }
 
 
