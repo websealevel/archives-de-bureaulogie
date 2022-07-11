@@ -17,6 +17,18 @@ const state = {
 
 jQuery(function ($) {
 
+    /**
+     * Hack: quand on click sur l'iframe YT, on perd le controle des evenement et des raccourcis claviers. Ici, des que l'iframe a le focus, on lui enleve avec blur(). Comme ça on peut utiliser
+     * les raccourcis meme quand on interagit avec l'iframe.
+     */
+    function checkFocus() {
+        if (document.activeElement == document.getElementsByTagName("iframe")[0]) {
+            const iframe = document.getElementsByTagName("iframe")[0]
+            document.activeElement.blur()
+        }
+    }
+    window.setInterval(checkFocus, 1000);
+
 
     /**
      * Evenement quand le select de source change
@@ -282,8 +294,7 @@ function init_youtube_player(video_id) {
 
 function onStateChange(event) {
 
-    //Hack: pour garder les raccourcis claviers utilisables il faut faire perdre le focus au player
-
+    console.log('onStateChange', event)
 
     if (event.data === YT.PlayerState.ENDED) {
 
@@ -314,8 +325,6 @@ function onStateChange(event) {
             state.preview = ''
             return
         }
-
-
     }
 }
 
