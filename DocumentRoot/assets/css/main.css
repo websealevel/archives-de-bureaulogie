@@ -178,6 +178,10 @@ summary .clip-item-header {
 	cursor: pointer;
 }
 
+#timeline{
+	display: inline-block;
+}
+
 button {
 	cursor: pointer;
 }

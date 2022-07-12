@@ -95,7 +95,10 @@ Sinon, utiliser le bouton 'Finir l'extrait ici' prévu à cet effet">
 
     <div id="editor-navigation">
 
+        <input id="timeline" type="range" value="0" min="0" max="100">
+
         <div class="first-row">
+
             <button id="btn_goto_and_play_start" class="btn-control" type="button" title="Aller au timecode de début" style="<?php echo $color_start; ?>;  ">
                 <span class="shortcut">a</span>
                 <?php echo htmlentities('[<---'); ?>

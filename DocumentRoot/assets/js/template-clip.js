@@ -15,6 +15,11 @@ const state = {
     preview: ''
 };
 
+
+const timeline = {
+    sliding: false
+}
+
 jQuery(function ($) {
 
     /**
@@ -304,7 +309,31 @@ function init_youtube_player(video_id) {
             }
 
         }, 500);
+
+
+        setInterval(displayTimeLine, 10)
     }
+}
+
+
+/**
+ * Fonction callback qui gere la timeline custom
+ * @returns 
+ */
+function displayTimeLine() {
+
+    if (!youtube_player.hasOwnProperty('getPlayerState'))
+        return
+
+    const current = youtube_player.getCurrentTime();
+    const duration = youtube_player.getDuration();
+    const currentPercent = (current && duration
+        ? current * 100 / duration
+        : 0);
+    if (!timeline.sliding) {
+        $("#timeline").val(currentPercent)
+    }
+
 }
 
 function onStateChange(event) {

@@ -39,6 +39,7 @@ Il sert également de prétexte pour construire un outil en *vanilla php* pour s
         - [Solution](#solution)
       - [Youtube-dl renvoie l'erreur `'ERROR: unable to download video data: HTTP Error 403: Forbidden while using youtube_dl'`](#youtube-dl-renvoie-lerreur-error-unable-to-download-video-data-http-error-403-forbidden-while-using-youtube_dl)
       - [FFMPEG renvoie une erreur `'Encoding Failed'`](#ffmpeg-renvoie-une-erreur-encoding-failed)
+  - [Possibilités concernant l'hébergement](#possibilités-concernant-lhébergement)
   - [Ressources](#ressources)
 
 
@@ -332,6 +333,10 @@ Il faut supprimer le cache
 Cette erreur est envoyée au moment de l'écriture du fichier dans le dossier. Il faut s'assurer de donner les droits d'écriture à l'utiliasteur nginx sur le dossier.
 
 
+## Possibilités concernant l'hébergement
+
+Utiliser PeerTube pour uplaod les fichiers et utiliser leur player embed.
+
 ## Ressources
 
 - [Twitter API](https://developer.twitter.com/en/docs/twitter-api)
@@ -358,3 +363,5 @@ Cette erreur est envoyée au moment de l'écriture du fichier dans le dossier. I
 - [Audio loudness, Google doc](https://developers.google.com/assistant/tools/audio-loudness), chapitre sur ffmpeg et exemple
 - [Capistrano](https://capistranorb.com/), un outil de déploiement automatique, simple, prédictible et réversible écrit en Ruby
 - [Extension memcached](https://pecl.php.net/package/memcached)
+- [PeerTube Player API](https://docs.joinpeertube.org/api-embed-player)
+- [PeerTube API](https://docs.joinpeertube.org/api-rest-reference.html)
