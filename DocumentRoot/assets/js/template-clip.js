@@ -262,8 +262,8 @@ function init_youtube_player(video_id) {
         youtube_player = new YT.Player('youtube-player',
             {
                 videoId: video_id,
-                height: '647',
-                width: '1150',
+                height: '600',
+                width: '1300',
                 playerVars: {
                     'autohide': 0,
                     'cc_load_policy': 0,
