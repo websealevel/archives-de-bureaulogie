@@ -178,8 +178,8 @@ summary .clip-item-header {
 	cursor: pointer;
 }
 
-#timeline{
-	display: inline-block;
+#slider-range{
+	margin:15px;
 }
 
 button {

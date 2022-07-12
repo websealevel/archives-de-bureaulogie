@@ -230,6 +230,41 @@ function init_on_landing() {
 
     const video_id = youtube_video_id(source_url)
 
+
+    //init range timeline
+    $("#slider-range").slider({
+        min: 0,
+        max: 100,
+        values: [0, 10, 20],
+        step: 0.001,
+        animate: "fast",
+        slide: function (event, ui) {
+
+            if (ui.handleIndex == handles.currentTime) {
+                if (youTubePlayerActive()) {
+                    youtube_player.seekTo(ui.value * youtube_player.getDuration() / 100, true);
+                }
+            }
+
+            if (ui.handleIndex == handles.start) {
+                if (youTubePlayerActive()) {
+                    const value = ui.value
+                    const start_in_sec = value * youtube_player.getDuration() / 100
+                    $("#timecode_start").val(seconds_to_hh_mm_ss_lll(start_in_sec))
+                }
+            }
+
+            if (ui.handleIndex == handles.end) {
+                if (youTubePlayerActive()) {
+                    const value = ui.value
+                    const start_in_sec = value * youtube_player.getDuration() / 100
+                    $("#timecode_end").val(seconds_to_hh_mm_ss_lll(start_in_sec))
+                }
+            }
+        }
+    })
+
+
     init_youtube_player(video_id)
 
     /**
@@ -262,6 +297,20 @@ function reset_fields() {
 function current_source() {
     return $("#sources").find(":selected").attr('data-url')
 }
+
+
+function update_timecode_start_with_handle() {
+    const start = $("#slider-range").slider('values', handles.start)
+    const start_in_sec = start * youtube_player.getDuration() / 100
+    $("#timecode_start").val(seconds_to_hh_mm_ss_lll(start_in_sec))
+}
+
+function update_timecode_end_with_handle() {
+    const end = $("#slider-range").slider('values', handles.end)
+    const end_in_sec = end * youtube_player.getDuration() / 100
+    $("#timecode_end").val(seconds_to_hh_mm_ss_lll(end_in_sec))
+}
+
 
 
 /**
@@ -301,7 +350,8 @@ function init_youtube_player(video_id) {
 
                     },
                     'onReady': function () {
-
+                        update_timecode_start_with_handle()
+                        update_timecode_end_with_handle()
                     },
                     'onStateChange': onStateChange
                 }
@@ -319,42 +369,12 @@ function init_youtube_player(video_id) {
 
 
 
-        $("#slider-range").slider({
-            min: 0,
-            max: 100,
-            values: [0, 10, 20],
-            step: 0.001,
-            animate: "fast",
-            slide: function (event, ui) {
-
-                if (ui.handleIndex == handles.currentTime) {
-                    if (youTubePlayerActive()) {
-                        youtube_player.seekTo(ui.value * youtube_player.getDuration() / 100, true);
-                    }
-                }
-
-                if (ui.handleIndex == handles.start) {
-                    if (youTubePlayerActive()) {
-                        const value = ui.value
-                        const start_in_sec = value * youtube_player.getDuration() / 100
-                        $("#timecode_start").val(seconds_to_hh_mm_ss_lll(start_in_sec))
-                    }
-                }
-
-                if (ui.handleIndex == handles.end) {
-                    if (youTubePlayerActive()) {
-                        const value = ui.value
-                        const start_in_sec = value * youtube_player.getDuration() / 100
-                        $("#timecode_end").val(seconds_to_hh_mm_ss_lll(start_in_sec))
-                    }
-                }
-            }
-        })
 
         setInterval(updateTimeLineSlider, 1000)
 
     }
 }
+
 
 function youTubePlayerActive() {
     return youtube_player && youtube_player.hasOwnProperty('getPlayerState');
