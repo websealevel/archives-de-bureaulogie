@@ -264,7 +264,6 @@ function init_on_landing() {
         }
     })
 
-
     init_youtube_player(video_id)
 
     /**
@@ -311,8 +310,6 @@ function update_timecode_end_with_handle() {
     $("#timecode_end").val(seconds_to_hh_mm_ss_lll(end_in_sec))
 }
 
-
-
 /**
  * Initialisation et instanciation du player embed youtube
  * @see https://developers.google.com/youtube/iframe_api_reference
@@ -357,21 +354,19 @@ function init_youtube_player(video_id) {
                 }
             })
 
+        //Update affichage temps courant, curseur slider currentTime
         setInterval(function () {
-            if (youtube_player.hasOwnProperty('getPlayerState')) {
-                const timecode_seconds = youtube_player.getCurrentTime()
-                const hh_mm_ss_lll = seconds_to_hh_mm_ss_lll(timecode_seconds)
-                $("#current-time").html(hh_mm_ss_lll)
-            }
+
+
+            if (!youTubePlayerActive())
+                return
+
+            const currentTime = youtube_player.getCurrentTime()
+            const duration = youtube_player.getDuration();
+            $("#current-time").html(seconds_to_hh_mm_ss_lll(currentTime))
+            updateTimeLineSlider(currentTime, duration)
 
         }, 500);
-
-
-
-
-
-        setInterval(updateTimeLineSlider, 1000)
-
     }
 }
 
@@ -381,13 +376,8 @@ function youTubePlayerActive() {
 }
 
 
-function updateTimeLineSlider() {
+function updateTimeLineSlider(current, duration) {
 
-    if (!youTubePlayerActive())
-        return
-
-    const current = youtube_player.getCurrentTime();
-    const duration = youtube_player.getDuration();
     const currentPercent = (current && duration
         ? current * 100 / duration
         : 0);
