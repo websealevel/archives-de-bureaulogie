@@ -37,10 +37,10 @@ $phrase = $random_phrases[$rando_key];
     <div class="video-main">
 
         <div id="youtube-player"></div>
-        <div>
+        <div id="side-player">
 
-            <fieldset>
-                <legend>HAL 9000 (bureaulogy IA project)</legend>
+            <fieldset id="hal">
+                <legend>bHAL 9000 <small>(bureaulogy IA project)</small></legend>
 
                 <div class="errors" style="color: red;"></div>
                 <div class="success" style="color: green;">Bienvenue, <?php esc_html_e(current_user_pseudo()); ?>. <?php echo $phrase; ?> </div>
@@ -70,7 +70,7 @@ Sinon, utiliser le bouton 'Finir l'extrait ici' prévu à cet effet">
 
             <div class="label-input">
                 <label for="title">Titre</label>
-                <textarea name="title" id="title" rows="2" cols="30" placeholder="Texte qui apparaîtra dans le tweet" maxlength="280" autocapitalize="sentences" spellcheck="true"></textarea>
+                <textarea name="title" id="title" rows="4" cols="50" placeholder="Texte qui apparaîtra dans le tweet" maxlength="280" autocapitalize="sentences" spellcheck="true"></textarea>
             </div>
 
             <div class="label-input">
@@ -137,7 +137,7 @@ Sinon, utiliser le bouton 'Finir l'extrait ici' prévu à cet effet">
                 <span class="shortcut">o</span>
                 <?php echo htmlentities('finir l\'extrait ici]'); ?>
             </button>
-            <button id="btn_play_500ms_before_start" class="btn-control" type="button" title="Visualiser 2s avant le timecode de début" style="<?php echo $color_start; ?>;  ">
+            <button id="btn_play_500ms_before_start" class="btn-control" type="button" title="Visualiser 3s avant le timecode de début" style="<?php echo $color_start; ?>;  ">
                 <span class="shortcut">w</span>
                 <?php echo htmlentities('=>['); ?>
             </button>
@@ -145,12 +145,12 @@ Sinon, utiliser le bouton 'Finir l'extrait ici' prévu à cet effet">
                 <span class="shortcut">p</span>
                 <?php echo htmlentities('[play]'); ?>
             </button>
-            <button id="btn_play_500ms_after_end" class="btn-control" type="button" title="Visualiser 2s après le timecode de fin">
+            <button id="btn_play_500ms_after_end" class="btn-control" type="button" title="Visualiser 3s après le timecode de fin">
                 <span class="shortcut">x</span>
                 <?php echo htmlentities(']=>'); ?>
             </button>
 
-            <button id="btn_save_clip_draft" class="btn-control" type="button" title="Définir un marqueur à la position courante du curseur de lecture">
+            <button id="btn_save_clip_draft" class="btn-control" type="button" title="Enregistrer les timecodes actuels ainsi que le titre de l'extrait comme brouillon">
                 <span class="shortcut">m</span>
                 <?php echo htmlentities('enregistrer le brouillon'); ?>
             </button>

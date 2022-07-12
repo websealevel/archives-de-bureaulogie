@@ -85,6 +85,26 @@ button {
 
 }
 
+#current-time {
+	font-family: 'Courier New', Courier, monospace;
+	font-size: 22px;
+	background-color: black;
+	padding:15px;
+	color:white;
+	display: inline-block;
+	margin:5px;
+}
+
+#side-player{
+	margin: 15px;
+}
+
+#hal{
+	font-family: 'Courier New', Courier, monospace;
+	padding:15px;
+	color:black;
+}
+
 #clip-duration.error {
 	color: red;
 	font-size: 28px;
@@ -133,11 +153,11 @@ span.shortcut {
 }
 
 #btn-submit-clip {
-	min-width: 300px;
-	width: auto;
-	padding: 20px;
-	font-size: 45px;
+	font-size: 32px;
 	justify-content: center;
+	width: auto;
+	padding: 12px;
+	min-width: 200px;
 }
 
 #btn_save_clip_draft,

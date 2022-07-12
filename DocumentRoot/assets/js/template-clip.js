@@ -230,12 +230,22 @@ function init_on_landing() {
             videoId: youtube_video_id(yt_url),
         })
 
+        reset_fields()
+
         fetch_clips_of_current_source(source_url)
         fetch_clip_drafs_of_current_source(source_url)
     })
 
     fetch_clips_of_current_source(source_url)
     fetch_clip_drafs_of_current_source(source_url)
+}
+
+
+function reset_fields() {
+    $("#timecode_start").val('00:00:00.000')
+    $("#timecode_end").val('00:00:00.000')
+    $("#title").val('')
+    $("#description").val('')
 }
 
 function current_source() {
