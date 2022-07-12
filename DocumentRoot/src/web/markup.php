@@ -82,7 +82,12 @@ function map_clip_to_html_item(DOMElement $clip, string $html_item, array $show_
 function html_clip_item(string $title, string $description, string $timecode_start, string $timecode_end, string $author, string $created_on, string $src, string $email): string
 {
 
-    $summary = sprintf('<div class="clip-item-header">%s %s-%s </div>%s <button class="btn-delete-clip" id="%s">Supprimer</button>', $title, $timecode_start, $timecode_end, html_download_link($src), $email);
+    if ($email === current_user_email()) {
+        $summary = sprintf('<div class="clip-item-header">%s %s-%s </div>%s <button class="btn-delete-clip" id="%s">Supprimer</button>', $title, $timecode_start, $timecode_end, html_download_link($src), $email);
+    } else {
+        $summary = sprintf('<div class="clip-item-header">%s %s-%s </div>%s', $title, $timecode_start, $timecode_end, html_download_link($src));
+    }
+
 
     $details = sprintf("%s %s <small>%s</small> <small>auteur: %s, crée le: %s</small>", html_video_markup($src, 500), html_download_link($src), $description, $author, $created_on);
 
