@@ -697,12 +697,10 @@ function post_clip() {
             $("div.success").html('')
             $("div.errors").html('<ul>' + items.join('') + '</ul>')
         } else {
-            console.log(response)
             $("div.errors").html('')
             $("div.success").html("L'extrait a été ajouté avec succès !")
             $("#list-clips-on-current-source").append(response.extrait)
             const $li_appended = $("#list-clips-on-current-source").children("li:last-child")
-            console.log($li_appended)
             clip_add_listeners($li_appended)
         }
 
@@ -925,14 +923,15 @@ function delete_clip_draft(marker) {
  */
 function delete_clip(clip) {
 
-    $.post('/api/v1/delete-clip', {
+    const data = {
         author_email: $(clip).find('.btn-delete-clip').attr('id'),
         clip_name: $(clip).attr('name'),
         token: $("#token_delete_clip").val(),
         source_name: $("#sources").find('option:selected').attr("id"),
         PHPSESSID: PHPSESSID
-    }).done(function (response) {
-        console.log(response)
+    }
+
+    $.post('/api/v1/delete-clip', data).done(function (response) {
         //Si le formulaire est rejeté on récupere les erreurs et on les affiche
         if (typeof response !== 'string' && '' !== response && 'errors' in response) {
             const errors = response.errors

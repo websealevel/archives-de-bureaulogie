@@ -122,12 +122,21 @@ function api_clip_source()
     //Renvoyer un markup html contenant le nouveau clip à ajouter à la liste des extraits présents sur la source.
     $src = path_clip($path_parts['basename']);
 
-    $html = html_clip_item($inputs['title']->value, $inputs['description']->value, $timecode_start, $timecode_end, current_user_pseudo(), $created_on, $src,current_user_email());
+    $html = html_clip_item($inputs['title']->value, $inputs['description']->value, $timecode_start, $timecode_end, current_user_pseudo(), $created_on, $src, current_user_email());
+
+    $item =  sprintf(
+        '<%s name="%s">%s</%s>',
+        'li',
+        $src,
+        $html,
+        'li'
+    );
+
 
     header('Content-Type: application/json; charset=utf-8');
     $response = json_encode(array(
         'statut' => 200,
-        'extrait' => $html
+        'extrait' => $item
     ));
     echo $response;
     exit;
