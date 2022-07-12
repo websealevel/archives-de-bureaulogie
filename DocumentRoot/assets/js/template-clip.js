@@ -30,15 +30,7 @@ jQuery(function ($) {
     window.setInterval(checkFocus, 1000);
 
 
-    /**
-     * Evenement quand le select de source change
-     */
-    $("#sources").change(function () {
-        source_url = $(this).find(":selected").attr('id')
-        $("#video-source").prop('src', source_url)
-        fetch_clips_of_current_source(source_url)
-        fetch_clip_drafs_of_current_source(source_url)
-    })
+
 
     /**
      * Boutons de controle du lecteur/edition
@@ -228,6 +220,19 @@ function init_on_landing() {
     const video_id = youtube_video_id(source_url)
 
     init_youtube_player(video_id)
+
+    /**
+    * Evenement quand le select de source change
+    */
+    $("#sources").change(function () {
+        const yt_url = $(this).find('option:selected').attr("data-url")
+        youtube_player.cueVideoById({
+            videoId: youtube_video_id(yt_url),
+        })
+
+        fetch_clips_of_current_source(source_url)
+        fetch_clip_drafs_of_current_source(source_url)
+    })
 
     fetch_clips_of_current_source(source_url)
     fetch_clip_drafs_of_current_source(source_url)

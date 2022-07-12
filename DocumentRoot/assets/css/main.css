@@ -246,3 +246,14 @@ nav.footer-links ul {
 nav.footer-links ul li {
 	margin: 20px;
 }
+
+
+
+a:link,
+a:visited {
+	color: blue;
+}
+
+a:hover {
+	color: #e700b3;
+}
