@@ -317,9 +317,6 @@ function init_youtube_player(video_id) {
         }, 500);
 
 
-        setInterval(displayTimeLine, 1000)
-
-        setInterval(displayTimeLineRange, 1000)
 
 
         $("#slider-range").slider({
@@ -335,14 +332,38 @@ function init_youtube_player(video_id) {
                         youtube_player.seekTo(ui.value * youtube_player.getDuration() / 100, true);
                     }
                 }
+
+                if (ui.handleIndex == handles.start) {
+                    if (youTubePlayerActive()) {
+                        const value = ui.value
+                        const start_in_sec = value * youtube_player.getDuration() / 100
+                        $("#timecode_start").val(seconds_to_hh_mm_ss_lll(start_in_sec))
+                    }
+                }
+
+                if (ui.handleIndex == handles.end) {
+                    if (youTubePlayerActive()) {
+                        const value = ui.value
+                        const start_in_sec = value * youtube_player.getDuration() / 100
+                        $("#timecode_end").val(seconds_to_hh_mm_ss_lll(start_in_sec))
+                    }
+                }
             }
         })
+
+        setInterval(updateTimeLineSlider, 1000)
+
     }
 }
 
-function displayTimeLineRange() {
+function youTubePlayerActive() {
+    return youtube_player && youtube_player.hasOwnProperty('getPlayerState');
+}
 
-    if (!youtube_player.hasOwnProperty('getPlayerState'))
+
+function updateTimeLineSlider() {
+
+    if (!youTubePlayerActive())
         return
 
     const current = youtube_player.getCurrentTime();
@@ -353,47 +374,10 @@ function displayTimeLineRange() {
 
     const start = $("#slider-range").slider('values', 1)
     const end = $("#slider-range").slider('values', 2)
-    console.log('here',start, end)
 
     $("#slider-range").slider({
         values: [currentPercent, start, end]
     });
-}
-
-
-/**
- * Fonction callback qui gere la timeline custom
- * @returns 
- */
-function displayTimeLine() {
-
-    if (!youtube_player.hasOwnProperty('getPlayerState'))
-        return
-
-    const current = youtube_player.getCurrentTime();
-    const duration = youtube_player.getDuration();
-    const currentPercent = (current && duration
-        ? current * 100 / duration
-        : 0);
-    if (!timeline.sliding) {
-        $("#timeline").val(currentPercent)
-    }
-
-}
-
-function youTubePlayerActive() {
-    return youtube_player && youtube_player.hasOwnProperty('getPlayerState');
-}
-
-function timeLineIsSliding() {
-    timeline.sliding = true
-}
-
-function timeLineIsChanging(percentage) {
-    timeline.sliding = false;
-    if (youTubePlayerActive()) {
-        youtube_player.seekTo(percentage * youtube_player.getDuration() / 100, true);
-    }
 }
 
 function onStateChange(event) {
