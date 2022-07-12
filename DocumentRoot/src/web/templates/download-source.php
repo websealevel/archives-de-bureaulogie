@@ -63,7 +63,7 @@ $token = register_api_token($account, 'add_source');
         </p>
         <p>
             <label for="source_url">Copiez/collez l'url de la vidéo youtube <span class="required">*</span></label>
-            <input type="url" name="source_url" title="l'url complète de la vidéo youtube" value="" required>
+            <input type="url" id="url" name="source_url" title="l'url complète de la vidéo youtube" value="" required>
         </p>
         <p name="preview_source">
             <iframe width="420" height="315" src="">

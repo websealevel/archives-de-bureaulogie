@@ -29,12 +29,7 @@ $phrase = $random_phrases[$rando_key];
         <small>Les champs marqués d'un asterisque(*) sont obligatoires</small>
     </p>
 
-    <p>
-        <small>Conseil : pour masquer les vidéos recommandées lorsque la vidéo est mise en pause, installer l'extension <a href="https://addons.mozilla.org/en-US/firefox/addon/ublock-origin/">uBlock Origin</a>. Aller dans les <em>Settings</em> de l'extension, puis <em>My filters</em> et ajouter la règle suivante <code>youtube.com##.ytp-pause-overlay</code>. Appliquer les cahngements puis rechargez la page.</small>
-    </p>
-
-
-    <div class="video-main">
+    <div id="editor">
 
         <div id="youtube-player"></div>
         <div id="side-player">
@@ -154,24 +149,21 @@ Sinon, utiliser le bouton 'Finir l'extrait ici' prévu à cet effet">
                 <span class="shortcut">m</span>
                 <?php echo htmlentities('enregistrer le brouillon'); ?>
             </button>
-        </div>
 
-        <div class="last-row">
-
-
-            <button type="submit" id="btn-submit-clip" value="Cut !" class="btn-control">
+            <button type="submit" id="btn-submit-clip" value="Cut !" class="btn-control" title="Créer l'extrait">
                 <span class="shortcut">
                     Shift+Enter
                 </span>
                 Cut !
             </button>
-
-            <div id="container-option-btn-submit">
-                <input type="hidden" name="token" id="token" value="<?php echo $token_submit_clip; ?>">
-                <input type="hidden" name="token_delete_clip" id="token_delete_clip" value="<?php echo $token_delete_clip; ?>">
-                <input type="hidden" name="source_name" id="source_name" value="">
-            </div>
         </div>
+
+
+
+
+        <input type="hidden" name="token" id="token" value="<?php echo $token_submit_clip; ?>">
+        <input type="hidden" name="token_delete_clip" id="token_delete_clip" value="<?php echo $token_delete_clip; ?>">
+        <input type="hidden" name="source_name" id="source_name" value="">
 
 
         <span id="spinner"></span>

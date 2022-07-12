@@ -14,7 +14,6 @@ textarea {
 	resize: none;
 }
 
-
 .screen-reader-text {
 	border: 0;
 	clip: rect(1px, 1px, 1px, 1px);
@@ -45,9 +44,9 @@ button {
 
 .btn-edition {
 	margin: 5px 0;
+	padding: 5px;
 	font-size: 24px;
 }
-
 
 #btn_clip_start,
 #btn_clip_end {
@@ -58,32 +57,23 @@ button {
 	margin-left: 30px;
 }
 
-#fieldset-video-clip {
-	height: 430px;
-	display: flex;
-	justify-content: center;
-	align-items: center;
+#youtube-player{
+	min-width: 1300px;
+	min-height: 600px;
 }
 
-
 #clip-duration {
-	font-size: 40px;
 	font-weight: bold;
-	padding: 20px;
-	border: 3px solid black;
 	display: inline-block;
 	font-family: 'Courier New', Courier, monospace;
 	margin: 5px;
-}
-
-#clip-duration {
-	width: 310px;
+	width: 250px;
 	text-align: center;
-	font-size: 30px;
-	padding: 15px;
+	font-size: 26px;
+	padding: 2px 5px;
 	border: 2px solid black;
-
 }
+
 
 #current-time {
 	font-family: 'Courier New', Courier, monospace;
@@ -96,7 +86,11 @@ button {
 }
 
 #side-player{
-	margin: 15px;
+	margin: 10px;
+}
+
+#url{
+	min-width: 600px;
 }
 
 #hal{
@@ -137,8 +131,8 @@ button {
 
 .btn-control {
 	height: 70px;
-	width: 70px;
-	font-size: 22px;
+	font-size: 1em;
+	padding: 10px;
 }
 
 span.shortcut {
@@ -146,18 +140,17 @@ span.shortcut {
 }
 
 .btn-control .shortcut {
-	font-size: 12px;
+	font-size: .8rem;
 	font-family: 'Courier New', Courier, monospace;
 	font-style: italic;
 	text-align: left;
 }
 
 #btn-submit-clip {
-	font-size: 32px;
+	font-size: 1.5rem;
 	justify-content: center;
 	width: auto;
 	padding: 12px;
-	min-width: 200px;
 }
 
 #btn_save_clip_draft,
@@ -181,27 +174,13 @@ li {
 
 summary .clip-item-header {
 	color: blue;
-	text-decoration: underline blue;
+	text-decoration: none;
 	cursor: pointer;
-}
-
-.two-col-side {
-	display: flex;
-	gap: 20px;
-}
-
-.video-main {
-	display: flex;
-}
-
-.video {
-	width: 80%;
 }
 
 button {
 	cursor: pointer;
 }
-
 
 #editor-navigation {
 	display: flex;
@@ -209,23 +188,11 @@ button {
 	justify-content: start;
 }
 
-.first-row,
-.second-row,
-.last-row {
+.first-row {
 	display: flex;
 	justify-content: flex-start;
 	gap: 3px;
 	margin: 10px;
-}
-
-.second-row .btn-control {
-	height: 80px;
-	width: 80px;
-	font-size: 24px;
-}
-
-.last-row {
-	justify-content: flex-end;
 }
 
 nav.footer-links {
@@ -244,7 +211,6 @@ nav.footer-links ul li {
 }
 
 
-
 a:link,
 a:visited {
 	color: blue;
@@ -252,4 +218,12 @@ a:visited {
 
 a:hover {
 	color: #e700b3;
+}
+
+#editor{
+	display: flex;
+}
+
+#list-clips-on-current-source{
+	list-style: none;
 }

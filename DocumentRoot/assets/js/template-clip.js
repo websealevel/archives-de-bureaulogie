@@ -503,7 +503,7 @@ function play_pause_preview() {
 
     if (!are_timecodes_valid()) {
         $("div.success").html('')
-        $("div.errors").html("<p>Impossible de prévisualiser l'extrait : le timecode de fin doit être plus grand que le timecode de début</p>")
+        $("div.errors").html("<p>Je suis désolé, je ne crois pas que je puisse faire cela.</p>")
         $("#timecode_start").addClass('error')
         $("#timecode_end").addClass('error')
         return
@@ -898,7 +898,7 @@ function save_clip_draft() {
 
         //Clean error messages.
         $("div.errors").html('')
-        $("div.success").html("Le brouillon a bien été enregistré")
+        $("div.success").html("Le brouillon a été enregistré, merci.")
 
 
     }).fail(function () {
@@ -929,7 +929,7 @@ function delete_clip_draft(marker) {
         }
         $(marker).remove()
         $("div.errors").html('')
-        $("div.success").html('Le brouillon a bien été supprimé')
+        $("div.success").html('Le brouillon a été supprimé, comme demandé.')
     })
 }
 
@@ -960,7 +960,7 @@ function delete_clip(clip) {
         }
         $(clip).remove()
         $("div.errors").html('')
-        $("div.success").html('Votre clip a été supprimé avec succès')
+        $("div.success").html("L'extrait a été malheureusement supprimé.")
     })
 }
 

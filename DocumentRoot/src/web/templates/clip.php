@@ -14,7 +14,7 @@ require_once __DIR__ . '/../api/token.php';
 
 if (!current_user_can('submit_clip'))
     redirect('/', 'notices', array(new Notice('Vous devez être authentifié pour soumettre un clip', NoticeStatus::Error)));
-    
+
 
 /**
  * Délivre un jeton pour consommer l'api au compte utilisateur
@@ -30,6 +30,8 @@ $token_delete_clip = register_api_token($account, 'delete_clip');
 
 <main class="form-clip">
 
+    <small>Conseil : pour masquer les vidéos recommandées lorsque la vidéo est mise en pause, installer l'extension <a href="https://addons.mozilla.org/en-US/firefox/addon/ublock-origin/">uBlock Origin</a>. Aller dans les <em>Settings</em> de l'extension, puis <em>My filters</em> et ajouter la règle suivante <code>youtube.com##.ytp-pause-overlay</code>. Appliquer les cahngements puis rechargez la page.</small>
+
     <h2>Soumettre un extrait</h2>
 
     <form action="clip-source">
@@ -38,16 +40,21 @@ $token_delete_clip = register_api_token($account, 'delete_clip');
 
     <?php require_once 'parts/clip-controls.php' ?>
 
+    <hr>
 
-    <section>
+    <div class="cols-2">
+        <section>
+            <h2>Vos brouillons</h2>
+            <ul id="list-markers"></ul>
+        </section>
 
-        <h2>Vos brouillons</h2>
-        <ul id="list-markers"></ul>
-    </section>
+        <section>
+            <?php esc_html_list_clips_of_source_e(show_data: array('details'), name_attr: 'list-clips-on-current-source'); ?>
+        </section>
 
-    <section>
-        <?php esc_html_list_clips_of_source_e(show_data: array('details'), name_attr: 'list-clips-on-current-source'); ?>
-    </section>
+    </div>
+
+
 
 
 </main>
