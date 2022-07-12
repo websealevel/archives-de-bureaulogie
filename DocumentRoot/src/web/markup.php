@@ -83,7 +83,7 @@ function html_clip_item(string $title, string $description, string $timecode_sta
 {
 
     if ($email === current_user_email()) {
-        $summary = sprintf('<div class="clip-item-header">%s %s-%s </div>%s <button class="btn-delete-clip" id="%s">Supprimer</button>', $title, $timecode_start, $timecode_end, html_download_link($src), $email);
+        $summary = sprintf('<div class="clip-item-header">%s %s-%s </div>%s <button type="button" class="btn-delete-clip" id="%s">Supprimer</button>', $title, $timecode_start, $timecode_end, html_download_link($src), $email);
     } else {
         $summary = sprintf('<div class="clip-item-header">%s %s-%s </div>%s', $title, $timecode_start, $timecode_end, html_download_link($src));
     }

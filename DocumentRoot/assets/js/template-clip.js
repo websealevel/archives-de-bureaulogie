@@ -568,8 +568,8 @@ function marker_markup(uid, timecode_start, timecode_end, title, class_btn_delet
     <span>${title}</span> 
     <span class="time">${timecode_start}</span> - 
     <span class="time">${timecode_end}</span> 
-    <button class="${class_btn_load}">Charger le brouillon</button>
-    <button class="${class_btn_delete}">Supprimer</button>
+    <button type="button" class="${class_btn_load}">Charger le brouillon</button>
+    <button type="button" class="${class_btn_delete}">Supprimer</button>
     </li>`
 }
 
@@ -686,6 +686,7 @@ function are_timecodes_valid() {
  * Post le formulaire pour créer l'extrait et traiteement de la réponse.
  */
 function post_clip() {
+
     //Disable le bouton, message traitement en cours + spinner ascii
     $("#btn-submit-clip").prop("disabled", true)
     window.requestAnimationFrame(spinner_ascii.step);
