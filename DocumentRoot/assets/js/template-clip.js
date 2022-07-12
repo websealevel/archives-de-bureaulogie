@@ -336,6 +336,26 @@ function displayTimeLine() {
 
 }
 
+/**
+ * :return: true if the player is active, else false
+ */
+function youTubePlayerActive() {
+    return youtube_player && youtube_player.hasOwnProperty('getPlayerState');
+}
+
+function timeLineIsSliding() {
+    timeline.sliding = true
+}
+
+function timeLineIsChanging(percentage) {
+
+    console.log(percentage)
+    timeline.sliding = false;
+    if (youTubePlayerActive()) {
+        youtube_player.seekTo(percentage * youtube_player.getDuration() / 100, true);
+    }
+}
+
 function onStateChange(event) {
 
     if (event.data === YT.PlayerState.ENDED) {

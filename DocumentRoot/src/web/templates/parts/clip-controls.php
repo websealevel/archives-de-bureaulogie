@@ -95,7 +95,7 @@ Sinon, utiliser le bouton 'Finir l'extrait ici' prévu à cet effet">
 
     <div id="editor-navigation">
 
-        <input id="timeline" type="range" value="0" min="0" max="100">
+        <input id="timeline" type="range" value="0" min="0" max="100" oninput="timeLineIsSliding()" onchange="timeLineIsChanging(this.value)">
 
         <div class="first-row">
 
