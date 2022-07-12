@@ -27,6 +27,7 @@ autoload();
     <link rel="canonical" href="https://archives-de-bureaulogie.fr">
     <!-- Minified version -->
     <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../assets/css/jquery-ui.min.css">
 </head>
 
 <body>

@@ -59,4 +59,4 @@ $token_delete_clip = register_api_token($account, 'delete_clip');
 
 </main>
 <script src="https://cdn.plyr.io/3.7.2/plyr.js"></script>
-<?php present_footer(array('jquery-min', 'template-clip')); ?>
+<?php present_footer(array('jquery-min', 'jquery-ui.min', 'template-clip')); ?>

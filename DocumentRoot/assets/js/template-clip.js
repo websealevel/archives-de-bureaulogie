@@ -20,6 +20,12 @@ const timeline = {
     sliding: false
 }
 
+const handles = {
+    currentTime: 0,
+    start: 1,
+    end: 2
+}
+
 jQuery(function ($) {
 
     /**
@@ -311,8 +317,47 @@ function init_youtube_player(video_id) {
         }, 500);
 
 
-        setInterval(displayTimeLine, 10)
+        setInterval(displayTimeLine, 1000)
+
+        setInterval(displayTimeLineRange, 1000)
+
+
+        $("#slider-range").slider({
+            min: 0,
+            max: 100,
+            values: [0, 10, 20],
+            step: 0.001,
+            animate: "fast",
+            slide: function (event, ui) {
+
+                if (ui.handleIndex == handles.currentTime) {
+                    if (youTubePlayerActive()) {
+                        youtube_player.seekTo(ui.value * youtube_player.getDuration() / 100, true);
+                    }
+                }
+            }
+        })
     }
+}
+
+function displayTimeLineRange() {
+
+    if (!youtube_player.hasOwnProperty('getPlayerState'))
+        return
+
+    const current = youtube_player.getCurrentTime();
+    const duration = youtube_player.getDuration();
+    const currentPercent = (current && duration
+        ? current * 100 / duration
+        : 0);
+
+    const start = $("#slider-range").slider('values', 1)
+    const end = $("#slider-range").slider('values', 2)
+    console.log('here',start, end)
+
+    $("#slider-range").slider({
+        values: [currentPercent, start, end]
+    });
 }
 
 
@@ -336,9 +381,6 @@ function displayTimeLine() {
 
 }
 
-/**
- * :return: true if the player is active, else false
- */
 function youTubePlayerActive() {
     return youtube_player && youtube_player.hasOwnProperty('getPlayerState');
 }
@@ -348,8 +390,6 @@ function timeLineIsSliding() {
 }
 
 function timeLineIsChanging(percentage) {
-
-    console.log(percentage)
     timeline.sliding = false;
     if (youTubePlayerActive()) {
         youtube_player.seekTo(percentage * youtube_player.getDuration() / 100, true);
