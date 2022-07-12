@@ -83,6 +83,13 @@ Sinon, utiliser le bouton 'Finir l'extrait ici' prévu à cet effet">
                 <input type="checkbox" name="checkbox_loop_preview" id="checkbox_loop_preview">
             </fieldset>
 
+            <button type="submit" id="btn-submit-clip" value="Cut !" class="btn-control" title="Créer l'extrait">
+                <span class="shortcut">
+                    Shift+Enter
+                </span>
+                Générer l'extrait
+            </button>
+
         </div>
     </div>
 
@@ -151,12 +158,7 @@ Sinon, utiliser le bouton 'Finir l'extrait ici' prévu à cet effet">
                 <?php echo htmlentities('enregistrer le brouillon'); ?>
             </button>
 
-            <button type="submit" id="btn-submit-clip" value="Cut !" class="btn-control" title="Créer l'extrait">
-                <span class="shortcut">
-                    Shift+Enter
-                </span>
-                Cut !
-            </button>
+
         </div>
 
 
