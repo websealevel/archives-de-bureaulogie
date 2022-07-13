@@ -277,3 +277,7 @@ article.clip-item {
 article .header-title{
 	display: block;
 }
+
+.btn-delete-clip{
+width: 100px;
+}

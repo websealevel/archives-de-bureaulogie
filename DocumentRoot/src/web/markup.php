@@ -82,14 +82,15 @@ function map_clip_to_html_item(DOMElement $clip, string $html_item, array $show_
 function html_clip_item(string $title, string $description, string $timecode_start, string $timecode_end, string $author, string $created_on, string $src, string $email): string
 {
 
+
+    $summary = sprintf('<div class="clip-item-header"> <span class="header-title">%s</span> <small class="header-timecoed">%s-%s</small> </div>%s', $title, $timecode_start, $timecode_end, html_download_link($src));
+
+
     if ($email === current_user_email()) {
-        $summary = sprintf('<div class="clip-item-header">%s %s-%s </div>%s <button type="button" class="btn-delete-clip" id="%s">Supprimer</button>', $title, $timecode_start, $timecode_end, html_download_link($src), $email);
+        $details = sprintf('%s %s <small>%s</small> <small>auteur: %s, crée le: %s</small>  <button type="button" class="btn-delete-clip" id="%s">Supprimer</button></div>', html_video_markup($src, 500), html_download_link($src), $description, $author, $created_on, $email);
     } else {
-        $summary = sprintf('<div class="clip-item-header"> <span class="header-title">%s</span> <small class="header-timecoed">%s-%s</small> </div>%s', $title, $timecode_start, $timecode_end, html_download_link($src));
+        $details = sprintf('%s %s <small>%s</small> <small>auteur: %s, crée le: %s</small>  ', html_video_markup($src, 500), html_download_link($src), $description, $author, $created_on);
     }
-
-
-    $details = sprintf("%s %s <small>%s</small> <small>auteur: %s, crée le: %s</small>", html_video_markup($src, 500), html_download_link($src), $description, $author, $created_on);
 
     return html_article(
         $summary,
