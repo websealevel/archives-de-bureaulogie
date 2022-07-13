@@ -6,17 +6,18 @@ $color_end = '';
  * Fait à la va vite pour le fun
  */
 $random_phrases = array(
-    "Belle journée n'est-ce pas ?",
+    "C'est une belle journée. N'est-ce-pas ?",
     "Comment allez-vous aujourd'hui ?",
     "",
     "Je suis ravi de vous revoir.",
     "Je suis ravie de vous revoir.",
     "La bureaulogie a besoin de vous.",
-    "A votre service.",
+    "Que puis-je faire pour vous aujourd'hui ?",
     "J'ai été mis à jour, et vous ?",
     "La bureaulogie peut-elle sauver l'humanité ?",
-    "Je ressens un câble qui dépasse.",
+    "Je pense que l'un de vos câbles n'est pas gainé.",
     "Je ne planterai pas aujourd'hui.",
+    "Je suis de bonne humeur aujourd'hui.",
     "",
 );
 $rando_key = array_rand($random_phrases, 1);

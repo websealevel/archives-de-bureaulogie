@@ -92,6 +92,8 @@ Après une phase de tests on retiendra les paramètres d'encodage avec les valeu
   -  format: mp4 [x]
   -  frame rate max : 30fps [x]
   -  video bitrate : 369 kbps [x]
+  -  durée comprise entre 1s et 2m20s [x] (contrainte Twitter)
+  -  taille inférieure à 512M [x] (contrainte Twitter)
 - **piste audio**
   - data-transfer rate : 96 kbps [x]
   - audio bitrate/échantillonage : 48000 Hz(standard dans un fichier vidéo)  [x]
