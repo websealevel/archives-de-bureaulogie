@@ -258,3 +258,7 @@ a:hover {
 .ui-slider-handle.ui-corner-all.ui-state-default.handle-current-time{
 	background-color: black;
 }
+
+#vos-brouillons{
+	margin-left:100px;
+}

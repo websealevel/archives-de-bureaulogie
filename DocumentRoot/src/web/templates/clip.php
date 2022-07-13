@@ -43,10 +43,7 @@ $token_delete_clip = register_api_token($account, 'delete_clip');
     <hr>
 
     <div class="cols-2">
-        <section>
-            <h2>Vos brouillons</h2>
-            <ul id="list-markers"></ul>
-        </section>
+
 
         <section>
             <?php esc_html_list_clips_of_source_e(show_data: array('details'), name_attr: 'list-clips-on-current-source'); ?>

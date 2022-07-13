@@ -383,7 +383,7 @@ function init_youtube_player(video_id) {
             $("#current-time").html(seconds_to_hh_mm_ss_lll(currentTime))
             updateTimeLineSlider(currentTime, duration)
 
-        }, 500);
+        }, 300);
     }
 }
 

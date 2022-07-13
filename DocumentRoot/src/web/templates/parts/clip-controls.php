@@ -161,16 +161,14 @@ Sinon, utiliser le bouton 'Finir l'extrait ici' prévu à cet effet">
                 <?php echo htmlentities('enregistrer le brouillon'); ?>
             </button>
 
-
+            <section id="vos-brouillons">
+                <h2>Vos brouillons</h2>
+                <ul id="list-markers"></ul>
+            </section>
         </div>
-
-
-
 
         <input type="hidden" name="token" id="token" value="<?php echo $token_submit_clip; ?>">
         <input type="hidden" name="token_delete_clip" id="token_delete_clip" value="<?php echo $token_delete_clip; ?>">
         <input type="hidden" name="source_name" id="source_name" value="">
-
-
         <span id="spinner"></span>
 </form>
