@@ -34,15 +34,12 @@ jQuery(function ($) {
      */
     function checkFocus() {
         if (document.activeElement == document.getElementsByTagName("iframe")[0]) {
-            const iframe = document.getElementsByTagName("iframe")[0]
-            document.activeElement.blur()
+            //Laisser un peu de temps pour changer la res de la video si besoin
+            setTimeout(document.activeElement.blur(), 5000)
         }
     }
-    window.setInterval(checkFocus, 1000);
 
-
-
-
+    window.setInterval(checkFocus, 6000);
     /**
      * Boutons de controle du lecteur/edition
      */
@@ -56,19 +53,19 @@ jQuery(function ($) {
     })
 
     $("#btn_rewind_5_s").click(function () {
-        shift_current_time(-5)
-    })
-
-    $("#btn_rewind_1_s").click(function () {
         shift_current_time(-1)
     })
 
+    $("#btn_rewind_1_s").click(function () {
+        shift_current_time(-0.05)
+    })
+
     $("#btn_forward_1_s").click(function () {
-        shift_current_time(1)
+        shift_current_time(0.05)
     })
 
     $("#btn_forward_5_s").click(function () {
-        shift_current_time(5)
+        shift_current_time(1)
     })
 
     $("#btn_play_pause").click(function () {
@@ -304,6 +301,20 @@ function update_timecode_start_with_handle() {
     $("#timecode_start").val(seconds_to_hh_mm_ss_lll(start_in_sec))
 }
 
+function update_handle_start_with_timecode(){
+    const start =  $("#timecode_start").val()
+    const start_in_sec = hh_mm_ss_lll_to_seconds(start)
+    const start_in_percent = start_in_sec / youtube_player.getDuration() * 100
+    $("#slider-range").slider('values', handles.start, start_in_percent)
+}
+
+function update_handle_end_with_timecode(){
+    const start =  $("#timecode_end").val()
+    const start_in_sec = hh_mm_ss_lll_to_seconds(start)
+    const start_in_percent = start_in_sec / youtube_player.getDuration() * 100
+    $("#slider-range").slider('values', handles.end, start_in_percent)
+}
+
 function update_timecode_end_with_handle() {
     const end = $("#slider-range").slider('values', handles.end)
     const end_in_sec = end * youtube_player.getDuration() / 100
@@ -356,7 +367,6 @@ function init_youtube_player(video_id) {
 
         //Update affichage temps courant, curseur slider currentTime
         setInterval(function () {
-
 
             if (!youTubePlayerActive())
                 return
@@ -669,6 +679,7 @@ function set_timecode_start(start_in_sec) {
     const timecode_seconds = currentTime()
     const hh_mm_ss_lll = seconds_to_hh_mm_ss_lll(timecode_seconds)
     $("#timecode_start").val(hh_mm_ss_lll)
+    update_handle_start_with_timecode()
     update_clip_duration()
 }
 
@@ -680,6 +691,7 @@ function set_timecode_end() {
     const hh_mm_ss_lll = seconds_to_hh_mm_ss_lll(timecode_seconds)
     $("#timecode_end").val(hh_mm_ss_lll)
     update_clip_duration()
+    update_handle_end_with_timecode()
 }
 
 /**

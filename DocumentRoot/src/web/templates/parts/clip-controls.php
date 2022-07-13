@@ -109,12 +109,12 @@ Sinon, utiliser le bouton 'Finir l'extrait ici' prévu à cet effet">
                 <?php echo htmlentities('--->]'); ?>
             </button>
 
-            <button id="btn_rewind_5_s" class="btn-control rewind" type="button" title="Reculer de 5s">
+            <button id="btn_rewind_5_s" class="btn-control rewind" type="button" title="Reculer de 1s">
                 <span class="shortcut">Q</span>
                 <?php echo htmlentities('<<'); ?>
             </button>
 
-            <button id="btn_rewind_1_s" class="btn-control rewind" type="button" title="Reculer de 1s">
+            <button id="btn_rewind_1_s" class="btn-control rewind" type="button" title="Reculer de 0.05s">
                 <span class="shortcut">q</span>
                 <?php echo htmlentities('<'); ?>
             </button>
@@ -124,12 +124,12 @@ Sinon, utiliser le bouton 'Finir l'extrait ici' prévu à cet effet">
                 <?php echo htmlentities('play'); ?>
             </button>
 
-            <button id="btn_forward_1_s" class="btn-control forward" type="button" title="Avancer de 1s">
+            <button id="btn_forward_1_s" class="btn-control forward" type="button" title="Avancer de 0.05s">
                 <span class="shortcut">d</span>
                 <?php echo htmlentities('>'); ?>
             </button>
 
-            <button id="btn_forward_5_s" class="btn-control forward" type="button" title="Avancer de 5s">
+            <button id="btn_forward_5_s" class="btn-control forward" type="button" title="Avancer de 1s">
                 <span class="shortcut">D</span>
                 <?php echo htmlentities('>>'); ?>
             </button>
