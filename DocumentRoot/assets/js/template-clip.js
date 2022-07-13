@@ -661,6 +661,8 @@ function load_clip_draft_on_player(item_draft) {
 
     $("div.success").html('Le brouillon a été chargé')
     $("div.errors").html('')
+    update_handle_start_with_timecode()
+    update_handle_end_with_timecode()
 }
 
 function marker_markup(uid, timecode_start, timecode_end, title, class_btn_delete, class_btn_load) {
