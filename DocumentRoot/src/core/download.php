@@ -133,6 +133,6 @@ function check_download_request(DownloadRequest $download_request): void
  */
 function youtube_dl_download_format(): string
 {
-    $format = sprintf("%s+%s", CODE_FORMAT_VIDEO_MP4_YOUTUBE['1080p'], CODE_FORMAT_AUDIO_M4E);
+    $format = sprintf("%s+%s", CODE_FORMAT_VIDEO_MP4_YOUTUBE_1080P, CODE_FORMAT_AUDIO_M4E_YOUTUBE);
     return $format;
 }
