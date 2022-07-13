@@ -57,7 +57,7 @@ button {
 	margin-left: 30px;
 }
 
-#youtube-player{
+#youtube-player {
 	min-width: 1300px;
 	min-height: 600px;
 }
@@ -79,24 +79,24 @@ button {
 	font-family: 'Courier New', Courier, monospace;
 	font-size: 22px;
 	background-color: black;
-	padding:15px;
-	color:white;
+	padding: 15px;
+	color: white;
 	display: inline-block;
-	margin:5px;
+	margin: 5px;
 }
 
-#side-player{
+#side-player {
 	margin: 10px;
 }
 
-#url{
+#url {
 	min-width: 600px;
 }
 
-#hal{
+#hal {
 	font-family: 'Courier New', Courier, monospace;
-	padding:15px;
-	color:black;
+	padding: 15px;
+	color: black;
 }
 
 #clip-duration.error {
@@ -138,7 +138,7 @@ button {
 
 }
 
-#btn_save_clip_draft{
+#btn_save_clip_draft {
 	width: auto;
 }
 
@@ -159,26 +159,27 @@ span.shortcut {
 	justify-content: center;
 	width: auto;
 	height: auto;
-	padding:20px;
+	padding: 20px;
 	padding: 12px;
 }
 
-#btn_clip_end{
+#btn_clip_end {
 	background-color: coral;
 }
 
-#btn_clip_end:hover{
+#btn_clip_end:hover {
 	background-color: #ffa600;
 }
 
-#btn_clip_start{
+#btn_clip_start {
 	background-color: chartreuse;
 }
-#btn_clip_start:hover{
+
+#btn_clip_start:hover {
 	background-color: #abf76d;
 }
 
-.btn-clip{
+.btn-clip {
 	width: 70px;
 	border-radius: 12px;
 }
@@ -202,8 +203,8 @@ summary .clip-item-header {
 	cursor: pointer;
 }
 
-#slider-range{
-	margin:15px;
+#slider-range {
+	margin: 15px;
 }
 
 button {
@@ -248,26 +249,31 @@ a:hover {
 	color: #e700b3;
 }
 
-#editor{
+#editor {
 	display: flex;
 }
 
-#list-clips-on-current-source{
-	list-style: none;
-}
-
-.ui-slider-handle.ui-corner-all.ui-state-default.handle-start{
+.ui-slider-handle.ui-corner-all.ui-state-default.handle-start {
 	background-color: chartreuse;
 }
 
-.ui-slider-handle.ui-corner-all.ui-state-default.handle-end{
+.ui-slider-handle.ui-corner-all.ui-state-default.handle-end {
 	background-color: coral;
 }
 
-.ui-slider-handle.ui-corner-all.ui-state-default.handle-current-time{
+.ui-slider-handle.ui-corner-all.ui-state-default.handle-current-time {
 	background-color: black;
 }
 
-#vos-brouillons{
-	margin-left:100px;
+#vos-brouillons {
+	margin-left: 100px;
+}
+
+article.clip-item {
+	display: flex;
+	flex-direction: column;
+}
+
+article .header-title{
+	display: block;
 }

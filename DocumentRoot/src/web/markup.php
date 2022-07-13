@@ -85,13 +85,13 @@ function html_clip_item(string $title, string $description, string $timecode_sta
     if ($email === current_user_email()) {
         $summary = sprintf('<div class="clip-item-header">%s %s-%s </div>%s <button type="button" class="btn-delete-clip" id="%s">Supprimer</button>', $title, $timecode_start, $timecode_end, html_download_link($src), $email);
     } else {
-        $summary = sprintf('<div class="clip-item-header">%s %s-%s </div>%s', $title, $timecode_start, $timecode_end, html_download_link($src));
+        $summary = sprintf('<div class="clip-item-header"> <span class="header-title">%s</span> <small class="header-timecoed">%s-%s</small> </div>%s', $title, $timecode_start, $timecode_end, html_download_link($src));
     }
 
 
     $details = sprintf("%s %s <small>%s</small> <small>auteur: %s, crée le: %s</small>", html_video_markup($src, 500), html_download_link($src), $description, $author, $created_on);
 
-    return html_details(
+    return html_article(
         $summary,
         $details
     );
@@ -138,6 +138,24 @@ function html_details(string $summary, string $detail): string
     %s
     </details>
     ', $summary, $detail);
+}
+
+
+/**
+ * Retourne une balise article HTML5
+ * @param string $summary Le header
+ * @param string $detail Le contenu
+ * @return string
+ * @link https://developer.mozilla.org/fr/docs/Web/HTML/Element/details
+ */
+function html_article(string $header, string $content): string
+{
+    return sprintf('
+    <article class="clip-item">
+    <h3>%s</h3>
+    %s
+    </article>
+    ', $header, $content);
 }
 
 /**

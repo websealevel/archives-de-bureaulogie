@@ -644,8 +644,6 @@ function shift_current_time(delay_in_s) {
 }
 
 
-
-
 function load_clip_draft_on_player(item_draft) {
 
     const data = {
