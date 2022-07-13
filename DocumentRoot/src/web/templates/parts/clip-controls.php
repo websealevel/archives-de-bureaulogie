@@ -74,9 +74,7 @@ Sinon, utiliser le bouton 'Finir l'extrait ici' prévu à cet effet">
                 <textarea id="description" name="description" rows="3" cols="50" placeholder="Texte additionnel" maxlength="280" autocapitalize="sentences" spellcheck="true"></textarea>
             </div>
 
-            <div id="current-time">
-                0
-            </div>
+
             <fieldset id=" clip-options">
                 <legend>Options</legend>
                 <label for="checkbox_loop_preview">Prévisualisation en boucle</label>
@@ -95,7 +93,13 @@ Sinon, utiliser le bouton 'Finir l'extrait ici' prévu à cet effet">
 
     <div id="editor-navigation">
 
-        <div id="slider-range"></div>
+        <div id="timeline">
+            <div id="slider-range"></div>
+            <div id="current-time">
+                0
+            </div>
+        </div>
+
 
         <div class="first-row">
 

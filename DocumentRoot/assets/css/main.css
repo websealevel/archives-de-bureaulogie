@@ -133,6 +133,13 @@ button {
 	height: 70px;
 	font-size: 1em;
 	padding: 10px;
+	border-radius: 12px;
+	width: 70px;
+
+}
+
+#btn_save_clip_draft{
+	width: auto;
 }
 
 span.shortcut {
@@ -151,6 +158,8 @@ span.shortcut {
 	font-size: 1.5rem;
 	justify-content: center;
 	width: auto;
+	height: auto;
+	padding:20px;
 	padding: 12px;
 }
 

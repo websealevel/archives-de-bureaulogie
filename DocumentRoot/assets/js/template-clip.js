@@ -827,7 +827,7 @@ function post_clip() {
         $("div.errors").html('Hmm, il semblerait qu\'il y ait eu un problème de connexion. Veuillez rééssayer s\'il vous plaît.')
     }).always(function () {
         window.cancelAnimationFrame(spinner_ascii.requestID)
-        $("#btn-submit-clip").prop('innerHTML', '<div class="shortcut">Shift+Enter</div> Cut !')
+        $("#btn-submit-clip").prop('innerHTML', '<div class="shortcut">Shift+Enter</div> Générer l\'extrait')
         $("#btn-submit-clip").prop("disabled", false)
     })
 }
