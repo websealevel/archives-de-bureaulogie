@@ -144,6 +144,7 @@ span.shortcut {
 	font-family: 'Courier New', Courier, monospace;
 	font-style: italic;
 	text-align: left;
+
 }
 
 #btn-submit-clip {
@@ -153,10 +154,24 @@ span.shortcut {
 	padding: 12px;
 }
 
-#btn_save_clip_draft,
-#btn_clip_start,
-#btn_clip_end {
-	width: 300px;
+#btn_clip_end{
+	background-color: coral;
+}
+
+#btn_clip_end:hover{
+	background-color: #ffa600;
+}
+
+#btn_clip_start{
+	background-color: chartreuse;
+}
+#btn_clip_start:hover{
+	background-color: #abf76d;
+}
+
+.btn-clip{
+	width: 70px;
+	border-radius: 12px;
 }
 
 .site-title {
@@ -233,13 +248,13 @@ a:hover {
 }
 
 .ui-slider-handle.ui-corner-all.ui-state-default.handle-start{
-	background-color: #e700b3;
+	background-color: chartreuse;
 }
 
 .ui-slider-handle.ui-corner-all.ui-state-default.handle-end{
-	background-color: #e700b3;
+	background-color: coral;
 }
 
 .ui-slider-handle.ui-corner-all.ui-state-default.handle-current-time{
-	background-color: #e700b3;
+	background-color: black;
 }

@@ -24,9 +24,6 @@ const handles = {
     currentTime: 0,
     start: 1,
     end: 2,
-    currentTimeColor: '',
-    startColor: '',
-    endColor: '',
 }
 
 jQuery(function ($) {
