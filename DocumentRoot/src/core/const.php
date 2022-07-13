@@ -165,3 +165,14 @@ function is_cli(): bool
 {
     return 'cli' === php_sapi_name();
 }
+
+/**
+ * Définit les code format pour le téléchargement des vidéos depuis youtube (youtube-dl)
+ * @see https://github.com/ytdl-org/youtube-dl/blob/master/README.md#format-selection
+ */
+define('CODE_FORMAT_VIDEO_MP4_YOUTUBE', array(
+    '720p' => 136,
+    '1080p' => 137
+));
+
+define('CODE_FORMAT_AUDIO_M4E', 140);
