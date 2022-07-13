@@ -231,3 +231,15 @@ a:hover {
 #list-clips-on-current-source{
 	list-style: none;
 }
+
+.ui-slider-handle.ui-corner-all.ui-state-default.handle-start{
+	background-color: #e700b3;
+}
+
+.ui-slider-handle.ui-corner-all.ui-state-default.handle-end{
+	background-color: #e700b3;
+}
+
+.ui-slider-handle.ui-corner-all.ui-state-default.handle-current-time{
+	background-color: #e700b3;
+}

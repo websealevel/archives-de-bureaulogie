@@ -26,8 +26,8 @@ autoload();
     <link rel="icon" type="image/x-icon" href="../assets/img/favicon.ico">
     <link rel="canonical" href="https://archives-de-bureaulogie.fr">
     <!-- Minified version -->
-    <link rel="stylesheet" href="../assets/css/main.css">
     <link rel="stylesheet" href="../assets/css/jquery-ui.min.css">
+    <link rel="stylesheet" href="../assets/css/main.css">
 </head>
 
 <body>

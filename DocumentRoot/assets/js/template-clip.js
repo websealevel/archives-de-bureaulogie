@@ -23,7 +23,10 @@ const timeline = {
 const handles = {
     currentTime: 0,
     start: 1,
-    end: 2
+    end: 2,
+    currentTimeColor: '',
+    startColor: '',
+    endColor: '',
 }
 
 jQuery(function ($) {
@@ -230,12 +233,19 @@ function init_on_landing() {
 
     //init range timeline
     $("#slider-range").slider({
+        create: function (event, ui) {
+            $("#slider-range").find(".ui-slider-handle:nth-child(1)").addClass("handle-current-time")
+            $("#slider-range").find(".ui-slider-handle:nth-child(2)").addClass("handle-start")
+            $("#slider-range").find(".ui-slider-handle:nth-child(3)").addClass("handle-end")
+        },
         min: 0,
         max: 100,
         values: [0, 10, 20],
         step: 0.001,
         animate: "fast",
         slide: function (event, ui) {
+
+            console.log(ui)
 
             if (ui.handleIndex == handles.currentTime) {
                 if (youTubePlayerActive()) {
@@ -301,15 +311,15 @@ function update_timecode_start_with_handle() {
     $("#timecode_start").val(seconds_to_hh_mm_ss_lll(start_in_sec))
 }
 
-function update_handle_start_with_timecode(){
-    const start =  $("#timecode_start").val()
+function update_handle_start_with_timecode() {
+    const start = $("#timecode_start").val()
     const start_in_sec = hh_mm_ss_lll_to_seconds(start)
     const start_in_percent = start_in_sec / youtube_player.getDuration() * 100
     $("#slider-range").slider('values', handles.start, start_in_percent)
 }
 
-function update_handle_end_with_timecode(){
-    const start =  $("#timecode_end").val()
+function update_handle_end_with_timecode() {
+    const start = $("#timecode_end").val()
     const start_in_sec = hh_mm_ss_lll_to_seconds(start)
     const start_in_percent = start_in_sec / youtube_player.getDuration() * 100
     $("#slider-range").slider('values', handles.end, start_in_percent)
