@@ -5,23 +5,35 @@ $color_end = '';
 /**
  * Fait à la va vite pour le fun
  */
-$random_phrases = array(
-    "C'est une belle journée. N'est-ce-pas ?",
-    "Comment allez-vous aujourd'hui ?",
-    "",
-    "Je suis ravi de vous revoir.",
-    "Je suis ravie de vous revoir.",
-    "La bureaulogie a besoin de vous.",
-    "Que puis-je faire pour vous aujourd'hui ?",
-    "J'ai été mis à jour, et vous ?",
-    "La bureaulogie peut-elle sauver l'humanité ?",
-    "Je pense que l'un de vos câbles n'est pas gainé.",
-    "Je ne planterai pas aujourd'hui.",
-    "Je suis de bonne humeur aujourd'hui.",
-    "",
-);
-$rando_key = array_rand($random_phrases, 1);
-$phrase = $random_phrases[$rando_key];
+
+
+/**
+ * Retourne une phrase d'accueil au hasard
+ * @return string
+ */
+function random_greeting_phrase(): string
+{
+    $time = date("H") < "12" ? "ce matin" : "aujourd'hui";
+
+    $random_phrases = array(
+        "C'est une belle journée. N'est-ce-pas ?",
+        "Comment allez-vous ${time} ?",
+        "",
+        "Je suis ravi de vous revoir.",
+        "Je suis ravie de vous revoir.",
+        "La bureaulogie a besoin de vous.",
+        "Que puis-je faire pour vous ${time} ?",
+        "J'ai été mis à jour, et vous ?",
+        "La bureaulogie peut-elle sauver l'humanité ?",
+        "Je pense que l'un de vos câbles n'est pas gainé.",
+        "Je ne planterai pas ${time}.",
+        "Je suis de bonne humeur ${time}.",
+    );
+
+    $rando_key = array_rand($random_phrases, 1);
+    return $random_phrases[$rando_key];
+}
+
 
 ?>
 
@@ -40,7 +52,7 @@ $phrase = $random_phrases[$rando_key];
                 <legend>bHAL 9000 <small>(bureaulogy IA project)</small></legend>
 
                 <div class="errors" style="color: red;"></div>
-                <div class="success" style="color: green;">Bienvenue, <?php esc_html_e(current_user_pseudo()); ?>. <?php echo $phrase; ?> </div>
+                <div class="success" style="color: green;">Bienvenue, <?php esc_html_e(current_user_pseudo()); ?>. <?php echo random_greeting_phrase(); ?> </div>
             </fieldset>
 
             <div class="timecodes">
