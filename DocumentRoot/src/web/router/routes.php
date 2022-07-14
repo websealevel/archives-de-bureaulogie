@@ -18,6 +18,7 @@ require_once __DIR__ . '/../session.php';
 require_once __DIR__ . '/../actions/log-in.php';
 require_once __DIR__ . '/../actions/log-out.php';
 require_once __DIR__ . '/../actions/sign-up.php';
+require_once __DIR__ . '/../actions/upload-source.php';
 require_once __DIR__ . '/../actions/confirm-authentification.php';
 
 
@@ -57,6 +58,9 @@ function routes(): array
             '/download-source' => function () {
                 present_template('download-source');
             },
+            '/upload-source' => function () {
+                present_template('upload-source');
+            },
             '/submit_ref' => function () {
                 present_template('submit-ref');
             },
@@ -89,6 +93,10 @@ function routes(): array
             '/sign-up' => function () {
                 sign_up_user();
             },
+            '/upload-source' => function () {
+                upload_source();
+            },
+            //API AJAX
             '/api/v1/download-source' => function () {
                 api_download_source();
             },
@@ -104,6 +112,7 @@ function routes(): array
             '/api/v1/delete-clip' => function () {
                 api_delete_clip();
             },
+
         )
     );
 }

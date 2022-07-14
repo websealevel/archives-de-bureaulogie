@@ -159,14 +159,13 @@ function api_download_source()
 
                 $collection = $yt->download(
                     Options::create()
+                        ->forceIpV4()
                         ->ffmpegLocation($path_bin_ffmpeg)
                         ->downloadPath(PATH_SOURCES)
                         ->url($download_request->url)
                         ->format(youtube_dl_download_format())
                         ->output($filename)
-                        ->forceIpV4()
                 );
-
 
                 foreach ($collection->getVideos() as $video) {
 
