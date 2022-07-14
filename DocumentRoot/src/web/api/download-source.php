@@ -164,6 +164,7 @@ function api_download_source()
                         ->url($download_request->url)
                         ->format(youtube_dl_download_format())
                         ->output($filename)
+                        ->forceIpV4()
                 );
 
 
