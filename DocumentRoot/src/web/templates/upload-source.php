@@ -35,7 +35,7 @@ $token = register_api_token($account, 'add_source');
 <div class="errors" style="color: red;"></div>
 <main class="form-upload-source">
 
-    <form action="upload-source" method="POST" id="form-upload">
+    <form action="upload-source" method="POST" id="form-upload" enctype="multipart/form-data">
 
         <p>
             <label for="series">Choisissez la série à laquelle appartient la source <span class="required">*</span></label>
@@ -58,7 +58,8 @@ $token = register_api_token($account, 'add_source');
             <label for="upload_file">Sélectionner un fichier<span class="required">*</span></label>
             <input type="file" id="upload-file" name="upload-file" accept="video/mp4" required>
         </p>
-
+        <input type="hidden" name="token" value="<?php echo $token; ?>">
+        <input type="hidden" name="fax" value="">
         <input type="submit" value="Uploader">
     </form>
 

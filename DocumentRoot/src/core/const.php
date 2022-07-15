@@ -156,6 +156,9 @@ define('SOURCE_SERIES', array(
     'le-tribunal-des-bureaux'
 ));
 
+
+define('MAX_UPLOAD_SIZE_IN_MB', 2000);
+
 /**
  * Définit les code format pour le téléchargement des vidéos depuis youtube (youtube-dl)
  * @see https://github.com/ytdl-org/youtube-dl/blob/master/README.md#format-selection
