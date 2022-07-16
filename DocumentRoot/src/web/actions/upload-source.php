@@ -135,6 +135,13 @@ function upload_source()
             )
         ));
     }
+
+    redirect('/upload-source', 'notices', array(
+        new Notice(
+            sprintf("La source a été importée dans nos archives avec succès !"),
+            NoticeStatus::Success
+        )
+    ));
 }
 
 
