@@ -67,17 +67,19 @@ function upload_source()
 
     //Check que la video n'est pas déja enregistrée dans le fichier source (une source avec la même url)
     if (is_source_already_declared($clean['series'], $clean['name'], $clean['source_url'])) {
-        api_respond_with_error();
+        api_respond_with_error(array(
+            new InputValidation('upload_file', '', 'Une source avec ce nom est déjà renseignée dans les archives')
+        ));
     }
 
     //Check que la vidéo à télécharger n'a pas un nom déjà utilisé par une autre vidéo source
     if (source_exists(format_to_source_file_raw($clean['series'], $clean['name']))) {
-        api_respond_with_error();
+        api_respond_with_error(array(
+            new InputValidation('upload_file', '', 'Une source avec ce nom existe déjà dans les archives')
+        ));
     }
 
     check_uploaded_file();
-
-    echo 'ok';
 }
 
 
