@@ -56,7 +56,7 @@ $token = register_api_token($account, 'add_source');
 
         <p>
             <label for="upload_file">Sélectionner un fichier<span class="required">*</span></label>
-            <input type="file" id="upload-file" name="upload-file" accept="video/mp4" required>
+            <input type="file" id="upload_file" multiple name="upload_file" accept="video/mp4" required>
         </p>
         <input type="hidden" name="token" value="<?php echo $token; ?>">
         <input type="hidden" name="fax" value="">

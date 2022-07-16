@@ -22,8 +22,6 @@ require_once __DIR__ . '/../database/repository-accounts.php';
 function upload_source()
 {
 
-    dd($_POST, $_FILES);
-
     //Authentifier l'utilisateur
     if (!current_user_can('add_source')) {
         api_respond_with_error();
@@ -60,22 +58,56 @@ function upload_source()
         exit;
     }
 
-    // $clean = array(
-    //     'series' => $_POST['series'],
-    //     ''
-    // )
 
-    // //Check que la video n'est pas déja enregistrée dans le fichier source (une source avec la même url)
-    // if (is_source_already_declared($download_request->series_name, $download_request->id, $download_request->url)) {
-    //     throw new \Exception("Cette source est déjà présente dans les archives.");
-    // }
+    $clean = filter_input_array(INPUT_POST, array(
+        'series' => FILTER_UNSAFE_RAW,
+        'name' => FILTER_UNSAFE_RAW,
+        'source_url' => FILTER_SANITIZE_URL,
+    ));
 
-    // //Check que la vidéo à télécharger n'a pas un nom déjà utilisé par une autre vidéo source
-    // if (source_exists(format_to_source_file($download_request))) {
-    //     throw new \Exception(sprintf("Une source du nom <em>%s</em> existe déjà dans nos archives, veuillez en choisir un autre.", format_to_source_file($download_request)));
-    // }
+    //Check que la video n'est pas déja enregistrée dans le fichier source (une source avec la même url)
+    if (is_source_already_declared($clean['series'], $clean['name'], $clean['source_url'])) {
+        api_respond_with_error();
+    }
+
+    //Check que la vidéo à télécharger n'a pas un nom déjà utilisé par une autre vidéo source
+    if (source_exists(format_to_source_file_raw($clean['series'], $clean['name']))) {
+        api_respond_with_error();
+    }
+
+    check_uploaded_file();
 
     echo 'ok';
+}
+
+
+/**
+ * @global $_FILES
+ */
+function check_uploaded_file(): void
+{
+    $nb_uploaded_files = count($_FILES);
+
+    if (!(1 === $nb_uploaded_files)) {
+        api_respond_with_error(array(
+            new InputValidation('upload_file', '', 'Uploadez un et un seul fichier')
+        ));
+    }
+
+    $allowed_mim_types = array('video/mp4');
+    $uploaded_file = $_FILES['upload_file'];
+
+    if (!in_array($uploaded_file['type'], $allowed_mim_types)) {
+        api_respond_with_error(array(
+            new InputValidation('upload_file', '', 'Le format du fichier n\'est pas autorisé')
+        ));
+    }
+
+    if (intval($uploaded_file['size']) / 1000 > MAX_UPLOAD_SIZE_IN_MB) {
+        api_respond_with_error(array(
+            new InputValidation('upload_file', $uploaded_file['size'], 'Le fichier dépasse la limite d\'upload autorisée')
+        ));
+    }
 }
 
 
@@ -148,34 +180,7 @@ function check_upload_source_form()
             }
 
             return new InputValidation('name', strval($name), '', InputStatus::Valid);
-        }),
-
-        new FormInput('nb_files', count($_FILES), function (int $nb_files): InputValidation {
-            if (1 == !$nb_files)
-                return new InputValidation('name', $nb_files, "Uploadez un et un seul fichier.");
-            return new InputValidation('nb_files', strval($nb_files), '', InputStatus::Valid);
-        }),
-
-        new FormInput('file', $_FILES, function (array $files): InputValidation {
-
-            $uploaded_file = $files[0];
-            $allowed_mim_types = array('mp4/video');
-
-            if (!in_array($uploaded_file['type'], $allowed_mim_types))
-                return new InputValidation('file', $uploaded_file['type'], "Seuls les fichiers au format " . implode(',', $allowed_mim_types));
-
-            return new InputValidation('file', 'file', '', InputStatus::Valid);
-        }),
-
-        new FormInput('max_size', $_FILES, function (array $files): InputValidation {
-
-            $uploaded_file = $files[0];
-
-            if (intval($uploaded_file['size']) / 1000 > MAX_UPLOAD_SIZE_IN_MB)
-                return new InputValidation('max_size', $uploaded_file['size'], 'Le fichier dépasse la limite d\'upload autorisée');
-
-            return new InputValidation('max_size', $uploaded_file['size'], '', InputStatus::Valid);
-        }),
+        })
     );
 
     return validate_posted_form($form_inputs);
