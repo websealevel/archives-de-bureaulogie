@@ -79,37 +79,88 @@ function upload_source()
         ));
     }
 
-    check_uploaded_file();
+    try {
+        $file_name = check_uploaded_file($clean['series'], $clean['name'],);
+    } catch (Exception $e) {
+        error_log($e);
+        header('Content-Type: application/json; charset=utf-8');
+        echo json_encode(array(
+            'statut' => 500,
+            'errors' => array(new Notice($e->getMessage(), NoticeStatus::Error)),
+        ));
+    }
+
+    //Déplacer le fichier uploader dans le dossier des sources
+    if (!move_uploaded_file($_FILES['upload_file']['tmp_name'], PATH_SOURCES . '/' . $file_name)) {
+        error_log($e);
+        header('Content-Type: application/json; charset=utf-8');
+        echo json_encode(array(
+            'statut' => 500,
+            'errors' => array(new Notice($e->getMessage(), NoticeStatus::Error)),
+        ));
+    }
+
+    //Déclarer la source
+    try {
+        $source_added = declare_source(
+            $clean['source_url'],
+            $clean['series'],
+            $clean['name'],
+            $file_name
+        );
+    } catch (Exception $e) {
+        error_log($e);
+        header('Content-Type: application/json; charset=utf-8');
+        echo json_encode(array(
+            'statut' => 500,
+            'errors' => array(new Notice($e->getMessage(), NoticeStatus::Error)),
+        ));
+    }
+
+    echo 'Fichier uploadé !';
 }
 
 
 /**
- * @global $_FILES
+ * Vérifie que le fichier uploadé est valide, retourne le nom du fichier formatté si aucune erreur
+ * @param string $series
+ * @param string $name
+ * @param string $source_url
+ * @throws Exception - Si l'upload a rencontré une erreur
+ * @throws Exception - Si plusieurs fichiers ont été uploadés en même temps
+ * @throws Exception - Si le format(mimtype) du fichier n'est pas autorisé
+ * @throws Exception - Si la tailel de l'upload dépasse la limite
+ * @global $_FILES, $_POST
+ * @return string
  */
-function check_uploaded_file(): void
+function check_uploaded_file(string $series, string $name): string
 {
+
+    if (
+        !isset($_FILES['upload_file']['error']) ||
+        is_array($_FILES['upload_file']['error'])
+    ) {
+        throw new Exception('Le fichier n\'a pas pu être uploadé');
+    }
+
     $nb_uploaded_files = count($_FILES);
 
     if (!(1 === $nb_uploaded_files)) {
-        api_respond_with_error(array(
-            new InputValidation('upload_file', '', 'Uploadez un et un seul fichier')
-        ));
+        throw new Exception('Uploadez un et un seul fichier');
     }
 
     $allowed_mim_types = array('video/mp4');
     $uploaded_file = $_FILES['upload_file'];
 
     if (!in_array($uploaded_file['type'], $allowed_mim_types)) {
-        api_respond_with_error(array(
-            new InputValidation('upload_file', '', 'Le format du fichier n\'est pas autorisé')
-        ));
+        throw new Exception('Le format du fichier n\'est pas autorisé');
     }
 
     if (intval($uploaded_file['size']) / 1000 > MAX_UPLOAD_SIZE_IN_MB) {
-        api_respond_with_error(array(
-            new InputValidation('upload_file', $uploaded_file['size'], 'Le fichier dépasse la limite d\'upload autorisée')
-        ));
+        throw new Exception('Le fichier dépasse la limite d\'upload autorisée');
     }
+
+    return format_to_source_file_raw($series, $name);
 }
 
 

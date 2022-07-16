@@ -145,10 +145,8 @@ function api_download_source()
         function () use ($yt, $download_id, $authentificated_user_id, $download_request, $filename, $db, $path_bin_ffmpeg) {
 
             try {
-
                 //Show progress
                 $yt->onProgress(static function (?string $process_target, ?string $percentage, ?string $size, ?string $speed, string $eta, ?string $total_time) use ($download_id, $db): void {
-
                     sql_update_download($db, $download_id, $process_target, $percentage, $size, $speed, $total_time);
                 });
 
