@@ -790,6 +790,11 @@ function are_timecodes_valid() {
  */
 function post_clip() {
 
+    $.ajaxSetup({
+        //timeout pour générer l'extrait 2min
+        timeout: 120000
+    });
+
     //Disable le bouton, message traitement en cours + spinner ascii
     $("#btn-submit-clip").prop("disabled", true)
     window.requestAnimationFrame(spinner_ascii.step);

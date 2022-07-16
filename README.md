@@ -120,8 +120,15 @@ Il faut rediriger toutes les reqûetes vers le `index.php` à la racine du proje
 Dans le `nginx.conf` à la racine du projet.
 
 ```bash
+server {
 
-# deny hidden files and files with the extensions listed below
+    index index.php;
+    server_name back.archives-de-bureaulogie.test;
+    error_log /var/www/html/archives.error.log;
+    access_log /var/www/html/archives.access.log;
+    root /var/www/html;
+    client_max_body_size 2500M;
+    # deny hidden files and files with the extensions listed below
     location ~ /\.|\.(?:xml|dtd|php|env|json|lock|ini|log)$ {
         deny all;
     }
@@ -139,7 +146,7 @@ Dans le `nginx.conf` à la racine du projet.
         fastcgi_param PATH_INFO $fastcgi_path_info;
         fastcgi_pass php-fpm:9000;
     }
-
+}
 ```
 
 #### Apache
