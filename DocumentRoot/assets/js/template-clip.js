@@ -242,8 +242,6 @@ function init_on_landing() {
         animate: "fast",
         slide: function (event, ui) {
 
-            console.log(ui)
-
             if (ui.handleIndex == handles.currentTime) {
                 if (youTubePlayerActive()) {
                     youtube_player.seekTo(ui.value * youtube_player.getDuration() / 100, true);
@@ -255,6 +253,7 @@ function init_on_landing() {
                     const value = ui.value
                     const start_in_sec = value * youtube_player.getDuration() / 100
                     $("#timecode_start").val(seconds_to_hh_mm_ss_lll(start_in_sec))
+                    update_clip_duration()
                 }
             }
 
@@ -263,6 +262,8 @@ function init_on_landing() {
                     const value = ui.value
                     const start_in_sec = value * youtube_player.getDuration() / 100
                     $("#timecode_end").val(seconds_to_hh_mm_ss_lll(start_in_sec))
+                    update_clip_duration()
+
                 }
             }
         }
