@@ -24,17 +24,32 @@ function upload_source()
 
     //Authentifier l'utilisateur
     if (!current_user_can('add_source')) {
-        api_respond_with_error();
+        redirect('/upload-source', 'notices', array(
+            new Notice(
+                sprintf("La récupération de l'historique des téléchargements a échoué"),
+                NoticeStatus::Error
+            )
+        ));
     }
 
     if (honey_pot_filled('fax')) {
-        api_respond_with_error();
+        redirect('/upload-source', 'notices', array(
+            new Notice(
+                sprintf("Pas de robot ici"),
+                NoticeStatus::Error
+            )
+        ));
     }
 
     //Check le token
     //Valider le token
     if (!($_POST['token'] && is_valid_token($_POST['token'], 'add_source'))) {
-        api_respond_with_error();
+        redirect('/upload-source', 'notices', array(
+            new Notice(
+                sprintf("Vous n'avez pas l'autorisation."),
+                NoticeStatus::Error
+            )
+        ));
     }
 
     //Validation des inputs du formulaire
@@ -43,19 +58,14 @@ function upload_source()
 
     //Retourner les erreurs sur les champs
     if (!empty($invalid_inputs)) {
-        header('Content-Type: application/json; charset=utf-8');
-        $response =  json_encode(array(
-            'statut' => 403,
-            'errors' => array_map(function ($invalid_input) {
-                return array(
-                    'name' => $invalid_input->name,
-                    'value' => $invalid_input->value,
-                    'message' => $invalid_input->message
-                );
-            }, $invalid_inputs),
+
+
+        redirect('/upload-source', 'notices', array(
+            new Notice(
+                sprintf("Champs non valides"),
+                NoticeStatus::Error
+            )
         ));
-        echo $response;
-        exit;
     }
 
 
@@ -66,16 +76,22 @@ function upload_source()
     ));
 
     //Check que la video n'est pas déja enregistrée dans le fichier source (une source avec la même url)
-    if (is_source_already_declared($clean['series'], $clean['name'], $clean['source_url'])) {
-        api_respond_with_error(array(
-            new InputValidation('upload_file', '', 'Une source avec ce nom est déjà renseignée dans les archives')
+    if (is_source_already_declared($clean['series'], $clean['name'], $clean['source_url'])) {;
+        redirect('/upload-source', 'notices', array(
+            new Notice(
+                sprintf("Une source avec ce nom et/ou cette url est déjà renseignée dans les archives"),
+                NoticeStatus::Error
+            )
         ));
     }
 
     //Check que la vidéo à télécharger n'a pas un nom déjà utilisé par une autre vidéo source
     if (source_exists(format_to_source_file_raw($clean['series'], $clean['name']))) {
-        api_respond_with_error(array(
-            new InputValidation('upload_file', '', 'Une source avec ce nom existe déjà dans les archives')
+        redirect('/upload-source', 'notices', array(
+            new Notice(
+                sprintf("Une source avec ce nom est déjà renseignée dans les archives"),
+                NoticeStatus::Error
+            )
         ));
     }
 
@@ -83,20 +99,22 @@ function upload_source()
         $file_name = check_uploaded_file($clean['series'], $clean['name'],);
     } catch (Exception $e) {
         error_log($e);
-        header('Content-Type: application/json; charset=utf-8');
-        echo json_encode(array(
-            'statut' => 500,
-            'errors' => array(new Notice($e->getMessage(), NoticeStatus::Error)),
+        redirect('/upload-source', 'notices', array(
+            new Notice(
+                sprintf("Impossible d'uploader le fichier, il n'est pas valide"),
+                NoticeStatus::Error
+            )
         ));
     }
 
     //Déplacer le fichier uploader dans le dossier des sources
     if (!move_uploaded_file($_FILES['upload_file']['tmp_name'], PATH_SOURCES . '/' . $file_name)) {
         error_log($e);
-        header('Content-Type: application/json; charset=utf-8');
-        echo json_encode(array(
-            'statut' => 500,
-            'errors' => array(new Notice($e->getMessage(), NoticeStatus::Error)),
+        redirect('/upload-source', 'notices', array(
+            new Notice(
+                sprintf("Impossible d'enregistrer le fichier dans les archives"),
+                NoticeStatus::Error
+            )
         ));
     }
 
@@ -110,10 +128,11 @@ function upload_source()
         );
     } catch (Exception $e) {
         error_log($e);
-        header('Content-Type: application/json; charset=utf-8');
-        echo json_encode(array(
-            'statut' => 500,
-            'errors' => array(new Notice($e->getMessage(), NoticeStatus::Error)),
+        redirect('/upload-source', 'notices', array(
+            new Notice(
+                sprintf("Impossible d'enregistrer l'archive."),
+                NoticeStatus::Error
+            )
         ));
     }
 }
