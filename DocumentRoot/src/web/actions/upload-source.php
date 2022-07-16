@@ -116,8 +116,6 @@ function upload_source()
             'errors' => array(new Notice($e->getMessage(), NoticeStatus::Error)),
         ));
     }
-
-    echo 'Fichier uploadé !';
 }
 
 

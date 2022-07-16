@@ -237,7 +237,12 @@ function find_element_by_attribute(DOMNodeList $nodes, string $attr, string $val
  */
 function add_source(string $url, string $series, string $slug, string $file_name, string $file_source = SOURCE_FILE, string $namespace = XMLNS_SOURCE_FILE): bool
 {
+
+
+    $user = posix_getpwuid(posix_geteuid());
+
     $dom = load_xml($file_source);
+
     $root = $dom->documentElement;
 
     $element = $dom->createElementNS(XMLNS_SOURCE_FILE, 'source');
@@ -279,6 +284,8 @@ function declare_source(string $url, string $series, string $slug, string $file_
     }
 
     $result = add_source($url, $series, $slug, basename($file_name_saved));
+
+    dd($result);
 
     if (!$result) {
         throw new Exception("La vidéo source n'a pas pu être déclarée et enregistrée.");
