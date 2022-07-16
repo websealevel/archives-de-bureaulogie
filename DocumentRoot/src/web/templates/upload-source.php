@@ -46,12 +46,12 @@ $token = register_api_token($account, 'add_source');
 
         <p>
             <label for="name">Choisissez un identifiant court pour cette vidéo (un mot ou un nombre en minuscule) <span class="required">*</span></label>
-            <input type="text" name="name" placeholder="ex: 3" pattern="[a-z0-9#]{1,25}" title="un nom en caractères alphanumériques, sans espaces (utiliser des hyphens à la place), d'1 caractère min" value="11" required>
+            <input type="text" name="name" placeholder="ex: 3" pattern="[a-z0-9#]{1,25}" title="un nom en caractères alphanumériques, sans espaces (utiliser des hyphens à la place), d'1 caractère min" value="" required>
 
         </p>
         <p>
             <label for="source_url">Copiez/collez l'url de la vidéo youtube <span class="required">*</span></label>
-            <input type="url" id="url" name="source_url" title="l'url complète de la vidéo youtube" value="https://www.youtube.com/watch?v=Acjf66Qdj2U" required>
+            <input type="url" id="url" name="source_url" title="l'url complète de la vidéo youtube" value="" required>
         </p>
 
         <p>
