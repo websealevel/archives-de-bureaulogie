@@ -98,7 +98,7 @@ function upload_source()
     try {
         $file_name = check_uploaded_file($clean['series'], $clean['name'],);
     } catch (Exception $e) {
-        error_log($e);
+        error_log("Impossible d'enregistrer le fichier dans les archives");
         redirect('/upload-source', 'notices', array(
             new Notice(
                 sprintf("Impossible d'uploader le fichier, il n'est pas valide"),
@@ -109,7 +109,7 @@ function upload_source()
 
     //Déplacer le fichier uploader dans le dossier des sources
     if (!move_uploaded_file($_FILES['upload_file']['tmp_name'], PATH_SOURCES . '/' . $file_name)) {
-        error_log($e);
+        error_log("Impossible d'enregistrer le fichier dans les archives");
         redirect('/upload-source', 'notices', array(
             new Notice(
                 sprintf("Impossible d'enregistrer le fichier dans les archives"),
@@ -160,6 +160,8 @@ function upload_source()
 function check_uploaded_file(string $series, string $name): string
 {
 
+    dd($_FILES);
+
     if (
         !isset($_FILES['upload_file']['error']) ||
         is_array($_FILES['upload_file']['error'])
@@ -180,7 +182,7 @@ function check_uploaded_file(string $series, string $name): string
         throw new Exception('Le format du fichier n\'est pas autorisé');
     }
 
-    if (intval($uploaded_file['size']) / 1000 > MAX_UPLOAD_SIZE_IN_MB) {
+    if (intval($uploaded_file['size']) / 1000000 > MAX_UPLOAD_SIZE_IN_MB) {
         throw new Exception('Le fichier dépasse la limite d\'upload autorisée');
     }
 

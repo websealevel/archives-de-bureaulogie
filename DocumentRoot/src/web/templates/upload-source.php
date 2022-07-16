@@ -26,6 +26,7 @@ $account = from_session('account_id');
 $token = register_api_token($account, 'add_source');
 ?>
 
+
 <?php present_header(); ?>
 
 <p>Les vidéos <em>sources</em> sont les vidéos originales et complètes à partir desquelles les extraits peuvent être réalisés.</p>
