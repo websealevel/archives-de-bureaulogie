@@ -45,8 +45,8 @@ require_once __DIR__ . '/../../handlers.php';
             <h3>Vidéos sources</h3>
             <p>
                 <?php if (current_user_can('add_source')) :  ?>
-                    <a href="download-source">Télécharger les vidéos sources depuis youtube</a>
-                    <?php esc_active_downloads_info_e(); ?>
+                    <!-- <a href="download-source">Télécharger les vidéos sources depuis youtube</a> -->
+                    <!-- <?php esc_active_downloads_info_e(); ?> -->
                 <?php endif;  ?>
             </p>
 

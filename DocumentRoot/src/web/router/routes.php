@@ -56,7 +56,9 @@ function routes(): array
                 present_template('clip');
             },
             '/download-source' => function () {
-                present_template('download-source');
+                present_template('home');
+                //Remarque: désactivé tant que pb pas résolu sur vidéos 1080p avec yt-dl
+                // present_template('download-source');
             },
             '/upload-source' => function () {
                 present_template('upload-source');
