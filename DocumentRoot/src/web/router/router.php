@@ -50,6 +50,7 @@ function resolve()
  */
 function redirect(string $path, string $session_key = '', array $data = array(), int $refresh = 0)
 {
+
     if (!empty($session_key) && !empty($data) && isset($_SESSION)) {
         $_SESSION[$session_key] = $data;
     }

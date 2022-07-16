@@ -160,8 +160,6 @@ function upload_source()
 function check_uploaded_file(string $series, string $name): string
 {
 
-    dd($_FILES);
-
     if (
         !isset($_FILES['upload_file']['error']) ||
         is_array($_FILES['upload_file']['error'])

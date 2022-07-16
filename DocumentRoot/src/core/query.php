@@ -285,8 +285,6 @@ function declare_source(string $url, string $series, string $slug, string $file_
 
     $result = add_source($url, $series, $slug, basename($file_name_saved));
 
-    dd($result);
-
     if (!$result) {
         throw new Exception("La vidéo source n'a pas pu être déclarée et enregistrée.");
     }
