@@ -118,7 +118,7 @@ function check_download_request(DownloadRequest $download_request): void
         throw new \Exception("Cette source est déjà présente dans les archives.");
     }
 
-    //Check que la vidéo à téléchargée n'a pas un nom déjà utilisé par une autre vidéo source
+    //Check que la vidéo à télécharger n'a pas un nom déjà utilisé par une autre vidéo source
     if (source_exists(format_to_source_file($download_request))) {
         throw new \Exception(sprintf("Une source du nom <em>%s</em> existe déjà dans nos archives, veuillez en choisir un autre.", format_to_source_file($download_request)));
     }

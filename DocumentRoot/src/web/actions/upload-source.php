@@ -22,8 +22,14 @@ require_once __DIR__ . '/../database/repository-accounts.php';
 function upload_source()
 {
 
+    dd($_POST, $_FILES);
+
     //Authentifier l'utilisateur
     if (!current_user_can('add_source')) {
+        api_respond_with_error();
+    }
+
+    if (honey_pot_filled('fax')) {
         api_respond_with_error();
     }
 
@@ -53,6 +59,21 @@ function upload_source()
         echo $response;
         exit;
     }
+
+    // $clean = array(
+    //     'series' => $_POST['series'],
+    //     ''
+    // )
+
+    // //Check que la video n'est pas déja enregistrée dans le fichier source (une source avec la même url)
+    // if (is_source_already_declared($download_request->series_name, $download_request->id, $download_request->url)) {
+    //     throw new \Exception("Cette source est déjà présente dans les archives.");
+    // }
+
+    // //Check que la vidéo à télécharger n'a pas un nom déjà utilisé par une autre vidéo source
+    // if (source_exists(format_to_source_file($download_request))) {
+    //     throw new \Exception(sprintf("Une source du nom <em>%s</em> existe déjà dans nos archives, veuillez en choisir un autre.", format_to_source_file($download_request)));
+    // }
 
     echo 'ok';
 }

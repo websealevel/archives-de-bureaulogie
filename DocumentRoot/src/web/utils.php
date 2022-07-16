@@ -178,3 +178,17 @@ function is_valid_json(string $json): bool
         return false;
     }
 }
+
+
+/**
+ * Retourne vrai si le champ honey_pot est rempli, faux sinon
+ * @param string $honey_pot_name Le nom du champ qui sert de pot à miel
+ * @global $_POST
+ */
+function honey_pot_filled(string $honey_pot_name): bool
+{
+    $honey = filter_input(INPUT_POST, $honey_pot_name);
+    if (isset($honey))
+        return !empty($honey);
+    return false;
+}
